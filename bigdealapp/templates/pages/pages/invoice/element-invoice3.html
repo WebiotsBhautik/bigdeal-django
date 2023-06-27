@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bigdeal - Invoice Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="big-deal">
+    <meta name="keywords" content="big-deal">
+    <meta name="author" content="big-deal">
+    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png" type="image/x-icon">
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+    <!--icon css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/themify.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css">
+
+    <!--Animate css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color2.css" >
+
+</head>
+<body class="light-layout">
+
+
+<!-- invoice start -->
+<section class="invoice-third">
+    <div class=container>
+        <div class="row">
+            <div class="col-12">
+                <div class="invoice-popup">
+                    <div>
+                      <div class="invoice-header">
+                        <div class="row">
+                          <div class="col-md-3">
+                            <div class="header-left">
+                              <div class="brand-logo">
+                                <a href="../html/index.html">
+                                  <img src="{% static 'assets/images/layout-2/logo/logo.png" alt="" class="img-fluid">
+                                </a> 
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="header-right">
+                              <ul>
+                                  <li>
+                                    <span>
+                                        <i class="fa fa-phone"></i>
+                                    </span>
+                                    <div>
+                                      <h5>+91 589-258-684</h5>
+                                      <h5>+91 123-456-7898</h5>
+                                    </div>
+                                  </li>                                
+                                  <li>
+                                    <span>
+                                        <i class="fa fa-globe"></i>
+                                    </span>
+                                    <div>
+                                      <h5>support@bigdeal.com</h5>
+                                      <h5>www.bigdeal.com</h5>
+                                    </div>
+                                  </li>   
+                                  <li>
+                                    <span>
+                                        <i class="fa fa-map-marker"></i>
+                                    </span>
+                                    <div>
+                                      <h5>Big Deal Store </h5>
+                                      <h5>Demo Store India-3654123</h5>
+                                    </div>
+                                  </li>                              
+                              </ul>
+                            </div> 
+                          </div>
+                        </div>
+                      </div>
+                      <div class="invoice-breadcrumb">
+                        <div class="row ">
+                          <div class="col-6">
+                            <div class="breadcrumb-left">
+                              <ul>
+                                <li><h2>invoice to:</h2></li>
+                                <li>
+                                  <svg enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg"><path d="m275.565 275.565c-75.972 0-137.783-61.81-137.783-137.783s61.811-137.782 137.783-137.782 137.783 61.81 137.783 137.783-61.811 137.782-137.783 137.782zm0-241.119c-56.983 0-103.337 46.353-103.337 103.337s46.353 103.337 103.337 103.337 103.337-46.354 103.337-103.337-46.354-103.337-103.337-103.337z"/><path d="m499.461 551.13h-447.793c-9.52 0-17.223-7.703-17.223-17.223v-118.558c0-17.795 9.099-34.513 23.732-43.663 129.339-80.682 305.554-80.665 434.759-.017 14.649 9.166 23.749 25.885 23.749 43.679v118.558c0 9.521-7.703 17.224-17.224 17.224zm-430.57-34.445h413.348v-101.336c0-6.004-2.893-11.555-7.552-14.464-118.256-73.819-279.905-73.87-398.26.017-4.642 2.893-7.535 8.443-7.535 14.448z"/></svg>
+                                  johan deo
+                                </li>
+                                <li>
+                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g> <g> <path d="M453.202,386.293L378.52,311.61c-15.546-15.544-40.751-15.562-56.314,0l-21.75,21.75 c-49.696-30.349-91.448-72.101-121.798-121.798l23.848-23.847c15.524-15.526,15.524-40.789-0.001-56.315l-74.682-74.682 c-15.502-15.5-40.671-15.644-56.361,0.047l-46.93,47.295C2.078,122.914-5.82,153.87,4.42,183.209 c52.546,150.577,173.814,271.844,324.39,324.39c28.33,9.884,57.422,2.492,75.919-16.565c0.267-0.236,0.528-0.48,0.783-0.736 l47.69-47.691C468.728,427.082,468.728,401.82,453.202,386.293z M429.412,418.817L382.8,465.429 c-0.569,0.472-1.107,0.985-1.613,1.535c-9.811,10.665-25.594,14.347-41.29,8.867C198.919,426.636,85.384,313.1,36.188,172.121 c-5.633-16.141-1.569-32.864,10.354-42.605c0.453-0.37,0.887-0.764,1.299-1.179l47.459-47.829 c1.573-1.574,3.412-1.809,4.367-1.809c0.956,0,2.793,0.234,4.367,1.809l74.68,74.682c2.408,2.408,2.408,6.325,0.001,8.733 l-33.043,33.043c-5.341,5.34-6.468,13.583-2.758,20.161c35.858,63.569,88.409,116.122,151.978,151.977 c6.577,3.711,14.82,2.582,20.161-2.757l30.945-30.945c2.409-2.409,6.32-2.412,8.733,0l74.682,74.682 C431.819,412.492,431.819,416.41,429.412,418.817z"/> </g></g><g> <g> <path d="M268.902,131.332c-9.291,0-16.823,7.532-16.823,16.823c0,9.291,7.531,16.823,16.823,16.823 c43.086,0,78.139,35.053,78.139,78.139c0,9.291,7.532,16.823,16.823,16.823s16.823-7.532,16.823-16.823 C380.687,181.479,330.54,131.332,268.902,131.332z"/> </g></g><g> <g> <path d="M268.902,65.304c-9.291,0-16.823,7.532-16.823,16.823s7.531,16.823,16.823,16.823 c79.494,0,144.167,64.673,144.167,144.167c0,9.291,7.532,16.823,16.823,16.823s16.823-7.532,16.823-16.823 C446.715,145.071,366.948,65.304,268.902,65.304z"/> </g></g><g> <g> <path d="M440.799,71.22C394.884,25.305,333.835,0.019,268.901,0.019c-9.291,0-16.823,7.532-16.823,16.823 c0,9.291,7.532,16.823,16.823,16.823c115.494,0,209.454,93.96,209.454,209.453c0,9.291,7.532,16.823,16.823,16.823 c9.291,0,16.823-7.532,16.823-16.823C512,178.183,486.714,117.136,440.799,71.22z"/> </g></g></svg>
+                                  +8478481681
+                                </li>
+                                <li>
+                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M467,61H45C20.218,61,0,81.196,0,106v300c0,24.72,20.128,45,45,45h422c24.72,0,45-20.128,45-45V106C512,81.28,491.872,61,467,61z M460.786,91L256.954,294.833L51.359,91H460.786z M30,399.788V112.069l144.479,143.24L30,399.788z M51.213,421l144.57-144.57l50.657,50.222c5.864,5.814,15.327,5.795,21.167-0.046L317,277.213L460.787,421H51.213z M482,399.787L338.213,256L482,112.212V399.787z"/></g></g></svg>
+                                  user@support.com 
+                                </li>
+                                <li>
+                                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g><g><path d="M256,0C156.748,0,76,80.748,76,180c0,33.534,9.289,66.26,26.869,94.652l142.885,230.257c2.737,4.411,7.559,7.091,12.745,7.091c0.04,0,0.079,0,0.119,0c5.231-0.041,10.063-2.804,12.75-7.292L410.611,272.22C427.221,244.428,436,212.539,436,180C436,80.748,355.252,0,256,0z M384.866,256.818L258.272,468.186l-129.905-209.34C113.734,235.214,105.8,207.95,105.8,180c0-82.71,67.49-150.2,150.2-150.2S406.1,97.29,406.1,180C406.1,207.121,398.689,233.688,384.866,256.818z"/></g></g><g><g><path d="M256,90c-49.626,0-90,40.374-90,90c0,49.309,39.717,90,90,90c50.903,0,90-41.233,90-90C346,130.374,305.626,90,256,90z M256,240.2c-33.257,0-60.2-27.033-60.2-60.2c0-33.084,27.116-60.2,60.2-60.2s60.1,27.116,60.1,60.2C316.1,212.683,289.784,240.2,256,240.2z"/></g></g></svg>
+                                  480 Red Banglos, PX 95848, UK
+                                </li>
+                              </ul> 
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="breadcrumb-right">
+                              <ul>
+                                <li>
+                                  <span>Invoice Date:-</span> 12/12/2020
+                                </li>
+                                <li>
+                                  <span>Issue Date:-</span> 12/11/2020
+                                </li>
+                                <li>
+                                  <span>Invoice No:-</span> 909048
+                                </li>
+                                <li>
+                                  <span>Account Numbers:-</span> 36590525744
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="table-box table-responsive-md">
+                          <table class="invoice-table" >
+                            <thead>
+                                <tr>
+                                    <th>no.</th>
+                                    <th>itme detail</th>
+                                    <th>qty</th>
+                                    <th>price</th>
+                                    <th>amout</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>                               
+                                      <h3>
+                                        wireless  headphones
+                                      </h3>
+                                      <p>Lorem ipsum dolor sit, amet, consectetur adipisicing elit.</p>
+                                    </td>
+                                    <td>12</td>
+                                    <td>$5.00</td>
+                                    <td>$60.00</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>                               
+                                      <h3>
+                                        women fashion shoes
+                                      </h3>
+                                      <p>Lorem ipsum dolor sit, amet, consectetur adipisicing elit.</p>
+                                    </td>
+                                    <td>30</td>
+                                    <td>$10.00</td>
+                                    <td>$300.00</td>
+                                </tr>                         
+                                <tr>
+                                    <td>3</td>
+                                    <td>                               
+                                      <h3>
+                                        Red Casual Backpack
+                                      </h3>
+                                      <p>Lorem ipsum dolor sit, amet, consectetur adipisicing elit.</p>
+                                    </td>
+                                    <td>12</td>
+                                    <td>$10.00</td>
+                                    <td>$120.00</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>                               
+                                      <h3>
+                                        relex camera 
+                                      </h3>
+                                      <p>Lorem ipsum dolor sit, amet, consectetur adipisicing elit.</p>
+                                    </td>
+                                    <td>20</td>
+                                    <td>$20.00</td>
+                                    <td>$400.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>                                                              
+                                <tr>
+                                  <td colspan="2"></td>
+                                  <td colspan="2">TOTAL AMOUNT</td>
+                                  <td>$6,500.00</td>
+                                </tr>
+                            </tfoot>
+                          </table> 
+                          <div class="row print-bar">
+                            <div class="col-md-6">
+                              <div class="printbar-left">
+                                <button id="exportpdf" class="btn btn-solid btn-md">
+                                  <i class="fa fa-file"></i> 
+                                  Export as PDF
+                                </button>  
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="printbar-right">
+                                <button id="printinvoice" class="btn btn-solid btn-md ">
+                                  <i class="fa fa-print"></i> 
+                                  Print
+                                </button>
+                              </div>
+                            </div>
+                          </div>   
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- invoice end -->
+
+
+<!-- latest jquery-->
+<script src="{% static 'assets/js/jquery-3.3.1.min.js" ></script>
+
+<!-- Bootstrap js-->
+<script src="{% static 'assets/js/bootstrap.js" ></script>
+
+<!-- Theme js-->
+<script src="{% static 'assets/js/invoice.js" ></script>
+</body>
+</html>
