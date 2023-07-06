@@ -2885,15 +2885,30 @@ $('.tap-top').on('click', function() {
 
 
     /*=====================
-     26. Cookiebar
+     24. Cookiebar
      ==========================*/
-     window.setTimeout(function(){
-        $(".cookie-bar").addClass('show')
-    }, 5000);
 
-    $('.cookie-bar .btn, .cookie-bar .btn-close').on('click',function(){
-        $(".cookie-bar").removeClass('show')
-    });
+    $(document).ready(function() {
+      window.setTimeout(function() {
+          $(".cookie-bar").addClass('show');
+      }, 0);
+  
+      $('.cookie-bar .btn, .cookie-bar .btn-close').on('click', function() {
+          $(".cookie-bar").removeClass('show');
+      });
+  
+      $(".cookie-bar #cookiebutton").on("click", function() {
+          $(".cookie-bar").toggleClass("hide");
+          $.ajax({
+              url: "/setCookie",
+              method: 'GET',
+              success: function(response) {
+                  console.log(response); // Optional: Log the response
+              },
+          });
+      });
+  }); 
+  
 
 
 

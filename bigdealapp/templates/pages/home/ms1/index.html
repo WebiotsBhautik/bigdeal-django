@@ -1,7 +1,31 @@
-{% extends 'base/ms1-base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 {% load sass_tags %}
 {% block components %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="big-deal">
+  <meta name="keywords" content="big-deal">
+  <meta name="author" content="big-deal">
+  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color2.css' %}" media="screen" id="color">
+</head>
+<body class="bg-light">
 
 
 <!-- loader start -->
@@ -14,7 +38,7 @@
 
 {% include 'pages/shop/shop-header.html' %}
 
-<!--top brand panel start-->
+<!--top brand panel start-->  
 <section class="brand-panel">
   <div class="brand-panel-box">
     <div class="brand-panel-contain ">
@@ -6464,8 +6488,7 @@
 </section>
 <!--instagra end-->
 
-
-{% comment %} <!-- footer start -->
+ <!-- footer start -->
 <footer>
   <div class="footer1">
     <div class="container">
@@ -7099,14 +7122,38 @@
   <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
   <div class="cart-inner">
     <div class="cart_top">
-      <h3>my account</h3>
+      <h3>my account </h3>
       <div class="close-cart">
         <a href="javascript:void(0)" onclick="closeAccount()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
       </div>
     </div>
-    <form class="theme-form">
+    {% if request.user %}
+    <li>
+      <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+      <h6 class="d-block">
+        Welcome, {{request.user.username}}
+      </h6>
+    </li>
+    <li>
+      <a href="{% url 'logout_page' %}" class="d-block"
+        >Logout</a
+      >
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url 'login_page' %}" class="d-block"
+        >Login</a
+      >
+    </li>
+    <li>
+      <a href="{% url 'signup_page' %}" class="d-block"
+        >Register</a
+      >
+    </li>
+    {% endif %}
+    {% comment %} <form class="theme-form">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" placeholder="Email" required="">
@@ -7116,13 +7163,13 @@
         <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
       </div>
       <div class="form-group">
-        <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+        <a href="{% url 'login_page' %}" class="btn btn-solid btn-md btn-block ">Login</a>
       </div>
       <div class="accout-fwd">
         <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-        <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+        <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
-    </form>
+    </form> {% endcomment %}
   </div>
 </div>
 <!-- Add to account bar end-->
@@ -7162,13 +7209,19 @@
 </div>
 <!-- add to  setting bar  end-->
 
+{% if not request.COOKIES.login_status %}
+
 <!-- cookie bar start -->
 <div class="cookie-bar">
   <p>We use cookies to improve our site and your shopping experience. By continuing to browse our site you accept our cookie policy.</p>
-  <a href="javascript:void(0)" class="btn btn-solid btn-xs">accept</a>
+  <button class="btn btn-solid btn-xs" id="cookiebutton">accept</button>
   <a href="javascript:void(0)" class="btn btn-solid btn-xs">decline</a>
 </div>
-<!-- cookie bar end -->
+<!-- cookie bar end -->   
+
+{% else %}
+
+{% endif %}
 
 <!-- notification product -->
 <div class="product-notification" id="dismiss">
@@ -7183,37 +7236,17 @@
 </div>
 <!-- notification product -->
 
-<!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
 
-<!-- slick js-->
-<script src="{% static 'assets/js/slick.js' %}"></script>
+{% endblock components %}
 
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
-<script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
 
-<!-- menu js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
+{% block script %}
 
 <!-- timer js -->
 <script src="{% static 'assets/js/timer2.js' %}"></script>
 
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}"></script>
-
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
-
-<!-- father icon -->
-<script src="{% static 'assets/js/feather.min.js' %}"></script>
-<script src="{% static 'assets/js/feather-icon.js' %}"></script>
-
-<!-- Theme js-->
-<script src="{% static 'assets/js/modal.js' %}"></script>
-<script src="{% static 'assets/js/script.js' %}"></script>
 </body>
-</html> {% endcomment %}
+</html> 
+{% endblock script %}
 
-{% endblock components %}
+

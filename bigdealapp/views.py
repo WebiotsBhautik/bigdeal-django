@@ -1,10 +1,79 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
+from accounts.models import CustomUser
+from django.contrib import messages
+from django.contrib.auth.models import Group
+from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.models import auth
+
+
 
 
 
 # Create your views here.
+
+
+def setCookie(request):
+    response = HttpResponse('Cookie Set')
+    response.set_cookie('login_status', True)
+    return response
+
+def signup_page(request):
+    if request.method == "POST":
+        role = request.POST['role']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['pass']
+        confpassword = request.POST['cpass']
+
+        if CustomUser.objects.filter(email=email).exists():
+            messages.warning(request, 'Email address is already in use')
+        else:
+            if password == confpassword:
+                if role == 'customer':
+                    user = CustomUser.objects.create_user(username=username, email=email, is_customer=True, is_vendor=False, password=password)
+                    group = Group.objects.get(name='Customer')
+                    user.groups.add(group)
+                    user.save()
+                    messages.success(request, 'Registration successfully')
+                    return redirect('login_page')
+                else:
+                    user = CustomUser.objects.create_user(
+                        username=username, email=email, is_customer=False, is_vendor=True, password=password)
+                    group = Group.objects.get(name='Vendor')
+                    user.groups.add(group)
+                    user.save()
+                    messages.success(request, 'Registration successfully')
+                    return redirect('login_page')
+            else:
+                messages.error(request,'Password Does Not Match')
+                return redirect('signup_page')
+        return render(request, 'authentication/sign-up.html')
+    else:
+        context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"}}
+        return render(request, 'authentication/sign-up.html', context)
+                    
+
+def login_page(request):
+    if request.method == "POST":
+        username = request.POST['name']
+        password = request.POST['password']
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None and user.is_customer:
+            auth.login(request,user)
+            return redirect('index')
+        else:
+            messages.error(request, 'Invalid Credentials')
+            return redirect('login_page')
+    context = {"breadcrumb": {
+         "parent": "Dashboard", "child": "Default"}}
+    return render(request, 'authentication/login.html',context)
+
+def logout_page(request):
+    auth.logout(request)
+    return redirect('/login_page')
 
 
 # HOME PAGES SECTION 
@@ -38,11 +107,6 @@ def cosmetic(request):
 
 def kids(request):
     return render(request, 'pages/home/kids/kids.html')
-
-
-
-
-
 
 
 
@@ -99,6 +163,6 @@ def farming(request):
     return render(request, 'pages/home/farming/farming.html')
 
 def digital_marketplace(request):
-    return render(request, 'pages/home/digital marketplace/digital-marketplace.html')
+    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html')
 
 

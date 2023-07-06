@@ -1,0 +1,68 @@
+{% load static %}  
+{% load sass_tags %}
+
+
+
+<!--icon css-->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}">
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}">
+
+{% block style %}
+
+{% endblock style %}
+
+  
+<!--Slick css-->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
+  
+<!--Animate css-->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
+
+<!-- Bootstrap css -->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
+
+
+
+
+{% block components %}
+
+{% endblock components %}
+
+
+
+
+<!-- latest jquery-->
+<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+
+<!-- slick js-->
+<script src="{% static 'assets/js/slick.js' %}"></script>
+
+<!-- tool tip js -->
+<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
+<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
+
+
+<!-- popper js-->
+<script src="{% static 'assets/js/popper.min.js' %}" ></script>
+
+<!-- menu js-->
+<script src="{% static 'assets/js/menu.js' %}"></script>
+
+<!-- father icon -->
+<script src="{% static 'assets/js/feather.min.js' %}"></script>
+<script src="{% static 'assets/js/feather-icon.js' %}"></script>
+
+<!-- Bootstrap js-->
+<script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.js' %}"></script>
+
+{% block script %}
+
+{% endblock script %}
+
+<!-- Theme js-->
+<script src="{% static 'assets/js/script.js' %}"></script>
+<script src="{% static 'assets/js/modal.js' %}"></script>
+
+
