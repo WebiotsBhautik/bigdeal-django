@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bigdealapp',
     'accounts',
     'product',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

@@ -7,6 +7,9 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import auth
+from .models import Banner,BannerTheme,BannerType
+from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
+                            ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
 
 
 
@@ -82,12 +85,31 @@ def index(request):
     return render(request,'pages/home/ms1/index.html')
 
 def layout2(request):
-    return render(request, 'pages/home/ms2/layout-2.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore2 Demo')
+    brands = ProBrand.objects.all()
+    layout2_category = ProCategory.objects.get(categoryName='ms2')
+    subcategories = layout2_category.get_descendants(include_self=True)
+    layout2_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+               'allbanners':banners,
+               'allbrands':brands,
+               }
+
+    return render(request, 'pages/home/ms2/layout-2.html',context)
 
 def layout3(request):
     return render(request, 'pages/home/ms3/layout-3.html')
 
-def layout4(request):
+def layout4(request):   
     return render(request, 'pages/home/ms4/layout-4.html')
 
 def megastore(request):
