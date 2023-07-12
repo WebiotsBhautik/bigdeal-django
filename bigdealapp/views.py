@@ -169,7 +169,32 @@ def layout2(request):
     return render(request, 'pages/home/ms2/layout-2.html',context)
 
 def layout3(request):
-    return render(request, 'pages/home/ms3/layout-3.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore3 Demo')
+    # shop_banners = banners.filter(bannerType__bannerTypeName='Banner')
+    media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
+
+    brands = ProBrand.objects.all()
+    layout3_category = ProCategory.objects.get(categoryName='ms2')
+    subcategories = layout3_category.get_descendants(include_self=True)
+    layout3_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products  
+        
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+               'allbanners':banners,
+               'allbrands':brands,
+               'layout3_products':layout3_products,
+               'media_banners':media_banners,
+               'subcategories':subcategories,
+               'products_by_subcategory':products_by_subcategory,
+               }
+        
+    return render(request, 'pages/home/ms3/layout-3.html',context)
 
 def layout4(request):   
     return render(request, 'pages/home/ms4/layout-4.html')
