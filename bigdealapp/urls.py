@@ -6,6 +6,11 @@ urlpatterns = [
 # AUTHNTICATION ROUTES
     
     path('setCookie',views.setCookie, name='setCookie'),
+    path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
+    path('get_selected_currency',views.get_selected_currency,name='get_selected_currency'),
+
+    
+
     path('', views.login_page, name='login_page'),
     path('signup_page', views.signup_page, name='signup_page'),
     path('login_page', views.login_page, name='login_page'),

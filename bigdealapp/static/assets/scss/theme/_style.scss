@@ -18239,6 +18239,10 @@ ul.sosiyal {
 
   .tab-content {
     display: none;
+    &.current{
+      display: none;
+    }
+    
 
     &[style="display: block;"] {
 

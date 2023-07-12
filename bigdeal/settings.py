@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts',
     'product',
     'mathfilters',
+    'currency',
 ]
 
 MIDDLEWARE = [

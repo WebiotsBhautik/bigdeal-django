@@ -11914,6 +11914,8 @@ ul.sosiyal {
     margin-bottom: -15px; }
   .theme-tab .tab-content {
     display: none; }
+    .theme-tab .tab-content.current {
+      display: none; }
     .theme-tab .tab-content[style="display: block;"] .product-box,
     .theme-tab .tab-content[style="display: block;"] .tab-box,
     .theme-tab .tab-content[style="display: block;"] .media-banner,

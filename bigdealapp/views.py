@@ -7,9 +7,13 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import auth
-from .models import Banner,BannerTheme,BannerType
+from .models import Banner,BannerTheme,BannerType,Blog
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
+
+from currency.models import Currency
+
+import json
 
 
 
@@ -21,7 +25,24 @@ from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory
 def setCookie(request):
     response = HttpResponse('Cookie Set')
     response.set_cookie('login_status', True)
+    currency = Currency.objects.get(code='USD')
+    response.set_cookie('currency', currency.id)
     return response
+
+def set_currency_to_session(request):
+    body = json.loads(request.body)
+    currencyID = body['currencyId']
+    print('currencyID ============>',currencyID)
+    response = HttpResponse('Cookie Set for currency')
+    response.set_cookie('currency', currencyID)
+    return response
+
+
+def get_selected_currency(request):
+    currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    data = {"factor": currency.factor, "symbol": currency.symbol}
+    return JsonResponse(data, safe=False)
+
 
 def signup_page(request):
     if request.method == "POST":
@@ -82,10 +103,43 @@ def logout_page(request):
 # HOME PAGES SECTION 
 
 def index(request):
-    return render(request,'pages/home/ms1/index.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
+    collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    col_banner = {}
+    if collection_banner.count() >= 1:
+        col_banner = [collection_banner[0],]
+
+    brands = ProBrand.objects.all()
+    layout1_category = ProCategory.objects.get(categoryName='ms1')
+    subcategories = layout1_category.get_descendants(include_self=True)
+    layout1_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+               'allbrands':brands,
+               'allbanners':banners,
+               'layout1_products':layout1_products,
+               'subcategories':subcategories,
+               'products_by_subcategory':products_by_subcategory,
+               'col_banner':col_banner,
+               }
+    return render(request,'pages/home/ms1/index.html',context)
 
 def layout2(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore2 Demo')
+    shop_banners = banners.filter(bannerType__bannerTypeName='Banner')
+    media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
+
+    if shop_banners.count() == 2:
+        both_banners = [shop_banners[0], shop_banners[1]]
+
     brands = ProBrand.objects.all()
     layout2_category = ProCategory.objects.get(categoryName='ms2')
     subcategories = layout2_category.get_descendants(include_self=True)
@@ -97,11 +151,19 @@ def layout2(request):
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='layout2',status=True, blogStatus=1)
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbanners':banners,
                'allbrands':brands,
+                'both_banners':both_banners,
+               'layout2_products':layout2_products,
+               'media_banners':media_banners,
+               'subcategories':subcategories,
+               'products_by_subcategory':products_by_subcategory,
+               'blogs':blogs,
                }
 
     return render(request, 'pages/home/ms2/layout-2.html',context)

@@ -2,7 +2,7 @@ from urllib.parse import urlencode, urlparse, urlunparse
 from django import template
 from django.http import QueryDict
 
-# from currency.models import Currency
+from currency.models import Currency
 
 # from order.models import (Cart, CartProducts,Wishlist,Compare)
 from product.models import (Product, ProductVariant)
@@ -40,63 +40,63 @@ def return_first_product_variant(value):
     pass
 
 
-# @register.filter(name='return_currency_wise_ammount')
-# def return_currency_wise_ammount(value, request):
-#     result = request.COOKIES.get('currency', '')
-#     if len(result) == 0:
-#         currency = Currency.objects.get(code='USD')
-#         amount = int(value)*currency.factor
-#         return amount
+@register.filter(name='return_currency_wise_ammount')
+def return_currency_wise_ammount(value, request):
+    result = request.COOKIES.get('currency', '')
+    if len(result) == 0:
+        currency = Currency.objects.get(code='USD')
+        amount = int(value)*currency.factor
+        return amount
 
-#     currency = Currency.objects.get(id=result)
-#     amount = int(value)*currency.factor
-#     return amount
-
-
-# @register.filter(name='return_currency_wise_ammount_range')
-# def return_currency_wise_ammount_range(value, request):
-#     result = request.COOKIES.get('currency', '')
-#     if len(result) == 0:
-#         currency = Currency.objects.get(code='USD')
-#         productVariantMinPrice = int(value[0])*currency.factor
-#         productVariantMaxPrice = int(value[1])*currency.factor
-#         if str(productVariantMinPrice) == str(productVariantMaxPrice):
-#             return str(currency.symbol)+str(productVariantMinPrice)
-#         else: 
-#             return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
-
-#     currency = Currency.objects.get(id=result)
-#     productVariantMinPrice = int(value[0])*currency.factor
-#     productVariantMaxPrice = int(value[1])*currency.factor
-#     if str(productVariantMinPrice) == str(productVariantMaxPrice):
-#         return str(currency.symbol)+str(productVariantMinPrice)
-#     else:
-#         return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
+    currency = Currency.objects.get(id=result)
+    amount = int(value)*currency.factor
+    return amount
 
 
-# @register.filter(name='return_currency_wise_symbol')
-# def return_currency_wise_symbol(value, request):
-#     result = request.COOKIES.get('currency', '')
-#     if len(result) == 0:
-#         currency = Currency.objects.get(code='USD')
-#         return currency.symbol
-#     currency = Currency.objects.get(id=result)
-#     return currency.symbol
+@register.filter(name='return_currency_wise_ammount_range')
+def return_currency_wise_ammount_range(value, request):
+    result = request.COOKIES.get('currency', '')
+    if len(result) == 0:
+        currency = Currency.objects.get(code='USD')
+        productVariantMinPrice = int(value[0])*currency.factor
+        productVariantMaxPrice = int(value[1])*currency.factor
+        if str(productVariantMinPrice) == str(productVariantMaxPrice):
+            return str(currency.symbol)+str(productVariantMinPrice)
+        else: 
+            return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
+
+    currency = Currency.objects.get(id=result)
+    productVariantMinPrice = int(value[0])*currency.factor
+    productVariantMaxPrice = int(value[1])*currency.factor
+    if str(productVariantMinPrice) == str(productVariantMaxPrice):
+        return str(currency.symbol)+str(productVariantMinPrice)
+    else:
+        return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
 
 
-# @register.filter(name='return_currency_wise_code')
-# def return_currency_wise_code(value, request):
-#     result = request.COOKIES.get('currency', '')
-#     if len(result) == 0:
-#         currency = Currency.objects.get(code='USD')
-#         return currency.code
-#     currency = Currency.objects.get(id=result)
-#     return currency.code
+@register.filter(name='return_currency_wise_symbol')
+def return_currency_wise_symbol(value, request):
+    result = request.COOKIES.get('currency', '')
+    if len(result) == 0:
+        currency = Currency.objects.get(code='USD')
+        return currency.symbol
+    currency = Currency.objects.get(id=result)
+    return currency.symbol
 
-# @register.filter(name='return_currency')
-# def return_currency(value):
-#     currency = Currency.objects.all()
-#     return currency
+
+@register.filter(name='return_currency_wise_code')
+def return_currency_wise_code(value, request):
+    result = request.COOKIES.get('currency', '')
+    if len(result) == 0:
+        currency = Currency.objects.get(code='USD')
+        return currency.code
+    currency = Currency.objects.get(id=result)
+    return currency.code
+
+@register.filter(name='return_currency')
+def return_currency(value):
+    currency = Currency.objects.all()
+    return currency
 
 
 # Functions to return context for ''''''HEADER'''''' for all pages start
