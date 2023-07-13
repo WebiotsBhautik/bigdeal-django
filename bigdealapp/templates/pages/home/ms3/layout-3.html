@@ -792,15 +792,16 @@
       <div class="row collection2 collection-layout3">
          <div class="col-lg-4 col-md-6">
             <div class="row banner-2-padding collection4">
+               {% for banner in left_banners|slice:"0:2"  %}
                <div class="col-6 ">
                   <div class="collection-banner-main banner-2">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/layout-3/collection-banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain">
                         <div>
-                           <h3>washing</h3>
-                           <h4>machine</h4>
+                           <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{banner.titleOne}}</h4>
                            <div class="shop">
                               <a href="product-page(left-sidebar).html">
                                  shop now
@@ -811,36 +812,19 @@
                      </div>
                   </div>
                </div>
-               <div class="col-6 ">
-                  <div class="collection-banner-main banner-2">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/layout-3/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain">
-                        <div>
-                           <h3>canon</h3>
-                           <h4>camera</h4>
-                           <div class="shop">
-                              <a href="product-page(left-sidebar).html">
-                                 shop now
-                                 <i class="fa fa-arrow-circle-right"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
             <div class="row banner-3-padding collection4">
+               {% for banner in left_banners|slice:"2:4"  %}
                <div class="col-6 ">
                   <div class="collection-banner-main banner-2">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/layout-3/collection-banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>new</h3>
-                           <h4>books</h4>
+                           <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{banner.titleOne}}</h4>
                            <div class="shop">
                               <a href="product-page(left-sidebar).html">
                                  shop now
@@ -851,25 +835,7 @@
                      </div>
                   </div>
                </div>
-               {% comment %} <div class="col-6">
-                  <div class="collection-banner-main banner-2">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/layout-3/collection-banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain ">
-                        <div>
-                           <h3>boys</h3>
-                           <h4>shoes</h4>
-                           <div class="shop">
-                              <a href="product-page(left-sidebar).html">
-                                 shop now
-                                 <i class="fa fa-arrow-circle-right"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div> {% endcomment %}
+               {% endfor %}
             </div>
          </div>
          <div class="col-lg-4 col-md-6">
@@ -896,7 +862,7 @@
          <div class="col-lg-4 col-sm-12">
             <div class="row banner-2-padding  collection5 ">
                {% for banner in allbanners  %}
-               {% if banner.bannerType|to_str == '	Right Banner' %}
+               {% if banner.bannerType|to_str == 'Right Banner' %}
                <div class="col-lg-12 col-md-6 ">
                   <div class="collection-banner-main banner-4 p-left">
                      <div class="collection-img">
@@ -918,25 +884,6 @@
                </div>
                {% endif %}
                {% endfor %}
-               {% comment %} <div class="col-lg-12 col-md-6 ">
-                  <div class="collection-banner-main banner-4 p-left">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/layout-3/collection-banner/7.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain ">
-                        <div >
-                           <h3>jewellery</h3>
-                           <h4>diamond ring</h4>
-                           <div class="shop">
-                              <a href="product-page(left-sidebar).html">
-                                 shop now
-                                 <i class="fa fa-arrow-circle-right"></i>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div> {% endcomment %}
             </div>
          </div>
       </div>

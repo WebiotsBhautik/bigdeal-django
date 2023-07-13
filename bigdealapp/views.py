@@ -172,9 +172,10 @@ def layout3(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore3 Demo')
     # shop_banners = banners.filter(bannerType__bannerTypeName='Banner')
     media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
+    left_banners = banners.filter(bannerType__bannerTypeName='Left Banner')
 
     brands = ProBrand.objects.all()
-    layout3_category = ProCategory.objects.get(categoryName='ms2')
+    layout3_category = ProCategory.objects.get(categoryName='ms3')
     subcategories = layout3_category.get_descendants(include_self=True)
     layout3_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -192,12 +193,39 @@ def layout3(request):
                'media_banners':media_banners,
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
+               'left_banners':left_banners,
                }
         
     return render(request, 'pages/home/ms3/layout-3.html',context)
 
 def layout4(request):   
-    return render(request, 'pages/home/ms4/layout-4.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Megastore4 Demo')
+    media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
+
+    
+    brands = ProBrand.objects.all()
+    layout4_category = ProCategory.objects.get(categoryName='ms4')
+    subcategories = layout4_category.get_descendants(include_self=True)
+    layout4_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products  
+
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+               'allbanners':banners,
+               'allbrands':brands,
+               'media_banners':media_banners,
+               'layout4_products':layout4_products,
+               'subcategories':subcategories,
+               'products_by_subcategory':products_by_subcategory,
+               }
+    
+    return render(request, 'pages/home/ms4/layout-4.html',context)
 
 def megastore(request):
     return render(request, 'pages/home/ms5/megastore.html')
