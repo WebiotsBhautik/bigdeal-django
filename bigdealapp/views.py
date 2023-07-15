@@ -228,7 +228,68 @@ def layout4(request):
     return render(request, 'pages/home/ms4/layout-4.html',context)
 
 def megastore(request):
-    return render(request, 'pages/home/ms5/megastore.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Megastore5 Demo')
+    collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    sale_banner  = banners.filter(bannerType__bannerTypeName='Sale Banner')
+
+    print(collection_banner)
+    print(collection_banner[0])
+    print(collection_banner[1])
+    
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    
+    if collection_banner.count() == 4:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        
+        
+    
+    brands = ProBrand.objects.all()
+    layout5_category = ProCategory.objects.get(categoryName='ms5')
+    subcategory_list = layout5_category.get_descendants(include_self=False)
+
+    subcategories = layout5_category.get_descendants(include_self=True)
+    print(subcategory_list)
+    layout5_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    
+    megastore1_category = ProCategory.objects.get(categoryName='megastore1')
+    print('megastore1_category ======>',megastore1_category)
+    mg1sub = megastore1_category.get_descendants(include_self=False)
+    print('mg1sub ========>',mg1sub)
+    
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products  
+        
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'allbrands':brands,
+            'layout5_category':layout5_category,
+            'layout5_products':layout5_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'collection_banner':collection_banner,
+            'mg1sub':mg1sub,
+            'subcategory_list':subcategory_list,
+            'sale_banner':sale_banner,
+            }
+    
+    return render(request, 'pages/home/ms5/megastore.html',context)
 
 def layout5(request):
     return render(request, 'pages/home/electronics/layout-5.html')

@@ -1,4 +1,11 @@
+{% extends 'base/base.html' %}
 {% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block components %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,28 +28,16 @@
    <link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-   <!--icon css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/themify.css' %}">
-
-   <!--Slick slider css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
-
-   <!--Animate css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}">
-   <!-- Bootstrap css -->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.css' %}">
 
    <!-- Theme css -->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color11.css' %}" media="screen" id="color">
+   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color11.scss' %}" media="screen" id="color">
 </head>
 <body class="bg-light">
 
 <!-- loader start -->
 <div class="loader-wrapper">
    <div>
-      <img src="{% static 'assets/images/loader.gif" alt="loader">
+      <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
    </div>
 </div>
 <!-- loader end -->
@@ -421,14 +416,19 @@
             <div class="row">
                <div class="col-12">
                   <div class="slide-1 no-arrow">
+                     {% for banner in allbanners  %}
+                     {% if banner.bannerType|to_str == 'Slider' %}
                      <div>
                         <div class="slide-main">
-                           <img src="{% static 'assets/images/mega-store/slider/1.jpg' %}" class="img-fluid bg-img" alt="mega-store">
+                           <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="mega-store">
                            <div class="slide-contain">
                               <div>
-                                 <h4>all product</h4>
-                                 <h2>megastore</h2>
-                                 <h3>save up to 20% off</h3>
+                                 <h4>{{banner.titleOne}}</h4>
+                                 <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+                                 <h3>save up to {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                    {% else %}
+                                    <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                                    {% endif %}</h3>
                                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-md">
                                     Shop Now
                                  </a>
@@ -436,116 +436,54 @@
                            </div>
                         </div>
                      </div>
-                     <div>
-                        <div class="slide-main">
-                           <img src="{% static 'assets/images/mega-store/slider/2.jpg' %}" class="img-fluid bg-img" alt="mega-store">
-                           <div class="slide-contain">
-                              <div>
-                                 <h4>all product</h4>
-                                 <h2>megastore</h2>
-                                 <h3>save up to 20% off</h3>
-                                 <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-md">
-                                    Shop Now
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div>
-                        <div class="slide-main">
-                           <img src="{% static 'assets/images/mega-store/slider/3.jpg' %}" class="img-fluid bg-img" alt="mega-store">
-                           <div class="slide-contain">
-                              <div>
-                                 <h4>all product</h4>
-                                 <h2>megastore</h2>
-                                 <h3>save up to 20% off</h3>
-                                 <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-md">
-                                    Shop Now
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                     {% endif %}
+                     {% endfor %}
                   </div>
                </div>
+               {% for banner in allbanners  %}
+               {% if banner.bannerType|to_str == 'Banner' %}
                <div class="col-md-6">
                   <div class="collection-banner-main banner-18 banner-style7 collection-color13 p-left text-center">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/slider/banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>smart watch</h3>
-                           <h4>speacial offer</h4>
+                           <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{banner.titleOne}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="col-md-6">
-                  <div class="collection-banner-main banner-18 banner-style7 collection-color9 p-left text-center">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/slider/banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain ">
-                        <div>
-                           <h3>stylish chair</h3>
-                           <h4>weekend sale</h4>
-                           <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               {% endif %}
+               {% endfor %}
             </div>
          </div>
          <div class="col-xl-3 col-lg-12 ">
             <div class="row collection-p6">
+               {% for banner in allbanners  %}
+               {% if banner.bannerType|to_str == 'Sidebanner' %}
                <div class="col-xl-12 col-lg-4 col-md-6">
                   <div class="collection-banner-main banner-17 banner-style7 collection-color14 p-left text-center">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/slider/banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>smart glasses</h3>
-                           <h4>best choise</h4>
+                           <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{banner.titleOne}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="col-xl-12 col-lg-4 col-md-6">
-                  <div class="collection-banner-main banner-17 banner-style7 collection-color15 p-left text-center">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/slider/banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain ">
-                        <div>
-                           <h3>smart led tv</h3>
-                           <h4>now 70% off</h4>
-                           <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-12 col-lg-4 col-md-12">
-                  <div class="collection-banner-main banner-18 banner-style7  p-left text-center">
-                     <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/slider/banner/5.jpg' %}" class="img-fluid bg-img  " alt="banner">
-                     </div>
-                     <div class="collection-banner-contain ">
-                        <div>
-                           <h3>smart phone</h3>
-                           <h4>special offer</h4>
-                           <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               {% endif %}
+               {% endfor %}
             </div>
          </div>
       </div>
-   </div>
+   </div> 
 </section>
 <!--home slider end-->
 
@@ -609,17 +547,18 @@
       <div class="row">
          <div class="col-12 pr-0">
             <div class="product-slide-5 product-m no-arrow">
+               {% for product in layout5_products %}
                <div>
                   <div class="product-box product-box2">
                      <div class="product-imgbox">
                         <div class="product-front">
                            <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/1.jpg' %}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                            </a>
                         </div>
                         <div class="product-back">
                            <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/6.jpg' %}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                            </a>
                         </div>
                         <div class="product-icon icon-inline">
@@ -637,10 +576,14 @@
                            </a>
                         </div>
                         <div class="new-label1">
-                           <div>new</div>
+                           {% if product.is_past_due %}
+                           <span class="label label-black">Old</span>
+                           {% else %}
+                           <span class="label label-black">New</span>
+                           {% endif %}
                         </div>
                         <div class="on-sale1">
-                           on sale
+                           {{product.productDescription|safe}}
                         </div>
                      </div>
                      <div class="product-detail product-detail2 ">
@@ -652,287 +595,26 @@
                            <li><i class="fa fa-star-o"></i></li>
                         </ul>
                         <a href="product-page(no-sidebar).html">
-                           <h3>women fashion shoes</h3>
+                           <h3>{{product.productName}}</h3>
                         </a>
                         <h5>
-                           $50
+                           {% if product.productType == "Simple" %}
+                           {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                           {% else %}
+                           {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                           {% endif %} 
                            <span>
-                      $80
-                    </span>
+                              {% if product.productType == "Simple" %} 
+                              {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                              {% else %} 
+                              {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                              {% endif %}  
+                           </span>
                         </h5>
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/2.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/7.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon icon-inline">
-                           <button  class="tooltip-top  add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>                           
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(no-sidebar).html">
-                           <h3>men analogue watch</h3>
-                        </a>
-                        <h5>
-                           $10
-                           <span>
-                      $30
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/3.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/8.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon icon-inline">
-                           <button  class="tooltip-top  add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>                           
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(no-sidebar).html">
-                           <h3>wireless  headphones</h3>
-                        </a>
-                        <h5>
-                           $34
-                           <span>
-                      $40
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/4.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/9.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon icon-inline">
-                           <button  class="tooltip-top  add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>                           
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(no-sidebar).html">
-                           <h3>redmi not 9 pro</h3>
-                        </a>
-                        <h5>
-                           $250
-                           <span>
-                      $390
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/5.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/10.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon icon-inline">
-                           <button  class="tooltip-top  add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>                           
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(no-sidebar).html">
-                           <h3>Red Casual Backpack</h3>
-                        </a>
-                        <h5>
-                           $80
-                           <span>
-                      $130
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/3.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/mega-store/product/8.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon icon-inline">
-                           <button  class="tooltip-top  add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>                           
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(no-sidebar).html">
-                           <h3>wireless  headphones</h3>
-                        </a>
-                        <h5>
-                           $42
-                           <span>
-                      $65
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </div>
@@ -941,72 +623,90 @@
 <!-- product tab end -->
 
 <!--collection banner start-->
+{% if first_banner and second_banner and third_banner and fourth_banner  %}
+{% comment %} and third_banner and fourth_banner {% endcomment %}
 <section class="collection-banner section-py-space b-g-white">
    <div class="container-fluid">
       <div class="row collection-p4">
+         {% if first_banner  %}
          <div class="col-md-4">
             <div class="collection-banner-main p-center text-center p-top banner-16 banner-style7">
                <div class="collection-img">
-                  <img src="{% static 'assets/images/mega-store/collection-banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                </div>
                <div class="collection-banner-contain ">
                   <div>
-                     <h3>couple watches</h3>
-                     <h4>50% discount</h4>
+                     <h3>{{first_banner.titleone}}</h3>
+                     <h4>{% if first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                        {% else %}
+                        <span class="theme-color">{{first_banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                        {% endif %}discount</h4>
                      <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                   </div>
                </div>
             </div>
          </div>
+         {% endif %}
+
+
          <div class="col-md-4">
             <div class="row">
+               {% if third_banner  %}
                <div class="col-12">
                   <div class="collection-banner-main p-left text-center banner-13 banner-style7">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>jacket collection</h3>
-                           <h4>best choise</h4>
+                           <h3>{{third_banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{third_banner.titleOne}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                         </div>
                      </div>
                   </div>
                </div>
+               {% endif %} 
+               
+               {% if fourth_banner  %}
                <div class="col-12">
                   <div class="collection-banner-main p-left text-center banner-13 banner-style7">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/mega-store/collection-banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>relex camera</h3>
-                           <h4>best offer</h4>
+                           <h3>{{fourth_banner.bannerProduct.variantProduct.productName}}</h3>
+                           <h4>{{fourth_banner.titleOne}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                         </div>
                      </div>
                   </div>
                </div>
+               {% endif %}
             </div>
          </div>
+
+         {% if second_banner  %}
          <div class="col-md-4">
             <div class="collection-banner-main p-center p-top text-center banner-16 banner-style7">
                <div class="collection-img">
-                  <img src="{% static 'assets/images/mega-store/collection-banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                </div>
                <div class="collection-banner-contain ">
                   <div>
-                     <h3>latest collection</h3>
-                     <h4>wow super sale</h4>
+                     <h3>{{second_banner.bannerProduct.variantProduct.productName}}</h3>
+                     <h4>{{second_banner.titleOne}}</h4>
                      <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-xs"> Shop Now </a>
                   </div>
                </div>
             </div>
          </div>
+         {% endif %}
       </div>
    </div>
 </section>
+{% endif %}
 <!--collection banner end-->
 
 <!--title start-->
@@ -1021,188 +721,32 @@
       <div class="row">
          <div class="col-12 pr-0">
             <div class="category-slide5two no-arrow">
+               {% for category  in subcategory_list  %}
                <div>
                   <div class="category-box">
                      <div class="img-wrraper">
                         <a href="category-page(left-sidebar).html">
-                           <img src="{% static 'assets/images/mega-store/category/1.jpg' %}" alt="category" class="img-fluid">
+                           <img src="{{category.categoryImage}}" alt="category" class="img-fluid">
                         </a>
                      </div>
                      <div class="category-detail">
                         <a href="category-page(left-sidebar).html">
-                           <h2>Fashion & Clothing</h2>
+                           <h2>{{category.categoryName}}</h2>
                         </a>
+                        {% for ctgory in category.get_children %}
                         <ul>
                            <li>
-                              <a href="category-page(left-sidebar).html">Winter Jackets  </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Office Blazer </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> sports watches </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Professional Cap </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">printed t-shirt </a>
+                              <a href="category-page(left-sidebar).html">{{ctgory.categoryName}}  </a>
                            </li>
                         </ul>
+                        {% endfor %}
+
                         <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
+
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class="category-box">
-                     <a href="category-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/mega-store/category/2.jpg' %}" alt="category" class="img-fluid">
-                     </a>
-                     <div class="category-detail">
-                        <a href="category-page(left-sidebar).html">
-                           <h2>home furniture</h2>
-                        </a>
-                        <ul>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Chesterfield Chair</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Bunching Table</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Sofa beds</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Sleeper Sofas</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Storage cabinets </a>
-                           </li>
-                        </ul>
-                        <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="category-box">
-                     <a href="category-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/mega-store/category/3.jpg' %}" alt="category" class="img-fluid">
-                     </a>
-                     <div class="category-detail">
-                        <a href="category-page(left-sidebar).html">
-                           <h2>letest electronics</h2>
-                        </a>
-                        <ul>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Sony  oled TV </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Gaming Phone</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Asus Zenbook Pro</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">lg 21:9 Monitor </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Ceiling Fans</a>
-                           </li>
-                        </ul>
-                        <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="category-box">
-                     <a href="category-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/mega-store/category/4.jpg' %}" alt="category" class="img-fluid">
-                     </a>
-                     <div class="category-detail">
-                        <a href="category-page(left-sidebar).html">
-                           <h2>beauty & cosmetics</h2>
-                        </a>
-                        <ul>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Skin Concealer</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">eye makeup mascara</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Skin Cleansing Cream</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">organic cream </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">body loation</a>
-                           </li>
-                        </ul>
-                        <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="category-box">
-                     <a href="category-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/mega-store/category/5.jpg' %}" alt="category" class="img-fluid">
-                     </a>
-                     <div class="category-detail">
-                        <a href="category-page(left-sidebar).html">
-                           <h2>fresh grocery</h2>
-                        </a>
-                        <ul>
-                           <li>
-                              <a href="category-page(left-sidebar).html">White Pepper Powder </a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">vegetable & fruits</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Tomato sauce</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Barbecue sauce</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html">fresh coffee powder</a>
-                           </li>
-                        </ul>
-                        <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="category-box">
-                     <a href="category-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/mega-store/category/2.jpg' %}" alt="category" class="img-fluid">
-                     </a>
-                     <div class="category-detail">
-                        <a href="category-page(left-sidebar).html">
-                           <h2>home furniture</h2>
-                        </a>
-                        <ul>
-                           <li>
-                              <a href="category-page(left-sidebar).html">Chesterfield Chair</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Bunching Table</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Sofa beds</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Sleeper Sofas</a>
-                           </li>
-                           <li>
-                              <a href="category-page(left-sidebar).html"> Storage cabinets </a>
-                           </li>
-                        </ul>
-                        <a href="category-page(left-sidebar).html" class="btn btn-rounded btn-md btn-block">shop now</a>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </div>
@@ -1211,23 +755,33 @@
 <!-- category end -->
 
 <!--sale banner start-->
+{% for banner in sale_banner %}
+{% if forloop.last %}
+
 <section class="sale-banenr banner-style2  section-big-mb-space">
-   <img src="{% static 'assets/images/mega-store/sale-banner/1.jpg' %}" alt="sale-banenr" class="img-fluid bg-img">
+   <img src="{{banner.bannerImage}}" alt="sale-banenr" class="img-fluid bg-img">
    <div class="custom-container">
       <div class="row">
          <div class="col-12 position-relative">
+            
             <div class="sale-banenr-contain text-center  p-right">
                <div>
-                  <h4>summer sale 20% off</h4>
-                  <h2>shoes collection</h2>
-                  <h3>fashion trends</h3>
+                  <h4>summer sale {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                     {% else %}
+                     <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                     {% endif %}</h4>
+                  <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+                  <h3>{{banner.titleOne}}</h3>
                   <a href="product-page(left-sidebar).html" class="btn btn-rounded">Shop Now</a>
                </div>
             </div>
+            
          </div>
       </div>
    </div>
 </section>
+{% endif %}
+{% endfor %}
 <!--sale banner ned-->
 
 <!--title-start-->
@@ -1242,23 +796,25 @@
       <div class="row hotdeal-block2">
          <div class="col-12">
             <div class="hotdeal-slide3 no-arrow">
+               {% for banner in allbanners  %}
+               {% if banner.bannerType|to_str == 'Timer' %}
                <div>
                   <div class="hotdeal-box">
                      <div class="img-wrapper">
                         <a href="product-page(left-sidebar).html">
-                           <img src="{% static 'assets/images/mega-store/hot-deal/1.jpg' %}" alt="hot-deal" class="img-fluid bg-img">
+                           <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid bg-img">
                         </a>
                      </div>
                      <div class="hotdeal-contain">
                         <div>
                            <a href="product-page(left-sidebar).html">
-                              <h3>smart phone</h3>
+                              <h3>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h3>
                            </a>
                            <h5>
-                              $60
-                              <span class="price">$80</span>
+                              {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                              <span class="price">{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
                            </h5>
-                           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                           <p> {{banner.bannerProduct.variantProduct.productDescription|safe}}</p>
                            <ul>
                               <li>
                                  <i class="fa fa-star"></i>
@@ -1281,7 +837,9 @@
                      </div>
                   </div>
                </div>
-               <div>
+               {% endif %}
+               {% endfor %}
+               {% comment %} <div>
                   <div class="hotdeal-box">
                      <div class="img-wrapper">
                         <a href="product-page(left-sidebar).html">
@@ -1409,7 +967,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> {% endcomment %}
             </div>
          </div>
       </div>
@@ -2540,7 +2098,6 @@
 <!-- brand start -->
 
 
-
 <!-- footer start -->
 <footer>
    <div class="footer1">
@@ -3232,7 +2789,7 @@
                <option value="">piund</option>
                <option value="">doller</option>
             </select>
-         </div>
+         </div>  
       </div>
    </div>
 </div>
@@ -3251,44 +2808,24 @@
 </div>
 <!-- notification product -->
 
-
-<!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
-
-<!-- slick js-->
-<script src="{% static 'assets/js/slick.js' %}"></script>
+{% endblock components %}
 
 
 
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
-
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
+{% block script %}
 
 <!-- ajax search js -->
 <script src="{% static 'assets/js/typeahead.bundle.min.js' %}"></script>
 <script src="{% static 'assets/js/typeahead.jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/ajax-custom.js' %}"></script>
 
-<!-- Timer js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}"></script>
-
-<!-- father icon -->
-<script src="{% static 'assets/js/feather.min.js' %}"></script>
-<script src="{% static 'assets/js/feather-icon.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
 
 <!-- Theme js-->
-<script src="{% static 'assets/js/script.js' %}"></script>
 <script src="{% static 'assets/js/timer1.js' %}"></script>
 <script src="{% static 'assets/js/timer2.js' %}"></script>
-<script src="{% static 'assets/js/modal.js' %}"></script>
+
 </body>
 </html>
+
+{% endblock script %}
+
