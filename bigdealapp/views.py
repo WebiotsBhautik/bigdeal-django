@@ -227,15 +227,11 @@ def layout4(request):
     
     return render(request, 'pages/home/ms4/layout-4.html',context)
 
-def megastore(request):
+def layout5(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Megastore5 Demo')
     collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
     sale_banner  = banners.filter(bannerType__bannerTypeName='Sale Banner')
 
-    print(collection_banner)
-    print(collection_banner[0])
-    print(collection_banner[1])
-    
     first_banner = {}
     second_banner = {}
     third_banner = {}
@@ -246,31 +242,20 @@ def megastore(request):
         second_banner = collection_banner[1]
         third_banner = collection_banner[2]
         fourth_banner = collection_banner[3]
-        
-        
     
     brands = ProBrand.objects.all()
     layout5_category = ProCategory.objects.get(categoryName='ms5')
-    subcategory_list = layout5_category.get_descendants(include_self=False)
-
     subcategories = layout5_category.get_descendants(include_self=True)
-    print(subcategory_list)
     layout5_products = Product.objects.filter(proCategory__in=subcategories)
-    
-    
-    megastore1_category = ProCategory.objects.get(categoryName='megastore1')
-    print('megastore1_category ======>',megastore1_category)
-    mg1sub = megastore1_category.get_descendants(include_self=False)
-    print('mg1sub ========>',mg1sub)
-    
+
+    main_categories = ProCategory.objects.filter(parent=layout5_category)
     
     products_by_subcategory = {}
     
-     # Retrieve products for each subcategory
+    # Retrieve products for each subcategory
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products  
-        
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -284,18 +269,96 @@ def megastore(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'collection_banner':collection_banner,
-            'mg1sub':mg1sub,
-            'subcategory_list':subcategory_list,
             'sale_banner':sale_banner,
+            'main_categories':main_categories,
             }
     
-    return render(request, 'pages/home/ms5/megastore.html',context)
+    return render(request, 'pages/home/ms5/layout-5.html',context)
 
-def layout5(request):
-    return render(request, 'pages/home/electronics/layout-5.html')
+def electronics(request):
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Electronics Demo')
+    media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
 
-def layout6(request):
-    return render(request, 'pages/home/vegetables/layout-6.html')
+    brands = ProBrand.objects.all()
+    
+    electronics_category = ProCategory.objects.get(categoryName='Electronics')
+    subcategories = electronics_category.get_descendants(include_self=True)
+    electronics_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products  
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Electronics',status=True, blogStatus=1)
+
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'allbrands':brands,
+            'electronics_category':electronics_category,
+            'electronics_products':electronics_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'media_banners':media_banners,
+            'blogs':blogs,
+            }
+    return render(request, 'pages/home/electronics/electronics.html',context)
+
+def vegetable(request):
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Vegetable Demo')
+    masonary_banner = banners.filter(bannerType__bannerTypeName='masonary-banner')
+    
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    four_banner = {}
+    five_banner = {}
+    six_banner = {}
+    
+    if masonary_banner.count() == 6:
+        first_banner = masonary_banner[0]
+        second_banner = masonary_banner[1]
+        third_banner = masonary_banner[2]
+        four_banner = masonary_banner[3]
+        five_banner = masonary_banner[4]
+        six_banner = masonary_banner[5]
+        
+    
+    vegetable_category = ProCategory.objects.get(categoryName='Vegetables')
+    subcategories = vegetable_category.get_descendants(include_self=True)
+    # subcategories = ProCategory.objects.get(categoryName='Vegetables').get_descendants(include_self=True)
+
+    vegetable_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products  
+        
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Vegetables',status=True, blogStatus=1)
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'vegetable_category':vegetable_category,
+            'vegetable_products':vegetable_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'four_banner':four_banner,
+            'five_banner':five_banner,
+            'six_banner':six_banner,
+            }
+
+    return render(request, 'pages/home/vegetables/vegetable.html',context)
 
 def furniture(request):
     return render(request, 'pages/home/furniture/furniture.html')
@@ -306,8 +369,20 @@ def cosmetic(request):
 def kids(request):
     return render(request, 'pages/home/kids/kids.html')
 
+def tools(request):
+    return render(request, 'pages/home/tools/tools.html')
 
+def grocery(request):
+    return render(request, 'pages/home/grocery/grocery.html')
 
+def pets(request):
+    return render(request, 'pages/home/pets/pets.html')
+
+def farming(request):
+    return render(request, 'pages/home/farming/farming.html')
+
+def digital_marketplace(request):
+    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html')
 
 
 
@@ -348,19 +423,5 @@ def shop_6grid(request):
 def shop_list_view(request):
     return render(request, 'pages/shop/shop-list-view.html')
 
-def tools(request):
-    return render(request, 'pages/home/tools/tools.html')
-
-def grocery(request):
-    return render(request, 'pages/home/grocery/grocery.html')
-
-def pets(request):
-    return render(request, 'pages/home/pets/pets.html')
-
-def farming(request):
-    return render(request, 'pages/home/farming/farming.html')
-
-def digital_marketplace(request):
-    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html')
 
 

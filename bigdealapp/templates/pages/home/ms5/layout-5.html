@@ -82,7 +82,7 @@
                <div class="header-contain">
                   <div class="logo-block">
                      <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
-                     <div class="brand-logo logo-sm-center"> <a href="index.html"> <img
+                     <div class="brand-logo logo-sm-center"> <a href="{% url 'index' %}"> <img
                              src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid  " alt="logo">
                      </a>
                      </div>
@@ -255,7 +255,7 @@
                      <div class="logo-block">
                         <div class="mobilecat-toggle "> <i class="fa fa-bars sidebar-bar"></i> </div>
                         <div class="brand-logo logo-sm-center">
-                           <a href="index.html ">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid  " alt="logo">
                            </a>
                         </div>
@@ -721,7 +721,7 @@
       <div class="row">
          <div class="col-12 pr-0">
             <div class="category-slide5two no-arrow">
-               {% for category  in subcategory_list  %}
+               {% for category  in main_categories  %}
                <div>
                   <div class="category-box">
                      <div class="img-wrraper">
@@ -736,7 +736,7 @@
                         {% for ctgory in category.get_children %}
                         <ul>
                            <li>
-                              <a href="category-page(left-sidebar).html">{{ctgory.categoryName}}  </a>
+                              <a href="category-page(left-sidebar).html">{{ctgory.categoryName}}</a>
                            </li>
                         </ul>
                         {% endfor %}
@@ -980,11 +980,13 @@
 <section  class="tab-product-main  tab-second">
    <div class="tab-prodcut-contain">
       <ul class="tabs tab-title">
-         <li class="current"><a href="tab-1">all</a></li>
-         <li class=""><a href="tab-2">furniture</a></li>
+         {% for category in main_categories %}
+         <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
+         {% endfor %}
+         {% comment %} <li class=""><a href="tab-2">furniture</a></li>
          <li class=""><a href="tab-3">electronic</a></li>
          <li class=""><a href="tab-4">sports</a></li>
-         <li class=""><a href="tab-5">medicine</a></li>
+         <li class=""><a href="tab-5">medicine</a></li> {% endcomment %}
       </ul>
    </div>
 </section>
@@ -997,15 +999,18 @@
          <div class="col-12 p-0">
             <div class="theme-tab product">
                <div class="tab-content-cls ">
-                  <div id="tab-1" class="tab-content active default product-block3">
+                  {% for subcategory,products in products_by_subcategory.items %}
+                  <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product-block3 {% endif %}" data-subcategory-id="{{ subcategory.id }}">
                      <div class="col-12 ">
                         <div class="product-slide-3 no-arrow">
+                           {% if products %}
+                           {% for product in products %}
                            <div>
                               <div class="product-box3">
                                  <div class="media">
                                     <div class="img-wrapper">
                                        <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/1.jpg' %}" alt="product">
+                                          <img class="img-fluid" src="{{product.productImageFront}}" alt="product">
                                        </a>
                                     </div>
                                     <div class="media-body">
@@ -1018,847 +1023,36 @@
                                              <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
                                           </ul>
                                           <a href="product-page(left-sidebar).html">
-                                             <h3>perfums</h3>
+                                             <h3>{{product.productName}}</h3>
                                           </a>
-                                          <h4>$70<span>$90</span></h4>
+                                          <h4>
+                                             {% if product.productType == "Simple" %}
+                                             {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                             {% else %}
+                                             {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                             {% endif %}
+                                             <span>
+                                                {% if product.productType == "Simple" %} 
+                                                {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                                {% else %} 
+                                                {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                                {% endif %}
+                                             </span>
+                                          </h4>
                                           <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/2.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>smartphone</h3>
-                                          </a>
-                                          <h4>$130<span>$150</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/3.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>vegetalbe</h3>
-                                          </a>
-                                          <h4>$150<span>$200</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/4.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>watches</h3>
-                                          </a>
-                                          <h4>$70<span>$80</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/5.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>wallet</h3>
-                                          </a>
-                                          <h4>$125<span>$140</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/6.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>camera</h3>
-                                          </a>
-                                          <h4>$85<span>$100</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                           {% endfor %}
+                           {% else %}
+                           <h2 style="text-align:center;"> No products Yet! </h2>
+                           {% endif %}
                         </div>
                      </div>
                   </div>
-                  <div id="tab-2" class="tab-content  product-block3">
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/6.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>camera</h3>
-                                          </a>
-                                          <h4>$85<span>$100</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/4.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>watches</h3>
-                                          </a>
-                                          <h4>$70<span>$80</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/5.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>wallet</h3>
-                                          </a>
-                                          <h4>$125<span>$140</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/3.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>vegetalbe</h3>
-                                          </a>
-                                          <h4>$150<span>$200</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/1.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>perfums</h3>
-                                          </a>
-                                          <h4>$70<span>$90</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/2.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>smartphone</h3>
-                                          </a>
-                                          <h4>$130<span>$150</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="tab-3" class="tab-content  product-block3">
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/2.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>smartphone</h3>
-                                          </a>
-                                          <h4>$130<span>$150</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/3.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>vegetalbe</h3>
-                                          </a>
-                                          <h4>$150<span>$200</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/1.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>perfums</h3>
-                                          </a>
-                                          <h4>$70<span>$90</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/5.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>wallet</h3>
-                                          </a>
-                                          <h4>$125<span>$140</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/6.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>camera</h3>
-                                          </a>
-                                          <h4>$85<span>$100</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/4.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>watches</h3>
-                                          </a>
-                                          <h4>$70<span>$80</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="tab-4" class="tab-content  product-block3">
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/4.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>watches</h3>
-                                          </a>
-                                          <h4>$70<span>$80</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/5.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>wallet</h3>
-                                          </a>
-                                          <h4>$125<span>$140</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/6.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>camera</h3>
-                                          </a>
-                                          <h4>$85<span>$100</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/1.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>perfums</h3>
-                                          </a>
-                                          <h4>$70<span>$90</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/2.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>smartphone</h3>
-                                          </a>
-                                          <h4>$130<span>$150</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/3.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>vegetalbe</h3>
-                                          </a>
-                                          <h4>$150<span>$200</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="tab-5" class="tab-content  product-block3">
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/3.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>vegetalbe</h3>
-                                          </a>
-                                          <h4>$150<span>$200</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/1.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>perfums</h3>
-                                          </a>
-                                          <h4>$70<span>$90</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/2.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>smartphone</h3>
-                                          </a>
-                                          <h4>$130<span>$150</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-                     </div>
-                     <div class="col-12">
-                        <div class="product-slide-3 no-arrow">
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/6.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>camera</h3>
-                                          </a>
-                                          <h4>$85<span>$100</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/4.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>watches</h3>
-                                          </a>
-                                          <h4>$70<span>$80</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="product-box3">
-                                 <div class="media">
-                                    <div class="img-wrapper">
-                                       <a href="product-page(left-sidebar).html">
-                                          <img class="img-fluid" src="{% static 'assets/images/mega-store/media-product/5.jpg' %}" alt="product">
-                                       </a>
-                                    </div>
-                                    <div class="media-body">
-                                       <div class="product-detail">
-                                          <ul class="rating">
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star"></i></a></li>
-                                             <li><a href="javascript:void(0)"><i class="fa fa-star-o"></i></a></li>
-                                          </ul>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h3>wallet</h3>
-                                          </a>
-                                          <h4>$125<span>$140</span></h4>
-                                          <a class="btn btn-rounded  btn-sm" href="product-page(left-sidebar).html" >shop now</a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-                     </div>
-                  </div>
+                  {% endfor %}
                </div>
             </div>
          </div>
@@ -2111,7 +1305,7 @@
                      </div>
                      <div class="footer-contant">
                         <div class="footer-logo">
-                           <a href="index.html">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>

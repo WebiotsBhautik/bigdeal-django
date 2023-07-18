@@ -95,7 +95,7 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bigdeal-django',
+#         'NAME': 'bigdeal',
 #         'USER': 'postgres',
 #         'PASSWORD': 'postgres',
 #         'HOST': '127.0.0.1',
