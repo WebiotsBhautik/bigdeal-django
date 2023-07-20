@@ -178,17 +178,22 @@
 <!--home slider start-->
 <section class="cosmetic-slide home-slide">
   <div class="slide-1 no-arrow">
+    {% for banner in allbanners  %}
+    {% if banner.bannerType|to_str == 'Slider' %}
     <div>
       <div class="slide-main">
-        <img src="{% static 'assets/images/cosmetic/slider/2.jpg' %}" class="img-fluid bg-img" alt="furniture-slider">
+        <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="furniture-slider">
         <div class="custom-container">
           <div class="row">
             <div class="col-12 p-0">
               <div class="slide-contain">
                 <div>
-                  <h3>save up to 20% off</h3>
-                  <h2>cosmetics store</h2>
-                  <h4>Biggest Offers On This Season</h4>
+                  <h3>save up to {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                    {% else %}
+                    <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                    {% endif %}</h3>
+                  <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+                  <h4>{{banner.titleOne}}</h4>
                   <a href="product-page(left-sidebar).html" class="btn btn-solid">
                     Shop Now
                   </a>
@@ -198,65 +203,12 @@
           </div>
         </div>
         <div class="animat-block">
-            <img id="img-1" src="{% static 'assets/images/cosmetic/slider/animat-img/1.png' %}" alt="animat-img" class="img-fluid animat-img1">
-            <img id="img-2" src="{% static 'assets/images/cosmetic/slider/animat-img/2.png' %}" alt="animat-img" class="img-fluid animat-img2">
-            <img id="img-3" src="{% static 'assets/images/cosmetic/slider/animat-img/3.png' %}" alt="animat-img" class="img-fluid animat-img3">
+            <img id="img-1" src="{{banner.bannerImageTwo}}" alt="animat-img" class="img-fluid animat-img1">
         </div>
       </div>
     </div>
-    <div>
-      <div class="slide-main">
-        <img src="{% static 'assets/images/cosmetic/slider/1.jpg' %}" class="img-fluid bg-img" alt="furniture-slider">
-        <div class="custom-container">
-          <div class="row">
-            <div class="col-12 p-0">
-              <div class="slide-contain">
-                <div>
-                  <h3>save up to 20% off</h3>
-                  <h2>cosmetics store</h2>
-                  <h4>Biggest Offers On This Season</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-solid">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="animat-block">
-            <img id="img-4" src="{% static 'assets/images/cosmetic/slider/animat-img/1.png' %}" alt="animat-img" class="img-fluid animat-img1">
-            <img id="img-5" src="{% static 'assets/images/cosmetic/slider/animat-img/2.png' %}" alt="animat-img" class="img-fluid animat-img2">
-            <img id="img-6" src="{% static 'assets/images/cosmetic/slider/animat-img/3.png' %}" alt="animat-img" class="img-fluid animat-img3">
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="slide-main">
-        <img src="{% static 'assets/images/cosmetic/slider/3.jpg' %}" class="img-fluid bg-img" alt="furniture-slider">
-        <div class="custom-container">
-          <div class="row">
-            <div class="col-12 p-0">
-              <div class="slide-contain">
-                <div>
-                  <h3>save up to 20% off</h3>
-                  <h2>cosmetics store</h2>
-                  <h4>Biggest Offers On This Season</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-solid">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="animat-block">
-            <img id="img-7" src="{% static 'assets/images/cosmetic/slider/animat-img/1.png' %}" alt="animat-img" class="img-fluid animat-img1">
-            <img id="img-8" src="{% static 'assets/images/cosmetic/slider/animat-img/2.png' %}" alt="animat-img" class="img-fluid animat-img2">
-            <img id="img-9" src="{% static 'assets/images/cosmetic/slider/animat-img/3.png' %}" alt="animat-img" class="img-fluid animat-img3">
-        </div>
-      </div>
-    </div>
-
+    {% endif %}
+    {% endfor %}
   </div>
 </section>
 <!--home slider end-->
@@ -268,23 +220,29 @@
     <div class="row">
       <div class="col-12 pr-0">
         <div class="category-slide6 no-arrow">
+          {% for category in subcategories %}
+          
           <div>
             <a href="category-page(left-sidebar).html">
               <div class="category-box">
               <div>
-                <div class="icon-wrapper">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128"><g><path d="M103.4,56.342h-3.079V43.652a1.749,1.749,0,0,0-1.75-1.75h-6.6A10.366,10.366,0,0,0,86.21,28.418a10.31,10.31,0,0,0,.381-2.79,10.416,10.416,0,0,0-10-10.4C73.046,3.936,62.412.793,61.944.66a1.75,1.75,0,0,0-2.123,2.282c.883,2.427-.587,6.875-4.04,12.282H53.344a10.4,10.4,0,0,0-10.137,12.74A10.366,10.366,0,0,0,36.031,41.9h-6.6a1.75,1.75,0,0,0-1.75,1.75v12.69H24.6a9.41,9.41,0,0,0-9.4,9.4v47.332a15.536,15.536,0,0,0,15.519,15.52H97.276a15.538,15.538,0,0,0,15.521-15.52V65.742A9.411,9.411,0,0,0,103.4,56.342ZM38.784,38.061a6.928,6.928,0,0,1,6.811-6.9,1.751,1.751,0,0,0,1.549-2.517,6.825,6.825,0,0,1-.7-3.018,6.912,6.912,0,0,1,6.9-6.9h3.385a1.749,1.749,0,0,0,1.459-.784c3.4-5.133,5.2-9.436,5.372-12.847A18.867,18.867,0,0,1,73.568,17.4a1.75,1.75,0,0,0,1.7,1.326h.921a6.912,6.912,0,0,1,6.9,6.9,6.811,6.811,0,0,1-.365,2.18H64a1.75,1.75,0,0,0,0,3.5H83.678A6.885,6.885,0,0,1,88.044,41.9H39.956A6.892,6.892,0,0,1,38.784,38.061Zm-7.6,7.341H96.817v10.94H31.182ZM109.3,113.074a12.034,12.034,0,0,1-12.021,12.02H30.723A12.033,12.033,0,0,1,18.7,113.074V65.742a5.906,5.906,0,0,1,5.9-5.9H103.4a5.907,5.907,0,0,1,5.9,5.9Z"/><path d="M101.047,66.342H26.954a1.749,1.749,0,0,0-1.75,1.75v44.982a5.526,5.526,0,0,0,5.519,5.52H97.276a5.527,5.527,0,0,0,5.521-5.52V68.092A1.749,1.749,0,0,0,101.047,66.342ZM99.3,113.074a2.022,2.022,0,0,1-2.021,2.02H30.723a2.021,2.021,0,0,1-2.019-2.02V69.842H99.3Z"/><path d="M78.805,84.7a5.6,5.6,0,0,0-4.3-.338,38.227,38.227,0,0,0-5.317,2.185,38.2,38.2,0,0,0,.435-5.731,5.629,5.629,0,0,0-11.258,0,38.186,38.186,0,0,0,.435,5.731,38.171,38.171,0,0,0-5.317-2.184A5.629,5.629,0,1,0,50.01,95.071,38.238,38.238,0,0,0,55.6,96.428a38.176,38.176,0,0,0-3.721,4.382,5.629,5.629,0,0,0,9.108,6.617A38.274,38.274,0,0,0,64,102.534a38.168,38.168,0,0,0,3.018,4.893,5.629,5.629,0,0,0,9.108-6.617h0A38.251,38.251,0,0,0,72.4,96.428a38.251,38.251,0,0,0,5.586-1.357,5.63,5.63,0,0,0,.816-10.37Zm-16.019,5.54a3.245,3.245,0,0,1,.862-.187A3.669,3.669,0,1,1,60.32,93.7a3.649,3.649,0,0,1,.087-.777,3.791,3.791,0,0,1,1.144-1.949,3.692,3.692,0,0,1,.952-.628C62.6,90.3,62.691,90.273,62.786,90.241ZM64,78.688a2.131,2.131,0,0,1,2.129,2.129,34.712,34.712,0,0,1-.5,5.889,7.309,7.309,0,0,0-3.25,0,34.814,34.814,0,0,1-.5-5.889A2.131,2.131,0,0,1,64,78.688ZM49.724,89.059a2.123,2.123,0,0,1,2.683-1.366,34.713,34.713,0,0,1,5.443,2.3,7.214,7.214,0,0,0-1,3.092,34.754,34.754,0,0,1-5.755-1.34A2.132,2.132,0,0,1,49.724,89.059Zm8.426,16.31a2.129,2.129,0,0,1-3.445-2.5,34.865,34.865,0,0,1,3.874-4.473A6.774,6.774,0,0,0,61.2,100.31,34.78,34.78,0,0,1,58.15,105.369Zm14.671.472a2.128,2.128,0,0,1-2.973-.472,34.78,34.78,0,0,1-3.054-5.059,8,8,0,0,0,2.625-1.916,34.787,34.787,0,0,1,3.874,4.473A2.133,2.133,0,0,1,72.821,105.841Zm4.086-14.1a34.831,34.831,0,0,1-5.755,1.34,7.688,7.688,0,0,0-1-3.092,34.783,34.783,0,0,1,5.444-2.3,2.129,2.129,0,0,1,1.315,4.05Z"/></g></svg>
+                {% comment %} <div class="icon-wrapper"> {% endcomment %}
+                <div class="img-wrapper">
+                  {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128"><g><path d="M103.4,56.342h-3.079V43.652a1.749,1.749,0,0,0-1.75-1.75h-6.6A10.366,10.366,0,0,0,86.21,28.418a10.31,10.31,0,0,0,.381-2.79,10.416,10.416,0,0,0-10-10.4C73.046,3.936,62.412.793,61.944.66a1.75,1.75,0,0,0-2.123,2.282c.883,2.427-.587,6.875-4.04,12.282H53.344a10.4,10.4,0,0,0-10.137,12.74A10.366,10.366,0,0,0,36.031,41.9h-6.6a1.75,1.75,0,0,0-1.75,1.75v12.69H24.6a9.41,9.41,0,0,0-9.4,9.4v47.332a15.536,15.536,0,0,0,15.519,15.52H97.276a15.538,15.538,0,0,0,15.521-15.52V65.742A9.411,9.411,0,0,0,103.4,56.342ZM38.784,38.061a6.928,6.928,0,0,1,6.811-6.9,1.751,1.751,0,0,0,1.549-2.517,6.825,6.825,0,0,1-.7-3.018,6.912,6.912,0,0,1,6.9-6.9h3.385a1.749,1.749,0,0,0,1.459-.784c3.4-5.133,5.2-9.436,5.372-12.847A18.867,18.867,0,0,1,73.568,17.4a1.75,1.75,0,0,0,1.7,1.326h.921a6.912,6.912,0,0,1,6.9,6.9,6.811,6.811,0,0,1-.365,2.18H64a1.75,1.75,0,0,0,0,3.5H83.678A6.885,6.885,0,0,1,88.044,41.9H39.956A6.892,6.892,0,0,1,38.784,38.061Zm-7.6,7.341H96.817v10.94H31.182ZM109.3,113.074a12.034,12.034,0,0,1-12.021,12.02H30.723A12.033,12.033,0,0,1,18.7,113.074V65.742a5.906,5.906,0,0,1,5.9-5.9H103.4a5.907,5.907,0,0,1,5.9,5.9Z"/><path d="M101.047,66.342H26.954a1.749,1.749,0,0,0-1.75,1.75v44.982a5.526,5.526,0,0,0,5.519,5.52H97.276a5.527,5.527,0,0,0,5.521-5.52V68.092A1.749,1.749,0,0,0,101.047,66.342ZM99.3,113.074a2.022,2.022,0,0,1-2.021,2.02H30.723a2.021,2.021,0,0,1-2.019-2.02V69.842H99.3Z"/><path d="M78.805,84.7a5.6,5.6,0,0,0-4.3-.338,38.227,38.227,0,0,0-5.317,2.185,38.2,38.2,0,0,0,.435-5.731,5.629,5.629,0,0,0-11.258,0,38.186,38.186,0,0,0,.435,5.731,38.171,38.171,0,0,0-5.317-2.184A5.629,5.629,0,1,0,50.01,95.071,38.238,38.238,0,0,0,55.6,96.428a38.176,38.176,0,0,0-3.721,4.382,5.629,5.629,0,0,0,9.108,6.617A38.274,38.274,0,0,0,64,102.534a38.168,38.168,0,0,0,3.018,4.893,5.629,5.629,0,0,0,9.108-6.617h0A38.251,38.251,0,0,0,72.4,96.428a38.251,38.251,0,0,0,5.586-1.357,5.63,5.63,0,0,0,.816-10.37Zm-16.019,5.54a3.245,3.245,0,0,1,.862-.187A3.669,3.669,0,1,1,60.32,93.7a3.649,3.649,0,0,1,.087-.777,3.791,3.791,0,0,1,1.144-1.949,3.692,3.692,0,0,1,.952-.628C62.6,90.3,62.691,90.273,62.786,90.241ZM64,78.688a2.131,2.131,0,0,1,2.129,2.129,34.712,34.712,0,0,1-.5,5.889,7.309,7.309,0,0,0-3.25,0,34.814,34.814,0,0,1-.5-5.889A2.131,2.131,0,0,1,64,78.688ZM49.724,89.059a2.123,2.123,0,0,1,2.683-1.366,34.713,34.713,0,0,1,5.443,2.3,7.214,7.214,0,0,0-1,3.092,34.754,34.754,0,0,1-5.755-1.34A2.132,2.132,0,0,1,49.724,89.059Zm8.426,16.31a2.129,2.129,0,0,1-3.445-2.5,34.865,34.865,0,0,1,3.874-4.473A6.774,6.774,0,0,0,61.2,100.31,34.78,34.78,0,0,1,58.15,105.369Zm14.671.472a2.128,2.128,0,0,1-2.973-.472,34.78,34.78,0,0,1-3.054-5.059,8,8,0,0,0,2.625-1.916,34.787,34.787,0,0,1,3.874,4.473A2.133,2.133,0,0,1,72.821,105.841Zm4.086-14.1a34.831,34.831,0,0,1-5.755,1.34,7.688,7.688,0,0,0-1-3.092,34.783,34.783,0,0,1,5.444-2.3,2.129,2.129,0,0,1,1.315,4.05Z"/></g></svg> {% endcomment %}
+                  <img src="{{category.categoryImage}}" alt="cosmetic " class="img-fluid">
                 </div>
                 <div class="category-details">
                   <h6>
-                    cream
+                    {{category.categoryName}}
                   </h6>
                 </div>
               </div>
             </div>
             </a>
           </div>
-          <div>
+          {% endfor %}
+
+          {% comment %} <div>
             <a href="category-page(left-sidebar).html">
               <div class="category-box">
               <div>
@@ -385,7 +343,7 @@
             </div>
             </a>
 
-          </div>
+          </div>  {% endcomment %}
         </div>
       </div>
     </div>
@@ -405,17 +363,18 @@
     <div class="row ">
       <div class="col pr-0">
         <div class="product-slide-6 no-arrow mb--5">
+          {% for product in cosmetic_products %}
           <div>
             <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="product-page(left-sidebar).html">
-                    <img src="{% static 'assets/images/cosmetic/product/1.jpg' %}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="product-page(left-sidebar).html">
-                    <img src="{% static 'assets/images/cosmetic/product/14.jpg' %}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                   </a>
                 </div>
               </div>
@@ -431,17 +390,25 @@
                     </div>
                     <a href="product-page(left-sidebar).html">
                       <h6 class="price-title">
-                         Skin Concealer
+                      {{product.productName}}
                       </h6>
                     </a>
                   </div>
                   <div class="detail-right">
                     <div class="check-price">
-                      $ 20.21
+                      {% if product.productType == "Simple" %} 
+                      {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                      {% else %} 
+                      {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                      {% endif %}
                     </div>
                     <div class="price">
                       <div class="price">
-                        $ 15.05
+                        {% if product.productType == "Simple" %}
+                        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                        {% else %}
+                        {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -462,355 +429,8 @@
                 </div>
               </div>
             </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/2.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/15.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          eye pencil
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 60.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 40.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/3.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/16.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          hand painted makeup brush
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 40.05
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 30.21
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/4.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/17.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          black eye makeup mascara
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 63.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 51.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/5.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/18.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          Beauty Cream
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $75.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $62.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/6.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/19.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          Skin Cleansing Cream
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 85.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $72.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-             <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/7.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/cosmetic/product/20.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-center ">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                     <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          Lipstick
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $49.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $36.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="icon-detail">
-                    <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -847,6 +467,7 @@
 <!--deal banner end-->
 
 <!--collection big banner start-->
+{% if first_banner and second_banner and third_banner and fourth_banner  %}
 <section class="collection-banner b-g-white section-py-space">
   <div class="custom-container">
     <div class="row collection-p2">
@@ -855,12 +476,12 @@
           <div class="col-md-6">
             <div class="collection-banner-main p-left banner-13 banner-style1 collection-color1">
               <div class="collection-img">
-                <img src="{% static 'assets/images/cosmetic/collection-banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain text-center">
                 <div>
-                  <h3>get a discount</h3>
-                  <h4>terry makeup</h4>
+                  <h3>{{first_banner.bannerProduct.variantProduct.productName}}</h3>
+                  <h4>{{first_banner.titleOne}}</h4>
                   <div class="shop">
                     <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -873,12 +494,12 @@
           <div class="col-md-6">
             <div class="collection-banner-main p-left banner-13 banner-style1 collection-color2">
               <div class="collection-img">
-                <img src="{% static 'assets/images/cosmetic/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain text-center">
                 <div>
-                  <h3>best natural</h3>
-                  <h4>body care</h4>
+                  <h3>{{second_banner.bannerProduct.variantProduct.productName}}</h3>
+                  <h4>{{second_banner.titleOne}}</h4>
                   <div class="shop">
                     <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -891,12 +512,12 @@
           <div class="col-md-12">
             <div class="collection-banner-main p-left banner-13 banner-style1 collection-color3">
               <div class="collection-img">
-                <img src="{% static 'assets/images/cosmetic/collection-banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain text-center">
                 <div>
-                  <h3>new  special offer</h3>
-                  <h4>incredible lipstick</h4>
+                  <h3>{{third_banner.bannerProduct.variantProduct.productName}}</h3>
+                  <h4>{{third_banner.titleOne}}</h4>
                   <div class="shop">
                    <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -911,12 +532,16 @@
       <div class="col-md-4">
         <div class="collection-banner-main p-left p-top p-center banner-14 banner-style1">
           <div class="collection-img">
-            <img src="{% static 'assets/images/cosmetic/collection-banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
+            <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
           </div>
           <div class="collection-banner-contain  p-top text-center ">
             <div>
-              <h3>buy 3 get 35% off</h3>
-              <h4>oil-free acne wash</h4>
+              <h3>buy 3 get {% if fourth_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                {% else %}
+                <span class="theme-color">{{fourth_banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                {% endif %} </h3>
+              <h4>{{fourth_banner.titleOne}}</h4>
+
               <div class="shop">
                 <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -929,6 +554,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 <!--collection big banner end-->
 
 <!--title-start-->
@@ -1017,14 +643,18 @@
               <div class="row hot-deal-subcontain hotdeal-block1">
                 <div class="col-lg-4 col-md-4  ">
                   <div class="hotdeal-right-slick border-0">
+                    {% for banner in allbanners  %}
+                    {% if banner.bannerType|to_str == 'Timer' %}
                     <a href="product-page(left-sidebar).html">
                       <div class="img-wrraper">
                         <div>
-                          <img src="{% static 'assets/images/cosmetic/hot-deal/1.jpg' %}" alt="hot-deal" class="img-fluid  bg-img">
+                          <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid  bg-img">
                         </div>
                       </div>
                     </a>
-                    <a href="product-page(left-sidebar).html">
+                    {% endif %}
+                    {% endfor %}
+                    {% comment %} <a href="product-page(left-sidebar).html">
                       <div class="img-wrraper">
                         <div>
                           <img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-deal" class="img-fluid  bg-img">
@@ -1044,15 +674,17 @@
                           <img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-deal" class="img-fluid  bg-img">
                         </div>
                       </div>
-                    </a>
+                    </a> {% endcomment %}
                   </div>
                 </div>
                 <div class="col-lg-6 col-md-6 deal-order-3">
                   <div class="hotdeal-right-slick border-0">
+                    {% for banner in allbanners  %}
+                    {% if banner.bannerType|to_str == 'Timer' %}
                     <div>
                       <div>
                         <a href="product-page(left-sidebar).html">
-                          <h5>mackup body lotion</h5>
+                          <h5>{{banner.titleOne}}</h5>
                         </a>
                         <ul class="rating">
                           <li><i class="fa fa-star"></i></li>
@@ -1062,9 +694,13 @@
                           <li><i class="fa fa-star-o"></i></li>
                         </ul>
                         <p>
-                          It is a long established fact that a reader. It is a long established fact that a reader.It is a long established fact that a reader. It is a long established fact that a reader.
+                          {{banner.bannerProduct.variantProduct.productDescription|safe}}
                         </p>
-                        <h6>$50.30<span>$60.00</span></h6>
+                        <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                          <span>
+                            {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
+                          </span>
+                        </h6>
                         <div class="timer">
                           <p id="demo">
                           </p>
@@ -1072,7 +708,9 @@
                         <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
                       </div>
                     </div>
-                    <div>
+                    {% endif %}
+                    {% endfor %}
+                    {% comment %} <div>
                       <div>
                         <a href="product-page(left-sidebar).html">
                           <h5>hair cream </h5>
@@ -1140,15 +778,19 @@
                         </div>
                         <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
                       </div>
-                    </div>
+                    </div> {% endcomment %}
                   </div>
                 </div>
                 <div class="col-md-2 ">
                   <div class="hotdeal-right-nav">
-                    <div><img src="{% static 'assets/images/cosmetic/hot-deal/1.jpg' %}" alt="hot-dea" class="img-fluid  " ></div>
-                    <div><img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-dea" class="img-fluid  " ></div>
+                    {% for banner in allbanners  %}
+                    {% if banner.bannerType|to_str == 'Timer' %}
+                    <div><img src="{{banner.bannerImage}}" alt="hot-dea" class="img-fluid" ></div>
+                    {% endif %}
+                    {% endfor %}
+                    {% comment %} <div><img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-dea" class="img-fluid  " ></div>
                     <div><img src="{% static 'assets/images/cosmetic/hot-deal/3.jpg' %}" alt="hot-dea" class="img-fluid  " ></div>
-                    <div><img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-dea" class="img-fluid  " ></div>
+                    <div><img src="{% static 'assets/images/cosmetic/hot-deal/2.jpg' %}" alt="hot-dea" class="img-fluid  " ></div> {% endcomment %}
                   </div>
                 </div>
               </div>
@@ -1156,15 +798,18 @@
           </div>
         </div>
       </div>
+
+      {% for banner in allbanners  %}
+      {% if banner.bannerType|to_str == 'Shop Banner' %}
       <div class="col-lg-3">
         <div class="collection-banner-main p-center p-top text-center banner-style1 banner-15">
           <div class="collection-img">
-            <img src="{% static 'assets/images/cosmetic/collection-banner/7.jpg' %}" class="img-fluid bg-img  " alt="banner">
+            <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
           </div>
           <div class="collection-banner-contain text-center">
             <div>
-              <h3>big sale</h3>
-              <h4>organic cream</h4>
+              <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+              <h4>{{banner.titleOne}}</h4>
               <div class="shop">
                 <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -1174,6 +819,8 @@
           </div>
         </div>
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -1188,10 +835,9 @@
   <div class="tab-product-main tab-third">
     <div class="tab-prodcut-contain">
       <ul class="tabs tab-title">
-        <li class="current"><a href="tab-1">cream</a></li>
-        <li class=""><a href="tab-2">mirror</a></li>
-        <li class=""><a href="tab-3">brush</a></li>
-        <li class=""><a href="tab-4">powder</a></li>
+        {% for category in subcategories %}
+        <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
+        {% endfor %}
       </ul>
     </div>
   </div>
@@ -1206,1366 +852,82 @@
       <div class="col pr-0">
         <div class="theme-tab product no-arrow mb--5">
           <div class="tab-content-cls ">
-            <div id="tab-1" class="tab-content active default product">
+            {% for subcategory,products in products_by_subcategory.items  %}
+            <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product {% endif %}">
               <div class="product-slide-6 product-m no-arrow">
-                 <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/8.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/21.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
+                {% if products %}
+                {% for product in products %}
+                <div class="product-box">
+                  <div class="product-imgbox">
+                    <div class="product-front">
+                      <a href="product-page(left-sidebar).html">
+                        <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                      </a>
                     </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              Brush Makeup
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $ 91.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $ 84.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
+                    <div class="product-back">
+                      <a href="product-page(left-sidebar).html">
+                        <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                      </a>
                     </div>
                   </div>
-                  <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
+                  <div class="product-detail detail-center ">
+                    <div class="detail-title">
+                      <div class="detail-left">
+                        <div class="rating-star">
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                        </div>
                         <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/9.jpg' %}" class="img-fluid  " alt="product">
+                          <h6 class="price-title">
+                            {{product.productName}}
+                          </h6>
                         </a>
                       </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/22.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
+                      <div class="detail-right">
+                        <div class="check-price">
+                          {% if product.productType == "Simple" %} 
+                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                          {% else %} 
+                          {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                          {% endif %}
+                        </div>
+                        <div class="price">
+                          <div class="price">
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              Hair Removal Cream
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $ 66.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $ 54.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
+                    <div class="icon-detail">
+                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
+                        <i  data-feather="shopping-cart"></i>
+                      </button>
+                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                        <i  data-feather="heart"></i>
+                      </a>
+                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                        <i  data-feather="eye"></i>
+                      </a>
+                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                        <i  data-feather="refresh-cw"></i>
+                      </a>
                     </div>
                   </div>
-                  <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/10.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/23.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              high voltage lipstick
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $80.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $70.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/11.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/24.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              body lotion
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $60.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $20.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/12.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/25.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              face powder
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $ 30.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $24.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-box">
-                    <div class="product-imgbox">
-                      <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/13.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                      <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
-                          <img src="{% static 'assets/images/cosmetic/product/26.jpg' %}" class="img-fluid  " alt="product">
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-detail detail-center ">
-                      <div class="detail-title">
-                        <div class="detail-left">
-                         <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                          </div>
-                          <a href="product-page(left-sidebar).html">
-                            <h6 class="price-title">
-                              hair cream
-                            </h6>
-                          </a>
-                        </div>
-                        <div class="detail-right">
-                          <div class="check-price">
-                            $89.21
-                          </div>
-                          <div class="price">
-                            <div class="price">
-                              $79.05
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="icon-detail">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                          <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
-                        </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
-                        </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                          <i  data-feather="refresh-cw"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h2 style="text-align:center;"> No products Yet! </h2>
+                {% endif %}
               </div>
             </div>
-            <div id="tab-2" class="tab-content  product">
-              <div class="product-slide-6 product-m no-arrow">
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/13.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/26.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            hair cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $89.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $79.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/8.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/21.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Brush Makeup
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 91.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 84.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/9.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/22.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Hair Removal Cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 66.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 54.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/10.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/23.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            high voltage lipstick
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $80.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $70.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/11.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/24.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            body lotion
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $60.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $20.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/12.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/25.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            face powder
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 30.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $24.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="tab-3" class="tab-content  product">
-              <div class="product-slide-6 product-m no-arrow">
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/12.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/25.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            face powder
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 30.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $24.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/13.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/26.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            hair cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $89.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $79.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/8.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/21.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Brush Makeup
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 91.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 84.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/9.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/22.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Hair Removal Cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 66.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 54.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/10.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/23.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            high voltage lipstick
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $80.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $70.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/11.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/24.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            body lotion
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $60.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $20.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div id="tab-4" class="tab-content  product">
-              <div class="product-slide-6 product-m no-arrow">
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/11.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/24.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            body lotion
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $60.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $20.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/12.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/25.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            face powder
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 30.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $24.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/13.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/26.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            hair cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $89.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $79.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/8.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/21.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Brush Makeup
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 91.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 84.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/9.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/22.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            Hair Removal Cream
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $ 66.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $ 54.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-box">
-                  <div class="product-imgbox">
-                    <div class="product-front">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/10.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="product-back">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/cosmetic/product/23.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                  <div class="product-detail detail-center ">
-                    <div class="detail-title">
-                      <div class="detail-left">
-                        <div class="rating-star">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <a href="product-page(left-sidebar).html">
-                          <h6 class="price-title">
-                            high voltage lipstick
-                          </h6>
-                        </a>
-                      </div>
-                      <div class="detail-right">
-                        <div class="check-price">
-                          $80.21
-                        </div>
-                        <div class="price">
-                          <div class="price">
-                            $70.05
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="icon-detail">
-                      <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                        <i  data-feather="shopping-cart"></i>
-                      </button>
-                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                        <i  data-feather="heart"></i>
-                      </a>
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                        <i  data-feather="eye"></i>
-                      </a>
-                      <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                        <i  data-feather="refresh-cw"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -2578,15 +940,16 @@
 <section class="collection-banner ">
   <div class="custom-container">
     <div class="row layout-3-collection">
+      {% for banner in last_two_banners %}
       <div class="col-md-6">
         <div class="collection-banner-main p-left  banner-13 text-center banner-style1">
           <div class="collection-img">
-            <img src="{% static 'assets/images/cosmetic/collection-banner/5.jpg' %}" class="img-fluid bg-img  " alt="banner">
+            <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
           </div>
           <div class="collection-banner-contain text-center">
             <div>
-              <h3>big sale</h3>
-              <h4>organic cream</h4>
+              <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
+              <h4>{{banner.titleOne}}</h4>
               <div class="shop">
                 <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
                       shop now
@@ -2596,24 +959,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 ">
-        <div class="collection-banner-main p-left text-center banner-13 banner-style1  collection-color4 ">
-          <div class="collection-img">
-            <img src="{% static 'assets/images/cosmetic/collection-banner/6.jpg' %}" class="img-fluid bg-img  " alt="banner">
-          </div>
-          <div class="collection-banner-contain text-center">
-            <div>
-              <h3>big sale</h3>
-              <h4>organic cream</h4>
-              <div class="shop">
-                <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-                      shop now
-                    </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -2628,21 +974,23 @@
 <!--title-end-->
 
 <!--blog start-->
-<section class="blog   section-big-mb-space">
+<section class="blog section-big-mb-space">
   <div class="custom-container">
     <div class="row">
       <div class="col pr-0">
         <div class="blog-slide-4 no-arrow">
+          {% if blogs %}
+          {% for blog in blogs %}
           <div>
             <div class="blog-contain">
               <div class="blog-img">
                 <a href="blog-details.html">
-                  <img src="{% static 'assets/images/cosmetic/blog/1.jpg' %}" alt="blog" class="img-fluid w-100">
+                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                 </a>
               </div>
               <div class="blog-details-2">
-                <h4>black Mascara samle </h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                <h4>{{blog.blogTitle}} </h4>
+                <p>{{blog.blogDescription|safe}}</p>
                 <ul>
                   <li>
                     <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
@@ -2652,10 +1000,12 @@
                   </li>
                 </ul>
               </div>
-              <div class="blog-label1">27 <br>nov</div>
+              <div class="blog-label1">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"F"}}</div>
             </div>
           </div>
-          <div>
+          {% endfor %}
+          {% endif %}
+          {% comment %} <div>
             <div class="blog-contain">
               <div class="blog-img">
                 <a href="blog-details.html">
@@ -2742,7 +1092,7 @@
               </div>
               <div class="blog-label1">27 <br>nov</div>
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
     </div>
@@ -2757,118 +1107,24 @@
       <div class="col">
         <div class="insta-contant insta-contant-inverse">
           <div class="slide-7 no-arrow">
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Instagram' %}
             <div>
               <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/1.jpg' %}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
               </div>
               <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/2.jpg' %}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImageTwo}}" class="img-fluid  " alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
               </div>
             </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/3.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/4.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/5.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/6.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/7.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/8.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/9.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/10.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/11.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/12.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/13.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/14.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/2.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/cosmetic/instagram/6.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
+            {% endif %}
+            {% endfor %}
           </div>
           <div class="insta-sub-contant">
             <div class="insta-title">
@@ -3724,7 +1980,31 @@
         </a>
       </div>
     </div>
-    <form class="theme-form">
+    {% if request.user %}
+    <li>
+      <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+      <h6 class="d-block">
+        Welcome, {{request.user.username}}
+      </h6>
+    </li>
+    <li>
+      <a href="{% url 'logout_page' %}" class="d-block"
+        >Logout</a
+      >
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url 'login_page' %}" class="d-block"
+        >Login</a
+      >
+    </li>
+    <li>
+      <a href="{% url 'signup_page' %}" class="d-block"
+        >Register</a
+      >
+    </li>
+    {% endif %}
+    {% comment %} <form class="theme-form">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" placeholder="Email" required="">
@@ -3740,7 +2020,7 @@
         <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
         <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
-    </form>
+    </form> {% endcomment %}
   </div>
 </div>
 <!-- Add to account bar end-->
@@ -3791,7 +2071,7 @@
               return cookieValue;
               } 
 
-           document.getElementById("currency-selection").addEventListener("change", async function () {
+           document.getElementById("currency-selection-dropdown").addEventListener("change", async function () {
                  var dropdown = document.getElementById("currency-selection-dropdown");
                  var currencyId = dropdown.options[dropdown.selectedIndex].value;
                  var csrftoken = getCookie("csrftoken");

@@ -32,7 +32,6 @@ def setCookie(request):
 def set_currency_to_session(request):
     body = json.loads(request.body)
     currencyID = body['currencyId']
-    print('currencyID ============>',currencyID)
     response = HttpResponse('Cookie Set for currency')
     response.set_cookie('currency', currencyID)
     return response
@@ -408,7 +407,54 @@ def furniture(request):
     return render(request, 'pages/home/furniture/furniture.html',context)
 
 def cosmetic(request):
-    return render(request,'pages/home/cosmetic/cosmetic.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Cosmetic Demo')
+    
+    main_banner = list(banners.filter(bannerType__bannerTypeName='Banner'))
+    last_two_banners = main_banner[-2:]
+    
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    
+    if collection_banner.count() == 4:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+    
+    cosmetic_category = ProCategory.objects.get(categoryName='Cosmetic')
+    subcategories = cosmetic_category.get_descendants(include_self=False)
+    
+    cosmetic_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+
+    blogs = Blog.objects.filter(blogCategory__categoryName='Cosmetic',status=True, blogStatus=1)
+
+        
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'last_two_banners':last_two_banners,
+            'cosmetic_category':cosmetic_category,
+            'cosmetic_products':cosmetic_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+           'first_banner':first_banner,
+           'second_banner':second_banner,
+           'third_banner':third_banner,
+           'fourth_banner':fourth_banner,
+           
+            }
+    
+    return render(request,'pages/home/cosmetic/cosmetic.html',context)
 
 def kids(request):
     return render(request, 'pages/home/kids/kids.html')
@@ -425,7 +471,8 @@ def pets(request):
 def farming(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Farming Demo')
     collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
-    
+    last_sale_banner  = list(banners.filter(bannerType__bannerTypeName='Sale Banner'))
+    sale_banner = last_sale_banner[-1:]
     
 
     first_banner = {}
@@ -467,6 +514,7 @@ def farming(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'blogs':blogs,
+            'sale_banner':sale_banner,
         }
     return render(request, 'pages/home/farming/farming.html',context)
 

@@ -444,8 +444,8 @@
                     {% for subcategory,products in products_by_subcategory.items %}
                     <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default {% endif %}">
                        <div class="product-slide-5 product-m no-arrow">
-                        {% if farming_products  %}
-                        {% for product in farming_products %}
+                        {% if products  %}
+                        {% for product in products %}
                           <div>
                             <div class="product-box ">
                               <div class="product-imgbox">
@@ -511,249 +511,6 @@
                         {% else %}
                         <h2 style="text-align:center;"> No products Yet! </h2>
                         {% endif %}
-                          {% comment %} <div>
-                              <div class="product-box ">
-                                  <div class="product-imgbox">
-                                      <div class="product-front">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/2.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-back">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/7.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-icon">
-                                          <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                                              <i  data-feather="heart"></i>
-                                          </a>
-                                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                                              <i  data-feather="eye"></i>
-                                          </a>
-                                          <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                                              <i  data-feather="refresh-cw"></i>
-                                          </a>
-
-                                      </div>
-
-                                  </div>
-                                  <div class="product-detail detail-center1">
-                                      <ul class="rating-star">
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                      </ul>
-                                      <a href="product-page(left-sidebar).html">
-                                          <h6>  Tomato Hybrid Vegetable Seeds</h6>
-                                      </a>
-                                      <span class="detail-price">$70.21<span>$65.00</span></span>
-                                  </div>
-                                  <div class="addtocart_btn">
-                                    <button class="add-button add_cart tooltip-top" data-tippy-content="Add to cart" tabindex="0">
-                                        add to cart
-                                    </button>
-                                    <div class="qty-box cart_qty ">
-                                        <div class="input-group">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="" tabindex="0">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                            <input type="text" name="quantity" class="form-control input-number qty-input" value="1" tabindex="0">
-                                            <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="" tabindex="0">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div>
-                              <div class="product-box">
-                                  <div class="product-imgbox">
-                                      <div class="product-front">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/3.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-back">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/8.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-icon">
-                                          
-                                          <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                                              <i  data-feather="heart"></i>
-                                          </a>
-                                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                                              <i  data-feather="eye"></i>
-                                          </a>
-                                          <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                                              <i  data-feather="refresh-cw"></i>
-                                          </a>
-
-                                      </div>
-                                  </div>
-                                  <div class="product-detail detail-center1">
-                                      <ul class="rating-star">
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                      </ul>
-                                      <a href="product-page(left-sidebar).html">
-                                          <h6>fresh red onion </h6>
-                                      </a>
-                                      
-                                      <span class="detail-price">$52.21<span>$48.00</span></span>
-                                  </div>
-                                  <div class="addtocart_btn">
-                                    <button class="add-button add_cart tooltip-top" data-tippy-content="Add to cart" tabindex="0">
-                                        add to cart
-                                    </button>
-                                    <div class="qty-box cart_qty ">
-                                        <div class="input-group">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="" tabindex="0">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                            <input type="text" name="quantity" class="form-control input-number qty-input" value="1" tabindex="0">
-                                            <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="" tabindex="0">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div>
-                              <div class="product-box">
-                                  <div class="product-imgbox">
-                                      <div class="product-front">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/4.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-back">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/9.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-icon">
-                                          
-                                          <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                                              <i  data-feather="heart"></i>
-                                          </a>
-                                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                                              <i  data-feather="eye"></i>
-                                          </a>
-                                          <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                                              <i  data-feather="refresh-cw"></i>
-                                          </a>
-
-                                      </div>
-                                      <div class="on-sale4">
-                                          on sale
-                                      </div>
-                                      <div class="new-label1">50%</div>
-                                  </div>
-                                  <div class="product-detail detail-center1">
-                                      <ul class="rating-star">
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                      </ul>
-                                      <a href="product-page(left-sidebar).html">
-                                         <h6> Fresh Brinjal</h6>
-                                      </a>
-                                      
-                                      <span class="detail-price">$48.21<span>$42.00</span></span>
-                                  </div>
-                                  <div class="addtocart_btn">
-                                    <button class="add-button add_cart tooltip-top" data-tippy-content="Add to cart" tabindex="0">
-                                        add to cart
-                                    </button>
-                                    <div class="qty-box cart_qty ">
-                                        <div class="input-group">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="" tabindex="0">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                            <input type="text" name="quantity" class="form-control input-number qty-input" value="1" tabindex="0">
-                                            <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="" tabindex="0">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div>
-                              <div class="product-box">
-                                  <div class="product-imgbox">
-                                      <div class="product-front">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/5.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-back">
-                                           <a href="product-page(left-sidebar).html">
-                                              <img src="{% static 'assets/images/farming/product/10.jpg' %}" class="img-fluid" alt="product">
-                                          </a>
-                                      </div>
-                                      <div class="product-icon">
-                                          
-                                          <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                                              <i  data-feather="heart"></i>
-                                          </a>
-                                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                                              <i  data-feather="eye"></i>
-                                          </a>
-                                          <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                                              <i  data-feather="refresh-cw"></i>
-                                          </a>
-
-                                      </div>
-                                      <div class="on-sale4">
-                                          on sale
-                                      </div>
-                                      <div class="new-label1">50%</div>
-                                  </div>
-                                  <div class="product-detail detail-center1">
-                                      <ul class="rating-star">
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                          <li><i class="fa fa-star"></i></li>
-                                      </ul>
-                                      <a href="product-page(left-sidebar).html">
-                                         <h6>hybrid chilli seed</h6>
-                                      </a>
-                                      
-                                      <span class="detail-price">$78.21<span>$92.00</span></span>
-                                  </div>
-                                  <div class="addtocart_btn">
-                                    <button class="add-button add_cart tooltip-top" data-tippy-content="Add to cart" tabindex="0">
-                                        add to cart
-                                    </button>
-                                    <div class="qty-box cart_qty ">
-                                        <div class="input-group">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="" tabindex="0">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                            <input type="text" name="quantity" class="form-control input-number qty-input" value="1" tabindex="0">
-                                            <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="" tabindex="0">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                          </div> {% endcomment %}
                         </div>
                     </div>
                     {% endfor %}
@@ -767,16 +524,21 @@
 
 
 <!--sale banner start-->
+{% for banner in sale_banner  %}
 <section class="sale-banenr ">
-  <img src="{% static 'assets/images/farming/sale-banner/1.jpg' %}" alt="sale-banenr" class="img-fluid bg-img">
+  <img src="{{banner.bannerImage}}" alt="sale-banenr" class="img-fluid bg-img">
   <div class="custom-container">
       <div class="row">
         <div class="col-12">
             <div class="sale-banenr-contain text-center p-left">
               <div>
-                <h4>summer sale 20% off</h4>
-                <h2>organic farm</h2>
-                <h3>fresh product</h3>
+                <h4>summer sale  {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                  {% else %}
+                  <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                  {% endif %}
+                </h4>
+                <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+                <h3>{{banner.titleOne}}</h3>
                 <a href="product-page(left-sidebar).html" class="btn btn-rounded">Shop Now</a>
               </div>
             </div>
@@ -784,6 +546,7 @@
       </div>
   </div>
 </section>
+{% endfor %}
 <!--sale banner ned-->
 
 <!--title start-->

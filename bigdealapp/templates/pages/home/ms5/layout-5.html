@@ -763,19 +763,18 @@
    <div class="custom-container">
       <div class="row">
          <div class="col-12 position-relative">
-            
             <div class="sale-banenr-contain text-center  p-right">
                <div>
                   <h4>summer sale {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                      {% else %}
                      <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
-                     {% endif %}</h4>
+                     {% endif %}
+                  </h4>
                   <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
                   <h3>{{banner.titleOne}}</h3>
                   <a href="product-page(left-sidebar).html" class="btn btn-rounded">Shop Now</a>
                </div>
             </div>
-            
          </div>
       </div>
    </div>
@@ -839,135 +838,6 @@
                </div>
                {% endif %}
                {% endfor %}
-               {% comment %} <div>
-                  <div class="hotdeal-box">
-                     <div class="img-wrapper">
-                        <a href="product-page(left-sidebar).html">
-                           <img src="{% static 'assets/images/mega-store/hot-deal/2.jpg' %}" alt="hot-deal" class="img-fluid bg-img">
-                        </a>
-                     </div>
-                     <div class="hotdeal-contain">
-                        <div>
-                           <a href="product-page(left-sidebar).html">
-                              <h3>perfums</h3>
-                           </a>
-                           <h5>
-                              $70
-                              <span class="price">$100</span>
-                           </h5>
-                           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                           <ul>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star-o"></i>
-                              </li>
-                           </ul>
-                           <div class="timer2">
-                              <p id="demo1">
-                              </p>
-                           </div>
-                           <a href="javascript:void(0)" class="btn btn-solid btn-sm add-cartnoty">add to cart</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="hotdeal-box">
-                     <div class="img-wrapper">
-                        <a href="product-page(left-sidebar).html">
-                           <img src="{% static 'assets/images/mega-store/hot-deal/3.jpg' %}" alt="hot-deal" class="img-fluid bg-img">
-                        </a>
-                     </div>
-                     <div class="hotdeal-contain">
-                        <div>
-                           <a href="product-page(left-sidebar).html">
-                              <h3>smart watch</h3>
-                           </a>
-                           <h5>
-                              $90
-                              <span class="price">$110</span>
-                           </h5>
-                           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                           <ul>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star-o"></i>
-                              </li>
-                           </ul>
-                           <div class="timer2">
-                              <p id="demo2">
-                              </p>
-                           </div>
-                           <a href="javascript:void(0)" class="btn btn-solid btn-sm add-cartnoty">add to cart</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="hotdeal-box">
-                     <div class="img-wrapper">
-                        <a href="product-page(left-sidebar).html">
-                           <img src="{% static 'assets/images/mega-store/hot-deal/2.jpg' %}" alt="hot-deal" class="img-fluid bg-img">
-                        </a>
-                     </div>
-                     <div class="hotdeal-contain">
-                        <div>
-                           <a href="product-page(left-sidebar).html">
-                              <h3>perfum</h3>
-                           </a>
-                           <h5>
-                              $70
-                              <span class="price">$100</span>
-                           </h5>
-                           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                           <ul>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star"></i>
-                              </li>
-                              <li>
-                                 <i class="fa fa-star-o"></i>
-                              </li>
-                           </ul>
-                           <div class="timer2">
-                              <p id="demo3">
-                              </p>
-                           </div>
-                           <a href="javascript:void(0)" class="btn btn-solid btn-sm add-cartnoty">add to cart</a>
-                        </div>
-                     </div>
-                  </div>
-               </div> {% endcomment %}
             </div>
          </div>
       </div>
@@ -983,10 +853,6 @@
          {% for category in main_categories %}
          <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
          {% endfor %}
-         {% comment %} <li class=""><a href="tab-2">furniture</a></li>
-         <li class=""><a href="tab-3">electronic</a></li>
-         <li class=""><a href="tab-4">sports</a></li>
-         <li class=""><a href="tab-5">medicine</a></li> {% endcomment %}
       </ul>
    </div>
 </section>
