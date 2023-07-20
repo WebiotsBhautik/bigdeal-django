@@ -1,4 +1,10 @@
- {% load static %}
+{% extends 'base/base.html' %}
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block components %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,23 +27,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
 
-  <!--icon css-->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/themify.css' %}">
-
-  <!--Slick slider css-->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
-
-  <!--Animate css-->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}">
-
-
-  <!-- Bootstrap css -->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.css' %}">
 
   <!-- Theme css -->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color9.css' %}" media="screen" id="color">
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color9.scss' %}" media="screen" id="color">
 </head>
 <body class="bg-light">
 
@@ -97,15 +89,50 @@
                   <li><a href="javascript:void(0)">spanish</a></li>
                 </ul>
               </div>
-              <div class="curroncy-dropdown">
-                  <span class="curroncy-dropdown-click">
-                    usd<i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                <ul class="curroncy-dropdown-open">
-                  <li><a href="javascript:void(0)"><i class="fa fa-inr"></i>inr</a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-usd"></i>usd</a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-eur"></i>eur</a></li>
-                </ul>
+              <div class="curroncy-dropdown" id="currency-selection">
+                <select id="currency-selection-dropdown">
+                   <option id="currency-value" value="%">Currency</option>
+                   {% for cur in ""|return_currency %}
+                   <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+                   {% endfor %}
+                </select>
+                <script>
+
+                   function getCookie(name) {
+                      let cookieValue = null;
+                      if (document.cookie && document.cookie !== "") {
+                         const cookies = document.cookie.split(";");
+                         for (let i = 0; i < cookies.length; i++) {
+                         const cookie = cookies[i].trim();
+                         // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) === name + "=") {
+                               cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                               break;
+                         }
+                         }
+                      }
+                      return cookieValue;
+                      } 
+ 
+                   document.getElementById("currency-selection").addEventListener("change", async function () {
+                         var dropdown = document.getElementById("currency-selection-dropdown");
+                         var currencyId = dropdown.options[dropdown.selectedIndex].value;
+                         var csrftoken = getCookie("csrftoken");
+                         var url = "{% url 'set_currency_to_session' %}";
+                      
+                         await fetch(url, {
+                         method: "POST",
+                         headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                         },
+                         body: JSON.stringify({
+                            currencyId: currencyId,
+                         }),
+                         })
+                         location.reload();
+                      });
+                </script>
               </div>
             </div>
           </div>
@@ -2028,7 +2055,6 @@
 <!--instagra end-->
 
 
-
 <!-- footer start -->
 <footer>
   <div class="footer1">
@@ -2731,37 +2757,13 @@
 </div>
 <!-- notification product -->
 
-
-<!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
-
-<!-- slick js-->
-<script src="{% static 'assets/js/slick.js' %}"></script>
+{% endblock components %}
 
 
 
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
-
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
-
-<!-- menu js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
-
-<!-- father icon -->
-<script src="{% static 'assets/js/feather.min.js' %}"></script>
-<script src="{% static 'assets/js/feather-icon.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
-
-<!-- Theme js-->
-<script src="{% static 'assets/js/script.js' %}"></script>
-<script src="{% static 'assets/js/modal.js' %}"></script>
+{% block script %}
+  
 </body>
 </html>
+
+{% endblock script %}

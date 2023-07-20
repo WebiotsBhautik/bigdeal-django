@@ -1813,7 +1813,8 @@ textarea.form-control-lg {
       background-color: #adb5bd; }
 
 .form-floating {
-  position: relative; }
+  position: relative;
+  margin-bottom: 26px; }
   .form-floating > .form-control,
   .form-floating > .form-select {
     height: calc(3.5rem + 2px);

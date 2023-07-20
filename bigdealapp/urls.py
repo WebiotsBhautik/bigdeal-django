@@ -2,13 +2,30 @@ from django.urls import path
 from .import views
 
 urlpatterns = [
-    path('',views.index,name='index'),
+    
+# AUTHNTICATION ROUTES
+    
+    path('setCookie',views.setCookie, name='setCookie'),
+    path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
+    path('get_selected_currency',views.get_selected_currency,name='get_selected_currency'),
+
+    
+
+    path('', views.login_page, name='login_page'),
+    path('signup_page', views.signup_page, name='signup_page'),
+    path('login_page', views.login_page, name='login_page'),
+    path('logout_page', views.logout_page, name='logout_page'),
+    
+    
+# HOME PAGES ROUTES
+
+    path('index',views.index,name='index'),
     path('layout2',views.layout2,name='layout2'),
     path('layout3',views.layout3,name='layout3'),
     path('layout4',views.layout4,name='layout4'),
-    path('megastore',views.megastore,name='megastore'),
     path('layout5',views.layout5,name='layout5'),
-    path('layout6',views.layout6,name='layout6'),
+    path('electronics',views.electronics,name='electronics'),
+    path('vegetable',views.vegetable,name='vegetable'),
     path('furniture',views.furniture,name='furniture'),
     path('cosmetic',views.cosmetic,name='cosmetic'),
     path('kids',views.kids,name='kids'),
@@ -22,7 +39,7 @@ urlpatterns = [
     
     
     
-# Shop pages routes
+# SHOP PAGES ROUTES
     
     path('shop_left_sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
     path('shop_right_sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),

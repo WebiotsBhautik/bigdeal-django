@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,14 +32,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bigdealapp',
     'sass_processor',
+    'ckeditor',
+    'mptt',
+    'bigdealapp',
+    'accounts',
+    'product',
+    'mathfilters',
+    'currency',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.get_username.RequestMiddleware',
+
 ]
 
 ROOT_URLCONF = 'bigdeal.urls'
@@ -77,14 +87,21 @@ WSGI_APPLICATION = 'bigdeal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bigdeal-django',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'bigdeal',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 
@@ -122,6 +139,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
 
 STATIC_URL = '/bigdeal/bigdealapp/static/'
 
@@ -137,3 +160,34 @@ MEDIA_ROOT = BASE_DIR / 'bigdealapp/static/assets/images'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+JAZZMIN_SETTINGS = {
+    "custom_css": "assets/css/backend.css",
+    "custom_js": "assets/js/custom.js",
+    
+    # Keep the same app ordering as above, but also order choice and book model links within the books app
+    "order_with_respect_to": [
+    
+    # Models Ordering for ACCOUNT Application
+    "accounts.CustomUser", "accounts.Admin", "accounts.Vendor", "accounts.Customer",
+
+    # Models Ordering for PRODUCT Application
+    "product.Product", "product.ProductVariant", "product.AttributeName", "product.ProCategory",
+    "product.ProBrand", "product.ProUnit", "product.ProVideoProvider", "product.ProductReview",
+
+    ],
+
+}
+
+
+ 
+ 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

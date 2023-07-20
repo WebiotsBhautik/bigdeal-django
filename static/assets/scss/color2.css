@@ -1537,7 +1537,8 @@ button {
       border-radius: 5px;
       overflow: hidden; }
       .category1 .category-box .img-wrapper img {
-        width: 100%; }
+        width: 100%;
+        height: 250px; }
     .category1 .category-box .category-details h4 {
       color: #ffffff;
       text-transform: uppercase;
@@ -11914,6 +11915,8 @@ ul.sosiyal {
     margin-bottom: -15px; }
   .theme-tab .tab-content {
     display: none; }
+    .theme-tab .tab-content.current {
+      display: none; }
     .theme-tab .tab-content[style="display: block;"] .product-box,
     .theme-tab .tab-content[style="display: block;"] .tab-box,
     .theme-tab .tab-content[style="display: block;"] .media-banner,

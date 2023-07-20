@@ -2109,6 +2109,7 @@ button {
 
       img {
         width: 100%;
+        height: 250px;
       }
     }
 
@@ -18239,6 +18240,10 @@ ul.sosiyal {
 
   .tab-content {
     display: none;
+    &.current{
+      display: none;
+    }
+    
 
     &[style="display: block;"] {
 
