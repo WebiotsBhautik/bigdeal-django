@@ -1975,7 +1975,7 @@
                <option value="">hindi</option>
             </select>
          </div>
-         <div class="form-group">
+         {% comment %} <div class="form-group">
             <select>
                <option value="">currency</option>
                <option value="">uro</option>
@@ -1983,7 +1983,52 @@
                <option value="">piund</option>
                <option value="">doller</option>
             </select>
-         </div>  
+         </div>   {% endcomment %}
+         <div class="form-group" id="currency-selection">
+            <select id="currency-selection-dropdown">
+               <option id="currency-value" value="%">Currency</option>
+               {% for cur in ""|return_currency %}
+               <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+               {% endfor %}
+            </select>
+            <script>
+    
+               function getCookie(name) {
+                  let cookieValue = null;
+                  if (document.cookie && document.cookie !== "") {
+                     const cookies = document.cookie.split(";");
+                     for (let i = 0; i < cookies.length; i++) {
+                     const cookie = cookies[i].trim();
+                     // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) === name + "=") {
+                           cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                           break;
+                     }
+                     }
+                  }
+                  return cookieValue;
+                  } 
+    
+               document.getElementById("currency-selection").addEventListener("change", async function () {
+                     var dropdown = document.getElementById("currency-selection-dropdown");
+                     var currencyId = dropdown.options[dropdown.selectedIndex].value;
+                     var csrftoken = getCookie("csrftoken");
+                     var url = "{% url 'set_currency_to_session' %}";
+                  
+                     await fetch(url, {
+                     method: "POST",
+                     headers: {
+                        "Content-type": "application/json",
+                        "X-CSRFToken": csrftoken,
+                     },
+                     body: JSON.stringify({
+                        currencyId: currencyId,
+                     }),
+                     })
+                     location.reload();
+                  });
+            </script>
+         </div>
       </div>
    </div>
 </div>

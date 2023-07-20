@@ -361,7 +361,51 @@ def vegetable(request):
     return render(request, 'pages/home/vegetables/vegetable.html',context)
 
 def furniture(request):
-    return render(request, 'pages/home/furniture/furniture.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Furniture Demo')
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    five_banner = {}
+    
+    if collection_banner.count() == 5:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        five_banner = collection_banner[4]
+        
+    
+    furniture_category = ProCategory.objects.get(categoryName='Furniture')
+    subcategories = furniture_category.get_descendants(include_self=True)
+    
+    furniture_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Furniture',status=True, blogStatus=1)
+        
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'furniture_category':furniture_category,
+            'furniture_products':furniture_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'five_banner':five_banner,
+            }
+    return render(request, 'pages/home/furniture/furniture.html',context)
 
 def cosmetic(request):
     return render(request,'pages/home/cosmetic/cosmetic.html')
@@ -379,7 +423,52 @@ def pets(request):
     return render(request, 'pages/home/pets/pets.html')
 
 def farming(request):
-    return render(request, 'pages/home/farming/farming.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Farming Demo')
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    
+    
+
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    
+    if collection_banner.count() == 4:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        
+        
+    farming_category = ProCategory.objects.get(categoryName='Farming')
+    subcategories = farming_category.get_descendants(include_self=True)
+    
+    farming_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Farming',status=True, blogStatus=1)
+        
+    
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'farming_category':farming_category,
+            'farming_products':farming_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'blogs':blogs,
+        }
+    return render(request, 'pages/home/farming/farming.html',context)
 
 def digital_marketplace(request):
     return render(request, 'pages/home/digital_marketplace/digital-marketplace.html')
