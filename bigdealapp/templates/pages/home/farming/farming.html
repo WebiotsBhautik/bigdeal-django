@@ -561,14 +561,16 @@
     <div class="row">
       <div class="col-12 pr-0">
         <div class="team-slide4 no-arrow">
+          {% for banner in allbanners %}
+          {% if banner.bannerType|to_str == 'Review Banner'  %}
           <div>
             <div class="team-box">
               <div class="img-wrraper">
-                <img src="{% static 'assets/images/farming/team/1.jpg' %}" alt="team" class="img-fluid">
+                <img src="{{banner.bannerImage}}" alt="team" class="img-fluid">
               </div>
               <div class="team-detail">
-                <h3>mark jecno</h3>
-                <h5>mark jecno</h5>
+                <h3>{{banner.titleOne}}</h3>
+                <h5>{{banner.titleTwo}}</h5>
                <ul>
                   <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
                   <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
@@ -577,7 +579,9 @@
               </div>
             </div>
           </div>
-          <div>
+          {% endif %}
+          {% endfor %}
+          {% comment %} <div>
             <div class="team-box">
               <div class="img-wrraper">
                 <img src="{% static 'assets/images/farming/team/2.jpg' %}" alt="team" class="img-fluid">
@@ -640,7 +644,7 @@
                 </ul>
               </div>
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
     </div>
@@ -651,16 +655,22 @@
 
 <!-- testionial start -->
 <section class="testimonial5 section-big-my-space">
-    <img src="{% static 'assets/images/farming/testimonial/1.jpg' %}" alt="testimonial" class="img-fluid bg-img">
+  {% for banner in allbanners %}
+  {% if banner.bannerType|to_str == 'testimonial Banner'  %}
+    <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
+  {% endif %}
+  {% endfor %}
     <div class="container">
       <div class="row">
-          <div class="col-12">
-            <div class="testimonial-top-slide no-arrow">
+        <div class="col-12">
+          <div class="testimonial-top-slide no-arrow">
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Farmer Banner'  %}
               <div>
                 <div class="testimonial-detail">
-                  <h3>ethan marcotte</h3>
-                  <h4>farmer</h4>
-                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod architecto quos culpa maxime provident at ipsum iure. Exercitationem, error! Id dolorum recusandae velit? Commodi quia saepe illo vel exercitationem deleniti?</p>
+                  <h3>{{banner.titleOne}}</h3>
+                  <h4>{{banner.titleTwo}}</h4>
+                  <p> {{banner.bannerDescription|safe}}</p>
                   <ul>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
@@ -670,59 +680,26 @@
                   </ul>
                 </div>
               </div>
-              <div>
-                <div class="testimonial-detail">
-                  <h3>alena folden</h3>
-                  <h4>farmer</h4>
-                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod architecto quos culpa maxime provident at ipsum iure. Exercitationem, error! Id dolorum recusandae velit? Commodi quia saepe illo vel exercitationem deleniti?</p>
-                  <ul>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div class="testimonial-detail">
-                  <h3>johan deo</h3>
-                  <h4>farmer</h4>
-                  <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod architecto quos culpa maxime provident at ipsum iure. Exercitationem, error! Id dolorum recusandae velit? Commodi quia saepe illo vel exercitationem deleniti?</p>
-                  <ul>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            {% endif %}
+            {% endfor %} 
+            {% comment %} </div> {% endcomment %}
+
             <div class="img-wrraper-mian">
               <div class="testimonial-bottom-slide no-arrow">
-                <div>
+                {% for banner in allbanners %}
+                {% if banner.bannerType|to_str == 'Farmer Banner'  %}
+                  <div>
                     <div class="img-wrraper">
-                        <img src="{% static 'assets/images/testimonial/1.jpg' %}" alt="testimonial" class="img-fluid">
+                        <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid">
                     </div>
-                </div>
-                <div>
-                  <div class="img-wrraper">
-                      <img src="{% static 'assets/images/testimonial/4.jpg' %}" alt="testimonial" class="img-fluid">
                   </div>
-              </div>
-              <div>
-                <div class="img-wrraper">
-                    <img src="{% static 'assets/images/testimonial/2.jpg' %}" alt="testimonial" class="img-fluid">
-                </div>
-              </div>
-              <div>
-                <div class="img-wrraper">
-                    <img src="{% static 'assets/images/testimonial/3.jpg' %}" alt="testimonial" class="img-fluid">
-                </div>
-              </div>
+                {% endif %}
+                {% endfor %} 
+              </div> 
             </div>
-            </div>
+          </div>
+        </div> 
+         
         </div>
       </div>
     </div>

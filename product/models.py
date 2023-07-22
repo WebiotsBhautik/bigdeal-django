@@ -126,8 +126,15 @@ class ProBrand(models.Model):
         blank=True, null=True, default=0, verbose_name='No. of Product')
     slug = models.SlugField(unique=True, blank=True)
 
+            
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.brandName) 
+        self.slug = slugify(self.brandName)
+
+        # Check if a brand with the same name already exists
+        existing_brand = ProBrand.objects.filter(brandName=self.brandName).exclude(pk=self.pk).first()
+        if existing_brand:
+            raise ValueError("Brand with this name already exists.")
+        
         super(ProBrand, self).save(*args, **kwargs)
 
     def __str__(self):

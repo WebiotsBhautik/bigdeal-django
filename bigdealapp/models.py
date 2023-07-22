@@ -88,6 +88,8 @@ class Banner(models.Model):
         max_length=255, blank=True, verbose_name='Title Three')
     titleFour = models.CharField(
         max_length=255, blank=True, verbose_name='Title Four')
+    bannerDescription = RichTextField(
+        blank=True, null=True, verbose_name='Description')
     
     
     def __str__(self):

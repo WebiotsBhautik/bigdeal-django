@@ -457,10 +457,84 @@ def cosmetic(request):
     return render(request,'pages/home/cosmetic/cosmetic.html',context)
 
 def kids(request):
-    return render(request, 'pages/home/kids/kids.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Kids Demo')
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    five_banner = {}
+    
+    if collection_banner.count() == 5:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        five_banner = collection_banner[4]
+        
+        
+    kids_category = ProCategory.objects.get(categoryName='Kids')
+    subcategories = kids_category.get_descendants(include_self=False)
+    
+    kids_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+
+    blogs = Blog.objects.filter(blogCategory__categoryName='Kids',status=True, blogStatus=1)
+        
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+        #     'last_two_banners':last_two_banners,
+            'kids_category':kids_category,
+            'kids_products':kids_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'five_banner':five_banner,
+        }   
+
+    return render(request, 'pages/home/kids/kids.html',context)
 
 def tools(request):
-    return render(request, 'pages/home/tools/tools.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Tools Demo')
+    collection_banner = list(banners.filter(bannerType__bannerTypeName='Collection Banner'))
+    last_three_collection = collection_banner[-3:]
+
+    tools_category = ProCategory.objects.get(categoryName ='Tools')
+    subcategories = tools_category.get_descendants(include_self=False)
+    
+    tools_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Tools',status=True, blogStatus=1)
+                                            
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'tools_category':tools_category,
+            'tools_products':tools_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'last_three_collection':last_three_collection,
+            'blogs':blogs,
+            }   
+    return render(request, 'pages/home/tools/tools.html',context)
 
 def grocery(request):
     return render(request, 'pages/home/grocery/grocery.html')

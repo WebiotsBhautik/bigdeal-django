@@ -9,7 +9,7 @@ class BannerAdmin(admin.ModelAdmin):
     exclude = ['slug']
     list_display = ['bannerTheme', 'bannerType', 'bannerProduct']
     ordering = ('bannerTheme','bannerType',)
-    list_per_page=10
+    # list_per_page=100
 
 
 admin.site.register(Banner, BannerAdmin)
