@@ -81,7 +81,7 @@ def return_currency_wise_symbol(value, request):
         currency = Currency.objects.get(code='USD')
         return currency.symbol
     currency = Currency.objects.get(id=result)
-    print('SYMBOL++++==>',currency.symbol)
+    # print('SYMBOL++++==>',currency.symbol)
     return currency.symbol
 
 

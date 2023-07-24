@@ -1,4 +1,10 @@
+{% extends 'base/base.html' %}
 {% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block components %} 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,19 +28,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Chau+Philomene+One:ital@0;1&display=swap" rel="stylesheet">
 
-
-   <!--icon css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/themify.css' %}">
-
-   <!--Slick slider css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css' %}">
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
-
-   <!--Animate css-->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}">
-   <!-- Bootstrap css -->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.css' %}">
+   
 
    <!-- Theme css -->
    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color13.css' %}" media="screen" id="color">
@@ -2473,7 +2467,7 @@
           <option value="">hindi</option>
         </select>
       </div>
-      <div class="form-group">
+      {% comment %} <div class="form-group">
         <select>
           <option value="">currency</option>
           <option value="">uro</option>
@@ -2481,6 +2475,51 @@
           <option value="">piund</option>
           <option value="">doller</option>
         </select>
+      </div> {% endcomment %}
+      <div class="form-group" id="currency-selection">
+         <select id="currency-selection-dropdown">
+            <option id="currency-value" value="%">Currency</option>
+            {% for cur in ""|return_currency %}
+            <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+            {% endfor %}
+         </select>
+         <script>
+ 
+            function getCookie(name) {
+               let cookieValue = null;
+               if (document.cookie && document.cookie !== "") {
+                  const cookies = document.cookie.split(";");
+                  for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === name + "=") {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                  }
+                  }
+               }
+               return cookieValue;
+               } 
+ 
+            document.getElementById("currency-selection").addEventListener("change", async function () {
+                  var dropdown = document.getElementById("currency-selection-dropdown");
+                  var currencyId = dropdown.options[dropdown.selectedIndex].value;
+                  var csrftoken = getCookie("csrftoken");
+                  var url = "{% url 'set_currency_to_session' %}";
+               
+                  await fetch(url, {
+                  method: "POST",
+                  headers: {
+                     "Content-type": "application/json",
+                     "X-CSRFToken": csrftoken,
+                  },
+                  body: JSON.stringify({
+                     currencyId: currencyId,
+                  }),
+                  })
+                  location.reload();
+               });
+         </script>
       </div>
     </div>
   </div>
@@ -2489,7 +2528,7 @@
 
 
 <!-- notification product -->
-<div class="product-notification" id="dismiss">
+{% comment %} <div class="product-notification" id="dismiss">
    <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
    <div class="media">
       <img class="me-2" src="{% static 'assets/images/pets/product/1.jpg' %}" alt="Generic placeholder image">
@@ -2498,51 +2537,28 @@
          Cras sit amet nibh libero, in gravida nulla.
       </div>
    </div>
-</div>
+</div> {% endcomment %}
 <!-- notification product -->
 
+{% endblock components %}
 
-<!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
-
-<!-- slick js-->
-<script src="{% static 'assets/js/slick.js' %}"></script>
-
+{% block script %}
+   
 <!-- gallary js -->
-<script src='../assets/js/gallery.js'></script>
+<script src="{% static 'assets/js/gallery.js' %}"></script>
 
-
-
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
-
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
-
-<!-- menu js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
 
 <!-- ajax search js -->
 <script src="{% static 'assets/js/typeahead.bundle.min.js' %}"></script>
 <script src="{% static 'assets/js/typeahead.jquery.min.js' %}"></script>
 <script src="{% static 'assets/js/ajax-custom.js' %}"></script>
 
-<!-- father icon -->
-<script src="{% static 'assets/js/feather.min.js' %}"></script>
-<script src="{% static 'assets/js/feather-icon.js' %}"></script>
-
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
 
 <!-- Theme js-->
 <script src="{% static 'assets/js/slider-animat-two.js' %}"></script>
-<script src="{% static 'assets/js/script.js' %}"></script>
-<script src="{% static 'assets/js/modal.js' %}"></script>
+
 </body>
 
 </html>
+
+{% endblock script %}

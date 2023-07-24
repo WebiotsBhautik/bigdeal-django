@@ -581,70 +581,6 @@
           </div>
           {% endif %}
           {% endfor %}
-          {% comment %} <div>
-            <div class="team-box">
-              <div class="img-wrraper">
-                <img src="{% static 'assets/images/farming/team/2.jpg' %}" alt="team" class="img-fluid">
-              </div>
-              <div class="team-detail">
-                <h3>mark jecno</h3>
-                <h5>mark jecno</h5>
-               <ul>
-                  <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-pinterest"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="team-box">
-              <div class="img-wrraper">
-                <img src="{% static 'assets/images/farming/team/3.jpg' %}" alt="team" class="img-fluid">
-              </div>
-              <div class="team-detail">
-                <h3>mark jecno</h3>
-                <h5>mark jecno</h5>
-               <ul>
-                  <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-pinterest"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="team-box">
-              <div class="img-wrraper">
-                <img src="{% static 'assets/images/farming/team/4.jpg' %}" alt="team" class="img-fluid">
-              </div>
-              <div class="team-detail">
-                <h3>mark jecno</h3>
-                <h5>mark jecno</h5>
-               <ul>
-                  <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-pinterest"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="team-box">
-              <div class="img-wrraper">
-                <img src="{% static 'assets/images/farming/team/5.jpg' %}" alt="team" class="img-fluid">
-              </div>
-              <div class="team-detail">
-                <h3>mark jecno</h3>
-                <h5>mark jecno</h5>
-               <ul>
-                  <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-pinterest"></i></a></li>
-                </ul>
-              </div>
-            </div>
-          </div> {% endcomment %}
         </div>
       </div>
     </div>
@@ -812,8 +748,9 @@
 
 
 <!-- counter banner -->
+{% for banner in counter_banner %}
 <section class="count counter-banner banner-style1 section-big-my-space" > 
-  <img src="{% static 'assets/images/farming/counter/2.jpg' %}" class="img-fluid bg-img" alt="furniture-slider">
+  <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="furniture-slider">
   <div class="custom-container">
     <div class="row counter-block">
       <div class="col-6 col-md-3">
@@ -821,7 +758,7 @@
           <div class="count-up">
             <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><g><g><path d="m422.463 99.997h-29.96v-26.429c0-20.46-5.64-40.493-16.31-57.932l25.555-15.636c13.551 22.148 20.714 47.587 20.714 73.568v26.429z" fill="#008581"/></g></g><g><path d="m294.204 144.569c-28.167 54.161-7.017 121.14 47.147 149.306 16.277 8.465 33.706 12.474 50.899 12.474.061 0 .121-.006.182-.006l54.594-112.692-54.594-108.674c-39.948.068-78.557 21.764-98.228 59.592z" fill="#2d6994"/><path d="m443.511 97.422c-16.333-8.495-33.83-12.474-51.08-12.445v221.365c39.947-.066 78.559-21.787 98.231-59.614v-.001c28.164-54.163 7.012-121.141-47.151-149.305z" fill="#2d5177"/></g><g><g><g><path d="m475.514 91.456-83.092 26.793v-25.964c0-39.436 32.084-71.519 71.52-71.519h48.058z" fill="#badb47"/></g></g></g><g><g><g><path d="m440.48 118.249h-48.058l119.578-97.482v25.964c0 39.435-32.084 71.518-71.52 71.518z" fill="#1fc979"/></g></g></g><g><path d="m0 316.799c0 107.799 87.391 195.187 195.192 195.187l51.111-195.069-51.111-195.305c-107.801 0-195.192 87.389-195.192 195.187z" fill="#fed200"/></g><path d="m195.192 121.612v390.374c107.802 0 195.192-87.388 195.192-195.187s-87.39-195.187-195.192-195.187z" fill="#f8b400"/><g><g><g><path d="m156.882 88.837h103.725v29.96h-103.725z" fill="#008581" transform="matrix(.257 -.966 .966 .257 54.716 278.823)"/></g></g><g><g><g><path d="m118.919 224.824h29.96v29.961h-29.96z" fill="#f8b400"/></g></g><g><g><path d="m88.97 254.763h29.96v29.961h-29.96z" fill="#f8b400"/></g></g></g></g><g><g><g><path d="m55.075 70.754h62.979c51.681 0 93.726 42.045 93.726 93.725v34.025l-108.892-35.112z" fill="#1fc979"/></g></g></g><g><g><g><path d="m55.075 104.78v-34.026l156.705 127.75h-62.979c-51.681 0-93.726-42.045-93.726-93.724z" fill="#badb47"/></g></g></g><g><g><path d="m191.373 445.855v.006c0 23.017 11.678 44.008 31.236 56.146 19.561 12.14 43.555 13.285 64.185 3.065l92.602-45.879c14.005-6.95 22.739-20.922 22.89-36.528l-128.014-29.257-82.897 29.257z" fill="#e1105a"/><path d="m222.662 342.293c-19.589 12.132-31.284 33.132-31.286 56.173l-.002 24.2h210.911c.001-.137.014-.272.014-.409 0-15.772-8.777-29.927-22.894-36.934l-92.515-46.017c-20.629-10.264-44.639-9.146-64.228 2.987z" fill="#b20844"/></g><g><path d="m114.194 470.473v41.514h23.09c33.715 0 61.143-27.654 61.143-61.367v-27.954l-25.662-23.015-35.478 23.015c-14.059 11.211-23.093 28.469-23.093 47.807z" fill="#badb47"/><path d="m114.194 374.858c0 19.338 9.035 36.596 23.093 47.807h61.14v-27.954c0-33.714-27.428-61.141-61.143-61.141h-23.09z" fill="#1fc979"/></g></g><g><g><path d="m398.472 301.065c-.003 0-.003 0-.006 0-23.018 0-44.009 11.677-56.148 31.235-12.14 19.561-13.286 43.554-3.065 64.183l45.881 92.6c6.95 14.004 20.922 22.738 36.529 22.889l29.258-128.011-29.258-82.895z" fill="#fd445f"/><path d="m502.037 332.354c-12.132-19.588-33.132-31.283-56.174-31.285l-24.2-.002v210.906c.137.001.272.014.409.014 15.773 0 29.928-8.776 36.935-22.893l46.019-92.512c10.262-20.63 9.144-44.64-2.989-64.228z" fill="#e1105a"/></g><g><path d="m373.794 223.783h-41.341v23.118c0 33.756 27.463 61.218 61.219 61.218h27.99l23.044-25.693-23.044-35.522c-11.226-14.076-28.505-23.121-47.868-23.121z" fill="#badb47"/><path d="m469.531 223.783c-19.363 0-36.642 9.046-47.869 23.121v61.215h27.99c33.757 0 62.348-27.462 62.348-61.218v-23.118z" fill="#1fc979"/></g></g></g></svg>
             <h1><span class="counter-count">300</span>+</h1>
-            <h3>fruits farm</h3>
+            <h3>{{banner.titleOne}}</h3>
           </div>
         </div>
       </div>
@@ -830,7 +767,7 @@
           <div class="count-up">
            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 469.334 469.334" style="enable-background:new 0 0 469.334 469.334;" xml:space="preserve"><path style="fill:#F57600;" d="M42.667,469.334h234.667c23.564,0,42.667-19.103,42.667-42.667V138.073c0-6.624-1.542-13.157-4.504-19.081l-38.162-76.324C277.334,19.103,258.231,0,234.667,0H85.334C61.77,0,42.667,19.103,42.667,42.667L4.505,118.991C1.543,124.916,0,131.449,0,138.073v288.594C0,450.231,19.103,469.334,42.667,469.334C42.667,469.334,42.667,469.334,42.667,469.334L42.667,469.334z"/><path style="fill:#DC5C00;" d="M234.662,127.997L234.662,127.997c23.563,0,42.665,19.103,42.665,42.667V405.33c0,23.564-19.102,42.667-42.665,42.667l0,0c-23.563,0-42.665-19.103-42.665-42.667V170.664C191.997,147.1,211.099,127.997,234.662,127.997z"/><path style="fill:#F7B236;" d="M170.667,469.334h-128C19.103,469.334,0,450.231,0,426.667V138.073c0-6.624,1.542-13.157,4.504-19.081l38.162-76.324C42.667,19.103,61.77,0,85.334,0c0,0,0,0,0,0h128C236.898,0,256,19.103,256,42.667l-38.162,76.325c-2.962,5.924-4.504,12.457-4.504,19.081v288.594C213.334,450.231,194.231,469.334,170.667,469.334L170.667,469.334L170.667,469.334z"/><path style="fill:#F8C746;" d="M199.777,128H35.492c-12.115,0-21.935-9.821-21.935-21.935c0-3.405,0.793-6.764,2.316-9.81l20.731-41.463c3.716-7.431,11.311-12.126,19.619-12.126h164.285c12.115,0,21.935,9.821,21.935,21.935c0,3.405-0.793,6.764-2.316,9.81l-20.731,41.463C215.681,123.306,208.085,128,199.777,128L199.777,128z"/><path style="fill:#F9CA75;" d="M21.333,106.667h170.664c11.782,0,21.333,9.551,21.333,21.333v0.001c0,11.782-9.551,21.333-21.333,21.333H21.333C9.551,149.334,0,139.783,0,128.001V128C0,116.218,9.551,106.667,21.333,106.667z"/><path style="fill:#F49E02;" d="M64,0h170.664c11.782,0,21.333,9.551,21.333,21.333v0.001c0,11.782-9.551,21.333-21.333,21.333H64c-11.782,0-21.333-9.551-21.333-21.333v-0.001C42.667,9.551,52.218,0,64,0z"/><path style="fill:#F5980C;" d="M202.667,170.667c-5.891,0-10.667,4.775-10.667,10.666c0,0,0,0,0,0.001v245.333c0,11.782-9.551,21.333-21.333,21.333H53.334c-5.891,0-10.667,4.776-10.667,10.667c0,5.891,4.776,10.667,10.667,10.667h117.333c23.564,0,42.666-19.103,42.667-42.667V181.334C213.334,175.443,208.559,170.667,202.667,170.667C202.667,170.667,202.667,170.667,202.667,170.667z"/><g><path style="fill:#F9CA75;" d="M63.999,170.667L63.999,170.667c23.563,0,42.665,19.103,42.665,42.667v63.996c0,23.564-19.102,42.667-42.665,42.667l0,0c-23.563,0-42.665-19.103-42.665-42.667v-63.996C21.334,189.77,40.436,170.667,63.999,170.667z"/><circle style="fill:#F9CA75;" cx="63.997" cy="383.997" r="42.667"/></g><path style="fill:#E76A0D;" d="M298.67,127.997L298.67,127.997c11.783,0,21.334,9.551,21.334,21.333v277.334c0,11.782-9.551,21.333-21.333,21.333h-0.001c-11.782,0-21.333-9.551-21.333-21.333V149.33C277.337,137.548,286.888,127.997,298.67,127.997z"/><path style="fill:#DCCDEE;" d="M286.343,152.649l24.649-49.298C316.916,91.502,320,78.437,320,65.189V21.334h106.667v43.856c0,13.248,3.084,26.313,9.009,38.162l24.649,49.298c5.924,11.849,9.009,24.915,9.009,38.162v235.856c0,23.564-19.103,42.667-42.667,42.667l0,0H320c-23.564,0-42.667-19.103-42.667-42.667v0V190.811C277.334,177.564,280.418,164.498,286.343,152.649z"/><path style="fill:#C9B1D9;" d="M405.334,21.334h-64c-11.782-0.005-21.337,9.543-21.342,21.325S329.535,63.996,341.317,64c0.005,0,0.011,0,0.016,0h10.47c15.073,0,28.432,7.212,40.187,16.646c9.194,7.369,22.621,5.889,29.99-3.305c3.034-3.785,4.687-8.491,4.687-13.341V42.667C426.667,30.885,417.116,21.334,405.334,21.334L405.334,21.334z"/><path style="fill:#D80E70;" d="M320,0h106.664c11.782,0,21.333,9.551,21.333,21.333v0.001c0,11.782-9.551,21.333-21.333,21.333H320c-11.782,0-21.333-9.551-21.333-21.333v-0.001C298.667,9.551,308.218,0,320,0z"/><path style="fill:#B60361;" d="M405.33,0h21.334c11.782,0,21.333,9.551,21.333,21.333v0.001c0,11.782-9.551,21.333-21.333,21.333H405.33c-11.782,0-21.333-9.551-21.333-21.333v-0.001C383.997,9.551,393.548,0,405.33,0z"/><path style="fill:#CAB3DA;" d="M460.443,452.466c-3.553-2.8-7.92-4.368-12.443-4.466H298.667c-4.522,0.098-8.89,1.666-12.443,4.466c8.001,10.596,20.499,16.837,33.776,16.867h106.667C439.944,469.303,452.442,463.062,460.443,452.466z"/><path style="fill:#C9B1D9;" d="M426.662,170.667L426.662,170.667c23.563,0,42.665,19.103,42.665,42.667V384c0,23.564-19.102,42.667-42.665,42.667h0c-23.563,0-42.665-19.103-42.665-42.667V213.334C383.997,189.77,403.099,170.667,426.662,170.667z"/><g><path style="fill:#EEE6F7;" d="M320,170.667L320,170.667c11.783,0,21.334,9.551,21.334,21.333v128.004c0,11.782-9.551,21.333-21.333,21.333H320c-11.782,0-21.333-9.551-21.333-21.333V192C298.667,180.218,308.218,170.667,320,170.667z"/><path style="fill:#EEE6F7;" d="M320,362.667L320,362.667c11.783,0,21.334,9.551,21.334,21.333v21.334c0,11.782-9.551,21.333-21.333,21.333H320c-11.782,0-21.333-9.551-21.333-21.333V384C298.667,372.218,308.218,362.667,320,362.667z"/></g></svg>
             <h1><span class="counter-count">320</span>+</h1>
-            <h3>dairy farm</h3>
+            <h3>{{banner.titleTwo}}</h3>
           </div>
         </div>
       </div>
@@ -839,7 +776,7 @@
           <div class="count-up">
             <svg  enable-background="new 0 0 454.549 454.549"  viewBox="0 0 454.549 454.549"  xmlns="http://www.w3.org/2000/svg"><g><path d="m193.173 127.09-25.27 109.763-59.603 88.232-54.618-23.413c-5.276-17.056-5.071-35.943 1.842-53.897 23.433-56.626 65.251-78.396 105.312-134.547l19.024-.722z" fill="#ff7d43"/><path d="m222.464 233.097c.941-27.431-.009-56.203 5.691-91.012l-13.629-19.072-21.352 4.076-84.874 197.996 63.437 27.193z" fill="#ef3800"/><path d="m235.322 28.762c-4.219-12.8-15.175-22.216-28.465-24.462-19.895-3.392-38.771 9.987-42.163 29.882-1.999 11.73 1.838 23.7 10.285 32.081 5.517 5.67 6.557 14.33 2.541 21.146-5.49 9.411-11.07 17.952-16.684 25.821l32.336 13.861 32.385-45.043z" fill="#ffe0b9"/><path d="m228.154 142.085c1.608-9.823 3.745-20.125 6.604-31.015 1.969-7.663 8.822-13.061 16.734-13.179 20.186.054 36.594-16.267 36.648-36.454.032-11.874-5.707-23.023-15.388-29.898-10.997-7.793-25.403-8.862-37.43-2.777l-42.149 98.328z" fill="#ffd07b"/><path d="m339.344 174.085-64.22 92.532-88.104 59.792-42.02-42.02c1.434-17.796 8.638-35.256 21.724-49.359 42.784-43.876 89.696-48.562 147.743-85.823l17.932 6.394z" fill="#ff7d43"/><path d="m327.178 283.389c11.059-25.121 20.861-52.188 39.079-82.392l-5.573-22.769-21.339-4.144-152.325 152.325 48.804 48.804z" fill="#ef3800"/><path d="m414.991 98.438c.836-13.452-5.841-26.262-17.346-33.283-17.213-10.536-39.708-5.124-50.244 12.089-6.212 10.149-7.094 22.688-2.362 33.606 3.017 7.313.768 15.74-5.492 20.577-8.592 6.699-16.944 12.557-25.079 17.779l24.877 24.877 46.795-29.797z" fill="#ffe0b9"/><path d="m366.256 200.997c5.141-8.523 10.95-17.296 17.649-26.345 4.673-6.384 13.041-8.851 20.431-6.023 18.723 7.545 40.018-1.516 47.564-20.24 4.439-11.013 3.25-23.496-3.186-33.475-7.317-11.32-20.296-17.661-33.723-16.477l-75.647 75.647z" fill="#ffd07b"/><g><path d="m195 303.775v-27h-195v45.166l100.686 128.834h121.314l35-58-35-62c-14.888 0-27-12.113-27-27z" fill="#ffe0b9"/><path d="m249 276.775v27c0 14.888-12.112 27-27 27v120h121.314l100.686-128.834v-45.166z" fill="#ffd07b"/></g></g></svg>
             <h1><span class="counter-count">60</span>+</h1>
-            <h3>meat farm</h3>
+            <h3>{{banner.titleThree}}</h3>
           </div>
         </div>
       </div>
@@ -848,18 +785,20 @@
           <div class="count-up">
             <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 472 472" style="enable-background:new 0 0 472 472;" xml:space="preserve"><path style="fill:#33BC00;" d="M100,216h-8c-8.837,0-16,7.163-16,16v8c0.026,22.08,17.92,39.974,40,40h8c8.837,0,16-7.163,16-16v-8C139.974,233.92,122.08,216.026,100,216z"/><path style="fill:#79D60D;" d="M148,216h-8c-8.837,0-16,7.163-16,16v8c0.026,22.08,17.92,39.974,40,40h8c8.837,0,16-7.163,16-16v-8C187.974,233.92,170.08,216.026,148,216z"/><path style="fill:#025902;" d="M84,264h-8c-8.837,0-16,7.163-16,16v8c0.026,22.08,17.92,39.974,40,40h8c8.837,0,16-7.163,16-16v-8C123.974,281.92,106.08,264.026,84,264z"/><path style="fill:#008100;" d="M132,264h-8c-8.837,0-16,7.163-16,16v8c0.026,22.08,17.92,39.974,40,40h8c8.837,0,16-7.163,16-16v-8C171.974,281.92,154.08,264.026,132,264z"/><path style="fill:#33BC00;" d="M180,264h-8c-8.837,0-16,7.163-16,16v8c0.026,22.08,17.92,39.974,40,40h8c8.837,0,16-7.163,16-16v-8C219.974,281.92,202.08,264.026,180,264z"/><g><path style="fill:#008100;" d="M292.407,205.475l8.003-23.997l15.178,5.062l-8.003,23.997L292.407,205.475z"/><path style="fill:#008100;" d="M324.411,205.439l8.003-23.997l15.178,5.062l-8.003,23.997L324.411,205.439z"/><path style="fill:#008100;" d="M356.423,205.466l8.003-23.997l15.178,5.062l-8.003,23.997L356.423,205.466z"/></g><path style="fill:#FF8800;" d="M300,200c-13.255,0-24,10.745-24,24v40h48v-40C324,210.745,313.255,200,300,200z"/><path style="fill:#FF6536;" d="M332,200c-13.255,0-24,10.745-24,24v40h48v-40C356,210.745,345.255,200,332,200z"/><path style="fill:#FF421D;" d="M364,200c-13.255,0-24,10.745-24,24v40h48v-40C388,210.745,377.255,200,364,200z"/><path style="fill:#FFA900;" d="M260,256h144v64H260V256z"/><path style="fill:#763A02;" d="M444,328H28V136h16v176h384V136h16V328z"/><g><path style="fill:#DE0418;" d="M212,0h48v112h-48V0z"/><path style="fill:#DE0418;" d="M164,112V0h-35.552L116,112H164z"/></g><g><path style="fill:#FBBF00;" d="M164,0h48v112h-48V0z"/><path style="fill:#FBBF00;" d="M116,112L128.448,0h-35.56L68,112H116z"/><path style="fill:#FBBF00;" d="M404,112L379.112,0h-35.56L356,112H404z"/></g><g><path style="fill:#DE0418;" d="M92.888,0H68L20,96v16h48L92.888,0z"/><path style="fill:#DE0418;" d="M356,112L343.552,0H308v112H356z"/></g><path style="fill:#FBBF00;" d="M260,0h48v112h-48V0z"/><path style="fill:#DE0418;" d="M404,0h-24.888L404,112h48V96L404,0z"/><path style="fill:#FF421D;" d="M20,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H20z"/><path style="fill:#FFDB0C;" d="M68,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H68z"/><path style="fill:#FF421D;" d="M116,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H116z"/><path style="fill:#FFDB0C;" d="M164,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H164z"/><path style="fill:#FF421D;" d="M212,112v24c0,13.255,10.745,24,24,24c13.255,0,24-10.745,24-24v-24H212z"/><path style="fill:#FFDB0C;" d="M260,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H260z"/><path style="fill:#FF421D;" d="M308,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H308z"/><path style="fill:#FFDB0C;" d="M356,112v24c0,13.255,10.745,24,24,24s24-10.745,24-24v-24H356z"/><path style="fill:#FF421D;" d="M404,136c0,13.255,10.745,24,24,24s24-10.745,24-24v-24h-48V136z"/><path style="fill:#FFDB0C;" d="M12,312h448v160H12V312z"/><path style="fill:#E47700;" d="M284,280h96v16h-96V280z"/><g><path style="fill:#33BC00;" d="M294.343,362.363l24.002-24.002l11.314,11.314l-24.002,24.002L294.343,362.363z"/><path style="fill:#33BC00;" d="M308,368h24v16h-24V368z"/></g><path style="fill:#FF6536;" d="M283.28,352h-2.56c-10.566,0.012-20.48,5.113-26.632,13.704l-30.344,42.488c-6.455,9.045-4.356,21.61,4.689,28.065c3.411,2.434,7.497,3.743,11.687,3.743h1.024c3.121-0.005,6.198-0.731,8.992-2.12l47.784-23.896c16.162-8.083,22.711-27.738,14.628-43.9C307.004,358.999,295.673,351.999,283.28,352L283.28,352z"/><path style="fill:#79D60D;" d="M196,360h-8c-8.837,0-16,7.163-16,16v8c0.035,30.913,25.087,55.965,56,56h8c8.837,0,16-7.163,16-16v-8C251.965,385.087,226.913,360.035,196,360z"/><g></g></svg>
             <h1><span class="counter-count">420</span>+</h1>
-            <h3>vegetable farm</h3>
+            <h3>{{banner.titleFour}}</h3>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+{% endfor %}
+
 <!-- counter banner -->
 
 <!--title-start-->
 <div class="title8 ">
-  <h4>letest blog</h4>
+  <h4>latest blog</h4>
 </div>
 <!--title-end-->
 
@@ -869,82 +808,31 @@
     <div class="row">
       <div class="col pr-0">
         <div class="blog-slide-4 no-arrow">
+          {% if blogs %}
+          {% for blog in blogs %}
           <div>
             <div class="blog-contain">
               <div class="blog-img">
                 <a href="blog-details.html">
-                  <img src="{% static 'assets/images/farming/blog/1.jpg' %}" alt="blog" class="img-fluid w-100">
+                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                 </a>
               </div>
               <div class="blog-details-2">
                 <a href="blog-details.html">
-                  <h4>the next big thing. </h4>
+                  <h4>{{blog.blogTitle}} </h4>
                 </a>           
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
+                <p>{{blog.blogDescription|safe}}</p>
                 <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
                   read more
                 </a>
               </div>
-              <div class="blog-label1 square">27 <br>nov</div>
+              <div class="blog-label1 square">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"M"}}</div>
             </div>
           </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/farming/blog/2.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-               <a href="blog-details.html">
-                  <h4>ten quick tips.</h4>
-                </a>          
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/farming/blog/3.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-               <a href="blog-details.html">
-                  <h4>why is everyone. </h4>
-                </a>              
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/farming/blog/4.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>trends in farming to watch. </h4>
-                </a>               
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>         
+          {% endfor %}
+          {% else %}
+          <h2 style="text-align:center;"> No Blogs Yet! </h2>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -953,16 +841,18 @@
 <!--blog end-->
 
 <!-- app download start -->
+{% for banner in allbanners %}
+{% if banner.bannerType|to_str == 'app-download' %}
 <section class="app-download section-mb-space">
   <div class="custom-container">
     <div class="row">
         <div class="col-12">
             <div class="app-download-main">
-              <img src="{% static 'assets/images/farming/app-download/1.jpg' %}" alt="app-download" class="img-fluid bg-img">
+              <img src="{{banner.bannerImage}}" alt="app-download" class="img-fluid bg-img">
               <div class="app-download-contian">
                 <div>
-                  <h2>reddy to get shopping?</h2>
-                  <h3>download the bigdeal App Now</h3>
+                  <h2>{{banner.titleOne}}</h2>
+                  <h3>{{banner.titleTwo}}</h3>
                   <a href="javascript:void(0)" class="btn btn-rounded btn-md">download</a>
                 </div>
               </div>
@@ -971,6 +861,9 @@
     </div>
   </div>
 </section>
+{% endif %}
+{% endfor %}
+
 <!-- app download end -->
 
 <!--subscribe start-->

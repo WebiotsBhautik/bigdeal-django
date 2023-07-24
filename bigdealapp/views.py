@@ -537,7 +537,67 @@ def tools(request):
     return render(request, 'pages/home/tools/tools.html',context)
 
 def grocery(request):
-    return render(request, 'pages/home/grocery/grocery.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Grocery Demo')
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    testimonial_banner= list(banners.filter(bannerType__bannerTypeName='testimonial Banner'))
+    last_testimonial = testimonial_banner[-1:]
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    five_banner = {}
+    six_banner = {}
+    
+    if collection_banner.count() >= 5:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        five_banner = collection_banner[4]
+        
+        
+    masonary_banner = banners.filter(bannerType__bannerTypeName='masonary-banner')
+    if masonary_banner.count() >= 6:
+        first_banner = masonary_banner[0]
+        second_banner = masonary_banner[1]
+        third_banner = masonary_banner[2]
+        fourth_banner = masonary_banner[3]
+        five_banner   = masonary_banner[4]
+        six_banner = masonary_banner[5]
+    
+    
+    grocery_category = ProCategory.objects.get(categoryName ='Grocery')
+    subcategories = grocery_category.get_descendants(include_self=False)
+    
+    grocery_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Grocery',status=True, blogStatus=1)
+    
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'grocery_category':grocery_category,
+            'grocery_products':grocery_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'five_banner':five_banner,
+            'six_banner':six_banner,
+            'last_testimonial':last_testimonial,
+            }   
+    return render(request, 'pages/home/grocery/grocery.html',context)
 
 def pets(request):
     return render(request, 'pages/home/pets/pets.html')
@@ -545,8 +605,12 @@ def pets(request):
 def farming(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Farming Demo')
     collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    	
     last_sale_banner  = list(banners.filter(bannerType__bannerTypeName='Sale Banner'))
     sale_banner = last_sale_banner[-1:]
+    
+    last_counter_banner  = list(banners.filter(bannerType__bannerTypeName='Counter Banner'))
+    counter_banner = last_counter_banner[-1:]
     
 
     first_banner = {}
@@ -559,6 +623,7 @@ def farming(request):
         second_banner = collection_banner[1]
         third_banner = collection_banner[2]
         fourth_banner = collection_banner[3]
+        
         
         
     farming_category = ProCategory.objects.get(categoryName='Farming')
@@ -589,6 +654,7 @@ def farming(request):
             'fourth_banner':fourth_banner,
             'blogs':blogs,
             'sale_banner':sale_banner,
+            'counter_banner':counter_banner,
         }
     return render(request, 'pages/home/farming/farming.html',context)
 
