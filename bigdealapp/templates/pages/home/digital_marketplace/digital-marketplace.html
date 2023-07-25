@@ -515,15 +515,22 @@
 
 <!--home slider start-->
 <section class="digitalmark-slide">
+  
+
   <div class="slide-main">
-    <img src="{% static 'assets/images/marketplace/slider/1.jpg' %}" class="img-fluid bg-img" alt="marketplace-sldie">
+    {% for bgimage in mainslider  %}
+    <img src="{{bgimage.bannerImage}}" class="img-fluid bg-img" alt="marketplace-sldie">
+    {% endfor %}
+
+    {% for banner in allbanners %}
+    {% if banner.bannerType|to_str == 'Slider' %}
     <div class="custom-container">
       <div class="row">
         <div class="col-12 p-0">
           <div class="slide-contain">
             <div class="sub-contain">
-              <h2>1200 + Website Templates & Psd Templates</h2>
-              <p>Deliver great experiences, no matter what. we can help with scalable messaging for sales, marketing, and support.</p>
+              <h2>{{banner.titleOne}}</h2>
+              <p>{{banner.bannerDescription|safe}}</p>
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="search your templates">
                 <a href="javascript:void(0)" class="btn btn-rounded">search</a>
@@ -535,9 +542,11 @@
       </div>
     </div>
     <div class="animat-block">
-        <img src="{% static 'assets/images/marketplace/slider/animat/1.png' %}" class="img-fluid animat1" alt="marketplace-sldie">
-        <img src="{% static 'assets/images/marketplace/slider/animat/2.png' %}" class="img-fluid animat2" alt="marketplace-sldie">
+        <img src="{{banner.bannerImage}}" class="img-fluid animat1" alt="marketplace-sldie">
+        <img src="{{banner.bannerImageTwo}}" class="img-fluid animat2" alt="marketplace-sldie">
     </div>
+    {% endif %}
+    {% endfor %}
   </div>
 </section>
 <!--home sldier end-->
@@ -3251,7 +3260,7 @@
 
 
 <!-- notification product -->
-<div class="product-notification" id="dismiss">
+{% comment %} <div class="product-notification" id="dismiss">
   <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
   <div class="media">
     <img class="me-2" src="{% static 'assets/images/marketplace/product/4.jpg' %}" alt="Generic placeholder image">
@@ -3260,7 +3269,7 @@
       Cras sit amet nibh libero, in gravida nulla.
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!-- notification product -->
 
 {% endblock components %}

@@ -600,7 +600,53 @@ def grocery(request):
     return render(request, 'pages/home/grocery/grocery.html',context)
 
 def pets(request):
-    return render(request, 'pages/home/pets/pets.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Pets Demo')
+    mainslider = banners.filter(bannerType__bannerTypeName='Sideslider')
+    collection_banner = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    
+    if collection_banner.count() >= 4:
+        first_banner = collection_banner[0]
+        second_banner = collection_banner[1]
+        third_banner = collection_banner[2]
+        fourth_banner = collection_banner[3]
+        
+    pets_category = ProCategory.objects.get(categoryName ='Pets')
+    subcategories = pets_category.get_descendants(include_self=False)
+    
+    pets_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Pets',status=True, blogStatus=1)
+
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'mainslider':mainslider,
+            'pets_category':pets_category,
+            'pets_products':pets_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'blogs':blogs,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            # 'five_banner':five_banner,
+            # 'six_banner':six_banner,
+            # 'last_testimonial':last_testimonial,
+            }   
+    
+    return render(request, 'pages/home/pets/pets.html',context)
 
 def farming(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Farming Demo')
@@ -625,7 +671,6 @@ def farming(request):
         fourth_banner = collection_banner[3]
         
         
-        
     farming_category = ProCategory.objects.get(categoryName='Farming')
     subcategories = farming_category.get_descendants(include_self=True)
     
@@ -640,7 +685,6 @@ def farming(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Farming',status=True, blogStatus=1)
         
-    
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -659,7 +703,28 @@ def farming(request):
     return render(request, 'pages/home/farming/farming.html',context)
 
 def digital_marketplace(request):
-    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Digital Marketplace demo')
+    mainslider = banners.filter(bannerType__bannerTypeName='Sideslider')
+    slider = banners.filter(bannerType__bannerTypeName='Slider')
+    print('mainslider =======>',mainslider)
+    print('slider =======>',slider)
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+            'allbanners':banners,
+            'mainslider':mainslider,
+            # 'farming_category':farming_category,
+            # 'farming_products':farming_products,
+            # 'subcategories':subcategories,
+            # 'products_by_subcategory':products_by_subcategory,
+            # 'first_banner':first_banner,
+            # 'second_banner':second_banner,
+            # 'third_banner':third_banner,
+            # 'fourth_banner':fourth_banner,
+            # 'blogs':blogs,
+            # 'sale_banner':sale_banner,
+            # 'counter_banner':counter_banner,
+        }
+    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html',context)
 
 
 

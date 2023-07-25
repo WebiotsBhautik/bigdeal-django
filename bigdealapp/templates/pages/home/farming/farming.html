@@ -473,7 +473,16 @@
                                   <div class="on-sale4">
                                       {{product.productDescription|safe}}
                                   </div>
-                                  <div class="new-label1">50%</div>
+                                  <div class="new-label1">
+                                    {% if product.productDiscount|to_int == 0 %}
+                                    {% else %}
+                                    {% if product.productType == "Classified" %}
+                                    <span>{{product.product_discount_range}} </span>
+                                    {% else %}
+                                    <span>{{product.product_discount_range}} </span>
+                                    {% endif %}
+                                    {% endif %}
+                                  </div>
                                   {% comment %} <div class="new-label1">{{""|return_currency_wise_symbol:request|product_discount_range|return_currency_wise_ammount:request}}</div> {% endcomment %}
                               </div>
                               <div class="product-detail detail-center1">
@@ -485,9 +494,22 @@
                                       <li><i class="fa fa-star"></i></li>
                                   </ul>
                                   <a href="product-page(left-sidebar).html">
-                                      <h6>fresh papaya</h6>
+                                      <h6>{{product.productName}}</h6>
                                   </a>
-                                  <span class="detail-price">$60.21<span>$55.00</span></span>
+                                  <span class="detail-price">
+                                    {% if product.productType == "Simple" %}
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                    {% else %}
+                                    {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                    <del>
+                                      {% if product.productType == "Simple" %} 
+                                      {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                      {% else %} 
+                                      {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                      {% endif %}
+                                    </del>
+                                  </span>
                               </div>
                               <div class="addtocart_btn">
                                 <button class="add-button add_cart tooltip-top" data-tippy-content="Add to cart" tabindex="0">
@@ -654,92 +676,96 @@
   <div class="custom-container">
     <div class="row">
       <div class="col-12 pr-0">
-          <div class="pricing-slide4 no-arrow mb--5">
-            <div>
-              <div class="pricing-box">               
-                <div class="pricing-header">
-                  <img  src="{% static 'assets/images/farming/pricing-table/1.jpg' %}" alt="farming" class="img-fluid bg-img">
-                  <h3>Beginners</h3>
-                  <h2>$30</h2>
-                </div>
-                <div class="pricing-body">
-                    <ul> 
-                      <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
-                      <li> <a href="javascript:void(0)">English Spurs</a></li>
-                      <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
-                      <li> <a href="javascript:void(0)">English Bits</a></li>
-                      <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
-                      <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
-                      <li> <a href="javascript:void(0)">English Horse Reins</a></li>
-                    </ul>
-                    <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
-                </div>
+        <div class="pricing-slide4 no-arrow mb--5">
+          {% for banner in allbanners %}
+          {% if banner.bannerType|to_str == 'Pricing Banner' %}
+          <div>
+            <div class="pricing-box">               
+              <div class="pricing-header">
+                <img  src="{{banner.bannerImage}}" alt="farming" class="img-fluid bg-img">
+                <h3>{{banner.bannerDescription|safe}}</h3>
+                <h2>${{banner.titleOne}}</h2>
+              </div>
+              <div class="pricing-body">
+                  <ul> 
+                    <li> <a href="javascript:void(0)">{{banner.titleTwo}}</a></li>
+                    <li> <a href="javascript:void(0)">{{banner.titleThree}}</a></li>
+                    <li> <a href="javascript:void(0)">{{banner.titleFour}}</a></li>
+                    {% comment %} <li> <a href="javascript:void(0)">{{banner.titleTwo}}</a></li>
+                    <li> <a href="javascript:void(0)">{{banner.titleThree}}</a></li>
+                    <li> <a href="javascript:void(0)">{{banner.titleFour}}</a></li>
+                    <li> <a href="javascript:void(0)">{{banner.titleTwo}}</a></li>  {% endcomment %}
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
+              </div>
             </div>
-            </div>
-            <div>
-              <div class="pricing-box">
-                <div class="pricing-header">
-                  <img  src="{% static 'assets/images/farming/pricing-table/2.jpg' %}" alt="farming" class="img-fluid bg-img">
-                    <h3>Advanced</h3>
-                    <h2>$60</h2>
-                </div>
-                <div class="pricing-body">
-                    <ul> 
-                      <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
-                      <li> <a href="javascript:void(0)">English Spurs</a></li>
-                      <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
-                      <li> <a href="javascript:void(0)">English Bits</a></li>
-                      <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
-                      <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
-                      <li> <a href="javascript:void(0)">English Horse Reins</a></li>
-                    </ul>
-                    <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
-                </div>
-            </div>
-            </div>
-            <div>
-              <div class="pricing-box">
-                <div class="pricing-header">
-                  <img  src="{% static 'assets/images/farming/pricing-table/3.jpg' %}" alt="farming" class="img-fluid bg-img">
-                    <h3>Personal</h3>
-                    <h2>$80</h2>
-                </div>
-                <div class="pricing-body">                   
-                    <ul> 
-                      <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
-                      <li> <a href="javascript:void(0)">English Spurs</a></li>
-                      <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
-                      <li> <a href="javascript:void(0)">English Bits</a></li>
-                      <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
-                      <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
-                      <li> <a href="javascript:void(0)">English Horse Reins</a></li>
-                    </ul>
-                    <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
-                </div>
-            </div>
-            </div>
-            <div>
-              <div class="pricing-box">
-                <div class="pricing-header">
-                  <img  src="{% static 'assets/images/farming/pricing-table/4.jpg' %}" alt="farming" class="img-fluid bg-img">
-                    <h3>Group</h3>
-                    <h2>$100</h2>
-                </div>
-                <div class="pricing-body">
-                    <ul> 
-                      <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
-                      <li> <a href="javascript:void(0)">English Spurs</a></li>
-                      <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
-                      <li> <a href="javascript:void(0)">English Bits</a></li>
-                      <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
-                      <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
-                      <li> <a href="javascript:void(0)">English Horse Reins</a></li>
-                    </ul>
-                    <a href="javascript:void(0)" class="btn btn-rounded btn-md btn-block">order now</a>
-                </div>
-            </div>
-            </div>            
           </div>
+          {% endif %}
+          {% endfor %}
+          {% comment %} <div>
+            <div class="pricing-box">
+              <div class="pricing-header">
+                <img  src="{% static 'assets/images/farming/pricing-table/2.jpg' %}" alt="farming" class="img-fluid bg-img">
+                  <h3>Advanced</h3>
+                  <h2>$60</h2>
+              </div>
+              <div class="pricing-body">
+                  <ul> 
+                    <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
+                    <li> <a href="javascript:void(0)">English Spurs</a></li>
+                    <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
+                    <li> <a href="javascript:void(0)">English Bits</a></li>
+                    <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
+                    <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
+                    <li> <a href="javascript:void(0)">English Horse Reins</a></li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
+              </div>
+          </div>
+          </div>
+          <div>
+            <div class="pricing-box">
+              <div class="pricing-header">
+                <img  src="{% static 'assets/images/farming/pricing-table/3.jpg' %}" alt="farming" class="img-fluid bg-img">
+                  <h3>Personal</h3>
+                  <h2>$80</h2>
+              </div>
+              <div class="pricing-body">                   
+                  <ul> 
+                    <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
+                    <li> <a href="javascript:void(0)">English Spurs</a></li>
+                    <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
+                    <li> <a href="javascript:void(0)">English Bits</a></li>
+                    <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
+                    <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
+                    <li> <a href="javascript:void(0)">English Horse Reins</a></li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
+              </div>
+          </div>
+          </div>
+          <div>
+            <div class="pricing-box">
+              <div class="pricing-header">
+                <img  src="{% static 'assets/images/farming/pricing-table/4.jpg' %}" alt="farming" class="img-fluid bg-img">
+                  <h3>Group</h3>
+                  <h2>$100</h2>
+              </div>
+              <div class="pricing-body">
+                  <ul> 
+                    <li> <a href="javascript:void(0)">Breastplates & Martingales</a></li>
+                    <li> <a href="javascript:void(0)">English Spurs</a></li>
+                    <li> <a href="javascript:void(0)">English Saddle Pads</a></li>
+                    <li> <a href="javascript:void(0)">English Bits</a></li>
+                    <li> <a href="javascript:void(0)">Stirrup Leathers</a></li>
+                    <li> <a href="javascript:void(0)">Stirrups or Stirrup Irons</a></li>
+                    <li> <a href="javascript:void(0)">English Horse Reins</a></li>
+                  </ul>
+                  <a href="javascript:void(0)" class="btn btn-rounded btn-md btn-block">order now</a>
+              </div>
+          </div>
+          </div>             {% endcomment %}
+        </div>
       </div>
     </div>
   </div>
@@ -1703,7 +1729,7 @@
 <!-- add to  setting bar  end-->
 
 <!-- notification product -->
-<div class="product-notification" id="dismiss">
+{% comment %} <div class="product-notification" id="dismiss">
   <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
   <div class="media">
     <img class="me-2" src="{% static 'assets/images/farming/product/1.jpg' %}" alt="Generic placeholder image">
@@ -1712,7 +1738,7 @@
       Cras sit amet nibh libero, in gravida nulla.
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!-- notification product -->
 
 {% endblock components %}

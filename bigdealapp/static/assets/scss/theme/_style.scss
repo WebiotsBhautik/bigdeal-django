@@ -875,7 +875,7 @@ button {
         .media-body {
           h4 {
             font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
-            margin-bottom: 5px;
+            margin-bottom: -30px;
           }
 
           p {
@@ -1455,6 +1455,10 @@ button {
         line-height: 1.6;
         color: $dark;
         margin-bottom: 13px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        overflow: hidden;
       }
 
       h3 {

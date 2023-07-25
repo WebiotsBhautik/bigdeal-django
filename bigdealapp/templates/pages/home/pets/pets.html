@@ -31,7 +31,7 @@
    
 
    <!-- Theme css -->
-   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color13.css' %}" media="screen" id="color">
+   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color13.scss' %}" media="screen" id="color">
 </head>
 
 <body class="bg-light ">
@@ -454,20 +454,28 @@
 <!--home slider start-->
 <section class="pets-slide home-slide" >
    <div class="slide-1 no-arrow">
+      {% comment %} {% for banner in allbanners %}
+      {% if banner.bannerType|to_str == 'Slider' %}  {% endcomment %}
       <div>
          <div class="slide-main">
-            <img src="{% static 'assets/images/pets/slider/bg.jpg' %}" class="img-fluid bg-img" alt="pets-slider">
+            {% for bgimage in mainslider  %}
+            <img src="{{bgimage.bannerImage}}" class="img-fluid bg-img" alt="pets-slider">
+            {% endfor %}
+            
+               {% for banner in allbanners %}
+               {% if banner.bannerType|to_str == 'Slider' %} 
             <div class="animat-block">
-               <img id="img-1" src="{% static 'assets/images/pets/slider/1.png' %}" class="img-fluid animat1" alt="pets-slider">
-               <img id="img-2" src="{% static 'assets/images/pets/slider/2.png' %}" class="img-fluid animat2" alt="pets-slider">
+               <img id="img-1" src="{{banner.bannerImage}}" class="img-fluid animat1" alt="pets-slider">
+               <img id="img-2" src="{{banner.bannerImageTwo}}" class="img-fluid animat2" alt="pets-slider">
             </div>
             <div class="custom-container">
                <div class="row">
                   <div class="col-12 p-0 position-relative">
                      <div class="slide-contain">
                         <div>
-                           <h3>best pets product for you</h3>
-                           <h2>we are providing best food</h2>
+                           <h3>{{banner.titleOne}}</h3>
+                           
+                           <h2>{{banner.bannerProduct.variantProduct.productDescription|safe }}</h2>
                            <input type="text" class="form-control" placeholder="search your pets">
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded">search</a>
                         </div>
@@ -475,8 +483,11 @@
                   </div>
                </div>
             </div>
+            {% endif %}
+            {% endfor %}
          </div>
       </div>
+
    </div>
 </section>
 <!--home slider end-->
@@ -493,72 +504,23 @@
       <div class="row">
          <div class="col-12 pr-0">
             <div class="services-slide4 no-arrow">
+               {% for category in subcategories %}
                <div>
                   <div class="services-box">
                      <div class="media">
-                        <div class="icon-wrraper">
-                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="435.783px" height="435.783px" viewBox="0 0 435.783 435.783" style="enable-background:new 0 0 435.783 435.783;" xml:space="preserve"> <g> <g> <path d="M428.251,275.038c-15.706-18.083-52.923-17.488-83.122,1.346c-8.643,5.388-15.771,11.689-21.19,18.356H111.84c-5.411-6.667-12.538-12.979-21.188-18.356c-30.186-18.834-67.402-19.429-83.116-1.346c-15.706,18.083-3.958,48.007,26.228,66.836c4.329,2.687,8.8,5.002,13.335,6.942c-4.524,1.949-9.006,4.25-13.335,6.951C3.585,374.597-8.175,404.521,7.536,422.594c15.706,18.093,52.923,17.499,83.116-1.335c8.65-5.388,15.777-11.689,21.188-18.357h212.11c5.408,6.668,12.527,12.97,21.186,18.357c30.193,18.834,67.41,19.428,83.121,1.335c15.69-18.072,3.95-47.997-26.243-66.826c-4.321-2.701-8.79-5.002-13.324-6.951c4.524-1.94,9.003-4.256,13.324-6.942C432.202,323.045,443.942,293.121,428.251,275.038z"/> <path d="M350.873,164.219c-11.187,0-20.266,0-20.266,0l-6.281-19.276c-3.458-10.651-9.069-10.651-12.513,0c-3.483,10.648-6.281,19.276-6.281,19.276H285.26c-11.187,0-12.934,5.347-3.869,11.921c9.069,6.573,16.401,11.913,16.401,11.913l-6.281,19.284c-3.438,10.656,1.097,13.952,10.166,7.371c9.044-6.581,16.387-11.92,16.387-11.92l16.397,11.92c9.063,6.582,13.599,3.286,10.15-7.371c-3.474-10.656-6.276-19.284-6.276-19.284l16.412-11.913C363.801,169.559,362.055,164.219,350.873,164.219z"/> <path d="M145.471,164.219c-11.187,0-20.264,0-20.264,0l-6.281-19.276c-3.461-10.651-9.069-10.651-12.512,0c-3.486,10.648-6.282,19.276-6.282,19.276H79.861c-11.187,0-12.934,5.347-3.872,11.921c9.069,6.573,16.402,11.913,16.402,11.913l-6.281,19.284c-3.445,10.656,1.097,13.952,10.166,7.371c9.046-6.581,16.387-11.92,16.387-11.92l16.399,11.92c9.062,6.582,13.596,3.286,10.151-7.371c-3.476-10.656-6.279-19.284-6.279-19.284l16.414-11.913C158.402,169.559,156.656,164.219,145.471,164.219z"/> <path d="M393.299,250.699c7.673,0,14.848,1.021,21.389,2.931c4.164-16.321,6.357-33.241,6.357-50.48C421.045,91.126,329.911,0,217.898,0C105.883,0,14.749,91.126,14.749,203.149c0,17.295,2.14,34.221,6.281,50.506c6.563-1.93,13.761-2.956,21.465-2.956c6.391,0,12.9,0.741,19.393,2.062c-5.009-15.812-7.64-32.483-7.64-49.604c0-90.233,73.415-163.648,163.65-163.648c90.233,0,163.645,73.415,163.645,163.648c0,17.08-2.747,33.756-7.789,49.635C380.315,251.451,386.871,250.699,393.299,250.699z"/> <path d="M262.313,133.952c-15.163,0-27.432,0-27.432,0l-8.5-26.108c-4.677-14.409-12.284-14.409-16.953,0c-4.707,14.424-8.485,26.108-8.485,26.108h-27.467c-15.145,0-17.499,7.239-5.23,16.132c12.284,8.904,22.213,16.133,22.213,16.133l-8.5,26.108c-4.674,14.427,1.47,18.891,13.749,9.986c12.251-8.912,22.191-16.133,22.191-16.133l22.199,16.133c12.258,8.904,18.392,4.44,13.721-9.986c-4.683-14.416-8.476-26.108-8.476-26.108l22.217-16.133C279.812,141.19,277.465,133.952,262.313,133.952z"/> </g> </g> </svg>
+                        {% comment %} <div class="icon-wrraper"> {% endcomment %}
+                           {% comment %} <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="435.783px" height="435.783px" viewBox="0 0 435.783 435.783" style="enable-background:new 0 0 435.783 435.783;" xml:space="preserve"> <g> <g> <path d="M428.251,275.038c-15.706-18.083-52.923-17.488-83.122,1.346c-8.643,5.388-15.771,11.689-21.19,18.356H111.84c-5.411-6.667-12.538-12.979-21.188-18.356c-30.186-18.834-67.402-19.429-83.116-1.346c-15.706,18.083-3.958,48.007,26.228,66.836c4.329,2.687,8.8,5.002,13.335,6.942c-4.524,1.949-9.006,4.25-13.335,6.951C3.585,374.597-8.175,404.521,7.536,422.594c15.706,18.093,52.923,17.499,83.116-1.335c8.65-5.388,15.777-11.689,21.188-18.357h212.11c5.408,6.668,12.527,12.97,21.186,18.357c30.193,18.834,67.41,19.428,83.121,1.335c15.69-18.072,3.95-47.997-26.243-66.826c-4.321-2.701-8.79-5.002-13.324-6.951c4.524-1.94,9.003-4.256,13.324-6.942C432.202,323.045,443.942,293.121,428.251,275.038z"/> <path d="M350.873,164.219c-11.187,0-20.266,0-20.266,0l-6.281-19.276c-3.458-10.651-9.069-10.651-12.513,0c-3.483,10.648-6.281,19.276-6.281,19.276H285.26c-11.187,0-12.934,5.347-3.869,11.921c9.069,6.573,16.401,11.913,16.401,11.913l-6.281,19.284c-3.438,10.656,1.097,13.952,10.166,7.371c9.044-6.581,16.387-11.92,16.387-11.92l16.397,11.92c9.063,6.582,13.599,3.286,10.15-7.371c-3.474-10.656-6.276-19.284-6.276-19.284l16.412-11.913C363.801,169.559,362.055,164.219,350.873,164.219z"/> <path d="M145.471,164.219c-11.187,0-20.264,0-20.264,0l-6.281-19.276c-3.461-10.651-9.069-10.651-12.512,0c-3.486,10.648-6.282,19.276-6.282,19.276H79.861c-11.187,0-12.934,5.347-3.872,11.921c9.069,6.573,16.402,11.913,16.402,11.913l-6.281,19.284c-3.445,10.656,1.097,13.952,10.166,7.371c9.046-6.581,16.387-11.92,16.387-11.92l16.399,11.92c9.062,6.582,13.596,3.286,10.151-7.371c-3.476-10.656-6.279-19.284-6.279-19.284l16.414-11.913C158.402,169.559,156.656,164.219,145.471,164.219z"/> <path d="M393.299,250.699c7.673,0,14.848,1.021,21.389,2.931c4.164-16.321,6.357-33.241,6.357-50.48C421.045,91.126,329.911,0,217.898,0C105.883,0,14.749,91.126,14.749,203.149c0,17.295,2.14,34.221,6.281,50.506c6.563-1.93,13.761-2.956,21.465-2.956c6.391,0,12.9,0.741,19.393,2.062c-5.009-15.812-7.64-32.483-7.64-49.604c0-90.233,73.415-163.648,163.65-163.648c90.233,0,163.645,73.415,163.645,163.648c0,17.08-2.747,33.756-7.789,49.635C380.315,251.451,386.871,250.699,393.299,250.699z"/> <path d="M262.313,133.952c-15.163,0-27.432,0-27.432,0l-8.5-26.108c-4.677-14.409-12.284-14.409-16.953,0c-4.707,14.424-8.485,26.108-8.485,26.108h-27.467c-15.145,0-17.499,7.239-5.23,16.132c12.284,8.904,22.213,16.133,22.213,16.133l-8.5,26.108c-4.674,14.427,1.47,18.891,13.749,9.986c12.251-8.912,22.191-16.133,22.191-16.133l22.199,16.133c12.258,8.904,18.392,4.44,13.721-9.986c-4.683-14.416-8.476-26.108-8.476-26.108l22.217-16.133C279.812,141.19,277.465,133.952,262.313,133.952z"/> </g> </g> </svg> {% endcomment %}
+                        <div class="img-wrapper">
+                           <img src="{{category.categoryImage}}" alt="Pets" class="img-fluid">
                         </div>
                         <div class="media-body">
-                           <h4>pet adoption</h4>
-                           <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p>
+                           <h4>{{category.categoryName}}</h4>
+                           {% comment %} <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p> {% endcomment %}
                         </div>
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class="services-box">
-                     <div class="media">
-                        <div class="icon-wrraper">
-                           <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M356.492,318.112c-7.557-2.669-15.203-0.528-16.575,3.357c-1.371,3.884-3.71,30.008,3.846,32.677c7.556,2.669,22.145-19.127,23.517-23.012C368.653,327.25,364.048,320.782,356.492,318.112z"/> </g> </g> <g> <g> <path d="M509.447,421.942c-2.017-0.736-4.248,0.302-4.985,2.318l-0.081,0.224c-1.342,3.685-3.028,7.271-4.815,10.485c-6.256,11.371-15.653,21.636-26.209,26.587c-0.889-10.344-6.421-24.078-35.228-49.951c-51.017-33.755-63.291-50.33-63.291-50.33s-2.931-5.13-6.601-11.456c-7.195,9.096-17.166,18.615-28.15,14.736c-12.07-4.263-12.49-20.629-12.628-26.006c-0.112-4.389,0.144-9.917,0.739-14.449l-0.268,0.063c-10.073,2.393-17.973,10.201-20.484,20.245l-11.393,6.975c-4.348,2.661-5.363,8.544-2.164,12.51l6.79,8.415c5.54,6.867,14.925,9.292,23.099,5.972c3.519-1.43,7.479-1.329,10.929,0.26s6.09,4.533,7.293,8.136c4.653,13.941,12.174,35.153,18.992,48.526l-12.623,58.109c-1.338,6.16,2.571,12.239,8.732,13.577c6.17,1.339,12.241-2.58,13.577-8.732l9.403-43.286c5.539,1.885,12.744,3.373,20.56,4.842c2.102-6.196,5.61-12.015,10.54-16.946c2.249-2.247,5.89-2.247,8.138,0c2.316,2.316,2.129,6.008,0,8.137c-8.952,8.952-11.563,21.709-8.016,32.906h-11.888h-1.369c-6.304,0-11.414,5.11-11.414,11.414c0,6.304,5.11,11.414,11.414,11.414c48.612,0,42.273-0.02,48.952,0.026c11.41,0,21.92-12.28,25.213-23.993c15.621-7.37,29.325-22.37,36.5-43.734c1.339-3.939,2.489-8.266,3.236-12.699C512.254,424.427,511.236,422.595,509.447,421.942z"/> </g> </g> <g> <g> <path d="M41.176,493.343l3.13-33.409c-11.113-16.057-12.502-40.105-8.028-55.515c-12.68-6.418-25.862-18.086-35.955-34.23L0,484.84c-0.037,13.319,10.73,24.146,24.048,24.184c0.023,0,0.047,0,0.07,0c6.953,0,13.204-2.962,17.607-7.674C41.126,498.793,40.918,496.099,41.176,493.343z"/> </g> </g> <g> <g> <path d="M93.71,468.592l-2.758,29.416c-0.364,3.884-1.598,7.471-3.48,10.603c11.208-2.049,19.724-11.831,19.758-23.634l0.094-33.177C102.916,458.935,98.41,464.509,93.71,468.592z"/> </g> </g> <g> <g> <circle cx="51.439" cy="47.35" r="44.374"/> </g> </g> <g> <g> <path d="M267.909,348.47l-11.618-7.113c-2.481-9.923-10.176-18.103-21.162-20.71c0.607,4.622,0.868,10.259,0.754,14.735c-0.14,5.484-0.569,22.173-12.877,26.52c-12.018,4.244-30.806-17.25-30.902-17.121c-21.402-23.869-38.663-52.29-49.62-79.513c0.404-0.401,0.811-0.798,1.19-1.237c7.715-8.961,6.703-22.48-2.257-30.194l-54.27-46.716l-20.432-51.131l32.631,39.25l8.561,3.967v-42.38c0-15.406-12.488-27.894-27.894-27.894H28.933c-15.406,0-27.894,12.488-27.894,27.894c0,179.063-0.388,118.121-0.607,195.44c7.53-3.826,17.301-2.211,23.187,7.016c5.562,8.632,15.258,17.918,24.963,22.286c0.204-71.968,0.238-67.159,0.081-68.864h10.988c-0.165,1.773-0.1-3.685-0.314,72.014c3.342,0.506,7.418,0.293,10.889-0.264c8.812-4.279,13.465-4.32,37.367-7.855c0.188-66.546,0.314-70.544,0.314-70.544s-60.56-50.919-71.374-60.217c-3.265-2.807-5.074-6.729-5.352-10.71l-4.23-63.246l22.376,55.993c1.277,3.196,3.306,6.035,5.914,8.281l58.236,50.133c3.898,3.355,8.658,5.044,13.428,5.162c12.042,30.227,31.245,61.176,55.042,87c-0.001,0.001,0.564,0.584,0.563,0.584c-78.323,11.007-92.908,13.856-108.135,18.296c-0.808,0.109,1.276-0.218-3.559,0.557c-8.608,1.47-20.955-0.232-31.131-5.828c-17.312-8.933-27.275-25.845-28.265-26.96c-3.008-3.384-8.635-0.071-6.877,4.266c5.607,13.831,15.849,27.487,26.4,35.685c6.32,5.129,14.961,9.913,23.216,12.318c-11.013,15.94-8.51,44.809,3.946,58.51l-3.629,38.713c-0.6,6.401,4.103,12.075,10.504,12.675c6.375,0.602,12.073-4.083,12.675-10.503c3.039-32.407,2.766-29.508,3.314-35.346c7.398-4.371,13.679-13.839,18.261-22.267l-0.215-0.106c4.232-6.709,6.647-15.104,6.647-24.051c0-3.453,2.801-6.253,6.253-6.253c3.452,0,6.253,2.8,6.253,6.253c0,7.792-1.475,15.177-4.102,21.784c17.364,2.239,52.436,6.611,62.355,7.674l-1.298,50.929c-0.164,6.426,4.913,11.768,11.34,11.932c0.101,0.002,0.203,0.004,0.302,0.004c6.29,0,11.47-5.018,11.63-11.344l1.494-58.648c7.755-14.541,14.587-33.408,19.911-49.126c1.275-3.752,2.394-9.13,8.696-12.033c8.756-4.036,11.503,2.32,21.383,1.06c2.78-0.352,5.342-1.207,7.851-2.697c0.134-0.079,0.269-0.152,0.401-0.234c3.633-2.271,12.237-12.701,13.264-15.232C272.984,355.139,271.491,350.663,267.909,348.47z"/> </g> </g> <g> <g> <path d="M223.177,317.966c-1.399-3.962-9.197-6.145-16.902-3.423c-7.705,2.722-12.402,9.319-11.002,13.28c1.401,3.963,16.279,26.19,23.983,23.467C226.96,348.568,224.576,321.927,223.177,317.966z"/> </g> </g> </svg>
-                        </div>
-                        <div class="media-body">
-                           <h4>training</h4>
-                           <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="services-box">
-                     <div class="media">
-                        <div class="icon-wrraper">
-                           <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"> <g> <path d="m348.624 352.884c9.447 0 17.133-7.686 17.133-17.133s-7.686-17.133-17.133-17.133-17.134 7.686-17.134 17.133 7.687 17.133 17.134 17.133z"/> <path d="m296.167 311.167c13.877 0 25.166-11.29 25.166-25.167s-11.289-25.167-25.166-25.167-25.167 11.29-25.167 25.167 11.29 25.167 25.167 25.167z"/> <path d="m241 286c0-13.877-11.29-25.167-25.167-25.167s-25.166 11.29-25.166 25.167 11.289 25.167 25.166 25.167 25.167-11.29 25.167-25.167z"/> <path d="m163.375 318.617c-9.447 0-17.133 7.686-17.133 17.133s7.686 17.133 17.133 17.133 17.134-7.686 17.134-17.133-7.687-17.133-17.134-17.133z"/> <path d="m48.2 286.439v210.561c0 8.284 6.716 15 15 15h385.6c8.284 0 15-6.716 15-15v-210.561l-207.8-207.799zm247.967-55.606c30.419 0 55.166 24.748 55.166 55.167 0 .904-.025 1.802-.068 2.695 24.765 1.375 44.492 21.952 44.492 47.055 0 25.989-21.144 47.133-47.133 47.133-4.653 0-9.146-.688-13.395-1.95.009.49.037.975.037 1.466 0 43.708-35.559 79.267-79.267 79.267s-79.267-35.559-79.267-79.267c0-.492.028-.977.037-1.467-4.249 1.262-8.742 1.95-13.396 1.95-25.989 0-47.133-21.144-47.133-47.133 0-25.103 19.728-45.681 44.493-47.055-.043-.893-.068-1.792-.068-2.695 0-30.419 24.747-55.167 55.166-55.167 15.821 0 30.098 6.705 40.167 17.41 10.071-10.704 24.348-17.409 40.169-17.409z"/> <circle cx="256" cy="382.4" r="49.267"/> <path d="m463.8 15c0-8.284-6.716-15-15-15h-64.267c-8.284 0-15 6.716-15 15v49.894l94.267 94.267z"/> <path d="m507.606 245.394-241-241c-5.857-5.858-15.355-5.858-21.213 0l-241 241c-5.858 5.858-5.858 15.355 0 21.213 5.857 5.858 15.355 5.858 21.213 0l230.394-230.393 230.393 230.393c2.929 2.929 6.768 4.393 10.607 4.393s7.678-1.464 10.606-4.394c5.859-5.857 5.859-15.354 0-21.212z"/> </g> </svg>
-                        </div>
-
-                        <div class="media-body">
-                           <h4>pet hostel</h4>
-                           <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="services-box">
-                     <div class="media">
-                        <div class="icon-wrraper">
-                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M253.839,35.748c-3.422-3.66-8.454-5.365-13.4-4.547c-4.946,0.817-9.157,4.05-11.223,8.617L93.867,333.701 C87.803,332.113,81.555,331,75,331c-41.353,0-75,33.647-75,75c0,41.353,33.647,75,75,75s75-33.647,75-75 c0-12.339-3.281-23.818-8.584-34.096l122.219-268.343C275.193,80.444,270.478,53.544,253.839,35.748z M75,451 c-24.814,0-45-20.186-45-45c0-24.814,20.186-45,45-45s45,20.186,45,45C120,430.814,99.814,451,75,451z"/> </g> </g> <g> <g> <path d="M255,331c-6.555,0-12.803,1.113-18.867,2.701l-22.304-48.43l-32.347,71.034l7.103,15.597 C183.281,382.18,180,393.661,180,406c0,41.353,33.647,75,75,75c41.353,0,75-33.647,75-75C330,364.647,296.353,331,255,331z M255,451c-24.814,0-45-20.186-45-45c0-24.814,20.186-45,45-45c24.814,0,45,20.186,45,45C300,430.814,279.814,451,255,451z"/> </g> </g> <g> <g> <path d="M467,31c-13.193,0-17.976,0-19.51,0c-0.471,0-0.638,0-0.646,0c-2.797,0-16.369,0-71.843,0c-8.291,0-15,6.709-15,15 s6.709,15,15,15h47v30h-47c-8.291,0-15,6.709-15,15s6.709,15,15,15h47v30h-47c-8.291,0-15,6.709-15,15s6.709,15,15,15h47v30h-47 c-8.291,0-15,6.709-15,15s6.709,15,15,15h47v30h-47c-8.291,0-15,6.709-15,15c0,8.291,6.709,15,15,15h47v30h-47 c-8.291,0-15,6.709-15,15c0,8.291,6.709,15,15,15h47v30h-47c-8.291,0-15,6.709-15,15c0,8.291,6.709,15,15,15h47v30h-47 c-8.291,0-15,6.709-15,15c0,8.291,6.709,15,15,15c55.387,0,69.015,0,71.841,0c0.497,0,0.66,0,0.657,0c1.548,0,6.344,0,19.501,0 c24.814,0,45-20.186,45-45V76C512,51.186,491.814,31,467,31z"/> </g> </g> <g> <g> <path d="M100.785,39.818c-2.066-4.566-6.277-7.8-11.223-8.616c-4.946-0.818-9.977,0.886-13.4,4.547 c-16.639,17.796-21.354,44.696-9.796,67.813l49.953,109.677l32.168-69.844L100.785,39.818z"/> </g> </g> </svg>
-                        </div>
-                        <div class="media-body">
-                           <h4>grooming</h4>
-                           <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="services-box">
-                     <div class="media">
-                        <div class="icon-wrraper">
-                           <svg viewBox="0 -39 512 512" xmlns="http://www.w3.org/2000/svg"> <path d="m341.660156 83.996094v-83.996094h-171.320312v83.996094h-170.339844v350.03125h512v-350.03125zm-141.320312-53.996094h111.320312v53.984375h-111.320312zm255.355468 248.285156c-1.382812 18.597656-16.421874 33.835938-34.988281 35.453125-1.15625.101563-2.308593.152344-3.445312.152344-14.65625 0-27.640625-8.1875-34.113281-20.644531h-22.25c-14.429688 44.148437-55.996094 76.132812-104.898438 76.132812s-90.46875-31.988281-104.898438-76.132812h-19.898437c-6.476563 12.457031-19.457031 20.644531-34.113281 20.644531-1.140625 0-2.285156-.050781-3.445313-.152344-18.566406-1.613281-33.605469-16.855469-34.988281-35.453125-.488281-6.59375.722656-13.21875 3.5-19.160156 1.40625-3.015625 1.40625-6.480469-.003906-9.5-2.773438-5.9375-3.984375-12.5625-3.496094-19.15625 1.378906-18.59375 16.421875-33.835938 34.988281-35.453125 16.035157-1.390625 30.582031 7.066406 37.558594 20.492187h23.425781c16.921875-39.25 55.988282-66.796874 101.375-66.796874 45.382813 0 84.449219 27.546874 101.371094 66.796874h25.777344c6.976562-13.425781 21.519531-21.890624 37.554687-20.492187 18.566407 1.617187 33.609375 16.855469 34.988281 35.453125.53125 7.171875-.929687 14.304688-4.222656 20.632812-1.050781 2.019532-1.050781 4.53125.003906 6.554688 3.289063 6.324219 4.75 13.457031 4.21875 20.628906zm0 0"/> <path d="m425.777344 232.6875c-.300782-4.015625-3.667969-7.4375-7.671875-7.785156-5.175781-.449219-8.753907 3.417968-9.238281 7.414062l-1.601563 13.191406h-41.765625c.546875 4.4375.832031 8.953126.832031 13.539063 0 1.40625-.035156 2.804687-.089843 4.199219h41.023437l1.601563 13.195312c.484374 3.996094 4.082031 7.855469 9.238281 7.414063 4-.347657 7.371093-3.769531 7.667969-7.789063.121093-1.625-.183594-3.160156-.914063-4.554687-5.582031-10.730469-5.582031-23.539063 0-34.265625.730469-1.398438 1.035156-2.929688.917969-4.558594zm0 0"/> <path d="m146.496094 245.507812h-39.414063l-1.601562-13.191406c-.484375-4-4.082031-7.859375-9.234375-7.414062-4.003906.347656-7.375 3.769531-7.671875 7.785156-.109375 1.5.144531 2.925781.753906 4.238281 5.183594 11.089844 5.1875 23.8125.003906 34.902344-.613281 1.3125-.867187 2.738281-.757812 4.238281.296875 4.019532 3.667969 7.4375 7.671875 7.785156 5.175781.453126 8.75-3.417968 9.234375-7.414062l1.605469-13.191406h38.667968c-.050781-1.394532-.085937-2.796875-.085937-4.203125 0-4.582031.285156-9.097657.828125-13.535157zm0 0"/> <path d="m256 178.710938c-44.296875 0-80.332031 36.035156-80.332031 80.332031s36.035156 80.332031 80.332031 80.332031 80.332031-36.035156 80.332031-80.332031-36.035156-80.332031-80.332031-80.332031zm47 95.332031h-32v32h-30v-32h-32v-30h32v-32h30v32h32zm0 0"/> </svg>
-                        </div>
-                        <div class="media-body">
-                           <h4>pets care</h4>
-                           <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </div>
@@ -575,12 +537,15 @@
                <div class="col-md-12">
                   <div class="collection-banner-main banner-style6 collection-color6 p-center p-top text-center  banner-14">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/pets/collection-banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>cute pet dogs</h3>
-                           <h4>up to 50% off</h4>
+                           <h3>{{first_banner.titleOne}}</h3>
+                           <h4>up to {% if first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                              {% else %}
+                              <span class="theme-color">{{first_banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                              {% endif %}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm">sop now</a>
                         </div>
                      </div>
@@ -593,12 +558,12 @@
                <div class="col-md-6">
                   <div class="collection-banner-main banner-style6 collection-color7 p-left text-center banner-13">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/pets/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>pet food shop</h3>
-                           <h4>fresh product</h4>
+                           <h3>{{second_banner.titleOne}}</h3>
+                           <h4>{{second_banner.titleTwo}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm">sop now</a>
                         </div>
                      </div>
@@ -607,12 +572,12 @@
                <div class="col-md-6">
                   <div class="collection-banner-main banner-style6 collection-color8 p-left text-center banner-13">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/pets/collection-banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>new pet house</h3>
-                           <h4>best collection</h4>
+                           <h3>{{third_banner.titleOne}}</h3>
+                           <h4>{{third_banner.titleTwo}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm">sop now</a>
                         </div>
                      </div>
@@ -621,12 +586,12 @@
                <div class="col-md-12">
                   <div class="collection-banner-main banner-style6 bg-color0  p-left text-center banner-13">
                      <div class="collection-img">
-                        <img src="{% static 'assets/images/pets/collection-banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
                      </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>cute pet collection </h3>
-                           <h4>best discount</h4>
+                           <h3>{{fourth_banner.titleOne}}</h3>
+                           <h4>{{fourth_banner.titleTwo}}</h4>
                            <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm">sop now</a>
                         </div>
                      </div>
@@ -647,21 +612,27 @@
 
 <!--testimonial start-->
 <section class="testimonial4 section-big-py-space ">
-   <img src="{% static 'assets/images/pets/testimonial/1.jpg' %}" alt="testimonial" class="img-fluid bg-img">
+   {% for banner in allbanners %}
+   {% if banner.bannerType|to_str == 'testimonial Banner' %}
+   <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
+   {% endif %}
+   {% endfor %}
+
    <div class="custom-container">
       <div class="row">
          <div class="col-12 pr-0">
             <div class="testimonial-slide3 no-arrow">
+               {% for banner in allbanners %}
+               {% if banner.bannerType|to_str == 'Review Banner' %}
                <div>
                   <div class="testimonial-box">
                      <div class="img-wrapper">
-                        <img src="{% static 'assets/images/testimonial/1.jpg' %}" alt="testimonial" class="img-fluid">
+                        <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid">
                      </div>
                      <div class="testimonial-detail">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur cum cumque cupiditate ea
-                           esse facilis fuga laudantium, nisi obcaecati perspiciatis.</p>
-                        <h3>mark jecno</h3>
-                        <h6>pet trainers</h6>
+                        <p>{{banner.bannerDescription|safe}}</p>
+                        <h3>{{banner.titleOne}}</h3>
+                        <h6>{{banner.titleTwo}}</h6>
                         <ul>
                            <li><i class="fa fa-star"></i></li>
                            <li><i class="fa fa-star"></i></li>
@@ -672,66 +643,9 @@
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class="testimonial-box">
-                     <div class="img-wrapper">
-                        <img src="{% static 'assets/images/testimonial/4.jpg' %}" alt="testimonial" class="img-fluid">
-                     </div>
-                     <div class="testimonial-detail">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur cum cumque cupiditate ea
-                           esse facilis fuga laudantium, nisi obcaecati perspiciatis.</p>
-                        <h3>elina folden</h3>
-                        <h6>pet trainers</h6>
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="testimonial-box">
-                     <div class="img-wrapper">
-                        <img src="{% static 'assets/images/testimonial/3.jpg' %}" alt="testimonial" class="img-fluid">
-                     </div>
-                     <div class="testimonial-detail">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur cum cumque cupiditate ea
-                           esse facilis fuga laudantium, nisi obcaecati perspiciatis.</p>
-                        <h3>johan deo</h3>
-                        <h6>pet trainers</h6>
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="testimonial-box">
-                     <div class="img-wrapper">
-                        <img src="{% static 'assets/images/testimonial/2.jpg' %}" alt="testimonial" class="img-fluid">
-                     </div>
-                     <div class="testimonial-detail">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur cum cumque cupiditate ea
-                           esse facilis fuga laudantium, nisi obcaecati perspiciatis.</p>
-                        <h3>mark jecno</h3>
-                        <h6>johan folden</h6>
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+               {% endif %}
+               {% endfor %}
+
             </div>
          </div>
       </div>
@@ -752,17 +666,18 @@
       <div class="row">
          <div class="col pr-0">
             <div class="product-slide-5 product-m no-arrow">
+               {% for product in pets_products %}
                <div>
                   <div class="product-box product-box2">
                      <div class="product-imgbox">
                         <div class="product-front">
                            <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/1.jpg' %}" class="img-fluid" alt="product">
+                              <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                            </a>
                         </div>
                         <div class="product-back">
                            <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/6.jpg' %}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                            </a>
                         </div>
                         <div class="product-icon  icon-inline ">
@@ -780,10 +695,16 @@
                            </a>
                         </div>
                         <div class="new-label1">
-                           <div>new</div>
+                           <div>
+                              {% if product.is_past_due %}
+                              <span class="label label-black">Old</span>
+                              {% else %}
+                              <span class="label label-black">New</span>
+                              {% endif %}
+                           </div>
                         </div>
                         <div class="on-sale1">
-                           on sale
+                           {{product.productDescription|safe}}
                         </div>
                      </div>
                      <div class="product-detail product-detail2 ">
@@ -795,287 +716,26 @@
                            <li><i class="fa fa-star-o"></i></li>
                         </ul>
                         <a href="product-page(left-sidebar).html">
-                           <h3>wooden pet house</h3>
+                           <h3>{{product.productName}}</h3>
                         </a>
                         <h5>
-                           $60
+                           {% if product.productType == "Simple" %}
+                           {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                           {% else %}
+                           {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                           {% endif %} 
                            <span>
-                      $80
-                    </span>
+                              {% if product.productType == "Simple" %} 
+                              {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                              {% else %} 
+                              {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                              {% endif %} 
+                           </span>
                         </h5>
                      </div>
                   </div>
                </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/2.jpg' %}" class="img-fluid" alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/7.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon  icon-inline ">
-                           <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html">
-                           <h3>pets food</h3>
-                        </a>
-                        <h5>
-                           $90
-                           <span>
-                      $110
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/3.jpg' %}" class="img-fluid" alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/8.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon  icon-inline ">
-                           <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html">
-                           <h3>dual color cats house</h3>
-                        </a>
-                        <h5>
-                           $150
-                           <span>
-                      $170
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/4.jpg' %}" class="img-fluid" alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/9.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon  icon-inline ">
-                           <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html">
-                           <h3>Meat Up Steel Dog Bowl </h3>
-                        </a>
-                        <h5>
-                           $68
-                           <span>
-                      $89
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/5.jpg' %}" class="img-fluid" alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/10.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon  icon-inline ">
-                           <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-bottom" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html">
-                           <h3>super dog pet leash chain</h3>
-                        </a>
-                        <h5>
-                           $48
-                           <span>
-                      $67
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="product-box product-box2">
-                     <div class="product-imgbox">
-                        <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/3.jpg' %}" class="img-fluid" alt="product">
-                           </a>
-                        </div>
-                        <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
-                              <img src="{% static 'assets/images/pets/product/8.jpg' %}" class="img-fluid  " alt="product">
-                           </a>
-                        </div>
-                        <div class="product-icon  icon-inline ">
-                           <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                              <i  data-feather="shopping-cart"></i>
-                           </button>
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                              <i  data-feather="heart"></i>
-                           </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
-                           </a>
-                           <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
-                        </div>
-                        <div class="new-label1">
-                           <div>new</div>
-                        </div>
-                        <div class="on-sale1">
-                           on sale
-                        </div>
-                     </div>
-                     <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html">
-                           <h3>dual color cats house</h3>
-                        </a>
-                        <h5>
-                           $96
-                           <span>
-                      $105
-                    </span>
-                        </h5>
-                     </div>
-                  </div>
-               </div>
+               {% endfor %}
             </div>
          </div>
       </div>
@@ -1085,7 +745,11 @@
 
 <!-- counter banner -->
 <section class="count counter-banner  counter-layer">
-   <img src="{% static 'assets/images/pets/counter-banner/1.jpg' %}" alt="counter-banner" class="img-fluid bg-img">
+   {% for banner in allbanners  %}
+   {% if banner.bannerType|to_str == 'Counter Banner' %}
+   <img src="{{banner.bannerImage}}" alt="counter-banner" class="img-fluid bg-img">
+   {% endif %}
+   {% endfor %}
    <div class="custom-container">
       <div class="row counter-block">
          <div class="col-6 col-md-3">
@@ -1202,27 +866,29 @@
       <div class="row">
          <div class="col-12 pr-0">
             <div class="pricing-slide4  no-arrow">
+               {% for banner in allbanners %}
+               {% if banner.bannerType|to_str == 'Pricing Banner' %}
                <div>
                   <div class="pricing-box">
                      <div class="pricing-header">
-                        <h2>Regular Pack</h2>
+                        <h2>{{banner.bannerDescription|safe}}</h2>
                      </div>
                      <div class="pricing-body">
-                        <h1><sup>$</sup>70<sub> / per visit</sub></h1>
+                        <h1><sup>$</sup>{{banner.titleOne}}<sub> / per visit</sub></h1>
                         <ul>
-                           <li> <a href="javascript:void(0)">Pet Shower</a> </li>
-                           <li> <a href="javascript:void(0)">Fitness Checkup</a> </li>
-                           <li> <a href="javascript:void(0)">Pet Grooming</a> </li>
-                           <li> <a href="javascript:void(0)">Hair And Nail Cut</a> </li>
-                           <li> <a href="javascript:void(0)">Control Hair Falling</a> </li>
-                           <li> <a href="javascript:void(0)">Brush & Blow Dry</a> </li>
-                           <li> <a href="javascript:void(0)">Pet Park And Games</a> </li>
+                           {% comment %} <li> <a href="javascript:void(0)">{{banner.titleOne}}</a> </li> {% endcomment %}
+                           <li> <a href="javascript:void(0)">{{banner.titleTwo}}</a> </li>
+                           <li> <a href="javascript:void(0)">{{banner.titleThree}}</a> </li>
+                           <li> <a href="javascript:void(0)">{{banner.titleFour}}</a> </li>
                         </ul>
                         <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
                      </div>
                   </div>
                </div>
-               <div>
+               {% endif %}
+               {% endfor %}
+
+               {% comment %} <div>
                   <div class="pricing-box">
                      <div class="pricing-header">
                         <h2>ultimate Plan</h2>
@@ -1281,7 +947,7 @@
                         <a href="javascript:void(0)" class="btn btn-rounded btn-md btn-block">order now</a>
                      </div>
                   </div>
-               </div>
+               </div> {% endcomment %}
             </div>
          </div>
       </div>
@@ -1294,10 +960,9 @@
    <div class="tab-product-main tab-second">
       <div class="tab-prodcut-contain">
          <ul class="tabs tab-title">
-            <li class="current"><a href="tab-1">all</a></li>
-            <li class=""><a href="tab-2">dogs</a></li>
-            <li class=""><a href="tab-3">cats</a></li>
-            <li class=""><a href="tab-4">other pets</a></li>
+            {% for category in subcategories %}
+            <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
+            {% endfor %}
          </ul>
       </div>
    </div>
@@ -1311,52 +976,29 @@
          <div class="col-12">
             <div class="theme-tab product mb--5">
                <div class="tab-content-cls">
-                  <div id="tab-1" class="tab-content active default row gallery-block">
+                  {% for subcategory,products in products_by_subcategory.items %}
+                  <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default row gallery-block {% endif %}" >
                      <div class="col-md-12">
                         <div class="gallery-slide no-arrow">
+                           {% if products %}
+                           {% for product in products %}
                            <div>
                               <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/1.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/1.jpg' %}" alt="gallery">
+                                 <a class="spotlight" href="{{product.productImageFront}}" tabindex="0">
+                                    <img class="img-fluid" src="{{product.productImageBack}}" alt="gallery">
                                     <div class="gallery-contain">
                                        <i class="fa fa-search-plus"></i>
                                     </div>
                                  </a>
                               </div>
                            </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/2.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/2.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/3.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/3.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/4.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/4.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
+                           {% endfor %}
+                           {% else %}
+                           <h2 style="text-align:center;"> No products Yet! </h2>
+                           {% endif %}
                         </div>
                      </div>
-                     <div class="col-md-12">
+                     {% comment %} <div class="col-md-12">
                         <div class="gallery-slide no-arrow">
                            <div>
                               <div class="gallery-box">
@@ -1399,279 +1041,9 @@
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </div> {% endcomment %}
                   </div>
-                  <div id="tab-2" class="tab-content  row gallery-block">
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/8.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/8.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/5.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/5.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/6.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/6.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/7.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/7.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/4.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/4.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/1.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/1.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/2.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/2.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/3.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/3.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="tab-3" class="tab-content  row gallery-block">
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/3.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/3.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/4.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/4.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/1.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/1.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/2.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/2.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/7.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/7.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/8.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/8.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/5.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/5.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/6.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/6.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div id="tab-4" class="tab-content  row gallery-block">
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/6.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/6.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/7.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/7.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/8.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/8.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/5.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/5.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-
-                        </div>
-                     </div>
-                     <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/2.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/2.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/3.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/3.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/4.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/4.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/1.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/1.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+                  {% endfor %}
                </div>
             </div>
          </div>
@@ -1685,7 +1057,7 @@
 <div class="title4 ">
    <h4>our <span>news letter</span></h4>
 </div>
-<!--title-end-->
+<!--title-end-->  
 
 <!--blog start-->
 <section class="blog  section-big-pb-space">
@@ -1693,86 +1065,31 @@
       <div class="row">
          <div class="col pr-0">
             <div class="blog-slide-4 no-arrow">
+               {% if blogs %}
+               {% for blog in blogs %}
                <div>
                   <div class="blog-contain">
                      <div class="blog-img">
                         <a href="blog-details.html">
-                           <img src="{% static 'assets/images/pets/blog/1.jpg' %}" alt="blog" class="img-fluid w-100">
+                           <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                         </a>
                      </div>
                      <div class="blog-details-2 text-center">
                         <a href="blog-details.html">
-                           <h4>where is the best pet?</h4>
+                           <h4>{{blog.blogTitle}}</h4>
                         </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus
-                           gravida.</p>
+                        <p>{{blog.blogDescription|safe}}</p>
                         <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
                            read more
                         </a>
                      </div>
-                     <div class="blog-label1">27 <br>nov</div>
+                     <div class="blog-label1">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"M"}}</div>
                   </div>
                </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/pets/blog/2.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2 text-center">
-                        <a href="blog-details.html">
-                           <h4> the ugly truth about pet </h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus
-                           gravida.</p>
-                        <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                           read more
-                        </a>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/pets/blog/3.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2 text-center ">
-                        <a href="blog-details.html">
-                           <h4>the ultimate secret of pet</h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus
-                           gravida.</p>
-                        <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                           read more
-                        </a>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/pets/blog/4.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2 text-center">
-                        <a href="blog-details.html">
-                           <h4>rules not to follow about pet </h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus
-                           gravida.</p>
-                        <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
-                           read more
-                        </a>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
+               {% endfor %}
+               {% else %}
+               <h2 style="text-align:center;"> No Blogs Yet! </h2>
+               {% endif %}
             </div>
          </div>
       </div>
@@ -2425,7 +1742,31 @@
         </a>
       </div>
     </div>
-    <form class="theme-form">
+    {% if request.user %}
+    <li>
+      <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+      <h6 class="d-block">
+        Welcome, {{request.user.username}}
+      </h6>
+    </li>
+    <li>
+      <a href="{% url 'logout_page' %}" class="d-block"
+        >Logout</a
+      >
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url 'login_page' %}" class="d-block"
+        >Login</a
+      >
+    </li>
+    <li>
+      <a href="{% url 'signup_page' %}" class="d-block"
+        >Register</a
+      >
+    </li>
+    {% endif %}
+    {% comment %} <form class="theme-form">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" placeholder="Email" required="">
@@ -2441,7 +1782,7 @@
         <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
         <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
-    </form>
+    </form> {% endcomment %}
   </div>
 </div>
 <!-- Add to account bar end-->
