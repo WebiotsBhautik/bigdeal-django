@@ -2074,23 +2074,23 @@
               } 
 
            document.getElementById("currency-selection-dropdown").addEventListener("change", async function () {
-                 var dropdown = document.getElementById("currency-selection-dropdown");
-                 var currencyId = dropdown.options[dropdown.selectedIndex].value;
-                 var csrftoken = getCookie("csrftoken");
-                 var url = "{% url 'set_currency_to_session' %}";
-              
-                 await fetch(url, {
-                 method: "POST",
-                 headers: {
-                    "Content-type": "application/json",
-                    "X-CSRFToken": csrftoken,
-                 },
-                 body: JSON.stringify({
-                    currencyId: currencyId,
-                 }),
-                 })
-                 location.reload();
-              });
+              var dropdown = document.getElementById("currency-selection-dropdown");
+              var currencyId = dropdown.options[dropdown.selectedIndex].value;
+              var csrftoken = getCookie("csrftoken");
+              var url = "{% url 'set_currency_to_session' %}";
+          
+              await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+              },
+              body: JSON.stringify({
+                currencyId: currencyId,
+              }),
+              })
+              location.reload();
+            });
         </script>
      </div>
     </div>

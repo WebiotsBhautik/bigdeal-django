@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from accounts.models import CustomUser
@@ -11,9 +12,14 @@ from .models import Banner,BannerTheme,BannerType,Blog
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
 
-from currency.models import Currency
+from bigdealapp.helpers import get_color_and_size_list, get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
 
+
+from currency.models import Currency
+from decimal import Decimal, ROUND_HALF_UP
+from django.http import Http404
 import json
+import uuid
 
 
 
@@ -86,7 +92,10 @@ def login_page(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None and user.is_customer:
             auth.login(request,user)
-            return redirect('index')
+            response = HttpResponseRedirect('index')
+            currency = Currency.objects.get(code='USD')
+            response.set_cookie('currency', currency.id)
+            return response
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login_page')
@@ -706,8 +715,6 @@ def digital_marketplace(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Digital Marketplace demo')
     mainslider = banners.filter(bannerType__bannerTypeName='Sideslider')
     slider = banners.filter(bannerType__bannerTypeName='Slider')
-    print('mainslider =======>',mainslider)
-    print('slider =======>',slider)
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -731,12 +738,127 @@ def digital_marketplace(request):
 
 
 
-
-
 # SHOP PAGES SECTION 
 
 def shop_left_sidebar(request):
-    return render(request, 'pages/shop/shop-left-sidebar.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    print('brand =======++>',brand)
+    print('LEN =======++>',len(brand))
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+        
+        
+    context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
+            'shop_banner':shop_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            # 'categoryid':categoryid,
+            # 'rating_range':rating_range,
+            # 'discount_filters':discount_filters,
+            # 'selected_prices':selected_allprice,
+            # 'selected_discounts':selected_alldiscount,                           
+            'path':'left-sidebar',
+            'totalCount':totalProduct,
+            # 'min_price':min_price*selected_currency.factor,
+            # 'max_price':max_price*selected_currency.factor,
+            }
+    return render(request, 'pages/shop/shop-left-sidebar.html',context)
 
 def shop_right_sidebar(request):
     return render(request, 'pages/shop/shop-right-sidebar.html')

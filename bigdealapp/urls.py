@@ -40,6 +40,10 @@ urlpatterns = [
     
     
 # SHOP PAGES ROUTES
+
+    path('create_query_params_url/<str:path>', views.create_query_params_url, name='create_query_params_url'),
+    
+    path('search_query_params_url', views.search_query_params_url, name='search_query_params_url'),
     
     path('shop_left_sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
     path('shop_right_sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),

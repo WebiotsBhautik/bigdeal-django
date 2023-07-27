@@ -2,7 +2,7 @@ import json
 from more_itertools import unique_everseen
 from django.shortcuts import redirect, render
 from product.models import AttributeName, Product, ProductAttributes, ProductVariant
-# from currency.models import Currency
+from currency.models import Currency
 from decimal import Decimal
 # from random import randint
 import math, random
@@ -75,14 +75,17 @@ def GetRoute(Url,key,filters,request):
     return Url 
 
 def create_query_params_url(request,path):
-    print('==============================path===================>',path)
+    print('=======path=======>',path)
     url=''
     prices = ''
     if request.method == "POST":
         selected_brands = request.POST.getlist('allbrand')
-        selected_discount = request.POST.get('discount')
         selected_price = request.POST.get('pricefilter')
-        selected_ratings = request.POST.get('ratings')
+        # selected_discount = request.POST.get('discount')
+        # selected_ratings = request.POST.get('ratings')
+        
+        print('selected_brands ========>',selected_brands)
+        print('selected_price ==========>',selected_price)
 
         if '-' in selected_price:
             prices = selected_price
@@ -93,7 +96,7 @@ def create_query_params_url(request,path):
 
         url='/'+path+'?'
         
-        urlStringList=[{"key":'brands',"value":selected_brands},{"key":"discount","value":selected_discount},{"key":"price","value":prices},{"key":"ratings","value":selected_ratings}]
+        urlStringList=[{"key":'brands',"value":selected_brands},{"key":"price","value":prices},]
         
         selectedAttributeList = []
         attributeList = [attribute.attributeName for attribute in AttributeName.objects.all()]
@@ -101,7 +104,6 @@ def create_query_params_url(request,path):
             dict={"key":attribute,"value":request.POST.getlist(attribute)}
             values=request.POST.getlist(attribute)
             for value in values:
-                
                 selectedAttributeList.append(value)
             urlStringList.append(dict)
         
@@ -110,6 +112,8 @@ def create_query_params_url(request,path):
         for Filters in urlStringList:
             if Filters:
                 url=GetRoute(url,Filters['key'],Filters['value'],request)
+                
+        print('URL ============+>',url)
         
     return redirect(url)
 
@@ -133,22 +137,22 @@ def search_query_params_url(request,path):
                 
     return redirect(url)
 
-# def get_currency_instance(request):
-#     result = request.COOKIES.get('currency', '')
-#     if len(result) == 0:
-#         currency = Currency.objects.get(code='USD')
-#         return currency
-#     currency = Currency.objects.get(id=result)
-#     return currency
+def get_currency_instance(request):
+    result = request.COOKIES.get('currency', '')
+    if len(result) == 0:
+        currency = Currency.objects.get(code='USD')
+        return currency
+    currency = Currency.objects.get(id=result)
+    return currency
 
 
-# def convert_amount_based_on_currency(amount,request):
-#     currency=get_currency_instance(request)
-#     if currency.code == 'USD':
-#         return Decimal(amount)
-#     else:
-#         amount=amount/Decimal(currency.factor)
-#         return Decimal(amount)
+def convert_amount_based_on_currency(amount,request):
+    currency=get_currency_instance(request)
+    if currency.code == 'USD':
+        return Decimal(amount)
+    else:
+        amount=amount/Decimal(currency.factor)
+        return Decimal(amount)
     
 
 # def random_with_N_digits(n):

@@ -40,7 +40,7 @@
           <img src="{% static 'assets/images/grocery/loader.gif' %}" alt="loader">
         </div>
       </div>
-      <!-- loader end -->
+  <!-- loader end -->
 
 <!--header start-->
 <header id="stickyheader">
@@ -624,43 +624,43 @@
           <div class="testimonial-top-slide no-arrow">
             {% for banner in allbanners %}
             {% if banner.bannerType|to_str == 'Farmer Banner'  %}
+            <div>
+              <div class="testimonial-detail">
+                <h3>{{banner.titleOne}}</h3>
+                <h4>{{banner.titleTwo}}</h4>
+                <p> {{banner.bannerDescription|safe}}</p>
+                <ul>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                </ul>
+              </div>
+            </div>
+            {% endif %} 
+            {% endfor %}  
+          </div> 
+
+          <div class="img-wrraper-mian">
+            <div class="testimonial-bottom-slide no-arrow">
+              {% for banner in allbanners %} 
+              {% if banner.bannerType|to_str == 'Farmer Banner'  %} 
               <div>
-                <div class="testimonial-detail">
-                  <h3>{{banner.titleOne}}</h3>
-                  <h4>{{banner.titleTwo}}</h4>
-                  <p> {{banner.bannerDescription|safe}}</p>
-                  <ul>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
+                <div class="img-wrraper">
+                    <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid">
                 </div>
               </div>
-            {% endif %}
-            {% endfor %} 
-            {% comment %} </div> {% endcomment %}
-
-            <div class="img-wrraper-mian">
-              <div class="testimonial-bottom-slide no-arrow">
-                {% for banner in allbanners %}
-                {% if banner.bannerType|to_str == 'Farmer Banner'  %}
-                  <div>
-                    <div class="img-wrraper">
-                        <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid">
-                    </div>
-                  </div>
-                {% endif %}
-                {% endfor %} 
-              </div> 
-            </div>
+              {% endif %}
+              {% endfor %} 
+            </div> 
           </div>
-        </div> 
-         
         </div>
-      </div>
+      </div> 
+         
     </div>
+  </div>
+  </div>
 </section>
 <!-- testionial end -->
 
