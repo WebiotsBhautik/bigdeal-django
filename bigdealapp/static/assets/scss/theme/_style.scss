@@ -118,6 +118,10 @@ p {
   line-height: 1.4;
   margin-bottom: 0;
   letter-spacing: 0.05em;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 a {
   transition: 0.5s ease;

@@ -714,22 +714,46 @@ def farming(request):
 def digital_marketplace(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Digital Marketplace demo')
     mainslider = banners.filter(bannerType__bannerTypeName='Sideslider')
-    slider = banners.filter(bannerType__bannerTypeName='Slider')
+    pricingBanners = banners.filter(bannerType__bannerTypeName='Pricing Banner')
+    first_banner = {}
+    second_banner = {}
+    third_banner = {}
+    fourth_banner = {}
+    
+    if pricingBanners.count() >= 4:
+        first_banner = pricingBanners[0]
+        second_banner = pricingBanners[1]
+        third_banner = pricingBanners[2]
+        fourth_banner = pricingBanners[3]
+        
+    
+    digital_category = ProCategory.objects.get(categoryName='Digital-Marketplace')
+    subcategories = digital_category.get_descendants(include_self=False)
+    
+    digital_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory={}
+    
+    # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+        
+    blogs = Blog.objects.filter(blogCategory__categoryName='Digital Marketplace',status=True, blogStatus=1)
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
             'mainslider':mainslider,
-            # 'farming_category':farming_category,
-            # 'farming_products':farming_products,
-            # 'subcategories':subcategories,
-            # 'products_by_subcategory':products_by_subcategory,
-            # 'first_banner':first_banner,
-            # 'second_banner':second_banner,
-            # 'third_banner':third_banner,
-            # 'fourth_banner':fourth_banner,
-            # 'blogs':blogs,
-            # 'sale_banner':sale_banner,
-            # 'counter_banner':counter_banner,
+            'digital_category':digital_category,
+            'digital_products':digital_products,
+            'subcategories':subcategories,
+            'products_by_subcategory':products_by_subcategory,
+            'first_banner':first_banner,
+            'second_banner':second_banner,
+            'third_banner':third_banner,
+            'fourth_banner':fourth_banner,
+            'blogs':blogs,
         }
     return render(request, 'pages/home/digital_marketplace/digital-marketplace.html',context)
 
