@@ -779,14 +779,21 @@ def shop_left_sidebar(request):
         attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
         
     brand = ProBrand.objects.all()
-    print('brand =======++>',brand)
-    print('LEN =======++>',len(brand))
     category = ProCategory.objects.all()
     product = ProductVariant.objects.all()
     
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    # product_variants = ProductVariant.objects.select_related('product').order_by('-product__productCreatedAt')
+    # last_added_products = product_variants[:9]
+
     
     shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
     shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
     
     
     if selected_allprice:
@@ -862,7 +869,7 @@ def shop_left_sidebar(request):
         
         
     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
-            'shop_banner':shop_banner,
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
             'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
             'productVariant':product,
             'url':url,
@@ -872,6 +879,7 @@ def shop_left_sidebar(request):
             'min_price':min_price,
             'max_price':max_price,
             'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
             # 'categoryid':categoryid,
             # 'rating_range':rating_range,
             # 'discount_filters':discount_filters,
@@ -885,25 +893,716 @@ def shop_left_sidebar(request):
     return render(request, 'pages/shop/shop-left-sidebar.html',context)
 
 def shop_right_sidebar(request):
-    return render(request, 'pages/shop/shop-right-sidebar.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    context = {"breadcrumb": {"parent": "Shop Right Sidebar", "child": "Shop Right Sidebar"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'right-sidebar',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-right-sidebar.html',context)
 
 def shop_no_sidebar(request):
-    return render(request, 'pages/shop/shop-no-sidebar.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    
+    context = {"breadcrumb": {"parent": "Shop No Sidebar", "child": "Shop No Sidebar"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'no-sidebar',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-no-sidebar.html',context)
 
 def shop_sidebar_popup(request):
-    return render(request, 'pages/shop/shop-sidebar-popup.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    
+    context = {"breadcrumb": {"parent": "Shop Sidebar Popup", "child": "Shop Sidebar Popup"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'no-sidebar',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-sidebar-popup.html',context)
 
 def shop_metro(request):
-    return render(request, 'pages/shop/shop-metro.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
+    # collection_banner  = banners.filter(bannerType__bannerTypeName='Shop metro')
+
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    
+    context = {"breadcrumb": {"parent": "Shop Metro", "child": "Shop Metro"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'allbanners': banners,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'Shop Metro',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-metro.html',context)
 
 def shop_full_width(request):
-    return render(request, 'pages/shop/shop-full-width.html')
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
+    context = {"breadcrumb": {"parent": "Shop Full Width", "child": "Shop Full Width"},
+            'allbanners': banners,
+            }
+    return render(request, 'pages/shop/shop-full-width.html',context)
 
 def shop_infinite_scroll(request):
-    return render(request, 'pages/shop/shop-infinite-scroll.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    # paginator = Paginator(product,5)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    
+    context = {"breadcrumb": {"parent": "Shop Infinite Scroll", "child": "Shop Infinite Scroll"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            # 'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'Shop infinite scroll',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-infinite-scroll.html',context)
 
 def shop_3grid(request):
-    return render(request, 'pages/shop/shop-3-grid.html')
+    url = ''
+    selected_allbrand = request.GET['brands'] if 'brands' in request.GET else []
+    selected_allprice = request.GET['price'] if 'price' in request.GET else []
+
+    attributeNameList = []
+    attributeDictionary = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeNameList.append(attribute.attributeName)
+        
+    for attribute in attributeNameList:
+        attributeDictionary[attribute] = request.GET[attribute] if attribute in request.GET else []
+        
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    product = ProductVariant.objects.all()
+    
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    
+    shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
+    shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
+    
+    sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
+    sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+
+    
+    
+    if selected_allprice:
+        price = selected_allprice.split(',')
+        price_filter = product
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        factor = current_currency.factor
+        product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
+
+    if selected_allbrand:
+        brand_filter = product
+        x = selected_allbrand.split(',')
+        y = x[:-1]
+        product = []
+        for brands in y:
+            product1 = brand_filter.filter(variantProduct__productBrand__brandName=brands)
+            product += product1
+            
+            
+    if attributeDictionary:
+        for attribute in attributeNameList:
+            if attributeDictionary[attribute]:
+                if type(product) is not list:
+                    attribute_filter = product
+                else:
+                    productIdList = [p.id for p in product]  
+                    attribute_filter = ProductVariant.objects.filter(id__in=productIdList)
+                x = attributeDictionary[attribute].split(',')
+                y = x[:-1]
+                product = []
+                for values in y:
+                    attributeNameObj=AttributeName.objects.get(attributeName=attribute)
+                    product1 = attribute_filter.filter(productVariantAttribute__attributeName=attributeNameObj,productVariantAttribute__attributeValue=values)
+                    product += product1
+     
+
+    attributeDict = {}
+    attributeName = AttributeName.objects.all()
+    for attribute in attributeName:
+        attributeDict[attribute.attributeName]=[]
+        attributeValue = AttributeValue.objects.filter(attributeName=attribute)
+        for value in attributeValue:
+            attributeDict[attribute.attributeName].append(value.attributeValue)
+            
+    product = GetUniqueProducts(product)
+    totalProduct = len(product)
+    paginator = Paginator(product,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
+    min_price = []
+    max_price = []
+    selected_currency = []
+    
+    if get_all_prices:
+        min_price = min(list(get_all_prices))
+        max_price = max(list(get_all_prices))
+        
+    try:
+        currency_id = request.COOKIES.get('currency', None)
+        if currency_id and uuid.UUID(currency_id):
+            selected_currency = Currency.objects.get(id=currency_id)
+            if product and selected_currency:
+                min_price = min_price*selected_currency.factor
+                max_price = max_price*selected_currency.factor
+        else:
+            pass
+    except Currency.DoesNotExist:
+        pass
+    except ValueError:
+        pass
+    
+    context = {"breadcrumb": {"parent": "Shop 3grid", "child": "Shop 3grid"},
+            'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
+            'products': product, 'ProductsBrand': brand, 'ProductCategory': category,
+            'productVariant':product,
+            'url':url,
+            'select_brands':selected_allbrand,
+            'page_obj':page_obj,
+            'attributeDict':attributeDict,
+            'min_price':min_price,
+            'max_price':max_price,
+            'symbol':selected_currency.symbol,
+            'last_added_products':last_added_products,
+            'path':'Shop 3grid',
+            'totalCount':totalProduct,
+            }
+    return render(request, 'pages/shop/shop-3-grid.html',context)
 
 def shop_6grid(request):
     return render(request, 'pages/shop/shop-6-grid.html')

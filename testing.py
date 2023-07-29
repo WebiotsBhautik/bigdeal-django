@@ -404,4 +404,3 @@
 #     return render(request,'pages/shop/canvas-filter.html', context)
 
 
-

@@ -8946,6 +8946,7 @@ header{
 .layout-5 {
   .media-banner.media-banner-1 {
     background-color: $bg-light;
+   
   }
 }
 
@@ -8986,6 +8987,8 @@ header{
 
       img {
         border: 1px solid $light-border;
+        height: 90px;
+        width: 100%;
       }
 
       .media-body {

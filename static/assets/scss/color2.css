@@ -245,7 +245,11 @@ p {
   font-size: 14px;
   line-height: 1.4;
   margin-bottom: 0;
-  letter-spacing: 0.05em; }
+  letter-spacing: 0.05em;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden; }
 
 a {
   transition: 0.5s ease;
@@ -5697,7 +5701,9 @@ header {
     .media-banner .media-banner-box .media {
       align-items: center; }
       .media-banner .media-banner-box .media img {
-        border: 1px solid #dddddd; }
+        border: 1px solid #dddddd;
+        height: 90px;
+        width: 100%; }
       .media-banner .media-banner-box .media .media-body .media-contant {
         margin-left: 15px;
         display: flex;
