@@ -36,7 +36,6 @@
 </script>
 
 
-
 <!-- section start -->
 <section class="section-big-pt-space ratio_asos b-g-light">
   <div class="collection-wrapper">
@@ -240,44 +239,44 @@
                   {% if page_obj.has_other_pages %}
 
                   <div class="product-pagination">
-                      <div class="theme-paggination-block">
-                          <div class="container-fluid p-0">
-                              <div class="row">
-                                  <div class="col-xl-6 col-md-6 col-sm-12">
-                                      <nav aria-label="Page navigation">
-                                          <ul class="pagination">
-                                            {% if page_obj.has_previous %}
-                                            <li class="page-item"><a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> <span class="sr-only">Previous</span></a></li>
-                                            {% endif %}
+                    <div class="theme-paggination-block">
+                      <div class="container-fluid p-0">
+                        <div class="row">
+                          <div class="col-xl-6 col-md-6 col-sm-12">
+                            <nav aria-label="Page navigation">
+                              <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item"><a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> <span class="sr-only">Previous</span></a></li>
+                                {% endif %}
 
-                                            {% for num in page_obj.paginator.page_range %}
-                                            {% if page_obj.number == num %}
-                                            <span class="current-page">{{ num }}</span>
-                                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                            <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
-                                            {% endif %}
-                                            {% endfor %}
+                                {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                <span class="current-page">{{ num }}</span>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
+                                {% endif %}
+                                {% endfor %}
 
-                                            {% if page_obj.has_next %}
-                                            <li class="page-item"><a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}" aria-label="Next"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span> <span class="sr-only">Next</span></a></li>
-                                            {% endif %}
-                                            {% endif %}
-                                          </ul>
-                                      </nav>
-                                  </div>
-                                  <div class="col-xl-6 col-md-6 col-sm-12">
-                                      <div class="product-search-count-bottom">
-                                          <h5>Showing Products 1-24 of {{totalCount}} Result</h5>
-                                      </div>
-                                  </div>
+                                {% if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}" aria-label="Next"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span> <span class="sr-only">Next</span></a></li>
+                                {% endif %}
+                                {% endif %}
+                              </ul>
+                            </nav>
+                          </div>
+                          <div class="col-xl-6 col-md-6 col-sm-12">
+                              <div class="product-search-count-bottom">
+                                  <h5>Showing Products 1-24 of {{totalCount}} Result</h5>
                               </div>
                           </div>
+                        </div>
                       </div>
-                      {% else %}
-                      <div class="success-icon">
-                        <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
-                      </div>
-                      {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="success-icon">
+                      <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
+                    </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>

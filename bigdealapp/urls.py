@@ -45,15 +45,15 @@ urlpatterns = [
     
     path('search_query_params_url', views.search_query_params_url, name='search_query_params_url'),
     
-    path('shop_left_sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
-    path('shop_right_sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
-    path('shop_no_sidebar', views.shop_no_sidebar, name='shop_no_sidebar'),
-    path('shop_sidebar_popup', views.shop_sidebar_popup, name='shop_sidebar_popup'),
-    path('shop_metro', views.shop_metro, name='shop_metro'),
-    path('shop_full_width', views.shop_full_width, name='shop_full_width'),
-    path('shop_infinite_scroll', views.shop_infinite_scroll, name='shop_infinite_scroll'),
-    path('shop_3grid', views.shop_3grid, name='shop_3grid'),
-    path('shop_6grid', views.shop_6grid, name='shop_6grid'),
-    path('shop_list_view', views.shop_list_view, name='shop_list_view'),
+    path('shop-left-sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
+    path('shop-right-sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
+    path('shop-no-sidebar', views.shop_no_sidebar, name='shop_no_sidebar'),
+    path('shop-sidebar-popup', views.shop_sidebar_popup, name='shop_sidebar_popup'),
+    path('shop-metro', views.shop_metro, name='shop_metro'),
+    path('shop-full-width', views.shop_full_width, name='shop_full_width'),
+    path('shop-infinite-scroll', views.shop_infinite_scroll, name='shop_infinite_scroll'),
+    path('shop-3grid', views.shop_3grid, name='shop_3grid'),
+    path('shop-6grid', views.shop_6grid, name='shop_6grid'),
+    path('shop-list-view', views.shop_list_view, name='shop_list_view'),
 
 ]

@@ -70,22 +70,14 @@ def GetRoute(Url,key,filters,request):
         print('=====> error <======',e)
         pass
     Url+='&'
-    # current_url = request.get_full_path()
-    # print('current_url in GetRoute Function inside========>',current_url)
     return Url 
 
 def create_query_params_url(request,path):
-    print('=======path=======>',path)
     url=''
     prices = ''
     if request.method == "POST":
         selected_brands = request.POST.getlist('allbrand')
         selected_price = request.POST.get('pricefilter')
-        # selected_discount = request.POST.get('discount')
-        # selected_ratings = request.POST.get('ratings')
-        
-        print('selected_brands ========>',selected_brands)
-        print('selected_price ==========>',selected_price)
 
         if '-' in selected_price:
             prices = selected_price
@@ -112,23 +104,14 @@ def create_query_params_url(request,path):
         for Filters in urlStringList:
             if Filters:
                 url=GetRoute(url,Filters['key'],Filters['value'],request)
-                
-        print('URL ============+>',url)
+        print('URL ===========>',url)
         
     return redirect(url)
 
 def search_query_params_url(request,path):
     url=''
-    # prices = ''
     if request.method == "POST":
         search_products = request.POST.getlist('search')
-        # selected_brands = request.POST.getlist('allbrand')
-        # selected_discount = request.POST.get('discount')
-
-        print('seach products in POST Method ==========>',search_products)
-        
-        # url=f'/canvas_filter?'
-        # url='/'+path+'?'
         url=f'/search_bar?'
         
         for Filters in [{"key":'products',"value":search_products},]:
