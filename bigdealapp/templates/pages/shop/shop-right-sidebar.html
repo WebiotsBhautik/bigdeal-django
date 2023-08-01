@@ -41,7 +41,6 @@
     <div class="collection-wrapper">
       <div class="custom-container">
         <div class="row">
-          {% comment %} {% include 'pages/shop/filter-base.html' %}  {% endcomment %}
           <div class="collection-content col">
             <div class="page-main-content">
               <div class="row">
@@ -155,7 +154,6 @@
                     </div>
 
                     {% if page_obj.has_other_pages %}
-
                     <div class="product-pagination">
                       <div class="theme-paggination-block">
                         <div class="row">
@@ -167,11 +165,11 @@
                                 {% endif %}
 
                                 {% for num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == num %}
-                                <span class="current-page">{{ num }}</span>
-                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
-                                {% endif %}
+                                  {% if page_obj.number == num %}
+                                  <span class="current-page">{{ num }}</span>
+                                  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                  <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
+                                  {% endif %}
                                 {% endfor %}
 
                                 {% if page_obj.has_next %}

@@ -55,5 +55,15 @@ urlpatterns = [
     path('shop-3grid', views.shop_3grid, name='shop_3grid'),
     path('shop-6grid', views.shop_6grid, name='shop_6grid'),
     path('shop-list-view', views.shop_list_view, name='shop_list_view'),
+    
+    
+    
+    
+# PRODUCT PAGES ROUTES
+
+
+    path('product-detail/<str:id>', views.left_slidebar, name='left_slidebar'),
+    path('right_sidebar/<str:id>', views.right_sidebar, name='right_sidebar'),
+
 
 ]

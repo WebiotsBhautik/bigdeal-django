@@ -56,10 +56,10 @@ def signal_to_manage_number_of_review(sender,instance,*args,**kwargs):
     product.save()
 
 
-@receiver(pre_delete, sender=Product)
-def product_pre_delete(sender, instance, **kwargs):
-    categoryName=instance.proCategory.categoryName
-    category=ProCategory.objects.get(categoryName=str(categoryName))
-    category.categoryTotalProduct=category.categoryTotalProduct-1
-    category.save()
+# @receiver(pre_delete, sender=Product)
+# def product_pre_delete(sender, instance, **kwargs):
+#     categoryName=instance.proCategory.categoryName
+#     category=ProCategory.objects.get(categoryName=str(categoryName))
+#     category.categoryTotalProduct=category.categoryTotalProduct-1
+#     category.save()
 

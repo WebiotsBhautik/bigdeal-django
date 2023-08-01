@@ -59,7 +59,6 @@ def IsVariantPresent(List,ValueToCheck):
 
 def GetRoute(Url,key,filters,request):
     Url+=key+'='
-    
     try:
         if isinstance(filters, str):
             Url+=filters+','
@@ -104,7 +103,6 @@ def create_query_params_url(request,path):
         for Filters in urlStringList:
             if Filters:
                 url=GetRoute(url,Filters['key'],Filters['value'],request)
-        print('URL ===========>',url)
         
     return redirect(url)
 

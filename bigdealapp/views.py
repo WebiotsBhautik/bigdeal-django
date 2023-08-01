@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.core.exceptions import ValidationError
+from django.core import serializers
 from django.conf import settings
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from accounts.models import CustomUser
@@ -11,6 +13,8 @@ from django.contrib.auth.models import auth
 from .models import Banner,BannerTheme,BannerType,Blog
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
+
+from order.models import (Cart,CartProducts,OrderBillingAddress,OrderPayment,Order,OrderTracking,ProductOrder,Wishlist,Compare)
 
 from bigdealapp.helpers import get_color_and_size_list, get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
 
@@ -799,7 +803,7 @@ def shop_left_sidebar(request):
     if selected_allprice:
         price = selected_allprice.split(',')
         price_filter = product
-        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ""))
         factor = current_currency.factor
         product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
 
@@ -1756,6 +1760,118 @@ def shop_list_view(request):
             'totalCount':totalProduct,
             }
     return render(request, 'pages/shop/shop-list-view.html',context)
+
+
+
+
+def left_slidebar(request,id):
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalide Product ID')
+    
+    products = ProductVariant.objects.all()
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    customer=CustomUser.objects.get(id=request.user.id)
+    productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    reviewStatus=False
+    for proOrder in productOrders:
+        if proOrder.productOrderedProducts.variantProduct== product:
+            reviewStatus=True
+            break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+
+    context = {"breadcrumb": {"parent": "Product Left Sidebar", "child": "Product Left Sidebar"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "reviewStatus":reviewStatus,
+                }
+
+    return render(request, 'pages/product/product-left-sidebar.html',context)
+
+
+
+def right_sidebar(request,id):
+    return render(request, 'pages/product/product-right-sidebar.html')
 
 
 

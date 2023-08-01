@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'bigdealapp',
     'accounts',
     'product',
+    'order',
     'mathfilters',
     'currency',
+    'shell_plus',
+    'django_extensions',
+
 ]
 
 MIDDLEWARE = [
