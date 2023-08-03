@@ -61,6 +61,7 @@
                                   <div class="open-popup">
                                       <div class="collection-filter category-side category-page-side">
                                         <form action="{% url 'create_query_params_url' path %}" method="post">
+                                          {% csrf_token %}
                                           <!-- side-bar colleps block stat -->
                                           <div class="collection-filter-block creative-card creative-inner">
                                               <!-- brand filter start -->
@@ -71,7 +72,7 @@
                                                       <div class="collection-brand-filter">
                                                         {% for brand in ProductsBrand %}
                                                           <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                              <input type="checkbox" class="custom-control-input form-check-input" value="{{brand.brandName}}" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
+                                                              <input type="checkbox" class="custom-control-input form-check-input" name="allbrand" value="{{brand.brandName}}" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
                                                               <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
                                                           </div>
                                                         {% endfor %}

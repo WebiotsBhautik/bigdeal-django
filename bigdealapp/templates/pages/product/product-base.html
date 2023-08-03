@@ -53,9 +53,13 @@
 
 
 
+
+
+
 {% block components %} 
 
 {% endblock components %}
+
 
 <!-- related products -->
 <section class="section-big-py-space  ratio_asos b-g-light">
@@ -68,6 +72,8 @@
       <div class="row">
         <div class="col-12 product">
           <div class="product-slide-6 product-m no-arrow">
+            {% if related_products %}
+            {% for product in related_products %}
             <div>
               <div class="product-box">
                 <div class="product-imgbox">
@@ -127,355 +133,10 @@
                 </div>
               </div>
             </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/3.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a3.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist">
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-  
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          woman hande bag
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 56.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 24.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/4.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a4.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          nikon camera
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 60.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 20.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/5.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a5.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          lenovo laptop
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 70.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 30.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/6.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a6.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          earphone Pouch Bag
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 100.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 80.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/7.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a7.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          wooden table
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 90.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 28.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="product-box">
-                <div class="product-imgbox">
-                  <div class="product-front">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/8.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-back">
-                    <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a8.jpg' %}" class="img-fluid  " alt="product">
-                    </a>
-                  </div>
-                  <div class="product-icon icon-inline">
-                    <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
-                      <i  data-feather="shopping-cart"></i>
-                    </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                      <i  data-feather="heart"></i>
-                    </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                      <i  data-feather="eye"></i>
-                    </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                      <i  data-feather="refresh-cw"></i>
-                    </a>
-                  </div>
-                </div>
-                <div class="product-detail detail-inline">
-                  <div class="detail-title">
-                    <div class="detail-left">
-                      <div class="rating-star">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <a href="product-page(left-sidebar).html">
-                        <h6 class="price-title">
-                          Wireless Optical Mouse
-                        </h6>
-                      </a>
-                    </div>
-                    <div class="detail-right">
-                      <div class="check-price">
-                        $ 80.21
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          $ 28.05
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
+            {% else %}
+            <h3 style="text-align:center;">  No related products found ! </h3>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -1143,7 +804,7 @@
   <!-- Quick-view modal popup end-->
   
   <!-- add to cart bottom sticky start-->
-  <div class="bottom-cart-sticky ">
+  {% comment %} <div class="bottom-cart-sticky ">
     <div class="container">
       <div class="cart-content">
         <div class="product-image">
@@ -1177,7 +838,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   <!-- add to cart bottom sticky end-->
   
   <!-- added to cart notification -->
@@ -1186,7 +847,6 @@
       <h3>added to cart</h3>
   </div>
   <!-- added to cart notification -->
-
 
 
 <!-- latest jquery-->
@@ -1217,8 +877,202 @@
 <script src="{% static 'assets/js/bootstrap-notify.min.js' %}"></script>
 <script src="{% static 'assets/js/bootstrap.js' %}"></script>
 
+
 <!-- Theme js-->
 <script src="{% static 'assets/js/script.js' %}"></script>
+
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(
+            cookie.substring(name.length + 1)
+          );
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getCookie("csrftoken");
+
+  async function show_details_ls(params) {
+    console.log("-------Params---------->",params);
+    document.getElementById(params.key).setAttribute("value", params.value);
+
+    var allAttributesFilled = true;
+
+    for (var i = 0; i < params.attributeNameList.length; i++) {
+      var attributeValue = document
+        .getElementById(params.attributeNameList[i])
+        .getAttribute("value");
+      if (!attributeValue || attributeValue.length === 0) {
+        allAttributesFilled = false;
+        break;
+      }
+    }
+
+    if (allAttributesFilled) {
+      var selectedAttributeValueDict = {};
+      for (var i = 0; i < params.attributeNameList.length; i++) {
+        var attributeName = params.attributeNameList[i];
+        var selectedAttributeValue = document
+          .getElementById(params.attributeNameList[i])
+          .getAttribute("value");
+        // Perform any desired operations with selectedAttributeValue
+        selectedAttributeValueDict[attributeName] = selectedAttributeValue;
+      }
+
+      var url = "{% url 'get_product_variant' %}";
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+        body: JSON.stringify({
+          productId: params.id,
+          selectedAttributeValueDict: selectedAttributeValueDict,
+        }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data.productVariantPrice == "Product Out Of Stock") {
+            document.getElementById("productFinalPrice").innerHTML =
+              data.productVariantPrice;
+          } else {
+            GetConvertedValues(data.productVariantPrice).then((Data) => {
+              document.getElementById("productFinalPrice").innerHTML =
+                Data.symbol + " " + Data.value + " ";
+            });
+            if (data.productVariantDiscount > 0) {
+              let productFinalPrice =
+                document.getElementById("productFinalPrice");
+              let actualPrice = document.createElement("del");
+              let discountPercentage = document.createElement("span");
+              console.log("----------------->Before");
+              discountPercentage.setAttribute("id", "discountPercentage");
+              console.log("----------------->After");
+              GetConvertedValues(data.productVariantActualPrice).then(
+                (Data) => {
+                  actualPrice.innerHTML = Data.symbol + Data.value;
+
+                  discountPercentage.innerHTML =
+                    data.productVariantDiscount + "%";
+                  productFinalPrice.appendChild(actualPrice);
+                  productFinalPrice.appendChild(discountPercentage);
+                }
+              );
+            }
+          }
+          let quantityValue = document
+            .getElementById("counterAtLeftSlidebar")
+            .getAttribute("value");
+          let urlForAddToCartCartEffect =
+            "add_to_cart_fun({key:'firstProductVariant'})";
+          urlForAddToCartCartEffect = urlForAddToCartCartEffect.replace(
+            "firstProductVariant",
+            data.productVariantId.toString()
+          );
+          document
+            .getElementById("cartEffect")
+            .setAttribute("onClick", urlForAddToCartCartEffect);
+          let urlForAddToWishlistWishlistEffect =
+            "{% url 'add_to_wishlist' 'productVariantId' %}".replace(
+              "productVariantId",
+              data.productVariantId.toString()
+            );
+          document
+            .getElementById("wishlistEffect")
+            .setAttribute("href", urlForAddToWishlistWishlistEffect);
+        });
+      // Code to execute when all attributes have non-empty values
+    }
+  }
+
+  function counterPlus(params) {
+    let counterAtLeftSlidebar = document.getElementById(params.key);
+    let a = counterAtLeftSlidebar.getAttribute("value");
+    let b = Number(a) + 1;
+    counterAtLeftSlidebar.setAttribute("value", b);
+  }
+
+  function counterMinus(params) {
+    let counterAtLeftSlidebar = document.getElementById(params.key);
+    let a = counterAtLeftSlidebar.getAttribute("value");
+    let b = Number(a) - 1;
+    if (b <= 0) {
+      // if quantity goes to zero or negative then...rehne do tum se na ho payega
+    } else {
+      counterAtLeftSlidebar.setAttribute("value", b);
+    }
+  }
+
+  async function GetConvertedValues(value) {
+    var url = "{% url 'get_selected_currency' %}",
+      valuereturn = 0;
+    await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        (valuereturn = (data.factor * value).toFixed(2)),
+          (symbol = data.symbol);
+      });
+    return {
+      symbol: symbol,
+      value: valuereturn,
+    };
+  }
+
+  async function GetConvertedRangeValues(value1, value2) {
+    var url = "{% url 'get_selected_currency' %}",
+      valuereturn1 = 0,
+      valuereturn2 = 0;
+    await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        (valuereturn1 = (data.factor * value1).toFixed(2)),
+          (valuereturn2 = (data.factor * value2).toFixed(2)),
+          (symbol = data.symbol);
+      });
+    return {
+      symbol: symbol,
+      value1: valuereturn1,
+      value2: valuereturn2,
+    };
+  }
+
+  function removeElementsByClass(className) {
+    const elements = document.getElementsByClassName(className);
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
+
+</script>
+
 
 </body>
 </html>

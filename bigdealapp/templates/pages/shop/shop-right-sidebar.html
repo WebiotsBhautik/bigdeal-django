@@ -46,56 +46,56 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="top-banner-wrapper">
-                      <a href="product-page(left-sidebar).html"><img src="{{shop_banner.bannerImage}}" class="img-fluid " alt=""></a>
-                      <div class="top-banner-content small-section">
-                          <h4>fashion</h4>
-                          <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                      </div>
+                    <a href="product-page(left-sidebar).html"><img src="{{shop_banner.bannerImage}}" class="img-fluid " alt=""></a>
+                    <div class="top-banner-content small-section">
+                      <h4>fashion</h4>
+                      <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
                   </div>
                   <div class="collection-product-wrapper">
                     <div class="product-top-filter">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter" aria-hidden="true"></i> Filter</span></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="product-filter-content">
-                                    <div class="search-count">
-                                        <h5>Showing Products 1-24 of {{totalCount}} Result</h5></div>
-                                    <div class="collection-view">
-                                        <ul>
-                                            <li><i class="fa fa-th grid-layout-view"></i></li>
-                                            <li><i class="fa fa-list-ul list-layout-view"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="collection-grid-view">
-                                        <ul>
-                                            <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"></li>
-                                            <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"></li>
-                                            <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"></li>
-                                            <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-page-per-view">
-                                        <select>
-                                            <option value="High to low">24 Products Par Page</option>
-                                            <option value="Low to High">50 Products Par Page</option>
-                                            <option value="Low to High">100 Products Par Page</option>
-                                        </select>
-                                    </div>
-                                    <div class="product-page-filter">
-                                        <select>
-                                            <option value="High to low">Sorting items</option>
-                                            <option value="Low to High">50 Products</option>
-                                            <option value="Low to High">100 Products</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                      <div class="row">
+                          <div class="col-xl-12">
+                              <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter" aria-hidden="true"></i> Filter</span></div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-12">
+                              <div class="product-filter-content">
+                                  <div class="search-count">
+                                      <h5>Showing Products 1-24 of {{totalCount}} Result</h5></div>
+                                  <div class="collection-view">
+                                      <ul>
+                                          <li><i class="fa fa-th grid-layout-view"></i></li>
+                                          <li><i class="fa fa-list-ul list-layout-view"></i></li>
+                                      </ul>
+                                  </div>
+                                  <div class="collection-grid-view">
+                                      <ul>
+                                          <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"></li>
+                                          <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"></li>
+                                          <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"></li>
+                                          <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"></li>
+                                      </ul>
+                                  </div>
+                                  <div class="product-page-per-view">
+                                      <select>
+                                          <option value="High to low">24 Products Par Page</option>
+                                          <option value="Low to High">50 Products Par Page</option>
+                                          <option value="Low to High">100 Products Par Page</option>
+                                      </select>
+                                  </div>
+                                  <div class="product-page-filter">
+                                      <select>
+                                          <option value="High to low">Sorting items</option>
+                                          <option value="Low to High">50 Products</option>
+                                          <option value="Low to High">100 Products</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                     </div>
                     <div class="product-wrapper-grid product">
                       <div class="row">
@@ -165,11 +165,11 @@
                                 {% endif %}
 
                                 {% for num in page_obj.paginator.page_range %}
-                                  {% if page_obj.number == num %}
-                                  <span class="current-page">{{ num }}</span>
-                                  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                  <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
-                                  {% endif %}
+                                {% if page_obj.number == num %}
+                                <span class="current-page">{{ num }}</span>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
+                                {% endif %}
                                 {% endfor %}
 
                                 {% if page_obj.has_next %}

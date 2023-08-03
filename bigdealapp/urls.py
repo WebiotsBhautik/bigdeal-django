@@ -58,12 +58,34 @@ urlpatterns = [
     
     
     
+    path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
+    path('customer_review',views.customer_review, name='customer_review'),
     
 # PRODUCT PAGES ROUTES
 
 
+    path('get_product_variant',views.get_product_variant,name='get_product_variant'),
     path('product-detail/<str:id>', views.left_slidebar, name='left_slidebar'),
     path('right_sidebar/<str:id>', views.right_sidebar, name='right_sidebar'),
+    path('no_sidebar/<str:id>', views.no_sidebar, name='no_sidebar'),
+    path('bundle/<str:id>', views.bundle, name='bundle'),
+    path('image_swatch/<str:id>', views.image_swatch, name='image_swatch'),
+    path('vertical_tab/<str:id>', views.vertical_tab, name='vertical_tab'),
+    path('video_thumbnail/<str:id>', views.video_thumbnail, name='video_thumbnail'),
+    path('image_4/<str:id>', views.image_4, name='image_4'),
+    path('sticky/<str:id>', views.sticky, name='sticky'),
+    path('accordian/<str:id>', views.accordian, name='accordian'),
+    path('product_360_view/<str:id>', views.product_360_view, name='product_360_view'),
+    path('left_image/<str:id>', views.left_image, name='left_image'),
+    path('right_image/<str:id>', views.right_image, name='right_image'),
+    path('image_outside/<str:id>', views.image_outside, name='image_outside'),
+    path('thumbnail_left/<str:id>', views.thumbnail_left, name='thumbnail_left'),
+    path('thumbnail_right/<str:id>', views.thumbnail_right, name='thumbnail_right'),
+    path('thumbnail_bottom/<str:id>', views.thumbnail_bottom, name='thumbnail_bottom'),
+    path('element_productbox/<str:id>', views.element_productbox, name='element_productbox'),
+    path('element_product_slider/<str:id>', views.element_product_slider, name='element_product_slider'),
+    path('element_no_slider/<str:id>', views.element_no_slider, name='element_no_slider'),
+    
 
 
 ]

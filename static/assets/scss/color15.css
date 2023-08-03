@@ -5698,7 +5698,9 @@ header {
     .media-banner .media-banner-box .media {
       align-items: center; }
       .media-banner .media-banner-box .media img {
-        border: 1px solid #dddddd; }
+        border: 1px solid #dddddd;
+        height: 90px;
+        width: 100%; }
       .media-banner .media-banner-box .media .media-body .media-contant {
         margin-left: 15px;
         display: flex;

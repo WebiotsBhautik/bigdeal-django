@@ -100,6 +100,7 @@
                                 </select>
                             </div>
                             <form action="{% url 'create_query_params_url' path %}" method="post">
+                              {% csrf_token %}
                               <div class="horizontal-filter collection-filter">
                                 <div class="horizontal-filter-contain">
                                   <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
@@ -124,7 +125,7 @@
                                     </div>
                                     {% endfor %}
                                     <div class="filter-group">
-                                      <div class="collection-collapse-block">
+                                      {% comment %} <div class="collection-collapse-block">
                                         <h6 class="collapse-block-title">select price</h6> 
                                         <div class="collection-collapse-block-content">
                                           <div class="size-selector">                              
@@ -152,6 +153,14 @@
                                               </div>
                                             </div>
                                         </div>
+                                      </div> {% endcomment %}
+                                      <div class="collection-collapse-block">
+                                        <h4 class="collapse-block-title">select price</h4>
+                                        <div class="collection-collapse-block-content">
+                                          <div class="filter-slide">
+                                            <input class="js-range-slider" type="text" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" name="pricefilter" data-filter="price" id="filter-price-range" value="" data-type="double"/>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div> 
                                    
@@ -172,7 +181,11 @@
                                     </div>
                                   </div>                                                         
                                   <a href="javascript:void(0)" class="btn btn-solid btn-sm close-filter"> close filter</a>                                                         
+                                  <div>
+                                    <button type="submit" class="btn btn-primary" id="submitBtnAtFilterSidebar">Submit</button>
+                                  </div>
                                 </div>
+                                <!-- submit button -->
                               </div>
                             </form>
                           </div>
@@ -291,3 +304,12 @@
 
 
 {% endblock components %}
+
+
+{% block script %}
+  
+<!-- range sldier -->
+<script src="{% static 'assets/js/ion.rangeSlider.js' %}"></script>
+<script src="{% static 'assets/js/rangeslidermain.js' %}"></script>
+
+{% endblock script %}

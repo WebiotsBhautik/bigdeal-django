@@ -179,6 +179,7 @@ def get_product_attribute_list(id):
                 #attribute_values.append({'fn': attr.attributeValue, 'sn': attr.attributeValue})
                 attribute_values.append(attr.attributeValue)
         attributeObjects.append({attribute_name: attribute_values})    
+        
     # Code to seperate attribute end ====================================================
     
     return attributeObjects,attributeObjectsIds

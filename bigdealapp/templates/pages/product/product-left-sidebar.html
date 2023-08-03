@@ -27,20 +27,16 @@
                 <div class="collection-brand-filter">
                   <ul class="category-list">
                     
-                    {% comment %} {% for brand in ProductsBrand %} {% endcomment %}
-                    <li><a href="javascript:void(0)">clothing</a></li>
-                    <li><a href="javascript:void(0)">bags</a></li>
-                    <li><a href="javascript:void(0)">footwear</a></li>
-                    <li><a href="javascript:void(0)">watches</a></li>
-                    <li><a href="javascript:void(0)">accessories</a></li> 
-                    {% comment %} {% endfor %} {% endcomment %}
+                     {% for brand in ProductsBrand %} 
+                    <li><a href="{% url 'shop_left_sidebar' %}">{{brand.brandName}}</a></li>
+                     {% endfor %} 
 
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <div class="collection-filter-block creative-card creative-inner">
+          {% comment %} <div class="collection-filter-block creative-card creative-inner">
             <div class="product-service">
               <div class="media">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -117 679.99892 679">
@@ -105,7 +101,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> {% endcomment %}
           <!-- side-bar single product slider start -->
           <div class="theme-card creative-card creative-inner">
             <h5 class="title-border">new product</h5>
@@ -409,10 +405,6 @@
                 <div class="product-slick ">
                   {% for image in images %}
                   <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
-                  {% comment %} <div><img src="{% static 'assets/images/product-sidebar/001.jpg' %}" alt="" class="img-fluid  image_zoom_cls-0"></div>
-                  <div><img src="{% static 'assets/images/product-sidebar/002.jpg' %}" alt="" class="img-fluid  image_zoom_cls-1"></div>
-                  <div><img src="{% static 'assets/images/product-sidebar/003.jpg' %}" alt="" class="img-fluid  image_zoom_cls-2"></div>
-                  <div><img src="{% static 'assets/images/product-sidebar/004.jpg' %}" alt="" class="img-fluid  image_zoom_cls-3"></div> {% endcomment %}
                   {% endfor %}
                 </div>
                 <div class="row">
@@ -420,10 +412,6 @@
                     <div class="slider-nav">
                       {% for image in images %}
                       <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid"></div>
-                      {% comment %} <div><img src="{% static 'assets/images/product-sidebar/001.jpg' %}" alt="" class="img-fluid"></div>
-                      <div><img src="{% static 'assets/images/product-sidebar/002.jpg' %}" alt="" class="img-fluid"></div>
-                      <div><img src="{% static 'assets/images/product-sidebar/003.jpg' %}" alt="" class="img-fluid"></div>
-                      <div><img src="{% static 'assets/images/product-sidebar/004.jpg' %}" alt="" class="img-fluid"></div> {% endcomment %}
                       {% endfor %}
                     </div>
                   </div>
@@ -433,7 +421,7 @@
                 <div class="product-right ">
                   <div class="pro-group">
                     <h2>{{product.productName}}</h2>
-                    <ul class="pro-price">
+                    <ul class="pro-price" id="productFinalPrice">
                       <li>
                         {% if product.productType == "Simple" %}
                         {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -487,9 +475,12 @@
                     </div>
                   </div>
                   <div id="selectSize" class="pro-group addeffect-section product-description border-product">
-                    <h6 class="product-title size-text">select size<span>
-                                      <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                    <div class="modal fade"  id="sizemodal" >
+                    {% if product.productType == "Classified" %}
+                    {% for attribute in attributeObjects %}
+                    {% for key,value in attribute.items %}
+                    {% comment %} <h6 class="product-title size-text">select {{key}}<span>
+                                      <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6> {% endcomment %}
+                    {% comment %} <div class="modal fade"  id="sizemodal" >
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -499,18 +490,21 @@
                           <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
                         </div>
                       </div>
-                    </div>
-                    <h6 class="error-message">please select size</h6>
+                    </div> {% endcomment %}
                     <div class="size-box">
-                      <ul>
-                        <li><a href="javascript:void(0)">s</a></li>
-                        <li><a href="javascript:void(0)">m</a></li>
-                        <li><a href="javascript:void(0)">l</a></li>
-                        <li><a href="javascript:void(0)">xl</a></li>
-                        <li><a href="javascript:void(0)">2xl</a></li>
+                      <h5>{{key}} :</h5>
+                      <ul id={{key}}LS>
+                        {% for item in value %}
+                        <li><a onclick="show_details_ls({key:'selected{{key}}',value:'{{item}}',name:'{{key}}LS',id:'{{product.id}}', attributeNameList: [{% for attr_id in attributeObjectsIds %}'{{ attr_id }}',{% endfor %}]})">{{item}}</a></li>
+                        {% endfor %}
                       </ul>
+                      <input type="hidden" name="" value="" id="selected{{key}}" />
                     </div>
-                    <h6 class="product-title">color</h6>
+                    {% endfor %}
+                    {% endfor %}
+                    {% endif %}
+
+                    {% comment %} <h6 class="product-title">color</h6>
                     <div class="color-selector inline">
                       <ul>
                         <li>
@@ -535,13 +529,13 @@
                           <div class="color-7"></div>
                         </li>
                       </ul>
-                    </div>
+                    </div> {% endcomment %}
                     <h6 class="product-title">quantity</h6>
                     <div class="qty-box">
                       <div class="input-group">
-                        <button class="qty-minus"></button>
-                        <input class="qty-adj form-control" type="number" value="1"/>
-                        <button class="qty-plus"></button>
+                        <button class="qty-minus" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})"></button>
+                        <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
+                        <button class="qty-plus" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})"></button>
                       </div>
                     </div>
                     <div class="product-buttons">
@@ -741,7 +735,7 @@
                           <textarea class="form-control" placeholder="Wrire Your Testimonial Here" id="exampleFormControlTextarea1" rows="6"></textarea>
                         </div>
                         <div class="col-md-12">
-                          <button class="btn btn-normal" type="submit">Submit YOur Review</button>
+                          <button class="btn btn-normal" type="submit">Submit your review</button>
                         </div>
                       </div>
                     </form>
