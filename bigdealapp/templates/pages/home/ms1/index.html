@@ -1230,7 +1230,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="index.html">
+                  <a href="{% url 'index' %}">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -1953,7 +1953,7 @@
 {% endif %}
 
 <!-- notification product -->
-<div class="product-notification" id="dismiss">
+{% comment %} <div class="product-notification" id="dismiss">
   <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
   <div class="media">
     <img class="me-2" src="{% static 'assets/images/layout-1/product/5.jpg' %}" alt="Generic placeholder image">
@@ -1962,7 +1962,7 @@
       Cras sit amet nibh libero, in gravida nulla.
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!-- notification product -->
 
 

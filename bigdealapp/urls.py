@@ -46,6 +46,8 @@ urlpatterns = [
     path('search_query_params_url', views.search_query_params_url, name='search_query_params_url'),
     
     path('shop-left-sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
+    # path('shop-left-sidebar/<slug:brand_slug>', views.shop_left_sidebar, name='shop_left_sidebar_with_slugs'),
+    
     path('shop-right-sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
     path('shop-no-sidebar', views.shop_no_sidebar, name='shop_no_sidebar'),
     path('shop-sidebar-popup', views.shop_sidebar_popup, name='shop_sidebar_popup'),
@@ -65,7 +67,15 @@ urlpatterns = [
 
 
     path('get_product_variant',views.get_product_variant,name='get_product_variant'),
+    
     path('product-detail/<str:id>', views.left_slidebar, name='left_slidebar'),
+    # path('product-detail/<slug:brand_slug>', views.left_slidebar, name='left_slidebar_with_brands'),
+
+    # path('shop-left-sidebar/<slug:brand_slug>', views.products_by_brand, name='products_by_brand'),
+    
+    # path('shop-left-sidebar/<str:brand_id>', views.left_slidebar_with_brands, name='left_slidebar_with_brands'),
+    
+
     path('right_sidebar/<str:id>', views.right_sidebar, name='right_sidebar'),
     path('no_sidebar/<str:id>', views.no_sidebar, name='no_sidebar'),
     path('bundle/<str:id>', views.bundle, name='bundle'),

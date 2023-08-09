@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import AttributeName, AttributeValue, ProductMeta, ProductVariant, ProductAttributes, MultipleImages, Product, ProCategory, ProBrand, ProUnit, ProVideoProvider, ProductReview
+from .models import AttributeName, AttributeValue, ProductMeta, ProductVariant, ProductAttributes, MultipleImages, Product, ProCategory, ProBrand, ProUnit, ProVideoProvider, ProductReview,DeliveryOption
 from mptt.admin import MPTTModelAdmin
 from django.db.models import Sum
 
@@ -252,6 +252,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin,
                     list_per_page=10)
+
+admin.site.register(DeliveryOption)
 
 
 class ProductReviewAdmin(admin.ModelAdmin):

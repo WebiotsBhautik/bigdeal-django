@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core import serializers
 from django.conf import settings
 from collections import Counter
+from django.urls import reverse
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from accounts.models import CustomUser
 from django.contrib import messages
@@ -789,15 +790,21 @@ def shop_left_sidebar(request):
     
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
     
-    # product_variants = ProductVariant.objects.select_related('product').order_by('-product__productCreatedAt')
-    # last_added_products = product_variants[:9]
-
-    
     shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
     shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
     
     sidebar_bnr = BannerType.objects.get(bannerTypeName='side-bar banner')
     sidebar_banner = Banner.objects.filter(bannerType=sidebar_bnr).first()
+    
+    
+    # if brand_slug:
+    #     brand = get_object_or_404(ProBrand, brandName__iexact=brand_slug)
+    #     print('brand ========>',brand)
+    #     product_variants = ProductVariant.objects.filter(variantProduct__productBrand=brand)
+    #     print('product_variants ======+>',product_variants)
+
+    #     # Generate the URL using the brand_slug
+    #     url = reverse('products_by_brand', args=[brand_slug])
 
     
     
@@ -1758,9 +1765,50 @@ def shop_list_view(request):
     return render(request, 'pages/shop/shop-list-view.html',context)
 
 
+# def left_slidebar_with_brands(request, brand_id=None):
+#     # Your existing code for retrieving cart products, product variants, and other data
+#     url = ''
+#     # brandid = ()
+#     brand = ProBrand.objects.all()
+#     category = ProCategory.objects.all()
+#     product = ProductVariant.objects.all()
+
+#     if brand_id:
+#         brand = ProBrand.objects.get(id=brand_id)
+#         product = ProductVariant.objects.filter(variantProduct__productBrand_id=brand)
+#         brandList = []
+#         brand = []
+        
+#         for p in product:
+#             brandList.append(str(p.variantProduct.productBrand.brandName))
+            
+#         for b in list(set(brandList)):
+#             brand.append(ProBrand.objects.get(brandName=b))
+            
+        
+#         url = reverse('left_slidebar_with_brands', args=[id])
+#     # try:
+#     #     brand = ProBrand.objects.get(id=brand_id)
+#     #     products = ProductVariant.objects.filter(variantProduct__productBrand=brand)
+#     # except ProBrand.DoesNotExist:
+#     #     return HttpResponse('Invalid Brand ID')
+    
+#     context = {
+#         "ProductsBrand":brand,
+#         'url':url,
+#         'path':'left_slidebar_with_brands',
+#         'products': product, 'ProductsBrand': brand,
+#         'productVariant':product,'ProductCategory': category,
+
+#     }
+#     return render(request, 'pages/shop/shop-left-sidebar.html',context)
+
+    # Rest of your code for processing the products and rendering the template
 
 
-def left_slidebar(request,id):
+
+def left_slidebar(request,id,brand_id=None):
+    url = ''
     # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -1768,12 +1816,39 @@ def left_slidebar(request,id):
     # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
     # wishlist_products = customer_wishlist.wishlistProducts.all()
     # totalWishlistProducts = wishlist_products.count()
+
+    if brand_id:
+        print('inside brand ID')
+        try:
+            print('TRY TRY TRY')
+            path =request.GET
+            full_path = request.get_full_path()
+            print('path ============<>',path)
+            print('full_path ============<>',full_path)
+            brandid = ProBrand.objects.get(id=brand_id)
+            print('HELLO HELLO HELLO')
+            product = ProductVariant.objects.filter(variantProduct__productBrand_id=brandid)
+            brandList = []
+            brand = []
+            
+            for p in product:
+                brandList.append(str(p.variantProduct.productBrand.brandName))
+                
+            for b in list(set(brandList)):
+                brand.append(ProBrand.objects.get(brandName=b))
+                
+            
+            url = reverse('left_slidebar_with_brands', args=[id])
+        except ProBrand.DoesNotExist:
+            return HttpResponse('Invalid Brand ID')
+        
     try:
         product = Product.objects.get(id=id)
     except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+        return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
     related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
     productVariants = ProductVariant.objects.filter(variantProduct=product)
@@ -1790,6 +1865,31 @@ def left_slidebar(request,id):
     #     if proOrder.productOrderedProducts.variantProduct== product:
     #         reviewStatus=True
     #         break
+    
+    # brandid = ()
+    
+    
+    # try:
+    #     if brand_id:
+    #         # brand = ProBrand.objects.get(id=brand_id)
+    #         # products = ProductVariant.objects.filter(variantProduct__productBrand=brand)
+    #         brandid = ProBrand.objects.get(id=brand_id)
+    #         product = ProductVariant.objects.filter(variantProduct__productBrand_id=brandid)
+    #         print('product ====>',product)
+    #         brandList = []
+    #         brand = []
+            
+    #         for p in product:
+    #             brandList.append(str(p.variantProduct.productBrand.brandName))
+                
+    #         for b in list(set(brandList)):
+    #             brand.append(ProBrand.objects.get(brandName=b))
+                
+            
+    #         url = reverse('left_slidebar_with_brands', args=[id])
+    # except ProBrand.DoesNotExist:
+    #     return HttpResponse('Invalid Brand ID')
+            
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -1840,6 +1940,20 @@ def left_slidebar(request,id):
 
     brand = ProBrand.objects.all()
     category = ProCategory.objects.all()
+    
+    # brandSlug = ()    
+    
+    # if brand_slug:
+    #     brandSlug = get_object_or_404(ProBrand, brandName__iexact=brand_slug)
+    #     product = ProductVariant.objects.filter(variantProduct__productBrand=brand)
+        
+    #     url = reverse('products_by_brand', args=[brand_slug])
+        
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
 
     context = {"breadcrumb": {"parent": "Product Left Sidebar", "child": "Product Left Sidebar"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -1853,16 +1967,39 @@ def left_slidebar(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "url":url,
+                "selected_delivery_options":selected_delivery_options,
                 # "reviewStatus":reviewStatus,
                 }
 
     return render(request, 'pages/product/product-left-sidebar.html',context)
+
+
+# def products_by_brand(request, brand_slug):
+#     brand = get_object_or_404(ProBrand, brandName__iexact=brand_slug)
+#     print('brand ========>',brand)
+#     product_variants = ProductVariant.objects.filter(variantProduct__productBrand=brand)
+#     print('product_variants ======+>',product_variants)
+    
+#     # Generate the URL using the brand_slug
+#     url = reverse('products_by_brand', args=[brand_slug])
+    
+#     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
+#                "products":product_variants,
+#                "url":url,
+        
+#     }
+    
+    
+#     return render(request, 'pages/shop/shop-left-sidebar.html',context)
 
 def get_product_variant(request):
     if request.method == 'POST':
@@ -1938,6 +2075,7 @@ def right_sidebar(request,id):
         return HttpResponse('Invalide Product ID')
     
     products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
     related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
     productVariants = ProductVariant.objects.filter(variantProduct=product)
@@ -2005,6 +2143,9 @@ def right_sidebar(request,id):
 
     brand = ProBrand.objects.all()
     category = ProCategory.objects.all()
+    
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
 
     context = {"breadcrumb": {"parent": "Product Right Sidebar", "child": "Product Right Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2025,42 +2166,1238 @@ def right_sidebar(request,id):
                 "average_rating":average_rating,
                 "rating_range":rating_range,
                 # "reviewStatus":reviewStatus,
+                "last_added_products":last_added_products,
+                "selected_delivery_options":selected_delivery_options,
                 }
     
     return render(request, 'pages/product/product-right-sidebar.html',context)
 
 def no_sidebar(request,id):
-    return render(request, 'pages/product/product-no-sidebar.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalide Product ID')
+    
+    products = ProductVariant.objects.all()
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+        
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+    
+    
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    
+    product = get_object_or_404(Product,id=id)
+    selected_delivery_options = product.deliveryOption.all()
+
+    context = {"breadcrumb": {"parent": "Product No Sidebar", "child": "Product No Sidebar"},
+                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                # "reviewStatus":reviewStatus,
+                "selected_delivery_options":selected_delivery_options,
+                }
+    return render(request, 'pages/product/product-no-sidebar.html',context)
 
 def bundle(request,id):
-    return render(request, 'pages/product/product-bundle.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalide Product ID')
+    
+    products = ProductVariant.objects.all()
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+        
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+    
+    
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+
+    context = {"breadcrumb": {"parent": "Product Bundle", "child": "Product Bundle"},
+                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                # "reviewStatus":reviewStatus,
+                "selected_delivery_options":selected_delivery_options,
+                }
+    return render(request, 'pages/product/product-bundle.html',context)
 
 def image_swatch(request,id):
-    return render(request, 'pages/product/product-image-swatch.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalide Product ID')
+    
+    products = ProductVariant.objects.all()
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+        
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+    
+    
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+
+    context = {"breadcrumb": {"parent": "Product Image Swatch", "child": "Product Image Swatch"},
+                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                # "reviewStatus":reviewStatus,
+                "selected_delivery_options":selected_delivery_options,
+                }
+    return render(request, 'pages/product/product-image-swatch.html',context)
 
 def vertical_tab(request,id):
-    return render(request, 'pages/product/product-vertical-tab.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalide Product ID')
+    
+    products = ProductVariant.objects.all()
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+        
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+    
+    
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+    
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+
+    context = {"breadcrumb": {"parent": "Product Vertical Tab", "child": "Product Vertical Tab"},
+                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                # "reviewStatus":reviewStatus,
+                "selected_delivery_options":selected_delivery_options,
+                }
+    return render(request, 'pages/product/product-vertical-tab.html',context)
 
 def video_thumbnail(request,id):
-    return render(request, 'pages/product/product-video-thumbnail.html')
+    url = ''
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product Video Thumbnail", "child": "Product Video Thumbnail"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                # "url":url,
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-video-thumbnail.html',context)
 
 def image_4(request,id):
-    return render(request, 'pages/product/product-4-image.html')
+    url = ''
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product 4 Image", "child": "Product 4 Image"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                # "url":url,
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-4-image.html',context)
 
 def sticky(request,id):
-    return render(request, 'pages/product/product-sticky.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product Sticky", "child": "Product Sticky"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-sticky.html',context)
 
 def accordian(request,id):
-    return render(request, 'pages/product/product-page-accordian.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product Accordian", "child": "Product Accordian"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-page-accordian.html',context)
 
 def product_360_view(request,id):
-    return render(request, 'pages/product/product-page-360-view.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product 360 View", "child": "Product 360 View"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-page-360-view.html',context)
 
 def left_image(request,id):
-    return render(request, 'pages/product/product-left-image.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product Left Image", "child": "Product Left Image"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-left-image.html',context)
 
 def right_image(request,id):
-    return render(request, 'pages/product/product-right-image.html')
+    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+    totalCartProducts = cart_products.count()
+    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    # wishlist_products = customer_wishlist.wishlistProducts.all()
+    # totalWishlistProducts = wishlist_products.count()
+        
+    try:
+        product = Product.objects.get(id=id)
+    except (ValidationError, Product.DoesNotExist):
+        return HttpResponse('Invalid Product ID')
+    
+    products = ProductVariant.objects.all()
+    last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
+    images = MultipleImages.objects.filter(multipleImageOfProduct=product)
+    related_products = Product.objects.filter(proCategory=product.proCategory).exclude(id=product.id)
+    productVariants = ProductVariant.objects.filter(variantProduct=product)
+    firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+    if firstProductVariant:
+        firstProductVariant = firstProductVariant.id
+    else:
+        firstProductVariant = None
+    
+    # customer=CustomUser.objects.get(id=request.user.id)
+    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+    # reviewStatus=False
+    # for proOrder in productOrders:
+    #     if proOrder.productOrderedProducts.variantProduct== product:
+    #         reviewStatus=True
+    #         break
+  
+    customerReviews = ProductReview.objects.filter(productName__id=id)
+
+    total_review_count = customerReviews.count()
+    if total_review_count > 0:
+        total_rating = sum([int(review.productRatings) for review in customerReviews])
+        average_rating = round(total_rating / total_review_count)   
+    else:
+        average_rating = 0
+    rating_range = ['1', '2', '3', '4', '5']
+
+    totalReviewCount = product.productNoOfReview
+    oneStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="1").count()
+    twoStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="2").count()
+    threeStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="3").count()
+    fourStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="4").count()
+    fiveStarcount = ProductReview.objects.filter(
+        productName=product, productRatings="5").count()
+
+    if totalReviewCount > 0:
+        ratingPercentage = {
+            "one_stars": Decimal((oneStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "two_stars": Decimal((twoStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "three_stars": Decimal((threeStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "four_stars": Decimal((fourStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+            "five_stars": Decimal((fiveStarcount/totalReviewCount)*100).quantize(Decimal('.1'), rounding=ROUND_HALF_UP),
+        }
+        total = sum(ratingPercentage.values())
+        last_number = Decimal(
+            100 - total + ratingPercentage['five_stars']).quantize(Decimal('.1'), rounding=ROUND_HALF_UP)
+        ratingPercentage['five_stars'] = last_number
+        total = sum(ratingPercentage.values())
+        assert total == 100
+
+    else:
+        ratingPercentage = {
+            "one_stars": "0",
+            "two_stars": "0",
+            "three_stars": "0",
+            "four_stars": "0",
+            "five_stars": "0"
+        }
+    attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+
+    brand = ProBrand.objects.all()
+    category = ProCategory.objects.all()
+        
+    product = get_object_or_404(Product, id=id)
+    selected_delivery_options = product.deliveryOption.all()
+    
+    
+
+    context = {"breadcrumb": {"parent": "Product Right Image", "child": "Product Right Image"},
+                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                #  "Cart": customer_cart,
+                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                "cart_products_demo": cart_products_demo,
+                "product": product, "products": products,
+                "productVariants": productVariants,
+                "firstProductVariant": str(firstProductVariant),
+                "attributeObjects":attributeObjects,
+                "attributeObjectsIds":attributeObjectsIds,
+                "images": images,
+                "ProductsBrand": brand,
+                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
+                "ProductCategory": category,
+                "related_products": related_products,
+                "customerReviews":customerReviews,
+                "ratingPercentage":ratingPercentage,
+                "average_rating":average_rating,
+                "rating_range":rating_range,
+                "last_added_products":last_added_products,  
+                "selected_delivery_options":selected_delivery_options,
+                # "reviewStatus":reviewStatus,
+                }
+    return render(request, 'pages/product/product-right-image.html',context)
 
 def image_outside(request,id):
     return render(request, 'pages/product/product-page-image-outside.html')
@@ -2082,58 +3419,6 @@ def element_product_slider(request,id):
 
 def element_no_slider(request,id):
     return render(request, 'pages/product/element-no_slider.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

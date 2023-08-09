@@ -1805,3 +1805,53 @@
   <span id="discountPercentage">{{product.product_discount_range}}</span>
   {% endif %}
 </h3>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  (function($) {
+    "use strict";
+
+    // Function to update the countdown
+    function updateCountdown() {
+        // Set the date we're counting down to
+        var currentDate = new Date();
+        var countDownDate = new Date(currentDate);
+        countDownDate.setDate(countDownDate.getDate() + 12); // Adding 12 days to the current date
+
+        // Update the countdown timer
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("demo").innerHTML =
+                "<span>" + days + "<span class='timer-cal'>Days</span></span>" +
+                "<span>" + hours + "<span class='timer-cal'>Hrs</span></span>" +
+                "<span>" + minutes + "<span class='timer-cal'>Min</span></span>" +
+                "<span>" + seconds + "<span class='timer-cal'>Sec</span></span>";
+
+            if (distance < 0) {
+                clearInterval(x);
+                updateCountdown(); // Restart the countdown with a new 12-day interval
+            }
+        }, 1000);
+    }
+
+    // Initial call to start the countdown
+    updateCountdown();
+})(jQuery);
+
+</script>

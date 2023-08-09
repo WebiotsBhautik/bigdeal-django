@@ -523,7 +523,31 @@
           </a>
         </div>
       </div>
-      <form class="theme-form">
+      {% if request.user %}
+      <li>
+        <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+        <h6 class="d-block">
+          Welcome, {{request.user.username}}
+        </h6>
+      </li>
+      <li>
+        <a href="{% url 'logout_page' %}" class="d-block"
+          >Logout</a
+        >
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'login_page' %}" class="d-block"
+          >Login</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'signup_page' %}" class="d-block"
+          >Register</a
+        >
+      </li>
+      {% endif %}
+      {% comment %} <form class="theme-form">
         <div class="form-group">
           <label for="email">Email</label>
           <input type="text" class="form-control" id="email" placeholder="Email" required="">
@@ -539,7 +563,7 @@
           <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
           <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
         </div>
-      </form>
+      </form> {% endcomment %}
     </div>
   </div>
   <!-- Add to account bar end-->

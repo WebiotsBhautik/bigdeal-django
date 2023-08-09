@@ -86,9 +86,9 @@
                 </div>
                 <div class="menu-content">
                     <ul>
-                    <li><a href="product-page(4-image).html">4 image </a></li>
-                    <li><a href="product-page(sticky).html">sticky</a></li>
-                    <li><a href="product-page(accordian).html">accordian</a></li>
+                    <li><a href="{% url 'image_4' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">4 image </a></li>
+                    <li><a href="{% url 'sticky' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">sticky</a></li>
+                    <li><a href="{% url 'accordian' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">accordian</a></li>
                     <li><a href="{% url 'product_360_view' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">360 view</a></li>
                     </ul>
                 </div>
@@ -101,9 +101,9 @@
                 </div>
                 <div class="menu-content">
                     <ul>
-                    <li><a href="product-page(left-image).html">left image</a></li>
-                    <li><a href="product-page(right-image).html">right image</a></li>
-                    <li><a href="product-page(image-outside).html">image outside</a></li>
+                    <li><a href="{% url 'left_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">left image</a></li>
+                    <li><a href="{% url 'right_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">right image</a></li>
+                    <li><a href="{% url 'image_outside' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">image outside</a></li>
                     </ul>
                 </div>
                 </div>
@@ -140,12 +140,12 @@
             <div class="row menu-banner">
             <div class="col-lg-6">
                 <div>
-                <img src="{% static 'assets/images/grocery/menu-banner/1.jpg' %}" alt="menu-banner" class="img-fluid">
+                <img src="{% static 'assets/images/menu-banner1.jpg' %}" alt="menu-banner" class="img-fluid">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div>
-                <img src="{% static 'assets/images/grocery/menu-banner/2.jpg' %}" alt="menu-banner" class="img-fluid">
+                <img src="{% static 'assets/images/menu-banner2.jpg' %}" alt="menu-banner" class="img-fluid">
                 </div>
             </div>
             </div>

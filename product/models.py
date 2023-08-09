@@ -175,6 +175,15 @@ class ProVideoProvider(models.Model):
         verbose_name = 'Video Provider'
         
         
+class DeliveryOption(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name
+
+        
+        
         
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -222,7 +231,7 @@ class Product(models.Model):
         blank=True, null=True, default=0, verbose_name='Rating Count')
     productFinalRating = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Rating (5)')
-
+    deliveryOption = models.ManyToManyField(DeliveryOption, blank=True, verbose_name='Delivery Option')
     productSoldQuantity = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Sold')
     slug = models.SlugField(unique=True,max_length=255, blank=True)
@@ -248,7 +257,6 @@ class Product(models.Model):
                 self.productType = "Simple"
         
         super(Product, self).save(*args, **kwargs)
-        
         
     
 
