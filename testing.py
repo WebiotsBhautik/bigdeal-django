@@ -45,12 +45,6 @@
 
 
 
-# # start:stop:step
-# name =[ 'vishal' , 'bhautik' , 'keyur','raj']
-# # name.append('urvish')
-# print(name[1:3])
-
-
 
 
 

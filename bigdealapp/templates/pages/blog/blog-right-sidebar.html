@@ -1,0 +1,139 @@
+{% extends 'pages/blog/blog-base.html' %}
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+{% block components %}
+
+
+<!-- section start -->
+<section class="section-big-py-space blog-page ratio2_3">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-7">
+              {% if page_obj %}
+                {% for obj in page_obj %}
+                <div class="row blog-media">
+                    <div class="col-xl-6">
+                        <div class="blog-left">
+                            <a href="{% url 'blog_details' obj.id %}"><img src="/{{obj.blogImage}}" class="img-fluid  " alt=""></a>
+                            <div class="date-label">
+                                {{obj.createdAt|date:"d M Y"}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="blog-right">
+                            <div>
+                                 <a href="javascript:void(0)"><h4>{{obj.blogTitle}}</h4> </a>
+                                <ul class="post-social">
+                                    <li>Posted By : Admin Admin</li>
+                                    <li><i class="fa fa-heart"></i> 5 Hits</li>
+                                    <li><i class="fa fa-comments"></i> 10 Comment</li>
+                                </ul>
+                                <p>{{obj.blogDescription|safe}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if page_obj.has_other_pages %}
+                  <div class="page-section">
+                      <div class="pagination">
+                          {% if page_obj.has_previous %}
+                          <a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
+                          {% endif %}
+
+                          {% for num in page_obj.paginator.page_range %}
+                          {% if page_obj.number == num %}
+                          <span class="current-page">{{ num }}</span>
+                          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                          <a href="?page={{ num }}" class="page">{{ num }}</a>
+                          {% endif %}
+                          {% endfor %}
+
+                          {% if page_obj.has_next %}
+                          <a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+                          {% endif %}
+                      </div>
+                      {% endif %}
+                  </div>
+                  {% else %}
+                  <div>
+                    <h2 style="text-align:center"> No Blogs Yet </h2>
+                  </div>
+                {% endif %}
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-5 order-sec">
+                <div class="blog-sidebar">
+                    <div class="theme-card">
+                        <h4>Recent Blog</h4>
+                        <ul class="recent-blog">
+                          {% for blog in recent_blogs %}
+                            <li>
+                              <div class="media"> <img class="img-fluid " src="/{{blog.blogImage}}" alt="Generic placeholder image">
+                                  <div class="media-body align-self-center">
+                                      <h6>{{blog.createdAt|date:"d M Y"}}</h6>
+                                      <p>0 hits</p>
+                                  </div>
+                              </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="theme-card">
+                        <h4>Popular Blog</h4>
+                        <ul class="popular-blog">
+                            <li>
+                                <div class="media">
+                                    <div class="blog-date"><span>03 </span><span>may</span></div>
+                                    <div class="media-body align-self-center">
+                                        <h6>Injected humour the like</h6>
+                                        <p>0 hits</p>
+                                    </div>
+                                </div>
+                                <p>it look like readable English. Many desktop publishing text.</p>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <div class="blog-date"><span>03 </span><span>may</span></div>
+                                    <div class="media-body align-self-center">
+                                        <h6>Injected humour the like</h6>
+                                        <p>0 hits</p>
+                                    </div>
+                                </div>
+                                <p>it look like readable English. Many desktop publishing text.</p>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <div class="blog-date"><span>03 </span><span>may</span></div>
+                                    <div class="media-body align-self-center">
+                                        <h6>Injected humour the like</h6>
+                                        <p>0 hits</p>
+                                    </div>
+                                </div>
+                                <p>it look like readable English. Many desktop publishing text.</p>
+                            </li>
+                            <li>
+                                <div class="media">
+                                    <div class="blog-date"><span>03 </span><span>may</span></div>
+                                    <div class="media-body align-self-center">
+                                        <h6>Injected humour the like</h6>
+                                        <p>0 hits</p>
+                                    </div>
+                                </div>
+                                <p>it look like readable English. Many desktop publishing text.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+
+{% endblock components %}

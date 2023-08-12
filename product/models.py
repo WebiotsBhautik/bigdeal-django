@@ -234,7 +234,7 @@ class Product(models.Model):
     deliveryOption = models.ManyToManyField(DeliveryOption, blank=True, verbose_name='Delivery Option')
     productSoldQuantity = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Sold')
-    slug = models.SlugField(unique=True,max_length=255, blank=True)
+    slug = models.SlugField(max_length=255, blank=True)
     
     
     

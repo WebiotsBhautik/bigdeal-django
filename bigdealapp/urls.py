@@ -92,9 +92,24 @@ urlpatterns = [
     path('thumbnail_left/<str:id>', views.thumbnail_left, name='thumbnail_left'),
     path('thumbnail_right/<str:id>', views.thumbnail_right, name='thumbnail_right'),
     path('thumbnail_bottom/<str:id>', views.thumbnail_bottom, name='thumbnail_bottom'),
-    path('element_productbox/<str:id>', views.element_productbox, name='element_productbox'),
-    path('element_product_slider/<str:id>', views.element_product_slider, name='element_product_slider'),
-    path('element_no_slider/<str:id>', views.element_no_slider, name='element_no_slider'),
+    path('element_productbox', views.element_productbox, name='element_productbox'),
+    path('element_product_slider', views.element_product_slider, name='element_product_slider'),
+    path('element_no_slider', views.element_no_slider, name='element_no_slider'),
+    
+    
+    
+# Blog Pages Routes
+
+    path('blog_details/<str:id>',views.blog_details, name='blog_details'),
+    
+    
+    path('blog_left_sidebar',views.blog_left_sidebar, name='blog_left_sidebar'),
+    # path('left_sidebar_for_selected_category/<str:id>',views.left_sidebar_for_selected_category, name='left_sidebar_for_selected_category'),
+    path('blog_right_sidebar',views.blog_right_sidebar, name='blog_right_sidebar'),
+    path('blog_no_sidebar',views.blog_no_sidebar,name='blog_no_sidebar'),
+    path('blog_creative_left_sidebar',views.blog_creative_left_sidebar,name='blog_creative_left_sidebar')
+
+
     
 
 

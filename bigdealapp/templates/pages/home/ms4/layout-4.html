@@ -287,7 +287,7 @@
                   <i class="fa fa-bars"></i>
                 </div>
                 <div class="logo-block logo-sm-center ">
-                  <a href="index.html">
+                  <a href="{% url 'index' %}">
                       <img src="{% static 'assets/images/layout-4/logo/logo.png' %}" alt="logo" class="img-fluid  ">
                   </a>
                 </div>
@@ -563,7 +563,7 @@
         <ul>
           <li><a href="javascript:void(0)">top brand</a></li>
           <li><a>:</a></li>
-          {% for brand in allbrands %}
+          {% for brand in allbrands|slice:":10" %}
           <li><a href="javascript:void(0)">{{brand.brandName}}</a></li>
           {% endfor %}
         </ul>

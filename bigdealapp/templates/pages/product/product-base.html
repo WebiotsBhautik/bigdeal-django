@@ -28,6 +28,10 @@
   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
 
+  {% block css %}
+    
+  {% endblock css %}
+
   <!--Animate css-->
   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
 
@@ -79,12 +83,12 @@
                 <div class="product-imgbox">
                   <div class="product-front">
                     <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/1.jpg' %}" class="img-fluid" alt="product">
+                      <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                     </a>
                   </div>
                   <div class="product-back">
                     <a href="product-page(left-sidebar).html">
-                      <img src="{% static 'assets/images/layout-2/product/a1.jpg' %}" class="img-fluid  " alt="product">
+                      <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                     </a>
                   </div>
                   <div class="product-icon icon-inline">
@@ -115,17 +119,25 @@
                       </div>
                       <a href="product-page(left-sidebar).html">
                         <h6 class="price-title">
-                          sony xperia m5
+                          {{product.productName}}
                         </h6>
                       </a>
                     </div>
                     <div class="detail-right">
                       <div class="check-price">
-                        $ 56.21
+                        {% if product.productType == "Simple" %}
+                          <del>{{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}</del>
+                        {% else %}
+                          <del>{{product.product_actual_price_range|return_currency_wise_ammount_range:request}}</del>
+                        {% endif %}
                       </div>
                       <div class="price">
                         <div class="price">
-                          $ 24.05
+                          {% if product.productType == "Simple" %}
+                          <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                          {% else %}  
+                          <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -234,6 +246,7 @@
     </div>
 </div>
 <!-- edit product modal end-->
+
   
   <!-- Add to cart bar -->
   <div id="cart_side" class="add_to_cart right">

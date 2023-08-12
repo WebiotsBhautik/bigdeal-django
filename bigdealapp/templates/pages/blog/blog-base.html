@@ -1,0 +1,72 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="big-deal">
+    <meta name="keywords" content="big-deal">
+    <meta name="author" content="big-deal">
+    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+    <!--icon css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
+
+    <!--Animate css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
+
+    
+    {% block css %}
+        
+    {% endblock css %}
+        
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
+
+</head>
+<body class="b-g-light">
+
+<!-- loader start -->
+<div class="loader-wrapper">
+    <div>
+        <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
+    </div>
+</div>
+<!-- loader end -->
+
+
+{% include 'pages/shop/shop-header.html' %}
+{% include 'pages/shop/breadcrumb-section.html' %}
+
+{% block components %}
+    
+{% endblock components %}
+
+
+{% include 'pages/blog/blog-footer.html' %}
+
+
+{% block script %}
+    
+{% endblock script %}
+    
