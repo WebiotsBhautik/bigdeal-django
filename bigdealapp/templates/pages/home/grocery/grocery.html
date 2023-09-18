@@ -1632,7 +1632,8 @@
         <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
     </form> {% endcomment %}
-    {% if request.user %}
+    {% if request.user.is_authenticated %}
+
     <li>
       <!-- <a href="log-in.html" class="d-block">Profile</a> -->
       <h6 class="d-block">

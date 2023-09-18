@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment
+from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment,ContactUs
 from django.utils.safestring import mark_safe
 
 
@@ -81,4 +81,12 @@ class BlogCommentAdmin(admin.ModelAdmin):
             return queryset
 
 admin.site.register(BlogComment, BlogCommentAdmin)
+
+
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display=['contactUsName','contactUsEmail','contactUsNumber','createdAt']
+    ordering=['-createdAt']
+        
+admin.site.register(ContactUs, ContactUsAdmin)
+
 

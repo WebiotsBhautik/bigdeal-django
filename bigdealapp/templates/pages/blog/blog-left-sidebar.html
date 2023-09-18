@@ -22,7 +22,7 @@
                               <div class="media"><img class="img-fluid " src="/{{blog.blogImage}}" alt="Generic placeholder image">
                                   <div class="media-body align-self-center">
                                       <h6>{{blog.createdAt|date:"d M Y"}}</h6>
-                                      <p>0 hits</p>
+                                      <p>{{blog.blogTitle}}</p>
                                   </div>
                               </div>
                             </li>
@@ -32,7 +32,19 @@
                     <div class="theme-card">
                         <h4>Popular Blog</h4>
                         <ul class="popular-blog">
+                            {% for blog in popular_blogs %}
                             <li>
+                                <div class="media">
+                                    <div class="blog-date"><span>{{blog.updatedAt|date:"d"}} </span><span>{{blog.updatedAt|date:"M"}}</span></div>
+                                    <div class="media-body align-self-center">
+                                        <h6>{{blog.blogTitle}}</h6>
+                                        {% comment %} <p>0 hits</p> {% endcomment %}
+                                    </div>
+                                </div>
+                                <p>{{blog.blogDescription|safe}}</p>
+                            </li>
+                            {% endfor %}
+                            {% comment %} <li>
                                 <div class="media">
                                     <div class="blog-date"><span>03 </span><span>may</span></div>
                                     <div class="media-body align-self-center">
@@ -61,17 +73,7 @@
                                     </div>
                                 </div>
                                 <p>it look like readable English. Many desktop publishing text.</p>
-                            </li>
-                            <li>
-                                <div class="media">
-                                    <div class="blog-date"><span>03 </span><span>may</span></div>
-                                    <div class="media-body align-self-center">
-                                        <h6>Injected humour the like</h6>
-                                        <p>0 hits</p>
-                                    </div>
-                                </div>
-                                <p>it look like readable English. Many desktop publishing text.</p>
-                            </li>
+                            </li> {% endcomment %}
                         </ul>
                     </div>
                 </div>

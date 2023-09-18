@@ -42,55 +42,90 @@ def return_first_product_variant(value):
 
 @register.filter(name='return_currency_wise_ammount')
 def return_currency_wise_ammount(value, request):
+    try:
+        numeric_value = int(value)
+    except ValueError:
+        return 0 
+    
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        amount = int(value)*currency.factor
+    try:
+        if len(result) == 0:
+            currency = Currency.objects.get(code='USD')
+            amount = int(value)*currency.factor
+            return amount
+        else:
+            try:
+                currency = Currency.objects.get(id=result)
+                amount = int(value)*currency.factor
+                return amount
+            except Currency.DoesNotExist:
+                pass
+    except Currency.DoesNotExist:
+        pass
+        # Currency.objects.all().delete()
         return amount
 
-    currency = Currency.objects.get(id=result)
-    amount = int(value)*currency.factor
-    return amount
+    # currency = Currency.objects.get(id=result)
+    # amount = int(value)*currency.factor
+    # return amount
 
 
 @register.filter(name='return_currency_wise_ammount_range')
 def return_currency_wise_ammount_range(value, request):
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
+    try:
+        if len(result) == 0:
+            currency = Currency.objects.get(code='USD')
+            productVariantMinPrice = int(value[0])*currency.factor
+            productVariantMaxPrice = int(value[1])*currency.factor
+            if str(productVariantMinPrice) == str(productVariantMaxPrice):
+                return str(currency.symbol)+str(productVariantMinPrice)
+            else: 
+                return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
+
+        currency = Currency.objects.get(id=result)
         productVariantMinPrice = int(value[0])*currency.factor
         productVariantMaxPrice = int(value[1])*currency.factor
         if str(productVariantMinPrice) == str(productVariantMaxPrice):
             return str(currency.symbol)+str(productVariantMinPrice)
-        else: 
+        else:
             return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
+        
+    except Currency.DoesNotExist:
+        pass
+        # Currency.objects.all().delete()
 
-    currency = Currency.objects.get(id=result)
-    productVariantMinPrice = int(value[0])*currency.factor
-    productVariantMaxPrice = int(value[1])*currency.factor
-    if str(productVariantMinPrice) == str(productVariantMaxPrice):
-        return str(currency.symbol)+str(productVariantMinPrice)
-    else:
-        return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
 
 
 @register.filter(name='return_currency_wise_symbol')
 def return_currency_wise_symbol(value, request):
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        return currency.symbol
-    currency = Currency.objects.get(id=result)
-    # print('SYMBOL++++==>',currency.symbol)
-    return currency.symbol
+    try:
+        if len(result) == 0:
+            currency = Currency.objects.get(code='USD')
+            return currency.symbol
+        else:
+            try:
+                currency = Currency.objects.get(id=result)
+                return currency.symbol
+            except Currency.DoesNotExist:
+                pass
+    except Currency.DoesNotExist:
+        pass
+        # Currency.objects.all().delete()
+    # return currency.symbol
 
 
 @register.filter(name='return_currency_wise_code')
 def return_currency_wise_code(value, request):
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        return currency.code
+    try:
+        if len(result) == 0:
+            currency = Currency.objects.get(code='USD')
+            return currency.code
+    except Currency.DoesNotExist:
+        pass
+        # Currency.objects.all().delete()
     currency = Currency.objects.get(id=result)
     return currency.code
 
@@ -104,32 +139,68 @@ def return_currency(value):
 
 # @register.filter(name='return_totalWishlistProducts')
 # def return_totalWishlistProducts(value,request):
-#     customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-#     wishlist_products = customer_wishlist.wishlistProducts.all()
-#     totalWishlistProducts = wishlist_products.count()
-#     return totalWishlistProducts
+#     if request.user.is_authenticated:
+#         customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+#         wishlist_products = customer_wishlist.wishlistProducts.all()
+#         totalWishlistProducts = wishlist_products.count()
+#         return totalWishlistProducts
+#     else:
+#         return 0
 
 # @register.filter(name='return_totalComparelistProducts')
 # def return_totalCompareProducts(value,request):
-#     customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
-#     comparelist_products = customer_comparelist.compareProducts.all()
-#     totalComparelistProducts = comparelist_products.count()
-#     return totalComparelistProducts
+#     if request.user.is_authenticated:
+#         customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
+#         comparelist_products = customer_comparelist.compareProducts.all()
+#         totalComparelistProducts = comparelist_products.count()
+#         return totalComparelistProducts
+#     else:
+#         return 0
 
 # @register.filter(name='return_totalCartProducts')
 # def return_totalCartProducts(value,request):
-#     totalCartProducts = CartProducts.objects.filter(cartByCustomer=request.user.id).count()
+#     if request.user.is_authenticated:
+#         totalCartProducts = CartProducts.objects.filter(cartByCustomer=request.user.id).count()
+#     else:
+#         get_Item = request.COOKIES.get('cart')
+#         cart_products = []
+#         if get_Item:
+#             try:
+#                 cart_products = json.loads(get_Item) 
+#             except json.JSONDecodeError as e:
+#                 cart_products = []
+#         totalCartProducts = len(cart_products)
 #     return totalCartProducts
 
 # @register.filter(name='return_cart_products')
 # def return_cart_products(value,request):
-#     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+#     if request.user.is_authenticated:
+#         cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+#     else:
+#         cart_products = CartProducts.objects.all()
 #     return cart_products
 
 # @register.filter(name='return_cartTotalPrice')
 # def return_cartTotalPrice(value,request):
-#     customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
-#     return customer_cart.getTotalPrice
+#     if request.user.is_authenticated:
+#         customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+#         return customer_cart.getTotalPrice
+#     else:
+#         get_Item = request.COOKIES.get('cart')
+#         cart_products = []
+#         if get_Item:
+#             try:
+#                 cart_products = json.loads(get_Item) 
+#             except json.JSONDecodeError as e:
+#                 cart_products = []
+                
+#         total_price = 0
+        
+#         for item in cart_products:
+#             price = item.get('totalPrice', 0)
+#             quantity = item.get('quantity', 0)
+#             total_price += price * quantity
+#         return total_price
 
 # @register.filter(name='return_totalComparelistProducts')
 # def return_totalCompareProducts(value,request):

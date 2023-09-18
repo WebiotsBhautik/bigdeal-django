@@ -1960,7 +1960,8 @@
         </a>
       </div>
     </div>
-    {% if request.user %}
+    {% if request.user.is_authenticated %}
+
     <li>
       <!-- <a href="log-in.html" class="d-block">Profile</a> -->
       <h6 class="d-block">

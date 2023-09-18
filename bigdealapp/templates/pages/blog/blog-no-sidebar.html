@@ -13,98 +13,59 @@
     <div class="custom-container">
         <div class="row">
             <div class="col-12">
+              {% if page_obj %}
+              {% for obj in page_obj %}
                 <div class="row blog-media">
                     <div class="col-xl-6 ">
                         <div class="blog-left">
-                            <a href="javascript:void(0)"><img src="{% static 'assets/images/blog/1.jpg' %}" class="img-fluid  " alt="blog"></a>
+                            <a href="javascript:void(0)"><img src="{{obj.blogImage}}" class="img-fluid  " alt="blog"></a>
                             <div class="date-label">
-                                26 nov 2019
+                                {{obj.createdAt|date:"d M Y"}}
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-6 ">
                         <div class="blog-right">
                             <div>
-                                <a href="javascript:void(0)"><h4>you how all this mistaken idea of denouncing pleasure and praising pain was born.</h4> </a>
+                                <a href="javascript:void(0)"><h4>{{obj.blogTitle}}</h4> </a>
                                 <ul class="post-social">
                                     <li>Posted By : Admin Admin</li>
                                     <li><i class="fa fa-heart"></i> 5 Hits</li>
                                     <li><i class="fa fa-comments"></i> 10 Comment</li>
                                 </ul>
-                                <p>Consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
+                                <p>{{obj.blogDescription|safe}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row blog-media">
-                    <div class="col-xl-6 ">
-                        <div class="blog-left">
-                            <a href="javascript:void(0)"><img src="{% static 'assets/images/blog/2.jpg' %}" class="img-fluid  " alt="blog"></a>
-                            <div class="date-label">
-                                26 nov 2019
-                            </div>
-                        </div>
+                {% endfor %}
+
+                {% if page_obj.has_other_pages %}
+                <div class="page-section">
+                    <div class="pagination">
+                        {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <span class="current-page">{{ num }}</span>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}" class="page">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+                        {% endif %}
                     </div>
-                    <div class="col-xl-6 ">
-                        <div class="blog-right">
-                            <div>
-                                <a href="javascript:void(0)"><h4>you how all this mistaken idea of denouncing pleasure and praising pain was born.</h4> </a>
-                                <ul class="post-social">
-                                    <li>Posted By : Admin Admin</li>
-                                    <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                    <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                </ul>
-                                <p>Consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-                            </div>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
-                <div class="row blog-media">
-                    <div class="col-xl-6 ">
-                        <div class="blog-left">
-                            <a href="javascript:void(0)"><img src="{% static 'assets/images/blog/3.jpg' %}" class="img-fluid  " alt="blog"></a>
-                            <div class="date-label">
-                                26 nov 2019
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 ">
-                        <div class="blog-right">
-                            <div>
-                                <a href="javascript:void(0)"><h4>you how all this mistaken idea of denouncing pleasure and praising pain was born.</h4> </a>
-                                <ul class="post-social">
-                                    <li>Posted By : Admin Admin</li>
-                                    <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                    <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                </ul>
-                                <p>Consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-                            </div>
-                        </div>
-                    </div>
+                {% else %}
+                <div>
+                  <h2 style="text-align:center"> No Blogs Yet </h2>
                 </div>
-                <div class="row blog-media">
-                    <div class="col-xl-6 ">
-                        <div class="blog-left">
-                            <a href="javascript:void(0)"><img src="{% static 'assets/images/blog/4.jpg' %}" class="img-fluid  " alt="blog"></a>
-                            <div class="date-label">
-                                26 nov 2019
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 ">
-                        <div class="blog-right">
-                            <div>
-                                <a href="javascript:void(0)"><h4>you how all this mistaken idea of denouncing pleasure and praising pain was born.</h4> </a>
-                                <ul class="post-social">
-                                    <li>Posted By : Admin Admin</li>
-                                    <li><i class="fa fa-heart"></i> 5 Hits</li>
-                                    <li><i class="fa fa-comments"></i> 10 Comment</li>
-                                </ul>
-                                <p>Consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -18,11 +18,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_per_page=10
     
     def get_queryset(self, request):
-       
-        # if request.user.is_vendor:  
-        #     queryset = super(OrderAdmin, self).get_queryset(request)         
-        #     return queryset.filter(orderedProductsvendor=request.user)
-
         if request.user.is_superuser:
             queryset = super(OrderAdmin, self).get_queryset(request)
             return queryset

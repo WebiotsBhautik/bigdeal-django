@@ -80,7 +80,7 @@
                     {% else %}
                     <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
                     {% endif %}</h2>
-                    <a href="product-page(left-sidebar).html" class="btn btn-normal">
+                    <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal">
                       Shop Now
                     </a>
                 </div>
@@ -112,7 +112,7 @@
               <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
               <h4>{{banner.titleOne}}</h4>
               <div class="shop">
-                <a href="product-page(left-sidebar).html">
+                <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
                 </a>
               </div>
@@ -177,12 +177,12 @@
                   <div class="product-box">
                     <div class="product-imgbox">
                       <div class="product-front">
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'left_slidebar' product.id %}">
                           <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                         </a>
                       </div>
                       <div class="product-back">
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'left_slidebar' product.id %}">
                           <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                         </a>
                       </div>
@@ -193,8 +193,8 @@
                         <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
                           <i  data-feather="heart"></i>
                         </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                          <i  data-feather="eye"></i>
+                        <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                          <i data-feather="eye"></i>
                         </a>
                         <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
                           <i  data-feather="refresh-cw"></i>
@@ -221,9 +221,9 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                           </div>
-                          <a href="product-page(left-sidebar).html">
+                          <a href="{% url 'left_slidebar' product.id %}">
                             <h6 class="price-title">
-                              {{product.productName}}hello
+                              {{product.productName}}
                             </h6>
                           </a>
                         </div>
@@ -282,7 +282,7 @@
                 {% endif %}</h3>
               <h4>{{banner.bannerProduct.variantProduct.productName}}<span>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</span></h4>
               <div class="shop">
-                <a class="btn btn-normal" href="product-page(left-sidebar).html">
+                <a class="btn btn-normal" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
                 </a>
               </div>
@@ -334,11 +334,11 @@
           <div>
             <div class="category-contain">
               <div class="img-wrapper">
-                <a href="category-page(left-sidebar).html">
+                <a href="{% url 'shop_left_sidebar' %}">
                   <img src="{{category.categoryImage}}" alt="category  " class="img-fluid">
                 </a>
               </div>
-              <a href="category-page(left-sidebar).html" class="btn-rounded">
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
                 {{category.categoryName}}
               </a>
             </div>
@@ -461,7 +461,7 @@
                   <div class="media-banner media-banner-1 border-0">
                     <div class="media-banner-box">
                       <div class="media">
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'left_slidebar' product.id %}">
                           <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
                         </a>
                         <div class="media-body">
@@ -475,7 +475,7 @@
                                   <li><i class="fa fa-star" ></i></li>
                                   <li><i class="fa fa-star-o" ></i></li>
                                 </ul>
-                                <a href="product-page(left-sidebar).html"><p>{{product.productName}}</p></a>
+                                <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
                                 <h6>
                                   {% if product.productType == "Simple" %}
                                   {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -531,7 +531,7 @@
               <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
               <h4>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h4>
               <div class="shop">
-                <a href="product-page(left-sidebar).html">
+                <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
                 </a>
               </div>
@@ -604,7 +604,7 @@
                   <div class="hotdeal-right-slick border-0">
                     {% for banner in allbanners  %}
                     {% if banner.bannerType|to_str == 'Timer' %}
-                    <a href="product-page(left-sidebar).html">
+                    <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                       <div class="img-wrraper">
                         <div>
                           <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid  bg-img">
@@ -642,7 +642,7 @@
                     {% if banner.bannerType|to_str == 'Timer' %}
                     <div>
                       <div>
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                           <h5>{{banner.bannerProduct.variantProduct.productName}} </h5>
                         </a>
                         <ul class="rating">
@@ -664,7 +664,7 @@
                           <p id="demo">
                           </p>
                         </div>
-                        <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
+                        <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal btn-md ">shop now</a>
                       </div>
                     </div>
                     {% endif %}
@@ -770,7 +770,7 @@
                 {% for product in layout1_products %}              
                 <div class="media-banner-box">
                   <div class="media">
-                    <a href="product-page(left-sidebar).html">
+                    <a href="{% url 'left_slidebar' product.id %}">
                       <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
                     </a>
                     <div class="media-body">
@@ -784,7 +784,7 @@
                               <li><i class="fa fa-star" ></i></li>
                               <li><i class="fa fa-star-o" ></i></li>
                             </ul>
-                            <a href="product-page(left-sidebar).html"><p>{{product.productName}}</p></a>
+                            <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
                             <h6>{% if product.productType == "Simple" %}
                               {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
                               {% else %}
@@ -1102,27 +1102,27 @@
             <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
-                  <a href="product-page(left-sidebar).html">
+                  <a href="{% url 'left_slidebar' product.id %}">
                     <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                   </a>
                 </div>
                 <div class="product-back">
-                  <a href="product-page(left-sidebar).html">
+                  <a href="{% url 'left_slidebar' product.id %}">
                     <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
                   <button  onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart" >
-                    <i  data-feather="shopping-cart"></i>
+                    <i data-feather="shopping-cart"></i>
                   </button>
                   <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
+                    <i data-feather="heart"></i>
                   </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
+                  <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i data-feather="eye"></i>
                   </a>
                   <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
+                    <i data-feather="refresh-cw"></i>
                   </a>
                 </div>
                 <div class="new-label1">
@@ -1133,7 +1133,7 @@
                   {% endif %}
                 </div>
                 <div class="on-sale1">
-                  {{product.productDescription|safe}}
+                  {% comment %} {{product.productDescription|safe}} {% endcomment %}
                 </div>
               </div>
               <div class="product-detail detail-inline ">
@@ -1146,7 +1146,7 @@
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                     </div>
-                    <a href="product-page(left-sidebar).html">
+                    <a href="{% url 'left_slidebar' product.id %}">
                       <h6 class="price-title">
                         {{product.productName}}
                       </h6>
@@ -1858,7 +1858,7 @@
         </a>
       </div>
     </div>
-    {% if request.user %}
+    {% if request.user.is_authenticated %}
     <li>
       <!-- <a href="log-in.html" class="d-block">Profile</a> -->
       <h6 class="d-block">
@@ -1867,7 +1867,7 @@
     </li>
     <li>
       <a href="{% url 'logout_page' %}" class="d-block"
-        >Logout</a
+        >Logout kro </a
       >
     </li>
     {% else %}
@@ -1968,14 +1968,120 @@
 
 {% endblock components %}
 
-<script>
-</script>
-
 
 {% block script %}
 
 <!-- timer js -->
 <script src="{% static 'assets/js/timer2.js' %}"></script>
+
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+  console.log('csrftoken =========>',csrftoken)
+
+  async function GetConvertedValues(value){
+    var url = "{% url 'get_selected_currency' %}",
+    valuereturn = 0;
+    await fetch(url,{
+      method: "GET",
+      headers:{
+        "Content-type": "application/json",
+        "X-CSRFToken" : csrftoken,
+      },
+    })
+    .then((response) =>{
+      return response.json();
+    })
+    .then((data) => {
+      (valuereturn = (data.factor * value).toFixed(2)), (symbol = data.symbol);
+    });
+    return {
+      symbol:symbol,
+      value:valuereturn
+    };
+  }
+
+  async function GetConvertedRangeValues(value1,value2){
+    var url = "{% url 'get_selected_currency' %}";
+    valuereturn1 = 0;
+    valuereturn2 = 0;
+     await fetch(url,{
+      method: "GET",
+      headers:{
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+     })
+     .then((response) => {
+      return response.json();
+     })
+     .then((data) => {
+      (valuereturn1 = (data.factor * value1).toFixed(2)),
+      (valuereturn2 = (data.factor * value2).toFixed(2)),
+      (symbol = data.symbol);
+     });
+     return {
+      symbol: symbol,
+      value1: valuereturn1,
+      value2: valuereturn2
+     };
+  }
+
+  async function handleQuickView(params){
+    var url = "{% url 'quick_view' %}";
+    console.log('url ======+>',url)
+    console.log('CSRF ONLY ======+>',csrftoken)
+    await fetch(url,{
+      method: "POST",
+      headers:{
+        "Content-type":"application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+        productId:params.productId,
+        productVariantId:params.productVariantId,
+      }),
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let id = data.productId;
+      let firstProductVariant = data.firstProductVariant;
+
+      console.log(" ====> singleImage <======",data.singleImage);
+
+      var productDetailsAtQuickView = document.getElementById('product-details');
+      if (productDetailsAtQuickView) {
+        productDetailsAtQuickView.remove();
+      }
+
+      // Code to render out multiple images in quick model view START -------------------------------------------------
+      var quickViewImg = document.getElementById("quickViewImage");
+      console.log('quickViewImg ==========>',quickViewImg)
+      //quickViewImg.setAttribute('src', data.singleImage)
+      //var element = document.getElementById("quickViewImagesDiv");
+      //element.style.backgroundImage = 'url("' + data.singleImage + '")';
+
+      // Code to render out multiple images in quick model view END ---------------------------------------------------
+
+    })
+  }
+</script>
 
 </body>
 </html> 

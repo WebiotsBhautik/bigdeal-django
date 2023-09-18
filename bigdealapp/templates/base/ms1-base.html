@@ -194,8 +194,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-lg-6 col-xs-12">
-              <div class="quick-view-img">
-                <img src="{% static 'assets/images/layout-1/product/3.jpg' %}" alt="" class="img-fluid bg-img">
+              <div class="quick-view-img" id="quickViewImagesDiv">
+                <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
             </div>
             <div class="col-lg-6 rtl-text">
@@ -292,11 +292,11 @@
                     </div>
                   </div>
                   <div class="product-buttons">
-                    <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                    <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                       <i class="fa fa-shopping-cart"></i>
                       add to cart
                     </a>
-                    <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                    <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                       view detail
                     </a>
                   </div>

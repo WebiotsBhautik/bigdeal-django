@@ -1,18 +1,19 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
+
 from django.core import serializers
 from django.conf import settings
 from collections import Counter
 from django.urls import reverse
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
-from accounts.models import CustomUser
+from accounts.models import CustomUser,TemporaryData
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import auth
-from .models import Banner, BannerType, BlogCategory, Blog, BlogComment
+from .models import Banner, BannerType, BlogCategory, Blog, BlogComment,ContactUs
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
 
@@ -26,6 +27,21 @@ from decimal import Decimal, ROUND_HALF_UP
 from django.http import Http404
 import json
 import uuid
+
+# Imports For Forgot Password With Email Verification
+
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode
+# from django.contrib.auth.tokens import default_token_generator,PasswordResetTokenGenerator
+from django.core.mail import EmailMultiAlternatives
+from datetime import datetime, timedelta
+from django.utils import timezone
+import re
+from django.db.models import Q,Sum
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+
 
 
 
@@ -866,8 +882,9 @@ def shop_left_sidebar(request):
         max_price = max(list(get_all_prices))
         
     selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
-    min_price = min_price*selected_currency.factor
-    max_price = max_price*selected_currency.factor
+    if selected_currency:
+        min_price = min_price*selected_currency.factor
+        max_price = max_price*selected_currency.factor
         
         
     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
@@ -1857,14 +1874,17 @@ def left_slidebar(request,id,brand_id=None):
         firstProductVariant = firstProductVariant.id
     else:
         firstProductVariant = None
-    
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+        
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     # brandid = ()
     
@@ -1974,10 +1994,10 @@ def left_slidebar(request,id,brand_id=None):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
+                "reviewStatus":reviewStatus,
                 "last_added_products":last_added_products,  
                 "url":url,
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
                 }
 
     return render(request, 'pages/product/product-left-sidebar.html',context)
@@ -2041,10 +2061,11 @@ def get_product_variant(request):
         
         
 def add_to_wishlist(request, id):
-    customer_wishlist = Wishlist.objects.get(
-        wishlistByCustomer=request.user.id)
-    customer_wishlist.wishlistProducts.add(id)
-    customer_wishlist.save()
+    if request.user.is_authenticated:
+        customer_wishlist = Wishlist.objects.get(
+            wishlistByCustomer=request.user.id)
+        customer_wishlist.wishlistProducts.add(id)
+        customer_wishlist.save()
     return redirect(request.META['HTTP_REFERER'])
 
 
@@ -2084,14 +2105,17 @@ def right_sidebar(request,id):
         firstProductVariant = firstProductVariant.id
     else:
         firstProductVariant = None
-        
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+   
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     
     customerReviews = ProductReview.objects.filter(productName__id=id)
@@ -2165,7 +2189,7 @@ def right_sidebar(request,id):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 "last_added_products":last_added_products,
                 "selected_delivery_options":selected_delivery_options,
                 }
@@ -2195,13 +2219,16 @@ def no_sidebar(request,id):
     else:
         firstProductVariant = None
         
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     
     customerReviews = ProductReview.objects.filter(productName__id=id)
@@ -2275,7 +2302,7 @@ def no_sidebar(request,id):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
                 }
     return render(request, 'pages/product/product-no-sidebar.html',context)
@@ -2291,7 +2318,7 @@ def bundle(request,id):
     try:
         product = Product.objects.get(id=id)
     except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+        return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -2303,13 +2330,16 @@ def bundle(request,id):
     else:
         firstProductVariant = None
         
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     
     customerReviews = ProductReview.objects.filter(productName__id=id)
@@ -2383,7 +2413,7 @@ def bundle(request,id):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
                 }
     return render(request, 'pages/product/product-bundle.html',context)
@@ -2411,13 +2441,16 @@ def image_swatch(request,id):
     else:
         firstProductVariant = None
         
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     
     customerReviews = ProductReview.objects.filter(productName__id=id)
@@ -2491,7 +2524,7 @@ def image_swatch(request,id):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
                 }
     return render(request, 'pages/product/product-image-swatch.html',context)
@@ -2518,14 +2551,17 @@ def vertical_tab(request,id):
         firstProductVariant = firstProductVariant.id
     else:
         firstProductVariant = None
-        
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+     
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
     
     
     customerReviews = ProductReview.objects.filter(productName__id=id)
@@ -2599,7 +2635,7 @@ def vertical_tab(request,id):
                 "ratingPercentage":ratingPercentage,
                 "average_rating":average_rating,
                 "rating_range":rating_range,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
                 }
     return render(request, 'pages/product/product-vertical-tab.html',context)
@@ -2630,13 +2666,16 @@ def video_thumbnail(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -2715,7 +2754,7 @@ def video_thumbnail(request,id):
                 "last_added_products":last_added_products,  
                 # "url":url,
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-video-thumbnail.html',context)
 
@@ -2744,14 +2783,17 @@ def image_4(request,id):
         firstProductVariant = firstProductVariant.id
     else:
         firstProductVariant = None
-    
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+        
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -2830,7 +2872,7 @@ def image_4(request,id):
                 "last_added_products":last_added_products,  
                 # "url":url,
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-4-image.html',context)
 
@@ -2859,13 +2901,17 @@ def sticky(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -2943,7 +2989,7 @@ def sticky(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-sticky.html',context)
 
@@ -2972,13 +3018,16 @@ def accordian(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3056,7 +3105,7 @@ def accordian(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-page-accordian.html',context)
 
@@ -3085,13 +3134,16 @@ def product_360_view(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3169,7 +3221,7 @@ def product_360_view(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-page-360-view.html',context)
 
@@ -3198,13 +3250,16 @@ def left_image(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3282,7 +3337,7 @@ def left_image(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-left-image.html',context)
 
@@ -3311,13 +3366,16 @@ def right_image(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3395,7 +3453,7 @@ def right_image(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-right-image.html',context)
 
@@ -3424,13 +3482,16 @@ def image_outside(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3508,7 +3569,7 @@ def image_outside(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-page-image-outside.html',context)
 
@@ -3537,13 +3598,16 @@ def thumbnail_left(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3621,7 +3685,7 @@ def thumbnail_left(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-thumbnail-left.html',context)
 
@@ -3650,13 +3714,16 @@ def thumbnail_right(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3734,7 +3801,7 @@ def thumbnail_right(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-thumbnail-right.html',context)
 
@@ -3763,13 +3830,16 @@ def thumbnail_bottom(request,id):
     else:
         firstProductVariant = None
     
-    # customer=CustomUser.objects.get(id=request.user.id)
-    # productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
-    # reviewStatus=False
-    # for proOrder in productOrders:
-    #     if proOrder.productOrderedProducts.variantProduct== product:
-    #         reviewStatus=True
-    #         break
+    if request.user.is_authenticated:
+        customer=CustomUser.objects.get(id=request.user.id)
+        productOrders=ProductOrder.objects.filter(productOrderedByCustomer=customer)
+        reviewStatus=False
+        for proOrder in productOrders:
+            if proOrder.productOrderedProducts.variantProduct== product:
+                reviewStatus=True
+                break
+    else:
+        reviewStatus=False
   
     customerReviews = ProductReview.objects.filter(productName__id=id)
 
@@ -3847,7 +3917,7 @@ def thumbnail_bottom(request,id):
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
-                # "reviewStatus":reviewStatus,
+                "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-thumbnail-bottom.html',context)
 
@@ -3902,7 +3972,6 @@ def element_productbox(request):
     
     
     
-    
     # subcategories = category.get_descendants(include_self=True)
     # category_products = Product.objects.filter(proCategory__in=subcategories)
     # print('category_products ==========+>',category_products)
@@ -3943,7 +4012,6 @@ def element_no_slider(request):
     pets_products = Product.objects.filter(proCategory__in=subcategories)
     
     
-    
     context = {"breadcrumb": {"parent": "No Slider", "child": "No Slider"},
                'kids_products':kids_products,
                'pets_products':pets_products,
@@ -3952,14 +4020,24 @@ def element_no_slider(request):
     return render(request, 'pages/product/element-no_slider.html',context)
 
 
-
-
-
 # Blog Pages Section
+
+def add_comment(request, id):
+    if request.method == 'POST':
+        comment = request.POST['comment']
+        blog = Blog.objects.get(id=id)
+        commentInstance = BlogComment.objects.create(
+            commentOfBlog=blog, commentByUser=request.user, comment=comment)
+        commentInstance.save()
+        return redirect('blog_details', id=id)
 
 
 def blog_details(request, id):
-    blog = Blog.objects.get(id=id)
+    try:
+        blog = Blog.objects.get(id=id)
+    except (ValidationError, Blog.DoesNotExist):
+        return HttpResponse('Invalid Blog ID')
+    
     blogs = Blog.objects.filter(status=True,blogStatus=1)
     blogCategories = BlogCategory.objects.all()
     blogComments = BlogComment.objects.filter(commentOfBlog__id=id, status=True)
@@ -3970,11 +4048,8 @@ def blog_details(request, id):
                 "blogCategories": blogCategories,
                 "blogComments": blogComments,
                 "relatedBlogs": relatedBlogs,
-                
                 }
-    
     return render(request, 'pages/blog/blog-details.html',context)
-
 
 
 def blog_left_sidebar(request):
@@ -3986,38 +4061,16 @@ def blog_left_sidebar(request):
     page_obj = paginator.get_page(page_number)
     
     recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
+    popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
 
     context = {"breadcrumb": {"parent": "Blog Left Sidebar", "child": "Blog Left Sidebar"},
                "blogs": blogs,
                "blogCategories": blogCategories,
                "page_obj": page_obj,
                "recent_blogs":recent_blogs,
+               "popular_blogs":popular_blogs,
                }
     return render(request, 'pages/blog/blog-left-sidebar.html', context)
-
-
-# def left_sidebar_for_selected_category(request, id):
-#     blogCategory = BlogCategory.objects.get(id=id)
-#     blogs = Blog.objects.filter(
-#         status=True, blogStatus=1, blogCategory=blogCategory)
-
-#     paginator = Paginator(blogs, 3)
-#     blogCategories = BlogCategory.objects.all()
-
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-    
-    
-
-#     context = {"breadcrumb": {"parent": "Blog Left Sidebar", "child": "Blog Left Sidebar"},
-#                "blogs": blogs,
-#                "blogCategories": blogCategories,
-#                "page_obj": page_obj,
-               
-#                }
-#     return render(request, 'pages/blog/blog-left-sidebar.html', context)
-
-
 
 
 def blog_right_sidebar(request):
@@ -4030,6 +4083,8 @@ def blog_right_sidebar(request):
     page_obj = paginator.get_page(page_number)
     
     recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
+    popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
+
 
     context = {
         "breadcrumb": {"parent": "Blog Right Sidebar", "child": "Blog Right Sidebar"},
@@ -4037,34 +4092,364 @@ def blog_right_sidebar(request):
         "blogCategories": blogCategories,
         "page_obj": page_obj,
         "recent_blogs":recent_blogs,
+        "popular_blogs":popular_blogs,
+        
     }
     return render(request, "pages/blog/blog-right-sidebar.html", context)
 
 
-
 def blog_no_sidebar(request):
+    blogs = Blog.objects.filter(status=True, blogStatus=1)
+    paginator = Paginator(blogs, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         "breadcrumb": {"parent": "Blog No Sidebar", "child": "Blog No Sidebar"},
+        'blogs':blogs,
+        'page_obj':page_obj,
     }
     return render(request, 'pages/blog/blog-no-sidebar.html',context)
 
 
-
 def blog_creative_left_sidebar(request):
+    blogs = Blog.objects.filter(status=True, blogStatus=1)
+    paginator = Paginator(blogs, 6)
+
+    blogCategories = BlogCategory.objects.all()
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
+    popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
+
     context = {
-        "breadcrumb": {"parent": "Blog Creative Left Sidebar", "child": "Blog Creative Left Sidebar"},
+        "breadcrumb": {"parent": "Creative Left Sidebar", "child": "Creative Left Sidebar"},
+        "blogs": blogs,
+        "blogCategories": blogCategories,
+        "page_obj": page_obj,
+        "recent_blogs":recent_blogs,
+        "popular_blogs":popular_blogs,
     }
     return render(request, 'pages/blog/blog-creative-left-sidebar.html',context)
+
+
+def search_products(request):
+    products = ProductVariant.objects.all()
+    results = [{'id':product.variantProduct.id,
+                } for product in products]
+    
+    return JsonResponse({'status':200, 'data':results})
+
+
+def search_bar(request,params=None):
+    query = ''
+    data = ''
+    products = ProductVariant.objects.all()
+    if 'search' in request.GET:
+        query = request.GET.get('search')
+        if query:
+            if params:
+                products = products.filter(variantProduct__productName__icontains=query)
+                data = [{'id':p.variantProduct.id,'name':p.variantProduct.productName,'category':p.variantProduct.proCategory.categoryName,
+                         'brand':p.variantProduct.productBrand.brandName,'description':p.variantProduct.productDescription,}for p in products]
+            else:
+                products = ProductVariant.objects.all()
+                
+    products = GetUniqueProducts(products)
+    paginator = Paginator(products,8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    
+    context = {"breadcrumb": {"parent": "Search", "child": "Search"}, 'products': products,
+                'query': query,'page_obj':page_obj, }
+            
+    
+    return render(request, 'pages/pages/search.html',context)
+
+
+
+
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST['emailname']
+        if CustomUser.objects.filter(email=email).exists():
+            user = CustomUser.objects.get(email__exact=email)
+            current_site = get_current_site(request)
+            mail_subject = 'Reset Your Password'
+            otp = generateOTP()
+            message = render_to_string('authentication/reset_password_email.html',{
+                'user':user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':otp,
+            })
+            to_email = email
+            mail = EmailMultiAlternatives(mail_subject,message,to=[to_email])
+            mail.attach_alternative(message, "text/html")
+            mail.send()
+            temDataObject = TemporaryData.objects.get(TemporaryDataByUser__email=email)
+            temDataObject.otpNumber = otp
+            
+            current_time = datetime.now()
+            temDataObject.otpExpiryTime = current_time + timedelta(minutes=1)
+            temDataObject.save(update_fields=['otpNumber','otpExpiryTime'])
+            
+            response = HttpResponseRedirect('verify_token')
+            response.set_cookie('code',user.id,max_age=180)
+            messages.success(request,'An OTP has been sent to your email adress successfully')
+            return response
+        else:
+            messages.error(request,'Account Does Not Exist!')
+            return redirect('forgot_password')
+            
+    return render(request, 'authentication/forget-pwd.html')
     
     
+def verify_token(request):
+    if request.method == "POST":
+        entered_otp = request.POST.get('otp')
+        get_id = request.COOKIES['code']
+        get_user = CustomUser.objects.get(id=get_id)
+        
+        temDataObject = TemporaryData.objects.get(TemporaryDataByUser=get_user)
+        stored_otp = temDataObject.otpNumber
+        current_time = timezone.now()
+        exp_time = temDataObject.otpExpiryTime
+        
+        if current_time < exp_time:
+            if entered_otp == stored_otp:
+                messages.success(request, 'OTP Verified')
+                return redirect('update_password')
+            else:
+                messages.error(request, 'Invalid OTP. Please try again.')
+                return redirect('verify_token')
+        else:
+            messages.error(request,'Your otp has been expired! Please regenerate otp.')
+            return redirect('forgot_password')
+    return render(request,'authentication/verify-token.html')
+
+def update_password(request):
+    if request.method == "POST":
+        password = request.POST['newpass']
+        conf_password = request.POST['confnewpass']
+        
+        password_pattern = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+        
+        user = CustomUser.objects.get(username__exact=request.user.username)
+
+        if password and conf_password:
+            if not re.search(password_pattern,password):
+                messages.warning(request, 'Password must be at least 8 characters long and contain at least one letter and one number')
+                return redirect('update_password')
+            
+            if password == conf_password:
+                user.set_password(password)
+                user.save()
+                messages.success(request, 'Password updated successfully')
+                return redirect('login_page')
+            else:
+                messages.error(request,'Password Does Not Match')
+                return redirect('update_password')
+    context = {"breadcrumb": {"parent": "Update password", "child": "Update password"},
+    }
+    return render(request, 'authentication/update_password.html',context)  
+
+
+def dashboard(request):
+    context = {"breadcrumb":{"parent":"Dashboard","child":"Dashboard"},
+               }
+    return render(request, 'pages/pages/account/dashboard.html',context)
+
+def profile(request):
+    context = {"breadcrumb":{"parent":"profile","child":"profile"},
+               }
+    return render(request, 'pages/pages/account/profile.html',context)
+
+
+def change_password(request):
+    if request.method == "POST":
+        current_password = request.POST['currentpass']
+        new_password = request.POST['newpass']
+        confirm_password = request.POST['confnewpass']
+        
+        user = CustomUser.objects.get(username__exact=request.user.username)
+            
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request,'Password changed successfully')
+                return redirect('login_page')
+            else:
+                messages.error(request, 'Please enter valid current password')
+                return redirect('change_password')
+        else:
+            messages.error(request,'Password Does Not Match')
+            return redirect('change_password')
+            
+    context = {"breadcrumb":{"parent": "Change password", "child":"Change password"},
+               }
+    return render(request, 'authentication/change_password.html',context)
 
 
 
+def contact_us(request):
+    if request.method == "POST":
+        firstname = request.POST['first']
+        lastname = request.POST['last']
+        email = request.POST['email']
+        number = request.POST['number']
+        comment = request.POST['comment']
+        name = str(firstname)+" "+str(lastname)
+        
+        if ContactUs.objects.filter(contactUsEmail=email).exists():
+            messages.warning(request, 'Email already exists')
+        else:
+            user = ContactUs.objects.create(contactUsName=name,contactUsEmail=email,contactUsNumber=number,contactUsComment=comment)
+            print('user ==========>',user.contactUsComment)
+            user.save()
+            messages.success(request, 'Your form has been submitted successfully')
+            return redirect('contact_us')
+    context = {"breadcrumb":{"parent":"Contact","child":"Contacts"},
+               }
+    return render(request, 'pages/pages/account/contact.html',context)
+
+def get_subcategories(category):
+    fashion_category = ProCategory.objects.get(categoryName__iexact=category)
+    subcategories = ProCategory.objects.filter(parent=fashion_category)
+    
+    result = []
+    for subcategory in subcategories:
+        subcategory_data = {
+            'id': subcategory.id,
+            'name': subcategory.categoryName,
+            'subcategories': get_subcategories(subcategory.categoryName)
+        }
+        result.append(subcategory_data)
+    
+    return result
+
+
+def search_products(request):
+    query = request.GET.get('q','')
+    category = request.GET.get('category','')
+    
+    products = ProductVariant.objects.all()
+    
+    if query and category:
+        fashion_subcategories = get_subcategories(category)
+        category_ids = []
+        category_ids.extend(get_category_ids(fashion_subcategories))
+        products = products.filter(variantProduct__proCategory__id__in=category_ids, variantProduct__productName__icontains=query)
+    else:
+        fashion_subcategories = get_subcategories(category)
+        category_ids = []
+        category_ids.extend(get_category_ids(fashion_subcategories))
+        products = ProductVariant.objects.filter(variantProduct__proCategory__id__in=category_ids).order_by('id')[:7]
+        
+    products = GetUniqueProducts(products)
+    results = [{'id': product.variantProduct.id,
+                'name': product.variantProduct.productName,
+                'price': product.productVariantFinalPrice,
+                'image_url': product.variantProduct.productImageFront.url if product.variantProduct.productImageFront else '',
+                'rating': product.variantProduct.productFinalRating,
+                'category': product.variantProduct.proCategory.categoryName,
+                } for product in products]
+    return JsonResponse({'status': 200, 'data': results})
+
+
+def get_category_ids(data):
+    category_ids = []
+    for category in data:
+        category_ids.append(category['id'])
+        category_ids.extend(get_category_ids(category['subcategories']))
+    return category_ids
+
+
+@csrf_exempt
+def quick_view(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        productId = body["productId"]
+        productVariantId = body["productVariantId"]
+        
+        product = Product.objects.get(id=productId)
+        productVariant = ProductVariant.objects.get(id=productVariantId)
+        firstProductVariant = ProductVariant.objects.filter(variantProduct=product).first()
+        multipleImages = MultipleImages.objects.filter(multipleImageOfProduct=product)
+        multipleImgList = []
+        
+        for image in multipleImages:
+            multipleImgList.append(str(image.multipleImages.url))
+            
+        singleImage = str(productVariant.variantProduct.productImageFront)
+        
+        attributeObjects, attributeObjectsIds = get_product_attribute_list_for_quick_view(product.id)
+        
+        if product.productType == "Simple":
+            productVariantMinPrice = None
+            productVariantMaxPrice = None
+            productVariantMinActualPrice = None
+            productVariantMaxActualPrice = None
+            productVariantActualPrice = product.product_actual_price_range
+            productVariantDiscountRange = None
+            productVariantDiscount = product.product_discount_range
+            productVariantPrice1 = product.product_price_range
+            
+        if product.productType == "Classified":
+            productVariantMinPrice = product.product_price_range[0]
+            productVariantMaxPrice = product.product_price_range[1]
+            productVariantMinActualPrice = product.product_actual_price_range[0]
+            productVariantActualPrice = None
+            productVariantMaxActualPrice = product.product_actual_price_range[1]
+            productVariantDiscountRange = product.product_discount_range
+            productVariantDiscount = None
+            productVariantPrice1 = None
+            
+        data = {
+            "productId": product.id,
+            "firstProductVariant": firstProductVariant.id,
+            "productVariantId": productVariant.id,
+            "productName": productVariant.variantProduct.productName,
+            "productFinalRating": product.productFinalRating,
+            "productStockStatus": productVariant.productVariantStockStatus,
+            "productVariantPrice1": productVariantPrice1,
+            
+            "productVariantMinPrice": productVariantMinPrice,
+            "productVariantMaxPrice": productVariantMaxPrice,
+      
+            "productVariantMinActualPrice" : productVariantMinActualPrice,
+            "productVariantMaxActualPrice" : productVariantMaxActualPrice,
+            "productVariantDiscountRange" : productVariantDiscountRange,
+          
+            "productVariantActualPrice":productVariantActualPrice,
+            "productVariantDiscount":productVariantDiscount,
+          
+            "productImageFront": str(product.productImageFront),
+            "multipleImages": multipleImgList,
+            "singleImage":singleImage,
+            "productType": product.productType,
+            "attributeObjects":attributeObjects,
+            "attributeObjectsIds":attributeObjectsIds,
+            "brand": str(product.productBrand),
+            "category": str(product.proCategory)
+            
+        }
+        
+        return JsonResponse(data, safe=False)
+            
+            
+        
+        
+        
 
 
 
-
-
+  
 
 
 

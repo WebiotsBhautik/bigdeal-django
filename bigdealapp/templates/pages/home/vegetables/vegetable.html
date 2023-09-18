@@ -788,12 +788,12 @@
                   <div class="product-box ">
                      <div class="product-imgbox">
                         <div class="product-front">
-                           <a href="product-page(left-sidebar).html">
+                           <a href="{% url 'left_slidebar' product.id %}">
                               <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                            </a>
                         </div>
                         <div class="product-back">
-                           <a href="product-page(left-sidebar).html">
+                           <a href="{% url 'left_slidebar' product.id %}">
                               <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                            </a>
                         </div>

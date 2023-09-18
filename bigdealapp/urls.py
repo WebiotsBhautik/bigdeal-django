@@ -9,12 +9,24 @@ urlpatterns = [
     path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
     path('get_selected_currency',views.get_selected_currency,name='get_selected_currency'),
 
-    
 
-    path('', views.login_page, name='login_page'),
+    path('', views.index, name='index'),
     path('signup_page', views.signup_page, name='signup_page'),
     path('login_page', views.login_page, name='login_page'),
     path('logout_page', views.logout_page, name='logout_page'),
+    
+    
+# Forgot password routes
+
+    path('forgot_password',views.forgot_password, name='forgot_password'),
+    path('verify_token',views.verify_token, name='verify_token'),
+    path('update_password',views.update_password, name='update_password'),
+    path('change_password',views.change_password,name='change_password'),
+    path('dashboard',views.dashboard,name='dashboard'),
+    path('profile',views.profile,name='profile'),
+    path('contact_us',views.contact_us,name='contact_us'),
+    
+
     
     
 # HOME PAGES ROUTES
@@ -69,6 +81,9 @@ urlpatterns = [
     path('get_product_variant',views.get_product_variant,name='get_product_variant'),
     
     path('product-detail/<str:id>', views.left_slidebar, name='left_slidebar'),
+    
+    path('quick_view',views.quick_view,name='quick_view'),
+
     # path('product-detail/<slug:brand_slug>', views.left_slidebar, name='left_slidebar_with_brands'),
 
     # path('shop-left-sidebar/<slug:brand_slug>', views.products_by_brand, name='products_by_brand'),
@@ -98,19 +113,23 @@ urlpatterns = [
     
     
     
+# Pages Section Routes
+
+    path('search_bar/',views.search_bar, name='search_bar'),
+    path('search_bar/<str:params>',views.search_bar, name='search_bar_with_params'),
+    path('search_products/', views.search_products, name='search_products'),
+
+    
 # Blog Pages Routes
 
     path('blog_details/<str:id>',views.blog_details, name='blog_details'),
-    
+    path('add_comment/<str:id>',views.add_comment, name='add_comment'),
     
     path('blog_left_sidebar',views.blog_left_sidebar, name='blog_left_sidebar'),
     # path('left_sidebar_for_selected_category/<str:id>',views.left_sidebar_for_selected_category, name='left_sidebar_for_selected_category'),
     path('blog_right_sidebar',views.blog_right_sidebar, name='blog_right_sidebar'),
     path('blog_no_sidebar',views.blog_no_sidebar,name='blog_no_sidebar'),
     path('blog_creative_left_sidebar',views.blog_creative_left_sidebar,name='blog_creative_left_sidebar')
-
-
-    
 
 
 ]

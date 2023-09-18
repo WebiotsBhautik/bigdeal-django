@@ -169,7 +169,7 @@
                     <div class="input-group-text">
                       <span class="search"><i class="fa fa-search"></i></span>
                     </div>
-                    <input type="search" class="form-control" placeholder="Search a Product" >
+                    <input text="search" class="form-control" id="search-input" placeholder="Search a Product" oninput="searchValue()" >
                     <div class="input-group-text">
                       <select>
                         <option>All Category</option>
@@ -178,9 +178,55 @@
                       </select>
                     </div>
                   </div>
+                  <div id="search_results"></div>
+                  <div class="search-suggestion" id="searchData">
+                    <ul class="custom-scroll" id="realData">
+                      {% comment %} <li>
+                        <div class="product-cart media">
+                            <img src="fashion/product/back/11.jpg"
+                                class="img-fluid blur-up lazyload" alt=""> 
+                            <div class="media-body">
+                                <a href="javascript:void(0)">
+                                    <h6 class="mb-1">New Smart Watch 4 ERT2</h6>
+                                </a>
+                                <ul class="rating p-0">
+                                    <li>
+                                        <i class="fas fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-star"></i>
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-star"></i>
+                                    </li>
+                                </ul>
+                                <p class="mb-0 mt-1">$28.00</p>
+                            </div>
+                        </div>
+                      </li>{% endcomment %}
+                    </ul>
+                  </div> 
                 </form>
               </div>
             </div>
+            <script>
+              let query
+               async function searchValue(){
+                query = document.getElementById('search-input').value;
+                document.getElementById("search-input").innerHTML = "You search: " + query;
+                console.log('query ==========>',query)
+
+                const response = await fetch(`/search_products/?q=${query}&category={{theme}}`);
+
+                const productData = await response.json();
+               }
+            </script>
             <div class="header-right">
               <div class="icon-block">
                 <ul>
