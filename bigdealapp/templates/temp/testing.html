@@ -127,6 +127,47 @@
 </html>
 
 
+<!-- Quick view modal start -->
+<div class="modal fade quick-view-modal" id="quick-view">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <div class="modal-body">
+              <div class="row gy-4">
+                  <div class="col-lg-6 ratio_2">
+                      <div class="quick-view-image" id="quickViewImagesDiv">
+                          <img loading="lazy" id="quickViewImage"
+                              class="product-quick-view img-fluid bg-img blur-up lazyload" alt="product">
+                      </div>
+                  </div>
+                  <div class="col-lg-6">
+                      <div class="product-right" id="productRight">
+                          <h2 class="mb-2" id="productName"></h2>
+                          <ul class="rating mt-1" id="productRating">
+                              <li class="font-light" id="stockStatus"></li>
+                          </ul>
+                          <div id="priceLabel" class="price mt-3">
+                              <h3 id="productPrice">$20.00</h3>
+                              <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                              <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                          </div>
+                          <div class="price mt-3" id="priceLabel2"></div>
+                          
+                          <div class="product-btns" id="productBtnDiv">
+                              <a id="addToCart" class="btn btn-solid-default btn-sm">Add to cart</a>
+                              <a id="productLeftSlidebar" class="btn btn-solid-default btn-sm">View
+                                  details</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Quick view modal end -->
+
+
 
 
 
@@ -224,7 +265,6 @@
               let firstProductVariant = data.firstProductVariant;
 
               console.log('--------singleImage>>>>', data.singleImage);
-              // console.log('--------multipleImages>>>>',data.multipleImages);
 
               var productDetailsAtQuickView = document.getElementById('product-details');
               if (productDetailsAtQuickView) {

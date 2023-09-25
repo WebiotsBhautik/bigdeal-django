@@ -199,18 +199,18 @@
               </div>
             </div>
             <div class="col-lg-6 rtl-text">
-              <div class="product-right">
+              <div class="product-right" id="productRight">
                 <div class="pro-group">
-                  <h2>
+                  <h2 id="productName">
                     reader will be distracted
                   </h2>
-                  <ul class="pro-price">
-                    <li>$70</li>
-                    <li><span>mrp $140</span></li>
-                    <li>50% off</li>
+                  <ul class="pro-price" id="priceLabel">
+                    <li id="productPrice">$70</li>
+                    <li><span id="actualPriceAtQuickView">mrp $140</span></li>
+                    <li id="discountPercentageAtQuickView">50% off</li>
                   </ul>
                   <div class="revieu-box">
-                    <ul>
+                    <ul id="productRating">
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
@@ -230,7 +230,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pro-group">
+                {% comment %} <div class="pro-group">
                   <h6 class="product-title">product infomation</h6>
                   <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
                 </div>
@@ -290,7 +290,7 @@
                       <input class="qty-adj form-control" type="number" value="1">
                       <button class="qty-plus"></button>
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="product-buttons">
                     <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                       <i class="fa fa-shopping-cart"></i>

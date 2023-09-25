@@ -1366,23 +1366,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           <div class="col-lg-6 col-xs-12">
-            <div class="quick-view-img">
-              <img src="{% static 'assets/images/layout-1/product/3.jpg' %}" alt="" class="img-fluid bg-img">
+            <div class="quick-view-img" id="quickViewImagesDiv">
+              <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
             </div>
           </div>
           <div class="col-lg-6 rtl-text">
-            <div class="product-right">
+            <div class="product-right" id="productRight">
               <div class="pro-group">
-                <h2>
+                <h2 id="productName">
                   reader will be distracted
                 </h2>
-                <ul class="pro-price">
-                  <li>$70</li>
-                  <li><span>mrp $140</span></li>
-                  <li>50% off</li>
+                <ul class="pro-price" id="priceLabel">
+                  {% comment %} <li id="productPrice">$70</li>
+                  <li><span id="actualPriceAtQuickView">mrp $140</span></li>
+                  <li id="discountPercentageAtQuickView">50% off</li> {% endcomment %}
+
+                  <h3 id="productPrice">$20.00</h3>
+                  <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                  <span class="theme-color" id="discountPercentageAtQuickView"></span>
                 </ul>
                 <div class="revieu-box">
-                  <ul>
+                  <ul id="productRating">
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
@@ -1402,7 +1406,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="pro-group">
+              {% comment %} <div class="pro-group">
                 <h6 class="product-title">product infomation</h6>
                 <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
               </div>
@@ -1462,13 +1466,13 @@
                     <input class="qty-adj form-control" type="number" value="1">
                     <button class="qty-plus"></button>
                   </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="product-buttons">
-                  <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                  <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                     <i class="fa fa-shopping-cart"></i>
                     add to cart
                   </a>
-                  <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                  <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                     view detail
                   </a>
                 </div>
@@ -1990,8 +1994,7 @@
     }
     return cookieValue;
   }
-  const csrftoken = getCookie('csrftoken');
-  console.log('csrftoken =========>',csrftoken)
+  var csrftoken = getCookie('csrftoken');
 
   async function GetConvertedValues(value){
     var url = "{% url 'get_selected_currency' %}",
@@ -2072,12 +2075,41 @@
 
       // Code to render out multiple images in quick model view START -------------------------------------------------
       var quickViewImg = document.getElementById("quickViewImage");
-      console.log('quickViewImg ==========>',quickViewImg)
-      //quickViewImg.setAttribute('src', data.singleImage)
-      //var element = document.getElementById("quickViewImagesDiv");
-      //element.style.backgroundImage = 'url("' + data.singleImage + '")';
+      quickViewImg.setAttribute('src', data.singleImage)
+      var element = document.getElementById("quickViewImagesDiv");
+      element.style.backgroundImage = 'url("' + data.singleImage + '")';
 
       // Code to render out multiple images in quick model view END ---------------------------------------------------
+
+      // ================= for rating ==================
+      let productRatingDiv = document.getElementById("productRating");
+      productRatingDiv.innerHTML = "";
+
+      for (let j = 1; j <= 5; j++) {
+        let ratingLi = document.createElement("li"),
+          icon = document.createElement("i");
+        icon.setAttribute("class", "fas fa-star");
+        if (j <= data.productFinalRating) {
+          icon.classList.add("theme-color");
+        }
+        ratingLi.appendChild(icon);
+        productRatingDiv.appendChild(ratingLi);
+      }
+      let stockStatusLi = document.createElement("li");
+      stockStatusLi.setAttribute("class", "font-light");
+      stockStatusLi.setAttribute("id", "stockStatus");
+      productRatingDiv.appendChild(stockStatusLi);
+
+      // ================= for rating ends==================
+
+      document.getElementById("productName").innerHTML = data.productName;
+      document.getElementById("stockStatus").innerHTML =
+        "( " + data.productStockStatus + " )";
+      document.getElementById("productPrice").innerHTML =
+        data.productVariantMinPrice +
+        "-" +
+        data.productVariantMaxPrice;
+
 
     })
   }
