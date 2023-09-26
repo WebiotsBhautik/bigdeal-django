@@ -115,9 +115,12 @@ urlpatterns = [
     
 # Pages Section Routes
 
+    path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
+
     path('search_bar/',views.search_bar, name='search_bar'),
     path('search_bar/<str:params>',views.search_bar, name='search_bar_with_params'),
     path('search_products/', views.search_products, name='search_products'),
+    
 
     
 # Blog Pages Routes

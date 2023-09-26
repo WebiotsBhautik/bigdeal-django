@@ -151,6 +151,9 @@ def index(request):
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products
         
+    template_path = 'pages/home/ms1/index.html'
+
+        
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbrands':brands,
@@ -160,7 +163,12 @@ def index(request):
                'products_by_subcategory':products_by_subcategory,
                'col_banner':col_banner,
                }
-    return render(request,'pages/home/ms1/index.html',context)
+    
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
+    
 
 def layout2(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore2 Demo')
@@ -2508,8 +2516,6 @@ def image_swatch(request,id):
 
     context = {"breadcrumb": {"parent": "Product Image Swatch", "child": "Product Image Swatch"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2530,13 +2536,9 @@ def image_swatch(request,id):
     return render(request, 'pages/product/product-image-swatch.html',context)
 
 def vertical_tab(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
     try:
         product = Product.objects.get(id=id)
     except (ValidationError, Product.DoesNotExist):
@@ -2619,8 +2621,6 @@ def vertical_tab(request,id):
 
     context = {"breadcrumb": {"parent": "Product Vertical Tab", "child": "Product Vertical Tab"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2642,13 +2642,9 @@ def vertical_tab(request,id):
 
 def video_thumbnail(request,id):
     url = ''
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -2734,8 +2730,6 @@ def video_thumbnail(request,id):
 
     context = {"breadcrumb": {"parent": "Product Video Thumbnail", "child": "Product Video Thumbnail"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2744,7 +2738,6 @@ def video_thumbnail(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -2752,7 +2745,6 @@ def video_thumbnail(request,id):
                 "average_rating":average_rating,
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
-                # "url":url,
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
                 }
@@ -2760,13 +2752,9 @@ def video_thumbnail(request,id):
 
 def image_4(request,id):
     url = ''
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -2852,8 +2840,6 @@ def image_4(request,id):
 
     context = {"breadcrumb": {"parent": "Product 4 Image", "child": "Product 4 Image"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2862,7 +2848,6 @@ def image_4(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -2870,20 +2855,15 @@ def image_4(request,id):
                 "average_rating":average_rating,
                 "rating_range":rating_range,
                 "last_added_products":last_added_products,  
-                # "url":url,
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
                 }
     return render(request, 'pages/product/product-4-image.html',context)
 
 def sticky(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -2970,8 +2950,6 @@ def sticky(request,id):
 
     context = {"breadcrumb": {"parent": "Product Sticky", "child": "Product Sticky"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2980,7 +2958,6 @@ def sticky(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -2994,13 +2971,9 @@ def sticky(request,id):
     return render(request, 'pages/product/product-sticky.html',context)
 
 def accordian(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3086,8 +3059,6 @@ def accordian(request,id):
 
     context = {"breadcrumb": {"parent": "Product Accordian", "child": "Product Accordian"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3096,7 +3067,6 @@ def accordian(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3110,13 +3080,9 @@ def accordian(request,id):
     return render(request, 'pages/product/product-page-accordian.html',context)
 
 def product_360_view(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3202,8 +3168,6 @@ def product_360_view(request,id):
 
     context = {"breadcrumb": {"parent": "Product 360 View", "child": "Product 360 View"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3212,7 +3176,6 @@ def product_360_view(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3226,13 +3189,9 @@ def product_360_view(request,id):
     return render(request, 'pages/product/product-page-360-view.html',context)
 
 def left_image(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3318,8 +3277,6 @@ def left_image(request,id):
 
     context = {"breadcrumb": {"parent": "Product Left Image", "child": "Product Left Image"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3328,7 +3285,6 @@ def left_image(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3342,13 +3298,9 @@ def left_image(request,id):
     return render(request, 'pages/product/product-left-image.html',context)
 
 def right_image(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3434,8 +3386,6 @@ def right_image(request,id):
 
     context = {"breadcrumb": {"parent": "Product Right Image", "child": "Product Right Image"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3444,7 +3394,6 @@ def right_image(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3458,13 +3407,9 @@ def right_image(request,id):
     return render(request, 'pages/product/product-right-image.html',context)
 
 def image_outside(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3550,8 +3495,6 @@ def image_outside(request,id):
 
     context = {"breadcrumb": {"parent": "Product Image Outside", "child": "Product Image Outside"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3560,7 +3503,6 @@ def image_outside(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3574,13 +3516,9 @@ def image_outside(request,id):
     return render(request, 'pages/product/product-page-image-outside.html',context)
 
 def thumbnail_left(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3666,8 +3604,6 @@ def thumbnail_left(request,id):
 
     context = {"breadcrumb": {"parent": "Product Thumbnail Left", "child": "Product Thumbnail Left"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3676,7 +3612,6 @@ def thumbnail_left(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3690,13 +3625,9 @@ def thumbnail_left(request,id):
     return render(request, 'pages/product/product-thumbnail-left.html',context)
 
 def thumbnail_right(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3782,8 +3713,6 @@ def thumbnail_right(request,id):
 
     context = {"breadcrumb": {"parent": "Product Thumbnail Right", "child": "Product Thumbnail Right"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3792,7 +3721,6 @@ def thumbnail_right(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3806,13 +3734,9 @@ def thumbnail_right(request,id):
     return render(request, 'pages/product/product-thumbnail-right.html',context)
 
 def thumbnail_bottom(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
         
     try:
         product = Product.objects.get(id=id)
@@ -3898,8 +3822,6 @@ def thumbnail_bottom(request,id):
 
     context = {"breadcrumb": {"parent": "Product Thumbnail Bottom", "child": "Product Thumbnail Bottom"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -3908,7 +3830,6 @@ def thumbnail_bottom(request,id):
                 "attributeObjectsIds":attributeObjectsIds,
                 "images": images,
                 "ProductsBrand": brand,
-                # "selectedBrand": brandSlug,  # Pass the selected brand_id to the template
                 "ProductCategory": category,
                 "related_products": related_products,
                 "customerReviews":customerReviews,
@@ -3970,11 +3891,6 @@ def element_productbox(request):
     subcategories = furniture.get_descendants(include_self=True)
     furniture_products = Product.objects.filter(proCategory__in=subcategories)
     
-    
-    
-    # subcategories = category.get_descendants(include_self=True)
-    # category_products = Product.objects.filter(proCategory__in=subcategories)
-    # print('category_products ==========+>',category_products)
     
     context = {"breadcrumb": {"parent": "Product Box", "child": "Product Box"},
         'ms1_products':ms1_products,
@@ -4310,7 +4226,6 @@ def contact_us(request):
             messages.warning(request, 'Email already exists')
         else:
             user = ContactUs.objects.create(contactUsName=name,contactUsEmail=email,contactUsNumber=number,contactUsComment=comment)
-            print('user ==========>',user.contactUsComment)
             user.save()
             messages.success(request, 'Your form has been submitted successfully')
             return redirect('contact_us')
@@ -4441,6 +4356,74 @@ def quick_view(request):
         }
         
         return JsonResponse(data, safe=False)
+    
+    
+    
+def _cart_id(request):
+    cart = request.session.session_key
+    if not cart:
+        cart = request.session.create()
+    return cart
+
+
+def add_to_cart(request, id=None, quantity=0):
+    productVariant = ProductVariant.objects.get(id=id)
+    cart_item = {
+        'product_id': str(productVariant.variantProduct.id),
+        'variant_id': id,
+        'quantity': quantity,
+        'productImage' : productVariant.variantProduct.productImageFront.url,
+        'productName' : productVariant.variantProduct.productName,
+        'price': productVariant.productVariantFinalPrice,
+        
+    }
+    
+    cart_item['totalPrice'] = format(int(cart_item['quantity']) * cart_item['price'],".2f")  # Calculate total price
+    current_user = request.user
+    if current_user.is_authenticated:
+        if productVariant.productVariantQuantity > 0:
+            cartObject=Cart.objects.get(cartByCustomer=request.user)
+            if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
+                cartProductObject = CartProducts.objects.get(
+                    cartByCustomer=request.user, cartProduct=productVariant)
+                cartProductObject.cartProductQuantity += int(quantity)
+                cartProductObject.save()
+                return redirect(request.META['HTTP_REFERER'])
+            else:
+                CartProducts.objects.create(
+                    cart=cartObject,cartProduct=productVariant, cartProductQuantity=quantity).save()
+                return redirect(request.META['HTTP_REFERER'])
+        else:
+            try:  
+                cart = Cart.objects.create(cart_id=_cart_id(request))
+            except Cart.DoesNotExist:
+                cart = Cart.objects.create(cart_id=_cart_id(request))
+    else:
+        cart_items= []
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        updated = False
+
+        if (get_Item is not None and get_Item != "null"):
+            cart_items = json.loads(get_Item)
+            # Check if the item already exists in the cart_items list and update quantity
+            for cart_item_cookie in cart_items:
+
+                if cart_item_cookie['product_id'] == str(productVariant.variantProduct.id) and cart_item_cookie['variant_id'] == str(id):
+                    cart_item_cookie['quantity'] = int(cart_item_cookie['quantity']) + 1
+                    updated = True
+                    break
+
+            if not updated:
+                cart_items.append(cart_item)
+                updated = True
+
+        if not updated:
+            cart_items.append(cart_item)
+        cart_items_json = json.dumps(cart_items)
+
+        response = HttpResponseRedirect(reverse('index_default'))
+        response.set_cookie('cart', cart_items_json)
+        return response
             
             
         
