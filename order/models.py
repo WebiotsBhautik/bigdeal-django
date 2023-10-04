@@ -14,21 +14,22 @@ from django.core.validators import RegexValidator
 
 class Cart(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    cart_id = models.CharField(max_length=200,blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    cartByCustomer = models.OneToOneField(CustomUser, on_delete=models.CASCADE,verbose_name='Customer')
+    cartByCustomer = models.OneToOneField(CustomUser, on_delete=models.CASCADE,verbose_name='Customer',null=True,blank=True)
     cartTotalPrice = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Total Price')
     cartOrdered = models.BooleanField(
         default=False, verbose_name='Cart Ordered')
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True,null=True)
 
     def __str__(self):
         return str(self.cartByCustomer)
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.id)
-        super(Cart, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.id)
+    #     super(Cart, self).save(*args, **kwargs)
 
     def getCartProducts(self):
         return " | ".join([str(cp) for cp in self.cartProducts.all()])
@@ -79,13 +80,12 @@ class Cart(models.Model):
     
 class CartProducts(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    cart=models.ForeignKey(Cart, on_delete=models.CASCADE, blank=True,null=True, verbose_name='Cart')
+    cart=models.ForeignKey(Cart, on_delete=models.CASCADE, null=True, verbose_name='Cart')
     cartByCustomer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, verbose_name='Customer')
     cartProduct = models.ForeignKey(ProductVariant, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Product')
     cartProductQuantity = models.PositiveIntegerField(verbose_name='Quantity')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
     slug = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
@@ -331,7 +331,7 @@ class ProductOrder(models.Model):
 class Wishlist(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     wishlistByCustomer = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE,verbose_name='Customer')
+        CustomUser, on_delete=models.CASCADE,verbose_name='Customer',null=True,blank=True)
     wishlistProducts = models.ManyToManyField(
         ProductVariant, blank=True, verbose_name='Products')
     slug = models.SlugField(unique=True, blank=True)
@@ -352,7 +352,7 @@ class Wishlist(models.Model):
 class Compare(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     compareByCustomer = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE,verbose_name='Customer')
+        CustomUser, on_delete=models.CASCADE,verbose_name='Customer',null=True,blank=True)
     compareProducts = models.ManyToManyField(
         ProductVariant, blank=True, verbose_name='Products')
     slug = models.SlugField(unique=True, blank=True)

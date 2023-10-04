@@ -1,642 +1,451 @@
+{% extends 'pages/shop/shop-base.html' %}
 {% load static %}
 {% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block components %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Voxo">
-    <meta name="keywords" content="Voxo">
-    <meta name="author" content="Voxo">
-    <link rel="icon" href="  {% static 'assets/images/favicon/2.png' %}" type="image/x-icon" />
-    <title>Create New Password</title>
-
-    <!--Google font-->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- bootstrap css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/vendors/bootstrap.scss' %}">
-
-    <!-- font-awesome css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/vendors/font-awesome.scss' %}">
-
-    <!-- feather icon css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/vendors/feather-icon.scss' %}">
-
-    <!-- animation css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/vendors/animate.css' %}">
-
-    <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/vendors/slick/slick.scss' %}">
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/vendors/slick/slick-theme.scss' %}">
-
-    <!-- Theme css -->
-    <link id="color-link" rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/demo2.scss' %}">
-
-</head>
-
-<body class="theme-color2 light ltr">
-
-
-    <!-- Sign Up Section Start -->
-    <div class="login-section">
-        <div class="materialContainer">
-            <div class="box">
-                <div class="login-title">
-                    {% include 'includes/alerts.html' %}
-                    <h2>Reset Password</h2>
+<!-- Category Slider Section Start -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="slide-7-1 product-wrapper slick-lg-space">
+                    {% for category in ProductCategory|slice:":10"  %}
+                    <div>
+                        <div class="image-slider">
+                            <div class="image-product">
+                                <img loading="lazy" src="{{category.categoryImage}}" class="w-100 blur-up lazyload"
+                                    alt="">
+                                <div class="image-contain">
+                                    <h5>{{category.categoryName}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-                <form action="{% url 'update_password' %}" method="post">
-                    {% csrf_token %}
-                    <div class="input">
-                        <label for="newpass">New Password</label>
-                        <input type="text" name="newpass" class="is-invalid" id="newpass" required>
-                        <span class="spin"></span>
-                    </div>
-
-                    <div class="input">
-                        <label for="confnewpass">Confirm New Password</label>
-                        <input type="text" name="confnewpass" class="is-invalid" id="confnewpass" required>
-                        <span class="spin"></span>
-                    </div>
-
-                    <div class="button login button-1">
-                        <button onclick="location.href = ">
-                            <span>Submit</span>
-                            <i class="fa fa-check"></i>
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-    <!-- Sign Up Section End -->
+</section>
+<!-- Category Slider Section End -->
 
-    <!-- theme Setting Start -->
-    <div class="theme-setting">
-        <ul>
-            <li>
-                <button id="darkButton" class="btn btn-sm dark-buttton">Dark</button>
-            </li>
-            <li>
-                <button class="btn btn-sm rtl-button">RTL</button>
-            </li>
-            <li class="color-picker">
-                <input type="color" class="form-control form-control-color" id="ColorPicker1" value="#e22454"
-                    title="Choose your color">
-            </li>
-        </ul>
+<!-- Shop Section start -->
+<section class="section-b-space">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3 col-md-4">
+                <div class="category-option">
+                    <div class="button-close mb-3">
+                        <button class="btn p-0"><i data-feather="arrow-left"></i> Close</button>
+                    </div>
+                    <div class="accordion category-name" id="accordionExample">
+
+                        <div class="accordion-item category-rating">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne">
+                                    Category
+                                </button>
+                            </h2>
+
+                            <div id="collapseOne" class="accordion-collapse collapse show">
+                                <div class="accordion-body category-scroll">
+                                    <ul class="category-list page-name">
+                                        {% for category in ProductCategory %}
+                                        <li><a href="{% url 'category_filter_with_id' category.id %}"
+                                                class="">{{category.categoryName}}<span>({{category.categoryTotalProduct}})</span></a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="accordion-item category-rating"> -->
+
+                        {% include 'pages/shop/filter-base.html' %}
+
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 col-12 ratio_30">
+                <div class="row g-4">
+
+                    <!-- filter button -->
+                    <div class="filter-button">
+                        <button class="danger-button danger-center btn btn-sm filter-btn"><i
+                                data-feather="align-left"></i> Filter</button>
+                    </div>
+                    <!-- filter button -->
+
+                    <!-- label and featured section -->
+                    <div class="col-md-12">
+                        {% comment %} <h3 class="mb-3">25 Results Found</h3> {% endcomment %}
+                        <ul class="short-name">
+                            {% for key, value in request.GET.items %}
+                            {% if key != 'selectedAttribute' and key != 'price' %}
+                            {% for attribute in value|return_selected_attribute_list:request %}
+                            <li>
+                                <div class="label-tag">
+                                    <span>{{attribute}}-{{key}}</span>
+                                    <button type="button" class="btn-close"
+                                        onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
+                                    {% comment %} <button type="button" class="btn-close"></button>
+                                    {% endcomment %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if key == 'price' %}
+                            {% with price_values=value|return_selected_attribute_list:request %}
+                            {% if price_values %}
+                            <li>
+                                <div class="label-tag">
+                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                                        {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
+                                </div>
+                            </li>
+                            {% endif %}
+                            {% endwith %}
+                            {% endif %}
+
+                            {% endfor %}
+
+                            {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                            {% if request.GET.page %}
+
+                            <div class="label-tag">
+                                <a href="{% url 'category_filter' %}"><span>Clear All</span></a>
+                            </div>
+
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% if request.path == '/category_filter' or request.GET.page %}
+                            {% if 'price' not in request.GET %}
+
+                            <li>
+                                <div class="label-tag">
+                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                                        {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                                </div>
+                            </li>
+
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% if request.path != '/category_filter' or request.GET %}
+                            {% if not request.GET.page %}
+
+                            <div class="label-tag">
+                                <a href="{% url 'category_filter' %}"><span>Clear All</span></a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+
+                        </ul>
+                        <script>
+                            function getCookie(name) {
+                                let cookieValue = null;
+                                if (document.cookie && document.cookie !== '') {
+                                    const cookies = document.cookie.split(';');
+                                    for (let i = 0; i < cookies.length; i++) {
+                                        const cookie = cookies[i].trim();
+                                        // Does this cookie string begin with the name we want?
+                                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                            break;
+                                        }
+                                    }
+                                }
+                                return cookieValue;
+                            }
+                            var csrftoken = getCookie('csrftoken');
+
+                            function redirectToCreateQueryParamsUrl(params) {
+                                var removeTagId = params.value + params.key + "CheckBox";
+                                var attributeCheckBox = document.getElementById(removeTagId);
+                                attributeCheckBox.checked = false;
+                                var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
+                                sbmtButton.click();
+                            }
+                        </script>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="filter-options">
+                            <div class="select-options">
+                                <div class="page-view-filter">
+                                    <div class="dropdown select-featured">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown">
+                                            24 Page per view
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
+                                                    A-Z</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
+                                                    Z-A</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Price, High To
+                                                    Low</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Price, Low To
+                                                    High</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Date, Old To
+                                                    New</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Date, New To
+                                                    Old</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="dropdown select-featured">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown">
+                                        Select Featured
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Jeans</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">T-Shirt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Shirt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Jacket</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Hoodie</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid-options d-sm-inline-block d-none">
+                                <ul class="d-flex">
+                                    <li class="two-grid">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid-2.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="three-grid d-md-inline-block d-none">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid-3.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="grid-btn active d-lg-inline-block d-none">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="list-btn">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/list.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- label and featured section -->
+                </div>
+
+                <!-- Product section start -->
+                <div
+                    class="row row-cols-lg-4 row-cols-md-3 row-cols-2 g-sm-4 g-3 gx-sm-4 gx-3 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+                    {% if page_obj %}
+                    {% for product in page_obj %}
+                    <div>
+                        <div class="product-box">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                                        <img loading="lazy" src="{{product.variantProduct.productImageFront.url}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                                        <img loading="lazy" src="{{product.variantProduct.productImageBack.url}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="cart-wrap">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}"
+                                                class="addtocart-btn">
+                                                <i data-feather="shopping-bag"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})"
+                                                data-bs-toggle="modal" href="#quick-view">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
+                                                class="add-to-compare-list">
+                                                <i data-feather="refresh-cw"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"
+                                                class="wishlist">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <div class="rating-details">
+                                    <span class="font-light grid-content">{{product.variantProduct.proCategory}}</span>
+                                    <ul class="rating mt-0">
+                                        <!-- ------------------------------------------------------------------- -->
+                                        {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
+                                        {% for x in product.variantProduct.productFinalRating|times %} <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        {% endfor %}
+
+                                        {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
+                                        {% with number3=number1|sub:number2 %}
+
+
+                                        {% for x in number3|times %}
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                        </li>
+                                        {% endfor %}
+
+                                        {% endwith %}
+                                        {% endwith %}
+
+                                        {% else %}
+
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        {% endif %}
+                                        <!-- ------------------------------------------------------------------- -->
+                                    </ul>
+                                </div>
+                                <div class="main-price">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}" class="font-default">
+                                        <h5 class="ms-0">{{product.variantProduct.productName}}</h5>
+                                    </a>
+                                    <div class="listing-content">
+                                        <span class="font-light">Regular Fit</span>
+                                        <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                            elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
+                                            ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
+                                            qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
+                                            accusantium architecto placeat quam officia, tempore repellendus.</p>
+                                    </div>
+                                    {% if product.variantProduct.productType == "Simple" %}
+                                    <h3 class="theme-color">
+                                        {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
+                                    </h3>
+                                    {% else %}
+                                    <h3 class="theme-color">
+                                        {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
+                                    </h3>
+                                    {% endif %}
+                                    <button
+                                        onclick="location.href = '{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}';"
+                                        class="btn listing-content">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if page_obj.has_other_pages %}
+                <div class="page-section">
+                    <div class="pagination">
+                        {% if page_obj.has_previous %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}"
+                            class="previous">Previous</a> {% endcomment %}
+                        <a href="{{page_obj.previous_page_number|update_url_parameters:request}}"
+                            class="previous">Previous</a>
+
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <span class="current-page">{{ num }}</span>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ num }}" class="page">{{ num }}</a>
+                        {% endcomment %}
+                        <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}"
+                            class="next">Next</a> {% endcomment %}
+                        <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="success-icon">
+                    <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
+                </div>
+                {% endif %}
+                <!-- Product section end -->
+            </div>
+        </div>
     </div>
-    <!-- theme Setting End -->
+</section>
+<!-- Shop Section end -->
 
-    <div class="bg-overlay"></div>
 
-    <!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}" ></script>
+{% endblock components %}
 
-<!-- menu js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
 
+{% block script %}
 
+<script src="{% static 'assets/js/price-filter.js' %} "></script>
+<script src="{% static 'assets/js/ion.rangeSlider.min.js' %} "></script>
 
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
-
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
-
-<!-- father icon -->
-<script src="{% static 'assets/js/feather.min.js' %}"></script>
-<script src="{% static 'assets/js/feather-icon.js' %}"></script>
-
-
-<!-- slick js-->
-<script  src="{% static 'assets/js/slick.js' %}"></script>
-
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}" ></script>
-
-<!-- Theme js-->
-<script src="{% static 'assets/js/script.js' %}" ></script>
-</body>
-</html>
-
-
-<!-- Quick view modal start -->
-<div class="modal fade quick-view-modal" id="quick-view">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          <div class="modal-body">
-              <div class="row gy-4">
-                  <div class="col-lg-6 ratio_2">
-                      <div class="quick-view-image" id="quickViewImagesDiv">
-                          <img loading="lazy" id="quickViewImage"
-                              class="product-quick-view img-fluid bg-img blur-up lazyload" alt="product">
-                      </div>
-                  </div>
-                  <div class="col-lg-6">
-                      <div class="product-right" id="productRight">
-                          <h2 class="mb-2" id="productName"></h2>
-                          <ul class="rating mt-1" id="productRating">
-                              <li class="font-light" id="stockStatus"></li>
-                          </ul>
-                          <div id="priceLabel" class="price mt-3">
-                              <h3 id="productPrice">$20.00</h3>
-                              <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
-                              <span class="theme-color" id="discountPercentageAtQuickView"></span>
-                          </div>
-                          <div class="price mt-3" id="priceLabel2"></div>
-                          
-                          <div class="product-btns" id="productBtnDiv">
-                              <a id="addToCart" class="btn btn-solid-default btn-sm">Add to cart</a>
-                              <a id="productLeftSlidebar" class="btn btn-solid-default btn-sm">View
-                                  details</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<!-- Quick view modal end -->
-
-
-
-
-
-
-
-
-
-<script>
-
-    <script>
-        function getCookie(name) {
-          let cookieValue = null;
-          if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-              const cookie = cookies[i].trim();
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === name + "=") {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-              }
-            }
-          }
-          return cookieValue;
-        }
-        var csrftoken = getCookie("csrftoken");
-
-        async function GetConvertedValues(value) {
-          var url = "{% url 'get_selected_currency' %}",
-            valuereturn = 0;
-          await fetch(url, {
-              method: "GET",
-              headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
-              },
-            })
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              (valuereturn = (data.factor * value).toFixed(2)), (symbol = data.symbol);
-            });
-          return {
-            symbol: symbol,
-            value: valuereturn
-          };
-        }
-
-        async function GetConvertedRangeValues(value1, value2) {
-
-          var url = "{% url 'get_selected_currency' %}",
-            valuereturn1 = 0,
-            valuereturn2 = 0;
-          await fetch(url, {
-              method: "GET",
-              headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
-              },
-            })
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              (valuereturn1 = (data.factor * value1).toFixed(2)),
-              (valuereturn2 = (data.factor * value2).toFixed(2)),
-              (symbol = data.symbol);
-            });
-          return {
-            symbol: symbol,
-            value1: valuereturn1,
-            value2: valuereturn2
-          };
-        }
-
-        async function handleQuickView(params) {
-          var url = "{% url 'quick_view' %}";
-          await fetch(url, {
-              method: "POST",
-              headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
-              },
-              body: JSON.stringify({
-                productId: params.productId,
-                productVariantId: params.productVariantId,
-              }),
-            })
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              let id = data.productId;
-              let firstProductVariant = data.firstProductVariant;
-
-              console.log('--------singleImage>>>>', data.singleImage);
-
-              var productDetailsAtQuickView = document.getElementById('product-details');
-              if (productDetailsAtQuickView) {
-                productDetailsAtQuickView.remove();
-              }
-
-              // Code to render out multiple images in quick model view START -------------------------------------------------
-              var quickViewImg = document.getElementById("quickViewImage");
-              quickViewImg.setAttribute('src', data.singleImage)
-              var element = document.getElementById("quickViewImagesDiv");
-              element.style.backgroundImage = 'url("' + data.singleImage + '")';
-
-              // Code to render out multiple images in quick model view END ---------------------------------------------------
-
-
-              // ================= for rating ==================
-              let productRatingDiv = document.getElementById("productRating");
-              productRatingDiv.innerHTML = "";
-
-              for (let j = 1; j <= 5; j++) {
-                let ratingLi = document.createElement("li"),
-                  icon = document.createElement("i");
-                icon.setAttribute("class", "fas fa-star");
-                if (j <= data.productFinalRating) {
-                  icon.classList.add("theme-color");
-                }
-                ratingLi.appendChild(icon);
-                productRatingDiv.appendChild(ratingLi);
-              }
-              let stockStatusLi = document.createElement("li");
-              stockStatusLi.setAttribute("class", "font-light");
-              stockStatusLi.setAttribute("id", "stockStatus");
-              productRatingDiv.appendChild(stockStatusLi);
-
-              // ================= for rating ends==================
-
-              document.getElementById("productName").innerHTML = data.productName;
-              document.getElementById("stockStatus").innerHTML =
-                "( " + data.productStockStatus + " )";
-              // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", data);
-
-              document.getElementById("productPrice").innerHTML =
-                data.productVariantMinPrice +
-                "-" +
-                data.productVariantMaxPrice;
-              // document.getElementById('productPrice').innerHTML = data.productFinalPrice + ".00";
-
-
-
-
-              if (data.productType == "Simple") {
-                GetConvertedValues(data.productVariantPrice1).then((Data) => {
-                  document.getElementById("productPrice").innerHTML =
-                    Data.symbol + " " + Data.value;
-                });
-                GetConvertedValues(data.productVariantActualPrice).then((Data) => {
-                  document.getElementById("actualPriceAtQuickView").innerHTML =
-                    Data.symbol + " " + Data.value;
-                });
-
-                document.getElementById("discountPercentageAtQuickView").innerHTML = data
-                  .productVariantDiscount;
-                // document.getElementById("productPrice").innerHTML =data.productVariantPrice1 +".00";
-              }
-              if (data.productType == "Classified") {
-                GetConvertedRangeValues(
-                  data.productVariantMinPrice,
-                  data.productVariantMaxPrice
-                ).then((Data) => {
-                  document.getElementById("productPrice").innerHTML =
-                    Data.symbol +
-                    " " +
-                    Data.value1
-                    //  +
-                    // " - " +
-                    // Data.symbol +
-                    // " " +
-                    // Data.value2;
-                });
-
-                //document.getElementById("productPrice").innerHTML =data.productVariantMinPrice +"-" +data.productVariantMaxPrice +".00";
-                GetConvertedRangeValues(
-                  data.productVariantMinActualPrice,
-                  data.productVariantMaxActualPrice
-                ).then((Data) => {
-                  document.getElementById("actualPriceAtQuickView").innerHTML =
-                    Data.symbol +
-                    " " +
-                    Data.value1
-                    //  +
-                    // " - " +
-                    // Data.symbol +
-                    // " " +
-                    // Data.value2;
-                });
-
-                document.getElementById("discountPercentageAtQuickView").innerHTML = data
-                  .productVariantDiscountRange;
-              }
-
-              if (data.productType == "Simple") {
-                var flag = document.getElementById("attrSuperDiv");
-                if (flag) {
-                  flag.remove();
-                }
-              }
-
-
-              if (data.productType == "Classified") {
-
-                var attributeObjects = data.attributeObjects
-                var attributeObjectsLength = data.attributeObjects.length
-                var flag = document.getElementById("attrSuperDiv");
-                if (flag) {
-                  flag.remove();
-                }
-                var priceLabel2 = document.getElementById("priceLabel2");
-                let attrSuperDiv = document.createElement("div");
-                attrSuperDiv.id = "attrSuperDiv";
-                for (let i = 0; i < attributeObjects.length; i++) {
-                  for (let attrName in attributeObjects[i]) {
-
-                    var falg = document.getElementById(attrName + "DivId");
-
-                    let attrValues = attributeObjects[i][attrName];
-
-                    let attrDiv = document.createElement("div");
-                    attrDiv.className = attrName.toLowerCase() + "-types size-detail";
-                    attrDiv.setAttribute("id",attrName.toLowerCase()+"-id")
-
-                    let heading = document.createElement("h4");
-                    heading.textContent = attrName;
-                    heading.id = attrName + "DivId"
-
-
-                    let ul = document.createElement("ul");
-                    
-
-
-                    for (let j = 0; j < attrValues.length; j++) {
-                      let li = document.createElement("li");
-
-                      let liId = attrName.toLowerCase() + "UlLi" + j;
-                      li.setAttribute("id", liId);
-
-                      let a = document.createElement("a");
-                      let aId = attrName.toLowerCase() + "A" + j;
-                      a.setAttribute("id", aId);
-                      let fun =
-                        "show_details_for_quick_view({attributeObjectsIds:'" + data
-                        .attributeObjectsIds + "',clickedEleId: '" +
-                        aId + "', eleLen: '" +
-                        attrValues.length + "', key: 'selected" +
-                        attrName + "AtQuickView', value: '" +
-                        attrValues[j] + "',ulDiv:'"+attrName.toLowerCase()+"', id: '" +
-                        data.productId + "'})";
-                      a.setAttribute("onClick", fun);
-
-                      let liContent = document.createElement("li");
-                      liContent.setAttribute("class", attrName.toLowerCase() + "Li");
-                      liContent.innerHTML = attrValues[j];
-
-                      li.appendChild(a);
-                      a.appendChild(liContent);
-                      ul.appendChild(li);
-                    }
-                    // Create hidden input field for attribute
-                    let input = document.createElement("input");
-                    input.type = "hidden";
-                    input.name = attrName.toLowerCase();
-                    // input.value = attrName;
-                    input.id = "selected" + attrName + "AtQuickView";
-                    attrDiv.appendChild(input);
-
-                    attrDiv.appendChild(heading);
-                    attrDiv.appendChild(ul);
-
-
-                    priceLabel2.appendChild(attrSuperDiv);
-                    attrSuperDiv.appendChild(attrDiv);
-
-                  }
-                }
-              }
-
-
-
-              let url1 = "add_to_cart_fun_at_quick_view({key:'test'})".replace(
-                "test",
-                firstProductVariant.toString()
-              );
-              document.getElementById("addToCart").setAttribute("onClick", url1);
-
-              let url2 = "{% url 'left_slidebar' 'test' %}".replace(
-                "test",
-                id.toString()
-              );
-              document.getElementById("productLeftSlidebar").setAttribute("href", url2);
-
-              var images = document.getElementsByClassName("product-quick-view");
-
-              // for (var i = 0; i < images.length; i++) {
-              //   images[i].setAttribute("src", data.multipleImages);
-              //   if (images[i].classList.contains("bg-img")) {
-              //     images[i].parentElement.style.backgroundImage = `url("${data.multipleImages}")`;
-              //   }
-              // }
-
-              // Code to render out product details like Category and Brand in quick model view START -------------------------
-
-              const div = document.createElement("div");
-              div.className = "product-details";
-              div.id = "product-details"
-
-
-              const h4 = document.createElement("h4");
-              h4.textContent = "product details";
-              div.appendChild(h4);
-
-              const ul = document.createElement("ul");
-
-              const li1 = document.createElement("li");
-              const span1 = document.createElement("span");
-              span1.className = "font-light";
-              span1.textContent = "Brand :";
-              li1.appendChild(span1);
-              li1.appendChild(document.createTextNode(data.brand));
-              ul.appendChild(li1);
-
-              const li2 = document.createElement("li");
-              const span2 = document.createElement("span");
-              span2.className = "font-light";
-              span2.textContent = "Category :";
-              li2.appendChild(span2);
-              li2.appendChild(document.createTextNode(data.category));
-              ul.appendChild(li2);
-
-              div.appendChild(ul);
-
-              // var attrSuperDiv = document.getElementById("attrSuperDiv");
-              // 
-              // if (attrSuperDiv) {
-              //   attrSuperDiv.after(div);
-              // } else {
-              // var priceLabelAtQuickView = document.getElementById("priceLabel2");
-              //   priceLabelAtQuickView.after(div);
-              // }
-              var priceLabelAtQuickView = document.getElementById("priceLabel2");
-              priceLabelAtQuickView.after(div);
-              // Code to render out product details like Category and Brand in quick model view End ---------------------------
-
-              // Code to render out multiple images in quick model view START -------------------------------------------------
-
-              // Code to render out multiple images in quick model view END ---------------------------------------------------
-            });
-        }
-
-        function removeElementsByClass(className) {
-          const elements = document.getElementsByClassName(className);
-          while (elements.length > 0) {
-            elements[0].parentNode.removeChild(elements[0]);
-          }
-        }
-
-        //------------------------------
-
-        async function show_details_for_quick_view(params) {
-          console.log('=======params params params=====>', params)
-          var ulElement = document.getElementById(params.ulDiv+"-id")
-          var activeElements = ulElement.querySelectorAll(".active");
-          activeElements.forEach(function (element) {
-            element.classList.remove("active");
-            element.style.backgroundColor = "";
-          });
-          document.getElementById(params.clickedEleId).setAttribute("class", "active")
-          document.getElementById(params.clickedEleId).style.backgroundColor = "#bfbfbf";
-          document.getElementById(params.key).setAttribute('value', params.value)
-
-
-
-          const attributes = params.attributeObjectsIds.split(',');
-
-          var allAttributesFilled = true;
-
-          for (var i = 0; i < attributes.length; i++) {
-            var attributeValue = document.getElementById(attributes[i]).getAttribute("value");
-            if (!attributeValue || attributeValue.length === 0) {
-              allAttributesFilled = false;
-              break;
-            }
-          }
-          if (allAttributesFilled) {
-            var selectedAttributeValueDict = {}
-            for (var i = 0; i < attributes.length; i++) {
-              var attributeName = attributes[i];
-              var selectedAttributeValue = document.getElementById(attributes[i]).getAttribute(
-                "value");
-              // Perform any desired operations with selectedAttributeValue
-              selectedAttributeValueDict[attributeName] = selectedAttributeValue;
-            }
-            console.log('88888888888888888888888888888===selectedAttributeValueDict',
-              selectedAttributeValueDict)
-
-            var url = "{% url 'get_product_variant' %}";
-            await fetch(url, {
-                method: "POST",
-                headers: {
-                  "Content-type": "application/json",
-                  "X-CSRFToken": csrftoken,
-                },
-                body: JSON.stringify({
-                  productId: params.id,
-                  selectedAttributeValueDict: selectedAttributeValueDict,
-                }),
-              })
-              .then((response) => {
-                return response.json();
-              })
-              .then((data) => {
-                if (data.productVariantPrice == "Product Out Of Stock") {
-                  document.getElementById("productPrice").innerHTML = data.productVariantPrice;
-                  document.getElementById("actualPriceAtQuickView").innerHTML = "";
-                  document.getElementById("discountPercentageAtQuickView").innerHTML = "";
-                } else {
-                  GetConvertedValues(data.productVariantPrice).then((Data) => {
-                    document.getElementById("productPrice").innerHTML = Data.symbol + " " + Data
-                      .value;
-                  });
-
-                  GetConvertedValues(data.productVariantActualPrice).then((Data) => {
-                    document.getElementById("actualPriceAtQuickView").innerHTML = Data.symbol +
-                      " " + Data.value;
-                  });
-
-                  document.getElementById("discountPercentageAtQuickView").innerHTML = data
-                    .productVariantDiscount + "%";
-
-
-
-                }
-                let urlForAddToCartAddToCart =
-                  "add_to_cart_fun_at_quick_view({key:'firstProductVariant'})";
-                urlForAddToCartAddToCart = urlForAddToCartAddToCart.replace("firstProductVariant",
-                  data.productVariantId.toString());
-                document.getElementById("addToCart").setAttribute("onClick",
-                  urlForAddToCartAddToCart);
-
-              });
-
-          }
-
-
-          // WORK FROM HERE==========================================================================
-
-        }
-
-        function add_to_cart_fun_at_quick_view(params) {
-          let quantityValue = 1;
-          if (params.key == "No Product Yet") {} else {
-            let url = "{% url 'add_to_cart' 'id' 'quantity' %}";
-            url = url.replace("id", params.key);
-            url = url.replace("quantity", quantityValue);
-            fetch(url, {
-              method: "GET",
-              headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
-              },
-            });
-            window.location.reload();
-          }
-        }
-      </script>
-
-</script>
+{% endblock script %}

@@ -1,6 +1,7 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render
 from django.urls import reverse
 from django.http import  HttpResponseRedirect
+from bigdealapp.views import show_cart_popup
 
 
 class RestrictUrlsMiddleware:
@@ -8,10 +9,6 @@ class RestrictUrlsMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        # if not request.user.is_authenticated:
-        #     # User is not authenticated, redirect to login page
-        #     return HttpResponseRedirect(reverse('login_page'))
-        
         # Check for the presence of the 'code' cookie
         code_cookie = request.COOKIES.get('code')
         
@@ -33,4 +30,9 @@ class RestrictUrlsMiddleware:
         #         return HttpResponseRedirect(reverse('cart_page'))
         
         response = self.get_response(request)
+        if response.status_code == 404:
+            cart_products,totalCartProducts = show_cart_popup(request)
+            context = {"breadcrumb": {"parent": 404, "child": 404},
+               "cart_products": cart_products, "totalCartProducts": totalCartProducts,}
+            return render(request, 'pages/pages/404.html',context)
         return response

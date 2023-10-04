@@ -64,6 +64,13 @@ class OrderBillingAddressAdmin(admin.ModelAdmin):
 
 admin.site.register(OrderBillingAddress,OrderBillingAddressAdmin)
 
+class CartProductAdmin(admin.ModelAdmin):
+    exclude = ['slug']
+    list_display=['cart_id','cartByCustomer','cartProduct','cartProductQuantity']
+
+
+admin.site.register(CartProducts,CartProductAdmin)
+
 
 class OrderTrackingAdmin(admin.ModelAdmin):
     exclude=['trackingOrderVendor','trackingOrderCustomer','trackingOrder']

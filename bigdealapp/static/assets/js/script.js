@@ -1321,9 +1321,9 @@ $('.feature-slide').slick({
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
-            $('header').addClass("sticky");
+            $('stickyheader').addClass("sticky");
         } else {
-            $('header').removeClass("sticky");
+            $('stickyheader').removeClass("sticky");
         }
     });
 
@@ -2625,13 +2625,46 @@ $('.feature-slide').slick({
   /*=====================
    16.  Add to wishlist
    ==========================*/
-  $('.add-to-wish').on('click', function () {
 
-    $.notify({
-      icon: 'fa fa-check',
-      title: 'Success!',
-      message: 'Item Successfully added in wishlist'
-    },{
+  $(document).ready(function (){
+    $.ajax({
+      url:'/user_authenticate',
+      method:'GET',
+      dataType: 'json',
+      success: function (data) {
+        const isAuthenticated = data.is_authenticated;
+
+        if (isAuthenticated){
+          $('.add-to-wish ').on('click', function () {
+            const notificationOptions = {
+              icon: 'fa fa-check',
+              title: 'Success!',
+              message: 'Item Successfully added in wishlist'
+            };
+
+            localStorage.setItem("wishlistpopup", JSON.stringify(notificationOptions));
+            setTimeout(function () {
+                localStorage.removeItem("wishlistpopup");
+            }, 5000);
+          });
+        }
+      },
+    error: function(error){
+      console.error(error);
+    }
+  });
+});
+
+  $(document).ready(function () {
+    const storedNotification = localStorage.getItem("wishlistpopup");
+    if (storedNotification) {
+        const notificationOptions = JSON.parse(storedNotification);
+        $.notify(notificationOptions, {
+            icon: "fa fa-check",
+            title: "Success!",
+            message: "Item Successfully added in wishlist",
+
+        },{
       element: 'body',
       position: null,
       type: "info",
@@ -2662,7 +2695,66 @@ $('.feature-slide').slick({
         '<a href="{3}" target="{4}" data-notify="url"></a>' +
         '</div>'
     });
+    localStorage.removeItem("wishlistpopup"); // Remove the notification after displaying
+  }
+
   });
+
+  
+  $(".add-to-compare-list").on("click", function () {
+    console.log('Compare called ');
+    // Check if the user is authenticated
+    $.ajax({
+        url: '/user_authenticate', // Replace with the actual URL of your Django view
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const isAuthenticated = data.is_authenticated;
+            
+            if (isAuthenticated) {
+                // User is authenticated, show the success notification
+                $.notify({
+                    icon: "fa fa-check",
+                    title: "Success!",
+                    message: "Item Successfully added to your compare list",
+                }, {
+                    element: "body",
+                    position: null,
+                    type: "success",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: true,
+                    placement: {
+                        from: "top",
+                        align: "right",
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    animate: {
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp",
+                    },
+                    icon_type: "class",
+                    template: '<div data-notify="container" class="col-xl-4 col-lg-5 col-md-7 col-sm-8 col-12 alert alert-{0}" role="alert">' +
+                        '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                        '<span data-notify="icon"></span> ' +
+                        '<span data-notify="title">{1}</span> ' +
+                        '<span data-notify="message">{2}</span>' +
+                        '<div class="progress" data-notify="progressbar">' +
+                        '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" style="width: 0%;"></div>' +
+                        "</div>" +
+                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                        "</div>",
+                });
+            } 
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+});
 
 
 
@@ -2675,7 +2767,7 @@ $(window).on('scroll', function() {
     }
   });
 
-$(' <div class="tap-top" style="display: block;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 285 285" style="enable-background:new 0 0 285 285;" xml:space="preserve"><g><path d="M88.4,87.996c2.525-2.146,2.832-5.933,0.687-8.458C82.801,72.144,79.34,62.719,79.34,53c0-22.607,18.393-41,41-41c22.607,0,41,18.393,41,41c0,9.729-3.467,19.161-9.761,26.557c-2.148,2.523-1.843,6.311,0.681,8.458c1.129,0.961,2.511,1.431,3.886,1.431c1.698,0,3.386-0.717,4.572-2.111C168.858,77.77,173.34,65.576,173.34,53c0-29.225-23.775-53-53-53c-29.225,0-53,23.775-53,53c0,12.563,4.476,24.748,12.602,34.31C82.089,89.835,85.873,90.141,88.4,87.996z"/><path d="M120.186,41.201c13.228,0,23.812,8.105,27.313,19.879c0.761-2.562,1.176-5.271,1.176-8.08c0-15.649-12.685-28.335-28.335-28.335c-15.648,0-28.334,12.686-28.334,28.335c0,2.623,0.364,5.16,1.031,7.571C96.691,49.076,107.152,41.201,120.186,41.201z"/><path d="M234.21,169.856c-3.769-22.452-19.597-26.04-27.034-26.462c-2.342-0.133-4.516-1.32-5.801-3.282c-5.388-8.225-12.609-10.4-18.742-10.4c-4.405,0-8.249,1.122-10.449,1.932c-0.275,0.102-0.559,0.15-0.837,0.15c-0.87,0-1.701-0.47-2.163-1.262c-5.472-9.387-13.252-11.809-19.822-11.809c-3.824,0-7.237,0.82-9.548,1.564c-0.241,0.077-0.764,0.114-1.001,0.114c-1.256,0-2.637-1.03-2.637-2.376V69.753c0-11.035-8.224-16.552-16.5-16.552c-8.276,0-16.5,5.517-16.5,16.552v84.912c0,4.989-3.811,8.074-7.918,8.074c-2.495,0-4.899-1.138-6.552-3.678l-7.937-12.281c-3.508-5.788-8.576-8.188-13.625-8.189c-11.412-0.001-22.574,12.258-14.644,25.344l62.491,119.692c0.408,0.782,1.225,1.373,2.108,1.373h87.757c1.253,0,2.289-1.075,2.365-2.325l2.196-35.816c0.025-0.413,0.162-0.84,0.39-1.186C231.591,212.679,237.828,191.414,234.21,169.856z"/></g></svg></div>').appendTo($('body'));
+$('<div class="tap-top" style="display: block;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 285 285" style="enable-background:new 0 0 285 285;" xml:space="preserve"><g><path d="M88.4,87.996c2.525-2.146,2.832-5.933,0.687-8.458C82.801,72.144,79.34,62.719,79.34,53c0-22.607,18.393-41,41-41c22.607,0,41,18.393,41,41c0,9.729-3.467,19.161-9.761,26.557c-2.148,2.523-1.843,6.311,0.681,8.458c1.129,0.961,2.511,1.431,3.886,1.431c1.698,0,3.386-0.717,4.572-2.111C168.858,77.77,173.34,65.576,173.34,53c0-29.225-23.775-53-53-53c-29.225,0-53,23.775-53,53c0,12.563,4.476,24.748,12.602,34.31C82.089,89.835,85.873,90.141,88.4,87.996z"/><path d="M120.186,41.201c13.228,0,23.812,8.105,27.313,19.879c0.761-2.562,1.176-5.271,1.176-8.08c0-15.649-12.685-28.335-28.335-28.335c-15.648,0-28.334,12.686-28.334,28.335c0,2.623,0.364,5.16,1.031,7.571C96.691,49.076,107.152,41.201,120.186,41.201z"/><path d="M234.21,169.856c-3.769-22.452-19.597-26.04-27.034-26.462c-2.342-0.133-4.516-1.32-5.801-3.282c-5.388-8.225-12.609-10.4-18.742-10.4c-4.405,0-8.249,1.122-10.449,1.932c-0.275,0.102-0.559,0.15-0.837,0.15c-0.87,0-1.701-0.47-2.163-1.262c-5.472-9.387-13.252-11.809-19.822-11.809c-3.824,0-7.237,0.82-9.548,1.564c-0.241,0.077-0.764,0.114-1.001,0.114c-1.256,0-2.637-1.03-2.637-2.376V69.753c0-11.035-8.224-16.552-16.5-16.552c-8.276,0-16.5,5.517-16.5,16.552v84.912c0,4.989-3.811,8.074-7.918,8.074c-2.495,0-4.899-1.138-6.552-3.678l-7.937-12.281c-3.508-5.788-8.576-8.188-13.625-8.189c-11.412-0.001-22.574,12.258-14.644,25.344l62.491,119.692c0.408,0.782,1.225,1.373,2.108,1.373h87.757c1.253,0,2.289-1.075,2.365-2.325l2.196-35.816c0.025-0.413,0.162-0.84,0.39-1.186C231.591,212.679,237.828,191.414,234.21,169.856z"/></g></svg></div>').appendTo($('body'));
     (function() {
     })();
 $('.tap-top').on('click', function() {

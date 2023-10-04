@@ -13,6 +13,7 @@ class BannerTheme(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     bannerThemeName = models.CharField(max_length=250, verbose_name='Name')
     slug = models.SlugField(unique=True, blank=True)
+    is_active = models.BooleanField(default=True, verbose_name="Status")
     
     def get_slug_list(self):
         try:

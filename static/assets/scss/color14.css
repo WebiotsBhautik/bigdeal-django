@@ -177,7 +177,7 @@ body {
   font-family: "PT Sans", sans-serif;
   font-size: 14px;
   color: #777;
-  background-color: rgba(30, 154, 5, 0.5); }
+  background-color: #f9f9f9; }
 
 h1 {
   font-weight: 700;
@@ -5698,7 +5698,9 @@ header {
     .media-banner .media-banner-box .media {
       align-items: center; }
       .media-banner .media-banner-box .media img {
-        border: 1px solid #dddddd; }
+        border: 1px solid #dddddd;
+        height: 90px;
+        width: 100%; }
       .media-banner .media-banner-box .media .media-body .media-contant {
         margin-left: 15px;
         display: flex;

@@ -1,49 +1,57 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %} 
+{% load mathfilters %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="big-deal">
-    <meta name="keywords" content="big-deal">
-    <meta name="author" content="big-deal">
-    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="big-deal">
+  <meta name="keywords" content="big-deal">
+  <meta name="author" content="big-deal">
+  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
 
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
-    <!--icon css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/themify.css' %}">
+  <!--icon css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}">
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}">
 
-    <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
+  <!--Slick slider css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
 
-    <!--Animate css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}">
+  {% block css %}
+    
+  {% endblock css %}
 
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.css' %}">
+  <!--Animate css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
 
-    <!--portfolio css-->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/magnific-popup.css' %}">
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
 
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/color2.css' %}" media="screen" id="color">
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
 </head>
 <body>
 
 <!-- loader start -->
 <div class="loader-wrapper">
-    <div>
-        <img src="{% static 'assets/images/loader.gif" alt="loader">
-    </div>
+  <div>
+    <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
+  </div>
 </div>
 <!-- loader end -->
+
+
 
 <!--section start-->
 <div class="template-password">
@@ -53,7 +61,7 @@
                 <div id="login">
                     <div>
                         <div class="logo mb-4">
-                            <a href="javascript:void(0)">
+                            <a href="{% url 'index' %}">
                                 <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" alt="logo" class="img-fluid  " >
                             </a>
                         </div>
@@ -97,7 +105,6 @@
 <!--section end-->
 
 
-
 <!-- latest jquery-->
 <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}" ></script>
 
@@ -122,3 +129,5 @@
 
 </body>
 </html>
+
+

@@ -57,7 +57,7 @@ urlpatterns = [
     
     path('search_query_params_url', views.search_query_params_url, name='search_query_params_url'),
     
-    path('shop-left-sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
+    path('shop_left_sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
     # path('shop-left-sidebar/<slug:brand_slug>', views.shop_left_sidebar, name='shop_left_sidebar_with_slugs'),
     
     path('shop-right-sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
@@ -120,6 +120,36 @@ urlpatterns = [
     path('search_bar/',views.search_bar, name='search_bar'),
     path('search_bar/<str:params>',views.search_bar, name='search_bar_with_params'),
     path('search_products/', views.search_products, name='search_products'),
+    
+    
+    path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist_page',views.wishlist_page,name='wishlist_page'),
+    
+    path('compare_page',views.compare_page, name='compare_page'),
+    path('compare_products/<str:id>',views.compare_products,name='compare_products'),
+    path('delete_compare_product/<str:id>',views.delete_compare_product, name='delete_compare_product'),
+    
+
+    path('delete_wishlist_product/<str:id>',views.delete_wishlist_product, name='delete_wishlist_product'),
+    path('user_authenticate',views.user_authenticate, name='user_authenticate'),
+    
+    path('page_not_found',views.page_not_found, name='page_not_found'),
+    path('faq_page',views.faq_page, name='faq_page'),
+    path('coming_soon',views.coming_soon, name='coming_soon'),
+    path('about_page',views.about_page, name='about_page'),
+
+
+    
+    # Cart page
+    
+    path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
+    # path('add_to_cart_product_quantity_management/<str:id>/<str:actionType>', views.add_to_cart_product_quantity_management, name='add_to_cart_product_quantity_management'),
+    # path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
+
+    
+    path('cart_page', views.cart_page, name='cart_page'),
+    
+
     
 
     
