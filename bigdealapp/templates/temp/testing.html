@@ -1,451 +1,390 @@
-{% extends 'pages/shop/shop-base.html' %}
+{% extends 'pages/pages/pages-base.html' %}
 {% load static %}
-{% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
+{% load sass_tags %}
 {% block components %}
 
-<!-- Category Slider Section Start -->
-<section>
+<!-- Cart Section Start -->
+<section class="cart-section section-b-space">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="slide-7-1 product-wrapper slick-lg-space">
-                    {% for category in ProductCategory|slice:":10"  %}
-                    <div>
-                        <div class="image-slider">
-                            <div class="image-product">
-                                <img loading="lazy" src="{{category.categoryImage}}" class="w-100 blur-up lazyload"
+            {% if totalCartProducts|to_int == 0|to_int %}
+            <!-- Order Success Section Start -->
+            <section class="pt-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            <div class="empty-product-box success-icon">
+                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"
                                     alt="">
-                                <div class="image-contain">
-                                    <h5>{{category.categoryName}}</h5>
+                                <div class="success-contain">
+                                    <h4>Your shopping cart is empty. Let's add something to it</h4>
+                                </div>
+
+                                <div>
+                                    <a href="{% url 'index_default' %}"
+                                        class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                                        <i class="fas fa-arrow-left"></i> Continue Shopping</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Category Slider Section End -->
+            </section>
+            <!-- Order Success Section End -->
+            {% else %}
 
-<!-- Shop Section start -->
-<section class="section-b-space">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <div class="category-option">
-                    <div class="button-close mb-3">
-                        <button class="btn p-0"><i data-feather="arrow-left"></i> Close</button>
-                    </div>
-                    <div class="accordion category-name" id="accordionExample">
-
-                        <div class="accordion-item category-rating">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne">
-                                    Category
-                                </button>
-                            </h2>
-
-                            <div id="collapseOne" class="accordion-collapse collapse show">
-                                <div class="accordion-body category-scroll">
-                                    <ul class="category-list page-name">
-                                        {% for category in ProductCategory %}
-                                        <li><a href="{% url 'category_filter_with_id' category.id %}"
-                                                class="">{{category.categoryName}}<span>({{category.categoryTotalProduct}})</span></a>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- <div class="accordion-item category-rating"> -->
-
-                        {% include 'pages/shop/filter-base.html' %}
-
-                        <!-- </div> -->
-                    </div>
+            <div class="col-12">
+                <div class="count-down">
+                    <h5>Your cart will be expired in <span class="count-timer theme-color" id="timer"></span>
+                        minutes !</h5>
+                    <button type="button" onclick="handleCheckout({'cartId':'{{cartId}}'})"
+                        class="btn btn-solid-default btn-sm fw-bold">Check Out</button>
                 </div>
             </div>
 
-            <div class="col-lg-9 col-12 ratio_30">
-                <div class="row g-4">
 
-                    <!-- filter button -->
-                    <div class="filter-button">
-                        <button class="danger-button danger-center btn btn-sm filter-btn"><i
-                                data-feather="align-left"></i> Filter</button>
-                    </div>
-                    <!-- filter button -->
+            <div class="col-sm-12 table-responsive mt-4">
+                <table class="table cart-table">
+                    <thead>
+                        <tr class="table-head">
+                            <th scope="col">image</th>
+                            <th scope="col">product name</th>
+                            <th scope="col">price</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">action</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
 
-                    <!-- label and featured section -->
-                    <div class="col-md-12">
-                        {% comment %} <h3 class="mb-3">25 Results Found</h3> {% endcomment %}
-                        <ul class="short-name">
-                            {% for key, value in request.GET.items %}
-                            {% if key != 'selectedAttribute' and key != 'price' %}
-                            {% for attribute in value|return_selected_attribute_list:request %}
-                            <li>
-                                <div class="label-tag">
-                                    <span>{{attribute}}-{{key}}</span>
-                                    <button type="button" class="btn-close"
-                                        onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
-                                    {% comment %} <button type="button" class="btn-close"></button>
-                                    {% endcomment %}
-                                </div>
-                            </li>
-                            {% endfor %}
-                            {% endif %}
-
-                            {% if key == 'price' %}
-                            {% with price_values=value|return_selected_attribute_list:request %}
-                            {% if price_values %}
-                            <li>
-                                <div class="label-tag">
-                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
-                                        {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
-                                </div>
-                            </li>
-                            {% endif %}
-                            {% endwith %}
-                            {% endif %}
-
-                            {% endfor %}
-
-                            {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
-                            {% if request.GET.page %}
-
-                            <div class="label-tag">
-                                <a href="{% url 'category_filter' %}"><span>Clear All</span></a>
-                            </div>
-
-                            {% endif %}
-                            {% endif %}
-
-
-                            {% if request.path == '/category_filter' or request.GET.page %}
-                            {% if 'price' not in request.GET %}
-
-                            <li>
-                                <div class="label-tag">
-                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
-                                        {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
-                                </div>
-                            </li>
-
-                            {% endif %}
-                            {% endif %}
-
-
-                            {% if request.path != '/category_filter' or request.GET %}
-                            {% if not request.GET.page %}
-
-                            <div class="label-tag">
-                                <a href="{% url 'category_filter' %}"><span>Clear All</span></a>
-                            </div>
-                            {% endif %}
-                            {% endif %}
-
-                        </ul>
-                        <script>
-                            function getCookie(name) {
-                                let cookieValue = null;
-                                if (document.cookie && document.cookie !== '') {
-                                    const cookies = document.cookie.split(';');
-                                    for (let i = 0; i < cookies.length; i++) {
-                                        const cookie = cookies[i].trim();
-                                        // Does this cookie string begin with the name we want?
-                                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                            break;
-                                        }
-                                    }
-                                }
-                                return cookieValue;
-                            }
-                            var csrftoken = getCookie('csrftoken');
-
-                            function redirectToCreateQueryParamsUrl(params) {
-                                var removeTagId = params.value + params.key + "CheckBox";
-                                var attributeCheckBox = document.getElementById(removeTagId);
-                                attributeCheckBox.checked = false;
-                                var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
-                                sbmtButton.click();
-                            }
-                        </script>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="filter-options">
-                            <div class="select-options">
-                                <div class="page-view-filter">
-                                    <div class="dropdown select-featured">
-                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                            data-bs-toggle="dropdown">
-                                            24 Page per view
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
-                                                    A-Z</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
-                                                    Z-A</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Price, High To
-                                                    Low</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Price, Low To
-                                                    High</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Date, Old To
-                                                    New</a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="javascript:void(0)">Date, New To
-                                                    Old</a>
-                                            </li>
-                                        </ul>
+                    
+                    <tbody>
+                        {% if request.user.is_authenticated %}
+                        {% for product in cart_products %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                                    <img loading="lazy" src="{{product.cartProduct.variantProduct.productImageFront}}"
+                                        class=" blur-up lazyload" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <a
+                                    href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">{{product.cartProduct.variantProduct.productName}}</a>
+                                <div class="mobile-cart-content row">
+                                    <div class="col">
+                                        <div class="qty-box">
+                                            <div class="input-group">
+                                                <input type="text" name="quantity" class="form-control input-number"
+                                                    value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                        </h2>
+                                    </div>
+                                    <div class="col">
+                                        <h2 class="td-color">
+                                            <a href="javascript:void(0)">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </h2>
                                     </div>
                                 </div>
-                                <div class="dropdown select-featured">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown">
-                                        Select Featured
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)">Jeans</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)">T-Shirt</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)">Shirt</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)">Jacket</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:void(0)">Hoodie</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="grid-options d-sm-inline-block d-none">
-                                <ul class="d-flex">
-                                    <li class="two-grid">
-                                        <a href="javascript:void(0)">
-                                            <img loading="lazy" src="{% static 'assets/svg/grid-2.svg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li class="three-grid d-md-inline-block d-none">
-                                        <a href="javascript:void(0)">
-                                            <img loading="lazy" src="{% static 'assets/svg/grid-3.svg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li class="grid-btn active d-lg-inline-block d-none">
-                                        <a href="javascript:void(0)">
-                                            <img loading="lazy" src="{% static 'assets/svg/grid.svg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </li>
-                                    <li class="list-btn">
-                                        <a href="javascript:void(0)">
-                                            <img loading="lazy" src="{% static 'assets/svg/list.svg' %}"
-                                                class="img-fluid blur-up lazyload" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- label and featured section -->
-                </div>
+                            </td>
+                            <td>
+                                <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                </h2>
+                            </td>
+                            <td>
+                                {% comment %} <div class="qty-box">
+                                    <div class="input-group">
+                                        <input type="number" readonly name="quantity" id="addToCart"
+                                            class="form-control ADD-TO-CART input-number" value="1" />
 
-                <!-- Product section start -->
-                <div
-                    class="row row-cols-lg-4 row-cols-md-3 row-cols-2 g-sm-4 g-3 gx-sm-4 gx-3 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
-                    {% if page_obj %}
-                    {% for product in page_obj %}
-                    <div>
-                        <div class="product-box">
-                            <div class="img-wrapper">
-                                <div class="front">
-                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
-                                        <img loading="lazy" src="{{product.variantProduct.productImageFront.url}}"
-                                            class="bg-img blur-up lazyload" alt="">
-                                    </a>
-                                </div>
-                                <div class="back">
-                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
-                                        <img loading="lazy" src="{{product.variantProduct.productImageBack.url}}"
-                                            class="bg-img blur-up lazyload" alt="">
-                                    </a>
-                                </div>
-                                <div class="cart-wrap">
-                                    <ul>
-                                        <li>
-                                            <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}"
-                                                class="addtocart-btn">
-                                                <i data-feather="shopping-bag"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})"
-                                                data-bs-toggle="modal" href="#quick-view">
-                                                <i data-feather="eye"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
-                                                class="add-to-compare-list">
-                                                <i data-feather="refresh-cw"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"
-                                                class="wishlist">
-                                                <i data-feather="heart"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-details">
-                                <div class="rating-details">
-                                    <span class="font-light grid-content">{{product.variantProduct.proCategory}}</span>
-                                    <ul class="rating mt-0">
-                                        <!-- ------------------------------------------------------------------- -->
-                                        {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
-                                        {% for x in product.variantProduct.productFinalRating|times %} <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        {% endfor %}
-
-                                        {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
-                                        {% with number3=number1|sub:number2 %}
-
-
-                                        {% for x in number3|times %}
-                                        <li>
-                                            <i class="fas fa-star"></i>
-                                        </li>
-                                        {% endfor %}
-
-                                        {% endwith %}
-                                        {% endwith %}
-
-                                        {% else %}
-
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-star theme-color"></i>
-                                        </li>
-                                        {% endif %}
-                                        <!-- ------------------------------------------------------------------- -->
-                                    </ul>
-                                </div>
-                                <div class="main-price">
-                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}" class="font-default">
-                                        <h5 class="ms-0">{{product.variantProduct.productName}}</h5>
-                                    </a>
-                                    <div class="listing-content">
-                                        <span class="font-light">Regular Fit</span>
-                                        <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                            elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
-                                            ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
-                                            qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
-                                            accusantium architecto placeat quam officia, tempore repellendus.</p>
                                     </div>
-                                    {% if product.variantProduct.productType == "Simple" %}
-                                    <h3 class="theme-color">
-                                        {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
-                                    </h3>
-                                    {% else %}
-                                    <h3 class="theme-color">
-                                        {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
-                                    </h3>
-                                    {% endif %}
-                                    <button
-                                        onclick="location.href = '{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}';"
-                                        class="btn listing-content">Add To Cart</button>
+                                </div> {% endcomment %}
+
+
+                                <div class="qty-box">
+                                    <div class="input-group cart-input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                data-field=""
+                                                onClick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.cartProductQuantity}}">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-right-plus"
+                                                onClick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% if page_obj.has_other_pages %}
-                <div class="page-section">
-                    <div class="pagination">
-                        {% if page_obj.has_previous %}
-                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}"
-                            class="previous">Previous</a> {% endcomment %}
-                        <a href="{{page_obj.previous_page_number|update_url_parameters:request}}"
-                            class="previous">Previous</a>
 
-                        {% endif %}
+                            </td>
 
-                        {% for num in page_obj.paginator.page_range %}
-                        {% if page_obj.number == num %}
-                        <span class="current-page">{{ num }}</span>
-                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ num }}" class="page">{{ num }}</a>
-                        {% endcomment %}
-                        <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
-                        {% endif %}
+
+                            <td>
+                                <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
+                                    {{""|return_currency_wise_symbol:request}}{{product.cartProductQuantityTotalPrice|return_currency_wise_ammount:request}}
+                                </h2>
+                            </td>
+                        </tr>
                         {% endfor %}
+                        {% else %}
+                        {% for product in cart_products %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'left_slidebar' product.product_id %}">
+                                    <img loading="lazy" src="{{product.productImage}}"
+                                        class=" blur-up lazyload" alt="">
+                                </a>
+                            </td>
+                            <td>
+                                <a
+                                    href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
+                                <div class="mobile-cart-content row">
+                                    <div class="col">
+                                        <div class="qty-box">
+                                            <div class="input-group">
+                                                <input type="text" name="quantity" class="form-control input-number"
+                                                    value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                                        </h2>
+                                    </div>
+                                    <div class="col">
+                                        <h2 class="td-color">
+                                            <a href="javascript:void(0)">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                                </h2>
+                            </td>
+                            <td>
+                                {% comment %} <div class="qty-box">
+                                    <div class="input-group">
+                                        <input type="number" readonly name="quantity" id="addToCart"
+                                            class="form-control ADD-TO-CART input-number" value="1" />
 
-                        {% if page_obj.has_next %}
-                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}"
-                            class="next">Next</a> {% endcomment %}
-                        <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">Next</a>
+                                    </div>
+                                </div> {% endcomment %}
+
+
+                                <div class="qty-box">
+                                    <div class="input-group cart-input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                data-field=""
+                                                onClick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.quantity}}">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn quantity-right-plus"
+                                                onClick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <a href="{% url 'delete_cart_product' product.variant_id %}">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
+                                    {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
+                                </h2>
+                            </td>
+                        </tr>
+                        {% endfor %}
                         {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12 mt-md-5 mt-4">
+                <div class="row">
+                    <div class="col-sm-7 col-5 order-1">
+                        <div class="left-side-button text-end d-flex d-block justify-content-end">
+                            <a href="{% url 'delete_cart_all_product' %}"
+                                class="text-decoration-underline theme-color d-block text-capitalize">clear
+                                all items</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-7">
+                        <div class="left-side-button float-start">
+                            <a href="{% url 'index_default' %}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                                <i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                        </div>
                     </div>
                 </div>
-                {% endif %}
-                {% else %}
-                <div class="success-icon">
-                    <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
+            </div>
+
+            <div class="cart-checkout-section">
+                <div class="row g-4">
+                    <div class="col-lg-8 col-sm-6">
+                        <div class="checkout-button">
+                            {% if request.user.is_authenticated %}
+
+                            <a onclick="handleCheckout({'cartId':'{{cartId}}'})"
+                                class="btn btn-solid-default btn fw-bold">
+                                Check Out <i class="fas fa-arrow-right ms-1"></i></a>
+
+                            {% else %}
+                            <a href="{% url 'login_page' %}" class="btn btn-solid-default btn fw-bold">
+                                Check Out <i class="fas fa-arrow-right ms-1"></i></a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="cart-box">
+                            <div class="cart-box-details">
+                                <div class="total-details">
+                                    <div class="top-details">
+                                        <h3>Cart Totals</h3>
+                                        {% if request.user.is_authenticated %}
+                                            <h6>Total MRP <span
+                                                    id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                            {% comment %} <h6>Coupon Discount <span>-(currency symbol)(amount)</span></h6>
+                                            {% endcomment %}
+                                            <h6> Tax <span
+                                                    id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                            <h6>Price After Tax <span
+                                                    id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                        {% else %}
+                                            <h6>Total MRP <span
+                                                    id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                            {% comment %} <h6>Coupon Discount <span>-(currency symbol)(amount)</span></h6>
+                                            {% endcomment %}
+                                            <h6> Tax <span
+                                                    id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                            <h6>Price After Tax <span
+                                                    id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+                                            </h6>
+                                        {% endif %}
+                                    </div>
+                                    <div class="bottom-details">
+                                        {% comment %} <a href="{% url 'checkout_page' %}">Process Checkout</a>
+                                        {% endcomment %}
+                                        {% if request.user.is_authenticated %}
+                                        <a onclick="handleCheckout({'cartId':'{{cartId}}'})">Process
+                                            Checkout</a>
+                                        {% else %}
+                                        <a href="{% url 'login_page' %}">Process
+                                            Checkout</a>
+                                        {% endif %}
+                                    </div>
+                                    <div id='cartMsgDiv'>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                {% endif %}
-                <!-- Product section end -->
             </div>
         </div>
     </div>
+    {% endif %}
 </section>
-<!-- Shop Section end -->
+<!-- Cart Section End -->
 
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie("csrftoken");
+
+    async function handleCheckout(params) {
+        var url = "{% url 'cart_to_checkout_validation' %}";
+        var pageUrl = window.location.href;
+        console.log('pageUrl ============>',pageUrl)
+
+        await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    cartId: params.cartId,
+                }),
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if (data.flag === "True") {
+                    var cartMsgDiv = document.getElementById("cartMsgDiv");
+                    for (var i = 0; i < data.outOfStockProducts.length; i++) {
+                        var cartMsg = document.createElement("h5");
+                        cartMsg.setAttribute("id", "cartMsg" + i);
+                        cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts +
+                            " stock of product " + data.outOfStockProducts[i].productName + ".";
+                        cartMsgDiv.append(cartMsg);
+                        // Set a timeout to hide the cartMsg element after 3 seconds
+                        setTimeout(function (index) {
+                            var cartMsgElement = document.getElementById("cartMsg" + index);
+                            if (cartMsgElement) {
+                                cartMsgElement.remove();
+                            }
+                        }, 3000, i);
+                    }
+                }
+                if (data.flag === "False") {
+                    window.location.href = "{% url 'checkout_page' %}";
+                }
+            });
+    }
+</script>
 
 {% endblock components %}
-
-
-{% block script %}
-
-<script src="{% static 'assets/js/price-filter.js' %} "></script>
-<script src="{% static 'assets/js/ion.rangeSlider.min.js' %} "></script>
-
-{% endblock script %}

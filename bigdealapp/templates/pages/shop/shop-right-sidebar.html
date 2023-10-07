@@ -26,7 +26,6 @@
   var csrftoken = getCookie('csrftoken');
 
   function redirectToCreateQueryParamsUrl(params) {
-      console.log("-------------------Function call",params);
       var removeTagId = params.value+params.key+"CheckBox";
       var attributeCheckBox=document.getElementById(removeTagId);
       attributeCheckBox.checked = false;
@@ -53,6 +52,74 @@
                       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
                   </div>
+
+                  <div class="col-md-12">
+                    <ul class="short-name">
+                        {% for key, value in request.GET.items %}
+                        {% if key != 'selectedAttribute' and key != 'price' %}
+                        {% for attribute in value|return_selected_attribute_list:request %}
+                        <li>
+                            <div class="label-tag">
+                                <span>{{attribute}}-{{key}}</span>
+                                <button type="button" class="btn-close"
+                                    onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        {% endif %}
+  
+                        {% if key == 'price' %}
+                        {% with price_values=value|return_selected_attribute_list:request %}
+                        {% if price_values %}
+                        <li>
+                            <div class="label-tag">
+                                <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                                    {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                        {% endwith %}
+                        {% endif %}
+  
+                        {% endfor %}
+  
+                        {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                        {% if request.GET.page %}
+  
+                        <div class="label-tag">
+                            <a href="{% url 'shop_right_sidebar' %}"><span>Clear All</span></a>
+                        </div>
+  
+                        {% endif %}
+                        {% endif %}
+  
+  
+                        {% if request.path == '/shop_right_sidebar' or request.GET.page %}
+                        {% if 'price' not in request.GET %}
+  
+                        <li>
+                            <div class="label-tag">
+                                <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                                    {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                            </div>
+                        </li>
+  
+                        {% endif %}
+                        {% endif %}
+  
+  
+                        {% if request.path != '/shop_right_sidebar' or request.GET %}
+                        {% if not request.GET.page %}
+  
+                        <div class="label-tag">
+                            <a href="{% url 'shop_right_sidebar' %}"><span>Clear All</span></a>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+  
+                    </ul>
+                  </div>
+
                   <div class="collection-product-wrapper">
                     <div class="product-top-filter">
                       <div class="row">
@@ -64,7 +131,7 @@
                           <div class="col-12">
                               <div class="product-filter-content">
                                   <div class="search-count">
-                                      <h5>Showing Products 1-24 of {{totalCount}} Result</h5></div>
+                                      <h5>Showing Products of {{totalCount}} Result</h5></div>
                                   <div class="collection-view">
                                       <ul>
                                           <li><i class="fa fa-th grid-layout-view"></i></li>

@@ -37,7 +37,7 @@
                                 {% for product in compare_products %}
 
                                 <td class="item-row"><img src="{{product.variantProduct.productImageFront}}" alt="product" class="   featured-image">
-                                    <div class="product-price product_price"><strong>On Sale: </strong><span>{{""|return_currency_wise_symbol:request}}{{product.productVariantPrice|return_currency_wise_ammount:request}}</span></div>
+                                    <div class="product-price product_price"><strong>On Sale: </strong><span>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</span></div>
                                     <form class="variants clearfix">
                                         <input type="hidden">
                                         <button title="Add to Cart" class="add-to-cart btn btn-normal">Add to Cart</button>
@@ -68,7 +68,16 @@
                             </tbody>
                           </thead>
                             {% else %}
-                            <h2> No compare Products Found!</h2>
+                            <div class="col-12 p-0">    
+                                <div class="empty-product-box success-icon text-center">
+                                    <img loading="lazy" src="{% static 'assets/images/empty-compare.png' %}" class="img-fluid"  alt="">
+                                    <div class="success-contain">
+                                        <h3><strong>Your compare list is Empty.</strong></h3>
+                                          <h4>Explore more shortlist some items.</h4> 
+                                    </div>
+                                </div>
+                            </div>
+                            {% comment %} <h2> No compare Products Found!</h2> {% endcomment %}
                             {% endif %}
                         </table>
                     </div>

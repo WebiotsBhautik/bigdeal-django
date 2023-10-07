@@ -62,9 +62,9 @@
                             </div>
                         </td>
                         <td>
-                            <h2>$63.00</h2></td>
+                            <h2>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2></td>
                         <td>
-                            <p>in stock</p>
+                            <p>{{product.productVariantStockStatus}}</p>
                         </td>
                         <td><a href="{% url 'delete_wishlist_product' product.id %}" class="icon me-3"><i class="ti-close"></i> </a><a href="javascript:void(0)" class="cart"><i class="ti-shopping-cart"></i></a></td>
                     </tr>

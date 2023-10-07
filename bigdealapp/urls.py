@@ -58,17 +58,15 @@ urlpatterns = [
     path('search_query_params_url', views.search_query_params_url, name='search_query_params_url'),
     
     path('shop_left_sidebar', views.shop_left_sidebar, name='shop_left_sidebar'),
-    # path('shop-left-sidebar/<slug:brand_slug>', views.shop_left_sidebar, name='shop_left_sidebar_with_slugs'),
-    
-    path('shop-right-sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
-    path('shop-no-sidebar', views.shop_no_sidebar, name='shop_no_sidebar'),
-    path('shop-sidebar-popup', views.shop_sidebar_popup, name='shop_sidebar_popup'),
-    path('shop-metro', views.shop_metro, name='shop_metro'),
-    path('shop-full-width', views.shop_full_width, name='shop_full_width'),
-    path('shop-infinite-scroll', views.shop_infinite_scroll, name='shop_infinite_scroll'),
-    path('shop-3grid', views.shop_3grid, name='shop_3grid'),
-    path('shop-6grid', views.shop_6grid, name='shop_6grid'),
-    path('shop-list-view', views.shop_list_view, name='shop_list_view'),
+    path('shop_right_sidebar', views.shop_right_sidebar, name='shop_right_sidebar'),
+    path('shop_no_sidebar', views.shop_no_sidebar, name='shop_no_sidebar'),
+    path('shop_sidebar_popup', views.shop_sidebar_popup, name='shop_sidebar_popup'),
+    path('shop_metro', views.shop_metro, name='shop_metro'),
+    path('shop_full_width', views.shop_full_width, name='shop_full_width'),
+    path('shop_infinite_scroll', views.shop_infinite_scroll, name='shop_infinite_scroll'),
+    path('shop_3grid', views.shop_3grid, name='shop_3grid'),
+    path('shop_6grid', views.shop_6grid, name='shop_6grid'),
+    path('shop_list_view', views.shop_list_view, name='shop_list_view'),
     
     
     
@@ -116,16 +114,19 @@ urlpatterns = [
 # Pages Section Routes
 
     path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
+    path('add_to_cart_product_quantity_management/<str:id>/<str:actionType>', views.add_to_cart_product_quantity_management, name='add_to_cart_product_quantity_management'),
+
+    path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist_page',views.wishlist_page,name='wishlist_page'),
 
     path('search_bar/',views.search_bar, name='search_bar'),
     path('search_bar/<str:params>',views.search_bar, name='search_bar_with_params'),
     path('search_products/', views.search_products, name='search_products'),
     
     
-    path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
-    path('wishlist_page',views.wishlist_page,name='wishlist_page'),
     
     path('compare_page',views.compare_page, name='compare_page'),
+    path('compare_page2',views.compare_page2, name='compare_page2'),
     path('compare_products/<str:id>',views.compare_products,name='compare_products'),
     path('delete_compare_product/<str:id>',views.delete_compare_product, name='delete_compare_product'),
     
@@ -137,17 +138,23 @@ urlpatterns = [
     path('faq_page',views.faq_page, name='faq_page'),
     path('coming_soon',views.coming_soon, name='coming_soon'),
     path('about_page',views.about_page, name='about_page'),
+    path('review',views.review, name='review'),
+    path('typography',views.typography, name='typography'),
+    path('look_book',views.look_book, name='look_book'),
+    path('collection',views.collection, name='collection'),
+    
 
 
     
     # Cart page
     
     path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
-    # path('add_to_cart_product_quantity_management/<str:id>/<str:actionType>', views.add_to_cart_product_quantity_management, name='add_to_cart_product_quantity_management'),
-    # path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
-
-    
     path('cart_page', views.cart_page, name='cart_page'),
+    path('delete_cart_product/<str:id>',views.delete_cart_product, name='delete_cart_product'),
+    # path('delete_cart_product_form_header_button/<str:id>',views.delete_cart_product_form_header_button,name='delete_cart_product_form_header_button'),
+    # path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
+    # path('cart_to_checkout_validation',views.cart_to_checkout_validation,name='cart_to_checkout_validation'),
+
     
 
     
@@ -166,3 +173,10 @@ urlpatterns = [
 
 
 ]
+
+
+
+
+
+
+

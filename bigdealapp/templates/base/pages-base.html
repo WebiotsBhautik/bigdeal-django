@@ -58,8 +58,6 @@
 
 
 
-
-
 {% block components %} 
 
 {% endblock components %}
@@ -827,6 +825,8 @@
 
 <!-- Theme js-->
 <script src="{% static 'assets/js/script.js' %}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
 
 <script>
   function getCookie(name) {
@@ -848,168 +848,169 @@
   }
   var csrftoken = getCookie("csrftoken");
 
-  async function show_details_ls(params) {
-    console.log("-------Params---------->",params);
-    document.getElementById(params.key).setAttribute("value", params.value);
-
-    var allAttributesFilled = true;
-
-    for (var i = 0; i < params.attributeNameList.length; i++) {
-      var attributeValue = document
-        .getElementById(params.attributeNameList[i])
-        .getAttribute("value");
-      if (!attributeValue || attributeValue.length === 0) {
-        allAttributesFilled = false;
-        break;
-      }
-    }
-
-    if (allAttributesFilled) {
-      var selectedAttributeValueDict = {};
-      for (var i = 0; i < params.attributeNameList.length; i++) {
-        var attributeName = params.attributeNameList[i];
-        var selectedAttributeValue = document
-          .getElementById(params.attributeNameList[i])
-          .getAttribute("value");
-        // Perform any desired operations with selectedAttributeValue
-        selectedAttributeValueDict[attributeName] = selectedAttributeValue;
-      }
-
-      var url = "{% url 'get_product_variant' %}";
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          "X-CSRFToken": csrftoken,
-        },
-        body: JSON.stringify({
-          productId: params.id,
-          selectedAttributeValueDict: selectedAttributeValueDict,
-        }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          if (data.productVariantPrice == "Product Out Of Stock") {
-            document.getElementById("productFinalPrice").innerHTML =
-              data.productVariantPrice;
-          } else {
-            GetConvertedValues(data.productVariantPrice).then((Data) => {
-              document.getElementById("productFinalPrice").innerHTML =
-                Data.symbol + " " + Data.value + " ";
-            });
-            if (data.productVariantDiscount > 0) {
-              let productFinalPrice =
-                document.getElementById("productFinalPrice");
-              let actualPrice = document.createElement("del");
-              let discountPercentage = document.createElement("span");
-              console.log("----------------->Before");
-              discountPercentage.setAttribute("id", "discountPercentage");
-              console.log("----------------->After");
-              GetConvertedValues(data.productVariantActualPrice).then(
-                (Data) => {
-                  actualPrice.innerHTML = Data.symbol + Data.value;
-
-                  discountPercentage.innerHTML =
-                    data.productVariantDiscount + "%";
-                  productFinalPrice.appendChild(actualPrice);
-                  productFinalPrice.appendChild(discountPercentage);
-                }
-              );
-            }
-          }
-          let quantityValue = document
-            .getElementById("counterAtLeftSlidebar")
-            .getAttribute("value");
-          let urlForAddToCartCartEffect =
-            "add_to_cart_fun({key:'firstProductVariant'})";
-          urlForAddToCartCartEffect = urlForAddToCartCartEffect.replace(
-            "firstProductVariant",
-            data.productVariantId.toString()
-          );
-          document
-            .getElementById("cartEffect")
-            .setAttribute("onClick", urlForAddToCartCartEffect);
-          let urlForAddToWishlistWishlistEffect =
-            "{% url 'add_to_wishlist' 'productVariantId' %}".replace(
-              "productVariantId",
-              data.productVariantId.toString()
-            );
-          document
-            .getElementById("wishlistEffect")
-            .setAttribute("href", urlForAddToWishlistWishlistEffect);
-        });
-      // Code to execute when all attributes have non-empty values
-    }
-  }
-
-  function counterPlus(params) {
-    let counterAtLeftSlidebar = document.getElementById(params.key);
-    let a = counterAtLeftSlidebar.getAttribute("value");
-    let b = Number(a) + 1;
-    counterAtLeftSlidebar.setAttribute("value", b);
-  }
-
-  function counterMinus(params) {
-    let counterAtLeftSlidebar = document.getElementById(params.key);
-    let a = counterAtLeftSlidebar.getAttribute("value");
-    let b = Number(a) - 1;
-    if (b <= 0) {
-      // if quantity goes to zero or negative then...rehne do tum se na ho payega
-    } else {
-      counterAtLeftSlidebar.setAttribute("value", b);
-    }
-  }
-
   async function GetConvertedValues(value) {
     var url = "{% url 'get_selected_currency' %}",
-      valuereturn = 0;
+        valuereturn = 0;
     await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        (valuereturn = (data.factor * value).toFixed(2)),
-          (symbol = data.symbol);
-      });
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+            },
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            (valuereturn = (data.factor * value).toFixed(2)), (symbol = data.symbol);
+        });
     return {
-      symbol: symbol,
-      value: valuereturn,
+        symbol: symbol,
+        value: valuereturn
     };
+}
+
+
+function counterPlusAtCart(params) {
+  let quantityValueInput = document.getElementById(params.key);
+  let a = quantityValueInput.getAttribute('value');
+  
+  if (Number(a) < params.productQuantity) {
+      let b = Number(a) + 1;
+      quantityValueInput.setAttribute('value', b);
+      let actionType = "plus"
+      console.log('params.productVariantId ======++>',params.productVariantId)
+      quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
+  }
+}
+
+function counterMinusAtCart(params) {
+  let quantityValueInput = document.getElementById(params.key);
+  let a = quantityValueInput.getAttribute('value');
+  let b = Number(a) - 1;
+  let actionType = "minus";
+  
+  if (b <= 0) {
+      // if quantity goes to zero or negative then...rehne do tum se na ho payega
+  } else {
+      quantityValueInput.setAttribute('value', b);
+      quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle);
+  }
+}
+
+function beforecounterPlusAtCart(params) {
+  let quantityValueInput = document.getElementById(params.key);
+  let a = quantityValueInput.getAttribute('value');
+  getdata = $.cookie("cart").replace(/\\054/g, ',').replaceAll("\'","\"");
+  var cookies = JSON.parse(getdata);
+  cookies.forEach(function(product)
+  {
+      
+      
+      if(product.variant_id == params.productVariantId)
+      {
+          if (Number(a) <= product.quantity) {
+              let b = Number(a) + 1;
+              quantityValueInput.setAttribute('value', b);
+              let actionType = "plus"
+              quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
+          }
+      }
+  });
+}   
+
+
+
+function quantity_wise_price_management(productVariantId, actionType, totalPriceEle) {
+  if (actionType == "plus") {
+      let urlForPlus = ("{% url 'add_to_cart_product_quantity_management' 'id' 'actionType' %}")
+      urlForPlus = urlForPlus.replace('id', productVariantId)
+      urlForPlus = urlForPlus.replace('actionType', actionType)
+
+      fetch(urlForPlus, {
+          method: 'POST',
+          headers: {
+              'Content-type': 'application/json',
+              'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+
+          })
+      }).then(response => {
+          return response.json()
+      }).then(data => {
+          console.log("data>>",data);
+          GetConvertedValues(data.quantityTotalPrice).then((Data) => {
+              document.getElementById(totalPriceEle).innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+          GetConvertedValues(data.cartTotalPrice).then((Data) => {
+              document.getElementById('cartTotalPrice').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+          GetConvertedValues(data.taxPrice).then((Data) => {
+              document.getElementById('taxPrice').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+          GetConvertedValues(data.cartTotalPriceAfterTax).then((Data) => {
+              document.getElementById('priceAfterTax').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+          GetConvertedValues(data.cartTotalPrice).then((Data) => {
+              document.getElementById('cartTotalPriceButton').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+      })
   }
 
-  async function GetConvertedRangeValues(value1, value2) {
-    var url = "{% url 'get_selected_currency' %}",
-      valuereturn1 = 0,
-      valuereturn2 = 0;
-    await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-    })
-      .then((response) => {
-        return response.json();
+  if (actionType == "minus") {
+      let urlForMinus = ("{% url 'add_to_cart_product_quantity_management' 'id' 'actionType' %}")
+      urlForMinus = urlForMinus.replace('id', productVariantId)
+      urlForMinus = urlForMinus.replace('actionType', actionType)
+
+      fetch(urlForMinus, {
+          method: 'POST',
+          headers: {
+              'Content-type': 'application/json',
+              'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+
+          })
+      }).then(response => {
+          return response.json()
+      }).then(data => {
+
+          GetConvertedValues(data.quantityTotalPrice).then((Data) => {
+              document.getElementById(totalPriceEle).innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+          GetConvertedValues(data.cartTotalPrice).then((Data) => {
+              document.getElementById('cartTotalPrice').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+          GetConvertedValues(data.taxPrice).then((Data) => {
+              document.getElementById('taxPrice').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+          GetConvertedValues(data.cartTotalPriceAfterTax).then((Data) => {
+              document.getElementById('priceAfterTax').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
+          GetConvertedValues(data.cartTotalPrice).then((Data) => {
+              document.getElementById('cartTotalPriceButton').innerHTML =
+                  Data.symbol + " " + Data.value;
+          });
+
       })
-      .then((data) => {
-        (valuereturn1 = (data.factor * value1).toFixed(2)),
-          (valuereturn2 = (data.factor * value2).toFixed(2)),
-          (symbol = data.symbol);
-      });
-    return {
-      symbol: symbol,
-      value1: valuereturn1,
-      value2: valuereturn2,
-    };
   }
+}
 
   function removeElementsByClass(className) {
     const elements = document.getElementsByClassName(className);

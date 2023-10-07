@@ -224,9 +224,9 @@
                      <nav id="main-nav">
                         <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
                      <!-- ===================================================================================== -->
-                     {% comment %} {% include 'layout/nav-link.html' %} {% endcomment %}
+                     {% include 'layout/nav-link.html' %}
                      <!-- ===================================================================================== -->
-                     <ul id="main-menu" class="sm pixelstrap desc-horizontal sm-vertical sm-blue">
+                     {% comment %} <ul id="main-menu" class="sm pixelstrap desc-horizontal sm-vertical sm-blue">
                         <li>
                            <div class="desc-back text-right">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
                         </li>
@@ -547,7 +547,7 @@
                            </ul>
                         </li>
                         <!--blog-meu end-->
-                     </ul> 
+                     </ul>  {% endcomment %}
                      </nav>
                   </div>
                   <div class="input-block">

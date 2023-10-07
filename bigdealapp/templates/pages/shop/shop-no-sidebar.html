@@ -5,7 +5,7 @@
 {% load mathfilters %}
 {% block components %}
 
-
+{% comment %} 
 <script>
   
   function getCookie(name) {
@@ -26,14 +26,13 @@
   var csrftoken = getCookie('csrftoken');
 
   function redirectToCreateQueryParamsUrl(params) {
-      console.log("-------------------Function call",params);
       var removeTagId = params.value+params.key+"CheckBox";
       var attributeCheckBox=document.getElementById(removeTagId);
       attributeCheckBox.checked = false;
       var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
       sbmtButton.click();
   }
-</script>
+</script> {% endcomment %}
 
 
 <!-- section start -->
@@ -53,6 +52,73 @@
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
                 </div>
+                <div class="col-md-12">
+                  <ul class="short-name">
+                      {% for key, value in request.GET.items %}
+                      {% if key != 'selectedAttribute' and key != 'price' %}
+                      {% for attribute in value|return_selected_attribute_list:request %}
+                      <li>
+                          <div class="label-tag">
+                              <span>{{attribute}}-{{key}}</span>
+                              <button type="button" class="btn-close"
+                                  onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
+                          </div>
+                      </li>
+                      {% endfor %}
+                      {% endif %}
+
+                      {% if key == 'price' %}
+                      {% with price_values=value|return_selected_attribute_list:request %}
+                      {% if price_values %}
+                      <li>
+                          <div class="label-tag">
+                              <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                                  {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
+                          </div>
+                      </li>
+                      {% endif %}
+                      {% endwith %}
+                      {% endif %}
+
+                      {% endfor %}
+
+                      {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                      {% if request.GET.page %}
+
+                      <div class="label-tag">
+                          <a href="{% url 'shop_no_sidebar' %}"><span>Clear All</span></a>
+                      </div>
+
+                      {% endif %}
+                      {% endif %}
+
+
+                      {% if request.path == '/shop_no_sidebar' or request.GET.page %}
+                      {% if 'price' not in request.GET %}
+
+                      <li>
+                          <div class="label-tag">
+                              <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                                  {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                          </div>
+                      </li>
+
+                      {% endif %}
+                      {% endif %}
+
+
+                      {% if request.path != '/shop_no_sidebar' or request.GET %}
+                      {% if not request.GET.page %}
+
+                      <div class="label-tag">
+                          <a href="{% url 'shop_no_sidebar' %}"><span>Clear All</span></a>
+                      </div>
+                      {% endif %}
+                      {% endif %}
+
+                  </ul>
+                </div>
+
                 <div class="collection-product-wrapper">
                   <div class="product-top-filter">
                       <div class="container-fluid p-0">
@@ -70,6 +136,7 @@
                           <div class="product-filter-content horizontal-filter-mian ">
                             <div class="horizontal-filter-toggle">
                               <h4><i data-feather="filter"></i>latest filter</h4>
+                              <h5>Showing Products of {{totalCount}} Result</h5>
                             </div>
                             <div class="collection-view">
                                 <ul>
@@ -125,35 +192,6 @@
                                     </div>
                                     {% endfor %}
                                     <div class="filter-group">
-                                      {% comment %} <div class="collection-collapse-block">
-                                        <h6 class="collapse-block-title">select price</h6> 
-                                        <div class="collection-collapse-block-content">
-                                          <div class="size-selector">                              
-                                              <div class="collection-brand-filter">
-                                                  <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                      <input type="checkbox" class="custom-control-input form-check-input" id="hundred">
-                                                      <label class="custom-control-label form-check-label" for="hundred">$10 - $100</label>
-                                                  </div>
-                                                  <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                      <input type="checkbox" class="custom-control-input form-check-input" id="twohundred">
-                                                      <label class="custom-control-label form-check-label" for="twohundred">$100 - $200</label>
-                                                  </div>
-                                                  <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                      <input type="checkbox" class="custom-control-input form-check-input" id="threehundred">
-                                                      <label class="custom-control-label form-check-label" for="threehundred">$200 - $300</label>
-                                                  </div>
-                                                  <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                      <input type="checkbox" class="custom-control-input form-check-input" id="fourhundred">
-                                                      <label class="custom-control-label form-check-label" for="fourhundred">$300 - $400</label>
-                                                  </div>
-                                                  <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
-                                                      <input type="checkbox" class="custom-control-input form-check-input" id="fourhundredabove">
-                                                      <label class="custom-control-label form-check-label" for="fourhundredabove">$400 above</label>
-                                                  </div>
-                                              </div>
-                                            </div>
-                                        </div>
-                                      </div> {% endcomment %}
                                       <div class="collection-collapse-block">
                                         <h4 class="collapse-block-title">select price</h4>
                                         <div class="collection-collapse-block-content">

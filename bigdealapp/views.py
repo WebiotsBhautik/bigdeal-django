@@ -72,6 +72,7 @@ def get_selected_currency(request):
 
 
 def signup_page(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         role = request.POST['role']
         username = request.POST['username']
@@ -103,11 +104,13 @@ def signup_page(request):
                 return redirect('signup_page')
         return render(request, 'authentication/sign-up.html')
     else:
-        context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"}}
+        context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+                   'active_banner_themes':active_banner_themes,}
         return render(request, 'authentication/sign-up.html', context)
                     
 
 def login_page(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         username = request.POST['name']
         password = request.POST['password']
@@ -122,7 +125,8 @@ def login_page(request):
             messages.error(request, 'Invalid Credentials')
             return redirect('login_page')
     context = {"breadcrumb": {
-         "parent": "Dashboard", "child": "Default"}}
+         "parent": "Dashboard", "child": "Default"},
+               'active_banner_themes':active_banner_themes,}
     return render(request, 'authentication/login.html',context)
 
 def logout_page(request):
@@ -234,6 +238,9 @@ def layout3(request):
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products  
         
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+        
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbanners':banners,
                'allbrands':brands,
@@ -242,6 +249,7 @@ def layout3(request):
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
                'left_banners':left_banners,
+               'active_banner_themes':active_banner_themes,
                }
         
     return render(request, 'pages/home/ms3/layout-3.html',context)
@@ -262,6 +270,9 @@ def layout4(request):
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products  
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -271,6 +282,8 @@ def layout4(request):
                'layout4_products':layout4_products,
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
+                'active_banner_themes':active_banner_themes,
+
                }
     
     return render(request, 'pages/home/ms4/layout-4.html',context)
@@ -304,6 +317,9 @@ def layout5(request):
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products  
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -319,6 +335,8 @@ def layout5(request):
             'collection_banner':collection_banner,
             'sale_banner':sale_banner,
             'main_categories':main_categories,
+            'active_banner_themes':active_banner_themes,
+
             }
     
     return render(request, 'pages/home/ms5/layout-5.html',context)
@@ -341,6 +359,9 @@ def electronics(request):
         products_by_subcategory[subcategory] = products  
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Electronics',status=True, blogStatus=1)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -352,6 +373,7 @@ def electronics(request):
             'products_by_subcategory':products_by_subcategory,
             'media_banners':media_banners,
             'blogs':blogs,
+            'active_banner_themes':active_banner_themes,
             }
     return render(request, 'pages/home/electronics/electronics.html',context)
 
@@ -390,6 +412,9 @@ def vegetable(request):
         
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Vegetables',status=True, blogStatus=1)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -404,6 +429,7 @@ def vegetable(request):
             'four_banner':four_banner,
             'five_banner':five_banner,
             'six_banner':six_banner,
+            'active_banner_themes':active_banner_themes,
             }
 
     return render(request, 'pages/home/vegetables/vegetable.html',context)
@@ -438,6 +464,8 @@ def furniture(request):
         products_by_subcategory[subcategory] = products
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Furniture',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
         
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -452,6 +480,8 @@ def furniture(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'five_banner':five_banner,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/home/furniture/furniture.html',context)
 
@@ -486,6 +516,7 @@ def cosmetic(request):
         products_by_subcategory[subcategory] = products
 
     blogs = Blog.objects.filter(blogCategory__categoryName='Cosmetic',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
         
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -500,7 +531,7 @@ def cosmetic(request):
            'second_banner':second_banner,
            'third_banner':third_banner,
            'fourth_banner':fourth_banner,
-           
+            'active_banner_themes':active_banner_themes,
             }
     
     return render(request,'pages/home/cosmetic/cosmetic.html',context)
@@ -535,6 +566,8 @@ def kids(request):
         products_by_subcategory[subcategory] = products
 
     blogs = Blog.objects.filter(blogCategory__categoryName='Kids',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
         
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -550,6 +583,7 @@ def kids(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'five_banner':five_banner,
+            'active_banner_themes':active_banner_themes,
         }   
 
     return render(request, 'pages/home/kids/kids.html',context)
@@ -573,6 +607,8 @@ def tools(request):
         
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Tools',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
                                             
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -582,6 +618,8 @@ def tools(request):
             'products_by_subcategory':products_by_subcategory,
             'last_three_collection':last_three_collection,
             'blogs':blogs,
+            'active_banner_themes':active_banner_themes,
+
             }   
     return render(request, 'pages/home/tools/tools.html',context)
 
@@ -629,6 +667,8 @@ def grocery(request):
         
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Grocery',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -645,6 +685,8 @@ def grocery(request):
             'five_banner':five_banner,
             'six_banner':six_banner,
             'last_testimonial':last_testimonial,
+            'active_banner_themes':active_banner_themes,
+
             }   
     return render(request, 'pages/home/grocery/grocery.html',context)
 
@@ -677,6 +719,8 @@ def pets(request):
         
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Pets',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -693,6 +737,8 @@ def pets(request):
             # 'five_banner':five_banner,
             # 'six_banner':six_banner,
             # 'last_testimonial':last_testimonial,
+            'active_banner_themes':active_banner_themes,
+
             }   
     
     return render(request, 'pages/home/pets/pets.html',context)
@@ -733,6 +779,8 @@ def farming(request):
         products_by_subcategory[subcategory] = products
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Farming',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
         
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -748,6 +796,8 @@ def farming(request):
             'blogs':blogs,
             'sale_banner':sale_banner,
             'counter_banner':counter_banner,
+            'active_banner_themes':active_banner_themes,
+
         }
     return render(request, 'pages/home/farming/farming.html',context)
 
@@ -781,6 +831,8 @@ def digital_marketplace(request):
         
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Digital Marketplace',status=True, blogStatus=1)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -794,6 +846,8 @@ def digital_marketplace(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'blogs':blogs,
+            'active_banner_themes':active_banner_themes,
+
         }
     return render(request, 'pages/home/digital_marketplace/digital-marketplace.html',context)
 
@@ -896,6 +950,9 @@ def shop_left_sidebar(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
         
         
     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
@@ -912,6 +969,8 @@ def shop_left_sidebar(request):
             'last_added_products':last_added_products,
             'path':'shop_left_sidebar',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-left-sidebar.html',context)
 
@@ -971,6 +1030,9 @@ def shop_right_sidebar(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop Right Sidebar", "child": "Shop Right Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -984,8 +1046,9 @@ def shop_right_sidebar(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-right-sidebar',
+            'path':'shop_right_sidebar',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
             }
     return render(request, 'pages/shop/shop-right-sidebar.html',context)
 
@@ -1045,6 +1108,9 @@ def shop_no_sidebar(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop No Sidebar", "child": "Shop No Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1058,8 +1124,10 @@ def shop_no_sidebar(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-no-sidebar',
+            'path':'shop_no_sidebar',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-no-sidebar.html',context)
 
@@ -1119,6 +1187,9 @@ def shop_sidebar_popup(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop Sidebar Popup", "child": "Shop Sidebar Popup"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1132,8 +1203,10 @@ def shop_sidebar_popup(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-sidebar-popup',
+            'path':'shop_sidebar_popup',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-sidebar-popup.html',context)
 
@@ -1157,10 +1230,8 @@ def shop_metro(request):
     
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
     # collection_banner  = banners.filter(bannerType__bannerTypeName='Shop metro')
-
     
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
-    
     
     shop_bnr = BannerType.objects.get(bannerTypeName='Shop category banner')
     shop_banner = Banner.objects.filter(bannerType=shop_bnr).first()
@@ -1185,8 +1256,8 @@ def shop_metro(request):
     page_obj = paginator.get_page(page_number)
     
     get_all_prices = ProductVariant.objects.values_list('productVariantFinalPrice', flat=True)
-    min_price = []
-    max_price = []
+    min_price = 0
+    max_price = 0
     selected_currency = []
     
     if get_all_prices:
@@ -1197,6 +1268,9 @@ def shop_metro(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop Metro", "child": "Shop Metro"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1211,15 +1285,20 @@ def shop_metro(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-metro',
+            'path':'shop_metro',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-metro.html',context)
 
 def shop_full_width(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     context = {"breadcrumb": {"parent": "Shop Full Width", "child": "Shop Full Width"},
             'allbanners': banners,
+            'active_banner_themes':active_banner_themes,
             }
     return render(request, 'pages/shop/shop-full-width.html',context)
 
@@ -1279,6 +1358,9 @@ def shop_infinite_scroll(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop Infinite Scroll", "child": "Shop Infinite Scroll"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1292,8 +1374,9 @@ def shop_infinite_scroll(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-infinite-scroll',
+            'path':'shop_infinite_scroll',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
             }
     return render(request, 'pages/shop/shop-infinite-scroll.html',context)
 
@@ -1353,6 +1436,8 @@ def shop_3grid(request):
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
       
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop 3grid", "child": "Shop 3grid"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1366,8 +1451,9 @@ def shop_3grid(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-3grid',
+            'path':'shop_3grid',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
             }
     return render(request, 'pages/shop/shop-3-grid.html',context)
 
@@ -1426,6 +1512,10 @@ def shop_6grid(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
+        
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     
     context = {"breadcrumb": {"parent": "Shop 6grid", "child": "Shop 6grid"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1439,8 +1529,10 @@ def shop_6grid(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-6grid',
+            'path':'shop_6grid',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-6-grid.html',context)
 
@@ -1500,8 +1592,9 @@ def shop_list_view(request):
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
- 
         
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     context = {"breadcrumb": {"parent": "Shop List View", "child": "Shop List View"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1515,8 +1608,10 @@ def shop_list_view(request):
             'max_price':max_price,
             'symbol':selected_currency.symbol,
             'last_added_products':last_added_products,
-            'path':'shop-list-view',
+            'path':'shop_list_view',
             'totalCount':totalProduct,
+            'active_banner_themes':active_banner_themes,
+
             }
     return render(request, 'pages/shop/shop-list-view.html',context)
 
@@ -1672,19 +1767,11 @@ def left_slidebar(request,id,brand_id=None):
     brand = ProBrand.objects.all()
     category = ProCategory.objects.all()
     
-    # brandSlug = ()    
-    
-    # if brand_slug:
-    #     brandSlug = get_object_or_404(ProBrand, brandName__iexact=brand_slug)
-    #     product = ProductVariant.objects.filter(variantProduct__productBrand=brand)
-        
-    #     url = reverse('products_by_brand', args=[brand_slug])
-        
-        
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product Left Sidebar", "child": "Product Left Sidebar"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -1709,6 +1796,8 @@ def left_slidebar(request,id,brand_id=None):
                 "last_added_products":last_added_products,  
                 "url":url,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
+
                 }
 
     return render(request, 'pages/product/product-left-sidebar.html',context)
@@ -1865,6 +1954,8 @@ def right_sidebar(request,id):
     
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product Right Sidebar", "child": "Product Right Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -1887,6 +1978,7 @@ def right_sidebar(request,id):
                 "reviewStatus":reviewStatus,
                 "last_added_products":last_added_products,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
                 }
     
     return render(request, 'pages/product/product-right-sidebar.html',context)
@@ -1978,6 +2070,9 @@ def no_sidebar(request,id):
     
     product = get_object_or_404(Product,id=id)
     selected_delivery_options = product.deliveryOption.all()
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product No Sidebar", "child": "Product No Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -1999,6 +2094,8 @@ def no_sidebar(request,id):
                 "rating_range":rating_range,
                 "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-no-sidebar.html',context)
 
@@ -2089,6 +2186,8 @@ def bundle(request,id):
     
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product Bundle", "child": "Product Bundle"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2110,6 +2209,8 @@ def bundle(request,id):
                 "rating_range":rating_range,
                 "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-bundle.html',context)
 
@@ -2200,6 +2301,8 @@ def image_swatch(request,id):
     
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product Image Swatch", "child": "Product Image Swatch"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2219,6 +2322,8 @@ def image_swatch(request,id):
                 "rating_range":rating_range,
                 "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-image-swatch.html',context)
 
@@ -2305,6 +2410,8 @@ def vertical_tab(request,id):
     
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product Vertical Tab", "child": "Product Vertical Tab"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2324,6 +2431,8 @@ def vertical_tab(request,id):
                 "rating_range":rating_range,
                 "reviewStatus":reviewStatus,
                 "selected_delivery_options":selected_delivery_options,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-vertical-tab.html',context)
 
@@ -2412,8 +2521,7 @@ def video_thumbnail(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product Video Thumbnail", "child": "Product Video Thumbnail"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2434,6 +2542,7 @@ def video_thumbnail(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/product/product-video-thumbnail.html',context)
 
@@ -2522,8 +2631,8 @@ def image_4(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
 
     context = {"breadcrumb": {"parent": "Product 4 Image", "child": "Product 4 Image"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2544,6 +2653,8 @@ def image_4(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-4-image.html',context)
 
@@ -2626,15 +2737,16 @@ def sticky(request,id):
             "five_stars": "0"
         }
     attributeObjects, attributeObjectsIds = get_product_attribute_list(id)
+    
 
     brand = ProBrand.objects.all()
     category = ProCategory.objects.all()
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
+    
     context = {"breadcrumb": {"parent": "Product Sticky", "child": "Product Sticky"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 "cart_products_demo": cart_products_demo,
@@ -2654,7 +2766,9 @@ def sticky(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
+    
     return render(request, 'pages/product/product-sticky.html',context)
 
 def accordian(request,id):
@@ -2742,6 +2856,7 @@ def accordian(request,id):
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
     
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
 
     context = {"breadcrumb": {"parent": "Product Accordian", "child": "Product Accordian"},
@@ -2763,6 +2878,7 @@ def accordian(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/product/product-page-accordian.html',context)
 
@@ -2851,7 +2967,7 @@ def product_360_view(request,id):
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
     
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product 360 View", "child": "Product 360 View"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2872,6 +2988,7 @@ def product_360_view(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/product/product-page-360-view.html',context)
 
@@ -2959,8 +3076,7 @@ def left_image(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product Left Image", "child": "Product Left Image"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2981,6 +3097,7 @@ def left_image(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/product/product-left-image.html',context)
 
@@ -3068,6 +3185,7 @@ def right_image(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     
 
@@ -3090,6 +3208,7 @@ def right_image(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/product/product-right-image.html',context)
 
@@ -3178,7 +3297,7 @@ def image_outside(request,id):
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
     
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product Image Outside", "child": "Product Image Outside"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -3199,6 +3318,8 @@ def image_outside(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-page-image-outside.html',context)
 
@@ -3286,6 +3407,7 @@ def thumbnail_left(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     
 
@@ -3308,6 +3430,8 @@ def thumbnail_left(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-thumbnail-left.html',context)
 
@@ -3395,6 +3519,9 @@ def thumbnail_right(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    
     
     
 
@@ -3417,6 +3544,8 @@ def thumbnail_right(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-thumbnail-right.html',context)
 
@@ -3504,8 +3633,7 @@ def thumbnail_bottom(request,id):
         
     product = get_object_or_404(Product, id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Product Thumbnail Bottom", "child": "Product Thumbnail Bottom"},
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -3526,8 +3654,11 @@ def thumbnail_bottom(request,id):
                 "last_added_products":last_added_products,  
                 "selected_delivery_options":selected_delivery_options,
                 "reviewStatus":reviewStatus,
+                'active_banner_themes':active_banner_themes,
+
                 }
     return render(request, 'pages/product/product-thumbnail-bottom.html',context)
+
 
 def element_productbox(request):
     ms1 = ProCategory.objects.get(categoryName='ms1')
@@ -3577,6 +3708,8 @@ def element_productbox(request):
     furniture = ProCategory.objects.get(categoryName='Furniture')
     subcategories = furniture.get_descendants(include_self=True)
     furniture_products = Product.objects.filter(proCategory__in=subcategories)
+
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     
     context = {"breadcrumb": {"parent": "Product Box", "child": "Product Box"},
@@ -3592,15 +3725,20 @@ def element_productbox(request):
         'grocery_products':grocery_products,
         'digital_Marketplace_products':digital_Marketplace_products,
         'furniture_products':furniture_products,
+        'active_banner_themes':active_banner_themes,
     }
     return render(request, 'pages/product/element-productbox.html',context)
 
 def element_product_slider(request):
     products = Product.objects.all()
     recent_products = Product.objects.all().order_by('-productCreatedAt')[:30]
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     context = {"breadcrumb": {"parent": "Product Slider", "child": "Product Slider"},
                'products':products,
                'recent_products':recent_products,
+                'active_banner_themes':active_banner_themes,
+
     }
     
     return render(request, 'pages/product/element-product-slider.html',context)
@@ -3614,12 +3752,13 @@ def element_no_slider(request):
     subcategories = pets.get_descendants(include_self=True)
     pets_products = Product.objects.filter(proCategory__in=subcategories)
     
-    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     context = {"breadcrumb": {"parent": "No Slider", "child": "No Slider"},
                'kids_products':kids_products,
                'pets_products':pets_products,
+                'active_banner_themes':active_banner_themes,
     }
-    
     return render(request, 'pages/product/element-no_slider.html',context)
 
 
@@ -3645,12 +3784,14 @@ def blog_details(request, id):
     blogCategories = BlogCategory.objects.all()
     blogComments = BlogComment.objects.filter(commentOfBlog__id=id, status=True)
     relatedBlogs = Blog.objects.filter(blogCategory=blog.blogCategory, status=True, blogStatus=1).exclude(id=id)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {"breadcrumb": {"parent": "Blog Details", "child": "Blog Details"},
                 "blog": blog,
                 "blogs": blogs,
                 "blogCategories": blogCategories,
                 "blogComments": blogComments,
                 "relatedBlogs": relatedBlogs,
+                'active_banner_themes':active_banner_themes,
                 }
     return render(request, 'pages/blog/blog-details.html',context)
 
@@ -3665,6 +3806,8 @@ def blog_left_sidebar(request):
     
     recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Blog Left Sidebar", "child": "Blog Left Sidebar"},
                "blogs": blogs,
@@ -3672,6 +3815,7 @@ def blog_left_sidebar(request):
                "page_obj": page_obj,
                "recent_blogs":recent_blogs,
                "popular_blogs":popular_blogs,
+               'active_banner_themes':active_banner_themes,
                }
     return render(request, 'pages/blog/blog-left-sidebar.html', context)
 
@@ -3687,6 +3831,8 @@ def blog_right_sidebar(request):
     
     recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
 
     context = {
@@ -3696,6 +3842,7 @@ def blog_right_sidebar(request):
         "page_obj": page_obj,
         "recent_blogs":recent_blogs,
         "popular_blogs":popular_blogs,
+        'active_banner_themes':active_banner_themes,
         
     }
     return render(request, "pages/blog/blog-right-sidebar.html", context)
@@ -3707,11 +3854,14 @@ def blog_no_sidebar(request):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {
         "breadcrumb": {"parent": "Blog No Sidebar", "child": "Blog No Sidebar"},
         'blogs':blogs,
         'page_obj':page_obj,
+        'active_banner_themes':active_banner_themes,
     }
     return render(request, 'pages/blog/blog-no-sidebar.html',context)
 
@@ -3727,6 +3877,8 @@ def blog_creative_left_sidebar(request):
     
     recent_blogs = Blog.objects.all().order_by('-createdAt')[:5]
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {
         "breadcrumb": {"parent": "Creative Left Sidebar", "child": "Creative Left Sidebar"},
@@ -3735,6 +3887,7 @@ def blog_creative_left_sidebar(request):
         "page_obj": page_obj,
         "recent_blogs":recent_blogs,
         "popular_blogs":popular_blogs,
+        'active_banner_themes':active_banner_themes,
     }
     return render(request, 'pages/blog/blog-creative-left-sidebar.html',context)
 
@@ -3766,16 +3919,18 @@ def search_bar(request,params=None):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    context = {"breadcrumb": {"parent": "Search", "child": "Search"}, 'products': products,
-                'query': query,'page_obj':page_obj, }
-            
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
+    context = {"breadcrumb": {"parent": "Search", "child": "Search"}, 'products': products,
+                'query': query,'page_obj':page_obj,
+                'active_banner_themes':active_banner_themes,}
     return render(request, 'pages/pages/search.html',context)
 
 
 
 
 def forgot_password(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == 'POST':
         email = request.POST['emailname']
         if CustomUser.objects.filter(email=email).exists():
@@ -3808,10 +3963,11 @@ def forgot_password(request):
             messages.error(request,'Account Does Not Exist!')
             return redirect('forgot_password')
             
-    return render(request, 'authentication/forget-pwd.html')
+    return render(request, 'authentication/forget-pwd.html',{'active_banner_themes':active_banner_themes})
     
     
 def verify_token(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         entered_otp = request.POST.get('otp')
         get_id = request.COOKIES['code']
@@ -3832,9 +3988,10 @@ def verify_token(request):
         else:
             messages.error(request,'Your otp has been expired! Please regenerate otp.')
             return redirect('forgot_password')
-    return render(request,'authentication/verify-token.html')
+    return render(request,'authentication/verify-token.html' ,{'active_banner_themes':active_banner_themes})
 
 def update_password(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         password = request.POST['newpass']
         conf_password = request.POST['confnewpass']
@@ -3857,22 +4014,28 @@ def update_password(request):
                 messages.error(request,'Password Does Not Match')
                 return redirect('update_password')
     context = {"breadcrumb": {"parent": "Update password", "child": "Update password"},
+               'active_banner_themes':active_banner_themes,
     }
     return render(request, 'authentication/update_password.html',context)  
 
 
 def dashboard(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {"breadcrumb":{"parent":"Dashboard","child":"Dashboard"},
+               'active_banner_themes':active_banner_themes,
                }
     return render(request, 'pages/pages/account/dashboard.html',context)
 
 def profile(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {"breadcrumb":{"parent":"profile","child":"profile"},
+               'active_banner_themes':active_banner_themes,
                }
     return render(request, 'pages/pages/account/profile.html',context)
 
 
 def change_password(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         current_password = request.POST['currentpass']
         new_password = request.POST['newpass']
@@ -3895,12 +4058,14 @@ def change_password(request):
             return redirect('change_password')
             
     context = {"breadcrumb":{"parent": "Change password", "child":"Change password"},
+               'active_banner_themes':active_banner_themes,
                }
     return render(request, 'authentication/change_password.html',context)
 
 
 
 def contact_us(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
     if request.method == "POST":
         firstname = request.POST['first']
         lastname = request.POST['last']
@@ -3917,6 +4082,7 @@ def contact_us(request):
             messages.success(request, 'Your form has been submitted successfully')
             return redirect('contact_us')
     context = {"breadcrumb":{"parent":"Contact","child":"Contacts"},
+               'active_banner_themes':active_banner_themes,
                }
     return render(request, 'pages/pages/account/contact.html',context)
 
@@ -4108,7 +4274,7 @@ def add_to_cart(request, id=None, quantity=0):
             cart_items.append(cart_item)
         cart_items_json = json.dumps(cart_items)
 
-        response = HttpResponseRedirect(reverse('index_default'))
+        response = HttpResponseRedirect(reverse('index'))
         response.set_cookie('cart', cart_items_json)
         return response
     
@@ -4124,6 +4290,93 @@ def get_total_tax_values(variant_products):
         TotalVariantFinalPriceAfterTax += variant.productVariantFinalPriceAfterTax * int(variant_product['quantity'])
         
     return TotalVariantTax,TotalVariantTaxPrice,TotalVariantFinalPriceAfterTax
+
+@csrf_exempt
+def add_to_cart_product_quantity_management(request, id, actionType):
+    if request.user.is_authenticated:
+        productVariant = ProductVariant.objects.get(id=id)
+        cart = Cart.objects.get(cartByCustomer=request.user)
+
+        if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
+            cartProductObject = CartProducts.objects.get(cartByCustomer=request.user, cartProduct=productVariant)
+
+            if actionType == "plus":
+                if productVariant.productVariantQuantity > 0:
+                    cartProductObject.cartProductQuantity = cartProductObject.cartProductQuantity + 1
+                    cartProductObject.save()
+                    cartTotalPrice = cart.getTotalPrice
+                    cartTotalPriceAfterTax = cart.getFinalPriceAfterTax
+                    data = {
+                        "quantityTotalPrice": cartProductObject.cartProductQuantityTotalPrice,
+                        "cartTotalPrice": cartTotalPrice,
+                        "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
+                        "taxPrice":cart.getTotalTax
+                    }
+                    return JsonResponse(data, safe=False)
+                else:
+                    cartTotalPrice = cart.getTotalPrice
+                    cartTotalPriceAfterTax = cart.getFinalPriceAfterTax
+                    data = {
+                        "quantityTotalPrice": cartProductObject.cartProductQuantityTotalPrice,
+                        "cartTotalPrice": cartTotalPrice,
+                        "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
+                        "taxPrice":cart.getTotalTax
+                    }
+                    return JsonResponse(data, safe=False)
+
+            if actionType == "minus":
+                cartProductObject.cartProductQuantity = cartProductObject.cartProductQuantity - 1
+                cartProductObject.save()
+                cartTotalPrice = cart.getTotalPrice
+                cartTotalPriceAfterTax = cart.getFinalPriceAfterTax
+                data = {
+                    "quantityTotalPrice": cartProductObject.cartProductQuantityTotalPrice,
+                    "cartTotalPrice": cartTotalPrice,
+                    "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
+                    "taxPrice":cart.getTotalTax
+                }
+                return JsonResponse(data, safe=False)
+            
+    else:
+        productVariant = ProductVariant.objects.get(id=id)
+        product_id = productVariant.variantProduct.id
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+
+        if (get_Item is not None and get_Item != "null"):
+            cart_products = json.loads(get_Item)
+        else:
+            cart_products = []
+
+        if actionType == "plus" and cart_products:
+
+            for item in cart_products:
+                if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
+                    item['quantity'] = int(item['quantity']) + 1
+                    item['totalPrice'] = format(item['quantity'] * item['price'],".2f")
+
+        if actionType == "minus" and cart_products:
+            for item in cart_products:
+                if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
+                    if item['quantity'] >= 1:
+                        item['quantity'] -= 1
+                        item['totalPrice'] = format(item['quantity'] * item['price'],".2f")
+                    else:
+                        cart_products = [item for item in cart_products if item.get('product_id') != id]
+                        break
+        res_data = [item for item in cart_products if str(id) == item.get('variant_id') and str(product_id) == item.get('product_id')]
+        TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
+        TotalTax,TotalTaxPrice,TotalFinalPriceAfterTax = get_total_tax_values(cart_products)
+        
+        data = {
+                    "quantityTotalPrice": res_data[0]['totalPrice'],
+                    "cartTotalPrice": TotalPrice,
+                    "cartTotalPriceAfterTax": TotalFinalPriceAfterTax,
+                    "taxPrice":TotalTaxPrice,
+                }
+
+        response = JsonResponse(data,safe=False)
+        response.set_cookie('cart', cart_products)
+        return response
     
     
 def cart_page(request,cart_products=None):
@@ -4133,7 +4386,11 @@ def cart_page(request,cart_products=None):
     cartTotalPriceAfterTax = 0
     cart_products = []
     
-    context = {"breadcrumb": {"parent": "Shopping Cart", "child": "Cart"},
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+    
+    context = {"breadcrumb": {"parent": "Cart", "child": "Cart"},
+               'active_banner_themes':active_banner_themes,
                }
     
     if current_user.is_authenticated:
@@ -4159,6 +4416,7 @@ def cart_page(request,cart_products=None):
                 item['totalPrice'] = int(item['quantity']) * float(item['price'])
 
         totalCartProducts = len(cart_products)
+        
         TotalTax,TotalTaxPrice,cartTotalPriceAfterTax = get_total_tax_values(cart_products)
         TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
         context["cartTotalPrice"]=TotalPrice
@@ -4171,11 +4429,28 @@ def cart_page(request,cart_products=None):
     context["Cart"]= customer_cart
     context["cartId"]=customer_cart.id
     
-    # print('cart_products ===>',cart_products)
-    # print('totalCartProducts ===>',totalCartProducts)
-            
-            
+    
     return render(request, 'pages/pages/account/cart.html',context)
+
+
+def delete_cart_product(request, id):
+    if request.user.is_authenticated:
+        CartProducts.objects.filter(cartProduct=id).delete()
+    else:
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+
+        if (get_Item is not None and get_Item != "null"):
+            cart_products = json.loads(get_Item)
+        else:
+            cart_products = []
+
+        if len(cart_products) >= 1:
+            
+            cart_products = [item for item in cart_products if item.get('variant_id') != str(id)]
+            response = HttpResponseRedirect(reverse('cart_page'))
+            response.set_cookie('cart', cart_products)
+            return response
+    return redirect('cart_page')
 
 
 def add_to_wishlist(request, id):
@@ -4215,10 +4490,14 @@ def wishlist_page(request):
     else:
         return redirect('login_page')
     
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
 
     context = {"breadcrumb": {"parent": "Wishlist", "child": "Wishlist"},
                "totalCartProducts": totalCartProducts,
-               "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts, }
+               "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+                'active_banner_themes':active_banner_themes,
+}
 
     return render(request, 'pages/pages/account/wishlist.html', context)
 
@@ -4281,15 +4560,56 @@ def compare_page(request):
     else:
         return redirect('login_page')
     
-    # active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     context = {"breadcrumb": {"parent": "Compare", "child": "Compare"},
                "Cart": customer_cart, "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                "compare": customer_compare, "compare_products": compare_products,
-                # 'active_banner_themes':active_banner_themes,
+                'active_banner_themes':active_banner_themes,
 }
     return render(request, 'pages/pages/compare/compare.html', context)
+
+def compare_page2(request):
+    wishlist_products = None
+    totalWishlistProducts = None 
+    compare_products = None
+    
+    if request.user.is_authenticated:
+        try:
+            customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+            cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+            totalCartProducts = cart_products.count()
+        except Cart.DoesNotExist:
+            customer_cart = None
+            
+        try:
+            customer_wishlist = Wishlist.objects.get(
+                wishlistByCustomer=request.user.id)
+            wishlist_products = customer_wishlist.wishlistProducts.all()
+            totalWishlistProducts = wishlist_products.count()
+        except Wishlist.DoesNotExist:
+            customer_wishlist = None
+            
+        try:
+            customer_compare = Compare.objects.get(compareByCustomer=request.user.id)
+            compare_products = customer_compare.compareProducts.all()
+        except Compare.DoesNotExist:
+            customer_compare = None
+            
+    else:
+        return redirect('login_page')
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+    context = {"breadcrumb": {"parent": "Compare", "child": "Compare"},
+               "Cart": customer_cart, "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+               "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+               "compare": customer_compare, "compare_products": compare_products,
+                'active_banner_themes':active_banner_themes,
+    }
+    return render(request, 'pages/pages/compare/compare-2.html',context)
+
 
 
 def compare_products(request, id):
@@ -4315,12 +4635,12 @@ def user_authenticate(request):
     return JsonResponse(data)
 
 def page_not_found(request):
-    # active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     cart_products,totalCartProducts = show_cart_popup(request)
     context = {"breadcrumb": {"parent": 404, "child": 404},
                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                # 'active_banner_themes':active_banner_themes,
+                'active_banner_themes':active_banner_themes,
                 }
 
     return render(request, 'pages/pages/404.html', context)
@@ -4345,21 +4665,44 @@ def coming_soon(request):
 
 
 def about_page(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
     context = {"breadcrumb":{"parent":"About","child":"About"},
-               }
+                'active_banner_themes':active_banner_themes,}
     return render(request, 'pages/pages/about-page.html',context)
+
+
+def review(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+    context = {"breadcrumb":{"parent":"Review","child":"Review"},
+                'active_banner_themes':active_banner_themes,}
+    return render(request, 'pages/pages/review.html',context)
+
+
+def typography(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    context = {"breadcrumb":{"parent":"TYPOGRAPHY","child":"TYPOGRAPHY"},
+                'active_banner_themes':active_banner_themes,}
+    return render(request, 'pages/pages/typography.html',context)
+
+def look_book(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    context = {"breadcrumb":{"parent":"Look book","child":"Look book"},
+                'active_banner_themes':active_banner_themes,}
+    return render(request, 'pages/pages/look-book.html',context)
+
+def collection(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    context = {"breadcrumb":{"parent":"collection","child":"collection"},
+                'active_banner_themes':active_banner_themes,}
+    return render(request, 'pages/pages/collection.html',context)
+
+
 
     
 
 
-            
-        
-        
-        
-
-
-
-  
 
 
 

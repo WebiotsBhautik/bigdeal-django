@@ -4528,7 +4528,6 @@ def user_authenticate(request):
     data = {'is_authenticated': is_authenticated}
     return JsonResponse(data)
 
-    
-    
+
 
 

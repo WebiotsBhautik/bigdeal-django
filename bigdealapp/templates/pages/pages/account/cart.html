@@ -10,6 +10,23 @@
 <section class="cart-section section-big-py-space b-g-light">
     <div class="custom-container">
         <div class="row">
+            {% if totalCartProducts|to_int == 0|to_int %}
+
+            <section class="pt-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            <div class="empty-product-box success-icon" style="text-align:center;">
+                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"
+                                    alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {% else %}
+
             <div class="col-sm-12">
                 <table class="table cart-table table-responsive-xs">
                     <thead>
@@ -23,6 +40,8 @@
                     </tr>
                     </thead>
                     <tbody>
+                        {% if request.user.is_authenticated %}
+                        {% for product in cart_products %}
                     <tr>
                         <td>
                             <a href="javascript:void(0)"><img src="{% static 'assets/images/layout-3/product/1.jpg' %}" alt="cart"  class=" "></a>
@@ -55,6 +74,46 @@
                         <td>
                             <h2 class="td-color">$4539.00</h2></td>
                     </tr>
+                    {% endfor %}
+                    {% else %}
+                    {% for product in cart_products %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'left_slidebar' product.product_id %}"><img src="{{product.productImage}}" alt="cart"  class=" "></a>
+                        </td>
+                        <td><a href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
+                            <div class="mobile-cart-content">
+                                <div class="col-xs-3">
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <input type="text" name="quantity" class="form-control input-number" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <h2 class="td-color">{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</h2></div>
+                                <div class="col-xs-3">
+                                    <h2 class="td-color"><a href="javascript:void(0)" class="icon"><i class="ti-close"></i></a></h2></div>
+                            </div>
+                        </td>
+                        <td>
+                            <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</h2></td>
+                        <td>
+                            <div class="qty-box">
+                                <div class="input-group">
+                                    <input type="text" readonly name="quantity" class="form-control input-number" value="1">
+                                </div>
+                            </div>
+                        </td>
+                        <td><a href="{% url 'delete_cart_product' product.variant_id %}" class="icon"><i class="ti-close"></i></a></td>
+                        <td>
+                            <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
+                                {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
+                            </h2>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
                 <table class="table cart-table table-responsive-md">
@@ -67,9 +126,13 @@
                     </tfoot>
                 </table>
             </div>
+            {% endif %}
         </div>
         <div class="row cart-buttons">
-            <div class="col-12"><a href="javascript:void(0)" class="btn btn-normal">continue shopping</a> <a href="javascript:void(0)" class="btn btn-normal ms-3">check out</a></div>
+            <div class="col-12">
+                <a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a>
+                <a href="javascript:void(0)" class="btn btn-normal ms-3">check out</a>
+            </div>
         </div>
     </div>
 </section>

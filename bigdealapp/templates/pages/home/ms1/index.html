@@ -210,7 +210,7 @@
                         {% endif %}
                       </div>
                       <div class="on-sale1">
-                        {{product.productDescription|safe}}
+                        {% comment %} {{product.productDescription|safe}} {% endcomment %}
                       </div>
                     </div>
                     <div class="product-detail detail-inline ">
@@ -1118,9 +1118,9 @@
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
-                  <button  onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart" >
+                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                     <i data-feather="shopping-cart"></i>
-                  </button>
+                  </a>
                   <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                     <i  data-feather="heart"></i>
                   </a>
