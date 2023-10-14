@@ -879,7 +879,6 @@ function counterPlusAtCart(params) {
       let b = Number(a) + 1;
       quantityValueInput.setAttribute('value', b);
       let actionType = "plus"
-      console.log('params.productVariantId ======++>',params.productVariantId)
       quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
   }
 }
@@ -905,8 +904,6 @@ function beforecounterPlusAtCart(params) {
   var cookies = JSON.parse(getdata);
   cookies.forEach(function(product)
   {
-      
-      
       if(product.variant_id == params.productVariantId)
       {
           if (Number(a) <= product.quantity) {
@@ -939,7 +936,7 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
       }).then(response => {
           return response.json()
       }).then(data => {
-          console.log("data>>",data);
+          console.log("PLUS PLUS ",data);
           GetConvertedValues(data.quantityTotalPrice).then((Data) => {
               document.getElementById(totalPriceEle).innerHTML =
                   Data.symbol + " " + Data.value;
@@ -983,6 +980,7 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
           return response.json()
       }).then(data => {
 
+        console.log('Minus Minus =====>',data)
           GetConvertedValues(data.quantityTotalPrice).then((Data) => {
               document.getElementById(totalPriceEle).innerHTML =
                   Data.symbol + " " + Data.value;

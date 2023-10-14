@@ -159,9 +159,7 @@ def index(request):
     cart_products,totalCartProducts = show_cart_popup(request)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-        
-    template_path = 'pages/home/ms1/index.html'
-
+    
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbrands':brands,
                'allbanners':banners,
@@ -173,6 +171,55 @@ def index(request):
                "totalCartProducts": totalCartProducts,
                'active_banner_themes':active_banner_themes,
                }
+    if request.user.is_authenticated:
+        try:
+            customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+        except Cart.DoesNotExist:
+            customer_cart = Cart.objects.create(cartByCustomer=request.user)
+        cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+        totalCartProducts = cart_products.count()
+        cartTotalPriceAfterTax = customer_cart.getFinalPriceAfterTax
+        context["cartId"]=customer_cart.id,
+    else:
+        try:  
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+        except Cart.DoesNotExist:   
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+            
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        if get_Item:
+            cart_products = json.loads(get_Item)  # Default to an empty list if no data
+            
+            for item in cart_products:
+                item['totalPrice'] = int(item['quantity']) * float(item['price'])
+
+        totalCartProducts = len(cart_products)
+        
+        TotalTax,TotalTaxPrice,cartTotalPriceAfterTax = get_total_tax_values(cart_products)
+        TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
+        context["cartTotalPrice"]=TotalPrice
+        context["cartTotalTax"]=TotalTaxPrice
+        cartTotalPriceAfterTax = TotalPrice + TotalTaxPrice
+    
+    context["cart_products"]= cart_products
+    context["totalCartProducts"]= totalCartProducts
+    context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
+    context["Cart"]= customer_cart
+    context["cartId"]=customer_cart.id
+        
+    template_path = 'pages/home/ms1/index.html'
+
+    # context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+    #            'allbrands':brands,
+    #            'allbanners':banners,
+    #            'layout1_products':layout1_products,
+    #            'subcategories':subcategories,
+    #            'products_by_subcategory':products_by_subcategory,
+    #            'col_banner':col_banner,
+    #            'cart_products':cart_products,
+    #            "totalCartProducts": totalCartProducts,
+    #            'active_banner_themes':active_banner_themes,
+    #            }
     
     currency = Currency.objects.get(code='USD')
     response = render(request, template_path, context)
@@ -4528,6 +4575,35 @@ def show_cart_popup(request):
             cart_products = []
             totalCartProducts = 0
     return cart_products,totalCartProducts
+
+
+def add_cart_data_to_database(request,get_Item):
+    if (get_Item is not None and get_Item != "null"):
+        cart_products = json.loads(get_Item)
+    else:
+        return False
+
+    for cart_product in cart_products:
+        productVariant = ProductVariant.objects.get(id=cart_product['variant_id'])
+        if productVariant.productVariantQuantity > 0:
+            cartObject=Cart.objects.get(cartByCustomer=request.user)
+            if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
+                cartProductObject = CartProducts.objects.get(
+                    cartByCustomer=request.user, cartProduct=productVariant)
+                cartProductObject.cartProductQuantity += int(cart_product['quantity'])
+                cartProductObject.save()
+            else:
+                CartProducts.objects.create(
+                    cart=cartObject,cartProduct=productVariant, cartProductQuantity=cart_product['quantity']).save()
+        else:
+            try:  
+                cart = Cart.objects.create(cart_id=_cart_id(request))
+            except Cart.DoesNotExist:   
+                cart = Cart.objects.create(cart_id=_cart_id(request))
+
+    response = HttpResponseRedirect(reverse('checkout_page'))
+    response.delete_cookie('cart')
+    return response
 
 
 def compare_page(request):

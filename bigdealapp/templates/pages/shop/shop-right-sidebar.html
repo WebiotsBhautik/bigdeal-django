@@ -164,7 +164,7 @@
                           </div>
                       </div>
                     </div>
-                    <div class="product-wrapper-grid product">
+                    {% comment %} <div class="product-wrapper-grid product">
                       <div class="row">
                         {% if page_obj %}
                         {% for product in page_obj %}
@@ -172,10 +172,10 @@
                           <div class="product-box">
                             <div class="product-imgbox">
                               <div class="product-front">
-                                <a href="product-page(left-sidebar).html"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid  " alt="product"> </a>
+                                <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid  " alt="product"> </a>
                               </div>
                               <div class="product-back">
-                                <a href="product-page(left-sidebar).html"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid  " alt="product"> </a>
+                                <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid  " alt="product"> </a>
                               </div>
                             </div>
                             <div class="product-detail detail-center detail-inverse">
@@ -208,10 +208,17 @@
                                 </div>
                               </div>
                               <div class="icon-detail">
-                                <button class="tooltip-top add-cartnoty" data-tippy-content="Add to cart"> <i  data-feather="shopping-cart"></i> </button>
-                                <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" > <i  data-feather="heart"></i> </a>
-                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
-                                <a href="compare.html" class="tooltip-top" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i> </a>
+                                <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                  <i data-feather="shopping-cart"></i> 
+                                </a>
+                                <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
+                                  <i data-feather="heart"></i> 
+                                </a>
+                                <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
+                                <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
+                                  class="add-to-compare-list" data-tippy-content="Compare">
+                                  <i data-feather="refresh-cw"></i>
+                                </a> 
                               </div>
                             </div>
                           </div>
@@ -258,7 +265,8 @@
                     <div class="success-icon">
                       <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
                     </div>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
+                    {% include 'pages/shop/shop-product.html' %}
                   </div>
                 </div>
               </div>

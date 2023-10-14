@@ -19217,7 +19217,7 @@ ul.sosiyal {
       ul {
         &.cart_product {
           display: flex;
-          width: 75%;
+          width: 100%;
           overflow-y: auto;
           li {
             min-width: 245px;
@@ -19235,7 +19235,7 @@ ul.sosiyal {
   }
 
   &.top {
-    top: -320px;
+    top: -390px;
 
     &.open-side {
       top: 0;

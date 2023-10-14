@@ -188,9 +188,9 @@
                         </a>
                       </div>
                       <div class="product-icon icon-inline">
-                        <button  onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart" >
+                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                           <i  data-feather="shopping-cart"></i>
-                        </button>
+                        </a>
                         <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                           <i  data-feather="heart"></i>
                         </a>
@@ -1596,18 +1596,27 @@
       </div>
     </div>
     <div class="cart_media">
+      {% if request.user.is_authenticated %}
       <ul class="cart_product">
+        {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+        <li>
+          <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+        </li>
+        {% else %}
+        {% for product in cart_products|return_cart_products:request %}
+
         <li>
           <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
+            <a href="{% url 'left_slidebar' product.id %}">
+              <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
             </a>
             <div class="media-body">
               <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
+                <h4>{{product.cartProduct.variantProduct.productName}}</h4>
               </a>
               <h6>
-                $80.00 <span>$120.00</span>
+                {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
               </h6>
               <div class="addit-box">
                 <div class="qty-box">
@@ -1621,7 +1630,7 @@
                   <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
                     <i data-feather="edit"></i>
                   </a>
-                  <a href="javascript:void(0)">
+                  <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
                     <i  data-feather="trash-2"></i>
                   </a>
                 </div>
@@ -1629,93 +1638,105 @@
             </div>
           </div>
         </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+        {% endfor %}
       </ul>
       <ul class="cart_total">
         <li>
-          subtotal : <span>$1050.00</span>
+          subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
         </li>
         <li>
           shpping <span>free</span>
         </li>
         <li>
-          taxes <span>$0.00</span>
+          taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
         </li>
         <li>
           <div class="total">
-            total<span>$1050.00</span>
+            total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
           </div>
         </li>
         <li>
           <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
+            <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
             <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
           </div>
         </li>
       </ul>
+      {% endif %}
+      {% else %}
+      <ul class="cart_product">
+        {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+        <li>
+          <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+        </li>
+        {% else %}
+        {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
+        {% for product in cart_products %}
+
+        <li>
+          <div class="media">
+            <a href="{% url 'left_slidebar' product.product_id %}">
+              <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+            </a> 
+            
+            <div class="media-body">
+              <a href="{% url 'left_slidebar' product.product_id %}">
+                <h4>{{product.productName}}</h4>
+              </a>
+              <h6>
+                {% comment %} $80.00 <span>$120.00</span> {% endcomment %}
+                {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                {% comment %} <span>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</span> {% endcomment %}
+              </h6>
+              <div class="addit-box">
+                <div class="qty-box">
+                  <div class="input-group">
+                    {% comment %} <button class="qty-minus" disabled></button> {% endcomment %}
+                    {% comment %} <input class="qty-adj form-control" type="number" value="{{product.quantity}}"/> {% endcomment %}
+                    <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.quantity}}">
+                    {% comment %} <button class="qty-plus" disabled></button> {% endcomment %}
+                  </div>
+                </div>
+                <div class="pro-add">
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                    <i data-feather="edit"></i>
+                  </a>
+                  <a href="{% url 'delete_cart_product' product.variant_id %}">
+                    <i  data-feather="trash-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <ul class="cart_total">
+        <li>
+          subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+        </li>
+        <li>
+          shipping <span>free</span>
+        </li>
+        <li>
+          taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+        </li>
+        <li>
+          <div class="total">
+            total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+          </div>
+        </li>
+        <li>
+          <div class="buttons">
+            <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+          </div>
+        </li>
+      </ul>
+      {% endif %}
+       {% endif %}
     </div>
   </div>
 </div>

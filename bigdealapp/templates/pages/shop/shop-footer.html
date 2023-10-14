@@ -1,5 +1,7 @@
 {% load static %}
 {% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
 
   <!-- footer start -->
   <footer>
@@ -108,7 +110,7 @@
     </div>
   </footer>
   <!-- footer end -->
-  
+
   <!-- Quick-view modal popup start-->
   <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -117,23 +119,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-lg-6 col-xs-12">
-              <div class="quick-view-img">
-                <img src="{% static 'assets/images/layout-1/product/3.jpg' %}" alt="" class="img-fluid bg-img">
+              <div class="quick-view-img" id="quickViewImagesDiv">
+                <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
             </div>
             <div class="col-lg-6 rtl-text">
-              <div class="product-right">
+              <div class="product-right" id="productRight">
                 <div class="pro-group">
-                  <h2>
+                  <h2 id="productName">
                     reader will be distracted
                   </h2>
-                  <ul class="pro-price">
-                    <li>$70</li>
-                    <li><span>mrp $140</span></li>
-                    <li>50% off</li>
-                  </ul>
+                  <div class="pro-price" id="priceLabel">
+                    <h3 id="productPrice">$20.00</h3>
+                    <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                    <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                  </div>
+                  <div class="price mt-3" id="priceLabel2"></div>
+
                   <div class="revieu-box">
-                    <ul>
+                    <ul id="productRating">
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
@@ -153,7 +157,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pro-group">
+                {% comment %} <div class="pro-group">
                   <h6 class="product-title">product infomation</h6>
                   <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
                 </div>
@@ -213,13 +217,13 @@
                       <input class="qty-adj form-control" type="number" value="1">
                       <button class="qty-plus"></button>
                     </div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="product-buttons">
-                    <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                    <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                       <i class="fa fa-shopping-cart"></i>
                       add to cart
                     </a>
-                    <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                    <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                       view detail
                     </a>
                   </div>
@@ -335,18 +339,27 @@
         </div>
       </div>
       <div class="cart_media">
+        {% if request.user.is_authenticated %}
         <ul class="cart_product">
+          {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+          <li>
+            <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+          </li>
+          {% else %}
+          {% for product in cart_products|return_cart_products:request %}
+
           <li>
             <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
+              <a href="{% url 'left_slidebar' product.id %}">
+                <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
               </a>
               <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>redmi not 3</h4>
+                <a href="{% url 'left_slidebar' product.id %}">
+                  <h4>{{product.cartProduct.variantProduct.productName}}</h4>
                 </a>
                 <h6>
-                  $80.00 <span>$120.00</span>
+                  {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                  <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
                 </h6>
                 <div class="addit-box">
                   <div class="qty-box">
@@ -360,7 +373,7 @@
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
                       <i data-feather="edit"></i>
                     </a>
-                    <a href="javascript:void(0)">
+                    <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
                       <i  data-feather="trash-2"></i>
                     </a>
                   </div>
@@ -368,100 +381,109 @@
               </div>
             </div>
           </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>Double Door Refrigerator</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>woman hande bag</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
+          {% endfor %}
         </ul>
         <ul class="cart_total">
           <li>
-            subtotal : <span>$1050.00</span>
+            subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
           </li>
           <li>
             shpping <span>free</span>
           </li>
           <li>
-            taxes <span>$0.00</span>
+            taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
           </li>
           <li>
             <div class="total">
-              total<span>$1050.00</span>
+              total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
             </div>
           </li>
           <li>
             <div class="buttons">
-              <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
+              <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
               <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
             </div>
           </li>
         </ul>
+        {% endif %}
+        {% else %}
+        <ul class="cart_product">
+          {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+          <li>
+            <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+          </li>
+          {% else %}
+          {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
+          {% for product in cart_products %}
+
+          <li>
+            <div class="media">
+              <a href="{% url 'left_slidebar' product.product_id %}">
+                <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+              </a>
+              <div class="media-body">
+                <a href="{% url 'left_slidebar' product.product_id %}">
+                  <h4>{{product.productName}}</h4>
+                </a>
+                <h6>
+                  {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                </h6>
+                <div class="addit-box">
+                  <div class="qty-box">
+                    <div class="input-group">
+                      {% comment %} <button class="qty-minus"></button>
+                      <input class="qty-adj form-control" type="number" value="1"/>
+                      <button class="qty-plus"></button> {% endcomment %}
+                      <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.quantity}}">
+                    </div>
+                  </div>
+                  <div class="pro-add">
+                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                      <i data-feather="edit"></i>
+                    </a>
+                    <a href="{% url 'delete_cart_product' product.variant_id %}">
+                      <i  data-feather="trash-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        <ul class="cart_total">
+          <li>
+            subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+            shipping <span>free</span>
+          </li>
+          <li>
+            taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+            <div class="total">
+              total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+            </div>
+          </li>
+          <li>
+            <div class="buttons">
+              <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+            </div>
+          </li>
+        </ul>
+        {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>
   <!-- Add to cart bar end-->
   
   <!-- wishlistbar bar -->
-  <div id="wishlist_side" class="add_to_cart right">
+  {% comment %} <div id="wishlist_side" class="add_to_cart right">
     <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
     <div class="cart-inner">
       <div class="cart_top">
@@ -594,7 +616,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   <!-- wishlistbar bar end-->
   
   <!-- My account bar start-->
@@ -602,14 +624,38 @@
     <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
     <div class="cart-inner">
       <div class="cart_top">
-        <h3>my account</h3>
+        <h3>my account </h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeAccount()">
             <i class="fa fa-times" aria-hidden="true"></i>
           </a>
         </div>
       </div>
-      <form class="theme-form">
+      {% if request.user.is_authenticated %}
+      <li>
+        <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+        <h6 class="d-block">
+          Welcome, {{request.user.username}}
+        </h6>
+      </li>
+      <li>
+        <a href="{% url 'logout_page' %}" class="d-block"
+          >Logout</a
+        >
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'login_page' %}" class="d-block"
+          >Login</a
+        >
+      </li>
+      <li>
+        <a href="{% url 'signup_page' %}" class="d-block"
+          >Register</a
+        >
+      </li>
+      {% endif %}
+      {% comment %} <form class="theme-form">
         <div class="form-group">
           <label for="email">Email</label>
           <input type="text" class="form-control" id="email" placeholder="Email" required="">
@@ -625,7 +671,7 @@
           <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
           <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
         </div>
-      </form>
+      </form> {% endcomment %}
     </div>
   </div>
   <!-- Add to account bar end-->
