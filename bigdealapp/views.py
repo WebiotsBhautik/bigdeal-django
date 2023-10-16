@@ -999,6 +999,9 @@ def shop_left_sidebar(request):
         max_price = max_price*selected_currency.factor
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_products,totalCartProducts = show_cart_popup(request)
+
 
         
         
@@ -1017,6 +1020,8 @@ def shop_left_sidebar(request):
             'path':'shop_left_sidebar',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            'totalCartProducts': totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-left-sidebar.html',context)
@@ -1079,6 +1084,8 @@ def shop_right_sidebar(request):
         max_price = max_price*selected_currency.factor
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+
 
     
     context = {"breadcrumb": {"parent": "Shop Right Sidebar", "child": "Shop Right Sidebar"},
@@ -1096,6 +1103,8 @@ def shop_right_sidebar(request):
             'path':'shop_right_sidebar',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
             }
     return render(request, 'pages/shop/shop-right-sidebar.html',context)
 
@@ -1157,6 +1166,7 @@ def shop_no_sidebar(request):
         max_price = max_price*selected_currency.factor
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop No Sidebar", "child": "Shop No Sidebar"},
@@ -1174,6 +1184,8 @@ def shop_no_sidebar(request):
             'path':'shop_no_sidebar',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-no-sidebar.html',context)
@@ -1236,6 +1248,7 @@ def shop_sidebar_popup(request):
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop Sidebar Popup", "child": "Shop Sidebar Popup"},
@@ -1253,6 +1266,8 @@ def shop_sidebar_popup(request):
             'path':'shop_sidebar_popup',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-sidebar-popup.html',context)
@@ -1317,6 +1332,7 @@ def shop_metro(request):
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop Metro", "child": "Shop Metro"},
@@ -1335,6 +1351,8 @@ def shop_metro(request):
             'path':'shop_metro',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-metro.html',context)
@@ -1342,10 +1360,13 @@ def shop_metro(request):
 def shop_full_width(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {"breadcrumb": {"parent": "Shop Full Width", "child": "Shop Full Width"},
             'allbanners': banners,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
             }
     return render(request, 'pages/shop/shop-full-width.html',context)
 
@@ -1407,6 +1428,7 @@ def shop_infinite_scroll(request):
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop Infinite Scroll", "child": "Shop Infinite Scroll"},
@@ -1424,6 +1446,8 @@ def shop_infinite_scroll(request):
             'path':'shop_infinite_scroll',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
             }
     return render(request, 'pages/shop/shop-infinite-scroll.html',context)
 
@@ -1484,6 +1508,7 @@ def shop_3grid(request):
         max_price = max_price*selected_currency.factor
       
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop 3grid", "child": "Shop 3grid"},
@@ -1501,6 +1526,8 @@ def shop_3grid(request):
             'path':'shop_3grid',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
             }
     return render(request, 'pages/shop/shop-3-grid.html',context)
 
@@ -1562,6 +1589,7 @@ def shop_6grid(request):
         
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Shop 6grid", "child": "Shop 6grid"},
@@ -1579,6 +1607,8 @@ def shop_6grid(request):
             'path':'shop_6grid',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-6-grid.html',context)
@@ -1642,6 +1672,7 @@ def shop_list_view(request):
         
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
     
     context = {"breadcrumb": {"parent": "Shop List View", "child": "Shop List View"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1658,6 +1689,8 @@ def shop_list_view(request):
             'path':'shop_list_view',
             'totalCount':totalProduct,
             'active_banner_themes':active_banner_themes,
+            'cart_products':cart_products,
+            "totalCartProducts": totalCartProducts,
 
             }
     return render(request, 'pages/shop/shop-list-view.html',context)
@@ -1818,6 +1851,7 @@ def left_slidebar(request,id,brand_id=None):
     selected_delivery_options = product.deliveryOption.all()
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
 
     context = {"breadcrumb": {"parent": "Product Left Sidebar", "child": "Product Left Sidebar"},
@@ -1844,10 +1878,53 @@ def left_slidebar(request,id,brand_id=None):
                 "url":url,
                 "selected_delivery_options":selected_delivery_options,
                 'active_banner_themes':active_banner_themes,
+                'cart_products':cart_products,
+                "totalCartProducts": totalCartProducts,
 
                 }
+    
+    if request.user.is_authenticated:
+        try:
+            customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+        except Cart.DoesNotExist:
+            customer_cart = Cart.objects.create(cartByCustomer=request.user)
+        cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+        totalCartProducts = cart_products.count()
+        cartTotalPriceAfterTax = customer_cart.getFinalPriceAfterTax
+        context["cartId"]=customer_cart.id,
+    else:
+        try:  
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+        except Cart.DoesNotExist:   
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+            
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        if get_Item:
+            cart_products = json.loads(get_Item)  # Default to an empty list if no data
+            
+            for item in cart_products:
+                item['totalPrice'] = int(item['quantity']) * float(item['price'])
 
-    return render(request, 'pages/product/product-left-sidebar.html',context)
+        totalCartProducts = len(cart_products)
+        
+        TotalTax,TotalTaxPrice,cartTotalPriceAfterTax = get_total_tax_values(cart_products)
+        TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
+        context["cartTotalPrice"]=TotalPrice
+        context["cartTotalTax"]=TotalTaxPrice
+        cartTotalPriceAfterTax = TotalPrice + TotalTaxPrice
+    
+    context["cart_products"]= cart_products
+    context["totalCartProducts"]= totalCartProducts
+    context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
+    context["Cart"]= customer_cart
+    context["cartId"]=customer_cart.id
+        
+    template_path = 'pages/product/product-left-sidebar.html'
+    
+    response = render(request, template_path, context)
+    return response
+
+    # return render(request, 'pages/product/product-left-sidebar.html',context)
 
 
 
@@ -2003,6 +2080,7 @@ def right_sidebar(request,id):
     selected_delivery_options = product.deliveryOption.all()
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {"breadcrumb": {"parent": "Product Right Sidebar", "child": "Product Right Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2026,6 +2104,8 @@ def right_sidebar(request,id):
                 "last_added_products":last_added_products,
                 "selected_delivery_options":selected_delivery_options,
                 'active_banner_themes':active_banner_themes,
+                'cart_products':cart_products,
+                'totalCartProducts': totalCartProducts,
                 }
     
     return render(request, 'pages/product/product-right-sidebar.html',context)
@@ -3832,6 +3912,8 @@ def blog_details(request, id):
     blogComments = BlogComment.objects.filter(commentOfBlog__id=id, status=True)
     relatedBlogs = Blog.objects.filter(blogCategory=blog.blogCategory, status=True, blogStatus=1).exclude(id=id)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    
     context = {"breadcrumb": {"parent": "Blog Details", "child": "Blog Details"},
                 "blog": blog,
                 "blogs": blogs,
@@ -3839,6 +3921,8 @@ def blog_details(request, id):
                 "blogComments": blogComments,
                 "relatedBlogs": relatedBlogs,
                 'active_banner_themes':active_banner_themes,
+                'cart_products':cart_products,
+                "totalCartProducts": totalCartProducts,
                 }
     return render(request, 'pages/blog/blog-details.html',context)
 
@@ -3855,6 +3939,7 @@ def blog_left_sidebar(request):
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {"breadcrumb": {"parent": "Blog Left Sidebar", "child": "Blog Left Sidebar"},
                "blogs": blogs,
@@ -3863,6 +3948,8 @@ def blog_left_sidebar(request):
                "recent_blogs":recent_blogs,
                "popular_blogs":popular_blogs,
                'active_banner_themes':active_banner_themes,
+               'cart_products':cart_products,
+                "totalCartProducts": totalCartProducts,
                }
     return render(request, 'pages/blog/blog-left-sidebar.html', context)
 
@@ -3880,6 +3967,7 @@ def blog_right_sidebar(request):
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
 
     context = {
@@ -3890,6 +3978,8 @@ def blog_right_sidebar(request):
         "recent_blogs":recent_blogs,
         "popular_blogs":popular_blogs,
         'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        "totalCartProducts": totalCartProducts,
         
     }
     return render(request, "pages/blog/blog-right-sidebar.html", context)
@@ -3903,12 +3993,15 @@ def blog_no_sidebar(request):
     page_obj = paginator.get_page(page_number)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {
         "breadcrumb": {"parent": "Blog No Sidebar", "child": "Blog No Sidebar"},
         'blogs':blogs,
         'page_obj':page_obj,
         'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        "totalCartProducts": totalCartProducts,
     }
     return render(request, 'pages/blog/blog-no-sidebar.html',context)
 
@@ -3926,6 +4019,7 @@ def blog_creative_left_sidebar(request):
     popular_blogs = Blog.objects.filter(status=True, popularBlog=1)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {
         "breadcrumb": {"parent": "Creative Left Sidebar", "child": "Creative Left Sidebar"},
@@ -3935,6 +4029,8 @@ def blog_creative_left_sidebar(request):
         "recent_blogs":recent_blogs,
         "popular_blogs":popular_blogs,
         'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        "totalCartProducts": totalCartProducts,
     }
     return render(request, 'pages/blog/blog-creative-left-sidebar.html',context)
 
