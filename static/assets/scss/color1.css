@@ -12453,7 +12453,7 @@ ul.sosiyal {
       padding-bottom: 20px; }
       .add_to_cart.top .cart_media ul.cart_product, .add_to_cart.bottom .cart_media ul.cart_product {
         display: flex;
-        width: 75%;
+        width: 100%;
         overflow-y: auto; }
         .add_to_cart.top .cart_media ul.cart_product li, .add_to_cart.bottom .cart_media ul.cart_product li {
           min-width: 245px;
@@ -12463,7 +12463,7 @@ ul.sosiyal {
       .add_to_cart.top .cart_media .cart_total, .add_to_cart.bottom .cart_media .cart_total {
         width: 24%; }
   .add_to_cart.top {
-    top: -320px; }
+    top: -390px; }
     .add_to_cart.top.open-side {
       top: 0; }
   .add_to_cart.bottom {
