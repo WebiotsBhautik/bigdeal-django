@@ -12331,7 +12331,7 @@ ul.sosiyal {
         padding: 10px; }
         .add_to_cart .cart-inner .cart_media ul.cart_product li .media {
           align-items: center;
-          height: 100%; }
+          height: auto; }
           .add_to_cart .cart-inner .cart_media ul.cart_product li .media img {
             width: 83px;
             height: auto; }

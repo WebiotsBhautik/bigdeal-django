@@ -74,7 +74,7 @@
                      </ul>
                   </div>
                   <div class="language-block">
-                     <div class="language-dropdown">
+                     {% comment %} <div class="language-dropdown">
                         <span  class="language-dropdown-click">
                         english <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </span>
@@ -84,7 +84,7 @@
                            <li><a href="javascript:void(0)">marathi</a></li>
                            <li><a href="javascript:void(0)">spanish</a></li>
                         </ul>
-                     </div>
+                     </div> {% endcomment %}
                      <div class="curroncy-dropdown" id="currency-selection">
                         <select id="currency-selection-dropdown">
                            <option id="currency-value" value="%">Currency</option>
@@ -150,24 +150,24 @@
                                  back <i class="fa fa-angle-right ps-2"></i>
                               </div>
                            </li>
-                           <li><a href="category-page(left-sidebar).html">western ware</a></li>
-                           <li><a href="category-page(left-sidebar).html">TV, Appliances</a></li>
-                           <li><a href="category-page(left-sidebar).html">Pets Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Car, Motorbike</a></li>
-                           <li><a href="category-page(left-sidebar).html">Industrial Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Beauty, Health Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Grocery Products </a></li>
-                           <li><a href="category-page(left-sidebar).html">Sports</a></li>
-                           <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                           <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                           <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                           <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">western ware</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">TV, Appliances</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Pets Products</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Car, Motorbike</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Industrial Products</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Beauty, Health Products</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Grocery Products </a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Sports</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                           <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                            <li class="mor-slide-open">
                               <ul>
-                                 <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                                 <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                                 <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                                 <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                                 <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                                 <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                                 <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                                 <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                               </ul>
                            </li>
                            <li>
@@ -180,7 +180,7 @@
                         </ul>
                      </div>
                      <div class="brand-logo logo-sm-center">
-                        <a href="index.html">
+                        <a href="{% url 'index' %}">
                            <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid " alt="logo-header">
                         </a>
                      </div>
@@ -243,18 +243,29 @@
                               </a>
                            </li>
                            <li class="mobile-wishlist item-count" onclick="openWishlist()">
-                              <a href="javascript:void(0)">
+                              <a href="{% url 'wishlist_page' %}">
                                  <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg">
                                     <path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
                                  </svg>
+                                 {% if request.user.is_authenticated %}
+                                 <div class="cart-item">
+                                    <div>{{totalWishlistProducts}} item<span>
+                                       wishlist</span>
+                                    </div>
+                                 </div>
+                                 <div class="item-count-contain">
+                                    {{totalWishlistProducts|return_totalWishlistProducts:request}}
+                                 </div>
+                                 {% else %}
                                  <div class="cart-item">
                                     <div>0 item<span>
                                        wishlist</span>
                                     </div>
                                  </div>
                                  <div class="item-count-contain">
-                                    3
+                                    0
                                  </div>
+                                 {% endif %}
                               </a>
                            </li>
                            <li class="cart-block mobile-cart  item-count" onclick="openCart()">
@@ -265,7 +276,7 @@
                                     </g>
                                  </svg>
                                  <div class="item-count-contain item-whtie item-md">
-                                    3
+                                    {{totalCartProducts}}
                                  </div>
                               </a>
                            </li>
@@ -314,8 +325,8 @@
                            <ul class="nav-cat title-font">
                            <div class="collapse show nav-desk" id="navbarToggleExternalContent">
                                  {% for category in subcategories %}
-                                 <li><a href="category-page(left-sidebar).html"><img src="{{category.categoryImage}}" alt="catergory-product">{{category.categoryName}}</a></li>
-                                 {% comment %} <li> <a href="category-page(left-sidebar).html"><img src="{% static 'assets/images/layout-6/header-category/2.jpg' %}" alt="catergory-product"> chili</a></li>
+                                 <li><a href="{% url 'shop_left_sidebar' %}"><img src="{{category.categoryImage}}" alt="catergory-product">{{category.categoryName}}</a></li>
+                                 {% comment %} <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/2.jpg' %}" alt="catergory-product"> chili</a></li>
                                  <li> <a href="category-page(left-sidebar).html"><img src="{% static 'assets/images/layout-6/header-category/3.jpg' %}" alt="catergory-product"> Capsicums</a></li>
                                  <li> <a href="category-page(left-sidebar).html"><img src="{% static 'assets/images/layout-6/header-category/4.jpg' %}" alt="catergory-product">Chilli peppers</a></li>
                                  <li> <a href="category-page(left-sidebar).html"><img src="{% static 'assets/images/layout-6/header-category/5.jpg' %}" alt="catergory-product"> Chokos</a></li>
@@ -456,7 +467,7 @@
                                  {% endif %} </h5>
                               <h3>@ lowest prices</h3>
                               <h1>{{banner.titleOne}}</h1>
-                              <a href="product-page(left-sidebar).html" class="btn btn-rounded">
+                              <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">
                                  shop now
                               </a>
                            </div>
@@ -499,7 +510,7 @@
                      <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
                      <h4>{{banner.titleOne}}</h4>
                      <div class="shop">
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'shop_left_sidebar' %}">
                            shop now
                            <i class="fa fa-arrow-circle-right"></i>
                         </a>
@@ -510,25 +521,6 @@
          </div>
          {% endif %}
          {% endfor %}
-         {% comment %} <div class="col-md-4 col-4">
-            <div class="collection-banner-main p-left">
-               <div class="collection-img">
-                  <img src="{% static 'assets/images/layout-6/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
-               </div>
-               <div class="collection-banner-contain">
-                  <div>
-                     <h3>fresh</h3>
-                     <h4>pineapple</h4>
-                     <div class="shop">
-                        <a href="product-page(left-sidebar).html">
-                           shop now
-                           <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div> {% endcomment %}
 
          {% for banner in allbanners %}
          {% if banner.bannerType|to_str == 'Sidebanner' %} 
@@ -564,7 +556,7 @@
                {% for category in subcategories %}
                <div>
                   <div class="category-contain">
-                     <a href="category-page(left-sidebar).html">
+                     <a href="{% url 'shop_left_sidebar' %}">
                         <div class="img-wrapper">
                            <img src="{{category.categoryImage}}" alt="category-img" class="img-fluid">
                         </div>
@@ -798,15 +790,16 @@
                            </a>
                         </div>
                         <div class="product-icon">
-                           <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
+                           <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                               <i  data-feather="heart"></i>
                            </a>
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                              <i  data-feather="eye"></i>
+                           <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                              <i data-feather="eye"></i>
                            </a>
-                           <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                              <i  data-feather="refresh-cw"></i>
-                           </a>
+                           <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              class="add-to-compare-list" data-tippy-content="Compare">
+                              <i data-feather="refresh-cw"></i>
+                           </a> 
                         </div>
                         <div class="on-sale4">
                            {% if product.is_past_due %}
@@ -835,7 +828,7 @@
                            <li><i class="fa fa-star"></i></li>
                            <li><i class="fa fa-star"></i></li>
                         </ul>
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'left_slidebar' product.id %}">
                            <h6>{{product.productName}}</h6>
                         </a>
                         <span class="detail-price">
@@ -854,9 +847,11 @@
                         </span>
                      </div>
                      <div class="addtocart_btn">
-                        <button class="add-button add_cart tooltip-top"  data-tippy-content="Add to cart">
-                           add to cart
-                        </button>
+                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" >
+                           <button class="add-button add_cart tooltip-top"  data-tippy-content="Add to cart">
+                              add to cart
+                           </button>
+                        </a>
                         <div class="qty-box cart_qty">
                            <div class="input-group">
                               <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
@@ -898,7 +893,7 @@
                            <div class="masonary-banner-contant p-center">
                               <div>
                                  <h5>{{first_banner.titleone}}</h5>
-                                 <a href="category-page(left-sidebar).html" class="btn-rounded">shop now</a>
+                                 <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>
                         </div>
@@ -914,7 +909,7 @@
                            <div class="masonary-banner-contant p-center">
                               <div>
                                  <h5>{{second_banner.bannerImage}}</h5>
-                                 <a href="category-page(left-sidebar).html" class="btn-rounded">shop now</a>
+                                 <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>
                         </div>
@@ -933,7 +928,7 @@
                         <div >
                            <div>
                               <h5>{{third_banner.titleOne}}</h5>
-                              <a href="category-page(left-sidebar).html" class="btn-rounded">shop now</a>
+                              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                            </div>
                         </div>
                      </div>
@@ -956,7 +951,7 @@
                            <div class="masonary-banner-contant p-center">
                               <div>
                                  <h5>{{four_banner.titleOne}}</h5>
-                                 <a href="category-page(left-sidebar).html" class="btn-rounded">shop now</a>
+                                 <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>
                         </div>
@@ -969,7 +964,7 @@
                            <div class="masonary-banner-contant p-center">
                               <div>
                                  <h5>{{five_banner.titleOne}}</h5>
-                                 <a href="category-page(left-sidebar).html" class="btn-rounded">shop now</a>
+                                 <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>
                         </div>
@@ -989,7 +984,7 @@
                            <div>
                               <h2>{{six_banner.titleTwo}}</h2>
                               <h5>{{six_banner.titleOne}}</h5>
-                              <a class="btn-rounded">shop now</a>
+                              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                            </div>
                         </div>
                      </div>
@@ -1034,24 +1029,24 @@
                            <div class="product-box">
                               <div class="product-imgbox">
                                  <div class="product-front">
-                                    <a href="product-page(left-sidebar).html">
+                                    <a href="{% url 'left_slidebar' product.id %}">
                                        <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                                     </a>
                                  </div>
                                  <div class="product-back">
-                                    <a href="product-page(left-sidebar).html">
+                                    <a href="{% url 'left_slidebar' product.id %}">
                                        <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                                     </a>
                                  </div>
                                  <div class="product-icon">
 
-                                    <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-left wishlist"  data-tippy-content="Add to Wishlist" >
                                        <i  data-feather="heart"></i>
                                     </a>
-                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
+                                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
                                        <i  data-feather="eye"></i>
                                     </a>
-                                    <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
+                                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="tooltip-left" data-tippy-content="Compare">
                                        <i  data-feather="refresh-cw"></i>
                                     </a>
 
@@ -1065,7 +1060,7 @@
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                  </ul>
-                                 <a href="product-page(left-sidebar).html">
+                                 <a href="{% url 'left_slidebar' product.id %}">
                                     <h6>{{product.productName}} </h6>
                                  </a>
 
@@ -1085,9 +1080,11 @@
                                  </span>
                               </div>
                               <div class="addtocart_btn">
-                                 <button class="add-button add_cart tooltip-top"  data-tippy-content="Add to cart">
-                                    add to cart
-                                 </button>
+                                 <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}">
+                                    <button class="add-button add_cart tooltip-top"  data-tippy-content="Add to cart">
+                                       add to cart
+                                    </button>
+                                 </a>
                                  <div class="qty-box cart_qty">
                                     <div class="input-group">
                                        <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
@@ -1159,21 +1156,21 @@
                <div>
                   <div class="blog-contain">
                      <div class="blog-img">
-                        <a href="blog-details.html">
+                        <a href="{% url 'blog_details' blog.id %}">
                            <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                         </a>
                      </div>
                      <div class="blog-details-2">
-                        <a href="blog-details.html">
+                        <a href="{% url 'blog_details' blog.id %}">
                            <h4>{{blog.blogTitle}}</h4>
                         </a>
                         <p>{{blog.blogDescription|safe}}</p>
                         <ul>
                            <li>
-                              <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
+                              <a href="{% url 'blog_details' blog.id %}"><i class="fa fa-user-md"></i>Donec lacinia</a>
                            </li>
                            <li>
-                              <a href="javascript:void(0)"><i class="fa fa-comments"></i>comants</a>
+                              <a href="{% url 'blog_details' blog.id %}"><i class="fa fa-comments"></i>comants</a>
                            </li>
                         </ul>
                      </div>
@@ -1184,102 +1181,6 @@
                {% else %}
                <h2 style="text-align:center;"> No Blogs Yet! </h2>
                {% endif %}
-               {% comment %} <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/layout-6/blog/2.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2">
-                        <a href="blog-details.html">
-                           <h4>we know that buying items </h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                        <ul>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
-                           </li>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-comments"></i>comants</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/layout-6/blog/3.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2">
-                        <a href="blog-details.html">
-                           <h4>Proin sit amet libero </h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                        <ul>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
-                           </li>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-comments"></i>comants</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/layout-6/blog/4.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2">
-                        <a href="blog-details.html">
-                           <h4>Latest News Post</h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                        <ul>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
-                           </li>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-comments"></i>comants</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div>
-               <div>
-                  <div class="blog-contain">
-                     <div class="blog-img">
-                        <a href="blog-details.html">
-                           <img src="{% static 'assets/images/layout-6/blog/2.jpg' %}" alt="blog" class="img-fluid w-100">
-                        </a>
-                     </div>
-                     <div class="blog-details-2">
-                        <a href="blog-details.html">
-                           <h4>Proin sit amet libero </h4>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                        <ul>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-user-md"></i>Donec lacinia</a>
-                           </li>
-                           <li>
-                              <a href="javascript:void(0)"><i class="fa fa-comments"></i>comants</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="blog-label1">27 <br>nov</div>
-                  </div>
-               </div> {% endcomment %}
             </div>
          </div>
       </div>
@@ -1352,7 +1253,7 @@
                      </div>
                      <div class="footer-contant">
                         <div class="footer-logo">
-                           <a href="index.html">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>
@@ -1475,123 +1376,125 @@
 <!-- Quick-view modal popup start-->
 <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content quick-view-modal">
-         <div class="modal-body">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="row">
-               <div class="col-lg-6 col-xs-12">
-                  <div class="quick-view-img">
-                     <img src="{% static 'assets/images/layout-6/product/1.jpg' %}" alt="" class="img-fluid bg-img">
-                  </div>
+     <div class="modal-content quick-view-modal">
+       <div class="modal-body">
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <div class="row">
+           <div class="col-lg-6 col-xs-12">
+             <div class="quick-view-img" id="quickViewImagesDiv">
+               <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
+             </div>
+           </div>
+           <div class="col-lg-6 rtl-text">
+             <div class="product-right" id="productRight">
+               <div class="pro-group">
+                 <h2 id="productName">
+                   reader will be distracted
+                 </h2>
+                 <div class="pro-price" id="priceLabel">
+                   <h3 id="productPrice">$20.00</h3>
+                   <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                   <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                 </div>
+                 <div class="price mt-3" id="priceLabel2"></div>
+ 
+                 <div class="revieu-box">
+                   <ul id="productRating">
+                     <li><i class="fa fa-star"></i></li>
+                     <li><i class="fa fa-star"></i></li>
+                     <li><i class="fa fa-star"></i></li>
+                     <li><i class="fa fa-star"></i></li>
+                     <li><i class="fa fa-star-o"></i></li>
+                   </ul>
+                   <a href="review.html"><span>(6 reviews)</span></a>
+                 </div>
+                 <ul class="best-seller">
+                   <li>
+                     <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><g><path d="m102.427 43.155-2.337-2.336a3.808 3.808 0 0 1 -.826-4.149l1.263-3.053a3.808 3.808 0 0 0 -2.063-4.975l-3.036-1.256a3.807 3.807 0 0 1 -2.352-3.519v-3.286a3.808 3.808 0 0 0 -3.809-3.808h-3.3a3.81 3.81 0 0 1 -3.518-2.35l-1.269-3.052a3.808 3.808 0 0 0 -4.98-2.059l-3.032 1.258a3.807 3.807 0 0 1 -4.152-.825l-2.323-2.323a3.809 3.809 0 0 0 -5.386 0l-2.336 2.336a3.808 3.808 0 0 1 -4.149.826l-3.053-1.263a3.809 3.809 0 0 0 -4.975 2.063l-1.257 3.036a3.808 3.808 0 0 1 -3.519 2.353h-3.285a3.808 3.808 0 0 0 -3.809 3.808v3.3a3.808 3.808 0 0 1 -2.349 3.519l-3.053 1.266a3.809 3.809 0 0 0 -2.059 4.976l1.259 3.035a3.81 3.81 0 0 1 -.825 4.152l-2.324 2.323a3.809 3.809 0 0 0 0 5.386l2.337 2.337a3.807 3.807 0 0 1 .826 4.149l-1.263 3.056a3.808 3.808 0 0 0 2.063 4.975l3.036 1.256a3.807 3.807 0 0 1 2.352 3.519v3.286a3.808 3.808 0 0 0 3.809 3.808h3.3a3.809 3.809 0 0 1 3.518 2.35l1.265 3.052a3.808 3.808 0 0 0 4.984 2.059l3.035-1.259a3.811 3.811 0 0 1 4.152.825l2.323 2.324a3.809 3.809 0 0 0 5.386 0l2.336-2.336a3.81 3.81 0 0 1 4.149-.827l3.053 1.264a3.809 3.809 0 0 0 4.975-2.063l1.257-3.037a3.809 3.809 0 0 1 3.519-2.352h3.285a3.808 3.808 0 0 0 3.809-3.808v-3.3a3.808 3.808 0 0 1 2.349-3.518l3.053-1.266a3.809 3.809 0 0 0 2.059-4.976l-1.259-3.036a3.809 3.809 0 0 1 .825-4.151l2.324-2.324a3.809 3.809 0 0 0 -.003-5.39z" fill="#f9cc4e"/><circle cx="64" cy="45.848" fill="#4ec4b5" r="29.146"/><path d="m59.795 41.643 4.205-12.614 4.205 12.614h12.615l-8.41 8.41 4.205 12.615-12.615-8.41-12.615 8.41 4.205-12.615-8.41-8.41z" fill="#f9cc4e"/><path d="m87.579 74.924h-1.6a3.809 3.809 0 0 0 -3.519 2.352l-1.257 3.037a3.809 3.809 0 0 1 -4.975 2.063l-3.053-1.264a3.81 3.81 0 0 0 -4.149.827l-2.336 2.336a3.809 3.809 0 0 1 -5.386 0l-2.323-2.324a3.811 3.811 0 0 0 -4.152-.825l-3.029 1.259a3.808 3.808 0 0 1 -4.977-2.059l-1.265-3.052a3.809 3.809 0 0 0 -3.518-2.35h-1.618l-17.417 35.386 17.255-5.872 5.872 17.256 17.868-36.304 17.868 36.3 5.872-17.256 17.26 5.876z" fill="#f95050"/></g></svg>
+                     3 best seller
+                   </li>
+                   <li>
+                     <svg enable-background="new 0 0 497 497" viewBox="0 0 497 497" xmlns="http://www.w3.org/2000/svg"><g><path d="m329.63 405.42-.38.43c-10.048 19.522-48.375 35.567-80.775 35.607-24.881 0-53.654-9.372-71.486-20.681-5.583-3.54-2.393-10.869-6.766-15.297l19.149-5.13c3.76-1.22 6.46-4.54 6.87-8.47l8.574-59.02 82.641-2.72 12.241 28.06.837 8.668-1.844 9.951 3.456 6.744.673 6.967c.41 3.93 3.11 7.25 6.87 8.47z" fill="#f2d1a5"/><path d="m420.39 497h-343.78c-6.21 0-7.159-6.156-6.089-12.266l2.53-14.57c3.82-21.96 16.463-37.323 37.683-44.153l27.702-8.561 28.754-8.035c18.34 18.57 48.615 27.957 81.285 27.957 32.4-.04 61.709-8.478 80.259-26.809l.38-.43 31.486 5.256 26.39 8.5c21.22 6.83 36.9 24.87 40.72 46.83l2.53 14.57c1.07 6.111-3.64 11.711-9.85 11.711z" fill="#7e8b96"/><g><path d="m384.055 215c-2.94 43.71-18.85 104.74-24.92 130.96-.68 2.94-2.33 5.45-4.56 7.22-2.23 1.78-5.05 2.82-8.06 2.82-6.88 0-12.55-5.37-12.94-12.23 0 0-5.58-84.28-7.63-128.77z" fill="#dc4955"/></g><path d="m141 271c-27.062 0-49-21.938-49-49 0-11.046 8.954-20 20-20h8.989l240.468-6.287 8.293 6.287h15.25c11.046 0 20 8.954 20 20 0 27.062-21.938 49-49 49z" fill="#f2bb88"/><path d="m360.6 415.39-.06.09c-49.3 66.23-174.56 66.38-223.76.56l-.43-.63 18.171-1.91 12.669-8.02c18.34 18.57 48.41 29.8 81.08 29.8h.15c32.4-.04 62.28-11.1 80.83-29.43l.38-.43z" fill="#a9a4d3"/><path d="m147.8 418.394v10.136l-32.89 10.59c-15.6 5.02-27.05 18.18-29.86 34.34l-3.59 23.54h-4.85c-6.21 0-10.92-5.6-9.85-11.71l2.53-14.57c3.82-21.96 19.5-40 40.72-46.83l26.34-8.48z" fill="#64727a"/><path d="m182.19 417.45-34.39 11.08c-3.99-3.86-7.68-8.02-11.02-12.49l-.43-.63 30.84-9.93c1.828 1.848 10.344.351 12.353 2.02 2.928 2.433-.561 7.928 2.647 9.95z" fill="#938dc8"/><path d="m299.7 358.2-2.71-28.06-79.861 2.255.001-.005-16.48.47-2.98 26.56-.763 6.8 2.039 12.83-3.989 4.55-.778 6.93c-.41 3.93-3.11 7.25-6.87 8.47l-20.12 6.48c4.37 4.43 9.41 8.44 15 11.97l10.02-3.22c9.79-3.17 16.79-11.79 17.88-21.97l2.058-17.506c.392-3.33 3.888-5.367 6.958-4.02 11.414 5.008 21.565 7.765 28.393 7.765 11.322.001 31.852-7.509 52.202-20.299z" fill="#f2bb88"/><path d="m134.539 164.427s-.849 18.411-.849 33.002c0 38.745 9.42 76.067 25.701 105.572 20.332 36.847 72.609 61.499 88.109 61.499s68.394-24.653 89.275-61.499c14.137-24.946 23.338-55.482 25.843-87.741.458-5.894-9.799-20.073-9.799-26.058l10.491-24.775c0-38.422-36.205-111.427-114.81-111.427s-113.961 73.005-113.961 111.427z" fill="#f2d1a5"/><g><path d="m294 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m203 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m249 260.847c-5.976 0-11.951-1.388-17.398-4.163-3.691-1.88-5.158-6.397-3.278-10.087 1.88-3.691 6.398-5.158 10.087-3.278 6.631 3.379 14.547 3.379 21.178 0 3.689-1.881 8.207-.413 10.087 3.278 1.88 3.69.413 8.207-3.278 10.087-5.447 2.775-11.422 4.163-17.398 4.163z" fill="#f2bb88"/></g><path d="m288.989 40.759c0 22.511-9.303 40.759-40.489 40.759s-48.702-42.103-48.702-42.103 17.516-39.415 48.702-39.415c25.911 0 47.746 12.597 54.392 29.769 1.353 3.497-13.903 7.182-13.903 10.99z" fill="#df646e"/><path d="m254.305 81.307c1.031-.099 2.069-.167 3.093-.295 26.96-3.081 47.572-19.928 47.572-40.252 0-3.81-.72-7.49-2.08-10.99-15.42-6.31-33.46-10.34-54.39-10.34-4.139 0-8.163.159-12.073.462-5.127.397-7.393-6.322-3.107-9.163 7.36-4.878 16.519-8.364 26.68-9.879-3.71-.56-7.56-.85-11.5-.85-25.933 0-47.766 12.621-54.393 29.813-.006.002-.011.004-.017.007-1.337 3.487-2.055 7.201-2.06 10.94 0 22.51 25.28 40.76 56.47 40.76 1.946.008 3.872-.09 5.805-.213z" fill="#dc4955"/><path d="m363.31 164.43v33c0 5.99-.23 11.94-.7 17.83-4.32-.91-8.4-2.66-12.05-5.19-22.785-15.834-31.375-40.163-37.64-60.936-.382-1.268-1.547-2.134-2.871-2.134h-30.949c-4.96 0-9.65-2.15-12.89-5.91l-10.947-12.711c-1.197-1.39-3.349-1.39-4.546 0l-10.947 12.711c-3.24 3.76-7.93 5.91-12.89 5.91h-90.33c8.47-39.6 44.09-94 111.95-94 78.61 0 114.81 73 114.81 111.43z" fill="#f2bb88"/><path d="m381 164.19v37.81h-11.25c-4 0-7.93-1.16-11.22-3.44-19.74-13.72-26.93-35.65-33.69-58.43-1.26-4.24-5.16-7.13-9.58-7.13h-36.165c-.873 0-1.703-.38-2.273-1.042l-21.559-25.029c-1.197-1.389-3.349-1.389-4.546 0l-21.559 25.029c-.57.662-1.4 1.042-2.273 1.042h-38.015c-5.3 0-9.68 4.14-9.98 9.44 0 0-2.331 25.591-4.032 66.31-1.765 42.256-7.908 135.02-7.908 135.02-.16 2.822-1.215 5.393-2.879 7.441-2.381 2.929-5.67.375-9.72.375-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-.792-5.474-1.472-8.414-6.7-28.94-23.83-94.686-23.83-138.351 0-13.73-.14-34.689 0-37.649.14-26.43 12.74-54.048 32-78.128 12.937-16.178 28.667-38.955 58.628-47.692 10.986-3.204 23.248-5.101 36.883-5.101 50.8 0 82.75 26.31 100.6 48.39 19.68 24.319 31.9 55.879 31.9 82.369z" fill="#df646e"/><path d="m211.62 38.54c-19.38 9.9-33.55 23.84-43.37 36.44-19.26 24.69-31.27 56.78-31.41 83.88-.14 3.03-.84 25.18-.84 39.25 0 44.77 18.69 117.93 25.39 147.6.47 2.08 1.4 3.94 2.68 5.5-2.38 2.93-6.01 4.79-10.06 4.79-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-3.88-4.28-4.56-7.22-6.7-28.94-25.39-100.29-25.39-143.96 0-13.73.7-35.33.84-38.29.14-26.43 12.15-57.73 31.41-81.81 12.94-16.18 33.4-34.63 63.37-43.36z" fill="#dc4955"/><g><path d="m316.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.172.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m225.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.171.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m302.143 383.517c-16.23 10.87-34.973 16.353-53.643 16.353s-37.3-5.41-53.54-16.27l3.476-6.313-1.526-11.067 4.15 3.37c28.46 20.41 66.63 20.37 95.05-.12.2-.14.39-.27.6-.39l3.826-2.211z" fill="#a9a4d3"/></g><g><path d="m211.98 376.2-1.85 15.68c-5.23-2.27-10.31-5.03-15.17-8.28l1.95-17.38 4.15 3.37c3.5 2.51 7.15 4.72 10.92 6.61z" fill="#938dc8"/></g><g><path d="m269.5 306.5h-42c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h42c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#df646e"/></g></g></svg>
+                     44 active view this
+                   </li>
+                 </ul>
                </div>
-               <div class="col-lg-6 rtl-text">
-                  <div class="product-right">
-                     <div class="pro-group">
-                        <h2>
-                           wireless  headphones
-                        </h2>
-                        <ul class="pro-price">
-                           <li>$70</li>
-                           <li><span>mrp $140</span></li>
-                           <li>50% off</li>
-                        </ul>
-                        <div class="revieu-box">
-                           <ul>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star-o"></i></li>
-                           </ul>
-                           <a href="review.html"><span>(6 reviews)</span></a>
-                        </div>
-                        <ul class="best-seller">
-                           <li>
-                              <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><g><path d="m102.427 43.155-2.337-2.336a3.808 3.808 0 0 1 -.826-4.149l1.263-3.053a3.808 3.808 0 0 0 -2.063-4.975l-3.036-1.256a3.807 3.807 0 0 1 -2.352-3.519v-3.286a3.808 3.808 0 0 0 -3.809-3.808h-3.3a3.81 3.81 0 0 1 -3.518-2.35l-1.269-3.052a3.808 3.808 0 0 0 -4.98-2.059l-3.032 1.258a3.807 3.807 0 0 1 -4.152-.825l-2.323-2.323a3.809 3.809 0 0 0 -5.386 0l-2.336 2.336a3.808 3.808 0 0 1 -4.149.826l-3.053-1.263a3.809 3.809 0 0 0 -4.975 2.063l-1.257 3.036a3.808 3.808 0 0 1 -3.519 2.353h-3.285a3.808 3.808 0 0 0 -3.809 3.808v3.3a3.808 3.808 0 0 1 -2.349 3.519l-3.053 1.266a3.809 3.809 0 0 0 -2.059 4.976l1.259 3.035a3.81 3.81 0 0 1 -.825 4.152l-2.324 2.323a3.809 3.809 0 0 0 0 5.386l2.337 2.337a3.807 3.807 0 0 1 .826 4.149l-1.263 3.056a3.808 3.808 0 0 0 2.063 4.975l3.036 1.256a3.807 3.807 0 0 1 2.352 3.519v3.286a3.808 3.808 0 0 0 3.809 3.808h3.3a3.809 3.809 0 0 1 3.518 2.35l1.265 3.052a3.808 3.808 0 0 0 4.984 2.059l3.035-1.259a3.811 3.811 0 0 1 4.152.825l2.323 2.324a3.809 3.809 0 0 0 5.386 0l2.336-2.336a3.81 3.81 0 0 1 4.149-.827l3.053 1.264a3.809 3.809 0 0 0 4.975-2.063l1.257-3.037a3.809 3.809 0 0 1 3.519-2.352h3.285a3.808 3.808 0 0 0 3.809-3.808v-3.3a3.808 3.808 0 0 1 2.349-3.518l3.053-1.266a3.809 3.809 0 0 0 2.059-4.976l-1.259-3.036a3.809 3.809 0 0 1 .825-4.151l2.324-2.324a3.809 3.809 0 0 0 -.003-5.39z" fill="#f9cc4e"/><circle cx="64" cy="45.848" fill="#4ec4b5" r="29.146"/><path d="m59.795 41.643 4.205-12.614 4.205 12.614h12.615l-8.41 8.41 4.205 12.615-12.615-8.41-12.615 8.41 4.205-12.615-8.41-8.41z" fill="#f9cc4e"/><path d="m87.579 74.924h-1.6a3.809 3.809 0 0 0 -3.519 2.352l-1.257 3.037a3.809 3.809 0 0 1 -4.975 2.063l-3.053-1.264a3.81 3.81 0 0 0 -4.149.827l-2.336 2.336a3.809 3.809 0 0 1 -5.386 0l-2.323-2.324a3.811 3.811 0 0 0 -4.152-.825l-3.029 1.259a3.808 3.808 0 0 1 -4.977-2.059l-1.265-3.052a3.809 3.809 0 0 0 -3.518-2.35h-1.618l-17.417 35.386 17.255-5.872 5.872 17.256 17.868-36.304 17.868 36.3 5.872-17.256 17.26 5.876z" fill="#f95050"/></g></svg>
-                              3 best seller
-                           </li>
-                           <li>
-                              <svg enable-background="new 0 0 497 497" viewBox="0 0 497 497" xmlns="http://www.w3.org/2000/svg"><g><path d="m329.63 405.42-.38.43c-10.048 19.522-48.375 35.567-80.775 35.607-24.881 0-53.654-9.372-71.486-20.681-5.583-3.54-2.393-10.869-6.766-15.297l19.149-5.13c3.76-1.22 6.46-4.54 6.87-8.47l8.574-59.02 82.641-2.72 12.241 28.06.837 8.668-1.844 9.951 3.456 6.744.673 6.967c.41 3.93 3.11 7.25 6.87 8.47z" fill="#f2d1a5"/><path d="m420.39 497h-343.78c-6.21 0-7.159-6.156-6.089-12.266l2.53-14.57c3.82-21.96 16.463-37.323 37.683-44.153l27.702-8.561 28.754-8.035c18.34 18.57 48.615 27.957 81.285 27.957 32.4-.04 61.709-8.478 80.259-26.809l.38-.43 31.486 5.256 26.39 8.5c21.22 6.83 36.9 24.87 40.72 46.83l2.53 14.57c1.07 6.111-3.64 11.711-9.85 11.711z" fill="#7e8b96"/><g><path d="m384.055 215c-2.94 43.71-18.85 104.74-24.92 130.96-.68 2.94-2.33 5.45-4.56 7.22-2.23 1.78-5.05 2.82-8.06 2.82-6.88 0-12.55-5.37-12.94-12.23 0 0-5.58-84.28-7.63-128.77z" fill="#dc4955"/></g><path d="m141 271c-27.062 0-49-21.938-49-49 0-11.046 8.954-20 20-20h8.989l240.468-6.287 8.293 6.287h15.25c11.046 0 20 8.954 20 20 0 27.062-21.938 49-49 49z" fill="#f2bb88"/><path d="m360.6 415.39-.06.09c-49.3 66.23-174.56 66.38-223.76.56l-.43-.63 18.171-1.91 12.669-8.02c18.34 18.57 48.41 29.8 81.08 29.8h.15c32.4-.04 62.28-11.1 80.83-29.43l.38-.43z" fill="#a9a4d3"/><path d="m147.8 418.394v10.136l-32.89 10.59c-15.6 5.02-27.05 18.18-29.86 34.34l-3.59 23.54h-4.85c-6.21 0-10.92-5.6-9.85-11.71l2.53-14.57c3.82-21.96 19.5-40 40.72-46.83l26.34-8.48z" fill="#64727a"/><path d="m182.19 417.45-34.39 11.08c-3.99-3.86-7.68-8.02-11.02-12.49l-.43-.63 30.84-9.93c1.828 1.848 10.344.351 12.353 2.02 2.928 2.433-.561 7.928 2.647 9.95z" fill="#938dc8"/><path d="m299.7 358.2-2.71-28.06-79.861 2.255.001-.005-16.48.47-2.98 26.56-.763 6.8 2.039 12.83-3.989 4.55-.778 6.93c-.41 3.93-3.11 7.25-6.87 8.47l-20.12 6.48c4.37 4.43 9.41 8.44 15 11.97l10.02-3.22c9.79-3.17 16.79-11.79 17.88-21.97l2.058-17.506c.392-3.33 3.888-5.367 6.958-4.02 11.414 5.008 21.565 7.765 28.393 7.765 11.322.001 31.852-7.509 52.202-20.299z" fill="#f2bb88"/><path d="m134.539 164.427s-.849 18.411-.849 33.002c0 38.745 9.42 76.067 25.701 105.572 20.332 36.847 72.609 61.499 88.109 61.499s68.394-24.653 89.275-61.499c14.137-24.946 23.338-55.482 25.843-87.741.458-5.894-9.799-20.073-9.799-26.058l10.491-24.775c0-38.422-36.205-111.427-114.81-111.427s-113.961 73.005-113.961 111.427z" fill="#f2d1a5"/><g><path d="m294 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m203 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m249 260.847c-5.976 0-11.951-1.388-17.398-4.163-3.691-1.88-5.158-6.397-3.278-10.087 1.88-3.691 6.398-5.158 10.087-3.278 6.631 3.379 14.547 3.379 21.178 0 3.689-1.881 8.207-.413 10.087 3.278 1.88 3.69.413 8.207-3.278 10.087-5.447 2.775-11.422 4.163-17.398 4.163z" fill="#f2bb88"/></g><path d="m288.989 40.759c0 22.511-9.303 40.759-40.489 40.759s-48.702-42.103-48.702-42.103 17.516-39.415 48.702-39.415c25.911 0 47.746 12.597 54.392 29.769 1.353 3.497-13.903 7.182-13.903 10.99z" fill="#df646e"/><path d="m254.305 81.307c1.031-.099 2.069-.167 3.093-.295 26.96-3.081 47.572-19.928 47.572-40.252 0-3.81-.72-7.49-2.08-10.99-15.42-6.31-33.46-10.34-54.39-10.34-4.139 0-8.163.159-12.073.462-5.127.397-7.393-6.322-3.107-9.163 7.36-4.878 16.519-8.364 26.68-9.879-3.71-.56-7.56-.85-11.5-.85-25.933 0-47.766 12.621-54.393 29.813-.006.002-.011.004-.017.007-1.337 3.487-2.055 7.201-2.06 10.94 0 22.51 25.28 40.76 56.47 40.76 1.946.008 3.872-.09 5.805-.213z" fill="#dc4955"/><path d="m363.31 164.43v33c0 5.99-.23 11.94-.7 17.83-4.32-.91-8.4-2.66-12.05-5.19-22.785-15.834-31.375-40.163-37.64-60.936-.382-1.268-1.547-2.134-2.871-2.134h-30.949c-4.96 0-9.65-2.15-12.89-5.91l-10.947-12.711c-1.197-1.39-3.349-1.39-4.546 0l-10.947 12.711c-3.24 3.76-7.93 5.91-12.89 5.91h-90.33c8.47-39.6 44.09-94 111.95-94 78.61 0 114.81 73 114.81 111.43z" fill="#f2bb88"/><path d="m381 164.19v37.81h-11.25c-4 0-7.93-1.16-11.22-3.44-19.74-13.72-26.93-35.65-33.69-58.43-1.26-4.24-5.16-7.13-9.58-7.13h-36.165c-.873 0-1.703-.38-2.273-1.042l-21.559-25.029c-1.197-1.389-3.349-1.389-4.546 0l-21.559 25.029c-.57.662-1.4 1.042-2.273 1.042h-38.015c-5.3 0-9.68 4.14-9.98 9.44 0 0-2.331 25.591-4.032 66.31-1.765 42.256-7.908 135.02-7.908 135.02-.16 2.822-1.215 5.393-2.879 7.441-2.381 2.929-5.67.375-9.72.375-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-.792-5.474-1.472-8.414-6.7-28.94-23.83-94.686-23.83-138.351 0-13.73-.14-34.689 0-37.649.14-26.43 12.74-54.048 32-78.128 12.937-16.178 28.667-38.955 58.628-47.692 10.986-3.204 23.248-5.101 36.883-5.101 50.8 0 82.75 26.31 100.6 48.39 19.68 24.319 31.9 55.879 31.9 82.369z" fill="#df646e"/><path d="m211.62 38.54c-19.38 9.9-33.55 23.84-43.37 36.44-19.26 24.69-31.27 56.78-31.41 83.88-.14 3.03-.84 25.18-.84 39.25 0 44.77 18.69 117.93 25.39 147.6.47 2.08 1.4 3.94 2.68 5.5-2.38 2.93-6.01 4.79-10.06 4.79-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-3.88-4.28-4.56-7.22-6.7-28.94-25.39-100.29-25.39-143.96 0-13.73.7-35.33.84-38.29.14-26.43 12.15-57.73 31.41-81.81 12.94-16.18 33.4-34.63 63.37-43.36z" fill="#dc4955"/><g><path d="m316.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.172.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m225.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.171.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m302.143 383.517c-16.23 10.87-34.973 16.353-53.643 16.353s-37.3-5.41-53.54-16.27l3.476-6.313-1.526-11.067 4.15 3.37c28.46 20.41 66.63 20.37 95.05-.12.2-.14.39-.27.6-.39l3.826-2.211z" fill="#a9a4d3"/></g><g><path d="m211.98 376.2-1.85 15.68c-5.23-2.27-10.31-5.03-15.17-8.28l1.95-17.38 4.15 3.37c3.5 2.51 7.15 4.72 10.92 6.61z" fill="#938dc8"/></g><g><path d="m269.5 306.5h-42c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h42c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#df646e"/></g></g></svg>
-                              44 active view this
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="pro-group">
-                        <h6 class="product-title">product infomation</h6>
-                        <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-                     </div>
-                     <div class="pro-group pb-0">
-                        <h6 class="product-title size-text">select size<span>
-                <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                        <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                           <div class="modal-dialog modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                 </div>
-                                 <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="size-box">
-                           <ul>
-                              <li ><a href="javascript:void(0)">s</a></li>
-                              <li><a href="javascript:void(0)">m</a></li>
-                              <li><a href="javascript:void(0)">l</a></li>
-                              <li><a href="javascript:void(0)">xl</a></li>
-                              <li><a href="javascript:void(0)">2xl</a></li>
-                           </ul>
-                        </div>
-                        <h6 class="product-title">color</h6>
-                        <div class="color-selector inline">
-                           <ul>
-                              <li>
-                                 <div class="color-1 active"></div>
-                              </li>
-                              <li>
-                                 <div class="color-2"></div>
-                              </li>
-                              <li>
-                                 <div class="color-3"></div>
-                              </li>
-                              <li>
-                                 <div class="color-4"></div>
-                              </li>
-                              <li>
-                                 <div class="color-5"></div>
-                              </li>
-                              <li>
-                                 <div class="color-6"></div>
-                              </li>
-                              <li>
-                                 <div class="color-7"></div>
-                              </li>
-                           </ul>
-                        </div>
-                        <h6 class="product-title">quantity</h6>
-                        <div class="qty-box">
-                           <div class="input-group">
-                              <button class="qty-minus"></button>
-                              <input class="qty-adj form-control" type="number" value="1">
-                              <button class="qty-plus"></button>
-                           </div>
-                        </div>
-                        <div class="product-buttons">
-                           <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                              <i class="fa fa-shopping-cart"></i>
-                              add to cart
-                           </a>
-                           <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
-                              view detail
-                           </a>
-                        </div>
-                     </div>
-                  </div>
+               {% comment %} <div class="pro-group">
+                 <h6 class="product-title">product infomation</h6>
+                 <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
                </div>
-            </div>
+               <div class="pro-group pb-0">
+                 <h6 class="product-title size-text">select size<span>
+                 <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
+                 <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                   <div class="modal-dialog modal-dialog-centered" role="document">
+                     <div class="modal-content">
+                       <div class="modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="size-box">
+                   <ul>
+                     <li ><a href="javascript:void(0)">s</a></li>
+                     <li><a href="javascript:void(0)">m</a></li>
+                     <li><a href="javascript:void(0)">l</a></li>
+                     <li><a href="javascript:void(0)">xl</a></li>
+                     <li><a href="javascript:void(0)">2xl</a></li>
+                   </ul>
+                 </div>
+                 <h6 class="product-title">color</h6>
+                 <div class="color-selector inline">
+                   <ul>
+                     <li>
+                       <div class="color-1 active"></div>
+                     </li>
+                     <li>
+                       <div class="color-2"></div>
+                     </li>
+                     <li>
+                       <div class="color-3"></div>
+                     </li>
+                     <li>
+                       <div class="color-4"></div>
+                     </li>
+                     <li>
+                       <div class="color-5"></div>
+                     </li>
+                     <li>
+                       <div class="color-6"></div>
+                     </li>
+                     <li>
+                       <div class="color-7"></div>
+                     </li>
+                   </ul>
+                 </div>
+                 <h6 class="product-title">quantity</h6>
+                 <div class="qty-box">
+                   <div class="input-group">
+                     <button class="qty-minus"></button>
+                     <input class="qty-adj form-control" type="number" value="1">
+                     <button class="qty-plus"></button>
+                   </div>
+                 </div> {% endcomment %}
+                 <div class="product-btns" id="productBtnDiv">
+                  <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                     <i class="fa fa-shopping-cart"></i> 
+                     add to cart
+                  </a>
+                  <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                     view detail
+                  </a>
+                 </div>
+               </div>
+             </div>
+           </div>
          </div>
-      </div>
+       </div>
+     </div>
    </div>
 </div>
 <!-- Quick-view modal popup end-->
@@ -1698,133 +1601,147 @@
          </div>
       </div>
       <div class="cart_media">
+         {% if request.user.is_authenticated %}
          <ul class="cart_product">
+            {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+            <li>
+               <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+            </li>
+            {% else %}
+            {% for product in cart_products|return_cart_products:request %}
             <li>
                <div class="media">
-                  <a href="product-page(left-sidebar).html">
-                     <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-6/product/1.jpg' %}">
+                  <a href="{% url 'left_slidebar' product.id %}">
+                     <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
                   </a>
                   <div class="media-body">
                      <a href="product-page(left-sidebar).html">
-                        <h4>Vacuum Cleaner</h4>
+                     <h4>{{product.cartProduct.variantProduct.productName}}</h4>
                      </a>
                      <h6>
-                        $80.00 <span>$120.00</span>
+                     {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                     <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
                      </h6>
                      <div class="addit-box">
-                        <div class="qty-box">
-                           <div class="input-group">
-                              <button class="qty-minus"></button>
-                              <input class="qty-adj form-control" type="number" value="1"/>
-                              <button class="qty-plus"></button>
-                           </div>
+                     <div class="qty-box">
+                        <div class="input-group">
+                           <button class="qty-minus"></button>
+                           <input class="qty-adj form-control" type="number" value="1"/>
+                           <button class="qty-plus"></button>
                         </div>
-                        <div class="pro-add">
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                              <i data-feather="edit"></i>
-                           </a>
-                           <a href="javascript:void(0)">
-                              <i  data-feather="trash-2"></i>
-                           </a>
-                        </div>
+                     </div>
+                     <div class="pro-add">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                           <i data-feather="edit"></i>
+                        </a>
+                        <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
+                           <i  data-feather="trash-2"></i>
+                        </a>
+                     </div>
                      </div>
                   </div>
                </div>
             </li>
-            <li>
-               <div class="media">
-                  <a href="product-page(left-sidebar).html">
-                     <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-6/product/2.jpg' %}">
-                  </a>
-                  <div class="media-body">
-                     <a href="product-page(left-sidebar).html">
-                        <h4>electronic shaver</h4>
-                     </a>
-                     <h6>
-                        $80.00 <span>$120.00</span>
-                     </h6>
-                     <div class="addit-box">
-                        <div class="qty-box">
-                           <div class="input-group">
-                              <button class="qty-minus"></button>
-                              <input class="qty-adj form-control" type="number" value="1"/>
-                              <button class="qty-plus"></button>
-                           </div>
-                        </div>
-                        <div class="pro-add">
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                              <i data-feather="edit"></i>
-                           </a>
-                           <a href="javascript:void(0)">
-                              <i  data-feather="trash-2"></i>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li>
-               <div class="media">
-                  <a href="product-page(left-sidebar).html">
-                     <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-6/product/3.jpg' %}">
-                  </a>
-                  <div class="media-body">
-                     <a href="product-page(left-sidebar).html">
-                        <h4>vivo y30</h4>
-                     </a>
-                     <h6>
-                        $80.00 <span>$120.00</span>
-                     </h6>
-                     <div class="addit-box">
-                        <div class="qty-box">
-                           <div class="input-group">
-                              <button class="qty-minus"></button>
-                              <input class="qty-adj form-control" type="number" value="1"/>
-                              <button class="qty-plus"></button>
-                           </div>
-                        </div>
-                        <div class="pro-add">
-                           <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                              <i data-feather="edit"></i>
-                           </a>
-                           <a href="javascript:void(0)">
-                              <i  data-feather="trash-2"></i>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </li>
+            {% endfor %}
          </ul>
          <ul class="cart_total">
             <li>
-               subtotal : <span>$1050.00</span>
+              subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
             </li>
             <li>
-               shpping <span>free</span>
+              shpping <span>free</span>
             </li>
             <li>
-               taxes <span>$0.00</span>
+              taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
             </li>
             <li>
-               <div class="total">
-                  total<span>$1050.00</span>
-               </div>
+              <div class="total">
+                total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+              </div>
             </li>
             <li>
-               <div class="buttons">
-                  <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-                  <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-               </div>
+              <div class="buttons">
+                <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+                <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+              </div>
             </li>
          </ul>
+         {% endif %}
+         {% else %}
+         <ul class="cart_product">
+            {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+            <li>
+              <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+            </li>
+            {% else %}
+            {% for product in cart_products %}
+    
+            <li>
+              <div class="media">
+                <a href="{% url 'left_slidebar' product.product_id %}">
+                  <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+                </a> 
+                
+                <div class="media-body">
+                  <a href="{% url 'left_slidebar' product.product_id %}">
+                    <h4>{{product.productName}}</h4>
+                  </a>
+                  <h6>
+                    {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                  </h6>
+                  <div class="addit-box">
+                    <div class="qty-box">
+                      <div class="input-group">
+                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                                name="quantity{{forloop.counter}}" class="form-control input-number"
+                                                value="{{product.quantity}}">
+                      </div>
+                    </div>
+                    <div class="pro-add">
+                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                        <i data-feather="edit"></i>
+                      </a>
+                      <a href="{% url 'delete_cart_product' product.variant_id %}">
+                        <i  data-feather="trash-2"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+         </ul>
+         <ul class="cart_total">
+         <li>
+            subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+         </li>
+         <li>
+            shipping <span>free</span>
+         </li>
+         <li>
+            taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+         </li>
+         <li>
+            <div class="total">
+               total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+            </div>
+         </li>
+         <li>
+            <div class="buttons">
+               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+               <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+            </div>
+         </li>
+         </ul>
+         {% endif %}
+         {% endif %}
       </div>
    </div>
 </div>
 <!-- Add to cart bar end-->
 
 <!-- Add to wishlist bar -->
-<div id="wishlist_side" class="add_to_cart right ">
+{% comment %} <div id="wishlist_side" class="add_to_cart right ">
    <a href="javascript:void(0)" class="overlay" onclick="closeWishlist()"></a>
    <div class="cart-inner">
       <div class="cart_top">
@@ -1957,7 +1874,7 @@
          </ul>
       </div>
    </div>
-</div>
+</div> {% endcomment %}
 <!-- Add to wishlist bar -->
 
 <!-- My account bar start-->
@@ -1972,23 +1889,38 @@
             </a>
          </div>
       </div>
-      <form class="theme-form">
+      {% if request.user.is_authenticated %}
+      <li>
+         <h6 class="d-block">
+           Welcome, {{request.user.username}}
+         </h6>
+      </li>
+      <li>
+         <a href="{% url 'logout_page' %}" class="d-block"
+            >Logout</a>
+      </li>
+   
+      {% else %}
+
+      <form class="theme-form" method="post" action="{% url 'login_page' %}">
+         {% csrf_token %}
          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="Email" required="">
+           <label for="email">Email</label>
+           <input type="text" class="form-control" name="name" id="email" placeholder="Email" required="">
          </div>
          <div class="form-group">
-            <label for="review">Password</label>
-            <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+           <label for="review">Password</label>
+           <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
          </div>
          <div class="form-group">
-            <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+           <button class="btn btn-solid btn-md btn-block ">Login</button>
          </div>
          <div class="accout-fwd">
-            <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-            <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+           <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>
+           <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
          </div>
-      </form>
+       </form>
+       {% endif %}
    </div>
 </div>
 <!-- Add to account bar end-->
@@ -2029,7 +1961,7 @@
 <!-- add to  setting bar  end-->
 
 <!-- notification product -->
-<div class="product-notification" id="dismiss">
+{% comment %} <div class="product-notification" id="dismiss">
    <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
    <div class="media">
       <img class="me-2" src="{% static 'assets/images/layout-6/product/5.jpg' %}" alt="Generic placeholder image">
@@ -2038,7 +1970,7 @@
          Cras sit amet nibh libero, in gravida nulla.
       </div>
    </div>
-</div>
+</div> {% endcomment %}
 <!-- notification product -->
 
 {% endblock components %}

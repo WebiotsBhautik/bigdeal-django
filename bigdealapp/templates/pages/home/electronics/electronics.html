@@ -72,7 +72,7 @@
                            </ul>
                         </div>
                         <div class="language-block">
-                           <div class="language-dropdown">
+                           {% comment %} <div class="language-dropdown">
                               <span  class="language-dropdown-click">
                               english <i class="fa fa-angle-down" aria-hidden="true"></i>
                               </span>
@@ -82,7 +82,7 @@
                                  <li><a href="javascript:void(0)">marathi</a></li>
                                  <li><a href="javascript:void(0)">spanish</a></li>
                               </ul>
-                           </div>
+                           </div> {% endcomment %}
                           <div class="curroncy-dropdown" id="currency-selection">
                             <select id="currency-selection-dropdown">
                                <option id="currency-value" value="%">Currency</option>
@@ -241,18 +241,31 @@
                                     </a>
                                  </li>
                                  <li class="mobile-wishlist item-count" onclick="openWishlist()">
-                                    <a href="javascript:void(0)">
+                                  <a href="{% url 'wishlist_page' %}">
                                        <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg">
                                           <path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/>
                                        </svg>
+                                       {% if request.user.is_authenticated %}
+
+                                       <div class="cart-item">
+                                          <div>{{totalWishlistProducts}} item<span>
+                                             wishlist</span>
+                                          </div>
+                                       </div>
+                                       <div class="item-count-contain"> 
+                                        {{totalWishlistProducts|return_totalWishlistProducts:request}}
+                                       </div>
+                                       {% else %}
+
                                        <div class="cart-item">
                                           <div>0 item<span>
                                              wishlist</span>
                                           </div>
                                        </div>
                                        <div class="item-count-contain"> 
-                                          3
+                                        0
                                        </div>
+                                       {% endif %}
                                     </a>
                                  </li>
                                  <li class="cart-block mobile-cart  item-count" onclick="openCart()">
@@ -263,7 +276,7 @@
                                           </g>
                                        </svg>
                                        <div class="item-count-contain item-whtie item-md"> 
-                                          3
+                                          {{totalCartProducts}}
                                        </div>
                                     </a>
                                  </li>
@@ -312,7 +325,7 @@
                                  <div class="collapse hide nav-desk" id="navbarToggleExternalContent">
                                     <ul class="nav-cat title-font">
                                       {% for category in subcategories %}
-                                       <li><a href="category-page(left-sidebar).html"> <img src="{{category.categoryImage}}" alt="catergory-product"> {{category.categoryName}}</a></li>
+                                       <li><a href="{% url 'shop_left_sidebar' %}"> <img src="{{category.categoryImage}}" alt="catergory-product"> {{category.categoryName}}</a></li>
                                        {% comment %} <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/layout-1/nav-img/02.png' %}" alt="catergory-product"> TV, Appliances</a></li>
                                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/layout-1/nav-img/03.png' %}" alt="catergory-product"> Pets Products</a></li>
                                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/layout-1/nav-img/04.png' %}" alt="catergory-product"> Car, Motorbike</a></li>
@@ -344,12 +357,17 @@
                                  <form class="big-deal-form">
                                     <div class="input-group ">                                      
                                        <span class="search"><i class="fa fa-search"></i></span>
-                                       <input type="text" class="form-control" placeholder="Search a Product" >
+                                       <input type="text" class="form-control" placeholder="Search a Product" id="search-input">
                                         <select>
                                            <option>All Category</option>
                                            <option>indurstrial</option>
                                            <option>sports</option>
                                         </select>                                      
+                                    </div>
+                                    <div id="search_results"></div>
+                                    <div class="search-suggestion" id="searchData">
+                                      <ul class="custom-scroll" id="realData">
+                                      </ul>
                                     </div>
                                  </form>
                               </div>
@@ -452,7 +470,7 @@
                               {% else %}
                               <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
                               {% endif %} on all selected product</h2>
-                            <a href="product-page(left-sidebar).html" class="btn btn-normal">
+                            <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
                                 shop now
                             </a>
                         </div>
@@ -486,29 +504,30 @@
                   <div class="product-box">
                     <div class="product-imgbox">
                         <div class="product-front">
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'left_slidebar' product.id %}">
                                 <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                             </a>
                         </div>
                         <div class="product-back">
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'left_slidebar' product.id %}">
                                 <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                             </a>
                         </div>
                         <div class="product-icon icon-inline">
-                            <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" >
-                                <i  data-feather="shopping-cart"></i>
-                            </button>
-                            <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                                <i  data-feather="heart"></i>
-                            </a>
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                                <i  data-feather="eye"></i>
-                            </a>
-                            <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                                <i  data-feather="refresh-cw"></i>
-                            </a>
-                        </div>
+                          <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                             <i  data-feather="shopping-cart"></i>
+                          </a>
+                          <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
+                             <i  data-feather="heart"></i>
+                          </a>
+                          <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                             <i data-feather="eye"></i>
+                          </a>
+                          <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                             class="add-to-compare-list" data-tippy-content="Compare">
+                             <i data-feather="refresh-cw"></i>
+                          </a> 
+                       </div>
                     </div>
                     <div class="product-detail detail-inline">
                       <div class="detail-title">
@@ -572,7 +591,7 @@
                                 <h3>{{banner.titleOne}}</h3>
                                 <h4>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h4>
                                 <div class="shop">
-                                    <a href="product-page(left-sidebar).html">
+                                    <a href="{% url 'shop_left_sidebar' %}">
                                         shop now
                                         <i class="fa fa-arrow-circle-right"></i>
                                     </a>
@@ -666,7 +685,7 @@
                       <div class="media-banner media-banner-1 border-0">
                         <div class="media-banner-box">
                           <div class="media">
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'left_slidebar' product.id %}">
                               <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
                             </a>
                             <div class="media-body">
@@ -680,7 +699,7 @@
                                     <li><i class="fa fa-star" ></i></li>                                
                                     <li><i class="fa fa-star-o" ></i></li>
                                   </ul>
-                                  <a href="product-page(left-sidebar).html"><p>{{product.productName}}</p></a>
+                                  <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
                                   <h6>
                                      {% if product.productType == "Simple" %}
                                      {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -697,11 +716,13 @@
                                   </h6>
                                   </div>
                                   <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
+                                    <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                      <i data-feather="shopping-cart"></i> 
+                                    </a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -2979,7 +3000,7 @@
           <div class="col-md-12 col-lg-4 ">
             <div class="deal-banner-containe">
               <diV class="deal-btn">
-                <a href="category-page(left-sidebar).html" class="btn-white">
+                <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
                   View more
                 </a>
               </div>
@@ -3000,11 +3021,11 @@
               <div>
                 <div class="category-contain">             
                   <div class="img-wrapper">
-                    <a href="category-page(left-sidebar).html">
+                    <a href="{% url 'shop_left_sidebar' %}">
                       <img src="{{category.categoryImage}}" alt="category  " class="img-fluid">
                     </a>
                   </div>
-                  <a href="category-page(left-sidebar).html" class="btn-rounded">
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
                     {{category.categoryName}}
                   </a>
                 </div>
@@ -3047,29 +3068,30 @@
                         <div class="product-box">
                             <div class="product-imgbox">
                                 <div class="product-front">
-                                    <a href="product-page(left-sidebar).html">
+                                    <a href="{% url 'left_slidebar' product.id %}">
                                         <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                                     </a>
                                 </div>
                                 <div class="product-back">
-                                    <a href="product-page(left-sidebar).html">
+                                    <a href="{% url 'left_slidebar' product.id %}">
                                         <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
                                     </a>
                                 </div>
                                 <div class="product-icon icon-inline">
-                                    <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" >
-                                        <i  data-feather="shopping-cart"></i>
-                                    </button>
-                                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
-                                        <i  data-feather="heart"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                                        <i  data-feather="eye"></i>
-                                    </a>
-                                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
-                                        <i  data-feather="refresh-cw"></i>
-                                    </a>
-                                </div>
+                                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                     <i  data-feather="shopping-cart"></i>
+                                  </a>
+                                  <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
+                                     <i  data-feather="heart"></i>
+                                  </a>
+                                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                                     <i data-feather="eye"></i>
+                                  </a>
+                                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                                     class="add-to-compare-list" data-tippy-content="Compare">
+                                     <i data-feather="refresh-cw"></i>
+                                  </a> 
+                               </div>
                             </div>
                             <div class="product-detail detail-inline">
                                 <div class="detail-title">
@@ -3081,7 +3103,7 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                         </div>
-                                        <a href="product-page(left-sidebar).html">
+                                        <a href="{% url 'left_slidebar' product.id %}">
                                             <h6 class="price-title">
                                                 {{product.productName}}
                                             </h6>
@@ -3197,7 +3219,7 @@
                       <div class="hotdeal-right-slick border-0">
                         {% for banner in allbanners  %}
                         {% if banner.bannerType|to_str == 'Timer' %}
-                        <a href="product-page(left-sidebar).html">
+                        <a href="{% url 'shop_left_sidebar' %}">
                           <div class="img-wrraper">
                             <div>                       
                               <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid  bg-img">  
@@ -3214,7 +3236,7 @@
                         {% if banner.bannerType|to_str == 'Timer' %}
                         <div>                     
                           <div>   
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'shop_left_sidebar' %}">
                               <h5>{{banner.titleOne}} </h5>                     
                             </a>                  
                             <ul class="rating">
@@ -3236,7 +3258,7 @@
                               <p id="demo">
                               </p>
                             </div>
-                            <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
+                            <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal btn-md ">shop now</a>
                           </div>
                         </div> 
                         {% endif %}
@@ -3269,7 +3291,7 @@
                   {% for banner in media_banners|slice:"0:3" %}
                   <div class="media-banner-box">
                     <div class="media">
-                          <a href="product-page(left-sidebar).html">
+                          <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                             <img src="{{banner.bannerImage}}" class="img-fluid " alt="banner">
                           </a>
                           <div class="media-body">
@@ -3283,7 +3305,7 @@
                                     <li><i class="fa fa-star" ></i></li>                                
                                     <li><i class="fa fa-star-o" ></i></li>
                                   </ul>
-                                <a href="product-page(left-sidebar).html"><p>{{banner.titleOne}}</p></a>
+                                <a href="{% url 'shop_left_sidebar' %}"><p>{{banner.titleOne}}</p></a>
                                 <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
                                   <span>
                                     {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
@@ -3291,11 +3313,13 @@
                                 </h6>
                                 </div>
                                 <div class="cart-info">
-                                      <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart"  ><i  data-feather="shopping-cart"></i></button>
-                                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                      <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                  </div>
+                                  <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                    <i data-feather="shopping-cart"></i> 
+                                  </a>
+                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                  <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -3320,7 +3344,7 @@
 
                   <div class="media-banner-box">
                     <div class="media">
-                          <a href="product-page(left-sidebar).html">
+                      <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                             <img src="{{banner.bannerImage}}" class="img-fluid " alt="banner">
                           </a>
                           <div class="media-body">
@@ -3334,7 +3358,7 @@
                                     <li><i class="fa fa-star" ></i></li>                                
                                     <li><i class="fa fa-star-o" ></i></li>
                                   </ul>
-                                <a href="product-page(left-sidebar).html"><p>{{banner.titleOne}}</p></a>
+                                <a href="{% url 'shop_left_sidebar' %}"><p>{{banner.titleOne}}</p></a>
                                 <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
                                   <span>
                                     {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
@@ -3342,11 +3366,13 @@
                                 </h6>
                                 </div>
                                 <div class="cart-info">
-                                      <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart"  ><i  data-feather="shopping-cart"></i></button>
-                                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                      <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                  </div>
+                                  <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                    <i data-feather="shopping-cart"></i> 
+                                  </a>
+                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                  <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -3438,16 +3464,16 @@
                   <div>
                     <div class="blog-contain">
                         <div class="blog-img">
-                            <a href="blog(left-sidebar).html">
+                            <a href="{% url 'blog_details' blog.id %}">
                                 <img src="{{blog.blogImage}}" alt="blog" class="img-fluid ">
                             </a>
                         </div>
                         <div class="blog-details">
-                            <a href="blog(left-sidebar).html">
+                          <a href="{% url 'blog_details' blog.id %}">
                               <h4>{{blog.blogTitle}}</h4>
                             </a>
                             <p>{{blog.blogDescription|safe}}</p>
-                            <span><a href="javascript:void(0)">read more</a></span>
+                            <span><a href="{% url 'blog_details' blog.id %}">read more</a></span>
                         </div>
                         <div class="blog-label">
                           <p>{{blog.createdAt|date:"jS F Y"}}</p>
@@ -3697,23 +3723,25 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           <div class="col-lg-6 col-xs-12">
-            <div class="quick-view-img">
-              <img src="{% static 'assets/images/mega-store/product/8.jpg' %}" alt="" class="img-fluid bg-img">
+            <div class="quick-view-img" id="quickViewImagesDiv">
+              <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
             </div>
           </div>
           <div class="col-lg-6 rtl-text">
-            <div class="product-right">
+            <div class="product-right" id="productRight">
               <div class="pro-group">
-                <h2>
-                   wireless  headphones
+                <h2 id="productName">
+                  reader will be distracted
                 </h2>
-                <ul class="pro-price">
-                  <li>$70</li>
-                  <li><span>mrp $140</span></li>
-                  <li>50% off</li>
-                </ul>
+                <div class="pro-price" id="priceLabel">
+                  <h3 id="productPrice">$20.00</h3>
+                  <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                  <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                </div>
+                <div class="price mt-3" id="priceLabel2"></div>
+
                 <div class="revieu-box">
-                  <ul>
+                  <ul id="productRating">
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
@@ -3733,7 +3761,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="pro-group">
+              {% comment %} <div class="pro-group">
                 <h6 class="product-title">product infomation</h6>
                 <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
               </div>
@@ -3793,15 +3821,15 @@
                     <input class="qty-adj form-control" type="number" value="1">
                     <button class="qty-plus"></button>
                   </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="product-buttons">
-                  <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                    <i class="fa fa-shopping-cart"></i>
+                 <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                    <i class="fa fa-shopping-cart"></i> 
                     add to cart
-                  </a>
-                  <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                 </a>
+                 <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                     view detail
-                  </a>
+                 </a>
                 </div>
               </div>
             </div>
@@ -3915,126 +3943,141 @@
       </div>
     </div>
     <div class="cart_media">
+      {% if request.user.is_authenticated %}
       <ul class="cart_product">
+        {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
         <li>
-          <div class="media">
+          <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+       </li>
+      {% else %}
+      {% for product in cart_products|return_cart_products:request %}
+
+      <li>
+        <div class="media">
+          <a href="{% url 'left_slidebar' product.id %}">
+            <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
+          </a>
+          <div class="media-body">
             <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-5/product/1.jpg' %}">
+              <h4>{{product.cartProduct.variantProduct.productName}}</h4>
             </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Vacuum Cleaner</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
+            <h6>
+              {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+              <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
+            </h6>
+            <div class="addit-box">
+              <div class="qty-box">
+                <div class="input-group">
+                  <button class="qty-minus"></button>
+                  <input class="qty-adj form-control" type="number" value="1"/>
+                  <button class="qty-plus"></button>
                 </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
+              </div>
+              <div class="pro-add">
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                  <i data-feather="edit"></i>
+                </a>
+                <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
+                  <i  data-feather="trash-2"></i>
+                </a>
               </div>
             </div>
           </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-5/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>electronic shaver</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-5/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>vivo y30</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
+        </div>
+      </li>
+      {% endfor %}
       </ul>
       <ul class="cart_total">
         <li>
-          subtotal : <span>$1050.00</span>
+          subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
         </li>
         <li>
           shpping <span>free</span>
         </li>
         <li>
-          taxes <span>$0.00</span>
+          taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
         </li>
         <li>
           <div class="total">
-            total<span>$1050.00</span>
+            total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
           </div>
         </li>
         <li>
           <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
+            <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
             <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
           </div>
         </li>
       </ul>
+      {% endif %}
+      {% else %}
+      <ul class="cart_product">
+        {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+        <li>
+          <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+        </li>
+        {% else %}
+        {% for product in cart_products %}
+
+        <li>
+          <div class="media">
+            <a href="{% url 'left_slidebar' product.product_id %}">
+              <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+            </a> 
+            
+            <div class="media-body">
+              <a href="{% url 'left_slidebar' product.product_id %}">
+                <h4>{{product.productName}}</h4>
+              </a>
+              <h6>
+                {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+              </h6>
+              <div class="addit-box">
+                <div class="qty-box">
+                  <div class="input-group">
+                    <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.quantity}}">
+                  </div>
+                </div>
+                <div class="pro-add">
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                    <i data-feather="edit"></i>
+                  </a>
+                  <a href="{% url 'delete_cart_product' product.variant_id %}">
+                    <i  data-feather="trash-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <ul class="cart_total">
+        <li>
+          subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+        </li>
+        <li>
+          shipping <span>free</span>
+        </li>
+        <li>
+          taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+        </li>
+        <li>
+          <div class="total">
+            total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+          </div>
+        </li>
+        <li>
+          <div class="buttons">
+            <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+          </div>
+        </li>
+      </ul>
+      {% endif %}
+       {% endif %}
     </div>
   </div>
 </div>
@@ -4153,7 +4196,7 @@
 <!-- Add to cart modal popup end-->
 
 <!-- Add to wishlist bar -->
-<div id="wishlist_side" class="add_to_cart right ">
+{% comment %} <div id="wishlist_side" class="add_to_cart right ">
   <a href="javascript:void(0)" class="overlay" onclick="closeWishlist()"></a>
   <div class="cart-inner">
     <div class="cart_top">
@@ -4286,7 +4329,7 @@
       </ul>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 <!-- Add to wishlist bar -->
 
 <!-- My account bar start-->
@@ -4301,23 +4344,37 @@
         </a>
       </div>
     </div>
-    <form class="theme-form">
+    {% if request.user.is_authenticated %}
+      <li>
+        <h6 class="d-block">
+          Welcome, {{request.user.username}}
+        </h6>
+      </li>
+      <li>
+          <a href="{% url 'logout_page' %}" class="d-block"
+            >Logout</a>
+      </li>
+  
+      {% else %}
+    <form class="theme-form" method="post" action="{% url 'login_page' %}">
+      {% csrf_token %}
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" placeholder="Email" required="">
+        <input type="text" class="form-control" name="name" id="email" placeholder="Email" required="">
       </div>
       <div class="form-group">
         <label for="review">Password</label>
-        <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+        <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
       </div>
       <div class="form-group">
-        <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+        <button class="btn btn-solid btn-md btn-block ">Login</button>
       </div>
       <div class="accout-fwd">
-        <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-        <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+        <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>
+        <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
     </form>
+    {% endif %}
   </div>
 </div>
 <!-- Add to account bar end-->
@@ -4360,7 +4417,7 @@
 
 
  <!-- notification product -->
-  <div class="product-notification" id="dismiss">
+  {% comment %} <div class="product-notification" id="dismiss">
     <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
     <div class="media">
       <img class="me-2" src="{% static 'assets/images/layout-1/product/5.jpg' %}" alt="Generic placeholder image">
@@ -4369,7 +4426,7 @@
         Cras sit amet nibh libero, in gravida nulla.
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   <!-- notification product -->
 
   {% endblock components %}

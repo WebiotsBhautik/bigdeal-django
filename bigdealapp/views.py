@@ -136,41 +136,9 @@ def logout_page(request):
 
 # HOME PAGES SECTION 
 
-def index(request):
-    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
-    collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
-    col_banner = {}
-    if collection_banner.count() >= 1:
-        col_banner = [collection_banner[0],]
-
-    brands = ProBrand.objects.all()
-    layout1_category = ProCategory.objects.get(categoryName='ms1')
-    subcategories = layout1_category.get_descendants(include_self=True)
-    layout1_products = Product.objects.filter(proCategory__in=subcategories)
-    
-    products_by_subcategory = {}
-    
-     # Retrieve products for each subcategory
-    for subcategory in subcategories:
-        products = Product.objects.filter(proCategory=subcategory)
-        products_by_subcategory[subcategory] = products
-        
-                
-    cart_products,totalCartProducts = show_cart_popup(request)
-    
-    active_banner_themes = BannerTheme.objects.filter(is_active=True)
-    
-    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
-               'allbrands':brands,
-               'allbanners':banners,
-               'layout1_products':layout1_products,
-               'subcategories':subcategories,
-               'products_by_subcategory':products_by_subcategory,
-               'col_banner':col_banner,
-               'cart_products':cart_products,
-               "totalCartProducts": totalCartProducts,
-               'active_banner_themes':active_banner_themes,
-               }
+def handle_cart_logic(request):
+    context = {}
+    cart_products = {}
     if request.user.is_authenticated:
         try:
             customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
@@ -206,26 +174,57 @@ def index(request):
     context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
     context["Cart"]= customer_cart
     context["cartId"]=customer_cart.id
+
+    return context
+
+def index(request):
+    banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
+    collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
+    col_banner = {}
+    if collection_banner.count() >= 1:
+        col_banner = [collection_banner[0],]
+
+    brands = ProBrand.objects.all()
+    layout1_category = ProCategory.objects.get(categoryName='ms1')
+    subcategories = layout1_category.get_descendants(include_self=True)
+    layout1_products = Product.objects.filter(proCategory__in=subcategories)
+    
+    products_by_subcategory = {}
+    
+     # Retrieve products for each subcategory
+    for subcategory in subcategories:
+        products = Product.objects.filter(proCategory=subcategory)
+        products_by_subcategory[subcategory] = products
+        
+                
+    cart_products,totalCartProducts = show_cart_popup(request)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
+               'allbrands':brands,
+               'allbanners':banners,
+               'layout1_products':layout1_products,
+               'subcategories':subcategories,
+               'products_by_subcategory':products_by_subcategory,
+               'col_banner':col_banner,
+               'cart_products':cart_products,
+               'theme':'ms1',
+               "totalCartProducts": totalCartProducts,
+               'active_banner_themes':active_banner_themes,
+                **cart_context,
+               }
         
     template_path = 'pages/home/ms1/index.html'
-
-    # context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
-    #            'allbrands':brands,
-    #            'allbanners':banners,
-    #            'layout1_products':layout1_products,
-    #            'subcategories':subcategories,
-    #            'products_by_subcategory':products_by_subcategory,
-    #            'col_banner':col_banner,
-    #            'cart_products':cart_products,
-    #            "totalCartProducts": totalCartProducts,
-    #            'active_banner_themes':active_banner_themes,
-    #            }
-    
+   
     currency = Currency.objects.get(code='USD')
     response = render(request, template_path, context)
     response.set_cookie('currency', currency.id)
     return response
-    
+
 
 def layout2(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore2 Demo')
@@ -250,9 +249,12 @@ def layout2(request):
     blogs = Blog.objects.filter(blogCategory__categoryName='layout2',status=True, blogStatus=1)
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-
-
     
+    cart_context = handle_cart_logic(request)
+    
+    cart_products,totalCartProducts = show_cart_popup(request)
+
+
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbanners':banners,
                'allbrands':brands,
@@ -262,14 +264,17 @@ def layout2(request):
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
                'blogs':blogs,
+                'theme':'ms2',
                'active_banner_themes':active_banner_themes,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+                **cart_context,
                }
-
+    
     return render(request, 'pages/home/ms2/layout-2.html',context)
 
 def layout3(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore3 Demo')
-    # shop_banners = banners.filter(bannerType__bannerTypeName='Banner')
     media_banners = banners.filter(bannerType__bannerTypeName='Media Banner')
     left_banners = banners.filter(bannerType__bannerTypeName='Left Banner')
 
@@ -280,12 +285,15 @@ def layout3(request):
     
     products_by_subcategory = {}
     
-     # Retrieve products for each subcategory
+    # Retrieve products for each subcategory
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products  
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
         
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -296,7 +304,11 @@ def layout3(request):
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
                'left_banners':left_banners,
+               'theme':'ms3',
                'active_banner_themes':active_banner_themes,
+               **cart_context,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
                }
         
     return render(request, 'pages/home/ms3/layout-3.html',context)
@@ -319,6 +331,9 @@ def layout4(request):
         products_by_subcategory[subcategory] = products  
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
 
     
@@ -328,8 +343,12 @@ def layout4(request):
                'media_banners':media_banners,
                'layout4_products':layout4_products,
                'subcategories':subcategories,
+               'theme':'ms4',
                'products_by_subcategory':products_by_subcategory,
                 'active_banner_themes':active_banner_themes,
+                **cart_context,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
 
                }
     
@@ -366,6 +385,9 @@ def layout5(request):
         products_by_subcategory[subcategory] = products  
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -381,8 +403,12 @@ def layout5(request):
             'fourth_banner':fourth_banner,
             'collection_banner':collection_banner,
             'sale_banner':sale_banner,
+            'theme':'ms5',
             'main_categories':main_categories,
             'active_banner_themes':active_banner_themes,
+             **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
             }
     
@@ -408,7 +434,9 @@ def electronics(request):
     blogs = Blog.objects.filter(blogCategory__categoryName='Electronics',status=True, blogStatus=1)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -420,7 +448,11 @@ def electronics(request):
             'products_by_subcategory':products_by_subcategory,
             'media_banners':media_banners,
             'blogs':blogs,
+            'theme':'Electronics',
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
             }
     return render(request, 'pages/home/electronics/electronics.html',context)
 
@@ -461,6 +493,9 @@ def vegetable(request):
     blogs = Blog.objects.filter(blogCategory__categoryName='Vegetables',status=True, blogStatus=1)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -470,6 +505,7 @@ def vegetable(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Vegetables',
             'first_banner':first_banner,
             'second_banner':second_banner,
             'third_banner':third_banner,
@@ -477,6 +513,9 @@ def vegetable(request):
             'five_banner':five_banner,
             'six_banner':six_banner,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
             }
 
     return render(request, 'pages/home/vegetables/vegetable.html',context)
@@ -512,7 +551,9 @@ def furniture(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Furniture',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
         
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -522,13 +563,16 @@ def furniture(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Furniture',
             'first_banner':first_banner,
             'second_banner':second_banner,
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'five_banner':five_banner,
             'active_banner_themes':active_banner_themes,
-
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
             }
     return render(request, 'pages/home/furniture/furniture.html',context)
 
@@ -574,6 +618,7 @@ def cosmetic(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Cosmetic',
            'first_banner':first_banner,
            'second_banner':second_banner,
            'third_banner':third_banner,
@@ -625,6 +670,7 @@ def kids(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Kids',
             'first_banner':first_banner,
             'second_banner':second_banner,
             'third_banner':third_banner,
@@ -665,6 +711,7 @@ def tools(request):
             'products_by_subcategory':products_by_subcategory,
             'last_three_collection':last_three_collection,
             'blogs':blogs,
+            'theme':'Tools',
             'active_banner_themes':active_banner_themes,
 
             }   
@@ -725,6 +772,7 @@ def grocery(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Grocery',
             'first_banner':first_banner,
             'second_banner':second_banner,
             'third_banner':third_banner,
@@ -777,6 +825,7 @@ def pets(request):
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
             'blogs':blogs,
+            'theme':'Pets',
             'first_banner':first_banner,
             'second_banner':second_banner,
             'third_banner':third_banner,
@@ -841,6 +890,7 @@ def farming(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'blogs':blogs,
+            'theme':'Farming',
             'sale_banner':sale_banner,
             'counter_banner':counter_banner,
             'active_banner_themes':active_banner_themes,
@@ -893,6 +943,7 @@ def digital_marketplace(request):
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
             'blogs':blogs,
+            'theme':'Digital Marketplace',
             'active_banner_themes':active_banner_themes,
 
         }
@@ -4035,13 +4086,6 @@ def blog_creative_left_sidebar(request):
     return render(request, 'pages/blog/blog-creative-left-sidebar.html',context)
 
 
-def search_products(request):
-    products = ProductVariant.objects.all()
-    results = [{'id':product.variantProduct.id,
-                } for product in products]
-    
-    return JsonResponse({'status':200, 'data':results})
-
 
 def search_bar(request,params=None):
     query = ''
@@ -4230,19 +4274,22 @@ def contact_us(request):
     return render(request, 'pages/pages/account/contact.html',context)
 
 def get_subcategories(category):
-    fashion_category = ProCategory.objects.get(categoryName__iexact=category)
-    subcategories = ProCategory.objects.filter(parent=fashion_category)
-    
-    result = []
-    for subcategory in subcategories:
-        subcategory_data = {
-            'id': subcategory.id,
-            'name': subcategory.categoryName,
-            'subcategories': get_subcategories(subcategory.categoryName)
-        }
-        result.append(subcategory_data)
-    
-    return result
+    try:
+        fashion_category = ProCategory.objects.get(categoryName__iexact=category)
+        subcategories = ProCategory.objects.filter(parent=fashion_category)
+        
+        result = []
+        for subcategory in subcategories:
+            subcategory_data = {
+                'id': subcategory.id,
+                'name': subcategory.categoryName,
+                'subcategories': get_subcategories(subcategory.categoryName)
+            }
+            result.append(subcategory_data)
+        
+        return result
+    except ProCategory.DoesNotExist:    
+        return []
 
 
 def search_products(request):
@@ -4270,6 +4317,7 @@ def search_products(request):
                 'rating': product.variantProduct.productFinalRating,
                 'category': product.variantProduct.proCategory.categoryName,
                 } for product in products]
+    print('results =========++>',results)
     return JsonResponse({'status': 200, 'data': results})
 
 
@@ -4869,7 +4917,6 @@ def collection(request):
     context = {"breadcrumb":{"parent":"collection","child":"collection"},
                 'active_banner_themes':active_banner_themes,}
     return render(request, 'pages/pages/collection.html',context)
-
 
 
     

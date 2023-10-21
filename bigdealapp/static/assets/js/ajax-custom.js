@@ -1,3 +1,71 @@
+      
+// let query
+  
+// async function searchValue() {
+//     query = document.getElementById("search-input").value;
+//     console.log('query =========+>',query)
+//     document.getElementById("search-input").innerHTML = "you search :" + query;
+
+//     const response = await fetch(`/search_products/?q=${(query)}&category={{theme}}`);
+//     console.log('response=========+>', response)
+//     const productData = await response.json();
+//     displayProductData(productData)
+//     console.log('productData=========+>', productData)
+//   }
+
+//   function displayProductData(productData) {
+//     $("#realData").empty();
+
+//     if (productData.data.length === 0) {
+//         $('#realData').append('<li class="no-results"> No products found! </li>');
+//         return;
+//     }
+
+//     productData.data.map(value => {
+//         let ratingHtml = '';
+//         if (parseInt(value.rating) < 5) {
+//             for (let i = 0; i < parseInt(value.rating); i++) {
+//                 ratingHtml +=
+//                     '<li><a class="fas fa-star theme-color" id="productOfStar" href="/left_slidebar/' +
+//                     value.id + '"></a></li>';
+//             }
+//             let emptyStars = 5 - parseInt(value.rating);
+//             for (let i = 0; i < emptyStars; i++) {
+//                 ratingHtml += '<li><i class="fas fa-star"></i></li>';
+//             }
+//         } else {
+//             for (let i = 0; i < 5; i++) {
+//                 ratingHtml +=
+//                     '<li><a class="fas fa-star theme-color" id="productOfStar" href="/left_slidebar/' +
+//                     value.id + '"></a></li>';
+//             }
+//         }
+//         $("#realData").append(`<li>
+//             <div class="product-cart media">
+//             <a href="/left_slidebar/${value.id}">
+//                 <img
+//                 src="${value.image_url}"
+//                 href="/left_slidebar/${value.id}"
+//                 class="img-fluid blur-up lazyload"
+//                 alt=""
+//                 />
+//             </a>
+
+//             <div class="media-body">
+//                 <a href="/left_slidebar/${value.id}">
+//                 <h6 class="mb-1">${value.name}</h6>
+//                 </a>
+//                 <ul class="rating p-0">
+//                 ${ratingHtml}
+//                 </ul>
+//                 <a href="/left_slidebar/${value.id}" class="mb-0 mt-1">$${value.price}</a>
+//             </div>
+//             </div>
+//         </li>`)
+//     });
+// }
+
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex;
@@ -48,7 +116,7 @@ $('.the-basics .typeahead').typeahead({
         'No Record Found !',
       '</div>'
     ].join('\n'),
-    suggestion: function (data) {
+    suggestion: function search_products (data) {
         return '<a href="product-page(left-sidebar).html" class="man-section"><div class="image-section"><img src='+data.image+'></div><div class="description-section"><h4>'+data.name+'</h4><span>'+data.price+'</span></div></a>';
     }
   },

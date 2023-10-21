@@ -133,8 +133,7 @@
   
     async function handleQuickView(params){
       var url = "{% url 'quick_view' %}";
-      console.log('url ======+>',url)
-      console.log('CSRF ONLY ======+>',csrftoken)
+      console.log('Quick view function called successfully')
       await fetch(url,{
         method: "POST",
         headers:{
