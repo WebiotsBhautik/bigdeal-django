@@ -609,6 +609,9 @@ def cosmetic(request):
     blogs = Blog.objects.filter(blogCategory__categoryName='Cosmetic',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+
         
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -624,6 +627,9 @@ def cosmetic(request):
            'third_banner':third_banner,
            'fourth_banner':fourth_banner,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
             }
     
     return render(request,'pages/home/cosmetic/cosmetic.html',context)
@@ -659,6 +665,9 @@ def kids(request):
 
     blogs = Blog.objects.filter(blogCategory__categoryName='Kids',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
         
 
@@ -677,6 +686,9 @@ def kids(request):
             'fourth_banner':fourth_banner,
             'five_banner':five_banner,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
         }   
 
     return render(request, 'pages/home/kids/kids.html',context)
@@ -701,6 +713,9 @@ def tools(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Tools',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
                                             
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -713,6 +728,9 @@ def tools(request):
             'blogs':blogs,
             'theme':'Tools',
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
             }   
     return render(request, 'pages/home/tools/tools.html',context)
@@ -762,8 +780,10 @@ def grocery(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Grocery',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-
     
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -781,6 +801,9 @@ def grocery(request):
             'six_banner':six_banner,
             'last_testimonial':last_testimonial,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
             }   
     return render(request, 'pages/home/grocery/grocery.html',context)
@@ -815,6 +838,9 @@ def pets(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Pets',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -834,6 +860,9 @@ def pets(request):
             # 'six_banner':six_banner,
             # 'last_testimonial':last_testimonial,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
             }   
     
@@ -876,6 +905,9 @@ def farming(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Farming',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
         
 
@@ -894,6 +926,9 @@ def farming(request):
             'sale_banner':sale_banner,
             'counter_banner':counter_banner,
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
         }
     return render(request, 'pages/home/farming/farming.html',context)
@@ -929,6 +964,9 @@ def digital_marketplace(request):
         
     blogs = Blog.objects.filter(blogCategory__categoryName='Digital Marketplace',status=True, blogStatus=1)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
@@ -945,13 +983,12 @@ def digital_marketplace(request):
             'blogs':blogs,
             'theme':'Digital Marketplace',
             'active_banner_themes':active_banner_themes,
+            **cart_context,
+            'cart_products':cart_products,
+            'totalCartProducts':totalCartProducts,
 
         }
     return render(request, 'pages/home/digital_marketplace/digital-marketplace.html',context)
-
-
-
-
 
 
 # SHOP PAGES SECTION 
