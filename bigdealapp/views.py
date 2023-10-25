@@ -4144,13 +4144,16 @@ def search_bar(request,params=None):
     page_obj = paginator.get_page(page_number)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
     
     context = {"breadcrumb": {"parent": "Search", "child": "Search"}, 'products': products,
                 'query': query,'page_obj':page_obj,
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/search.html',context)
-
-
 
 
 def forgot_password(request):
@@ -4714,7 +4717,6 @@ def wishlist_page(request):
             totalWishlistProducts = wishlist_products.count()
         except Wishlist.DoesNotExist:
             customer_wishlist = None
-
     else:
         return redirect('login_page')
     
@@ -4895,9 +4897,13 @@ def page_not_found(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
     cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
     context = {"breadcrumb": {"parent": 404, "child": 404},
                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 'active_banner_themes':active_banner_themes,
+                **cart_context,
+
                 }
 
     return render(request, 'pages/pages/404.html', context)
@@ -4906,53 +4912,87 @@ def page_not_found(request):
 def faq_page(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
     context = {"breadcrumb": {"parent": 'FAQ', "child": 'FAQ'},
                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 'active_banner_themes':active_banner_themes,
+                **cart_context,
                 }
 
     return render(request,'pages/pages/faq.html',context)
 
 def coming_soon(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
     context = {"breadcrumb": {"parent": "Coming Soon", "child": "Coming Soon"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/coming-soon.html', context)
 
 
 
 def about_page(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {"breadcrumb":{"parent":"About","child":"About"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/about-page.html',context)
 
 
 def review(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
 
     context = {"breadcrumb":{"parent":"Review","child":"Review"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/review.html',context)
 
 
 def typography(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
     context = {"breadcrumb":{"parent":"TYPOGRAPHY","child":"TYPOGRAPHY"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/typography.html',context)
 
 def look_book(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
     context = {"breadcrumb":{"parent":"Look book","child":"Look book"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,
+                }
     return render(request, 'pages/pages/look-book.html',context)
 
 def collection(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
     context = {"breadcrumb":{"parent":"collection","child":"collection"},
-                'active_banner_themes':active_banner_themes,}
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/collection.html',context)
 
 

@@ -560,7 +560,7 @@
                 </h4>
                 <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
                 <h3>{{banner.titleOne}}</h3>
-                <a href="product-page(left-sidebar).html" class="btn btn-rounded">Shop Now</a>
+                <a href="{% url 'shop_left_sidebar'  %}" class="btn btn-rounded">Shop Now</a>
               </div>
             </div>
         </div>
@@ -593,9 +593,9 @@
                 <h3>{{banner.titleOne}}</h3>
                 <h5>{{banner.titleTwo}}</h5>
                <ul>
-                  <li class="fb-color"><a href="javascript:void(0)" tabindex="0"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="javascript:void(0)" tabindex="0"><i class="ti-pinterest"></i></a></li>
+                  <li class="fb-color"><a href="https://www.facebook.com/" tabindex="0" target ="_blank"> <i class="ti-facebook"></i></a></li>
+                  <li class="twt-color"> <a href="https://twitter.com/" tabindex="0" target ="_blank"><i class="ti-twitter-alt"></i></a></li>
+                  <li class="print-color"> <a href="https://in.pinterest.com/" tabindex="0" target ="_blank"><i class="ti-pinterest"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -695,7 +695,7 @@
                     <li> <a href="javascript:void(0)">{{banner.titleFour}}</a></li>
                     <li> <a href="javascript:void(0)">{{banner.titleTwo}}</a></li>  {% endcomment %}
                   </ul>
-                  <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-block">order now</a>
               </div>
             </div>
           </div>
@@ -838,16 +838,16 @@
           <div>
             <div class="blog-contain">
               <div class="blog-img">
-                <a href="blog-details.html">
+                <a href="{% url 'blog_details' blog.id %}">
                   <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                 </a>
               </div>
               <div class="blog-details-2">
-                <a href="blog-details.html">
+                <a href="{% url 'blog_details' blog.id %}">
                   <h4>{{blog.blogTitle}} </h4>
                 </a>           
                 <p>{{blog.blogDescription|safe}}</p>
-                <a href="blog-details.html" class=" btn btn-normal  btn-xs btn-outline">
+                <a href="{% url 'blog_details' blog.id %}" class=" btn btn-normal  btn-xs btn-outline">
                   read more
                 </a>
               </div>
@@ -878,7 +878,7 @@
                 <div>
                   <h2>{{banner.titleOne}}</h2>
                   <h3>{{banner.titleTwo}}</h3>
-                  <a href="javascript:void(0)" class="btn btn-rounded btn-md">download</a>
+                  <a href="{% url 'coming_soon' %}" class="btn btn-rounded btn-md">download</a>
                 </div>
               </div>
             </div>

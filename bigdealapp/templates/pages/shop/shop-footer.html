@@ -16,7 +16,7 @@
                 </div>
                 <div class="footer-contant">
                   <div class="footer-logo">
-                    <a href="index.html">
+                    <a href="{% url 'index' %}">
                       <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                     </a>
                   </div>
@@ -135,7 +135,7 @@
                     <span class="theme-color" id="discountPercentageAtQuickView"></span>
                   </div>
                   <div class="price mt-3" id="priceLabel2"></div>
-
+  
                   <div class="revieu-box">
                     <ul id="productRating">
                       <li><i class="fa fa-star"></i></li>
@@ -218,14 +218,14 @@
                       <button class="qty-plus"></button>
                     </div>
                   </div> {% endcomment %}
-                  <div class="product-buttons">
-                    <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                      <i class="fa fa-shopping-cart"></i>
+                  <div class="product-btns" id="productBtnDiv">
+                   <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                      <i class="fa fa-shopping-cart"></i> 
                       add to cart
-                    </a>
-                    <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                   </a>
+                   <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                       view detail
-                    </a>
+                   </a>
                   </div>
                 </div>
               </div>

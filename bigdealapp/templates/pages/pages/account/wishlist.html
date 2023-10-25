@@ -47,9 +47,9 @@
                     <tbody>
                     <tr>
                         <td>
-                            <a href="{% url 'shop_left_sidebar' %}"><img src="{{product.variantProduct.productImageFront}}" alt="product" class="img-fluid  "></a>
+                            <a href="{% url 'left_slidebar' product.variantProduct.id %}"><img src="{{product.variantProduct.productImageFront}}" alt="product" class="img-fluid  "></a>
                         </td>
-                        <td><a href="{% url 'shop_left_sidebar' %}">{{product.variantProduct.productName}}</a>
+                        <td><a href="{% url 'left_slidebar' product.variantProduct.id %}">{{product.variantProduct.productName}}</a>
                             <div class="mobile-cart-content">
                                 <div class="col-xs-3">
                                   <p>{{product.productVariantStockStatus}}</p>

@@ -156,7 +156,7 @@
 
   
   <!-- Add to cart bar -->
-  <div id="cart_side" class="add_to_cart right">
+  {% comment %} <div id="cart_side" class="add_to_cart right">
     <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
     <div class="cart-inner">
       <div class="cart_top">
@@ -290,12 +290,14 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   <!-- Add to cart bar end-->
+
+  {% include 'base/cart-popup.html' %}
   
   
   <!-- wishlistbar bar -->
-  <div id="wishlist_side" class="add_to_cart right ">
+  {% comment %} <div id="wishlist_side" class="add_to_cart right ">
     <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
     <div class="cart-inner">
       <div class="cart_top">
@@ -428,7 +430,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   <!-- wishlistbar bar end-->
   
   <!-- My account bar start-->
