@@ -14633,6 +14633,7 @@ ul.sosiyal {
   .input-group {
     justify-content: center;
     border: 1px solid $light-border;
+
     .form-control {
       text-align: center;
       width: 80px;
@@ -14641,30 +14642,81 @@ ul.sosiyal {
       border-top: unset;
       border-bottom: unset;
     }
-    button {
-      background-color: transparent;
-      cursor: pointer;
-      line-height: 1;
-      background-color: $white;
-      font-family: $font-themify;
-      padding-left: 10px;
-      padding-right: 10px;
-      border: none;
-      i {
-        font-weight: 900;
-        color: $dark;
-        font-size: 16px;
-      }
+    .input-group-prepend {
       &:first-child {
-        &:before {
-          content: "\e622";
+        button {
+          background-color: transparent;
+          cursor: pointer;
+          line-height: 1;
+          background-color: $white;
+          font-family: $font-themify;
+          padding-left: 10px;
+          padding-right: 10px;
+          border: none;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i {
+            font-weight: 900;
+            color: $dark;
+            font-size: 16px;
+          }
+          &:before {
+            content: "\e622";
+          }
         }
       }
+
       &:last-child {
-        &:before {
-          content: "\e61a";
+        button {
+          background-color: transparent;
+          cursor: pointer;
+          line-height: 1;
+          background-color: $white;
+          font-family: $font-themify;
+          padding-left: 10px;
+          padding-right: 10px;
+          border: none;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i {
+            font-weight: 900;
+            color: $dark;
+            font-size: 16px;
+          }
+          &:before {
+            content: "\e61a";
+          }
         }
       }
+      // button {
+      //   background-color: transparent;
+      //   cursor: pointer;
+      //   line-height: 1;
+      //   background-color: $white;
+      //   font-family: $font-themify;
+      //   padding-left: 10px;
+      //   padding-right: 10px;
+      //   border: none;
+      //   i {
+      //     font-weight: 900;
+      //     color: $dark;
+      //     font-size: 16px;
+      //   }
+      //   &:first-child {
+      //     &:before {
+      //       content: "\e622";
+      //     }
+      //   }
+      //   &:last-child {
+      //     &:before {
+      //       content: "\e61a";
+      //     }
+      //   }
+      // }
     }
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -22420,11 +22472,9 @@ table {
       align-items: center;
       gap: 5px;
       margin-bottom: 15px;
-      span{
+      span {
         color: black;
       }
     }
   }
 }
-
-

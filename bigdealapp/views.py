@@ -124,9 +124,16 @@ def login_page(request):
         else:
             messages.error(request, 'Invalid Credentials')
             return redirect('login_page')
+        
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    
     context = {"breadcrumb": {
          "parent": "Dashboard", "child": "Default"},
-               'active_banner_themes':active_banner_themes,}
+               'active_banner_themes':active_banner_themes,
+               **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
     return render(request, 'authentication/login.html',context)
 
 def logout_page(request):
@@ -411,6 +418,8 @@ def layout5(request):
             'totalCartProducts':totalCartProducts,
 
             }
+    
+    
     
     return render(request, 'pages/home/ms5/layout-5.html',context)
 
@@ -4313,17 +4322,17 @@ def contact_us(request):
                }
     return render(request, 'pages/pages/account/contact.html',context)
 
-def get_subcategories(category):
+def get_subcategories(category,parent=True):
     try:
         fashion_category = ProCategory.objects.get(categoryName__iexact=category)
-        subcategories = ProCategory.objects.filter(parent=fashion_category)
+        subcategories = ProCategory.objects.filter(Q(parent=fashion_category) & Q(parent=parent))
         
         result = []
         for subcategory in subcategories:
             subcategory_data = {
                 'id': subcategory.id,
                 'name': subcategory.categoryName,
-                'subcategories': get_subcategories(subcategory.categoryName)
+                'subcategories': get_subcategories(subcategory.categoryName, parent=True)
             }
             result.append(subcategory_data)
         
@@ -4335,19 +4344,26 @@ def get_subcategories(category):
 def search_products(request):
     query = request.GET.get('q','')
     category = request.GET.get('category','')
+    print(query,category)
     
     products = ProductVariant.objects.all()
     
     if query and category:
         fashion_subcategories = get_subcategories(category)
+        print('fashion_subcategories ========>',fashion_subcategories)
         category_ids = []
         category_ids.extend(get_category_ids(fashion_subcategories))
         products = products.filter(variantProduct__proCategory__id__in=category_ids, variantProduct__productName__icontains=query)
+        print('products =======+++++>',products)
     else:
         fashion_subcategories = get_subcategories(category)
+        print('fashion_subcategories ========>',fashion_subcategories)
+
         category_ids = []
         category_ids.extend(get_category_ids(fashion_subcategories))
         products = ProductVariant.objects.filter(variantProduct__proCategory__id__in=category_ids).order_by('id')[:7]
+        print('products in ELSE PART =======+++++>',products)
+
         
     products = GetUniqueProducts(products)
     results = [{'id': product.variantProduct.id,
@@ -4357,7 +4373,7 @@ def search_products(request):
                 'rating': product.variantProduct.productFinalRating,
                 'category': product.variantProduct.proCategory.categoryName,
                 } for product in products]
-    print('results =========++>',results)
+    print('results =========>',results)
     return JsonResponse({'status': 200, 'data': results})
 
 

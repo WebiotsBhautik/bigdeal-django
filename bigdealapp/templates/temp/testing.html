@@ -323,3 +323,217 @@
 </body>
 
 </html>
+
+
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    async function GetConvertedValues(value) {
+        var url = "{% url 'get_selected_currency' %}",
+            valuereturn = 0;
+        await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                (valuereturn = (data.factor * value).toFixed(2)), (symbol = data.symbol);
+            });
+        return {
+            symbol: symbol,
+            value: valuereturn
+        };
+    }
+
+
+    function counterPlusAtCart(params) {
+        let quantityValueInput = document.getElementById(params.key);
+        let a = quantityValueInput.getAttribute('value');
+        
+        if (Number(a) < params.productQuantity) {
+            let b = Number(a) + 1;
+            quantityValueInput.setAttribute('value', b);
+            let actionType = "plus"
+            console.log('params.productVariantId ======++>',params.productVariantId)
+            quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
+        }
+    }
+
+    function counterMinusAtCart(params) {
+        let quantityValueInput = document.getElementById(params.key);
+        let a = quantityValueInput.getAttribute('value');
+        let b = Number(a) - 1;
+        let actionType = "minus";
+        
+        if (b <= 0) {
+            // if quantity goes to zero or negative then...rehne do tum se na ho payega
+        } else {
+            quantityValueInput.setAttribute('value', b);
+            quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle);
+        }
+    }
+
+
+    function getCookie(cname) {
+
+        let name = cname + "=";
+      
+        let decodedCookie = decodeURIComponent(document.cookie);
+      
+        let ca = decodedCookie.split(';');
+      
+        for(let i = 0; i <ca.length; i++) {
+      
+          let c = ca[i];
+      
+          while (c.charAt(0) == ' ') {
+      
+            c = c.substring(1);
+      
+          }
+      
+          if (c.indexOf(name) == 0) {
+      
+            return c.substring(name.length, c.length);
+          }
+      
+        }
+      
+        return "";
+      }
+
+    function beforecounterPlusAtCart(params) {
+        let quantityValueInput = document.getElementById(params.key);
+        let a = quantityValueInput.getAttribute('value');
+        getdata = $.cookie("cart").replace(/\\054/g, ',').replaceAll("\'","\"");
+        var cookies = JSON.parse(getdata);
+        cookies.forEach(function(product)
+        {
+            
+            
+            if(product.variant_id == params.productVariantId)
+            {
+                console.log("product.variant_id>>",product.variant_id);
+                console.log("params.productVariantId>>",params.productVariantId);
+                if (Number(a) <= product.quantity) {
+                    let b = Number(a) + 1;
+                    quantityValueInput.setAttribute('value', b);
+                    let actionType = "plus"
+                    quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
+                }
+            }
+        });
+    }                                          
+
+    function quantity_wise_price_management(productVariantId, actionType, totalPriceEle) {
+        if (actionType == "plus") {
+            let urlForPlus = ("{% url 'add_to_cart_product_quantity_management' 'id' 'actionType' %}")
+            urlForPlus = urlForPlus.replace('id', productVariantId)
+            urlForPlus = urlForPlus.replace('actionType', actionType)
+
+            fetch(urlForPlus, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+
+                })
+            }).then(response => {
+                return response.json()
+            }).then(data => {
+                console.log("data>>",data);
+                GetConvertedValues(data.quantityTotalPrice).then((Data) => {
+                    document.getElementById(totalPriceEle).innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+                GetConvertedValues(data.cartTotalPrice).then((Data) => {
+                    document.getElementById('cartTotalPrice').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+                GetConvertedValues(data.taxPrice).then((Data) => {
+                    document.getElementById('taxPrice').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+                GetConvertedValues(data.cartTotalPriceAfterTax).then((Data) => {
+                    document.getElementById('priceAfterTax').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+                GetConvertedValues(data.cartTotalPrice).then((Data) => {
+                    document.getElementById('cartTotalPriceButton').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+            })
+        }
+
+        if (actionType == "minus") {
+            let urlForMinus = ("{% url 'add_to_cart_product_quantity_management' 'id' 'actionType' %}")
+            urlForMinus = urlForMinus.replace('id', productVariantId)
+            urlForMinus = urlForMinus.replace('actionType', actionType)
+
+            fetch(urlForMinus, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+
+                })
+            }).then(response => {
+                return response.json()
+            }).then(data => {
+
+                GetConvertedValues(data.quantityTotalPrice).then((Data) => {
+                    document.getElementById(totalPriceEle).innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+                GetConvertedValues(data.cartTotalPrice).then((Data) => {
+                    document.getElementById('cartTotalPrice').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+                GetConvertedValues(data.taxPrice).then((Data) => {
+                    document.getElementById('taxPrice').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+                GetConvertedValues(data.cartTotalPriceAfterTax).then((Data) => {
+                    document.getElementById('priceAfterTax').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+                GetConvertedValues(data.cartTotalPrice).then((Data) => {
+                    document.getElementById('cartTotalPriceButton').innerHTML =
+                        Data.symbol + " " + Data.value;
+                });
+
+            })
+        }
+    }
+</script>

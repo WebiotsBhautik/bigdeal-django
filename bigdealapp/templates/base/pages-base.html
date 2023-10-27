@@ -459,34 +459,25 @@
         >
       </li>
       {% else %}
-      <li>
-        <a href="{% url 'login_page' %}" class="d-block"
-          >Login</a
-        >
-      </li>
-      <li>
-        <a href="{% url 'signup_page' %}" class="d-block"
-          >Register</a
-        >
-      </li>
-      {% endif %}
-      {% comment %} <form class="theme-form">
+      <form class="theme-form" method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" placeholder="Email" required="">
+          <input type="text" class="form-control" name="name" id="email" placeholder="Email" required="">
         </div>
         <div class="form-group">
-          <label >Password</label>
-          <input type="password" class="form-control"  placeholder="Enter your password" required="">
+          <label for="review">Password</label>
+          <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
         </div>
         <div class="form-group">
-          <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+          <button class="btn btn-solid btn-md btn-block ">Login</button>
         </div>
         <div class="accout-fwd">
-          <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-          <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+          <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>
+          <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
         </div>
-      </form> {% endcomment %}
+      </form>
+      {% endif %}
     </div>
   </div>
   <!-- Add to account bar end-->
