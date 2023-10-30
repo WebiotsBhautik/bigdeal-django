@@ -892,8 +892,11 @@ function counterMinusAtCart(params) {
 
 function beforecounterPlusAtCart(params) {
   let quantityValueInput = document.getElementById(params.key);
+  console.log('quantityValueInput ===>',quantityValueInput)
   let a = quantityValueInput.getAttribute('value');
+  console.log('a ===>',a)
   getdata = $.cookie("cart").replace(/\\054/g, ',').replaceAll("\'","\"");
+  console.log('getdata ===>',getdata)
   var cookies = JSON.parse(getdata);
   cookies.forEach(function(product)
   {
@@ -901,7 +904,9 @@ function beforecounterPlusAtCart(params) {
       {
           if (Number(a) <= product.quantity) {
               let b = Number(a) + 1;
+              console.log('b ====>',b)
               quantityValueInput.setAttribute('value', b);
+              console.log('quantityValueInput ===>',quantityValueInput)
               let actionType = "plus"
               quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
           }
@@ -947,10 +952,10 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
                   Data.symbol + " " + Data.value;
           });
 
-          GetConvertedValues(data.cartTotalPrice).then((Data) => {
-              document.getElementById('cartTotalPriceButton').innerHTML =
-                  Data.symbol + " " + Data.value;
-          });
+         // GetConvertedValues(data.cartTotalPrice).then((Data) => {
+         //     document.getElementById('cartTotalPriceButton').innerHTML =
+         //         Data.symbol + " " + Data.value;
+         // });
 
       })
   }
@@ -994,10 +999,10 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
                   Data.symbol + " " + Data.value;
           });
 
-          GetConvertedValues(data.cartTotalPrice).then((Data) => {
-              document.getElementById('cartTotalPriceButton').innerHTML =
-                  Data.symbol + " " + Data.value;
-          });
+        //  GetConvertedValues(data.cartTotalPrice).then((Data) => {
+        //      document.getElementById('cartTotalPriceButton').innerHTML =
+        //          Data.symbol + " " + Data.value;
+        //  });
 
       })
   }

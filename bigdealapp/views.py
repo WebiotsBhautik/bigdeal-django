@@ -4620,6 +4620,8 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                     "cartTotalPriceAfterTax": TotalFinalPriceAfterTax,
                     "taxPrice":TotalTaxPrice,
                 }
+        
+        print('data in view ========>' ,data)
 
         response = JsonResponse(data,safe=False)
         response.set_cookie('cart', cart_products)

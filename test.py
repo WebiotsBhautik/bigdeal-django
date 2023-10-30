@@ -449,6 +449,32 @@
 #     raise StopIteration
 
 
+# list = ['alfa', 'bravo', 'charlie', 'delta', 'echo']
+# print(list[10:])
+
+# x = "Webiots"
+# print(x[::-1])
+
+# lis = ['a', 'b', 'b','d']
+# print(lis)
+# # del lis[1:3]
+# lis.remove('b')
+# print(lis)
+
+
+# lst = [1,2,3]
+# # lst.append(4)
+# lst.extend([4])
+# print(lst)
+
+
+# thislist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+# print(thislist[2:])
+
+
+
+
+
 
 
 
