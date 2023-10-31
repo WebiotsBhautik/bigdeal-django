@@ -4531,3 +4531,54 @@ def user_authenticate(request):
 
 
 
+
+
+def cart_page(request,cart_products=None):
+    current_user = request.user
+    customer_cart = request.user
+    totalCartProducts = 0
+    cartTotalPriceAfterTax = 0
+    cart_products = []
+    
+    context = {"breadcrumb": {"parent": "Shopping Cart", "child": "Cart"},
+               }
+
+    if current_user.is_authenticated:
+        try:
+            customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+        except Cart.DoesNotExist:
+            customer_cart = Cart.objects.create(cartByCustomer=request.user)
+        cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+        totalCartProducts = cart_products.count()
+        cartTotalPriceAfterTax = customer_cart.getFinalPriceAfterTax
+        context["cartId"]=customer_cart.id,
+    else:
+        try:  
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+        except Cart.DoesNotExist:   
+            customer_cart = Cart.objects.create(cart_id=_cart_id(request))
+            
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        if get_Item:
+            cart_products = json.loads(get_Item)  # Default to an empty list if no data
+            
+            for item in cart_products:
+                item['totalPrice'] = int(item['quantity']) * float(item['price'])
+
+        totalCartProducts = len(cart_products)
+        TotalTax,TotalTaxPrice,cartTotalPriceAfterTax = get_total_tax_values(cart_products)
+        TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
+        context["cartTotalPrice"]=TotalPrice
+        context["cartTotalTax"]=TotalTaxPrice
+        cartTotalPriceAfterTax = TotalPrice + TotalTaxPrice
+        
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    context["cart_products"]= cart_products
+    context["totalCartProducts"]= totalCartProducts
+    context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
+    context["Cart"]= customer_cart
+    context["cartId"]=customer_cart.id
+    context['active_banner_themes']=active_banner_themes
+
+    return render(request, 'pages/pages/cart.html', context)

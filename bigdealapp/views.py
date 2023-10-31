@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-
+from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.conf import settings
 from collections import Counter
@@ -4520,7 +4520,6 @@ def add_to_cart(request, id=None, quantity=0):
         if not updated:
             cart_items.append(cart_item)
         cart_items_json = json.dumps(cart_items)
-
         response = HttpResponseRedirect(reverse('index'))
         response.set_cookie('cart', cart_items_json)
         return response
@@ -4595,11 +4594,13 @@ def add_to_cart_product_quantity_management(request, id, actionType):
             cart_products = []
 
         if actionType == "plus" and cart_products:
-
+            print('=======>Inside plus condition <==========')
             for item in cart_products:
                 if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
                     item['quantity'] = int(item['quantity']) + 1
+                    print('QUANTITY ====>',item['quantity'])
                     item['totalPrice'] = format(item['quantity'] * item['price'],".2f")
+                    print('TOtal PRice ====>',item['totalPrice'])
 
         if actionType == "minus" and cart_products:
             for item in cart_products:
@@ -4677,7 +4678,6 @@ def cart_page(request,cart_products=None):
     context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
     context["Cart"]= customer_cart
     context["cartId"]=customer_cart.id
-    
     
     return render(request, 'pages/pages/account/cart.html',context)
 
@@ -4778,33 +4778,68 @@ def show_cart_popup(request):
     return cart_products,totalCartProducts
 
 
-def add_cart_data_to_database(request,get_Item):
-    if (get_Item is not None and get_Item != "null"):
-        cart_products = json.loads(get_Item)
-    else:
-        return False
+# def add_cart_data_to_database(request,get_Item):
+#     if (get_Item is not None and get_Item != "null"):
+#         cart_products = json.loads(get_Item)
+#     else:
+#         return False
 
-    for cart_product in cart_products:
-        productVariant = ProductVariant.objects.get(id=cart_product['variant_id'])
-        if productVariant.productVariantQuantity > 0:
-            cartObject=Cart.objects.get(cartByCustomer=request.user)
-            if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
-                cartProductObject = CartProducts.objects.get(
-                    cartByCustomer=request.user, cartProduct=productVariant)
-                cartProductObject.cartProductQuantity += int(cart_product['quantity'])
-                cartProductObject.save()
+#     for cart_product in cart_products:
+#         productVariant = ProductVariant.objects.get(id=cart_product['variant_id'])
+#         if productVariant.productVariantQuantity > 0:
+#             cartObject=Cart.objects.get(cartByCustomer=request.user)
+#             if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
+#                 cartProductObject = CartProducts.objects.get(
+#                     cartByCustomer=request.user, cartProduct=productVariant)
+#                 cartProductObject.cartProductQuantity += int(cart_product['quantity'])
+#                 cartProductObject.save()
+#             else:
+#                 CartProducts.objects.create(
+#                     cart=cartObject,cartProduct=productVariant, cartProductQuantity=cart_product['quantity']).save()
+#         else:
+#             try:  
+#                 cart = Cart.objects.create(cart_id=_cart_id(request))
+#             except Cart.DoesNotExist:   
+#                 cart = Cart.objects.create(cart_id=_cart_id(request))
+
+#     response = HttpResponseRedirect(reverse('checkout_page'))
+#     response.delete_cookie('cart')
+#     return response
+
+
+@login_required(login_url='login_page')
+def cart_to_checkout_validation(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            body = json.loads(request.body)
+            cartId = body["cartId"]
+            cart = Cart.objects.get(id=cartId)
+            cartProducts = CartProducts.objects.filter(cart=cart)
+            productList = []
+            flag = False
+            for product in cartProducts:
+                dbProduct=ProductVariant.objects.get(id=product.cartProduct.id)
+                if product.cartProductQuantity <= dbProduct.productVariantQuantity:
+                    pass
+                else:
+                    productList.append({"productName":str(product.cartProduct.variantProduct.productName),"outOfStockProducts":str(product.cartProduct.productVariantQuantity)})
+            if len(productList) > 0:
+                flag=True
+            
+            if flag:
+                data={"outOfStockProducts":productList,"flag":str(flag),}
+                response = JsonResponse(data,safe=False)
+                expiry_time = datetime.utcnow() + timedelta(seconds=30)
+                response.set_cookie('checkout', 'False',expires=expiry_time)
+                return response
             else:
-                CartProducts.objects.create(
-                    cart=cartObject,cartProduct=productVariant, cartProductQuantity=cart_product['quantity']).save()
-        else:
-            try:  
-                cart = Cart.objects.create(cart_id=_cart_id(request))
-            except Cart.DoesNotExist:   
-                cart = Cart.objects.create(cart_id=_cart_id(request))
-
-    response = HttpResponseRedirect(reverse('checkout_page'))
-    response.delete_cookie('cart')
-    return response
+                data={"outOfStockProducts":productList,"flag":str(flag),}
+                response = JsonResponse(data,safe=False)
+                expiry_time = datetime.utcnow() + timedelta(seconds=30)
+                response.set_cookie('checkout', 'True',expires=expiry_time)
+                return response
+    else:
+        return redirect('login_page')
 
 
 def compare_page(request):
@@ -5015,6 +5050,8 @@ def collection(request):
 
 
     
+
+
 
 
 

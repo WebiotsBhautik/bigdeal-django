@@ -471,6 +471,34 @@
 # thislist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
 # print(thislist[2:])
 
+# myint = 10
+
+# def myFunction():
+#     myint = 20
+#     print('1st',myint)
+    
+# print('2nd',myint)
+# myFunction()
+# print('3rd',myint)
+
+# my_list = [5, 6, 7]
+# my_tuple = (9, 10)
+# my_list2 = [11,12,13]
+
+
+# my_list.extend(my_tuple)
+# my_list.append(my_list2)
+# print(my_list)
+
+# n = 15
+# for i in range(1,n):
+#     print(i)
+#     if i == 10:
+#         break
+
+
+    
+
 
 
 
