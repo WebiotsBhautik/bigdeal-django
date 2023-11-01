@@ -66,9 +66,36 @@ def set_currency_to_session(request):
 
 
 def get_selected_currency(request):
-    currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    currency_cookie = request.COOKIES.get('currency')
+    if currency_cookie:
+        try:
+            currency = Currency.objects.get(id=currency_cookie)
+        except Currency.DoesNotExist:
+            raise Http404("Currency does not exist")
+    else:
+        currency = None
+
+    if currency is None:
+        currency = Currency.objects.get(code='USD')
+        
     data = {"factor": currency.factor, "symbol": currency.symbol}
     return JsonResponse(data, safe=False)
+
+
+def add_cookie_currency(request):
+    currency_cookie = request.COOKIES.get('currency')
+    if currency_cookie:
+        try:
+            selected_currency = Currency.objects.get(id=currency_cookie)
+        except Currency.DoesNotExist:
+            raise Http404("Currency does not exist")
+    else:
+        selected_currency = None
+
+    if selected_currency is None:
+        selected_currency = Currency.objects.get(code='USD')
+
+    return selected_currency
 
 
 def signup_page(request):
@@ -1006,7 +1033,7 @@ def filter_products(request, product, selected_allbrand, selected_allprice, attr
     if selected_allprice:
         price = selected_allprice.split(',')
         price_filter = product
-        current_currency = Currency.objects.get(id=request.COOKIES.get('currency', ""))
+        current_currency = add_cookie_currency(request)
         factor = current_currency.factor
         product = price_filter.filter(productVariantFinalPrice__range=(Decimal(price[0])/factor, Decimal(price[1])/factor))
 
@@ -1090,7 +1117,7 @@ def shop_left_sidebar(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
@@ -1098,9 +1125,7 @@ def shop_left_sidebar(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     cart_products,totalCartProducts = show_cart_popup(request)
-
-
-        
+    template_path = 'pages/shop/shop-left-sidebar.html'
         
     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1121,7 +1146,11 @@ def shop_left_sidebar(request):
             'totalCartProducts': totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-left-sidebar.html',context)
+    
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_right_sidebar(request):
     url = ''
@@ -1175,15 +1204,14 @@ def shop_right_sidebar(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
-
+    template_path = 'pages/shop/shop-right-sidebar.html'
     
     context = {"breadcrumb": {"parent": "Shop Right Sidebar", "child": "Shop Right Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1203,7 +1231,10 @@ def shop_right_sidebar(request):
             'cart_products':cart_products,
             "totalCartProducts": totalCartProducts,
             }
-    return render(request, 'pages/shop/shop-right-sidebar.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_no_sidebar(request):
     url = ''
@@ -1257,14 +1288,14 @@ def shop_no_sidebar(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-no-sidebar.html'
     
     context = {"breadcrumb": {"parent": "Shop No Sidebar", "child": "Shop No Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1285,7 +1316,10 @@ def shop_no_sidebar(request):
             "totalCartProducts": totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-no-sidebar.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_sidebar_popup(request):
     url = ''
@@ -1339,14 +1373,14 @@ def shop_sidebar_popup(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-sidebar-popup.html'
     
     context = {"breadcrumb": {"parent": "Shop Sidebar Popup", "child": "Shop Sidebar Popup"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1367,7 +1401,10 @@ def shop_sidebar_popup(request):
             "totalCartProducts": totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-sidebar-popup.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_metro(request):
     url = ''
@@ -1423,14 +1460,14 @@ def shop_metro(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-metro.html'
     
     context = {"breadcrumb": {"parent": "Shop Metro", "child": "Shop Metro"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1452,12 +1489,16 @@ def shop_metro(request):
             "totalCartProducts": totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-metro.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_full_width(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
+    template_path = 'pages/shop/shop-full-width.html'
 
     context = {"breadcrumb": {"parent": "Shop Full Width", "child": "Shop Full Width"},
             'allbanners': banners,
@@ -1465,7 +1506,11 @@ def shop_full_width(request):
             'cart_products':cart_products,
             "totalCartProducts": totalCartProducts,
             }
-    return render(request, 'pages/shop/shop-full-width.html',context)
+    
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_infinite_scroll(request):
     url = ''
@@ -1519,14 +1564,14 @@ def shop_infinite_scroll(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-infinite-scroll.html'
     
     context = {"breadcrumb": {"parent": "Shop Infinite Scroll", "child": "Shop Infinite Scroll"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1546,7 +1591,10 @@ def shop_infinite_scroll(request):
             'cart_products':cart_products,
             "totalCartProducts": totalCartProducts,
             }
-    return render(request, 'pages/shop/shop-infinite-scroll.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_3grid(request):
     url = ''
@@ -1599,14 +1647,14 @@ def shop_3grid(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
       
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-3-grid.html'
     
     context = {"breadcrumb": {"parent": "Shop 3grid", "child": "Shop 3grid"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1626,7 +1674,10 @@ def shop_3grid(request):
             'cart_products':cart_products,
             "totalCartProducts": totalCartProducts,
             }
-    return render(request, 'pages/shop/shop-3-grid.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_6grid(request):
     url = ''
@@ -1679,7 +1730,7 @@ def shop_6grid(request):
         min_price = min(list(get_all_prices))
         max_price = max(list(get_all_prices))
         
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
@@ -1687,7 +1738,7 @@ def shop_6grid(request):
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    template_path = 'pages/shop/shop-6-grid.html'
     
     context = {"breadcrumb": {"parent": "Shop 6grid", "child": "Shop 6grid"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1708,7 +1759,10 @@ def shop_6grid(request):
             "totalCartProducts": totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-6-grid.html',context)
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 def shop_list_view(request):
     url = ''
@@ -1762,7 +1816,7 @@ def shop_list_view(request):
         max_price = max(list(get_all_prices))
         
     
-    selected_currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+    selected_currency = add_cookie_currency(request)
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
@@ -1770,6 +1824,7 @@ def shop_list_view(request):
         
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
+    template_path = 'pages/shop/shop-list-view.html'
     
     context = {"breadcrumb": {"parent": "Shop List View", "child": "Shop List View"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1790,7 +1845,11 @@ def shop_list_view(request):
             "totalCartProducts": totalCartProducts,
 
             }
-    return render(request, 'pages/shop/shop-list-view.html',context)
+
+    currency = Currency.objects.get(code='USD')
+    response = render(request, template_path, context)
+    response.set_cookie('currency', currency.id)
+    return response
 
 
 # def left_slidebar_with_brands(request, brand_id=None):
@@ -4350,19 +4409,14 @@ def search_products(request):
     
     if query and category:
         fashion_subcategories = get_subcategories(category)
-        print('fashion_subcategories ========>',fashion_subcategories)
         category_ids = []
         category_ids.extend(get_category_ids(fashion_subcategories))
         products = products.filter(variantProduct__proCategory__id__in=category_ids, variantProduct__productName__icontains=query)
-        print('products =======+++++>',products)
     else:
         fashion_subcategories = get_subcategories(category)
-        print('fashion_subcategories ========>',fashion_subcategories)
-
         category_ids = []
         category_ids.extend(get_category_ids(fashion_subcategories))
         products = ProductVariant.objects.filter(variantProduct__proCategory__id__in=category_ids).order_by('id')[:7]
-        print('products in ELSE PART =======+++++>',products)
 
         
     products = GetUniqueProducts(products)
@@ -4373,7 +4427,6 @@ def search_products(request):
                 'rating': product.variantProduct.productFinalRating,
                 'category': product.variantProduct.proCategory.categoryName,
                 } for product in products]
-    print('results =========>',results)
     return JsonResponse({'status': 200, 'data': results})
 
 

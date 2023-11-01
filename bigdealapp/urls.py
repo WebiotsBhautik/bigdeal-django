@@ -8,6 +8,8 @@ urlpatterns = [
     path('setCookie',views.setCookie, name='setCookie'),
     path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
     path('get_selected_currency',views.get_selected_currency,name='get_selected_currency'),
+    path('add_cookie_currency',views.add_cookie_currency,name='add_cookie_currency'),
+
 
 
     path('', views.index, name='index'),

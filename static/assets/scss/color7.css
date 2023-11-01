@@ -9406,7 +9406,7 @@ ul.sosiyal {
     border-color: #dddddd;
     border-top: unset;
     border-bottom: unset; }
-  .qty-box .input-group button {
+  .qty-box .input-group .input-group-prepend:first-child button {
     background-color: transparent;
     cursor: pointer;
     line-height: 1;
@@ -9414,14 +9414,35 @@ ul.sosiyal {
     font-family: themify;
     padding-left: 10px;
     padding-right: 10px;
-    border: none; }
-    .qty-box .input-group button i {
+    border: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .qty-box .input-group .input-group-prepend:first-child button i {
       font-weight: 900;
       color: #444444;
       font-size: 16px; }
-    .qty-box .input-group button:first-child:before {
+    .qty-box .input-group .input-group-prepend:first-child button:before {
       content: "\e622"; }
-    .qty-box .input-group button:last-child:before {
+  .qty-box .input-group .input-group-prepend:last-child button {
+    background-color: transparent;
+    cursor: pointer;
+    line-height: 1;
+    background-color: #ffffff;
+    font-family: themify;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .qty-box .input-group .input-group-prepend:last-child button i {
+      font-weight: 900;
+      color: #444444;
+      font-size: 16px; }
+    .qty-box .input-group .input-group-prepend:last-child button:before {
       content: "\e61a"; }
   .qty-box .input-group input::-webkit-outer-spin-button,
   .qty-box .input-group input::-webkit-inner-spin-button {

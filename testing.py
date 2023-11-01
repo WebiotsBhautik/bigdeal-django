@@ -57,7 +57,6 @@ import uuid
 
 from math import floor
 from django.forms import ValidationError
-import requests
 from datetime import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
@@ -4582,3 +4581,5 @@ def cart_page(request,cart_products=None):
     context['active_banner_themes']=active_banner_themes
 
     return render(request, 'pages/pages/cart.html', context)
+
+
