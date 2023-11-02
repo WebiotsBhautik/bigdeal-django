@@ -388,3 +388,111 @@
 </script>
 
 {% endblock components %}
+
+
+
+<div class="product-details">
+    <div class="rating-details">
+      <span class="font-light grid-content">{{product.proCategory}}</span>
+      <ul class="rating mt-0">
+
+        {% comment %}
+        <!-- ------------------------------------------------------------------- --> {% endcomment %}
+        {% if product.productFinalRating|to_int < 5|to_int %}
+        {% for x in product.productFinalRating|times %} <li>
+          <a class="fas fa-star theme-color" id="productOfStar"
+            href="{% url 'left_slidebar' product.id %}"></a>
+        </li>
+        {% endfor %}
+
+        {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+        {% with number3=number1|sub:number2 %}
+
+
+        {% for x in number3|times %}
+        <li>
+          <i class="fas fa-star"></i>
+        </li>
+        {% endfor %}
+
+        {% endwith %}
+        {% endwith %}
+
+        {% else %}
+        <li>
+          <i class="fas fa-star theme-color"></i>
+        </li>
+        <li>
+          <i class="fas fa-star theme-color"></i>
+        </li>
+        <li>
+          <i class="fas fa-star theme-color"></i>
+        </li>
+        <li>
+          <i class="fas fa-star theme-color"></i>
+        </li>
+        <li>
+          <i class="fas fa-star theme-color"></i>
+        </li>
+        {% endif %}
+        <!-- ------------------------------------------------------------------- -->
+      </ul>
+    </div>
+    <div class="main-price">
+      <a href="{% url 'shop_left_slidebar' %}" class="font-default">
+        <h5>{{product.productName}}</h5>
+      </a>
+      <div class="listing-content">
+        <span class="font-light">Regular Fit</span>
+        <p class="font-light">{{product.productDescription}}</p>
+      </div>
+
+      {% if product.productType == "Simple" %}
+      <h3 class="theme-color">
+        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+      </h3>
+      {% else %}
+      <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}
+      </h3>
+      {% endif %}
+
+      <button onclick="location.href = {% url 'add_to_cart' product.id '1' %}"
+        class="btn listing-content">Add To Cart</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+{% if reviewStatus %}
+<div class="col-lg-8">
+    <p class="d-inline-block me-2">Rate this product</p>
+    <ul class="rating mb-3 d-inline-block" id="starRating">
+    <i class="fas fa-star" id="star1"></i>
+    <i class="fas fa-star" id="star2"></i>
+    <i class="fas fa-star" id="star3"></i>
+    <i class="fas fa-star" id="star4"></i>
+    <i class="fas fa-star" id="star5"></i>
+    </ul>
+    <input type="hidden" name="rating" id="rating">
+
+    <div class="review-box">
+    <div class="col-12">
+        <label class="mb-1" for="comments">Comments</label>
+        <textarea class="form-control" name='comment' placeholder="Leave a comment here..." id="comments"
+        style="height: 100px" required></textarea>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" onclick="submitReview({'productId':'{{product.id}}'})"
+        class="btn default-light-theme default-theme default-theme-2">
+        Submit
+        </button>
+    </div>
+    </div>
+</div>
+{% endif %}

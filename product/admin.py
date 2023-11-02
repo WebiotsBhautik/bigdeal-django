@@ -259,7 +259,7 @@ admin.site.register(DeliveryOption)
 class ProductReviewAdmin(admin.ModelAdmin):
     exclude = ['productReviewByCustomer']
     search_fields = ['productName', 'productReview', 'productRatings']
-    list_display = ['productName', 'productReview', 'productRatings']
+    list_display = ['productName', 'productReview', 'productRatings','productReviewByCustomer']
 
     def get_queryset(self, request):
         if request.user.is_vendor:

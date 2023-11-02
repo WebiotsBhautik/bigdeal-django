@@ -435,11 +435,11 @@
                   <div class="pro-group pb-0">
                     <h6 class="product-title">share</h6>
                     <ul class="product-social">
-                      <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                      <li><a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a></li>
-                      <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4ifQ%3D%3D%22%7D"><i class="fa fa-twitter"></i></a></li>
-                      <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
-                      <li><a href="https://www.google.com/"><i class="fa fa-rss"></i></a></li>
+                      <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                      <li><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                      <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4ifQ%3D%3D%22%7D" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                      <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                      <li><a href="https://www.google.com/" target="_blank"><i class="fa fa-rss"></i></a></li>
                     </ul>
                   </div>
                 </div>
@@ -513,11 +513,18 @@
                           <div class="media">
                             <label>Rating</label>
                             <div class="media-body ms-3">
-                              <div class="rating three-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                              <div class="rating-star" id="starRating">
+                                <i class="fa fa-star" id="star1"></i>
+                                <i class="fa fa-star" id="star2"></i>
+                                <i class="fa fa-star" id="star3"></i>
+                                <i class="fa fa-star" id="star4"></i>
+                                <i class="fa fa-star" id="star5"></i>
+                              </div>
+                              <input type="hidden" name="rating" id="rating">
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        {% comment %} <div class="col-md-6">
                           <label for="name">Name</label>
                           <input type="text" class="form-control" id="name" placeholder="Enter Your name" required>
                         </div>
@@ -528,13 +535,14 @@
                         <div class="col-md-12">
                           <label >Review Title</label>
                           <input type="text" class="form-control"  placeholder="Enter your Review Subjects" required>
+                        </div> {% endcomment %}
+                        
+                        <div class="col-md-12">
+                          <label for="comments" >Comments</label>
+                          <textarea class="form-control" name ='comment' placeholder="Leave a comment here..." id="comments" rows="6" required></textarea>
                         </div>
                         <div class="col-md-12">
-                          <label >Review Title</label>
-                          <textarea class="form-control" placeholder="Wrire Your Testimonial Here" id="exampleFormControlTextarea1" rows="6"></textarea>
-                        </div>
-                        <div class="col-md-12">
-                          <button class="btn btn-normal" type="submit">Submit your review</button>
+                          <button class="btn btn-normal" onclick="submitReview({'productId':'{{product.id}}'})" type="submit">Submit your review</button>
                         </div>
                       </div>
                     </form>

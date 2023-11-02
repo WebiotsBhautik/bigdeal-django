@@ -1255,6 +1255,83 @@
     }
   }
 
+
+  function add_to_cart_fun_at_quick_view(params) {
+    let quantityValue = 1;
+    if (params.key == "No Product Yet") {
+    } else {
+      let url = "{% url 'add_to_cart' 'id' 'quantity' %}";
+      url = url.replace("id", params.key);
+      url = url.replace("quantity", quantityValue);
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+      });
+      window.location.reload();
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const stars = document.querySelectorAll("#starRating i");
+    const ratingInput = document.querySelector("#rating");
+
+    stars.forEach(function (star) {
+      star.addEventListener("click", function () {
+        // remove the 'rated' class from all stars
+        stars.forEach(function (s) {
+          s.classList.remove("theme-color");
+        });
+        // add the 'rated' class to the clicked star and all previous stars
+        for (let i = 0; i < star.id.slice(-1); i++) {
+          stars[i].classList.add("theme-color");
+        }
+      });
+    });
+  });
+
+  async function submitReview(params) {
+    var reviewText = document.getElementById("comments");
+    const starRatingElement = document.getElementById("starRating");
+    const starElements = starRatingElement.querySelectorAll(".fa.fa-star");
+    const themeColorStarElements = Array.from(starElements).filter(
+      (element) => element.classList.contains("theme-color")
+    );
+    const themeColorStarCount = themeColorStarElements.length;
+
+
+    if (themeColorStarCount === null || themeColorStarCount === 0) {
+      alert("Please select a rating before submitting your review.");
+      event.preventDefault();
+      return;
+    } else if (
+      reviewText.value === null ||
+      reviewText.value.trim() === ""
+    ) {
+      alert("Please give some review");
+      event.preventDefault();
+      return;
+    }
+
+    var url = "{% url 'customer_review' %}";
+
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+        productId: params.productId,
+        reviewText: reviewText.value,
+        ratingValue: themeColorStarCount,
+      }),
+    });
+    window.location.reload();
+  }
+
 </script>
 
 

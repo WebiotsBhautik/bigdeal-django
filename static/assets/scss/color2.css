@@ -2723,10 +2723,10 @@ button {
     .product .product-box .product-detail .detail-title .detail-left {
       float: left; }
       .product .product-box .product-detail .detail-title .detail-left .rating-star i {
-        color: #ffa800;
+        color: #e8ebf2;
         font-size: calc( 11px + (14 - 11) * ((100vw - 320px) / (1920 - 320))); }
-        .product .product-box .product-detail .detail-title .detail-left .rating-star i:last-child {
-          color: #e8ebf2; }
+        .product .product-box .product-detail .detail-title .detail-left .rating-star i.theme-color {
+          color: #ffa800; }
       .product .product-box .product-detail .detail-title .detail-left .price-title {
         text-transform: capitalize;
         color: #444444;
@@ -11986,9 +11986,7 @@ ul.sosiyal {
         margin-top: 0; }
         .theme-tab .tab-content .product-tab .tab-box .product-box2 .media .media-body .rating i {
           padding-right: 0; }
-          .theme-tab .tab-content .product-tab .tab-box .product-box2 .media .media-body .rating i:nth-child(-n + 4) {
-            color: #ffa800; }
-          .theme-tab .tab-content .product-tab .tab-box .product-box2 .media .media-body .rating i:last-child {
+          .theme-tab .tab-content .product-tab .tab-box .product-box2 .media .media-body .rating i.theme-color {
             color: #ffa800; }
       .theme-tab .tab-content .product-tab .tab-box .product-box2 .media .media-body a h6 {
         margin-right: 35px;
@@ -14502,6 +14500,12 @@ table.invoice-table {
   margin-bottom: 15px; }
   .short-name li .label-tag span {
     color: black; }
+
+.fa-star {
+  color: #e8ebf2;
+  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1920 - 320))); }
+  .fa-star.theme-color {
+    color: #ffa800; }
 
 /*=====================
     27.Menu css start

@@ -832,13 +832,45 @@
                                           <a href="{% url 'shop_left_sidebar' %}">
                                              <h5>{{banner.bannerProduct.variantProduct.productName}}</h5>
                                           </a>
-                                          <ul class="rating">
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star-o"></i></li>
-                                          </ul>
+                                          <div class="rating-star">
+                                             {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
+                                             {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
+                                             <li>
+                                               <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}"></a>
+                                             </li>
+                                             {% endfor %}
+                       
+                                             {% with number1=5|to_int number2=banner.bannerProduct.variantProduct.productFinalRating|to_int %}
+                                             {% with number3=number1|sub:number2 %}
+                       
+                                             {% for x in number3|times %}
+                                             <li>
+                                               <i class="fa fa-star"></i>
+                                             </li>
+                                             {% endfor %}
+                       
+                                             {% endwith %}
+                                             {% endwith %}
+                       
+                                             
+                                             {% else %}
+                                             <li>
+                                               <i class="fa fa-star theme-color"></i>
+                                             </li>
+                                             <li>
+                                               <i class="fa fa-star theme-color"></i>
+                                             </li>
+                                             <li>
+                                               <i class="fa fa-star theme-color"></i>
+                                             </li>
+                                             <li>
+                                               <i class="fa fa-star theme-color"></i>
+                                             </li>
+                                             <li>
+                                               <i class="fa fa-star theme-color"></i>
+                                             </li>
+                                             {% endif %}
+                                          </div>
                                           <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
                                              <span>
                                                {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
@@ -1703,12 +1735,44 @@
                         <div class="detail-title">
                            <div class="detail-left">
                               <div class="rating-star">
-                                 <i class="fa fa-star"></i>
-                                 <i class="fa fa-star"></i>
-                                 <i class="fa fa-star"></i>
-                                 <i class="fa fa-star"></i>
-                                 <i class="fa fa-star"></i>
-                              </div>
+                                 {% if product.productFinalRating|to_int < 5|to_int %}
+                                 {% for x in product.productFinalRating|times %}
+                                 <li>
+                                   <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                 </li>
+                                 {% endfor %}
+           
+                                 {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                 {% with number3=number1|sub:number2 %}
+           
+                                 {% for x in number3|times %}
+                                 <li>
+                                   <i class="fa fa-star"></i>
+                                 </li>
+                                 {% endfor %}
+           
+                                 {% endwith %}
+                                 {% endwith %}
+           
+                                 
+                                 {% else %}
+                                 <li>
+                                   <i class="fa fa-star theme-color"></i>
+                                 </li>
+                                 <li>
+                                   <i class="fa fa-star theme-color"></i>
+                                 </li>
+                                 <li>
+                                   <i class="fa fa-star theme-color"></i>
+                                 </li>
+                                 <li>
+                                   <i class="fa fa-star theme-color"></i>
+                                 </li>
+                                 <li>
+                                   <i class="fa fa-star theme-color"></i>
+                                 </li>
+                                 {% endif %}
+                              </div> 
                               <a href="{% url 'left_slidebar' product.id %}">
                                  <h6 class="price-title">
                                     {{product.productName}}

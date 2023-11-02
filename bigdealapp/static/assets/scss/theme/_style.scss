@@ -4157,13 +4157,17 @@ button {
 
           .rating-star {
             i {
-              color: $rating-star;
+              color: $light-gray;
               font-size: calc(
                 11px + (14 - 11) * ((100vw - 320px) / (1920 - 320))
               );
 
-              &:last-child {
-                color: $light-gray;
+              // &:last-child {
+              //   color: $light-gray;
+              // }
+
+              &.theme-color {
+                color: $rating-star;
               }
             }
           }
@@ -18406,11 +18410,15 @@ ul.sosiyal {
                 i {
                   padding-right: 0;
 
-                  &:nth-child(-n + 4) {
-                    color: $rating-star;
-                  }
+                  // &:nth-child(-n + 4) {
+                  //   color: $rating-star;
+                  // }
 
-                  &:last-child {
+                  // &:last-child {
+                  //   color: $rating-star;
+                  // }
+
+                  &.theme-color {
                     color: $rating-star;
                   }
                 }
@@ -22476,5 +22484,13 @@ table {
         color: black;
       }
     }
+  }
+}
+
+.fa-star {
+  color: $light-gray;
+  font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1920 - 320)));
+  &.theme-color {
+    color: $rating-star;
   }
 }
