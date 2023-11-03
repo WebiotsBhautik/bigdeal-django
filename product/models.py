@@ -418,8 +418,7 @@ class ProductMeta(models.Model):
     
 class ProductReview(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    productRatingsChoices = [('0', '0'), ('1', '1'),
-                             ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
+    productRatingsChoices = [('0', '0'), ('1', '1'),('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
     productReviewByCustomer = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, blank=True, verbose_name='Customer')
     productName = models.ForeignKey(

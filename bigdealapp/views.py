@@ -2133,8 +2133,10 @@ def add_to_wishlist(request, id):
     return redirect(request.META['HTTP_REFERER'])
 
 
-def customer_review(request):                                                                 
+def customer_review(request):    
+    print('INSIDE CUSTOMER REVIEW FUNCTION ===========>')                                                             
     if request.method == 'POST':
+        print('<====== inside post method')
         body = json.loads(request.body)
         productId = body["productId"]
         reviewText = body["reviewText"]
