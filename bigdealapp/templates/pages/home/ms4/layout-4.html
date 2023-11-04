@@ -1265,7 +1265,7 @@
                   <div class="detail-title">
                     <div class="detail-left">
                       <div class="rating-star"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                      <a href="product-page(left-sidebar).html">
+                      <a href="{% url 'left_slidebar' product.id %}">
                         <h6 class="price-title">
                           {{product.productName}}
                         </h6> 
@@ -1403,7 +1403,7 @@
                     <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
                     <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="javascript:void(0)" target ="_blank"><i class="fa fa-rss"></i></a></li>
+                    <li><a href="javascript:void(0)" ><i class="fa fa-rss"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -1412,8 +1412,8 @@
                   <h5>my account</h5> </div>
                 <div class="footer-contant">
                   <ul>
-                    <li><a href="javascript:void(0)">about us</a></li>
-                    <li><a href="javascript:void(0)">contact us</a></li>
+                    <li><a href="{% url 'about_page' %}">about us</a></li>
+                    <li><a href="{% url 'contact_us' %}">contact us</a></li>
                     <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
                     <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
                     <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
@@ -1561,7 +1561,7 @@
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <a href="review.html"><span>(6 reviews)</span></a>
+                    <a href="{% url 'review' %}"><span>(6 reviews)</span></a>
                   </div>
                   <ul class="best-seller">
                     <li>

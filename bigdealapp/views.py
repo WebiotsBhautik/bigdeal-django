@@ -170,6 +170,14 @@ def logout_page(request):
 
 # HOME PAGES SECTION 
 
+def delete_old_currencies(request,response):
+    if not request.session.get('cookies_deleted', False):
+        for cookie in request.COOKIES:
+            response.delete_cookie(cookie)
+            request.session['cookies_deleted'] = True
+    return response
+    
+
 def handle_cart_logic(request):
     context = {}
     cart_products = {}
@@ -256,6 +264,15 @@ def index(request):
    
     currency = Currency.objects.get(code='USD')
     response = render(request, template_path, context)
+    
+    # Deleting all old cookies
+    if not request.session.get('cookies_deleted', False):
+        for cookie in request.COOKIES:
+            response.delete_cookie(cookie)  
+        request.session['cookies_deleted'] = True
+
+        
+    # Setting the new cookie
     response.set_cookie('currency', currency.id)
     return response
 
@@ -4585,12 +4602,22 @@ def get_total_tax_values(variant_products):
     TotalVariantFinalPriceAfterTax = 0
 
     for variant_product in variant_products:
-        variant = ProductVariant.objects.get(id = variant_product['variant_id'])
-        TotalVariantTax += variant.productVariantTax * int(variant_product['quantity'])
-        TotalVariantTaxPrice += variant.productVariantTaxPrice * int(variant_product['quantity'])
-        TotalVariantFinalPriceAfterTax += variant.productVariantFinalPriceAfterTax * int(variant_product['quantity'])
+        try:
+            variant = ProductVariant.objects.get(id = variant_product['variant_id'])
+            TotalVariantTax += variant.productVariantTax * int(variant_product['quantity'])
+            TotalVariantTaxPrice += variant.productVariantTaxPrice * int(variant_product['quantity'])
+            TotalVariantFinalPriceAfterTax += variant.productVariantFinalPriceAfterTax * int(variant_product['quantity'])
+        except ObjectDoesNotExist:  
+            TotalVariantTax += 0
+            TotalVariantTaxPrice += 0
+            TotalVariantFinalPriceAfterTax += 0
+            # Handle the case where the ProductVariant does not exist
+            print(f"ProductVariant with id {variant_product['variant_id']} does not exist.")
+
         
     return TotalVariantTax,TotalVariantTaxPrice,TotalVariantFinalPriceAfterTax
+
+
 
 @csrf_exempt
 def add_to_cart_product_quantity_management(request, id, actionType):
