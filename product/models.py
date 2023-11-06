@@ -427,24 +427,6 @@ class ProductReview(models.Model):
     productRatings = models.CharField(
         default=0, max_length=10, choices=productRatingsChoices, verbose_name='Rating')
 
-    # def save(self, *args, **kwargs):
-    #     req = get_request().user
-
-    #     product = Product.objects.get(id=self.productName.id)
-    #     count = int(product.productNoOfReview)+1
-    #     product.productNoOfReview = count
-    #     product.productRatingCount = int(product.productRatingCount)+int(self.productRatings)
-
-    #     x = product.productNoOfReview
-    #     x1 = x*5
-    #     y = product.productRatingCount
-    #     z = (5*int(y))/int(x1)
-
-    #     product.productFinalRating = round(z)
-
-    #     product.save()
-    #     self.productReviewByCustomer = req
-    #     super(ProductReview, self).save(*args, **kwargs)
     
     def save(self, *args, **kwargs):
         req = get_request().user
@@ -468,6 +450,15 @@ class ProductReview(models.Model):
         
         self.productReviewByCustomer = req
         super(ProductReview, self).save(*args, **kwargs)
+        
+    def update_product_rating(self):
+        total_reviews = self.productreview_set.count()
+        if total_reviews > 0:
+            total_rating = sum([int(review.productRatings) for review in self.productreview_set.all()])
+            self.productFinalRating = round(total_rating / total_reviews)
+        else:
+            self.productFinalRating = 0
+        self.save()
 
     def __str__(self):
         return str(self.productName)

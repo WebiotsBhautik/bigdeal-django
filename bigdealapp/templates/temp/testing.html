@@ -496,3 +496,28 @@
     </div>
 </div>
 {% endif %}
+
+
+
+<div class="rating-star">
+    {% if product.productFinalRating|int < 5 %}
+        {% for x in product.productFinalRating %}
+            <li><a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a></li>
+        {% endfor %}
+
+        {% with number1=5 number2=product.productFinalRating|add:"-1" %}
+            {% with number3=number1|add:number2|add:"-1" %}
+                {% for x in number3 %}
+                    <li><i class="fa fa-star"></i></li>
+                {% endfor %}
+            {% endwith %}
+        {% endwith %}
+
+    {% else %}
+        <li><i class="fa fa-star theme-color"></i></li>
+        <li><i class="fa fa-star theme-color"></i></li>
+        <li><i class="fa fa-star theme-color"></i></li>
+        <li><i class="fa fa-star theme-color"></i></li>
+        <li><i class="fa fa-star theme-color"></i></li>
+    {% endif %}
+</div>
