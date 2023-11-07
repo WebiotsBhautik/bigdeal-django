@@ -1711,7 +1711,7 @@ $('.feature-slide').slick({
       e.preventDefault();
       $(".col-grid-box:hidden").slice(0, 4).slideDown();
       if ($(".col-grid-box:hidden").length == 0) {
-        $(".load-more-sec").text('no more products');
+        $(".load-more-sec").text('No more products');
       }
     });
   });

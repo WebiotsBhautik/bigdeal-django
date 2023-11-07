@@ -710,13 +710,45 @@
                         </div>
                      </div>
                      <div class="product-detail product-detail2 ">
-                        <ul>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star"></i></li>
-                           <li><i class="fa fa-star-o"></i></li>
-                        </ul>
+                        <div class="rating-star">
+                           {% if product.productFinalRating|to_int < 5|to_int %}
+                           {% for x in product.productFinalRating|times %}
+                           <li>
+                             <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                           </li>
+                           {% endfor %}
+         
+                           {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                           {% with number3=number1|sub:number2 %}
+         
+                           {% for x in number3|times %}
+                           <li>
+                             <i class="fa fa-star"></i>
+                           </li>
+                           {% endfor %}
+         
+                           {% endwith %}
+                           {% endwith %}
+         
+                           
+                           {% else %}
+                           <li>
+                             <i class="fa fa-star theme-color"></i>
+                           </li>
+                           <li>
+                             <i class="fa fa-star theme-color"></i>
+                           </li>
+                           <li>
+                             <i class="fa fa-star theme-color"></i>
+                           </li>
+                           <li>
+                             <i class="fa fa-star theme-color"></i>
+                           </li>
+                           <li>
+                             <i class="fa fa-star theme-color"></i>
+                           </li>
+                           {% endif %}
+                        </div>
                         <a href="{% url 'left_slidebar' product.id %}">
                            <h3>{{product.productName}}</h3>
                         </a>
@@ -1120,11 +1152,11 @@
                         </div>
                         <p>It is a long established fact that a reader will be distracted by the readable content.</p>
                         <ul class="sosiyal">
-                           <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                           <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                           <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                           <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
-                           <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+                           <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
+                           <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
+                           <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
+                           <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
+                           <li><a href="javascript:void(0)" ><i class="fa fa-rss"></i></a></li>
                         </ul>
                      </div>
                   </div>
@@ -1134,8 +1166,8 @@
                      </div>
                      <div class="footer-contant">
                         <ul>
-                           <li><a href="javascript:void(0)">about us</a></li>
-                           <li><a href="javascript:void(0)">contact us</a></li>
+                           <li><a href="{% url 'about_page' %}">about us</a></li>
+                           <li><a href="{% url 'contact_us' %}">contact us</a></li>
                            <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
                            <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
                            <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>

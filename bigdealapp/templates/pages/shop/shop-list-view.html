@@ -17,7 +17,7 @@
 
                         <div class="col">
                             <div class="top-banner-wrapper">
-                                <a href="product-page(left-sidebar).html"><img src="{{shop_banner.bannerImage}}" class="img-fluid  w-100" alt="cat-banner"></a>
+                                <a href="{% url 'shop_list_view' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid  w-100" alt="cat-banner"></a>
                                 <div class="top-banner-content small-section">
                                     <h4>fashion</h4>
                                     <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
@@ -144,16 +144,54 @@
                                         <div class="product-box">
                                           <div class="product-imgbox">
                                             <div class="product-front">
-                                              <a href="product-page(left-sidebar).html"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid  " alt="product"> </a>
+                                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid  " alt="product"> </a>
                                             </div>
                                             <div class="product-back">
-                                              <a href="product-page(left-sidebar).html"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid  " alt="product"> </a>
+                                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid  " alt="product"> </a>
                                             </div>
                                           </div>
                                           <div class="product-detail detail-center detail-inverse">
                                             <div class="detail-title">
                                               <div class="detail-left">
-                                                <div class="rating-star"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
+                                                <div class="rating-star">
+                                                  {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
+                                                  {% for x in product.variantProduct.productFinalRating|times %}
+                                                  <li>
+                                                    <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                                  </li>
+                                                  {% endfor %}
+                                
+                                                  {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
+                                                  {% with number3=number1|sub:number2 %}
+                                
+                                                  {% for x in number3|times %}
+                                                  <li>
+                                                    <i class="fa fa-star"></i>
+                                                  </li>
+                                                  {% endfor %}
+                                
+                                                  {% endwith %}
+                                                  {% endwith %}
+                                
+                                                  
+                                                  {% else %}
+                                                  <li>
+                                                    <i class="fa fa-star theme-color"></i>
+                                                  </li>
+                                                  <li>
+                                                    <i class="fa fa-star theme-color"></i>
+                                                  </li>
+                                                  <li>
+                                                    <i class="fa fa-star theme-color"></i>
+                                                  </li>
+                                                  <li>
+                                                    <i class="fa fa-star theme-color"></i>
+                                                  </li>
+                                                  <li>
+                                                    <i class="fa fa-star theme-color"></i>
+                                                  </li>
+                                                  {% endif %}
+                                                </div> 
                                                 <p>{{product.variantProduct.productDescription|safe}}</p>
                                                 <a href="product-page(left-sidebar).html">
                                                   <h6 class="price-title">
@@ -163,7 +201,7 @@
                                               <div class="detail-right">
                                                 <div class="check-price">
                                                   {% if product.variantProduct.productType == "Simple" %}
-                                                    <del>{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}</del=>
+                                                    <del>{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}</del>
                                                   {% else %}
                                                     <del>{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}</=>
                                                   {% endif %}

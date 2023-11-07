@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-  <meta http-equiv="Content-Type content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="big-deal">
@@ -136,8 +136,6 @@
 
   async function handleQuickView(params){
     var url = "{% url 'quick_view' %}";
-    console.log('url ======+>',url)
-    console.log('CSRF ONLY ======+>',csrftoken)
     await fetch(url,{
       method: "POST",
       headers:{
