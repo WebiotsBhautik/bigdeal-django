@@ -59,14 +59,46 @@
                             <li id="discountPercentage">{{product.product_discount_range}}</li>
                           </ul>                                   
                           <div class="revieu-box">                                     
-                            <ul>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star-o"></i></li>
-                            </ul>
-                            <a href="review.html"><span>(6 reviews)</span></a>
+                            <div class="rating-star">
+                              {% if product.productFinalRating|to_int < 5|to_int %}
+                              {% for x in product.productFinalRating|times %}
+                              <li>
+                                <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                              </li>
+                              {% endfor %}
+        
+                              {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                              {% with number3=number1|sub:number2 %}
+        
+                              {% for x in number3|times %}
+                              <li>
+                                <i class="fa fa-star"></i>
+                              </li>
+                              {% endfor %}
+        
+                              {% endwith %}
+                              {% endwith %}
+        
+                              
+                              {% else %}
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              {% endif %}
+                            </div> 
+                            <a href="{% url 'review' %}"><span>(6 reviews)</span></a>
                           </div> 
                           <ul class="best-seller">
                             <li>
@@ -79,62 +111,15 @@
                             </li>
                           </ul>
                         </div>
-                        {% comment %} <div class="pro-group">
-                                    <div class="product-offer">
-                                      <h6 class="product-title"><i class="fa fa-tags"></i>5 offers Available </h6>
-                                      <div class="offer-contain">
-                                        <ul>
-                                          <li>                                         
-                                            <span class="code-lable">OFFER40</span>
-                                            <div>
-                                              <h5>Get extra $40 off on first Orders</h5>
-                                              <p>Use code "OFFER40" Min. Cart Value $99 | Max. Discount $40</p>
-                                            </div>                                         
-                                          </li>
-                                        </ul>
-                                        <ul class="offer-sider">
-                                          <li>                                         
-                                            <span class="code-lable">OFFER25</span>
-                                            <div>
-                                              <h5>Get extra $25 off on second Orders</h5>
-                                              <p>Use code "OFFER25" Min. Cart Value $99 | Max. Discount $25</p>
-                                            </div>                                         
-                                          </li>
-                                          <li>                                         
-                                            <span class="code-lable">OFFER40</span>
-                                            <div>
-                                              <h5>Bank Offer40% Unlimited Cashback on bideal Axis Bank Credit Card</h5>
-                                              <p>Use code "OFFER40" Min. Cart Value $99 | Max. Discount $40</p>
-                                            </div>                                         
-                                          </li>
-                                          <li>                                         
-                                            <span class="code-lable">OFFER10</span>
-                                            <div>
-                                              <h5>Bank Offer10% off* with Axis Bank Buzz Credit Card</h5>
-                                              <p>Use code "OFFER10" Min. Cart Value $99 | Max. Discount $10</p>
-                                            </div>                                         
-                                          </li>
-                                          <li>                                         
-                                            <span class="code-lable">OFFER5</span>
-                                            <div>
-                                              <h5>Bank Offer5% Unlimited Cashback on bideal sbi banck Credit Card</h5>
-                                              <p>Use code "OFFER5" Min. Cart Value $99 | Max. Discount $5</p>
-                                            </div>                                         
-                                          </li>
-                                        </ul>
-                                        <h5 class="show-offer"><span class="more-offer">show more offer</span><span class="less-offer">less offer</span></h5>
-                                        </div>
-                                    </div>
-                        </div> {% endcomment %}
                         <div class="pro-group ">
                           <h6 class="product-title">share</h6>
                           <ul class="product-social">
-                            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4ifQ%3D%3D%22%7D"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="https://www.google.com/"><i class="fa fa-rss"></i></a></li>
-                          </ul>                                                                          
+                            <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-rss"></i></a></li>
+                          </ul>                                                                           
                         </div>
                         <div class="pro-group">
                           <h6 class="product-title">Delivery option</h6>
@@ -178,9 +163,13 @@
                       <h6 class="product-title">quantity</h6>
                       <div class="qty-box">
                         <div class="input-group">
-                          <button class="qty-minus" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})"></button>
+                          <button class="qty-minus btn" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})">
+                            <i class="fa fa-minus"></i>
+                          </button>
                           <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
-                          <button class="qty-plus" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})"></button>
+                          <button class="qty-plus btn" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})">
+                            <i class="fa fa-plus"></i>
+                          </button>
                         </div>
                       </div>
                       <div class="product-buttons">

@@ -14742,11 +14742,35 @@ ul.sosiyal {
           border-color: $light-border;
           box-shadow: none;
         }
+        i{
+          font-size: 14px;
+          color: #8a8a8a;
+        }
       }
     }
     .form-control {
       border-color: $light-border;
       box-shadow: none;
+    }
+    button{
+      background-color: transparent;
+      cursor: pointer;
+      line-height: 1;
+      background-color: #ffffff;
+      font-family: themify;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: none;
+      &:first-child{
+        content:"\e622";
+      }
+      &:last-child{
+        content: "\e61a";
+      }
+      i{
+        font-size: 14px;
+        color: #8a8a8a;
+      }
     }
   }
 }
@@ -15797,9 +15821,9 @@ ul.sosiyal {
         }
       }
 
-      a {
-        color: $theme-color1;
-      }
+      // a {
+      //   color: $theme-color1;
+      // }
 
       span {
         display: inline-block;

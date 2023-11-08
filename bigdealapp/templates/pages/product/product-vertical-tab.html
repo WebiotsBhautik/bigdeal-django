@@ -58,13 +58,45 @@
                         <li id="discountPercentage">{{product.product_discount_range}}</li>
                       </ul>                                   
                       <div class="revieu-box">                                     
-                        <ul>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
+                        <div class="rating-star">
+                          {% if product.productFinalRating|to_int < 5|to_int %}
+                          {% for x in product.productFinalRating|times %}
+                          <li>
+                            <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                          </li>
+                          {% endfor %}
+    
+                          {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                          {% with number3=number1|sub:number2 %}
+    
+                          {% for x in number3|times %}
+                          <li>
+                            <i class="fa fa-star"></i>
+                          </li>
+                          {% endfor %}
+    
+                          {% endwith %}
+                          {% endwith %}
+    
+                          
+                          {% else %}
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          {% endif %}
+                        </div> 
                         <a href="review.html"><span>(6 reviews)</span></a>
                       </div> 
                       <ul class="best-seller">

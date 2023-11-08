@@ -260,13 +260,45 @@
                       <li id="discountPercentage">{{product.product_discount_range}}</li>
                     </ul>
                     <div class="revieu-box">
-                      <ul>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star"></i></li>
-                        <li><i class="fa fa-star-o"></i></li>
-                      </ul>
+                      <div class="rating-star">
+                        {% if product.productFinalRating|to_int < 5|to_int %}
+                        {% for x in product.productFinalRating|times %}
+                        <li>
+                          <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                        </li>
+                        {% endfor %}
+  
+                        {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                        {% with number3=number1|sub:number2 %}
+  
+                        {% for x in number3|times %}
+                        <li>
+                          <i class="fa fa-star"></i>
+                        </li>
+                        {% endfor %}
+  
+                        {% endwith %}
+                        {% endwith %}
+  
+                        
+                        {% else %}
+                        <li>
+                          <i class="fa fa-star theme-color"></i>
+                        </li>
+                        <li>
+                          <i class="fa fa-star theme-color"></i>
+                        </li>
+                        <li>
+                          <i class="fa fa-star theme-color"></i>
+                        </li>
+                        <li>
+                          <i class="fa fa-star theme-color"></i>
+                        </li>
+                        <li>
+                          <i class="fa fa-star theme-color"></i>
+                        </li>
+                        {% endif %}
+                      </div> 
                       <a href="review.html"><span>(6 reviews)</span></a>
                     </div>
                     <ul class="best-seller">
@@ -476,16 +508,23 @@
                   </div>
                   <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
                     <form class="theme-form">
-                      <div class="row g-3">
+                      <div class="row">
                         <div class="col-md-12">
                           <div class="media">
                             <label>Rating</label>
                             <div class="media-body ms-3">
-                              <div class="rating three-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                              <div class="rating-star" id="starRating">
+                                <i class="fa fa-star" id="star1"></i>
+                                <i class="fa fa-star" id="star2"></i>
+                                <i class="fa fa-star" id="star3"></i>
+                                <i class="fa fa-star" id="star4"></i>
+                                <i class="fa fa-star" id="star5"></i>
+                              </div>
+                              <input type="hidden" name="rating" id="rating">
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        {% comment %} <div class="col-md-6">
                           <label for="name">Name</label>
                           <input type="text" class="form-control" id="name" placeholder="Enter Your name" required>
                         </div>
@@ -496,17 +535,18 @@
                         <div class="col-md-12">
                           <label >Review Title</label>
                           <input type="text" class="form-control"  placeholder="Enter your Review Subjects" required>
+                        </div> {% endcomment %}
+                        
+                        <div class="col-md-12">
+                          <label for="comments" >Comments</label>
+                          <textarea class="form-control" name ='comment' placeholder="Leave a comment here..." id="comments" rows="6" required></textarea>
                         </div>
                         <div class="col-md-12">
-                          <label >Review Title</label>
-                          <textarea class="form-control" placeholder="Wrire Your Testimonial Here"  rows="6"></textarea>
-                        </div>
-                        <div class="col-md-12">
-                          <button class="btn btn-normal" type="submit">Submit YOur Review</button>
+                          <button class="btn btn-normal" onclick="submitReview({'productId':'{{product.id}}'})" type="submit">Submit your review</button>
                         </div>
                       </div>
                     </form>
-                  </div>
+                  </div>  
                 </div>
               </div>
             </div>

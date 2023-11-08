@@ -61,14 +61,46 @@
                         <li id="discountPercentage">{{product.product_discount_range}}</li>
                       </ul>                                   
                       <div class="revieu-box">                                     
-                        <ul>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="review.html"><span>(6 reviews)</span></a>
+                        <div class="rating-star">
+                          {% if product.productFinalRating|to_int < 5|to_int %}
+                          {% for x in product.productFinalRating|times %}
+                          <li>
+                            <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                          </li>
+                          {% endfor %}
+    
+                          {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                          {% with number3=number1|sub:number2 %}
+    
+                          {% for x in number3|times %}
+                          <li>
+                            <i class="fa fa-star"></i>
+                          </li>
+                          {% endfor %}
+    
+                          {% endwith %}
+                          {% endwith %}
+    
+                          
+                          {% else %}
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          {% endif %}
+                        </div> 
+                        <a href="{% url 'review' %}"><span>(6 reviews)</span></a>
                       </div> 
                       <ul class="best-seller">
                         <li>
@@ -110,9 +142,13 @@
                       <h6 class="product-title">quantity</h6>
                       <div class="qty-box">
                         <div class="input-group">
-                          <button class="qty-minus" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})"></button>
+                          <button class="qty-minus btn" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})">
+                            <i class="fa fa-minus"></i>
+                          </button>
                           <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
-                          <button class="qty-plus" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})"></button>
+                          <button class="qty-plus btn" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})">
+                            <i class="fa fa-plus"></i>
+                          </button>
                         </div>
                       </div>
                       <div class="product-buttons">
@@ -125,69 +161,7 @@
                         </a>
                       </div>
                     </div>
-                    {% comment %} <div class="pro-group">
-                      <h6 class="product-title">delivery location</h6>
-                      <div class="delivery-detail">
-                        <div class="delivery-detail-contian">
-                          <div class="input-group">                                       
-                          <span class="input-group-text"><i class="ti-location-pin"></i></span>                                       
-                          <input type="text" class="form-control" placeholder="Enter Pincode for delivery">
-                          </div>
-                          <a href="javascript:void(0)" class="btn btn-solid btn-md ">check</a>
-                        </div>
-                        <div class="delivery-lable">
-                          <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><g><path d="m412.65 107.667h-80.65v148.333l180-21.056v-.108z" fill="#cce6ff"/><path d="m332 234.944h180v158.722h-180z" fill="#cc295f"/></g><g><path d="m356.333 65h-170.065l-15.601 159 15.601 169.667h170.065z" fill="#fdae02"/><path d="m0 393.667h186.268v-148.334l-186.267 20.334z" fill="#fdcb02"/><path d="m0 65 .001 96 186.267 20.333v-116.333z" fill="#fdcb02"/><path d="m235.314 265.667 29.905-104.667h-78.951l-15.601 52.333 15.601 52.334z" fill="#cc295f"/><path d="m.001 161h186.267v104.666h-186.267z" fill="#ff4d4d"/></g><g><circle cx="122.667" cy="384" fill="#f9f9f9" r="48"/><path d="m122.667 447c-34.738 0-63-28.262-63-63s28.262-63 63-63 63 28.262 63 63-28.262 63-63 63zm0-96c-18.196 0-33 14.804-33 33s14.804 33 33 33 33-14.804 33-33-14.804-33-33-33z" fill="#29376d"/></g><g><circle cx="389.333" cy="384" fill="#eaf1ff" r="48"/><path d="m389.333 447c-34.738 0-63-28.262-63-63s28.262-63 63-63 63 28.262 63 63-28.261 63-63 63zm0-96c-18.196 0-33 14.804-33 33s14.804 33 33 33 33-14.804 33-33-14.803-33-33-33z" fill="#23305b"/></g></g></svg> 
-                          Order within 12 hrs 
-                        </div>
-                      </div>
-                    </div>
-                    <div class="pro-group">
-                      <div class="product-offer">
-                        <h6 class="product-title"><i class="fa fa-tags"></i>5 offers Available </h6>
-                        <div class="offer-contain">
-                          <ul>
-                            <li>                                         
-                              <span class="code-lable">OFFER40</span>
-                              <div>
-                                <h5>Get extra $40 off on first Orders</h5>
-                                <p>Use code "OFFER40" Min. Cart Value $99 | Max. Discount $40</p>
-                              </div>                                         
-                            </li>
-                          </ul>
-                          <ul class="offer-sider">
-                            <li>                                         
-                              <span class="code-lable">OFFER25</span>
-                              <div>
-                                <h5>Get extra $25 off on second Orders</h5>
-                                <p>Use code "OFFER25" Min. Cart Value $99 | Max. Discount $25</p>
-                              </div>                                         
-                            </li>
-                            <li>                                         
-                              <span class="code-lable">OFFER40</span>
-                              <div>
-                                <h5>Bank Offer40% Unlimited Cashback on bideal Axis Bank Credit Card</h5>
-                                <p>Use code "OFFER40" Min. Cart Value $99 | Max. Discount $40</p>
-                              </div>                                         
-                            </li>
-                            <li>                                         
-                              <span class="code-lable">OFFER10</span>
-                              <div>
-                                <h5>Bank Offer10% off* with Axis Bank Buzz Credit Card</h5>
-                                <p>Use code "OFFER10" Min. Cart Value $99 | Max. Discount $10</p>
-                              </div>                                         
-                            </li>
-                            <li>                                         
-                              <span class="code-lable">OFFER5</span>
-                              <div>
-                                <h5>Bank Offer5% Unlimited Cashback on bideal sbi banck Credit Card</h5>
-                                <p>Use code "OFFER5" Min. Cart Value $99 | Max. Discount $5</p>
-                              </div>                                         
-                            </li>
-                          </ul>
-                          <h5 class="show-offer"><span class="more-offer">show more offer</span><span class="less-offer">less offer</span></h5>
-                          </div>
-                      </div>
-                    </div> {% endcomment %}
+                    
                     <div class="pro-group">                                   
                       <h6 class="product-title">product infomation</h6>
                       <p>{{product.productDescription|safe}}</p>                                   
@@ -206,11 +180,11 @@
                     <div class="pro-group pb-0">
                       <h6 class="product-title">share</h6>
                       <ul class="product-social">
-                        <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.google.com/"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZW4ifQ%3D%3D%22%7D"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="https://www.google.com/"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-rss"></i></a></li>
                       </ul>                                                                          
                     </div>
                   </div>
@@ -221,108 +195,7 @@
 </section>
 <!-- Section ends -->
 
-<!-- product-tab starts -->
-<section class=" tab-product tab-exes">
-    <div class="custom-container">
-        <div class="row">
-            <div class="col-sm-12 col-lg-12">
-                <div class="creative-card creative-inner">
-                    <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                        <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true">Description</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-selected="false">Details</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-selected="false">Video</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab" aria-selected="false">Write Review</a>
-                            <div class="material-border"></div>
-                        </li>
-                    </ul>
-                    <div class="tab-content nav-material" id="top-tabContent">
-                        <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        </div>
-                        <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                            <div class="single-product-tables">
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>Febric</td>
-                                        <td>Chiffon</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Color</td>
-                                        <td>Red</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Material</td>
-                                        <td>Crepe printed</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                    <tr>
-                                        <td>Length</td>
-                                        <td>50 Inches</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>S, M, L .XXL</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                            <div class="mt-4 text-center">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-                            <form class="theme-form">
-                                <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <div class="media">
-                                            <label>Rating</label>
-                                            <div class="media-body ms-3">
-                                                <div class="rating three-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label >Name</label>
-                                        <input type="text" class="form-control"  placeholder="Enter Your name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label >Email</label>
-                                        <input type="text" class="form-control"  placeholder="Email" required>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label >Review Title</label>
-                                        <input type="text" class="form-control"  placeholder="Enter your Review Subjects" required>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label >Review Title</label>
-                                        <textarea class="form-control" placeholder="Wrire Your Testimonial Here"  rows="6"></textarea>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <button class="btn btn-normal" type="submit">Submit YOur Review</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- product-tab ends -->
+{% include 'base/review.html' %}
 
 {% endblock components %}
 
