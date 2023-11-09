@@ -28,16 +28,16 @@
                         </a>
                       </div>
                       <div class="product-icon icon-inline">
-                        <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart" >
+                        <a h0ref="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="tooltip-top add-cartnoty" data-tippy-content="Add to cart" >
                           <i  data-feather="shopping-cart"></i>
-                        </button>
-                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                        </a>
+                        <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                           <i  data-feather="heart"></i>
                         </a>
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                        <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
                           <i  data-feather="eye"></i>
                         </a>
-                        <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                        <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="add-to-compare-list" data-tippy-content="Compare">
                           <i  data-feather="refresh-cw"></i>
                         </a>
                       </div>
