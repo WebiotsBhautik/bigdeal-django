@@ -27,7 +27,7 @@
                     <div class="col-xl-6">
                         <div class="blog-right">
                             <div>
-                                 <a href="javascript:void(0)"><h4>{{obj.blogTitle}}</h4> </a>
+                                <a href="{% url 'blog_details' obj.id %}"><h4>{{obj.blogTitle}}</h4> </a>
                                 <ul class="post-social">
                                     <li>Posted By : Admin Admin</li>
                                     <li><i class="fa fa-heart"></i> 5 Hits</li>

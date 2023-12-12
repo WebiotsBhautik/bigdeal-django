@@ -56,7 +56,7 @@
                 <div class="row blog-media {% if forloop.counter|divisibleby:2 %}media-change {% endif %}">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a href="javascript:void(0)"><img src="/{{blog.blogImage}}" class="img-fluid  " alt="blog-left"></a>
+                            <a href="{% url 'blog_details' blog.id %}"><img src="/{{blog.blogImage}}" class="img-fluid  " alt="blog-left"></a>
                             <div class="label-block">
                                 <div class="date-label">
                                   {{blog.createdAt|date:"d M Y"}}
@@ -67,7 +67,7 @@
                     <div class="col-xl-6 ">
                         <div class="blog-right">
                             <div>
-                                <a href="javascript:void(0)"><h4>{{blog.blogTitle}}</h4></a>
+                                <a href="{% url 'blog_details' blog.id %}"><h4>{{blog.blogTitle}}</h4></a>
                                 <ul class="post-social">
                                     <li>Posted By : Admin Admin</li>
                                     <li><i class="fa fa-heart"></i> 5 Hits</li>

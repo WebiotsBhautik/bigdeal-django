@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment,ContactUs
+from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment,ContactUs, Coupon, CouponHistory
 from django.utils.safestring import mark_safe
 
 
@@ -88,5 +88,29 @@ class ContactUsAdmin(admin.ModelAdmin):
     ordering=['-createdAt']
         
 admin.site.register(ContactUs, ContactUsAdmin)
+
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['couponCode','couponType','couponDiscountOrFixed','numOfCoupon','minAmount','expirationDateTime','usageLimit','couponDescription','createdAt']
+    ordering = ['-createdAt']
+
+admin.site.register(Coupon, CouponAdmin)
+
+class CouponHistoryAdmin(admin.ModelAdmin):
+    list_display = ['coupon','couponHistoryByUser','order_id','couponHistoryByOrder']
+    ordering = ['-createdAt']
+    
+    @admin.display(description='Order ID')
+    def order_id(self,obj):
+        return str(obj.couponHistoryByOrder.id)
+    
+    @admin.display(description='Order ID')
+    def order_id(self,obj):
+        return str(obj.couponHistoryByOrder.id)
+    
+admin.site.register(CouponHistory,CouponHistoryAdmin)
+    
+    
+    
 
 

@@ -2151,9 +2151,7 @@ def add_to_wishlist(request, id):
 
 
 def customer_review(request):    
-    print('INSIDE CUSTOMER REVIEW FUNCTION ===========>')                                                             
     if request.method == 'POST':
-        print('<====== inside post method')
         body = json.loads(request.body)
         productId = body["productId"]
         reviewText = body["reviewText"]
@@ -4012,6 +4010,9 @@ def element_productbox(request):
     furniture_products = Product.objects.filter(proCategory__in=subcategories)
 
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
     
     
     context = {"breadcrumb": {"parent": "Product Box", "child": "Product Box"},
@@ -4028,6 +4029,9 @@ def element_productbox(request):
         'digital_Marketplace_products':digital_Marketplace_products,
         'furniture_products':furniture_products,
         'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        'totalCartProducts':totalCartProducts,
+        **cart_context,
     }
     return render(request, 'pages/product/element-productbox.html',context)
 
@@ -4035,12 +4039,17 @@ def element_product_slider(request):
     products = Product.objects.all()
     recent_products = Product.objects.all().order_by('-productCreatedAt')[:30]
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
 
     context = {"breadcrumb": {"parent": "Product Slider", "child": "Product Slider"},
                'products':products,
                'recent_products':recent_products,
                 'active_banner_themes':active_banner_themes,
-
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,
+                **cart_context,
     }
     
     return render(request, 'pages/product/element-product-slider.html',context)
@@ -4055,11 +4064,16 @@ def element_no_slider(request):
     pets_products = Product.objects.filter(proCategory__in=subcategories)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
 
     context = {"breadcrumb": {"parent": "No Slider", "child": "No Slider"},
                'kids_products':kids_products,
                'pets_products':pets_products,
                 'active_banner_themes':active_banner_themes,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,
+                **cart_context,
     }
     return render(request, 'pages/product/element-no_slider.html',context)
 
@@ -4088,6 +4102,7 @@ def blog_details(request, id):
     relatedBlogs = Blog.objects.filter(blogCategory=blog.blogCategory, status=True, blogStatus=1).exclude(id=id)
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
     
     context = {"breadcrumb": {"parent": "Blog Details", "child": "Blog Details"},
                 "blog": blog,
@@ -4098,6 +4113,7 @@ def blog_details(request, id):
                 'active_banner_themes':active_banner_themes,
                 'cart_products':cart_products,
                 "totalCartProducts": totalCartProducts,
+                **cart_context,
                 }
     return render(request, 'pages/blog/blog-details.html',context)
 
@@ -4231,15 +4247,15 @@ def search_bar(request,params=None):
     page_obj = paginator.get_page(page_number)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-    cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
     
     context = {"breadcrumb": {"parent": "Search", "child": "Search"}, 'products': products,
                 'query': query,'page_obj':page_obj,
                 'active_banner_themes':active_banner_themes,
-                **cart_context,
                 'cart_products':cart_products,
-                'totalCartProducts':totalCartProducts,}
+                'totalCartProducts':totalCartProducts,
+                **cart_context,}
     return render(request, 'pages/pages/search.html',context)
 
 
@@ -4422,7 +4438,6 @@ def get_subcategories(category,parent=True):
 def search_products(request):
     query = request.GET.get('q','')
     category = request.GET.get('category','')
-    print(query,category)
     
     products = ProductVariant.objects.all()
     
@@ -4638,8 +4653,10 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                         "quantityTotalPrice": cartProductObject.cartProductQuantityTotalPrice,
                         "cartTotalPrice": cartTotalPrice,
                         "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
-                        "taxPrice":cart.getTotalTax
+                        "taxPrice":cart.getTotalTax,
+                        "quantity":cartProductObject.cartProductQuantity,
                     }
+                    print('data1 ===========>',data)
                     return JsonResponse(data, safe=False)
                 else:
                     cartTotalPrice = cart.getTotalPrice
@@ -4648,8 +4665,10 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                         "quantityTotalPrice": cartProductObject.cartProductQuantityTotalPrice,
                         "cartTotalPrice": cartTotalPrice,
                         "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
-                        "taxPrice":cart.getTotalTax
+                        "taxPrice":cart.getTotalTax,
+                        "quantity":cartProductObject.cartProductQuantity,
                     }
+                    print('data2 ============+>',data)
                     return JsonResponse(data, safe=False)
 
             if actionType == "minus":
@@ -4674,6 +4693,9 @@ def add_to_cart_product_quantity_management(request, id, actionType):
             cart_products = json.loads(get_Item)
         else:
             cart_products = []
+            
+        # Inside your Django view
+
 
         if actionType == "plus" and cart_products:
             print('=======>Inside plus condition <==========')
@@ -4685,6 +4707,7 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                     print('TOtal PRice ====>',item['totalPrice'])
 
         if actionType == "minus" and cart_products:
+            print('=======>Inside minus condition <==========')
             for item in cart_products:
                 if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
                     if item['quantity'] >= 1:
@@ -4693,6 +4716,7 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                     else:
                         cart_products = [item for item in cart_products if item.get('product_id') != id]
                         break
+                    
         res_data = [item for item in cart_products if str(id) == item.get('variant_id') and str(product_id) == item.get('product_id')]
         TotalPrice = sum([float(i['totalPrice']) for i in cart_products])
         TotalTax,TotalTaxPrice,TotalFinalPriceAfterTax = get_total_tax_values(cart_products)
@@ -4720,7 +4744,6 @@ def cart_page(request,cart_products=None):
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
-    
     context = {"breadcrumb": {"parent": "Cart", "child": "Cart"},
                'active_banner_themes':active_banner_themes,
                }
@@ -4821,12 +4844,16 @@ def wishlist_page(request):
         return redirect('login_page')
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
-    
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
 
     context = {"breadcrumb": {"parent": "Wishlist", "child": "Wishlist"},
                "totalCartProducts": totalCartProducts,
                "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 'active_banner_themes':active_banner_themes,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,
+                **cart_context,
 }
 
     return render(request, 'pages/pages/account/wishlist.html', context)
@@ -4837,6 +4864,38 @@ def delete_wishlist_product(request,id):
     customer_wishlist.wishlistProducts.remove(id)
     customer_wishlist.save()
     return redirect('wishlist_page')
+
+def add_to_cart_from_wishlist(request, id, quantity):
+    # Product moved from wishlist to cart)
+    product = ProductVariant.objects.get(id=id)
+    cartObject = Cart.objects.get(cartByCustomer=request.user.id)
+    
+    if product.productVariantQuantity > 0:
+        if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=product).exists():
+            cartProductObject = CartProducts.objects.get(cartByCustomer=request.user, cartProduct=product)
+            cartProductObject.cartProductQuantity = cartProductObject.cartProductQuantity + int(quantity)
+            cartProductObject.save()
+
+            # Product remove from wishlist
+            customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+            customer_wishlist.wishlistProducts.remove(id)
+            customer_wishlist.save()
+            return redirect('wishlist_page')
+        else:
+            CartProducts.objects.create(
+                cart=cartObject,cartProduct=product, cartProductQuantity=quantity).save()
+
+            # Product remove from wishlist
+            customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+            customer_wishlist.wishlistProducts.remove(id)
+            customer_wishlist.save()
+            return redirect('wishlist_page')
+        # CartProducts.objects.create(cartProduct=product,cartProductQuantity=1).save()
+    else:
+        messages.success(request, 'Product out of stock.')
+        return redirect('wishlist_page')
+
+        
 
 
 def user_authenticate(request):
@@ -4996,7 +5055,7 @@ def compare_page2(request):
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
 
-    context = {"breadcrumb": {"parent": "Compare", "child": "Compare"},
+    context = {"breadcrumb": {"parent": "Compare-2", "child": "Compare-2"},
                "Cart": customer_cart, "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                "compare": customer_compare, "compare_products": compare_products,
@@ -5019,7 +5078,8 @@ def delete_compare_product(request,id):
     customer_compare = Compare.objects.get(compareByCustomer=request.user.id)
     customer_compare.compareProducts.remove(id)
     customer_compare.save()
-    return redirect('compare_page')
+    referer_url = request.META.get('HTTP_REFERER', 'compare_page')
+    return redirect(referer_url)
 
 
             

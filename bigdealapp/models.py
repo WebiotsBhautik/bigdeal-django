@@ -6,6 +6,7 @@ from accounts.models import CustomUser
 from ckeditor.fields import RichTextField
 from accounts.get_username import get_request
 from django.core.validators import RegexValidator,MaxValueValidator,MinValueValidator
+from order.models import Order
 
 # Create your models here.
 
@@ -226,6 +227,47 @@ class ContactUs(models.Model):
     class Meta:
         verbose_name = 'Contact Us'
         verbose_name_plural = 'Contact Us'
+        
+        
+class Coupon(models.Model):
+    couponTypeChoices = [('Fixed','Fixed'),('Percentage','Percentage'),]
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    couponCode = models.CharField(max_length=200, unique=True, verbose_name='Code')
+    couponType = models.CharField(max_length=255, choices=couponTypeChoices, verbose_name='Type')
+    numOfCoupon = models.PositiveIntegerField(default=0,verbose_name='Num. of Coupons')
+    couponDiscountOrFixed = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)],verbose_name='Amount / Discount (%)')
+    minAmount = models.DecimalField(default=0, max_digits=10, decimal_places=2,blank=True,null=True,verbose_name='Minimum Amount')
+    expirationDateTime = models.DateTimeField(verbose_name='Expiration Date')
+    usageLimit = models.PositiveIntegerField(default=0,blank=True, null=True, verbose_name='Usage Limit')
+    couponDescription = models.TextField(verbose_name='Description')
+    createdAt = models.DateTimeField(auto_now_add=True,verbose_name='Created At')
+    updatedAt = models.DateTimeField(auto_now=True,verbose_name='Updated At')
+    
+    def __str__(self):
+        return self.couponCode
+
+    class Meta:
+        verbose_name = 'Coupon'
+        verbose_name_plural = 'Coupons'
+        
+        
+        
+class CouponHistory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    coupon = models.ForeignKey(Coupon, on_delete=models.CASCADE, verbose_name='Coupon')
+    couponHistoryByUser = models.ForeignKey(CustomUser, on_delete=models.CASCADE,verbose_name='User')
+    couponHistoryByOrder = models.ForeignKey(Order,on_delete=models.CASCADE, verbose_name='Order')
+    createdAt = models.DateTimeField(auto_now_add=True, verbose_name='Created At')
+    updatedAt = models.DateTimeField(auto_now=True, verbose_name='Updated At')
+
+    def __str__(self):
+        return str(self.coupon)
+
+    class Meta:
+        verbose_name = 'Coupon History'
+        verbose_name_plural = 'Coupon History'
+        
+
         
         
         

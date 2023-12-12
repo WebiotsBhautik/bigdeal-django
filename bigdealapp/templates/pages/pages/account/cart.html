@@ -111,15 +111,6 @@
                                 </h2>
                             </td>
                             <td>
-                                {% comment %} <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" readonly name="quantity" id="addToCart"
-                                            class="form-control ADD-TO-CART input-number" value="1" />
-
-                                    </div>
-                                </div> {% endcomment %}
-
-
                                 <div class="qty-box">
                                     <div class="input-group cart-input-group">
                                         <span class="input-group-prepend">
@@ -131,7 +122,7 @@
                                         </span>
                                         <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                             name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.cartProductQuantity}}">
+?                                            value="{{product.cartProductQuantity}}">
                                         <span class="input-group-prepend">
                                             <button type="button" class="btn quantity-right-plus"
                                                 onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
@@ -156,56 +147,6 @@
                         {% endfor %}
                         {% else %}
                         {% for product in cart_products %}
-                        {% comment %} <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.product_id %}"><img src="{{product.productImage}}" alt="cart"  class=" "></a>
-                            </td>
-                            <td><a href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
-                                <div class="mobile-cart-content">
-                                    <div class="col-xs-3">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number" value="1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <h2 class="td-color">{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</h2></div>
-                                    <div class="col-xs-3">
-                                        <h2 class="td-color"><a href="javascript:void(0)" class="icon"><i class="ti-close"></i></a></h2></div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</h2></td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group cart-input-group">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                                data-field=""
-                                                onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
-                                                <i class="fas fa-minus"></i>
-                                            </button> 
-                                        </span>
-                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.quantity}}"> 
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-right-plus" 
-                                                onclick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><a href="{% url 'delete_cart_product' product.variant_id %}" class="icon"><i class="ti-close"></i></a></td>
-                            <td>
-                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
-                                    {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                        </tr> {% endcomment %}
                         <tr>
                             <td>
                                 <a href="{% url 'left_slidebar' product.product_id %}">
@@ -243,15 +184,6 @@
                                 </h2>
                             </td>
                             <td>
-                                {% comment %} <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" readonly name="quantity" id="addToCart"
-                                            class="form-control ADD-TO-CART input-number" value="1" />
-
-                                    </div>
-                                </div> {% endcomment %}
-
-
                                 <div class="qty-box">
                                     <div class="input-group cart-input-group">
                                         <span class="input-group-prepend">
@@ -263,7 +195,7 @@
                                         </span>
                                         <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                             name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.quantity}}">
+                                            value="{{product.quantity}}"> 
                                         <span class="input-group-prepend">
                                             <button type="button" class="btn quantity-right-plus"
                                                 onclick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
@@ -296,7 +228,7 @@
                             
                             {% if request.user.is_authenticated %}
                             <td>
-                                <h2>$6935.00</h2>
+                                <h2 id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</h2>
                             </td>
                             {% else %}
                             <td>
@@ -309,7 +241,7 @@
                             
                             {% if request.user.is_authenticated %}
                             <td>
-                                <h2>$6935.00</h2>
+                                <h2 id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</h2>
                             </td>
                             {% else %}
                             <td>
@@ -322,7 +254,7 @@
                             
                             {% if request.user.is_authenticated %}
                             <td>
-                                <h2>$6935.00</h2>
+                                <h2 id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</h2>
                             </td>
                             {% else %}
                             <td>

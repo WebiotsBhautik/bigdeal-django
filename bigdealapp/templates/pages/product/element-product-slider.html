@@ -28,7 +28,7 @@
                         </a>
                       </div>
                       <div class="product-icon icon-inline">
-                        <a h0ref="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="tooltip-top add-cartnoty" data-tippy-content="Add to cart" >
+                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="tooltip-top add-cartnoty" data-tippy-content="Add to cart" >
                           <i  data-feather="shopping-cart"></i>
                         </a>
                         <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
@@ -41,8 +41,12 @@
                           <i  data-feather="refresh-cw"></i>
                         </a>
                       </div>
-                      <div class="new-label1">
-                        <div>new</div>
+                      <div class="new-label">
+                        {% if product.is_past_due %}
+                          <div class="label label-black">Old</div>
+                        {% else %}
+                          <div class="label label-black">New</div>
+                        {% endif %}
                       </div>
                       <div class="on-sale1">
                         on sale
@@ -52,11 +56,43 @@
                       <div class="detail-title">
                         <div class="detail-left">
                           <div class="rating-star">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            {% if product.productFinalRating|to_int < 5|to_int %}
+                            {% for x in product.productFinalRating|times %}
+                            <li>
+                              <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                            </li>
+                            {% endfor %}
+      
+                            {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                            {% with number3=number1|sub:number2 %}
+      
+                            {% for x in number3|times %}
+                            <li>
+                              <i class="fa fa-star"></i>
+                            </li>
+                            {% endfor %}
+      
+                            {% endwith %}
+                            {% endwith %}
+      
+                            
+                            {% else %}
+                            <li>
+                              <i class="fa fa-star theme-color"></i>
+                            </li>
+                            <li>
+                              <i class="fa fa-star theme-color"></i>
+                            </li>
+                            <li>
+                              <i class="fa fa-star theme-color"></i>
+                            </li>
+                            <li>
+                              <i class="fa fa-star theme-color"></i>
+                            </li>
+                            <li>
+                              <i class="fa fa-star theme-color"></i>
+                            </li>
+                            {% endif %}
                           </div>
                           <a href="{% url 'left_slidebar' product.id %}">
                             <h6 class="price-title">
