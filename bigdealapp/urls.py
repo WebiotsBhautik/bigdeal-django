@@ -26,6 +26,7 @@ urlpatterns = [
     path('change_password',views.change_password,name='change_password'),
     path('dashboard',views.dashboard,name='dashboard'),
     path('profile',views.profile,name='profile'),
+    path('save_address',views.save_address,name='save_address'),
     path('contact_us',views.contact_us,name='contact_us'),
     
 
@@ -158,10 +159,8 @@ urlpatterns = [
     # path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
     path('cart_to_checkout_validation',views.cart_to_checkout_validation,name='cart_to_checkout_validation'),
     
-    # path('checkout_page',views.checkout_page,name='checkout_page'),
-
-
-    
+    path('checkout_page',views.checkout_page,name='checkout_page'),
+    path('checkout_2_page',views.checkout_2_page,name='checkout_2_page'),
 
     
 

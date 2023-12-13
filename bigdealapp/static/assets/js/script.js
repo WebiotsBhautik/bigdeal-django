@@ -3020,6 +3020,16 @@ $('.tap-top').on('click', function() {
           });
       });
   }); 
+
+
+  
+    /*=====================
+        25.  django Messages js
+    ==========================*/
+
+    setTimeout(function(){
+      $('#message').fadeOut('slow')
+    },5000)
   
 
 

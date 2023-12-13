@@ -871,7 +871,6 @@ function counterPlusAtCart(params) {
       let b = Number(a) + 1;
       quantityValueInput.setAttribute('value', b);
       let actionType = "plus"
-      console.log('CounterPlusAtCart in params.productVariantId ======++>',params.productVariantId)
       quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
   }
 }
@@ -893,14 +892,13 @@ function counterMinusAtCart(params) {
 function beforecounterPlusAtCart(params) {
   let quantityValueInput = document.getElementById(params.key);
   let a = quantityValueInput.getAttribute('value');
+
   getdata = $.cookie("cart").replace(/\\054/g, ',').replaceAll("\'","\"");
   var cookies = JSON.parse(getdata);
   cookies.forEach(function(product)
   {
       if(product.variant_id == params.productVariantId)
       {
-        console.log("product.variant_id>>",product.variant_id);
-        console.log("params.productVariantId>>",params.productVariantId);
           if (Number(a) <= product.quantity) {
               let b = Number(a) + 1;
               quantityValueInput.setAttribute('value', b);
@@ -931,7 +929,7 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
       }).then(response => {
           return response.json()
       }).then(data => {
-          console.log("PLUS PLUS ",data);
+          console.log("Plus Plus =====> ",data);
           GetConvertedValues(data.quantityTotalPrice).then((Data) => {
               document.getElementById(totalPriceEle).innerHTML =
                   Data.symbol + " " + Data.value;
@@ -948,11 +946,6 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
               document.getElementById('priceAfterTax').innerHTML =
                   Data.symbol + " " + Data.value;
           });
-
-         // GetConvertedValues(data.cartTotalPrice).then((Data) => {
-         //     document.getElementById('cartTotalPriceButton').innerHTML =
-         //         Data.symbol + " " + Data.value;
-         // });
 
       })
   }
@@ -996,11 +989,7 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
                   Data.symbol + " " + Data.value;
           });
 
-        //  GetConvertedValues(data.cartTotalPrice).then((Data) => {
-        //      document.getElementById('cartTotalPriceButton').innerHTML =
-        //          Data.symbol + " " + Data.value;
-        //  });
-
+       
       })
   }
 }

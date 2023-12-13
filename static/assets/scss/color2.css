@@ -9378,7 +9378,8 @@ ul.sosiyal {
 .contact-page .theme-form {
   padding: 30px;
   background-color: #f1f4f7;
-  border: 30px solid #ffffff; }
+  border: 30px solid #ffffff;
+  margin-top: 30px; }
   .contact-page .theme-form label {
     text-transform: capitalize;
     color: #333333;

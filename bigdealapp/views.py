@@ -4351,26 +4351,65 @@ def update_password(request):
 
 def dashboard(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
     context = {"breadcrumb":{"parent":"Dashboard","child":"Dashboard"},
                'active_banner_themes':active_banner_themes,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+               **cart_context,
                }
     return render(request, 'pages/pages/account/dashboard.html',context)
 
 def profile(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    
     context = {"breadcrumb":{"parent":"profile","child":"profile"},
                'active_banner_themes':active_banner_themes,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+               **cart_context,
                }
     return render(request, 'pages/pages/account/profile.html',context)
 
 
+def save_address(request):
+    if request.method == "POST":
+        first_name = request.POST['fname']
+        # last_name = request.POST['lname']
+        # mobno = request.POST['mobno']
+        # email = request.POST['email']
+        # message = request.POST['message']
+        # flat = request.POST['flat']
+        # address = request.POST['address']
+        # zipcode = request.POST['zipcode']
+        # # country = request.POST['']
+        # city = request.POST['city']
+        # state = request.POST['state']
+        # customer = CustomUser.objects.get(id=request.user.id)
+        customer=OrderBillingAddress.objects.get(id=request.user.id)
+        if not customer:
+            user = OrderBillingAddress.objects.create(customer=customer,customerFirstName=first_name)
+            user.save()
+    return render(request, 'pages/pages/account/profile.html')
+
+
+
+
 def change_password(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    if not request.user.is_authenticated:
+        messages.warning(request, 'You need to login first.')
+        return redirect('login_page')
+    
     if request.method == "POST":
         current_password = request.POST['currentpass']
         new_password = request.POST['newpass']
         confirm_password = request.POST['confnewpass']
-        
         user = CustomUser.objects.get(username__exact=request.user.username)
             
         if new_password == confirm_password:
@@ -4386,9 +4425,16 @@ def change_password(request):
         else:
             messages.error(request,'Password Does Not Match')
             return redirect('change_password')
+        
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
             
     context = {"breadcrumb":{"parent": "Change password", "child":"Change password"},
                'active_banner_themes':active_banner_themes,
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+               **cart_context,
                }
     return render(request, 'authentication/change_password.html',context)
 
@@ -4654,9 +4700,7 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                         "cartTotalPrice": cartTotalPrice,
                         "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
                         "taxPrice":cart.getTotalTax,
-                        "quantity":cartProductObject.cartProductQuantity,
                     }
-                    print('data1 ===========>',data)
                     return JsonResponse(data, safe=False)
                 else:
                     cartTotalPrice = cart.getTotalPrice
@@ -4666,9 +4710,7 @@ def add_to_cart_product_quantity_management(request, id, actionType):
                         "cartTotalPrice": cartTotalPrice,
                         "cartTotalPriceAfterTax": cartTotalPriceAfterTax,
                         "taxPrice":cart.getTotalTax,
-                        "quantity":cartProductObject.cartProductQuantity,
                     }
-                    print('data2 ============+>',data)
                     return JsonResponse(data, safe=False)
 
             if actionType == "minus":
@@ -4702,9 +4744,7 @@ def add_to_cart_product_quantity_management(request, id, actionType):
             for item in cart_products:
                 if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
                     item['quantity'] = int(item['quantity']) + 1
-                    print('QUANTITY ====>',item['quantity'])
                     item['totalPrice'] = format(item['quantity'] * item['price'],".2f")
-                    print('TOtal PRice ====>',item['totalPrice'])
 
         if actionType == "minus" and cart_products:
             print('=======>Inside minus condition <==========')
@@ -4724,12 +4764,10 @@ def add_to_cart_product_quantity_management(request, id, actionType):
         data = {
                     "quantityTotalPrice": res_data[0]['totalPrice'],
                     "cartTotalPrice": TotalPrice,
-                    "cartTotalPriceAfterTax": TotalFinalPriceAfterTax,
                     "taxPrice":TotalTaxPrice,
+                    "cartTotalPriceAfterTax": TotalFinalPriceAfterTax,
                 }
         
-        print('data in view ========>' ,data)
-
         response = JsonResponse(data,safe=False)
         response.set_cookie('cart', cart_products)
         return response
@@ -4981,6 +5019,27 @@ def cart_to_checkout_validation(request):
                 return response
     else:
         return redirect('login_page')
+    
+def checkout_page(request):
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    context = {"breadcrumb": {"parent": "Checkout", "child": "Checkout"},
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+               **cart_context,
+               }
+    
+    return render(request, 'pages/pages/account/checkout.html',context)
+
+def checkout_2_page(request):
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    context = {"breadcrumb": {"parent": "Checkout-2", "child": "Checkout-2"},
+               'cart_products':cart_products,
+               'totalCartProducts':totalCartProducts,
+               **cart_context,
+               }
+    return render(request,'pages/pages/account/checkout2.html',context)
 
 
 def compare_page(request):
@@ -5098,7 +5157,6 @@ def page_not_found(request):
                "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
-
                 }
 
     return render(request, 'pages/pages/404.html', context)

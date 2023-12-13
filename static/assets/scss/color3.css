@@ -9458,9 +9458,28 @@ ul.sosiyal {
     .qty-box .input-group .input-group-prepend button:focus {
       border-color: #dddddd;
       box-shadow: none; }
+    .qty-box .input-group .input-group-prepend button i {
+      font-size: 14px;
+      color: #8a8a8a; }
     .qty-box .input-group .form-control {
       border-color: #dddddd;
       box-shadow: none; }
+    .qty-box .input-group button {
+      background-color: transparent;
+      cursor: pointer;
+      line-height: 1;
+      background-color: #ffffff;
+      font-family: themify;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: none; }
+      .qty-box .input-group button:first-child {
+        content: "\e622"; }
+      .qty-box .input-group button:last-child {
+        content: "\e61a"; }
+      .qty-box .input-group button i {
+        font-size: 14px;
+        color: #8a8a8a; }
 
 .order-history .responsive-data {
   display: none; }
@@ -10228,8 +10247,6 @@ ul.sosiyal {
     margin-bottom: 5px; }
     .product-right .pro-group .revieu-box ul li i {
       color: #ffa800; }
-    .product-right .pro-group .revieu-box a {
-      color: #f1bb3a; }
     .product-right .pro-group .revieu-box span {
       display: inline-block;
       margin-left: 10px;

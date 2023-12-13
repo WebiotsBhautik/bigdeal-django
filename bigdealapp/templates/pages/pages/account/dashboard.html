@@ -24,8 +24,15 @@
                         <li><a href="{% url 'wishlist_page' %}">My Wishlist</a></li>
                         <li><a href="javascript:void(0)">Newsletter</a></li>
                         <li><a href="javascript:void(0)">My Account</a></li>
+                        {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
                         <li><a href="{% url 'change_password' %}">Change Password</a></li>
-                        <li class="last"><a href="javascript:void(0)">Log Out</a></li>
+                        {% comment %} {% else %} {% endcomment %}
+                        {% comment %} {% endif %} {% endcomment %}
+
+                        {% if request.user.is_authenticated %}
+                        <li class="last"><a href="{% url 'logout_page' %}">Log Out</a></li>
+                        {% else %}
+                        {% endif %}
                       </ul>
                     </div>
                 </div>
