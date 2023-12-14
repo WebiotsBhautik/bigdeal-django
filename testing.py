@@ -88,4 +88,41 @@
 #         response = JsonResponse(data,safe=False)
 #         response.set_cookie('cart', cart_products)
 #         return response
+
+
+
+
+# @login_required(login_url='login_page')
+# def cart_to_checkout_validation(request):
+#     if request.user.is_authenticated:
+#         if request.method == 'POST':
+#             body = json.loads(request.body)
+#             cartId = body["cartId"]
+#             cart = Cart.objects.get(id=cartId)
+#             cartProducts = CartProducts.objects.filter(cart=cart)
+#             productList = []
+#             flag = False
+#             for product in cartProducts:
+#                 dbProduct=ProductVariant.objects.get(id=product.cartProduct.id)
+#                 if product.cartProductQuantity <= dbProduct.productVariantQuantity:
+#                     pass
+#                 else:
+#                     productList.append({"productName":str(product.cartProduct.variantProduct.productName),"outOfStockProducts":str(product.cartProduct.productVariantQuantity)})
+#             if len(productList) > 0:
+#                 flag=True
             
+#             if flag:
+#                 data={"outOfStockProducts":productList,"flag":str(flag),}
+#                 response = JsonResponse(data,safe=False)
+#                 expiry_time = datetime.utcnow() + timedelta(seconds=30)
+#                 response.set_cookie('checkout', 'False',expires=expiry_time)
+#                 return response
+#             else:
+#                 data={"outOfStockProducts":productList,"flag":str(flag),}
+#                 response = JsonResponse(data,safe=False)
+#                 expiry_time = datetime.utcnow() + timedelta(seconds=30)
+#                 response.set_cookie('checkout', 'True',expires=expiry_time)
+#                 return response
+#     else:
+#         return redirect('login_page')
+        

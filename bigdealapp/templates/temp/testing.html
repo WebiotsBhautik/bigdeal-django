@@ -1,434 +1,1054 @@
 {% extends 'pages/pages/pages-base.html' %}
 {% load static %}
+{% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
-{% load sass_tags %}
+
 {% block components %}
 
-<!-- Cart Section Start -->
-<section class="cart-section section-b-space">
+<!-- user dashboard section start -->
+<section class="section-b-space">
     <div class="container">
         <div class="row">
-            {% if totalCartProducts|to_int == 0|to_int %}
-            <!-- Order Success Section Start -->
-            <section class="pt-0">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 p-0">
-                            <div class="empty-product-box success-icon">
-                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"
-                                    alt="">
-                                <div class="success-contain">
-                                    <h4>Your shopping cart is empty. Let's add something to it</h4>
+            <div class="col-lg-3">
+                <ul class="nav nav-tabs custome-nav-tabs flex-column category-option" id="myTab">
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light active" id="tab" data-bs-toggle="tab" data-bs-target="#dash"
+                            type="button"><i class="fas fa-angle-right"></i>Dashboard</button>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="1-tab" data-bs-toggle="tab" data-bs-target="#order"
+                            type="button"><i class="fas fa-angle-right"></i>Orders</button>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="2-tab" data-bs-toggle="tab" data-bs-target="#wishlist"
+                            type="button"><i class="fas fa-angle-right"></i>Wishlist</button>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="3-tab" data-bs-toggle="tab" data-bs-target="#save"
+                            type="button"><i class="fas fa-angle-right"></i>Saved
+                            Address</button>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="4-tab" data-bs-toggle="tab" data-bs-target="#pay"
+                            type="button"><i class="fas fa-angle-right"></i>Payment</button>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <button class="nav-link font-light" id="5-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                            type="button"><i class="fas fa-angle-right"></i>Profile</button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link font-light" id="6-tab" data-bs-toggle="tab" data-bs-target="#security"
+                            type="button"><i class="fas fa-angle-right"></i>Security</button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="filter-button dash-filter dashboard">
+                    <button class="btn btn-solid-default btn-sm fw-bold filter-btn">Show Menu</button>
+                </div>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="dash">
+                        <div class="dashboard-right">
+                            <div class="dashboard">
+                                <div class="page-title title title1 title-effect">
+                                    <h2>My Dashboard</h2>
+                                </div>
+                                <div class="welcome-msg">
+                                    <h6 class="font-light">Hello, <span>{{request.user.username}}</span></h6>
+                                    <p class="font-light">From your My Account Dashboard you have the ability to
+                                        view a snapshot of your recent account activity and update your account
+                                        information. Select a link below to view or edit information.</p>
                                 </div>
 
-                                <div>
-                                    <a href="{% url 'index_default' %}"
-                                        class="btn btn-solid-default btn fw-bold mb-0 ms-0">
-                                        <i class="fas fa-arrow-left"></i> Continue Shopping</a>
+                                <div class="order-box-contain my-4">
+                                    <div class="row g-4">
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img loading="lazy" src="{% static 'assets/images/svg/box.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img loading="lazy" src="{% static 'assets/images/svg/box1.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                    <div>
+                                                        <h5 class="font-light">total order</h5>
+                                                        <h3>{{totalorder}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img loading="lazy" src="{% static 'assets/images/svg/sent.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img loading="lazy" src="{% static 'assets/images/svg/sent1.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                    <div>
+                                                        <h5 class="font-light">pending orders</h5>
+                                                        <h3>{{pendingOrders}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-sm-6">
+                                            <div class="order-box">
+                                                <div class="order-box-image">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/svg/wishlist.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                </div>
+                                                <div class="order-box-contain">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/svg/wishlist1.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="">
+                                                    <div>
+                                                        <h5 class="font-light">wishlist</h5>
+                                                        <h3>{{totalWishlistProducts}}</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="box-account box-info">
+                                    <div class="box-head">
+                                        <h3>Account Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="box">
+                                                <div class="box-title">
+                                                    <h4>Contact Information</h4><a href="javascript:void(0)">Edit</a>
+                                                </div>
+                                                <div class="box-content">
+                                                    <h6 class="font-light">{{request.user.username}}</h6>
+                                                    <h6 class="font-light">{{request.user.email}}</h6>
+                                                    <a href="{% url 'change_password' %}">Change Password</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="box">
+                                                <div class="box-title">
+                                                    <h4>Newsletters</h4><a href="javascript:void(0)">Edit</a>
+                                                </div>
+                                                <div class="box-content">
+                                                    <h6 class="font-light">You are currently not subscribed to any
+                                                        newsletter.</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="box address-box">
+                                            <div class="box-title">
+                                                <h4>Address Book</h4><a href="javascript:void(0)">Manage
+                                                    Addresses</a>
+                                            </div>
+                                            <div class="box-content">
+                                                <div class="row g-4">
+                                                    <div class="col-sm-6">
+                                                        <h6 class="font-light">Default Billing Address</h6>
+                                                        <h6 class="font-light">You have not set a default
+                                                            billing address.</h6>
+                                                        <a href="javascript:void(0)">Edit Address</a>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <h6 class="font-light">Default Shipping Address</h6>
+                                                        <h6 class="font-light">You have not set a default
+                                                            shipping address.</h6>
+                                                        <a href="javascript:void(0)">Edit Address</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <!-- Order Success Section End -->
-            {% else %}
 
-            <div class="col-12">
-                <div class="count-down">
-                    <h5>Your cart will be expired in <span class="count-timer theme-color" id="timer"></span>
-                        minutes !</h5>
-                    <button type="button" onclick="handleCheckout({'cartId':'{{cartId}}'})"
-                        class="btn btn-solid-default btn-sm fw-bold">Check Out</button>
-                </div>
-            </div>
-
-
-            <div class="col-sm-12 table-responsive mt-4">
-                <table class="table cart-table">
-                    <thead>
-                        <tr class="table-head">
-                            <th scope="col">image</th>
-                            <th scope="col">product name</th>
-                            <th scope="col">price</th>
-                            <th scope="col">quantity</th>
-                            <th scope="col">action</th>
-                            <th scope="col">total</th>
-                        </tr>
-                    </thead>
-
-                    
-                    <tbody>
-                        {% if request.user.is_authenticated %}
-                        {% for product in cart_products %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
-                                    <img loading="lazy" src="{{product.cartProduct.variantProduct.productImageFront}}"
-                                        class=" blur-up lazyload" alt="">
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">{{product.cartProduct.variantProduct.productName}}</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                    value="1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                        </h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                            <td>
-                                {% comment %} <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" readonly name="quantity" id="addToCart"
-                                            class="form-control ADD-TO-CART input-number" value="1" />
-
-                                    </div>
-                                </div> {% endcomment %}
-
-
-                                <div class="qty-box">
-                                    <div class="input-group cart-input-group">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                                data-field=""
-                                                onClick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </span>
-                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.cartProductQuantity}}">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-right-plus"
-                                                onClick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-
-                            </td>
-
-
-                            <td>
-                                <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
-                                    {{""|return_currency_wise_symbol:request}}{{product.cartProductQuantityTotalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% else %}
-                        {% for product in cart_products %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.product_id %}">
-                                    <img loading="lazy" src="{{product.productImage}}"
-                                        class=" blur-up lazyload" alt="">
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                    value="1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                                        </h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                            <td>
-                                {% comment %} <div class="qty-box">
-                                    <div class="input-group">
-                                        <input type="number" readonly name="quantity" id="addToCart"
-                                            class="form-control ADD-TO-CART input-number" value="1" />
-
-                                    </div>
-                                </div> {% endcomment %}
-
-
-                                <div class="qty-box">
-                                    <div class="input-group cart-input-group">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                                data-field=""
-                                                onClick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </span>
-                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.quantity}}">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-right-plus"
-                                                onClick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <a href="{% url 'delete_cart_product' product.variant_id %}">
-                                    <i class="fas fa-times"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
-                                    {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-12 mt-md-5 mt-4">
-                <div class="row">
-                    <div class="col-sm-7 col-5 order-1">
-                        <div class="left-side-button text-end d-flex d-block justify-content-end">
-                            <a href="{% url 'delete_cart_all_product' %}"
-                                class="text-decoration-underline theme-color d-block text-capitalize">clear
-                                all items</a>
+                    <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="order">
+                        <div class="box-head mb-3">
+                            <h3>My Order</h3>
                         </div>
-                    </div>
-                    <div class="col-sm-5 col-7">
-                        <div class="left-side-button float-start">
-                            <a href="{% url 'index_default' %}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
-                                <i class="fas fa-arrow-left"></i> Continue Shopping</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="table-responsive">
+                            {% if orders %}
+                            <table class="table cart-table">
+                                <thead>
+                                    <tr class="table-head">
+                                        <th scope="col">Order Id</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">View</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>
+                                            <p class="mt-0">#{{order.id}}</p>
+                                        </td>
+                                        {% if order.orderedOrNot == True %}
+                                        <td>
+                                            <p class="success-button btn btn-sm">Shipped</p>
+                                        </td>
+                                        {% else %}
+                                        <td>
+                                            <p class="danger-button btn btn-sm">Pending</p>
+                                        </td>
+                                        {% endif %}
+                                        <td>
+                                            <p class="theme-color fs-6">
+                                                {{""|return_currency_wise_symbol:request}}{{order.orderTotalPrice|return_currency_wise_ammount:request}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'order_tracking' order.id %}">
+                                                <i class="far fa-eye"></i>
 
-            <div class="cart-checkout-section">
-                <div class="row g-4">
-                    <div class="col-lg-8 col-sm-6">
-                        <div class="checkout-button">
-                            {% if request.user.is_authenticated %}
-
-                            <a onclick="handleCheckout({'cartId':'{{cartId}}'})"
-                                class="btn btn-solid-default btn fw-bold">
-                                Check Out <i class="fas fa-arrow-right ms-1"></i></a>
-
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                             {% else %}
-                            <a href="{% url 'login_page' %}" class="btn btn-solid-default btn fw-bold">
-                                Check Out <i class="fas fa-arrow-right ms-1"></i></a>
-
+                            <section class="pt-0">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 p-0">    
+                                            <div class="empty-product-box success-icon">
+                                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"  alt="">
+                                                <div class="success-contain">
+                                                    <h4>No order found!</h4>
+                                                </div>
+                                                <div>
+                                                    <a href="{% url 'index_default' %}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                                                        <i class="fas fa-arrow-left"></i> Add Products</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                             {% endif %}
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="cart-box">
-                            <div class="cart-box-details">
-                                <div class="total-details">
-                                    <div class="top-details">
-                                        <h3>Cart Totals</h3>
-                                        {% if request.user.is_authenticated %}
-                                            <h6>Total MRP <span
-                                                    id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                            {% comment %} <h6>Coupon Discount <span>-(currency symbol)(amount)</span></h6>
-                                            {% endcomment %}
-                                            <h6> Tax <span
-                                                    id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                            <h6>Price After Tax <span
-                                                    id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                        {% else %}
-                                            <h6>Total MRP <span
-                                                    id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                            {% comment %} <h6>Coupon Discount <span>-(currency symbol)(amount)</span></h6>
-                                            {% endcomment %}
-                                            <h6> Tax <span
-                                                    id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                            <h6>Price After Tax <span
-                                                    id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
-                                            </h6>
-                                        {% endif %}
-                                    </div>
-                                    <div class="bottom-details">
-                                        {% comment %} <a href="{% url 'checkout_page' %}">Process Checkout</a>
-                                        {% endcomment %}
-                                        {% if request.user.is_authenticated %}
-                                        <a onclick="handleCheckout({'cartId':'{{cartId}}'})">Process
-                                            Checkout</a>
-                                        {% else %}
-                                        <a href="{% url 'login_page' %}">Process
-                                            Checkout</a>
-                                        {% endif %}
-                                    </div>
-                                    <div id='cartMsgDiv'>
+                    <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="wishlist">
+                        <div class="box-head mb-3">
+                            <h3>My Wishlist</h3>
+                        </div>
+                        <div class="table-responsive">
+                            {% if totalWishlistProducts|to_int == 0|to_int %}
 
+                            <div class="empty-product-box success-icon">
+                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" alt="">
+                                <div class="success-contain">
+                                    <h4>Your shopping wishlist is empty. Let's add something to it</h4>
+                                </div>
+                                <div>
+                                    <a href="{% url 'index_default' %}"
+                                        class="btn btn-solid-default btn fw-bold mb-0 ms-0">
+                                        <i class="fas fa-arrow-left"></i> Add Products</a>
+                                </div>
+                            </div>
+
+                            {% else %}
+                            {% include 'includes/alerts.html' %}
+
+                            <table class="table cart-table">
+                                <thead>
+                                    <tr class="table-head">
+                                        <th scope="col">image</th>
+                                        <th scope="col">Product Details</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for wishlist_product in wishlist_products %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'shop_left_slidebar' %}">
+                                                <img loading="lazy"
+                                                    src="{{wishlist_product.variantProduct.productImageFront}}"
+                                                    class="blur-up lazyload" alt="">
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            <p class="fs-6 m-0">{{wishlist_product.variantProduct.productName}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="theme-color fs-6">
+                                                {{""|return_currency_wise_symbol:request}}{{wishlist_product.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                            </p>
+                                        </td>
+
+                                        <td>
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <h2 class="td-color">
+                                                    <a href="{% url 'delete_wishlist_product' wishlist_product.id %}"
+                                                        class="icon">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </h2>
+                                                <h2 class="td-color">
+                                                    <a href="{% url 'add_to_cart_from_wishlist' wishlist_product.id 1 %}"
+                                                        class="icon">
+                                                        <i class="fas fa-shopping-cart"></i>
+                                                    </a>
+                                                </h2>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade dashboard" id="save">
+                        <div class="box-head">
+                            <h3>Save Address</h3>
+                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#addAddress">
+                                Add New Address
+                            </button>
+
+
+                        </div>
+                        <div class="save-details-box">
+                            <div class="row g-3">
+                                {% include 'includes/alerts.html' %}
+                                {% if orderaillingaddress %}
+                                {% for address in orderaillingaddress %}
+                                <div class="col-xl-4 col-md-6">
+                                    <div class="save-details">
+                                        <div class="save-name">
+                                            <h5>{{address.customerFirstName}} {{address.customerLastName}}</h5>
+                                            <div class="save-position">
+                                                <h6>{{address.customerAddress2}}</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="save-address">
+                                            <p class="font-light">{{address.customerAddress1}}</p>
+                                            <p class="font-light">{{address.customerCity}}, {{address.customerZip}}</p>
+                                            <p class="font-light">{{address.customerCountry}}</p>
+                                        </div>
+
+                                        <div class="mobile">
+                                            <p class="font-light mobile">Mobile No. {{address.customerMobile}}</p>
+                                        </div>
+
+                                        <div class="button">
+                                            <a class="btn btn-sm edit"
+                                                onclick="HandleEdit({'addressId':'{{address.id}}'})"
+                                                data-bs-toggle="modal" data-bs-target="#editAddress">Edit</a>
+                                            <a href="{% url 'remove_address' address.id %}"
+                                                class="btn btn-sm">Remove</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="empty-product-box success-icon">
+                                    <img loading="lazy" src="{% static 'assets/images/noaddressfound.jpg' %}" alt="">
+                                    <div class="success-contain">
+                                        <h4>No Address Found!</h4>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function getCookie(name) {
+                            let cookieValue = null;
+                            if (document.cookie && document.cookie !== "") {
+                                const cookies = document.cookie.split(";");
+                                for (let i = 0; i < cookies.length; i++) {
+                                    const cookie = cookies[i].trim();
+                                    // Does this cookie string begin with the name we want?
+                                    if (cookie.substring(0, name.length + 1) === name + "=") {
+                                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                        break;
+                                    }
+                                }
+                            }
+                            return cookieValue;
+                        }
+                        var csrftoken = getCookie("csrftoken");
+
+
+                        function DeleteAccount() {
+                            if (confirm("Are you sure you want to delete your account?")) {
+                                $.ajax({
+                                    url: '/delete_user',
+                                    type: 'POST',
+                                    data: {
+                                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                                    },
+                                });
+                                window.location.href = '/login_page';
+                            } else {
+                            }
+                        }
+                    </script>
+
+                    <!-- Add Address Modal Start-->
+                    <div class="modal fade add-address-modal" id="addAddress">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form id="formNewAddress" name="formNewAddress" method="post" action="">
+                                        {% csrf_token %}
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">First Name</label>
+                                            <input type="text" class="form-control" value="" name="fnameNew" id="fname"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">Last Name</label>
+                                            <input type="text" class="form-control" value="" name="lnameNew" id="lname"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">Username</label>
+                                            <input type="text" class="form-control" value="" name="usernameNew"
+                                                id="username" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label font-light">Email Address</label>
+                                            <input type="email" class="form-control" value="" name="emailNew" id="email"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="number" class="form-label font-light">Mobile No</label>
+                                            <input type="number" class="form-control" value="" name="mobnoNew"
+                                                id="mobno" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Address-1</label>
+                                            <input type="text" class="form-control" value="" name="address1New"
+                                                id="address1" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Address-2</label>
+                                            <input type="text" class="form-control" value="" name="address2New"
+                                                id="address2" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Country</label>
+                                            <input type="text" class="form-control" value="" name="countryNew"
+                                                id="country" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">City</label>
+                                            <input type="text" class="form-control" value="" name="cityNew" id="city"
+                                                required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="number" class="form-label font-light">Zipcode</label>
+                                            <input type="number" class="form-control" value="" name="zipcodeNew"
+                                                id="zipcode" required>
+                                        </div>
+
+                                        <div class="modal-footer pt-0 text-end d-block">
+                                            <button type="button"
+                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button class="btn btn-solid-default rounded-1" id="saveNewAddress"
+                                                onclick="addNewAddress()" data-bs-dismiss="modal">Save Address</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Address Modal End -->
+                    <script>
+                        function addNewAddress(params) {
+                            var url = "{% url 'add_address' %}";
+                            var fname = document.getElementById("fname").value;
+                            var lname = document.getElementById("lname").value;
+                            var username = document.getElementById("username").value;
+                            var email = document.getElementById("email").value;
+                            var mobno = document.getElementById("mobno").value;
+                            var address1 = document.getElementById("address1").value;
+                            var address2 = document.getElementById("address2").value;
+                            var country = document.getElementById("country").value;
+                            var city = document.getElementById("city").value;
+                            var zipcode = document.getElementById("zipcode").value;
+
+                            // Check if any field is empty
+
+                            if (
+                                fname === "" ||
+                                lname === "" ||
+                                username === "" ||
+                                email === "" ||
+                                mobno === "" ||
+                                address1 === "" ||
+                                address2 === "" ||
+                                country === "" ||
+                                city === "" ||
+                                zipcode === ""
+                            ) {
+                                alert("Please fill in all the required fields.");
+                                return; // Stop form submission
+                            }
+
+                            fetch(url, {
+                                method: "POST",
+                                headers: {
+                                    "Content-type": "application/json",
+                                    "X-CSRFToken": csrftoken,
+                                },
+                                body: JSON.stringify({
+                                    fname: fname,
+                                    lname: lname,
+                                    username: username,
+                                    email: email,
+                                    mobno: mobno,
+                                    address1: address1,
+                                    address2: address2,
+                                    country: country,
+                                    city: city,
+                                    zipcode: zipcode,
+                                }),
+                            });
+                            window.location.reload();
+                        }
+
+
+                        function HandleEdit(params) {
+                            var url = ("{% url 'get_address' %}");
+
+                            fetch(url, {
+                                method: 'POST',
+                                headers: {
+                                    "Content-type": "application/json",
+                                    "X-CSRFToken": csrftoken,
+                                },
+                                body: JSON.stringify({
+                                    addressId: params.addressId,
+                                }),
+                            }).then((response) => {
+                                return response.json();
+                            }).then((data) => {
+                                console.log('===> DATA <=== ', data)
+                                document.getElementById('fnameEdit').value = data.fname;
+                                document.getElementById('lnameEdit').value = data.lname;
+                                document.getElementById('usernameEdit').value = data.username;
+                                document.getElementById('emailEdit').value = data.email;
+                                document.getElementById('mobnoEdit').value = data.mobno;
+                                document.getElementById('address1Edit').value = data.address1;
+                                document.getElementById('address2Edit').value = data.address2;
+                                document.getElementById('countryEdit').value = data.country;
+                                document.getElementById('cityEdit').value = data.city;
+                                document.getElementById('zipcodeEdit').value = data.zipcode;
+                                document.getElementById('addressIdInForm').value = params.addressId;
+
+                            });
+                        }
+
+
+                        function handleSaveAddress() {
+                            console.log('===> handleSaveAddress function called ====>')
+                            var url = ("{% url 'save_address' %}");
+
+                            fetch(url, {
+                                method: 'POST',
+                                headers: {
+                                    "Content-type": "application/json",
+                                    "X-CSRFToken": csrftoken,
+                                },
+                                body: JSON.stringify({
+                                    fNameEle: document.getElementById('fnameEdit').value,
+                                    lNameEle: document.getElementById('lnameEdit').value,
+                                    userNameEle: document.getElementById('usernameEdit').value,
+                                    emailEle: document.getElementById('emailEdit').value,
+                                    mobileEle: document.getElementById('mobnoEdit').value,
+                                    addOneEle: document.getElementById('address1Edit').value,
+                                    addTwoEle: document.getElementById('address2Edit').value,
+                                    countryEle: document.getElementById('countryEdit').value,
+                                    cityEle: document.getElementById('cityEdit').value,
+                                    zipEle: document.getElementById('zipcodeEdit').value,
+                                    addressId: document.getElementById('addressIdInForm').value,
+
+                                })
+
+                            }).then(response => {
+                                window.location.reload();
+                                if (response.ok) {
+                                    console.log(' ===> Address Saved successfully <====')
+                                } else {
+                                    console.log('===> Address Saved failed <===')
+                                }
+                            }).catch(error => {
+                                console.log('====> something went wrong address saved error<======')
+                            });
+
+                        }
+                    </script>
+
+                    <!-- Edit Address Modal Start-->
+                    <div class="modal fade add-address-modal" id="editAddress">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form id="formEditAddress" name="formEditAddress" action="" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="addressName" id="addressIdInForm">
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">First Name</label>
+                                            <input type="text" class="form-control" value="" name="fnameEdit"
+                                                id="fnameEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">Last Name</label>
+                                            <input type="text" class="form-control" value="" name="lnameEdit"
+                                                id="lnameEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label font-light">Username</label>
+                                            <input type="text" class="form-control" value="" name="usernameEdit"
+                                                id="usernameEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label font-light">Email Address</label>
+                                            <input type="email" class="form-control" value="" name="emailEdit"
+                                                id="emailEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="number" class="form-label font-light">Mobile No</label>
+                                            <input type="number" class="form-control" value="" name="mobnoEdit"
+                                                id="mobnoEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Address-1</label>
+                                            <input type="text" class="form-control" value="" name="address1Edit"
+                                                id="address1Edit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Address-2</label>
+                                            <input type="text" class="form-control" value="" name="address2Edit"
+                                                id="address2Edit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">Country</label>
+                                            <input type="text" class="form-control" value="" name="countryEdit"
+                                                id="countryEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="text" class="form-label font-light">City</label>
+                                            <input type="text" class="form-control" value="" name="cityEdit"
+                                                id="cityEdit" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="number" class="form-label font-light">Zipcode</label>
+                                            <input type="number" class="form-control" value="" name="zipcodeEdit"
+                                                id="zipcodeEdit" required>
+                                        </div>
+
+                                        <div class="modal-footer pt-0 text-end d-block">
+                                            <button type="button"
+                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
+                                                data-bs-dismiss="modal">Close</button>
+                                            {% comment %} <button class="btn btn-solid-default rounded-1"
+                                                id="saveEditAddress"
+                                                onclick="handleSaveAddress('{{ addressId }}','{{ customerId }}', '{{ fNameEle }}', '{{ lNameEle }}', '{{ userNameEle }}', '{{ emailEle }}', '{{ mobileEle }}', '{{ addOneEle }}', '{{ addTwoEle }}', '{{ countryEle }}', '{{ cityEle }}', '{{ zipEle }}')"
+                                                data-bs-dismiss="modal">Save Address</button> {% endcomment %}
+                                            <button class="btn btn-solid-default rounded-1" id="saveEditAddress"
+                                                onclick="handleSaveAddress()" data-bs-dismiss="modal">Save
+                                                Address</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Address Modal End -->
+
+                    <div class="tab-pane fade dashboard" id="pay">
+                        <div class="box-head">
+                            <h3>Card & Payment</h3>
+                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
+                                data-bs-target="#addPayment"><i class="fas fa-plus"></i>
+                                Add New Card</button>
+                        </div>
+
+                        <div class="card-details-section">
+                            <div class="row g-4">
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="payment-card-detail">
+                                        <div class="card-details">
+                                            <div class="card-number">
+                                                <h4>XXXX - XXXX - XXXX - 2548</h4>
+                                            </div>
+
+                                            <div class="valid-detail">
+                                                <div class="title">
+                                                    <span>valid</span>
+                                                    <span>thru</span>
+                                                </div>
+                                                <div class="date">
+                                                    <h3>12/25</h3>
+                                                </div>
+                                                <div class="primary">
+                                                    <span class="badge bg-pill badge-light">primary</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="name-detail">
+                                                <div class="name">
+                                                    <h5>Bhautik Vaghasiya</h5>
+                                                </div>
+                                                <div class="card-img">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/payment-icon/1.jpg' %}"
+                                                        class="img-fluid blur-up lazyloaded" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card">
+                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                delete</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="edit-card-mobile">
+                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            delete</a>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="payment-card-detail">
+                                        <div class="card-details card-visa">
+                                            <div class="card-number">
+                                                <h4>XXXX - XXXX - XXXX - 0506</h4>
+                                            </div>
+
+                                            <div class="valid-detail">
+                                                <div class="title">
+                                                    <span>valid</span>
+                                                    <span>thru</span>
+                                                </div>
+                                                <div class="date">
+                                                    <h3>12/26</h3>
+                                                </div>
+                                                <div class="primary">
+                                                    <span class="badge bg-pill badge-light">Visa</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="name-detail">
+                                                <div class="name">
+                                                    <h5>Charles Jhon</h5>
+                                                </div>
+                                                <div class="card-img">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/payment-icon/2.jpg' %}"
+                                                        class="img-fluid blur-up lazyloaded" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card">
+                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                delete</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="edit-card-mobile">
+                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            delete</a>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="payment-card-detail">
+                                        <div class="card-details dabit-card">
+                                            <div class="card-number">
+                                                <h4>XXXX - XXXX - XXXX - 4617</h4>
+                                            </div>
+
+                                            <div class="valid-detail">
+                                                <div class="title">
+                                                    <span>valid</span>
+                                                    <span>thru</span>
+                                                </div>
+                                                <div class="date">
+                                                    <h3>12/30</h3>
+                                                </div>
+                                                <div class="primary">
+                                                    <span class="badge bg-pill badge-light">Rupay</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="name-detail">
+                                                <div class="name">
+                                                    <h5>Mayur Patodiya</h5>
+                                                </div>
+                                                <div class="card-img">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/payment-icon/3.jpg' %}"
+                                                        class="img-fluid blur-up lazyloaded" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card">
+                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                delete</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="edit-card-mobile">
+                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            delete</a>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade dashboard-profile dashboard" id="profile">
+                        <div class="box-head">
+                            <h3>Profile</h3>
+                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto"
+                                onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
+                                data-bs-target="#editAddress">
+                                Edit
+                            </button>
+                        </div>
+                        <ul class="dash-profile">
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">First Name</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerFirstName}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Last Name</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerLastName}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Username</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerUsername}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Email Address</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerEmail}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Mob No</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerMobile}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Addressline-1</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerAddress1}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Addressline-2</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerAddress2}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Country</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerCountry}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">City</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerCity}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Zip Code</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerZip}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="box-head mt-lg-5 mt-3">
+                            <h3>Login Details</h3>
+                        </div>
+
+                        <ul class="dash-profile">
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Email Address</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerEmail}}</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="left">
+                                    <h6 class="font-light">Phone No.</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>{{lastAddress.customerMobile}}</h6>
+                                </div>
+                            </li>
+
+                            <li class="mb-0">
+                                <div class="left">
+                                    <h6 class="font-light">Password</h6>
+                                </div>
+                                <div class="right">
+                                    <h6>●●●●●●</h6>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="tab-pane fade dashboard-security dashboard" id="security">
+                        <div class="box-head">
+                            <h3>Delete Your Account</h3>
+                        </div>
+                        <div class="security-details">
+                            <h5 class="font-light mt-3">Hi <span> {{request.user.username}},</span>
+                            </h5>
+                            <p class="font-light mt-1">We Are Sorry To Here You Would Like To Delete Your Account.
+                            </p>
+                        </div>
+
+                        <div class="security-details-1 mb-0">
+                            <div class="page-title">
+                                <h4 class="fw-bold">Note</h4>
+                            </div>
+                            <p class="font-light">Deleting your account will permanently remove your profile,
+                                personal settings, and all other associated information. Once your account is
+                                deleted, You will be logged out and will be unable to log back in.</p>
+
+                            <p class="font-light mb-4">If you understand and agree to the above statement, and would
+                                still like to delete your account, than click below</p>
+
+                            <button class="btn btn-solid-default btn-sm fw-bold rounded" onclick="DeleteAccount();"
+                                data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Your
+                                Account</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    {% endif %}
 </section>
-<!-- Cart Section End -->
+<!-- user dashboard section end -->
 
 
-<script>
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === name + "=") {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie("csrftoken");
 
-    async function handleCheckout(params) {
-        var url = "{% url 'cart_to_checkout_validation' %}";
-        var pageUrl = window.location.href;
-        console.log('pageUrl ============>',pageUrl)
-
-        await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    "X-CSRFToken": csrftoken,
-                },
-                body: JSON.stringify({
-                    cartId: params.cartId,
-                }),
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                if (data.flag === "True") {
-                    var cartMsgDiv = document.getElementById("cartMsgDiv");
-                    for (var i = 0; i < data.outOfStockProducts.length; i++) {
-                        var cartMsg = document.createElement("h5");
-                        cartMsg.setAttribute("id", "cartMsg" + i);
-                        cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts +
-                            " stock of product " + data.outOfStockProducts[i].productName + ".";
-                        cartMsgDiv.append(cartMsg);
-                        // Set a timeout to hide the cartMsg element after 3 seconds
-                        setTimeout(function (index) {
-                            var cartMsgElement = document.getElementById("cartMsg" + index);
-                            if (cartMsgElement) {
-                                cartMsgElement.remove();
-                            }
-                        }, 3000, i);
-                    }
-                }
-                if (data.flag === "False") {
-                    window.location.href = "{% url 'checkout_page' %}";
-                }
-            });
-    }
-</script>
 
 {% endblock components %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function beforecounterPlusAtCart(params) {
-    let quantityValueInput = document.getElementById(params.key);
-    let a = quantityValueInput.getAttribute('value');
-    getdata = $.cookie("cart").replace(/\\054/g, ',').replaceAll("\'","\"");
-    var cookies = JSON.parse(getdata);
-    cookies.forEach(function(product)
-    {
-        
-        
-        if(product.variant_id == params.productVariantId)
-        {
-            console.log("product.variant_id>>",product.variant_id);
-            console.log("params.productVariantId>>",params.productVariantId);
-            if (Number(a) <= product.quantity) {
-                let b = Number(a) + 1;
-                quantityValueInput.setAttribute('value', b);
-                let actionType = "plus"
-                quantity_wise_price_management(params.productVariantId, actionType, params.totalPriceEle)
-            }
-        }
-    });
-}  
-
-
-
-
-
-
-
-

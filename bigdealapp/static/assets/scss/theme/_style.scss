@@ -10895,9 +10895,9 @@ ul.sosiyal {
    20. Title css
 ==============================*/
 .title1 {
-  text-align: center;
+  text-align: left;
   background-color: $white;
-  padding: 42px 0;
+  padding-bottom: 35px;
 
   h4 {
     font-size: 18px;
@@ -17252,7 +17252,7 @@ ul.sosiyal {
 
     .page-title h2 {
       font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
-      margin-bottom: 15px;
+      // margin-bottom: 15px;
       color: $font-color;
       line-height: 1;
       font-weight: 600;
@@ -17270,6 +17270,10 @@ ul.sosiyal {
 
 .dashboard {
   .box-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
     h2 {
       font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
       margin: 20px 0 0;

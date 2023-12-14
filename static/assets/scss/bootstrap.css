@@ -2820,6 +2820,15 @@ textarea.form-control-lg {
     border-top-left-radius: 0;
     border-top-right-radius: 0; }
 
+.custome-nav-tabs {
+  padding: 30px; }
+  .custome-nav-tabs li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600; }
+
 .nav-pills .nav-link {
   border-radius: 0.25rem; }
 

@@ -72,6 +72,18 @@
     @include border-top-radius(0);
   }
 }
+.custome-nav-tabs{
+  padding: 30px;
+  li{
+    a{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
 
 
 //

@@ -4349,17 +4349,50 @@ def update_password(request):
     return render(request, 'authentication/update_password.html',context)  
 
 
-def dashboard(request):
+def user_dashboard(request):
+    wishlist_products = None
+    totalWishlistProducts = None
+    if request.user.is_authenticated:
+        customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+        cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+        totalCartProducts = cart_products.count()
+
+        try:
+            customer_wishlist = Wishlist.objects.get(
+                wishlistByCustomer=request.user.id)
+            wishlist_products = customer_wishlist.wishlistProducts.all()
+            totalWishlistProducts = wishlist_products.count()
+        except Wishlist.DoesNotExist:
+            customer_wishlist = None
+
+        totalorder = ProductOrder.objects.filter(
+            productOrderedByCustomer=request.user).count()
+        pendingOrders = OrderTracking.objects.filter(trackingOrderCustomer=request.user).all().exclude(trackingOrderStatus="Delivered").count()
+
+        products = ProductOrder.objects.filter(
+            productOrderedByCustomer=request.user)
+        orderaillingaddress = OrderBillingAddress.objects.filter(
+            customer=request.user)
+        lastAddress = OrderBillingAddress.objects.all().last()
+
+        orders = Order.objects.filter(orderedByCustomer=request.user)
+    else:
+        return redirect('login_page')
+    
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)
-
-    context = {"breadcrumb":{"parent":"Dashboard","child":"Dashboard"},
-               'active_banner_themes':active_banner_themes,
-               'cart_products':cart_products,
-               'totalCartProducts':totalCartProducts,
-               **cart_context,
-               }
+    
+    context = {"breadcrumb": {"parent": "Dashboard", "child": "Dashboard"},
+               "Cart": customer_cart, "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+               "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+               "totalorder": totalorder, "pendingOrders": pendingOrders,
+               "orderaillingaddress": orderaillingaddress, "products": products,
+               "orders": orders, "lastAddress": lastAddress,
+               "userId": request.user.id,
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+            }
     return render(request, 'pages/pages/account/dashboard.html',context)
 
 def profile(request):
@@ -4898,12 +4931,17 @@ def wishlist_page(request):
 
 
 def delete_wishlist_product(request,id):
+    referer = request.META.get('HTTP_REFERER', None)
     customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
     customer_wishlist.wishlistProducts.remove(id)
     customer_wishlist.save()
-    return redirect('wishlist_page')
+    messages.success(request,'Product Removed Successfully')
+    return redirect(referer)
+
+    # return redirect('wishlist_page')
 
 def add_to_cart_from_wishlist(request, id, quantity):
+    referer = request.META.get('HTTP_REFERER', None)
     # Product moved from wishlist to cart)
     product = ProductVariant.objects.get(id=id)
     cartObject = Cart.objects.get(cartByCustomer=request.user.id)
@@ -4918,7 +4956,7 @@ def add_to_cart_from_wishlist(request, id, quantity):
             customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
             customer_wishlist.wishlistProducts.remove(id)
             customer_wishlist.save()
-            return redirect('wishlist_page')
+            return redirect(referer)
         else:
             CartProducts.objects.create(
                 cart=cartObject,cartProduct=product, cartProductQuantity=quantity).save()
@@ -4927,11 +4965,12 @@ def add_to_cart_from_wishlist(request, id, quantity):
             customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
             customer_wishlist.wishlistProducts.remove(id)
             customer_wishlist.save()
-            return redirect('wishlist_page')
+            return redirect(referer)
         # CartProducts.objects.create(cartProduct=product,cartProductQuantity=1).save()
     else:
         messages.success(request, 'Product out of stock.')
-        return redirect('wishlist_page')
+        return redirect(referer)
+
 
         
 
@@ -5055,7 +5094,7 @@ def compare_page(request):
         except Cart.DoesNotExist:
             customer_cart = None
             
-        try:
+        try:    
             customer_wishlist = Wishlist.objects.get(
                 wishlistByCustomer=request.user.id)
             wishlist_products = customer_wishlist.wishlistProducts.all()
@@ -5248,7 +5287,39 @@ def collection(request):
                 'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/collection.html',context)
 
-
+@login_required(login_url='login_page')
+def cart_to_checkout_validation(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            body = json.loads(request.body)
+            cartId = body["cartId"]
+            cart = Cart.objects.get(id=cartId)
+            cartProducts = CartProducts.objects.filter(cart=cart)
+            productList = []
+            flag = False
+            for product in cartProducts:
+                dbProduct = ProductVariant.objects.get(id=product.cartProduct.id)
+                if product.cartProductQuantity <= dbProduct.productVariantQuantity:
+                    pass
+                else:
+                    productList.append({"productName":str(product.cartProduct.variantProduct.productName),"outOfStockProducts":str(product.cartProduct.productVariantQuantity)})
+            if len(productList) > 0:
+                flag=True
+                
+            if flag:
+                data = {"outOfStockProducts":productList,"flag":str(flag),}
+                response = JsonResponse(data,safe=False)
+                expiry_time = datetime.utcnow() + timedelta(seconds=30)
+                response.set_cookie('checkout','False',expires=expiry_time)
+                return response
+            else:
+                data = {"outOfStockProducts":productList, "flag":str(flag),}
+                response = JsonResponse(data,safe=False)
+                expiry_time = datetime.utcnow() + timedelta(seconds=30)
+                response.set_cookie("checkout",'True',expires=expiry_time)
+                return response
+    else:
+        return redirect('login_page')
     
 
 
