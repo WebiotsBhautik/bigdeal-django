@@ -497,42 +497,14 @@
 #         break
 
 
-class ProductReview(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    productRatingsChoices = [('0', '0'), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
-    productReviewByCustomer = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, verbose_name='Customer')
-    productName = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Product Name')
-    productReview = models.CharField(max_length=255, verbose_name='Review')
-    productRatings = models.CharField(default=0, max_length=10, choices=productRatingsChoices, verbose_name='Rating')
+# import json
+# x =  '{ "name":"John", "age":30, "city":"New York"}' => string
+# x = {'name': 'John', 'age': 30, 'city': 'New York'} => object/dict
+# y = json.dumps(x)
+# print(y)
+# print(type(y))
 
-    def save(self, *args, **kwargs):
-        req = get_request().user
 
-        product = Product.objects.get(id=self.productName.id)
-        productNoOfReview=product.productNoOfReview
-
-        if productNoOfReview == 0:
-            product.productNoOfReview=1
-            product.productRatingCount=int(self.productRatings)
-            product.productFinalRating=int(self.productRatings)
-            product.save()
-        if productNoOfReview > 0:
-            product.productNoOfReview = int(product.productNoOfReview) + 1
-            product.productRatingCount = int(product.productRatingCount) + int(self.productRatings)
-            totalStar=5*int(product.productNoOfReview)
-            actualStar=int(product.productRatingCount)
-            average=(5*actualStar)/totalStar
-            product.productFinalRating=round(average)
-            product.save()
-        
-        self.productReviewByCustomer = req
-        super(ProductReview, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return str(self.productName)
-
-    class Meta:
-        verbose_name = 'Review'
 
 
     

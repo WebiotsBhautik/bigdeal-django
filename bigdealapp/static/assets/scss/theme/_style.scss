@@ -68,7 +68,7 @@ h2 {
 h3 {
   font-weight: 700;
   margin-bottom: 0;
-  font-size: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320)));
+  font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1920 - 320)));
 }
 h4 {
   font-weight: 700;
@@ -17273,6 +17273,7 @@ ul.sosiyal {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 10px;
     
     h2 {
       font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
@@ -17280,6 +17281,9 @@ ul.sosiyal {
       text-transform: capitalize;
       color: $font-color;
     }
+  }
+  .card-details-section {
+    margin-top: calc(18px + (40 - 18) * ((100vw - 320px) / (1920 - 320)));
   }
 
   .box {
@@ -17325,6 +17329,34 @@ ul.sosiyal {
     }
   }
 }
+
+.dashboard-profile{
+  .box-head{
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+  }
+  .dash-profile{
+    padding-left: 0px;
+    margin-bottom: 0px;
+
+    li{
+      width: 100%;
+      display: flex;
+      + li{
+        margin-top: 15px;
+      }
+      .left{
+        width: calc(100px + (220 - 100) * ((100vw - 320px) / (1920 - 320)));
+      }
+      .right{
+        width: 100%;
+      }
+      }
+    }
+  }
+  
+
 
 .box-content {
   h6 {
@@ -22523,3 +22555,92 @@ table {
     color: $rating-star;
   }
 }
+
+
+.tab-pane {
+  .save-details-box{
+      .save-details{
+          background-color: $light-box-bg;
+          padding: 20px;
+          color: #000;
+          .button{
+            display: flex;
+            gap: 10px;
+            .remove-edit{
+              width: 100%;
+              background-color: #dedede;
+              font-weight: 600;
+              
+            }
+          }
+          
+      }
+  }
+}
+
+
+
+.payment-card-detail {
+  .card-details {
+    color: rgb(255, 255, 255);
+    padding: 30px 20px;
+    border-radius: 5px;
+    height: 100%;
+    background-color: rgb(75, 119, 160);
+    background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%);
+    &.card-visa{
+      background-color: rgb(119, 120, 118)
+    }
+    &.dabit-card{
+    background-color: rgb(134, 184, 207);
+    }
+
+    .name-detail{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+  }
+}
+
+
+.edit-card {
+  // @include flex_common;
+  // @include pseudowh;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background-color: rgba($black1, $alpha: 0.8);
+  border-radius: 5px;
+  opacity: 0;
+  transition: all 0.5s ease;
+
+  // @include mq-max(md) {
+  //     display: none;
+  // }
+
+  a {
+      padding: 0 10px;
+      text-transform: capitalize;
+      color: $white;
+  }
+}
+
+
+.edit-card-mobile {
+display: none;
+
+// @include mq-max(md) {
+//   @include flex_common;
+//   margin-top: 10px;
+
+//   a {
+//       padding: 0 10px;
+//       text-transform: capitalize;
+//       color: $black1;
+//   }
+// }
+}
+

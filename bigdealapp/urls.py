@@ -24,9 +24,7 @@ urlpatterns = [
     path('verify_token',views.verify_token, name='verify_token'),
     path('update_password',views.update_password, name='update_password'),
     path('change_password',views.change_password,name='change_password'),
-    path('user_dashboard',views.user_dashboard,name='user_dashboard'),
-    path('profile',views.profile,name='profile'),
-    path('save_address',views.save_address,name='save_address'),
+    
     path('contact_us',views.contact_us,name='contact_us'),
     
 
@@ -143,6 +141,14 @@ urlpatterns = [
     path('look_book',views.look_book, name='look_book'),
     path('collection',views.collection, name='collection'),
     
+    # User dashboard routes
+    path('user_dashboard',views.user_dashboard,name='user_dashboard'),
+    path('add_address',views.add_address, name="add_address"),
+    path('get_address',views.get_address, name='get_address'),
+    path('save_address',views.save_address,name='save_address'),
+    path('remove_address/<str:id>',views.remove_address, name='remove_address'),
+    path('profile',views.profile,name='profile'),
+    
     
     # Wishlist routes
     path('add_to_wishlist/<str:id>', views.add_to_wishlist, name='add_to_wishlist'),
@@ -169,6 +175,7 @@ urlpatterns = [
 
     path('blog_details/<str:id>',views.blog_details, name='blog_details'),
     path('add_comment/<str:id>',views.add_comment, name='add_comment'),
+    
     
     path('blog_left_sidebar',views.blog_left_sidebar, name='blog_left_sidebar'),
     # path('left_sidebar_for_selected_category/<str:id>',views.left_sidebar_for_selected_category, name='left_sidebar_for_selected_category'),

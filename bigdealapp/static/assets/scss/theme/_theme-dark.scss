@@ -2122,6 +2122,18 @@ body {
     }
   }
 
+  .save-details-box{
+    .save-details{
+        background-color: $dark-color;
+        .button{
+          .remove-edit{
+            color: black;
+          }
+        }
+    }
+  }
+
+
 
   // product dark// 
   .qty-box {
@@ -2533,6 +2545,7 @@ body {
 
   .dashboard {
     .box-head {
+      
       h2 {
         color: $font-layout-3;
       }
@@ -3436,8 +3449,6 @@ body {
       }
     }
   }
-
-
 
   // typografy //
 

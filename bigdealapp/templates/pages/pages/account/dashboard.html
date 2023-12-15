@@ -497,9 +497,8 @@
                                 data-bs-target="#addAddress">
                                 Add New Address
                             </button>
-
-
                         </div>
+
                         <div class="save-details-box">
                             <div class="row g-3">
                                 {% include 'includes/alerts.html' %}
@@ -524,12 +523,12 @@
                                             <p class="font-light mobile">Mobile No. {{address.customerMobile}}</p>
                                         </div>
 
-                                        <div class="button">
-                                            <a class="btn btn-sm edit"
+                                        <div class="button mt-3">
+                                            <a class="btn remove-edit "
                                                 onclick="HandleEdit({'addressId':'{{address.id}}'})"
                                                 data-bs-toggle="modal" data-bs-target="#editAddress">Edit</a>
                                             <a href="{% url 'remove_address' address.id %}"
-                                                class="btn btn-sm">Remove</a>
+                                                class="btn remove-edit">Remove</a>
                                         </div>
                                     </div>
                                 </div>
@@ -656,7 +655,7 @@
                                             <button type="button"
                                                 class="btn bg-secondary text-white rounded-1 modal-close-button"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button class="btn btn-solid-default rounded-1" id="saveNewAddress"
+                                            <button class="btn btn-normal" id="saveNewAddress"
                                                 onclick="addNewAddress()" data-bs-dismiss="modal">Save Address</button>
                                         </div>
                                     </form>
@@ -665,7 +664,7 @@
                         </div>
                     </div>
                     <!-- Add Address Modal End -->
-                    {% comment %} <script>
+                    <script>
                         function addNewAddress(params) {
                             var url = "{% url 'add_address' %}";
                             var fname = document.getElementById("fname").value;
@@ -789,7 +788,7 @@
                             });
 
                         }
-                    </script> {% endcomment %}
+                    </script> 
 
                     <!-- Edit Address Modal Start-->
                     <div class="modal fade add-address-modal" id="editAddress">
@@ -868,11 +867,7 @@
                                             <button type="button"
                                                 class="btn bg-secondary text-white rounded-1 modal-close-button"
                                                 data-bs-dismiss="modal">Close</button>
-                                            {% comment %} <button class="btn btn-solid-default rounded-1"
-                                                id="saveEditAddress"
-                                                onclick="handleSaveAddress('{{ addressId }}','{{ customerId }}', '{{ fNameEle }}', '{{ lNameEle }}', '{{ userNameEle }}', '{{ emailEle }}', '{{ mobileEle }}', '{{ addOneEle }}', '{{ addTwoEle }}', '{{ countryEle }}', '{{ cityEle }}', '{{ zipEle }}')"
-                                                data-bs-dismiss="modal">Save Address</button> {% endcomment %}
-                                            <button class="btn btn-solid-default rounded-1" id="saveEditAddress"
+                                            <button class="btn btn-normal" id="saveEditAddress"
                                                 onclick="handleSaveAddress()" data-bs-dismiss="modal">Save
                                                 Address</button>
 
@@ -887,8 +882,8 @@
                     <div class="tab-pane fade dashboard" id="pay">
                         <div class="box-head">
                             <h3>Card & Payment</h3>
-                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#addPayment"><i class="fas fa-plus"></i>
+                            <button class="btn btn-normal" data-bs-toggle="modal"
+                                data-bs-target="#addPayment"><i class="fa fa-plus"></i>
                                 Add New Card</button>
                         </div>
 
@@ -916,7 +911,7 @@
 
                                             <div class="name-detail">
                                                 <div class="name">
-                                                    <h5>Bhautik Vaghasiya</h5>
+                                                    <h5>Brendan Canty</h5>
                                                 </div>
                                                 <div class="card-img">
                                                     <img loading="lazy"
@@ -928,16 +923,16 @@
 
                                         <div class="edit-card">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                                 delete</a>
                                         </div>
                                     </div>
 
                                     <div class="edit-card-mobile">
                                         <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                             delete</a>
                                     </div>
                                 </div>
@@ -964,7 +959,7 @@
 
                                             <div class="name-detail">
                                                 <div class="name">
-                                                    <h5>Charles Jhon</h5>
+                                                    <h5>Robin Banks</h5>
                                                 </div>
                                                 <div class="card-img">
                                                     <img loading="lazy"
@@ -976,23 +971,23 @@
 
                                         <div class="edit-card">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                                 delete</a>
                                         </div>
                                     </div>
 
                                     <div class="edit-card-mobile">
                                         <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                             delete</a>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="payment-card-detail">
-                                        <div class="card-details dabit-card">
+                                        <div class="card-details    ">
                                             <div class="card-number">
                                                 <h4>XXXX - XXXX - XXXX - 4617</h4>
                                             </div>
@@ -1012,7 +1007,7 @@
 
                                             <div class="name-detail">
                                                 <div class="name">
-                                                    <h5>Mayur Patodiya</h5>
+                                                    <h5>Matthew Taylor</h5>
                                                 </div>
                                                 <div class="card-img">
                                                     <img loading="lazy"
@@ -1024,16 +1019,16 @@
 
                                         <div class="edit-card">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                                href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                                 delete</a>
                                         </div>
                                     </div>
 
                                     <div class="edit-card-mobile">
                                         <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
+                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                             delete</a>
                                     </div>
                                 </div>
@@ -1044,7 +1039,7 @@
                     <div class="tab-pane fade dashboard-profile dashboard" id="profile">
                         <div class="box-head">
                             <h3>Profile</h3>
-                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto"
+                            <button class="btn btn-normal"
                                 onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
                                 data-bs-target="#editAddress">
                                 Edit
@@ -1146,7 +1141,7 @@
                             <h3>Login Details</h3>
                         </div>
 
-                        <ul class="dash-profile">
+                        <ul class="dash-profile mb-5">
                             <li>
                                 <div class="left">
                                     <h6 class="font-light">Email Address</h6>

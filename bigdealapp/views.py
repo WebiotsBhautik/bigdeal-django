@@ -4411,24 +4411,70 @@ def profile(request):
 
 def save_address(request):
     if request.method == "POST":
-        first_name = request.POST['fname']
-        # last_name = request.POST['lname']
-        # mobno = request.POST['mobno']
-        # email = request.POST['email']
-        # message = request.POST['message']
-        # flat = request.POST['flat']
-        # address = request.POST['address']
-        # zipcode = request.POST['zipcode']
-        # # country = request.POST['']
-        # city = request.POST['city']
-        # state = request.POST['state']
-        # customer = CustomUser.objects.get(id=request.user.id)
-        customer=OrderBillingAddress.objects.get(id=request.user.id)
-        if not customer:
-            user = OrderBillingAddress.objects.create(customer=customer,customerFirstName=first_name)
-            user.save()
-    return render(request, 'pages/pages/account/profile.html')
+        body = json.loads(request.body)
+        addressId = body['addressId']
+        addressGet = OrderBillingAddress.objects.get(id=addressId)
+        addressGet.customerFirstName = body['fNameEle']
+        addressGet.customerLastName = body['lNameEle']
+        addressGet.customerUsername = body['userNameEle']
+        addressGet.customerEmail = body['emailEle']
+        addressGet.customerMobile = body['mobileEle']
+        addressGet.customerAddress1 = body['addOneEle']
+        addressGet.customerAddress2 = body['addTwoEle']
+        addressGet.customerCountry = body['countryEle']
+        addressGet.customerCity = body['cityEle']
+        addressGet.customerZip = body['zipEle']
+        addressGet.save()
+        return HttpResponse(status=200)
 
+
+def add_address(request):
+    body = json.loads(request.body)
+    fname = body["fname"]
+    lname = body["lname"]
+    username = body["username"]
+    email = body["email"]
+    mobno = body["mobno"]
+    address1 = body["address1"]
+    address2 = body["address2"]
+    country = body["country"]
+    city = body["city"]
+    zipcode = body["zipcode"]
+    customer = CustomUser.objects.get(id=request.user.id)
+    user = OrderBillingAddress.objects.create(customer=customer,customerFirstName=fname, customerLastName=lname, customerUsername=username, customerEmail=email, customerMobile=mobno,customerAddress1=address1,customerAddress2=address2, customerCountry=country, customerCity=city, customerZip =zipcode)
+    user.save()
+    return HttpResponse(request,status=200)
+
+def remove_address(request,id):
+    address = OrderBillingAddress.objects.get(id=id, customer=request.user)
+    product_orders = ProductOrder.objects.filter(productOrderedByCustomer__username=address)
+
+    associated_orders = Order.objects.filter(orderBillingAddress=address)
+    if associated_orders:
+        for order in associated_orders:
+            if order.orderedOrNot == True:
+                address.delete()
+                messages.success(request,'Address Removed Successfully')
+                return redirect('user_dashboard')
+            else:
+                messages.warning(request, 'Address cannot be removed as it is associated with a delivered order')
+                return redirect('user_dashboard')
+        else:
+            address.delete()
+            messages.success(request,'Address Removed Successfully')
+            return redirect('user_dashboard')
+    else:
+        address.delete()
+        messages.success(request,"Address Removed Successfully")
+        return redirect('user_dashboard')
+
+def get_address(request):
+    if request.method == "POST":
+        body = json.loads(request.body)
+        addressId = body['addressId']
+        address = OrderBillingAddress.objects.get(id=addressId)
+        data = {'fname':address.customerFirstName, 'lname':address.customerLastName, 'username':address.customerUsername, 'email':address.customerEmail, 'mobno':address.customerMobile, 'address1':address.customerAddress1, 'address2':address.customerAddress2, 'country':address.customerCountry,'city':address.customerCity,'zipcode':address.customerZip}
+        return JsonResponse(data,safe=False)
 
 
 
