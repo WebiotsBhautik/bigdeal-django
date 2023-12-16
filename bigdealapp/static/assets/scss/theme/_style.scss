@@ -17263,6 +17263,11 @@ ul.sosiyal {
         margin-bottom: 0;
         font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
         line-height: 1.6;
+
+        span{
+          color:$dark-color;
+          font-weight: 600;
+        }
       }
     }
   }
@@ -22606,8 +22611,7 @@ table {
 
 
 .edit-card {
-  // @include flex_common;
-  // @include pseudowh;
+
   position: absolute;
   text-align: center;
   top: 0;
@@ -22617,9 +22621,7 @@ table {
   opacity: 0;
   transition: all 0.5s ease;
 
-  // @include mq-max(md) {
-  //     display: none;
-  // }
+
 
   a {
       padding: 0 10px;
@@ -22632,15 +22634,32 @@ table {
 .edit-card-mobile {
 display: none;
 
-// @include mq-max(md) {
-//   @include flex_common;
-//   margin-top: 10px;
 
-//   a {
-//       padding: 0 10px;
-//       text-transform: capitalize;
-//       color: $black1;
-//   }
-// }
+}
+
+
+
+.dashboard-security{
+  .security-details{
+    h5{
+      span{
+        font-weight: 600;
+        color:$dark-color;
+      }
+    }
+  }
+  .security-details-1{
+    border: 1px dashed black;
+    padding: 20px;
+    margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320)));
+    .page-title{
+      .notes{
+        font-weight: 600;
+        color:$dark-color;
+        padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
+          }
+    }
+    
+  }
 }
 

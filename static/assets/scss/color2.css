@@ -11218,6 +11218,9 @@ ul.sosiyal {
       margin-bottom: 0;
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
       line-height: 1.6; }
+      .dashboard-right .dashboard .welcome-msg p span {
+        color: #2a3142;
+        font-weight: 600; }
 
 .dashboard .box-head {
   display: flex;
@@ -14595,6 +14598,19 @@ table.invoice-table {
 
 .edit-card-mobile {
   display: none; }
+
+.dashboard-security .security-details h5 span {
+  font-weight: 600;
+  color: #2a3142; }
+
+.dashboard-security .security-details-1 {
+  border: 1px dashed black;
+  padding: 20px;
+  margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320))); }
+  .dashboard-security .security-details-1 .page-title .notes {
+    font-weight: 600;
+    color: #2a3142;
+    padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))); }
 
 /*=====================
     27.Menu css start
@@ -23418,10 +23434,28 @@ body.dark {
     border-color: #3c3c3c; }
   .dark .dashboard .box .box-title {
     border-color: #3c3c3c; }
+  .dark .dashboard .welcome-msg p {
+    margin-bottom: 0;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: 1.6; }
+    .dark .dashboard .welcome-msg p span {
+      font-weight: 600;
+      color: #20cff9; }
   .dark .save-details-box .save-details {
     background-color: #2a3142; }
     .dark .save-details-box .save-details .button .remove-edit {
       color: black; }
+  .dark .dashboard-security .security-details h5 span {
+    font-weight: 600;
+    color: #20cff9; }
+  .dark .security-details-1 {
+    border: 1px dashed lightgray;
+    padding: 20px;
+    margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320))); }
+    .dark .security-details-1 .page-title .notes {
+      font-weight: 600;
+      color: #20cff9;
+      padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))); }
   .dark .qty-box .input-group {
     border-color: #3c3c3c; }
     .dark .qty-box .input-group .form-control {

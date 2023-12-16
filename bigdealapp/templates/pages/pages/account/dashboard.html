@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="welcome-msg"> 
                                     {% with username=request.user.username|default:"MARK JECNO" %}
-                                        <p>Hello, {{ username }} !</p>
+                                        <p>Hello, <span>{{ username }} ! </span></p>
                                     {% endwith %}
                                     <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
                                 </div>
@@ -882,10 +882,9 @@
                     <div class="tab-pane fade dashboard" id="pay">
                         <div class="box-head">
                             <h3>Card & Payment</h3>
-                            <button class="btn btn-normal" data-bs-toggle="modal"
-                                data-bs-target="#addPayment"><i class="fa fa-plus"></i>
+                            <button class="btn btn-normal" ><i class="fa fa-plus"></i>
                                 Add New Card</button>
-                        </div>
+                        </div>  
 
                         <div class="card-details-section">
                             <div class="row g-4">
@@ -902,7 +901,7 @@
                                                     <span>thru</span>
                                                 </div>
                                                 <div class="date">
-                                                    <h3>12/25</h3>
+                                                    <h3>06/25</h3>
                                                 </div>
                                                 <div class="primary">
                                                     <span class="badge bg-pill badge-light">primary</span>
@@ -950,7 +949,7 @@
                                                     <span>thru</span>
                                                 </div>
                                                 <div class="date">
-                                                    <h3>12/26</h3>
+                                                    <h3>10/26</h3>
                                                 </div>
                                                 <div class="primary">
                                                     <span class="badge bg-pill badge-light">Visa</span>
@@ -987,7 +986,7 @@
 
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="payment-card-detail">
-                                        <div class="card-details    ">
+                                        <div class="card-details dabit-card">
                                             <div class="card-number">
                                                 <h4>XXXX - XXXX - XXXX - 4617</h4>
                                             </div>
@@ -1185,7 +1184,7 @@
 
                         <div class="security-details-1 mb-0">
                             <div class="page-title">
-                                <h4 class="fw-bold">Note</h4>
+                                <h4 class="notes">Note</h4>
                             </div>
                             <p class="font-light">Deleting your account will permanently remove your profile,
                                 personal settings, and all other associated information. Once your account is
@@ -1194,8 +1193,7 @@
                             <p class="font-light mb-4">If you understand and agree to the above statement, and would
                                 still like to delete your account, than click below</p>
 
-                            <button class="btn btn-solid-default btn-sm fw-bold rounded" onclick="DeleteAccount();"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Your
+                            <button class="btn btn-normal" onclick="DeleteAccount();">Delete Your
                                 Account</button>
                         </div>
                     </div>
