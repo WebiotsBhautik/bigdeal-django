@@ -10,43 +10,87 @@
 <section class="section-big-py-space b-g-light">
     <div class="custom-container">
         <div class="checkout-page contact-page">
+            <div id="couponCodeDiv">
+                <div class="col-lg-4 col-sm-6"> 
+                    <div class="promo-section mb-sm-4 mb-2">
+                        <div class="row g-2">
+                            <div class="col-7">
+                                <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code">
+                            </div>
+                            <div class="col-5">
+                                <button class="btn btn-info" id="couponBtn"
+                                onclick="couponvalidation({'price':'{{Cart.getTotalPrice}}','tax':{{Cart.getTotalTax}},'priceInUSD':{{getFinalPriceAfterTax}}})">Apply
+                                Coupon</button>
+                            </div>  
+                        </div>
+                    </div>
+                </div> 
+            </div>
             <div class="checkout-form">
                 <form>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12 col-xs-12">
                             <div class="checkout-title">
                                 <h3>Billing Details</h3></div>
+                                <div class="d-block my-3">
+                                    <div class="form-check custome-radio-box">
+                                      <input class="form-check-input" type="radio" name="flexRadioDefaultForAddress" value="newAddress"
+                                        id="newAddress">
+                                      <label class="form-check-label" for="newAddress">New Address</label>
+                                    </div>
+                                    {% for address in billingAddresses %}
+                                    <div class="form-check custome-radio-box">
+                                      <input class="form-check-input" type="radio" id="address-{{forloop.counter}}"
+                                        name="flexRadioDefaultForAddress" value={{address.id}}>
+                                      <label class="form-check-label" for="address-{{forloop.counter}}">{{address.customerAddress1}} -
+                                        {{address.customerZip}}</label>
+                                    </div>
+                                    {% endfor %}
+                                  </div>
                             <div class="theme-form">
+                                <form class="needs-validation" id="new-address" style="display: none;">
+                                    <input type="hidden" name="cartid" value="{{Cart.id}}">
+                          
                                 <div class="row check-out ">
 
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <label>First Name</label>
-                                        <input type="text" name="field-name" value="" placeholder="Enter Firstname">
+                                        <label for="fname" class="form-label">First Name</label>
+                                        <input type="text" name="fname" class="form-control" id="fname" placeholder="Enter Firstname" required>
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <label>Last Name</label>
-                                        <input type="text" name="field-name" value="" placeholder="Enter Lastname">
+                                        <label for="lname" class="form-label">Last Name</label>
+                                        <input type="text" name="lname" id="lname" class="form-control"  placeholder="Enter Lastname" required>
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <label class="field-label">Phone</label>
-                                        <input type="text" name="field-name" value="" placeholder="Enter number">
+                                        <label for="uname" class="form-lable">Username</label>
+                                        <input type="text" name="uname" id="uname" class="form-control"  placeholder="Enter Username" required>
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <label class="field-label">Email Address</label>
-                                        <input type="text" name="field-name" value="" placeholder="Enter email">
+                                        <label class="form-label" for="email">Email Address</label>
+                                        <input type="email" name="email" class="form-control" id="email"  placeholder="example@gmail.com" required>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <label class="field-label">Country</label>
-                                        <select>
-                                          <option>South Africa</option>
-                                            <option>India</option>
-                                            <option>United State</option>
-                                            <option>Australia</option>
+                                        <label class="form-label" for="validationCustom04">Country</label>
+                                        <select name="country" class="form-select custome-form-select" id="validationCustom04" required>
+                                            <option selected disabled value="">Choose...</option>
+                                            <option name="united-states" value="United States">United States</option>
+                                            <option name="india" value="India">India</option>
+                                            <option name="america" value="America">America</option>
+                                            <option name="south-america" value="">South America</option>
+                                            <option name="dubai" value="Dubai">Dubai</option>
+                                            <option name="hong-kong" value="Hong Kong">Hong Kong</option>
+                                            <option name="indonesia" value="Indonesia">Indonesia</option>
+                                            <option name="pakistan" value="Pakistan">Pakistan</option>
+                                            <option name="saudi-arabia" value="Saudi Arabia">Saudi Arabia</option>
+                                            <option name="china" value="China">China</option>
                                         </select>
+                                        <div class="invalid-feedback">
+                                            Please select a valid country.
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <label class="field-label">Address</label>
-                                        <input type="text" name="field-name" value="" placeholder="Street address">
+                                        <label class="form-label" for="address1">Address</label>
+                                        <input type="text" name="address1" class="form-control" id="address1"  placeholder="Street address">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <label class="field-label">Town/City</label>
@@ -74,13 +118,17 @@
                                         <div>Product <span>Total</span></div>
                                     </div>
                                     <ul class="qty">
-                                        <li>Pink Slim Shirt × 1 <span>$25.10</span></li>
-                                        <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
+                                        {% for product in cart_products %}
+                                        <li>{{product.cartProduct.variantProduct.productName}}<span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                             X {{product.cartProductQuantity}}</span></li>
+                                        {% endfor %}
+
                                     </ul>
                                     <ul class="sub-total">
-                                        <li>Subtotal <span class="count">$380.10</span></li>
-                                        <li>Shipping
-                                            <div class="shipping">
+                                        <li>Subtotal <span class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span></li>
+                                        <li>Coupon amount <span class="count" id="couponAmount">{{""|return_currency_wise_symbol:request}}{{couponAmount|return_currency_wise_ammount:request}}</span></li>
+                                        <li>Tax <span class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span></li>
+                                            {% comment %} <div class="shipping">
                                                 <div class="shopping-option">
                                                     <input type="checkbox" name="free-shipping" id="free-shipping">
                                                     <label for="free-shipping">Free Shipping</label>
@@ -89,18 +137,21 @@
                                                     <input type="checkbox" name="local-pickup" id="local-pickup">
                                                     <label for="local-pickup">Local Pickup</label>
                                                 </div>
-                                            </div>
+                                            </div> {% endcomment %}
                                         </li>
                                     </ul>
                                     <ul class="total">
-                                        <li>Total <span class="count">$620.00</span></li>
+                                        <li>Total <span class="count" id="finalAmount">{{""|return_currency_wise_symbol:request}}{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}</span></li>
+                                    </ul>
+                                    <ul class="total">
+                                        <li>Total (In USD) <span class="count" id="finalAmountInUSD">${{getFinalPriceAfterTax}}</span></li>
                                     </ul>
                                 </div>
                                 <div class="payment-box">
                                     <div class="upper-box">
                                         <div class="payment-options">
                                             <ul>
-                                                <li>
+                                                {% comment %} <li>
                                                     <div class="radio-option">
                                                         <input type="radio" name="payment-group" id="payment-1" checked="checked">
                                                         <label for="payment-1">Check Payments<span class="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span></label>
@@ -111,11 +162,17 @@
                                                         <input type="radio" name="payment-group" id="payment-2">
                                                         <label for="payment-2">Cash On Delivery<span class="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span></label>
                                                     </div>
-                                                </li>
+                                                </li> {% endcomment %}
                                                 <li>
                                                     <div class="radio-option paypal">
-                                                        <input type="radio" name="payment-group" id="payment-3">
-                                                        <label for="payment-3">PayPal</label>
+                                                        <input type="radio" name="payment-group" id="payment-1" checked="checked">
+                                                        <label for="payment-1">PayPal</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio-option razorpay">
+                                                        <input type="radio" name="payment-group" id="payment-2">
+                                                        <label for="payment-2">Razorpay</label>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -134,3 +191,96 @@
 <!-- section end -->
 
 {% endblock components %}
+
+
+{% block script %}
+
+<script>
+    function getCookie(name){
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++){
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if(cookie.substring(0,name.length + 1) === name + "="){
+                    cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    var price;
+    price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
+    var totalTax;
+    totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
+
+
+
+// Handle Checkout Function Start ============================================================
+
+// Set value in cookie Function Start ============================================================
+
+function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds){
+    const existingCookie = getCookie(cookieName);
+
+    if (existingCookie !== null ) {
+        // Cookie exists, update its value and expiration
+        setCookie(cookieName,cookieValue,expirationSeconds);
+    } else {
+        // Cookie doesn't exist, set a new cookie
+        setCookie(cookieName, cookieValue, expirationSeconds);
+    }
+}
+
+function setCookie(cookieName,cookieValue,expirationSeconds){
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + expirationSeconds * 1000);
+    const cookieString = `${encodeURIComponent(cookieName)}=${encodeURIComponent(cookieValue)}; expires=${expirationDate.toUTCString()}; path=/`;
+    document.cookie = cookieString;
+    
+}
+
+function getCookie(cookieName){
+    const cookieString = document.cookie;
+    const cookies = cookieString.split(';');
+
+    for(let i=0; i < cookies.length; i++){
+        const cookie = cookies[i].trim();
+        if(cookie.startsWith(`${cookieName}=`)){
+            return cookie.substring(cookieName.length +1);
+        }
+    }
+    return null;
+}
+
+
+// Set value in cookie Function Start ============================================================
+
+
+// Handle coupon validation start ======================
+
+async function couponvalidation(params){
+    const couponCodeEle = document.getElementById('couponCode');
+    const couponCode = couponCodeEle.value;
+
+    if(couponCode == ''){
+        alert('Please enter a coupon code')
+        return;
+    }   else{
+            setOrUpdateCookie('couponCode',couponCode,3600);
+        }
+
+    window.location.reload();
+}
+
+  // Handle coupon validation end ========================
+
+
+
+</script>
+    
+{% endblock script %}
+    

@@ -192,7 +192,7 @@ h2 {
 h3 {
   font-weight: 700;
   margin-bottom: 0;
-  font-size: calc(18px + (30 - 18) * ((100vw - 320px) / (1920 - 320))); }
+  font-size: calc(18px + (26 - 18) * ((100vw - 320px) / (1920 - 320))); }
 
 h4 {
   font-weight: 700;
@@ -11215,12 +11215,23 @@ ul.sosiyal {
       margin-bottom: 0;
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
       line-height: 1.6; }
+      .dashboard-right .dashboard .welcome-msg p span {
+        color: #2a3142;
+        font-weight: 600; }
 
-.dashboard .box-head h2 {
-  font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
-  margin: 20px 0 0;
-  text-transform: capitalize;
-  color: #333333; }
+.dashboard .box-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px; }
+  .dashboard .box-head h2 {
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
+    margin: 20px 0 0;
+    text-transform: capitalize;
+    color: #333333; }
+
+.dashboard .card-details-section {
+  margin-top: calc(18px + (40 - 18) * ((100vw - 320px) / (1920 - 320))); }
 
 .dashboard .box a {
   color: #ff6000;
@@ -11254,6 +11265,24 @@ ul.sosiyal {
 .dashboard .box address {
   margin-bottom: 0;
   font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))); }
+
+.dashboard-profile .box-head {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center; }
+
+.dashboard-profile .dash-profile {
+  padding-left: 0px;
+  margin-bottom: 0px; }
+  .dashboard-profile .dash-profile li {
+    width: 100%;
+    display: flex; }
+    .dashboard-profile .dash-profile li + li {
+      margin-top: 15px; }
+    .dashboard-profile .dash-profile li .left {
+      width: calc(100px + (220 - 100) * ((100vw - 320px) / (1920 - 320))); }
+    .dashboard-profile .dash-profile li .right {
+      width: 100%; }
 
 .box-content h6 {
   font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
@@ -14520,6 +14549,65 @@ table.invoice-table {
   font-size: calc(11px + (14 - 11) * ((100vw - 320px) / (1920 - 320))); }
   .fa-star.theme-color {
     color: #ffa800; }
+
+.tab-pane .save-details-box .save-details {
+  background-color: #ebebeb;
+  padding: 20px;
+  color: #000; }
+  .tab-pane .save-details-box .save-details .button {
+    display: flex;
+    gap: 10px; }
+    .tab-pane .save-details-box .save-details .button .remove-edit {
+      width: 100%;
+      background-color: #dedede;
+      font-weight: 600; }
+
+.payment-card-detail .card-details {
+  color: white;
+  padding: 30px 20px;
+  border-radius: 5px;
+  height: 100%;
+  background-color: #4b77a0;
+  background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0) 1px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.04) 3px, rgba(255, 255, 255, 0.05) 4px), -webkit-linear-gradient(-245deg, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0) 90%); }
+  .payment-card-detail .card-details.card-visa {
+    background-color: #777876; }
+  .payment-card-detail .card-details.dabit-card {
+    background-color: #86b8cf; }
+  .payment-card-detail .card-details .name-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; }
+
+.edit-card {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(48, 48, 48, 0.8);
+  border-radius: 5px;
+  opacity: 0;
+  transition: all 0.5s ease; }
+  .edit-card a {
+    padding: 0 10px;
+    text-transform: capitalize;
+    color: #ffffff; }
+
+.edit-card-mobile {
+  display: none; }
+
+.dashboard-security .security-details h5 span {
+  font-weight: 600;
+  color: #2a3142; }
+
+.dashboard-security .security-details-1 {
+  border: 1px dashed black;
+  padding: 20px;
+  margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320))); }
+  .dashboard-security .security-details-1 .page-title .notes {
+    font-weight: 600;
+    color: #2a3142;
+    padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))); }
 
 /*=====================
     27.Menu css start
@@ -23343,6 +23431,28 @@ body.dark {
     border-color: #3c3c3c; }
   .dark .dashboard .box .box-title {
     border-color: #3c3c3c; }
+  .dark .dashboard .welcome-msg p {
+    margin-bottom: 0;
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: 1.6; }
+    .dark .dashboard .welcome-msg p span {
+      font-weight: 600;
+      color: #20cff9; }
+  .dark .save-details-box .save-details {
+    background-color: #2a3142; }
+    .dark .save-details-box .save-details .button .remove-edit {
+      color: black; }
+  .dark .dashboard-security .security-details h5 span {
+    font-weight: 600;
+    color: #20cff9; }
+  .dark .security-details-1 {
+    border: 1px dashed lightgray;
+    padding: 20px;
+    margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320))); }
+    .dark .security-details-1 .page-title .notes {
+      font-weight: 600;
+      color: #20cff9;
+      padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))); }
   .dark .qty-box .input-group {
     border-color: #3c3c3c; }
     .dark .qty-box .input-group .form-control {

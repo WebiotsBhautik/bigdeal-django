@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from product.models import AttributeName, Product, ProductAttributes, ProductVariant
 from currency.models import Currency
 from decimal import Decimal
+from django.core.exceptions import ObjectDoesNotExist
 # from random import randint
 import math, random
 
@@ -123,8 +124,13 @@ def get_currency_instance(request):
     if len(result) == 0:
         currency = Currency.objects.get(code='USD')
         return currency
-    currency = Currency.objects.get(id=result)
+    try:
+        currency = Currency.objects.get(id=result)
+    except ObjectDoesNotExist:
+        currency = Currency.objects.get(code='USD')
+        
     return currency
+
 
 
 def convert_amount_based_on_currency(amount,request):

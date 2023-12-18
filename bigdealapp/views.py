@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import auth
-from .models import Banner,BannerTheme, BannerType, BlogCategory, Blog, BlogComment,ContactUs
+from .models import Banner,BannerTheme, BannerType, BlogCategory, Blog, BlogComment,ContactUs,Coupon,CouponHistory
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
 
@@ -26,7 +26,11 @@ from currency.models import Currency
 from decimal import Decimal, ROUND_HALF_UP
 from django.http import Http404
 import json
-import uuid
+import decimal
+import razorpay
+
+from decimal import Decimal, ROUND_HALF_UP
+
 
 # Imports For Forgot Password With Email Verification
 
@@ -144,9 +148,17 @@ def login_page(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None and user.is_customer:
             auth.login(request,user)
-            response = HttpResponseRedirect('index')
+            response = HttpResponseRedirect('checkout_page')
+            cid=Cart.objects.get(cartByCustomer=user)
+            response.set_cookie('cid',cid.id)
+            
+            get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+            if get_Item:
+                if add_cart_data_to_database(request,get_Item):
+                    response.delete_cookie('cart')
             currency = Currency.objects.get(code='USD')
             response.set_cookie('currency', currency.id)
+
             return response
         else:
             messages.error(request, 'Invalid Credentials')
@@ -5042,33 +5054,33 @@ def show_cart_popup(request):
     return cart_products,totalCartProducts
 
 
-# def add_cart_data_to_database(request,get_Item):
-#     if (get_Item is not None and get_Item != "null"):
-#         cart_products = json.loads(get_Item)
-#     else:
-#         return False
+def add_cart_data_to_database(request,get_Item):
+    if (get_Item is not None and get_Item != "null"):
+        cart_products = json.loads(get_Item)
+    else:
+        return False
 
-#     for cart_product in cart_products:
-#         productVariant = ProductVariant.objects.get(id=cart_product['variant_id'])
-#         if productVariant.productVariantQuantity > 0:
-#             cartObject=Cart.objects.get(cartByCustomer=request.user)
-#             if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
-#                 cartProductObject = CartProducts.objects.get(
-#                     cartByCustomer=request.user, cartProduct=productVariant)
-#                 cartProductObject.cartProductQuantity += int(cart_product['quantity'])
-#                 cartProductObject.save()
-#             else:
-#                 CartProducts.objects.create(
-#                     cart=cartObject,cartProduct=productVariant, cartProductQuantity=cart_product['quantity']).save()
-#         else:
-#             try:  
-#                 cart = Cart.objects.create(cart_id=_cart_id(request))
-#             except Cart.DoesNotExist:   
-#                 cart = Cart.objects.create(cart_id=_cart_id(request))
+    for cart_product in cart_products:
+        productVariant = ProductVariant.objects.get(id=cart_product['variant_id'])
+        if productVariant.productVariantQuantity > 0:
+            cartObject=Cart.objects.get(cartByCustomer=request.user)
+            if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
+                cartProductObject = CartProducts.objects.get(
+                    cartByCustomer=request.user, cartProduct=productVariant)
+                cartProductObject.cartProductQuantity += int(cart_product['quantity'])
+                cartProductObject.save()
+            else:
+                CartProducts.objects.create(
+                    cart=cartObject,cartProduct=productVariant, cartProductQuantity=cart_product['quantity']).save()
+        else:
+            try:  
+                cart = Cart.objects.create(cart_id=_cart_id(request))
+            except Cart.DoesNotExist:   
+                cart = Cart.objects.create(cart_id=_cart_id(request))
 
-#     response = HttpResponseRedirect(reverse('checkout_page'))
-#     response.delete_cookie('cart')
-#     return response
+    response = HttpResponseRedirect(reverse('checkout_page'))
+    response.delete_cookie('cart')
+    return response
 
 
 @login_required(login_url='login_page')
@@ -5105,13 +5117,73 @@ def cart_to_checkout_validation(request):
     else:
         return redirect('login_page')
     
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))
+
+   
+@login_required(login_url='login_page')
 def checkout_page(request):
+    customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    cart_products_demo = serializers.serialize("json",CartProducts.objects.filter(cartByCustomer=request.user.id))
+    
+    customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    wishlist_products = customer_wishlist.wishlistProducts.all()
+    totalWishlistProducts = wishlist_products.count()
+
+    getTotalTax = customer_cart.getTotalTax
+    getTotalPrice = customer_cart.getTotalPrice
+    
+    customer = CustomUser.objects.get(id=request.user.id)
+    billingAddresses = OrderBillingAddress.objects.filter(customer=customer)
+
+    cookie_value = request.COOKIES.get('couponCode')
+    couponAmount = 0
+    if cookie_value:
+        coupon = Coupon.objects.filter(couponCode=cookie_value)
+        couponObj = coupon.first()
+
+        if len(coupon) == 1:
+            couponUsesByCustomer = CouponHistory.objects.filter(coupon=couponObj)
+            if len(couponUsesByCustomer) < couponObj.usageLimit and int(couponObj.numOfCoupon) > 0:
+                currentDateTime = timezone.now()
+                if couponObj.expirationDateTime >= currentDateTime and getTotalPrice >= couponObj.minAmount:
+                    if couponObj.couponType == "Fixed":
+                        couponAmount = int(couponObj.couponDiscountOrFixed)
+                    if couponObj.couponType == "Percentage":
+                        couponDiscountAmount = ((getTotalPrice*couponObj.couponDiscountOrFixed)/100)
+                        couponAmount = couponDiscountAmount
+    else:
+        pass
+    
+    currency = get_currency_instance(request)
+    currency_code = currency.code
+    getTotalPriceForRazorPay = (decimal.Decimal(float(getTotalPrice))) * currency.factor * 100
+    couponAmountForRazorPay = (decimal.Decimal(float(couponAmount))) * currency.factor * 100
+    getTotalTaxForRazorPay = (decimal.Decimal(float(getTotalTax))) * currency.factor * 100
+
+    finalAmountForRazorPay=(getTotalPriceForRazorPay-couponAmountForRazorPay)+getTotalTaxForRazorPay
+    payment = client.order.create({'amount': int(finalAmountForRazorPay), 'currency': currency_code, 'payment_capture': 1})
+    finalAmount=(getTotalPrice-couponAmount)+getTotalTax
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+    
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)
     context = {"breadcrumb": {"parent": "Checkout", "child": "Checkout"},
-               'cart_products':cart_products,
-               'totalCartProducts':totalCartProducts,
+               "Cart": customer_cart,'cart_products':cart_products,'totalCartProducts':totalCartProducts,
+               "wishlist":customer_wishlist, "wishlist_products":wishlist_products,"totalWishlistProducts":totalWishlistProducts,
+               "cart_products_demo":cart_products_demo,
+               "getTotalTax":getTotalTax,
+               "getFinalPriceAfterTax":finalAmount,
+               "getTotalPrice":getTotalPrice,
+               "couponAmount":couponAmount,
+               "billingAddresses":billingAddresses,
+               "payment":payment,
+               "rsk": settings.RAZORPAY_KEY_ID,
+               "ppl":settings.PAYPAL_CLIENT_ID,
                **cart_context,
+               'active_banner_themes':active_banner_themes,
+
                }
     
     return render(request, 'pages/pages/account/checkout.html',context)
@@ -5367,13 +5439,6 @@ def cart_to_checkout_validation(request):
     else:
         return redirect('login_page')
     
-
-
-
-
-
-
-
 
 
 

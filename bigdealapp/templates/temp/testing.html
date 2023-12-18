@@ -6,1049 +6,938 @@
 
 {% block components %}
 
-<!-- user dashboard section start -->
+<!-- Checkout Section Start -->
 <section class="section-b-space">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <ul class="nav nav-tabs custome-nav-tabs flex-column category-option" id="myTab">
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light active" id="tab" data-bs-toggle="tab" data-bs-target="#dash"
-                            type="button"><i class="fas fa-angle-right"></i>Dashboard</button>
-                    </li>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
 
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light" id="1-tab" data-bs-toggle="tab" data-bs-target="#order"
-                            type="button"><i class="fas fa-angle-right"></i>Orders</button>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light" id="2-tab" data-bs-toggle="tab" data-bs-target="#wishlist"
-                            type="button"><i class="fas fa-angle-right"></i>Wishlist</button>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light" id="3-tab" data-bs-toggle="tab" data-bs-target="#save"
-                            type="button"><i class="fas fa-angle-right"></i>Saved
-                            Address</button>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light" id="4-tab" data-bs-toggle="tab" data-bs-target="#pay"
-                            type="button"><i class="fas fa-angle-right"></i>Payment</button>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <button class="nav-link font-light" id="5-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                            type="button"><i class="fas fa-angle-right"></i>Profile</button>
-                    </li>
-
-                    <li class="nav-item">
-                        <button class="nav-link font-light" id="6-tab" data-bs-toggle="tab" data-bs-target="#security"
-                            type="button"><i class="fas fa-angle-right"></i>Security</button>
-                    </li>
-                </ul>
+        {% comment %} <div id="couponDiv">
+          <h3 class="mb-3">Do you have coupon?</h3>
+          <div class="d-block my-3">
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" name="flexRadioDefaultForCoupon" value="haveCoupon"
+                id="haveCoupon">
+              <label class="form-check-label" for="haveCoupon">Yes</label>
             </div>
-
-            <div class="col-lg-9">
-                <div class="filter-button dash-filter dashboard">
-                    <button class="btn btn-solid-default btn-sm fw-bold filter-btn">Show Menu</button>
-                </div>
-
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="dash">
-                        <div class="dashboard-right">
-                            <div class="dashboard">
-                                <div class="page-title title title1 title-effect">
-                                    <h2>My Dashboard</h2>
-                                </div>
-                                <div class="welcome-msg">
-                                    <h6 class="font-light">Hello, <span>{{request.user.username}}</span></h6>
-                                    <p class="font-light">From your My Account Dashboard you have the ability to
-                                        view a snapshot of your recent account activity and update your account
-                                        information. Select a link below to view or edit information.</p>
-                                </div>
-
-                                <div class="order-box-contain my-4">
-                                    <div class="row g-4">
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="order-box">
-                                                <div class="order-box-image">
-                                                    <img loading="lazy" src="{% static 'assets/images/svg/box.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                </div>
-                                                <div class="order-box-contain">
-                                                    <img loading="lazy" src="{% static 'assets/images/svg/box1.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                    <div>
-                                                        <h5 class="font-light">total order</h5>
-                                                        <h3>{{totalorder}}</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="order-box">
-                                                <div class="order-box-image">
-                                                    <img loading="lazy" src="{% static 'assets/images/svg/sent.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                </div>
-                                                <div class="order-box-contain">
-                                                    <img loading="lazy" src="{% static 'assets/images/svg/sent1.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                    <div>
-                                                        <h5 class="font-light">pending orders</h5>
-                                                        <h3>{{pendingOrders}}</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="order-box">
-                                                <div class="order-box-image">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/svg/wishlist.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                </div>
-                                                <div class="order-box-contain">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/svg/wishlist1.png' %}"
-                                                        class="img-fluid blur-up lazyload" alt="">
-                                                    <div>
-                                                        <h5 class="font-light">wishlist</h5>
-                                                        <h3>{{totalWishlistProducts}}</h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="box-account box-info">
-                                    <div class="box-head">
-                                        <h3>Account Information</h3>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="box">
-                                                <div class="box-title">
-                                                    <h4>Contact Information</h4><a href="javascript:void(0)">Edit</a>
-                                                </div>
-                                                <div class="box-content">
-                                                    <h6 class="font-light">{{request.user.username}}</h6>
-                                                    <h6 class="font-light">{{request.user.email}}</h6>
-                                                    <a href="{% url 'change_password' %}">Change Password</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="box">
-                                                <div class="box-title">
-                                                    <h4>Newsletters</h4><a href="javascript:void(0)">Edit</a>
-                                                </div>
-                                                <div class="box-content">
-                                                    <h6 class="font-light">You are currently not subscribed to any
-                                                        newsletter.</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="box address-box">
-                                            <div class="box-title">
-                                                <h4>Address Book</h4><a href="javascript:void(0)">Manage
-                                                    Addresses</a>
-                                            </div>
-                                            <div class="box-content">
-                                                <div class="row g-4">
-                                                    <div class="col-sm-6">
-                                                        <h6 class="font-light">Default Billing Address</h6>
-                                                        <h6 class="font-light">You have not set a default
-                                                            billing address.</h6>
-                                                        <a href="javascript:void(0)">Edit Address</a>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <h6 class="font-light">Default Shipping Address</h6>
-                                                        <h6 class="font-light">You have not set a default
-                                                            shipping address.</h6>
-                                                        <a href="javascript:void(0)">Edit Address</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="order">
-                        <div class="box-head mb-3">
-                            <h3>My Order</h3>
-                        </div>
-                        <div class="table-responsive">
-                            {% if orders %}
-                            <table class="table cart-table">
-                                <thead>
-                                    <tr class="table-head">
-                                        <th scope="col">Order Id</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">View</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for order in orders %}
-                                    <tr>
-                                        <td>
-                                            <p class="mt-0">#{{order.id}}</p>
-                                        </td>
-                                        {% if order.orderedOrNot == True %}
-                                        <td>
-                                            <p class="success-button btn btn-sm">Shipped</p>
-                                        </td>
-                                        {% else %}
-                                        <td>
-                                            <p class="danger-button btn btn-sm">Pending</p>
-                                        </td>
-                                        {% endif %}
-                                        <td>
-                                            <p class="theme-color fs-6">
-                                                {{""|return_currency_wise_symbol:request}}{{order.orderTotalPrice|return_currency_wise_ammount:request}}
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'order_tracking' order.id %}">
-                                                <i class="far fa-eye"></i>
-
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            {% else %}
-                            <section class="pt-0">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12 p-0">    
-                                            <div class="empty-product-box success-icon">
-                                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"  alt="">
-                                                <div class="success-contain">
-                                                    <h4>No order found!</h4>
-                                                </div>
-                                                <div>
-                                                    <a href="{% url 'index_default' %}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
-                                                        <i class="fas fa-arrow-left"></i> Add Products</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="wishlist">
-                        <div class="box-head mb-3">
-                            <h3>My Wishlist</h3>
-                        </div>
-                        <div class="table-responsive">
-                            {% if totalWishlistProducts|to_int == 0|to_int %}
-
-                            <div class="empty-product-box success-icon">
-                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" alt="">
-                                <div class="success-contain">
-                                    <h4>Your shopping wishlist is empty. Let's add something to it</h4>
-                                </div>
-                                <div>
-                                    <a href="{% url 'index_default' %}"
-                                        class="btn btn-solid-default btn fw-bold mb-0 ms-0">
-                                        <i class="fas fa-arrow-left"></i> Add Products</a>
-                                </div>
-                            </div>
-
-                            {% else %}
-                            {% include 'includes/alerts.html' %}
-
-                            <table class="table cart-table">
-                                <thead>
-                                    <tr class="table-head">
-                                        <th scope="col">image</th>
-                                        <th scope="col">Product Details</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for wishlist_product in wishlist_products %}
-                                    <tr>
-                                        <td>
-                                            <a href="{% url 'shop_left_slidebar' %}">
-                                                <img loading="lazy"
-                                                    src="{{wishlist_product.variantProduct.productImageFront}}"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-                                        </td>
-
-                                        <td>
-                                            <p class="fs-6 m-0">{{wishlist_product.variantProduct.productName}}</p>
-                                        </td>
-                                        <td>
-                                            <p class="theme-color fs-6">
-                                                {{""|return_currency_wise_symbol:request}}{{wishlist_product.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                            </p>
-                                        </td>
-
-                                        <td>
-                                            <div class="d-flex align-items-center justify-content-center">
-                                                <h2 class="td-color">
-                                                    <a href="{% url 'delete_wishlist_product' wishlist_product.id %}"
-                                                        class="icon">
-                                                        <i class="fas fa-times"></i>
-                                                    </a>
-                                                </h2>
-                                                <h2 class="td-color">
-                                                    <a href="{% url 'add_to_cart_from_wishlist' wishlist_product.id 1 %}"
-                                                        class="icon">
-                                                        <i class="fas fa-shopping-cart"></i>
-                                                    </a>
-                                                </h2>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade dashboard" id="save">
-                        <div class="box-head">
-                            <h3>Save Address</h3>
-                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#addAddress">
-                                Add New Address
-                            </button>
-
-
-                        </div>
-                        <div class="save-details-box">
-                            <div class="row g-3">
-                                {% include 'includes/alerts.html' %}
-                                {% if orderaillingaddress %}
-                                {% for address in orderaillingaddress %}
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="save-details">
-                                        <div class="save-name">
-                                            <h5>{{address.customerFirstName}} {{address.customerLastName}}</h5>
-                                            <div class="save-position">
-                                                <h6>{{address.customerAddress2}}</h6>
-                                            </div>
-                                        </div>
-
-                                        <div class="save-address">
-                                            <p class="font-light">{{address.customerAddress1}}</p>
-                                            <p class="font-light">{{address.customerCity}}, {{address.customerZip}}</p>
-                                            <p class="font-light">{{address.customerCountry}}</p>
-                                        </div>
-
-                                        <div class="mobile">
-                                            <p class="font-light mobile">Mobile No. {{address.customerMobile}}</p>
-                                        </div>
-
-                                        <div class="button">
-                                            <a class="btn btn-sm edit"
-                                                onclick="HandleEdit({'addressId':'{{address.id}}'})"
-                                                data-bs-toggle="modal" data-bs-target="#editAddress">Edit</a>
-                                            <a href="{% url 'remove_address' address.id %}"
-                                                class="btn btn-sm">Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                {% else %}
-                                <div class="empty-product-box success-icon">
-                                    <img loading="lazy" src="{% static 'assets/images/noaddressfound.jpg' %}" alt="">
-                                    <div class="success-contain">
-                                        <h4>No Address Found!</h4>
-                                    </div>
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <script>
-                        function getCookie(name) {
-                            let cookieValue = null;
-                            if (document.cookie && document.cookie !== "") {
-                                const cookies = document.cookie.split(";");
-                                for (let i = 0; i < cookies.length; i++) {
-                                    const cookie = cookies[i].trim();
-                                    // Does this cookie string begin with the name we want?
-                                    if (cookie.substring(0, name.length + 1) === name + "=") {
-                                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                        break;
-                                    }
-                                }
-                            }
-                            return cookieValue;
-                        }
-                        var csrftoken = getCookie("csrftoken");
-
-
-                        function DeleteAccount() {
-                            if (confirm("Are you sure you want to delete your account?")) {
-                                $.ajax({
-                                    url: '/delete_user',
-                                    type: 'POST',
-                                    data: {
-                                        csrfmiddlewaretoken: '{{ csrf_token }}',
-                                    },
-                                });
-                                window.location.href = '/login_page';
-                            } else {
-                            }
-                        }
-                    </script>
-
-                    <!-- Add Address Modal Start-->
-                    <div class="modal fade add-address-modal" id="addAddress">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form id="formNewAddress" name="formNewAddress" method="post" action="">
-                                        {% csrf_token %}
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">First Name</label>
-                                            <input type="text" class="form-control" value="" name="fnameNew" id="fname"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">Last Name</label>
-                                            <input type="text" class="form-control" value="" name="lnameNew" id="lname"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">Username</label>
-                                            <input type="text" class="form-control" value="" name="usernameNew"
-                                                id="username" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label font-light">Email Address</label>
-                                            <input type="email" class="form-control" value="" name="emailNew" id="email"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="number" class="form-label font-light">Mobile No</label>
-                                            <input type="number" class="form-control" value="" name="mobnoNew"
-                                                id="mobno" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Address-1</label>
-                                            <input type="text" class="form-control" value="" name="address1New"
-                                                id="address1" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Address-2</label>
-                                            <input type="text" class="form-control" value="" name="address2New"
-                                                id="address2" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Country</label>
-                                            <input type="text" class="form-control" value="" name="countryNew"
-                                                id="country" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">City</label>
-                                            <input type="text" class="form-control" value="" name="cityNew" id="city"
-                                                required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="number" class="form-label font-light">Zipcode</label>
-                                            <input type="number" class="form-control" value="" name="zipcodeNew"
-                                                id="zipcode" required>
-                                        </div>
-
-                                        <div class="modal-footer pt-0 text-end d-block">
-                                            <button type="button"
-                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button class="btn btn-solid-default rounded-1" id="saveNewAddress"
-                                                onclick="addNewAddress()" data-bs-dismiss="modal">Save Address</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add Address Modal End -->
-                    <script>
-                        function addNewAddress(params) {
-                            var url = "{% url 'add_address' %}";
-                            var fname = document.getElementById("fname").value;
-                            var lname = document.getElementById("lname").value;
-                            var username = document.getElementById("username").value;
-                            var email = document.getElementById("email").value;
-                            var mobno = document.getElementById("mobno").value;
-                            var address1 = document.getElementById("address1").value;
-                            var address2 = document.getElementById("address2").value;
-                            var country = document.getElementById("country").value;
-                            var city = document.getElementById("city").value;
-                            var zipcode = document.getElementById("zipcode").value;
-
-                            // Check if any field is empty
-
-                            if (
-                                fname === "" ||
-                                lname === "" ||
-                                username === "" ||
-                                email === "" ||
-                                mobno === "" ||
-                                address1 === "" ||
-                                address2 === "" ||
-                                country === "" ||
-                                city === "" ||
-                                zipcode === ""
-                            ) {
-                                alert("Please fill in all the required fields.");
-                                return; // Stop form submission
-                            }
-
-                            fetch(url, {
-                                method: "POST",
-                                headers: {
-                                    "Content-type": "application/json",
-                                    "X-CSRFToken": csrftoken,
-                                },
-                                body: JSON.stringify({
-                                    fname: fname,
-                                    lname: lname,
-                                    username: username,
-                                    email: email,
-                                    mobno: mobno,
-                                    address1: address1,
-                                    address2: address2,
-                                    country: country,
-                                    city: city,
-                                    zipcode: zipcode,
-                                }),
-                            });
-                            window.location.reload();
-                        }
-
-
-                        function HandleEdit(params) {
-                            var url = ("{% url 'get_address' %}");
-
-                            fetch(url, {
-                                method: 'POST',
-                                headers: {
-                                    "Content-type": "application/json",
-                                    "X-CSRFToken": csrftoken,
-                                },
-                                body: JSON.stringify({
-                                    addressId: params.addressId,
-                                }),
-                            }).then((response) => {
-                                return response.json();
-                            }).then((data) => {
-                                console.log('===> DATA <=== ', data)
-                                document.getElementById('fnameEdit').value = data.fname;
-                                document.getElementById('lnameEdit').value = data.lname;
-                                document.getElementById('usernameEdit').value = data.username;
-                                document.getElementById('emailEdit').value = data.email;
-                                document.getElementById('mobnoEdit').value = data.mobno;
-                                document.getElementById('address1Edit').value = data.address1;
-                                document.getElementById('address2Edit').value = data.address2;
-                                document.getElementById('countryEdit').value = data.country;
-                                document.getElementById('cityEdit').value = data.city;
-                                document.getElementById('zipcodeEdit').value = data.zipcode;
-                                document.getElementById('addressIdInForm').value = params.addressId;
-
-                            });
-                        }
-
-
-                        function handleSaveAddress() {
-                            console.log('===> handleSaveAddress function called ====>')
-                            var url = ("{% url 'save_address' %}");
-
-                            fetch(url, {
-                                method: 'POST',
-                                headers: {
-                                    "Content-type": "application/json",
-                                    "X-CSRFToken": csrftoken,
-                                },
-                                body: JSON.stringify({
-                                    fNameEle: document.getElementById('fnameEdit').value,
-                                    lNameEle: document.getElementById('lnameEdit').value,
-                                    userNameEle: document.getElementById('usernameEdit').value,
-                                    emailEle: document.getElementById('emailEdit').value,
-                                    mobileEle: document.getElementById('mobnoEdit').value,
-                                    addOneEle: document.getElementById('address1Edit').value,
-                                    addTwoEle: document.getElementById('address2Edit').value,
-                                    countryEle: document.getElementById('countryEdit').value,
-                                    cityEle: document.getElementById('cityEdit').value,
-                                    zipEle: document.getElementById('zipcodeEdit').value,
-                                    addressId: document.getElementById('addressIdInForm').value,
-
-                                })
-
-                            }).then(response => {
-                                window.location.reload();
-                                if (response.ok) {
-                                    console.log(' ===> Address Saved successfully <====')
-                                } else {
-                                    console.log('===> Address Saved failed <===')
-                                }
-                            }).catch(error => {
-                                console.log('====> something went wrong address saved error<======')
-                            });
-
-                        }
-                    </script>
-
-                    <!-- Edit Address Modal Start-->
-                    <div class="modal fade add-address-modal" id="editAddress">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <form id="formEditAddress" name="formEditAddress" action="" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="addressName" id="addressIdInForm">
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">First Name</label>
-                                            <input type="text" class="form-control" value="" name="fnameEdit"
-                                                id="fnameEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">Last Name</label>
-                                            <input type="text" class="form-control" value="" name="lnameEdit"
-                                                id="lnameEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label font-light">Username</label>
-                                            <input type="text" class="form-control" value="" name="usernameEdit"
-                                                id="usernameEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="email" class="form-label font-light">Email Address</label>
-                                            <input type="email" class="form-control" value="" name="emailEdit"
-                                                id="emailEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="number" class="form-label font-light">Mobile No</label>
-                                            <input type="number" class="form-control" value="" name="mobnoEdit"
-                                                id="mobnoEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Address-1</label>
-                                            <input type="text" class="form-control" value="" name="address1Edit"
-                                                id="address1Edit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Address-2</label>
-                                            <input type="text" class="form-control" value="" name="address2Edit"
-                                                id="address2Edit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">Country</label>
-                                            <input type="text" class="form-control" value="" name="countryEdit"
-                                                id="countryEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="text" class="form-label font-light">City</label>
-                                            <input type="text" class="form-control" value="" name="cityEdit"
-                                                id="cityEdit" required>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="number" class="form-label font-light">Zipcode</label>
-                                            <input type="number" class="form-control" value="" name="zipcodeEdit"
-                                                id="zipcodeEdit" required>
-                                        </div>
-
-                                        <div class="modal-footer pt-0 text-end d-block">
-                                            <button type="button"
-                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
-                                                data-bs-dismiss="modal">Close</button>
-                                            {% comment %} <button class="btn btn-solid-default rounded-1"
-                                                id="saveEditAddress"
-                                                onclick="handleSaveAddress('{{ addressId }}','{{ customerId }}', '{{ fNameEle }}', '{{ lNameEle }}', '{{ userNameEle }}', '{{ emailEle }}', '{{ mobileEle }}', '{{ addOneEle }}', '{{ addTwoEle }}', '{{ countryEle }}', '{{ cityEle }}', '{{ zipEle }}')"
-                                                data-bs-dismiss="modal">Save Address</button> {% endcomment %}
-                                            <button class="btn btn-solid-default rounded-1" id="saveEditAddress"
-                                                onclick="handleSaveAddress()" data-bs-dismiss="modal">Save
-                                                Address</button>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Edit Address Modal End -->
-
-                    <div class="tab-pane fade dashboard" id="pay">
-                        <div class="box-head">
-                            <h3>Card & Payment</h3>
-                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto" data-bs-toggle="modal"
-                                data-bs-target="#addPayment"><i class="fas fa-plus"></i>
-                                Add New Card</button>
-                        </div>
-
-                        <div class="card-details-section">
-                            <div class="row g-4">
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 2548</h4>
-                                            </div>
-
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>12/25</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">primary</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Bhautik Vaghasiya</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/1.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="edit-card">
-                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                                delete</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                            delete</a>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details card-visa">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 0506</h4>
-                                            </div>
-
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>12/26</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">Visa</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Charles Jhon</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/2.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="edit-card">
-                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                                delete</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                            delete</a>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details dabit-card">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 4617</h4>
-                                            </div>
-
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>12/30</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">Rupay</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Mayur Patodiya</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/3.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="edit-card">
-                                            <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                                href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                            <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                                delete</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="far fa-minus-square"></i>
-                                            delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade dashboard-profile dashboard" id="profile">
-                        <div class="box-head">
-                            <h3>Profile</h3>
-                            <button class="btn btn-solid-default btn-sm fw-bold ms-auto"
-                                onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
-                                data-bs-target="#editAddress">
-                                Edit
-                            </button>
-                        </div>
-                        <ul class="dash-profile">
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">First Name</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerFirstName}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Last Name</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerLastName}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Username</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerUsername}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Email Address</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerEmail}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Mob No</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerMobile}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Addressline-1</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerAddress1}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Addressline-2</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerAddress2}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Country</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerCountry}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">City</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerCity}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Zip Code</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerZip}}</h6>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="box-head mt-lg-5 mt-3">
-                            <h3>Login Details</h3>
-                        </div>
-
-                        <ul class="dash-profile">
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Email Address</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerEmail}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Phone No.</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerMobile}}</h6>
-                                </div>
-                            </li>
-
-                            <li class="mb-0">
-                                <div class="left">
-                                    <h6 class="font-light">Password</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>●●●●●●</h6>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                    <div class="tab-pane fade dashboard-security dashboard" id="security">
-                        <div class="box-head">
-                            <h3>Delete Your Account</h3>
-                        </div>
-                        <div class="security-details">
-                            <h5 class="font-light mt-3">Hi <span> {{request.user.username}},</span>
-                            </h5>
-                            <p class="font-light mt-1">We Are Sorry To Here You Would Like To Delete Your Account.
-                            </p>
-                        </div>
-
-                        <div class="security-details-1 mb-0">
-                            <div class="page-title">
-                                <h4 class="fw-bold">Note</h4>
-                            </div>
-                            <p class="font-light">Deleting your account will permanently remove your profile,
-                                personal settings, and all other associated information. Once your account is
-                                deleted, You will be logged out and will be unable to log back in.</p>
-
-                            <p class="font-light mb-4">If you understand and agree to the above statement, and would
-                                still like to delete your account, than click below</p>
-
-                            <button class="btn btn-solid-default btn-sm fw-bold rounded" onclick="DeleteAccount();"
-                                data-bs-toggle="modal" data-bs-target="#deleteModal">Delete Your
-                                Account</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" name="flexRadioDefaultForCoupon" value="doNotHaveCoupon"
+                id="doNotHaveCoupon">
+              <label class="form-check-label" for="doNotHaveCoupon">No</label>
             </div>
+          </div>
+        </div> {% endcomment %}
+
+        {% comment %} ----------------------- COUPON MODULE Start -------------------------- {% endcomment %}
+        <div id="couponCodeDiv">
+          <!-- <div class="col-lg-4 col-sm-6"> -->
+          <div class="promo-section mb-sm-4 mb-2">
+            <div class="row g-2">
+              <div class="col-7">
+                <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code">
+              </div>
+              <div class="col-5">
+                <button class="btn btn-solid-default rounded" id="couponBtn"
+                  onclick="couponvalidation({'price':'{{Cart.getTotalPrice}}','tax':{{Cart.getTotalTax}},'priceInUSD':{{getFinalPriceAfterTax}}})">Apply
+                  Coupon</button>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
         </div>
+        {% comment %} ----------------------- COUPON MODULE End -------------------------- {% endcomment %}
+
+        {% comment %} -------------------- BILLING ADDRESS CHECKBOXED Start -----------------------------
+        {% endcomment %}
+        <div id="billingAddressDiv">
+          <h3 class="mb-3">Billing address</h3>
+          <div class="d-block my-3">
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" name="flexRadioDefaultForAddress" value="newAddress"
+                id="newAddress">
+              <label class="form-check-label" for="newAddress">New Address</label>
+            </div>
+            {% for address in billingAddresses %}
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" id="address-{{forloop.counter}}"
+                name="flexRadioDefaultForAddress" value={{address.id}}>
+              <label class="form-check-label" for="address-{{forloop.counter}}">{{address.customerAddress1}} -
+                {{address.customerZip}}</label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% comment %} ----------------------- BILLING ADDRESS CHECKBOXED End ------------------------ {% endcomment %}
+        {% comment %} ----------------------- BILLING ADDRESS FORM Start ---------------------------- {% endcomment %}
+        <form class="needs-validation" id="new-address" style="display: none;">
+          <input type="hidden" name="cartid" value="{{Cart.id}}">
+          {% comment %} <div class="row g-4" id="new-address"> {% endcomment %}
+            <div class="row g-4">
+
+              <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" name="fname" class="form-control" id="fname" required placeholder="Enter First Name">
+              </div>
+
+              <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" name="lname" class="form-control" id="lname" required placeholder="Enter Last Name">
+              </div>
+
+              <div class="col-md-6">
+                <label for="lname" class="form-label">Username</label>
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <input type="text" name="uname" class="form-control" placeholder="Username" id="uname" required>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="email" class="form-label">Email address </label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com"
+                  required>
+              </div>
+
+              <div class="col-md-6">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" name="address1" class="form-control" id="address1" placeholder="1234 Main St"
+                  required>
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="address2" class="form-label">Address 2</label>
+                <input type="text" name="address2" class="form-control" id="address2" placeholder="1234 Main St"
+                  required>
+              </div>
+
+              <div class="col-md-5">
+                <label for="validationCustom04" class="form-label">Country</label>
+                <select name="country" class="form-select custome-form-select" id="validationCustom04" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option name="united-states" value="United States">United States</option>
+                  <option name="india" value="India">India</option>
+                  <option name="america" value="America">America</option>
+                  <option name="south-america" value="">South America</option>
+                  <option name="dubai" value="Dubai">Dubai</option>
+                  <option name="hong-kong" value="Hong Kong">Hong Kong</option>
+                  <option name="indonesia" value="Indonesia">Indonesia</option>
+                  <option name="pakistan" value="Pakistan">Pakistan</option>
+                  <option name="saudi-arabia" value="Saudi Arabia">Saudi Arabia</option>
+                  <option name="china" value="China">China</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="validationCustom04" class="form-label">City</label>
+                <select name="city" class="form-select custome-form-select" id="validationCustom05" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option name="Bhutan" value="Bhutan">Bhutan</option>
+                  <option name="Burundi" value="Burundi">Burundi</option>
+                  <option name="Comoros" value="Comoros">Comoros</option>
+                  <option name="Dilhi" value="Dilhi">Dilhi</option>
+                  <option name="Mumbai" value="Mumbai">Mumbai</option>
+                  <option name="Surat" value="Surat">Surat</option>
+                  <option name="Abu & Ambaji" value="Abu & Ambaji">Abu & Ambaji</option>
+                  <option name="Japan" value="Japan">Japan</option>
+                  <option name="Cuba" value="Cuba">Cuba</option>
+                  <option name="Zambia" value="Zambia">Zambia</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="zip" class="form-label">Zip</label>
+                <input name="zip" type="text" class="form-control" id="zip" required placeholder="1234 Main St">
+              </div>
+
+            </div>
+            {% comment %} <div class="form-check ps-0 mt-3 custome-form-check">
+              <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11">
+              <label class="form-check-label checkout-label" for="flexCheckDefault11">Save this
+                information for next time</label>
+            </div> {% endcomment %}
+            {% comment %} <button type="submit" class="btn btn-primary" id="submit-address">Save</button>
+            {% endcomment %}
+        </form>
+        {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
+        {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
+        <hr class="my-lg-5 my-4">
+        {% comment %} Payment option section START ------------------------------------------------ {% endcomment %}
+        <div id="payment-option" style="display:none;">
+          <h3 class="mb-3">Payment</h3>
+          <div class="d-block my-3">
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="PayPal" id="paypal">
+              <label class="form-check-label" for="paypal">PayPal</label>
+            </div>
+
+            <div class="form-check custome-radio-box">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" value="RazorPay" id="razorpay">
+              <label class="form-check-label" for="razorpay">RazorPay</label>
+            </div>
+          </div>
+        </div>
+        <div id="paypal-button-container" class="selected-option"></div>
+        <div id="smart-button-container" class="selected-option"></div>
+        <button id="rzp-button1" class="btn btn-solid-default razorpay-btn" style="display:none;">Pay with Razorpay</button>
+        <div style="text-align: center;">
+        </div>
+      </div>
+      {% comment %} Payment option section END ------------------------------------------------ {% endcomment %}
+
+      <div class="col-lg-4">
+        <div class="your-cart-box">
+          <h3 class="mb-3 d-flex text-capitalize">Your cart<span
+              class="badge bg-theme new-badge rounded-pill ms-auto bg-dark">{{totalCartProducts}}</span>
+          </h3>
+          <ul class="list-group mb-3">
+
+            {% for product in cart_products %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">{{product.cartProduct.variantProduct.productName}}</h6>
+                <small>{{product.cartProduct.variantProduct.proCategory}}</small>
+              </div>
+              <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                &nbsp; &nbsp; &nbsp; X {{product.cartProductQuantity}}</span>
+            </li>
+            {% endfor %}
+
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div class="text-dark">
+                <h6 class="my-0">Total MRP</h6>
+                <small></small>
+              </div>
+              <span>{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div class="text-dark">
+                <h6 class="my-0">Coupon amount</h6>
+                <small></small>
+              </div>
+              <span
+                id="couponAmount">{{""|return_currency_wise_symbol:request}}{{couponAmount|return_currency_wise_ammount:request}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div class="text-dark">
+                <h6 class="my-0">Tax</h6>
+                <small></small>
+              </div>
+              <span>{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
+            </li>
+            <li class="list-group-item d-flex lh-condensed justify-content-between">
+              <span class="fw-bold">Total ({{""|return_currency_wise_code:request}})</span>
+              <strong
+                id="finalAmount">{{""|return_currency_wise_symbol:request}}{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}</strong>
+            </li>
+            <li class="list-group-item d-flex lh-condensed justify-content-between">
+              <span class="fw-bold">Total (In USD)</span>
+              <strong id="finalAmountInUSD">${{getFinalPriceAfterTax}}</strong>
+            </li>
+          </ul>
+
+          {% comment %} <form class="card border-0">
+            <div class="input-group custome-imput-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-solid-default rounded-0">Redeem</button>
+              </div>
+            </div>
+          </form> {% endcomment %}
+        </div>
+      </div>
+      <div id='checkoutMsgDiv'>
+      </div>
     </div>
 </section>
-<!-- user dashboard section end -->
-
-
-
-
+<!-- Checkout Section End -->
 {% endblock components %}
+
+{% block script %}
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypal_sdk"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getCookie("csrftoken");
+  var price;
+  price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
+  var totalTax;
+  totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
+  // console.log('============>totalTax', totalTax)
+  // completeOrder() function for paypal payment start ============================================
+  function completeOrder(params) {
+    var url = "{% url 'payment_complete' %}";
+    var cartid = "{{Cart.id}}";
+
+    var newAddressRadioBtn = document.getElementById("newAddress");
+    if (newAddressRadioBtn.checked) {
+      var fname = document.getElementById("fname").value;
+      var lname = document.getElementById("lname").value;
+      var uname = document.getElementById("uname").value;
+      var email = document.getElementById("email").value;
+      var address1 = document.getElementById("address1").value;
+      var address2 = document.getElementById("address2").value;
+      var country = document.getElementById("validationCustom04").value;
+      var city = document.getElementById("validationCustom05").value;
+      var zip = document.getElementById("zip").value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
+            price: price,
+            totalTax: totalTax,
+
+            fname: fname,
+            lname: lname,
+            uname: uname,
+            email: email,
+            address1: address1,
+            address2: address2,
+            country: country,
+            city: city,
+            zip: zip,
+            cartid: cartid,
+            orderpaymentmethodname: orderpaymentmethodname,
+            payPalTransactionID: params.payPalTransactionID,
+            couponCode: couponCode,
+            couponCode: couponCode,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the JSON response
+          console.log(data); // Access the data returned from the server
+          // Perform any additional operations with the response data
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the JSON response
+          console.log(data); // Access the data returned from the server
+          // Perform any additional operations with the response data
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        });
+    } else {
+      var radios = document.getElementsByName("flexRadioDefaultForAddress");
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      var couponCode = document.getElementById("couponCode").value;
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          var selectedValue = radios[i].value;
+          fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+              },
+              body: JSON.stringify({
+                price: price,
+                totalTax: totalTax,
+                addressId: selectedValue,
+                cartid: cartid,
+                orderpaymentmethodname: orderpaymentmethodname,
+                payPalTransactionID: params.payPalTransactionID,
+                couponCode: couponCode,
+                couponCode: couponCode,
+              }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the JSON response
+              console.log(data); // Access the data returned from the server
+              // Perform any additional operations with the response data
+            })
+            .catch(error => {
+              // Handle any errors that occur during the request
+              console.error(error);
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the JSON response
+              console.log(data); // Access the data returned from the server
+              // Perform any additional operations with the response data
+            })
+            .catch(error => {
+              // Handle any errors that occur during the request
+              console.error(error);
+            });
+        }
+      }
+    }
+  }
+  // completeOrder() function for paypal payment end ==============================================  
+
+
+  // completeOrder() function for razorpay payment start ==========================================
+  function completeOrderForRazorPay(params) {
+    var url = "{% url 'payment_complete' %}";
+    var cartid = "{{Cart.id}}";
+
+    var newAddressRadioBtn = document.getElementById("newAddress");
+    if (newAddressRadioBtn.checked) {
+      var fname = document.getElementById("fname").value;
+      var lname = document.getElementById("lname").value;
+      var uname = document.getElementById("uname").value;
+      var email = document.getElementById("email").value;
+      var address1 = document.getElementById("address1").value;
+      var address2 = document.getElementById("address2").value;
+      var country = document.getElementById("validationCustom04").value;
+      var city = document.getElementById("validationCustom05").value;
+      var zip = document.getElementById("zip").value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
+            price: price,
+            totalTax: totalTax,
+            fname: fname,
+            lname: lname,
+            uname: uname,
+            email: email,
+            address1: address1,
+            address2: address2,
+            country: country,
+            city: city,
+            zip: zip,
+            cartid: cartid,
+            orderpaymentmethodname: orderpaymentmethodname,
+            rpPaymentId: params.rpPaymentId,
+            rpOrderId: params.rpOrderId,
+            rpSignature: params.rpSignature,
+            couponCode: couponCode,
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the JSON response
+          console.log(data); // Access the data returned from the server
+          // Perform any additional operations with the response data
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the JSON response
+          console.log(data); // Access the data returned from the server
+          // Perform any additional operations with the response data
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        });
+
+
+    } else {
+      var radios = document.getElementsByName("flexRadioDefaultForAddress");
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      var couponCode = document.getElementById("couponCode").value;
+      var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+      var couponCode = document.getElementById("couponCode").value;
+
+      for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+          var selectedValue = radios[i].value;
+          fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+              },
+              body: JSON.stringify({
+                price: price,
+                totalTax: totalTax,
+                addressId: selectedValue,
+                cartid: cartid,
+                orderpaymentmethodname: orderpaymentmethodname,
+                rpPaymentId: params.rpPaymentId,
+                rpOrderId: params.rpOrderId,
+                rpSignature: params.rpSignature,
+                couponCode: couponCode,
+                couponCode: couponCode,
+              }),
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the JSON response
+              console.log(data); // Access the data returned from the server
+              // Perform any additional operations with the response data
+            })
+            .catch(error => {
+              // Handle any errors that occur during the request
+              console.error(error);
+            })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the JSON response
+              console.log(data); // Access the data returned from the server
+              // Perform any additional operations with the response data
+            })
+            .catch(error => {
+              // Handle any errors that occur during the request
+              console.error(error);
+            });
+        }
+      }
+    }
+  }
+  // completeOrder() function for razorpay payment end ============================================
+
+
+  // =======================================================================
+  // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
+  // =======================================================================
+
+  paypal_sdk.Buttons({
+    onClick: async function (data, actions) {
+      var fname = document.getElementById("fname").value;
+      var lname = document.getElementById("lname").value;
+      var uname = document.getElementById("uname").value;
+      var email = document.getElementById("email").value;
+      var address1 = document.getElementById("address1").value;
+      var address2 = document.getElementById("address2").value;
+      var country = document.getElementById("validationCustom04").value;
+      var city = document.getElementById("validationCustom05").value;
+      var zip = document.getElementById("zip").value;
+
+      var checkOutStatus = await handleCheckout();
+
+      const options = document.getElementsByName("flexRadioDefaultForAddress");
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].checked && options[i].value == "newAddress") {
+          if (!fname || !lname || !uname || !email || !address1 || !address2 || !country || !city || !zip) {
+            alert("Please fill the billing address form.");
+            return actions.reject();
+          } else {
+            if (checkOutStatus) {
+              return actions.resolve();
+            } else {
+              return actions.reject();
+            }
+          }
+        } else {
+          if (checkOutStatus) {
+            return actions.resolve();
+          } else {
+            return actions.reject();
+          }
+        }
+      }
+    },
+
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: price,
+          },
+        }, ],
+      });
+    },
+
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        var transactionId = details.purchase_units[0].payments.captures[0].id;
+        console.log('============>transactionId', transactionId)
+        console.log('==================>details', details)
+        console.log('============>data', data)
+        console.log('============>data.paymentID', data.paymentID)
+        console.log('============>data.order', data.orderID)
+
+
+        completeOrder({
+          'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
+        });
+        setTimeout(function () {
+          location.href = "{% url 'order_success' %}";
+        }, 400);
+      });
+    },
+  }).render("#paypal-button-container");
+
+
+  //  =======================================================================
+  //  RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay
+  // ========================================================================
+
+  var options = {
+    key: "{{rsk}}",
+    amount: "{{payment.amount}}",
+    currency: "{{payment.currency}}",
+    name: "Voxo Ecommerce",
+    description: "Order Transaction",
+    order_id: "{{payment.id}}",
+    handler: function (response) {
+      if (response.error && response.error.code === 'payment_cancelled') {
+        // Handle payment cancellation error
+        alert("Payment has been cancelled. Please try again or complete the payment later.");
+      }
+
+      completeOrderForRazorPay({
+        'rpPaymentId': response.razorpay_payment_id,
+        'rpOrderId': response.razorpay_order_id,
+        'rpSignature': response.razorpay_signature
+      });
+      setTimeout(function () {
+        location.href = "{% url 'order_success' %}";
+      }, 400);
+    },
+  };
+
+  var rzpObject = new Razorpay(options);
+
+  document.getElementById("rzp-button1").onclick = function (e) {
+    var fname = document.getElementById("fname").value;
+    var lname = document.getElementById("lname").value;
+    var uname = document.getElementById("uname").value;
+    var email = document.getElementById("email").value;
+    var address1 = document.getElementById("address1").value;
+    var address2 = document.getElementById("address2").value;
+    var country = document.getElementById("validationCustom04").value;
+    var city = document.getElementById("validationCustom05").value;
+    var zip = document.getElementById("zip").value;
+
+    handleCheckout()
+      .then((checkOutStatus) => {
+        const options = document.getElementsByName("flexRadioDefaultForAddress");
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].checked && options[i].value == "newAddress") {
+            if (!fname || !lname || !uname || !email || !address1 || !address2 || !country || !city || !zip) {
+              alert("Please fill the billing address form.");
+            } else {
+              if (checkOutStatus) {
+                rzpObject.open();
+                e.preventDefault();
+              } else {
+                return;
+              }
+            }
+          }
+          if (options[i].checked && options[i].value != "newAddress") {
+            if (checkOutStatus) {
+              rzpObject.open();
+              e.preventDefault();
+            } else {
+              return;
+            }
+          }
+        }
+      });
+  };
+
+
+
+  // ===============================================================
+  // It will display payment option based on payment method selection
+
+  const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+  const paypalProceedButton = document.querySelector("#paypal-button-container");
+  const razorPayProceedButton = document.querySelector("#rzp-button1");
+
+  paypalProceedButton.style.display = "none";
+  razorPayProceedButton.style.display = "none";
+
+  paymentMethodRadios.forEach((radio) => {
+    radio.addEventListener("click", (event) => {
+      const options = document.getElementsByName("flexRadioDefaultForAddress");
+      let isChecked = false;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].checked && (options[i].value == "newAddress" || options[i].value != "newAddress")) {
+          isChecked = true;
+          break;
+        }
+      }
+
+      if (!isChecked) {
+        event.preventDefault();
+        alert("Please select at least one option from the billing address.");
+      } else {
+        const paymentMethod = event.target.value;
+        if (paymentMethod === "PayPal") {
+          paypalProceedButton.style.display = "block";
+          razorPayProceedButton.style.display = "none";
+        } else if (paymentMethod === "RazorPay") {
+          paypalProceedButton.style.display = "none";
+          razorPayProceedButton.style.display = "block";
+        } else if (paymentMethod === "Stripe") {
+          paypalProceedButton.style.display = "none";
+          razorPayProceedButton.style.display = "none";
+        }
+      }
+    });
+  });
+
+  // ============================================================
+  // It will display billing address checking it checks coupon
+  // ============================================================
+
+
+
+
+  // ============================================================
+  // It will display address option based on priviously saved address
+  // ============================================================
+
+  const addressMethodRadios = document.querySelectorAll('input[name="flexRadioDefaultForAddress"]');
+  const addAddressDiv = document.querySelector("#new-address");
+  const paymentOptions = document.querySelector("#payment-option");
+  const couponCodeEle = document.getElementById('couponCode');
+  const couponBtn = document.getElementById('couponBtn');
+
+
+  //addAddressDiv.style.display = "none";
+  //paymentOptions.style.display = "none";
+
+  addressMethodRadios.forEach((radio) => {
+    radio.addEventListener("change", (event) => {
+
+      // yesOption.disabled = true;
+      // noOption.disabled = true;
+      couponCodeEle.disabled = true;
+      couponBtn.disabled = true;
+
+      const addressMethod = event.target.value;
+      if (addressMethod === "newAddress") {
+        addAddressDiv.style.display = "block";
+        paymentOptions.style.display = "block";
+      } else {
+        addAddressDiv.style.display = "none";
+        paymentOptions.style.display = "block";
+      }
+    });
+  });
+
+  // ============================================================
+
+  // Handle Checkout Function Start ============================================================
+  var cartId = getCookie("cid");
+
+  async function handleCheckout() {
+    var checkOutStatus = true;
+    var url = "{% url 'cart_to_checkout_validation' %}";
+
+    await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+        body: JSON.stringify({
+          cartId: cartId,
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.flag === "True") {
+          // You can not Buy
+
+          var checkoutMsgDiv = document.getElementById("checkoutMsgDiv");
+          for (var i = 0; i < data.outOfStockProducts.length; i++) {
+            var checkoutMsg = document.createElement("h5");
+            checkoutMsg.setAttribute("id", "checkoutMsg" + i);
+            checkoutMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts +
+              " stock of product " + data.outOfStockProducts[i].productName + ". Please update your cart.";
+            checkoutMsgDiv.append(checkoutMsg);
+
+            // Set a timeout to hide the checkoutMsg element after 3 seconds
+            setTimeout(function (index) {
+              var checkoutMsgElement = document.getElementById("checkoutMsg" + index);
+              if (checkoutMsgElement) {
+                checkoutMsgElement.remove();
+              }
+            }, 3000, i);
+          }
+          checkOutStatus = false;
+        }
+        if (data.flag === "False") {
+          // You can Buy
+        }
+      });
+
+    return checkOutStatus;
+  }
+  // Handle Checkout Function Start ============================================================
+
+  // Set value in cookie Function Start ============================================================
+
+  function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds) {
+    const existingCookie = getCookie(cookieName);
+
+    if (existingCookie !== null) {
+      // Cookie exists, update its value and expiration
+      setCookie(cookieName, cookieValue, expirationSeconds);
+    } else {
+      // Cookie doesn't exist, set a new cookie
+      setCookie(cookieName, cookieValue, expirationSeconds);
+    }
+  }
+
+  function setCookie(cookieName, cookieValue, expirationSeconds) {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + expirationSeconds * 1000);
+    const cookieString =
+      `${encodeURIComponent(cookieName)}=${encodeURIComponent(cookieValue)}; expires=${expirationDate.toUTCString()}; path=/`;
+    document.cookie = cookieString;
+  }
+
+  function getCookie(cookieName) {
+    const cookieString = document.cookie;
+    const cookies = cookieString.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith(`${cookieName}=`)) {
+        return cookie.substring(cookieName.length + 1);
+      }
+    }
+
+    return null;
+  }
+
+
+
+  // Set value in cookie Function Start ============================================================
+
+
+
+
+  // Handle coupon validation start ======================
+  async function couponvalidation(params) {
+    const couponCodeEle = document.getElementById('couponCode');
+    const couponCode = couponCodeEle.value;
+    // const couponBtn = document.getElementById('couponBtn');
+    // const price = params.price
+    // const tax = params.tax
+    // const priceInUSD = params.priceInUSD
+
+
+
+
+    if (couponCode == '') {
+      alert('Please enter a coupon code')
+      return;
+    } else {
+      // Usage example
+      setOrUpdateCookie('couponCode', couponCode, 3600);
+    }
+
+
+
+    window.location.reload();
+
+    // console.log('============>url',url)
+    // await fetch(url, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     "X-CSRFToken": csrftoken,
+    //   },
+    //   // body: JSON.stringify({
+    //     // couponCode: couponCode,
+    //     // price: price,
+    //     // tax: tax,
+    //     // priceInUSD:priceInUSD,
+    //   // }),
+    // })
+
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   if (data.valid) {
+    //     console.log('============>valid',data)
+    //     // couponBtn.disabled = true;
+    //     couponCodeEle.disabled = true;
+    //     var couponAmount = document.getElementById("couponAmount")
+    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
+    //     var finalAmount = document.getElementById("finalAmount")
+    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
+    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
+    //     finalAmountInUSD.innerHTML = '$'+data.finalAmountInUSD
+    //     // priceBt=data.finalAmount
+    //     // yesOption.disabled = true;
+    //     // noOption.disabled = true;
+    //   }
+    //   if (!data.valid) {
+    //     console.log('============>IN valid',data)
+    //     var couponAmount = document.getElementById("couponAmount")
+    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
+    //     var finalAmount = document.getElementById("finalAmount")
+    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
+    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
+    //     finalAmountInUSD.innerHTML ='$'+data.finalAmountInUSD
+    //     // priceBt=data.finalAmount
+    //     // couponBtn.disabled = true;
+    //     couponCodeEle.disabled = true;
+    //     // yesOption.disabled = true;
+    //     // noOption.disabled = true;
+    //   }
+    // });
+
+  }
+  // Handle coupon validation end ========================
+</script>
+
+{% endblock script %}
+
+{% block style %}
+{% endblock style %}

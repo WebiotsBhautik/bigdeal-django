@@ -162,6 +162,18 @@ SASS_PROCESSOR_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'bigdealapp/static/assets/images'
 
 
+
+
+# Rozarpay settings ===================================================
+RAZORPAY_KEY_ID = 'rzp_test_iV7SM01Wb7wvhv'
+RAZORPAY_SECRET_KEY = 'gjdchqP3v7shiW7SRKo2xecV'
+# =====================================================================
+
+# PayPal settings ===================================================
+PAYPAL_CLIENT_ID = 'AWSvIg3u2s-p7g2RYkcktJLjtn3Rsw0LZAm0CoS6WeYtEoYmSzRC01bT0wVxz4whG3eN4bCu1vparBbp'
+# =====================================================================
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

@@ -191,3 +191,81 @@
 
 
         
+
+        
+# @login_required(login_url='login_page')
+# def checkout_page(request):
+#     customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+#     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+#     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
+#     totalCartProducts = cart_products.count()
+
+#     customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+#     wishlist_products = customer_wishlist.wishlistProducts.all()
+#     totalWishlistProducts = wishlist_products.count()
+    
+    
+
+#     getTotalTax = customer_cart.getTotalTax
+#     getTotalPrice = customer_cart.getTotalPrice
+
+#     customer = CustomUser.objects.get(id=request.user.id)
+#     billingAddresses = OrderBillingAddress.objects.filter(customer=customer)
+    
+    
+#     cookie_value = request.COOKIES.get('couponCode')
+#     couponAmount = 0
+#     if cookie_value:
+#         coupon = Coupon.objects.filter(couponCode=cookie_value)
+#         couponObj=coupon.first()
+        
+#         if len(coupon) == 1:
+#             couponUsesByCustomer=CouponHistory.objects.filter(coupon=couponObj)
+#             if len(couponUsesByCustomer) < couponObj.usageLimit and int(couponObj.numOfCoupon) > 0:
+#                 currentDateTime = timezone.now()
+#                 if couponObj.expirationDateTime >= currentDateTime and getTotalPrice >= couponObj.minAmount:
+#                     if couponObj.couponType == "Fixed":
+#                         couponAmount=int(couponObj.couponDiscountOrFixed)
+#                     if couponObj.couponType == "Percentage":
+#                         couponDiscountAmount=((getTotalPrice*couponObj.couponDiscountOrFixed)/100)
+#                         couponAmount=couponDiscountAmount
+#     else:
+#         pass
+        
+#     currency = get_currency_instance(request)
+#     currency_code = currency.code
+#     getTotalPriceForRazorPay = (decimal.Decimal(float(getTotalPrice))) * currency.factor * 100
+#     couponAmountForRazorPay = (decimal.Decimal(float(couponAmount))) * currency.factor * 100
+#     getTotalTaxForRazorPay = (decimal.Decimal(float(getTotalTax))) * currency.factor * 100
+    
+#     finalAmountForRazorPay=(getTotalPriceForRazorPay-couponAmountForRazorPay)+getTotalTaxForRazorPay
+#     payment = client.order.create({'amount': int(finalAmountForRazorPay), 'currency': currency_code, 'payment_capture': 1})
+#     finalAmount=(getTotalPrice-couponAmount)+getTotalTax
+    
+#     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+
+    
+#     context = {"breadcrumb": {"parent": "Checkout", "child": "Checkout"},
+#                "Cart": customer_cart, "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+#                "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
+#                "cart_products_demo": cart_products_demo,
+#                "getTotalTax": getTotalTax,
+#                "getFinalPriceAfterTax": finalAmount,
+               
+#                "getTotalPrice": getTotalPrice,
+#                "couponAmount":couponAmount,
+#                "billingAddresses": billingAddresses,
+#                "payment": payment,
+#                "rsk": settings.RAZORPAY_KEY_ID,
+#                "ppl":settings.PAYPAL_CLIENT_ID,
+#                 'active_banner_themes':active_banner_themes,
+#                }
+        
+#     return render(request, 'pages/pages/checkout.html', context)
+
+
+
+
+
+
+
