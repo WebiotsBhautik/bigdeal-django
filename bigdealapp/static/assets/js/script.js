@@ -3092,3 +3092,7 @@ function redirectToCreateQueryParamsUrl(params) {
     var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
     sbmtButton.click();
 }
+
+
+
+

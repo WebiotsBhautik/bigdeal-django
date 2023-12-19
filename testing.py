@@ -269,3 +269,48 @@
 
 
 
+
+
+
+
+# def validate_coupon(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         coupon_code = data.get('couponCode')
+#         priceStr = data.get('price')
+#         taxstr = data.get('tax')
+#         finalAmountInUSDStr = data.get('priceInUSD')
+        
+#         price = Decimal(priceStr)
+#         tax = Decimal(taxstr)
+#         finalAmountInUSD = Decimal(finalAmountInUSDStr)
+        
+#         couponStatus = False
+        
+#         coupon = Coupon.objects.filter(couponCode=coupon_code)
+#         couponObj=coupon.first()
+#         couponAmount = 0
+        
+#         if len(coupon) == 1:
+#             couponStatus = True
+#             couponUsesByCustomer=CouponHistory.objects.filter(coupon=couponObj)
+#             if len(couponUsesByCustomer) < couponObj.usageLimit and int(couponObj.numOfCoupon) > 0:
+#                 currentDateTime = timezone.now()
+#                 if couponObj.expirationDateTime >= currentDateTime and price >= couponObj.minAmount:
+#                     if couponObj.couponType == "Fixed":
+#                         couponAmount=int(couponObj.couponDiscountOrFixed)
+#                     if couponObj.couponType == "Percentage":
+#                         couponDiscountAmount=((price*couponObj.couponDiscountOrFixed)/100)
+#                         couponAmount=couponDiscountAmount
+        
+#         couponAmountForUSD = couponAmount
+#         currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))
+#         couponAmount=couponAmount*currency.factor
+#         finalAmount= (price-couponAmount)+(tax*currency.factor)
+#         finalAmountInUSD=finalAmountInUSD-couponAmountForUSD
+        
+#         data = {'valid': couponStatus,'couponAmount':couponAmount,'currencySymbol':currency.symbol,
+#                 'finalAmount':finalAmount,'finalAmountInUSD':finalAmountInUSD}
+#         return JsonResponse(data, safe=False)
+
+# client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))

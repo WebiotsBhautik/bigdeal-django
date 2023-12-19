@@ -163,8 +163,11 @@ urlpatterns = [
     path('delete_cart_product/<str:id>',views.delete_cart_product, name='delete_cart_product'),
     # path('delete_cart_product_form_header_button/<str:id>',views.delete_cart_product_form_header_button,name='delete_cart_product_form_header_button'),
     # path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
-    path('cart_to_checkout_validation',views.cart_to_checkout_validation,name='cart_to_checkout_validation'),
     
+    
+    # Checkout Page Routes
+    path('cart_to_checkout_validation',views.cart_to_checkout_validation,name='cart_to_checkout_validation'),
+    path('validate_coupon/', views.validate_coupon, name='validate_coupon'),
     path('checkout_page',views.checkout_page,name='checkout_page'),
     path('checkout_2_page',views.checkout_2_page,name='checkout_2_page'),
 
