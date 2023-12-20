@@ -5232,6 +5232,15 @@ def checkout_page(request):
     
     return render(request, 'pages/pages/account/checkout.html',context)
 
+
+def payment_complete(request):
+    body = json.loads(request.body)
+    pass
+
+    
+def order_success(request):
+    pass
+
 def checkout_2_page(request):
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)

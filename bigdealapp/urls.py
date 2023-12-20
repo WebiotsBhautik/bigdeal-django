@@ -170,6 +170,10 @@ urlpatterns = [
     path('validate_coupon/', views.validate_coupon, name='validate_coupon'),
     path('checkout_page',views.checkout_page,name='checkout_page'),
     path('checkout_2_page',views.checkout_2_page,name='checkout_2_page'),
+    
+    path('payment_complete',views.payment_complete,name='payment_complete'),
+    path('order_success',views.order_success,name='order_success'),
+
 
     
 

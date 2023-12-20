@@ -160,13 +160,6 @@
               </div>
 
             </div>
-            {% comment %} <div class="form-check ps-0 mt-3 custome-form-check">
-              <input class="checkbox_animated check-it" type="checkbox" id="flexCheckDefault11">
-              <label class="form-check-label checkout-label" for="flexCheckDefault11">Save this
-                information for next time</label>
-            </div> {% endcomment %}
-            {% comment %} <button type="submit" class="btn btn-primary" id="submit-address">Save</button>
-            {% endcomment %}
         </form>
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
@@ -244,15 +237,6 @@
               <strong id="finalAmountInUSD">${{getFinalPriceAfterTax}}</strong>
             </li>
           </ul>
-
-          {% comment %} <form class="card border-0">
-            <div class="input-group custome-imput-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-solid-default rounded-0">Redeem</button>
-              </div>
-            </div>
-          </form> {% endcomment %}
         </div>
       </div>
       <div id='checkoutMsgDiv'>
@@ -282,13 +266,14 @@
     }
     return cookieValue;
   }
+  
   var csrftoken = getCookie("csrftoken");
-  var price;
-  price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
-  var totalTax;
-  totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
-  // console.log('============>totalTax', totalTax)
+  var price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
+  var totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
+
+
   // completeOrder() function for paypal payment start ============================================
+
   function completeOrder(params) {
     var url = "{% url 'payment_complete' %}";
     var cartid = "{{Cart.id}}";
@@ -746,14 +731,11 @@
   const couponBtn = document.getElementById('couponBtn');
 
 
-  //addAddressDiv.style.display = "none";
-  //paymentOptions.style.display = "none";
+ 
 
   addressMethodRadios.forEach((radio) => {
     radio.addEventListener("change", (event) => {
 
-      // yesOption.disabled = true;
-      // noOption.disabled = true;
       couponCodeEle.disabled = true;
       couponBtn.disabled = true;
 
@@ -817,7 +799,7 @@
 
     return checkOutStatus;
   }
-  // Handle Checkout Function Start ============================================================
+  // Handle Checkout Function End ============================================================
 
   // Set value in cookie Function Start ============================================================
 
@@ -866,11 +848,7 @@
   async function couponvalidation(params) {
     const couponCodeEle = document.getElementById('couponCode');
     const couponCode = couponCodeEle.value;
-    // const couponBtn = document.getElementById('couponBtn');
-    // const price = params.price
-    // const tax = params.tax
-    // const priceInUSD = params.priceInUSD
-
+    
 
 
 
@@ -886,52 +864,7 @@
 
     window.location.reload();
 
-    // console.log('============>url',url)
-    // await fetch(url, {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //     "X-CSRFToken": csrftoken,
-    //   },
-    //   // body: JSON.stringify({
-    //     // couponCode: couponCode,
-    //     // price: price,
-    //     // tax: tax,
-    //     // priceInUSD:priceInUSD,
-    //   // }),
-    // })
-
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   if (data.valid) {
-    //     console.log('============>valid',data)
-    //     // couponBtn.disabled = true;
-    //     couponCodeEle.disabled = true;
-    //     var couponAmount = document.getElementById("couponAmount")
-    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
-    //     var finalAmount = document.getElementById("finalAmount")
-    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
-    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
-    //     finalAmountInUSD.innerHTML = '$'+data.finalAmountInUSD
-    //     // priceBt=data.finalAmount
-    //     // yesOption.disabled = true;
-    //     // noOption.disabled = true;
-    //   }
-    //   if (!data.valid) {
-    //     console.log('============>IN valid',data)
-    //     var couponAmount = document.getElementById("couponAmount")
-    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
-    //     var finalAmount = document.getElementById("finalAmount")
-    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
-    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
-    //     finalAmountInUSD.innerHTML ='$'+data.finalAmountInUSD
-    //     // priceBt=data.finalAmount
-    //     // couponBtn.disabled = true;
-    //     couponCodeEle.disabled = true;
-    //     // yesOption.disabled = true;
-    //     // noOption.disabled = true;
-    //   }
-    // });
+    
 
   }
   // Handle coupon validation end ========================
