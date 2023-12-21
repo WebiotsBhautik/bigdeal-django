@@ -145,9 +145,9 @@
                                     </ul>
                                 </div>
                                 <div class="payment-box">
-                                    <div class="upper-box">
-                                        <div id="payment-option" style="display:none;">
-                                            <ul style="display:none;">
+                                    <div class="upper-box" id="payment-option" style="display:none;">
+                                        <div id="payment-option">
+                                            <ul>
                                                 <li>
                                                     <div class="form-check custome-radio-box">
                                                         <input type="radio" name="flexRadioDefault" id="paypal" value="PayPal" >
@@ -165,11 +165,10 @@
                                         <div id="paypal-button-container" class="selected-option"></div>
                                         <div id="smart-button-container" class="selected-option"></div>
                                         <button id="rzp-button1" class="btn btn-solid-default razorpay-btn" style="display:none;">Pay with Razorpay</button>
-                                        <div style="text-align: center;">
-                                        </div>
+                                        <div style="text-align: center;"></div>
                                     </div>
                                     <div class="text-right"><a href="javascript:void(0)" class="btn-normal btn">Place Order</a></div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -528,8 +527,8 @@ async function couponvalidation(params){
     if(couponCode == ''){
         alert('Please enter coupon code')
         return;
-    }   else{
-            setOrUpdateCookie('couponCode',couponCode,3600);
+    }else{
+        setOrUpdateCookie('couponCode',couponCode,3600);
         }
 
     window.location.reload();

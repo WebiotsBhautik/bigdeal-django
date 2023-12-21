@@ -17,7 +17,7 @@ from .models import Banner,BannerTheme, BannerType, BlogCategory, Blog, BlogComm
 from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory, Product,
                             ProductAttributes, ProductReview, ProductVariant,AttributeValue,ProductMeta)
 
-from order.models import (Cart,CartProducts,OrderBillingAddress,OrderPayment,Order,OrderTracking,ProductOrder,Wishlist,Compare)
+from order.models import (Cart,CartProducts,OrderBillingAddress,OrderPayment,Order,OrderTracking,ProductOrder,Wishlist,Compare,PaymentMethod)
 
 from bigdealapp.helpers import get_color_and_size_list, get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
 
@@ -5235,11 +5235,150 @@ def checkout_page(request):
 
 def payment_complete(request):
     body = json.loads(request.body)
-    pass
+    
+    if 'addressId' in body:
+        addressId = body["addressId"]
+        strPrice = body["price"]
+
+        decimalPrice = Decimal(strPrice)
+        price = convert_amount_based_on_currency(decimalPrice,request)
+        cartid = body["cartid"]
+        orderpaymentmethodname = body["orderpaymentmethodname"]
+
+        cookie_value = request.COOKIES.get('couponCode')
+        if cookie_value:
+            couponCode = cookie_value
+        else:
+            couponCode = ''
+        
+        couponDiscountAmount = 0
+        createHistory = False
+        if couponCode:
+            try:
+                coupon = Coupon.objects.get(couponCode = couponCode)
+                couponUsesByCustomer = CouponHistory.objects.filter(coupon=coupon)
+                if len(couponUsesByCustomer) < coupon.usageLimit and int (coupon.numOfCoupon) > 0:
+                    currentDateTime = timezone.now()
+                    if coupon.expirationDateTime >= currentDateTime and price >= coupon.minAmount:
+                        if coupon.couponType == "Fixed":
+                            price = price-int(coupon.couponDiscountOrFixed)
+                        if coupon.couponType == "Percentage":
+                            couponDiscountAmount = ((price*coupon.couponDescription)/100)
+                            price = price-couponDiscountAmount
+                        createHistory = True
+            except:
+                pass
+        
+        order_billing_address_instance = OrderBillingAddress.objects.get(id=addressId)
+        paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
+
+        if 'payPalTransactionID' in body:
+            payPalTransactionID = body["payPalTransactionID"]
+            order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=payPalTransactionID, orderAmount=price, orderPaymentMethodName=paymentmethod,)
+            order_payment_instance.save()
+            cart = Cart.objects.get(id=cartid)
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, OrderBillingAddress=order_billing_address_instance,
+                                                  orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings = cart.getTotalDiscountAmount)
+            order_instance.save()
+            
+            # Create the history for this transaction
+
+            if createHistory:
+                coupon.numOfCoupon = coupon.numOfCoupon-1
+                coupon.save()
+                CouponHistory.objects.create(coupon=coupon, couponHistoryByUser=order_instance.orderedByCustomer, couponHistoryByOrder=order_instance)
+            CartProducts.objects.filter(cartByCustomer=cart.cartByCustomer).delete()
+            remove_coupon = request.COOKIES.get('couponCode')
+            if remove_coupon:
+                response = HttpResponse("Currency removed")
+                response.delete_cookie('couponCode')
+                return response
+            return JsonResponse(data={'message': 'Payment Completed'},safe=False)
+    else:
+        strPrice = body["price"]
+        decimalPrice = Decimal(strPrice)
+        price = convert_amount_based_on_currency(decimalPrice,request)
+        fname = body["fname"]
+        lname = body["lname"]
+        uname = body["uname"]
+        email = body["email"]
+        address1 = body["address1"]
+        country = body["country"]
+        city = body["city"]
+        zip = body["zip"]
+        cartid = body["cartid"]
+        orderpaymentmethodname = body["orderpaymentmethodname"]
+        
+        cookie_value = request.COOKIES.get('couponCode')
+        if cookie_value:
+            couponCode = cookie_value
+        else:
+            couponCode = ''
+        
+        couponDiscountAmount = 0
+        createHistory = False
+        if couponCode:
+            try:
+                coupon = Coupon.objects.get(couponCode=couponCode)
+                couponUsesByCustomer = CouponHistory.objects.filter(coupon=coupon)
+                if len(couponUsesByCustomer) < coupon.usageLimit and int(coupon.numOfCoupon) > 0:
+                    currentDateTime = timezone.now()
+                    if coupon.expirationDateTime >= currentDateTime and price >= coupon.minAmount:
+                        if coupon.couponType == "Fixed":
+                            price = price-int(coupon.couponDiscountOrFixed)
+                        if coupon.couponType == "Percentage":
+                            couponDiscountAmount = ((price*coupon.couponDiscountOrFixed)/100)
+                            price = price-couponDiscountAmount
+                        createHistory = True
+            except:
+                pass
+        order_billing_address_instance = OrderBillingAddress.objects.create(customer=request.user, customerFirstName=fname, customerLastName=lname, customerUserName=uname,
+                                                                            customerEmail=email, customerAddress1=address1, customerCountry=country, customerCity=city, customerZip=zip)
+        order_billing_address_instance.save()
+        paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
+
+        
+        if 'payPalTransactionID' in body:
+            payPalTransactionID = body["payPalTransactionID"]
+            order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user,
+                                                                 orderPaymentTransactionId=payPalTransactionID,
+                                                                 orderAmount=price, orderPaymentMethodName=paymentmethod)
+            order_payment_instance.save()      
+            cart = Cart.objects.get(id=cartid)                                                           
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, OrderBillingAddress=order_billing_address_instance,
+                                                  orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings=cart.getTotalDiscountAmount)
+            order_instance.save()
+            
+            # Create the history for this transaction
+            
+            if createHistory:
+                coupon.numOfCoupon = coupon.numOfCoupon-1
+                coupon.save()
+                CouponHistory.objects.create(coupon=coupon,couponHistoryByUser=order_instance.orderedByCustomer,couponHistoryByOrder = order_instance)
+            CartProducts.objects.filter(cartByCustomer=cart.cartByCustomer).delete()
+            remove_coupon = request.COOKIES.get('   ')
+            if remove_coupon:
+                response = HttpResponse("Currency removed")
+                response.delete_cookie('couponCode')
+                return response
+            return JsonResponse(data={'message':'Payment completed'},safe=False)
 
     
 def order_success(request):
-    pass
+    if request.user.is_authenticated:
+        
+        pass
+    else:
+        return redirect('login_page')
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    context = {
+        "breadcrumb": {"parent": "Order-Success", "child": "Order-Success"},
+        'active_banner_themes':active_banner_themes,
+    }
+    
+    return render(request, 'pages/pages/order-success.html',context)
+
 
 def checkout_2_page(request):
     cart_products,totalCartProducts = show_cart_popup(request)
