@@ -14,25 +14,30 @@
             <div class="col-lg-6">
                 <div class="product-order">
                     <h3>your order details</h3>
+                    {% for product in products %}
                     <div class="row product-order-detail">
-                        <div class="col-3"><img src="{% static 'assets/images/layout-4/product/1.jpg' %}" alt="" class="img-fluid "></div>
+                        <div class="col-3">
+                            <a href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
+                                <img loading="lazy" src="{{product.productOrderedProducts.variantProduct.productImageFront}}" alt="" class="img-fluid "></div>
+                            </a>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>product name</h4>
-                                <h5>cotton shirt</h5></div>
+                                <h5>{{product.productOrderedProducts.variantProduct.productName}}</h5></div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>quantity</h4>
-                                <h5>1</h5></div>
+                                <h5>{{product.productOrderedProductQuantity}}</h5></div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>price</h4>
-                                <h5>$555.00</h5></div>
+                                <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5></div>
                         </div>
                     </div>
-                    <div class="row product-order-detail">
+                    {% endfor %}
+                    {% comment %} <div class="row product-order-detail">
                         <div class="col-3"><img src="{% static 'assets/images/layout-4/product/2.jpg' %}" alt="" class="img-fluid "></div>
                         <div class="col-3 order_detail">
                             <div>
@@ -49,16 +54,16 @@
                                 <h4>price</h4>
                                 <h5>$555.00</h5></div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="total-sec">
                         <ul>
-                            <li>subtotal <span>$55.00</span></li>
-                            <li>shipping <span>$12.00</span></li>
-                            <li>tax(GST) <span>$10.00</span></li>
+                            <li>subtotal <span>${{ordersubtotal}}.00</span></li>
+                            <li>shipping <span>$0.00</span></li>
+                            <li>tax(GST) <span>${{orderTax}}.00</span></li>
                         </ul>
                     </div>
                     <div class="final-total">
-                        <h3>total <span>$77.00</span></h3></div>
+                        <h3>total <span>${{orderprice}}.00</span></h3></div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -66,23 +71,24 @@
                     <div class="col-sm-6">
                         <h4>summery</h4>
                         <ul class="order-detail">
-                            <li>order ID: 5563853658932</li>
-                            <li>Order Date: October 22, 2018</li>
-                            <li>Order Total: $907.28</li>
+                            <li>order ID: {{orderid}}</li>
+                            <li>Order Date: {{orderdate}}</li>
+                            <li>Order Total: ${{orderprice}}.00</li>
                         </ul>
                     </div>
                     <div class="col-sm-6">
                         <h4>shipping address</h4>
                         <ul class="order-detail">
-                            <li>gerg harvell</li>
-                            <li>568, suite ave.</li>
-                            <li>Austrlia, 235153</li>
-                            <li>Contact No. 987456321</li>
+                            <li>{{orderaddress.customerUsername}}</li>
+                            <li>{{orderaddress.customerAddress1}}</li>
+                            <li>{{orderaddress.customerCountry}}, {{orderaddress.customerZip}}</li>
+                            <li>Contact No. {{orderaddress.customerMobile}}</li>
                         </ul>
                     </div>
                     <div class="col-sm-12 payment-mode">
                         <h4>payment method</h4>
-                        <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) availabel. Card/Net banking acceptance subject to device availability.</p>
+                        {% comment %} <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) availabel. Card/Net banking acceptance subject to device availability.</p> {% endcomment %}
+                        <p>{{paymentmethod}}</p>
                     </div>
                     <div class="col-md-12">
                         <div class="delivery-sec">

@@ -162,7 +162,7 @@ urlpatterns = [
     path('cart_page', views.cart_page, name='cart_page'),
     path('delete_cart_product/<str:id>',views.delete_cart_product, name='delete_cart_product'),
     # path('delete_cart_product_form_header_button/<str:id>',views.delete_cart_product_form_header_button,name='delete_cart_product_form_header_button'),
-    # path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
+    path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
     
     
     # Checkout Page Routes
@@ -173,6 +173,8 @@ urlpatterns = [
     
     path('payment_complete',views.payment_complete,name='payment_complete'),
     path('order_success',views.order_success,name='order_success'),
+    # path('order_tracking/<str:id>',views.order_tracking,name='order_tracking'),
+
 
 
     

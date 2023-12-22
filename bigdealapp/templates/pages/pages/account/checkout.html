@@ -235,7 +235,7 @@ function completeOrder(params){
         fetch(url,{
             method: "POST",
             headers:{
-                "Content-type":"application/json" ,
+                "Content-type":"application/json",
                 "X-CSRFToken":csrftoken,
             },
             body: JSON.stringify({
@@ -324,9 +324,8 @@ function completeOrder(params){
   // =======================================================================
   // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
   // =======================================================================
-
   paypal_sdk.Buttons({
-    onclick: async function(data,actions){
+      onclick: async function(data,actions){
         var fname = document.getElementById("fname").value;
         var lname = document.getElementById("lname").value;
         var uname = document.getElementById("uname").value;
@@ -393,6 +392,52 @@ function completeOrder(params){
 
 
 
+
+    // ===============================================================
+  // It will display payment option based on payment method selection
+
+  const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+  const paypalProceedButton = document.querySelector("#paypal-button-container");
+  const razorPayProceedButton = document.querySelector("#rzp-button1");
+
+  paypalProceedButton.style.display = "none";
+  razorPayProceedButton.style.display = "none";
+
+  paymentMethodRadios.forEach((radio) => {
+    radio.addEventListener("click", (event) => {
+        const options = document.getElementsByName("flexRadioDefaultForAddress");
+        console.log('options ======>',options)
+        let isChecked = false;
+        for(let i = 0; i < options.length; i++){
+            if(options[i].checked && (options[i].value == "newAddress" || options[i].value != "newAddress")){
+                isChecked = true;
+                break;
+            }
+        }
+        console.log('NEW FUNCTION ====++>')
+        if (!isChecked) {
+            event.preventDefault();
+            console.log('IF PART =====>')
+            alert("Please select at least one option from the billing address.");
+        }else {
+            console.log('ELSE PART ===>')
+            const paymentMethod = event.target.value;
+            if(paymentMethod === "PayPal"){
+                paypalProceedButton.style.display = "block";
+                razorPayProceedButton.style.display = "none";
+            } else if(paymentMethod === "RazorPay"){
+                paypalProceedButton.style.display = "none";
+                razorPayProceedButton.style.display = "block";
+            } else if(paymentMethod === "Stripe"){
+                paypalProceedButton.style.display = "none";
+                razorPayProceedButton.style.display = "none";
+            }
+        }
+    });
+  });
+
+
+
   // ============================================================
   // It will display address option based on previously saved address
   // ============================================================
@@ -400,7 +445,6 @@ function completeOrder(params){
   const addressMethodRadios = document.querySelectorAll('input[name="flexRadioDefaultForAddress"]');
   const addAddressDiv = document.querySelector("#new-address");
   const paymentOptions = document.querySelector("#payment-option");
-  console.log('paymentOptions ==========++>',paymentOptions)
   const couponCodeEle = document.getElementById('couponCode');
   const couponBtn = document.getElementById('couponBtn');
 

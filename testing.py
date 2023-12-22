@@ -503,10 +503,6 @@
 
 
 
-
-
-
-
 # def order_success(request): 
 #     if request.user.is_authenticated:
 #         customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
@@ -555,4 +551,3 @@
 
 
   
-        

@@ -97,7 +97,7 @@
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
                       <i  data-feather="eye"></i>
                     </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <a href="javascript:void(0)" class="tooltip-top" data-tippy-content="Compare">
                       <i  data-feather="refresh-cw"></i>
                     </a>
                   </div>
@@ -406,7 +406,7 @@
           <li>
             <div class="media">
               <a href="{% url 'left_slidebar' product.id %}">
-                <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
+                <img alt="mega" class="me-3" src="/{{product.cartProduct.variantProduct.productImageFront}}">
               </a>
               <div class="media-body">
                 <a href="product-page(left-sidebar).html">

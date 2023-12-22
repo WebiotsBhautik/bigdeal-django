@@ -122,7 +122,7 @@
                                         </span>
                                         <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                             name="quantity{{forloop.counter}}" class="form-control"
-?                                            value="{{product.cartProductQuantity}}">
+                                            value="{{product.cartProductQuantity}}">
                                         <span class="input-group-prepend">
                                             <button type="button" class="btn quantity-right-plus"
                                                 onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
@@ -221,6 +221,11 @@
                         {% endif %}
                     </tbody>
                 </table>
+                <div class="left-side-button text-end d-flex d-block justify-content-end">
+                    <a href="{% url 'delete_cart_all_product' %}"
+                        class="text-decoration-underline theme-color d-block text-capitalize">clear
+                        all items</a>
+                </div>
                 <table class="table cart-table table-responsive-md">
                     <tfoot>
                         <tr>

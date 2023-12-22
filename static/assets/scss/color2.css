@@ -14612,6 +14612,9 @@ table.invoice-table {
     color: #2a3142;
     padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320))); }
 
+.text-decoration-underline {
+  font-size: 18px; }
+
 /*=====================
     27.Menu css start
 ==========================*/
