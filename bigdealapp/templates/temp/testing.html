@@ -250,6 +250,7 @@
 
 <script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypal_sdk"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
   function getCookie(name) {
     let cookieValue = null;
@@ -272,7 +273,7 @@
   var totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
 
 
-  // completeOrder() function for paypal payment start ============================================
+// completeOrder() function for paypal payment start ============================================
 
   function completeOrder(params) {
     var url = "{% url 'payment_complete' %}";
@@ -397,10 +398,10 @@
       }
     }
   }
-  // completeOrder() function for paypal payment end ==============================================  
+// completeOrder() function for paypal payment end ==============================================  
 
 
-  // completeOrder() function for razorpay payment start ==========================================
+// completeOrder() function for razorpay payment start ==========================================
   function completeOrderForRazorPay(params) {
     var url = "{% url 'payment_complete' %}";
     var cartid = "{{Cart.id}}";
@@ -527,7 +528,7 @@
       }
     }
   }
-  // completeOrder() function for razorpay payment end ============================================
+// completeOrder() function for razorpay payment end ============================================
 
 
   // =======================================================================

@@ -452,8 +452,7 @@
 # list = ['alfa', 'bravo', 'charlie', 'delta', 'echo']
 # print(list[10:])
 
-# x = "Webiots"
-# print(x[::-1])
+
 
 # lis = ['a', 'b', 'b','d']
 # print(lis)

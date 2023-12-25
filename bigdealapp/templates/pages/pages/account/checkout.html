@@ -10,22 +10,6 @@
 <section class="section-big-py-space b-g-light">
     <div class="custom-container">
         <div class="checkout-page contact-page">
-            <div id="couponCodeDiv">
-                <div class="col-lg-4 col-sm-6"> 
-                    <div class="promo-section mb-sm-4 mb-2">
-                        <div class="row g-2">
-                            <div class="col-7">
-                                <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code">
-                            </div>
-                            <div class="col-5">
-                                <button class="btn btn-info" id="couponBtn"
-                                onclick="couponvalidation({'price':'{{Cart.getTotalPrice}}','tax':{{Cart.getTotalTax}},'priceInUSD':{{getFinalPriceAfterTax}}})">Apply
-                                Coupon</button>
-                            </div>  
-                        </div>
-                    </div>
-                </div> 
-            </div>
             <div class="checkout-form">
                 <form>
                     <div class="row">
@@ -120,6 +104,18 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="promo-section mb-sm-4 mb-2" id="couponCodeDiv">
+                                <div class="row g-2">
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code">
+                                    </div>
+                                    <div class="col-5">
+                                        <button class="btn btn-info" id="couponBtn"
+                                        onclick="couponvalidation({'price':'{{Cart.getTotalPrice}}','tax':{{Cart.getTotalTax}},'priceInUSD':{{getFinalPriceAfterTax}}})">Apply
+                                        Coupon</button>
+                                    </div>  
+                                </div>
+                            </div>
                             <div class="checkout-details theme-form  section-big-mt-space">
                                 <div class="order-box">
                                     <div class="title-box">
@@ -157,17 +153,17 @@
                                                 <li>
                                                     <div class="form-check custome-radio-box">
                                                         <input type="radio" name="flexRadioDefault" id="razorpay" value="RazorPay">
-                                                        <label class="form-check-label" for="razorpay">RazorPay</label>
+                                                        <label class="form-check-label" for="razorpay">Razorpay</label>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div id="paypal-button-container" class="selected-option"></div>
                                         <div id="smart-button-container" class="selected-option"></div>
-                                        <button id="rzp-button1" class="btn btn-solid-default razorpay-btn" style="display:none;">Pay with Razorpay</button>
+                                        <button id="rzp-button1" class="btn-normal btn razorpay-btn" style="display:none;">Pay with Razorpay</button>
                                         <div style="text-align: center;"></div>
                                     </div>
-                                    <div class="text-right"><a href="javascript:void(0)" class="btn-normal btn">Place Order</a></div>
+                                    {% comment %} <div class="text-right"><a href="javascript:void(0)" class="btn-normal btn">Place Order</a></div> {% endcomment %}
                                 </div> 
                             </div>
                         </div>
@@ -181,15 +177,17 @@
 </section>
 <!-- section end -->
 
+
 {% endblock components %}
 
 
 {% block script %}
 
-<script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypal_sdk"></script>
+<script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypal_sdk" ></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
+
     function getCookie(name){
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -319,13 +317,138 @@ function completeOrder(params){
 // completeOrder() function for paypal payment end ==============================================  
 
 
+// completeOrder() function for razorpay payment start ==========================================
+
+function completeOrderForRazorPay(params){
+    var url = "{% url 'payment_complete' %}";
+    var cartid = "{{Cart.id}}";
+
+    var newAddressRadioBtn = document.getElementById("newAddress");
+    if(newAddressRadioBtn.checked){
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var uname = document.getElementById("uname").value;
+        var email = document.getElementById("email").value;
+        var address1 = document.getElementById("address1").value;
+        var country = document.getElementById("validationCustom04").value;
+        var city = document.getElementById("validationCustom05").value;
+        var zip = document.getElementById("zip").value;
+
+        var couponCode = document.getElementById("couponCode").value;
+
+        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+        fetch(url,{
+            method:'POST',
+            headers:{
+                "Content-type":"application/json",
+                "X-CSRFToken":csrftoken,
+            },
+            body: JSON.stringify({
+                price:price,
+                totalTax:totalTax,
+                fname:fname,
+                lname:lname,
+                uname:uname,
+                email:email,
+                address1:address1,
+                country:country,
+                city:city,
+                zip:zip,
+                cardid:cartid,
+                orderpaymentmethodname:orderpaymentmethodname,
+                rpPaymentId:params.rpPaymentId,
+                rpOrderId:params.rpSignature,
+                couponCode:couponCode,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the JSON response
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the JSON response
+          console.log(data); // Access the data returned from the server
+          // Perform any additional operations with the response data
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        });
+
+    } else{
+        var radios = document.getElementsByName("flexRadioDefaultForAddress");
+        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+        var couponCode = document.getElementById("couponCode").value;
+        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+        var couponCode = document.getElementById("couponCode").value;
+
+        for(var i = 0; i < radios.length; i++){
+            if (radios[i].checked) {
+                var selectedValue = radios[i].value;
+                fetch(url, {
+                    method:"POST",
+                    headers:{
+                        "Content-type":"application/json",
+                        "X-CSRFToken": csrftoken,
+                    },
+                    body:JSON.stringify({
+                        price:price,
+                        totalTax:totalTax,
+                        addressId:selectedValue,
+                        cartid:cartid,
+                        orderpaymentmethodname:orderpaymentmethodname,
+                        rpPaymentId:params.rpPaymentId,
+                        rpOrderId:params.rpOrderId,
+                        rpSignature: params.rpSignature,
+                        couponCode:couponCode,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data=>{
+                    // Handle the JSON response
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the JSON response
+                    console.log(data); // Access the data returned from the server
+                    // Perform any additional operations with the response data
+                  })
+                  .catch(error => {
+                    // Handle any errors that occur during the request
+                    console.error(error);
+                  });
+            }
+        }
+    }
+}
+
+
+
+// completeOrder() function for razorpay payment end ============================================
+
 
 
   // =======================================================================
   // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
   // =======================================================================
-  paypal_sdk.Buttons({
-      onclick: async function(data,actions){
+  console.log('=====> Starting <======')
+
+
+  paypal_sdk.Buttons({ 
+    onclick: async function(data,actions){
+        console.log('=====> Inside PAYPAL <======')
         var fname = document.getElementById("fname").value;
         var lname = document.getElementById("lname").value;
         var uname = document.getElementById("uname").value;
@@ -339,6 +462,9 @@ function completeOrder(params){
 
         const options = document.getElementsByName("flexRadioDefaultForAddress");
         for(let i = 0; i < options.length; i++){
+            console.log('options[i] ====>',options[i])
+            console.log('options[i].checked ====>',options[i].checked)
+            console.log('options[i].value ====>',options[i].value)
             if(options[i].checked && options[i].value == "newAddress") {
                 if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip ){
                     alert('Please fill the billing address form.');
@@ -388,9 +514,80 @@ function completeOrder(params){
             }, 400);
         });
     },
-  }).render("#paypal-button-container");
+}).render("#paypal-button-container");
+  
+  console.log('=====> Ending <======')
 
 
+//  =======================================================================
+//  RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay
+// ========================================================================
+
+
+var options = {
+    key: "{{rsk}}",
+    amount: "{{payment.amount}}",
+    currency: "{{payment.currency}}",
+    name: "Bigdeal Ecommerce",
+    description: "Order Transaction",
+    order_id: "{{payment.id}}",
+    handler: function (response){
+        if(response.error && response.error.code === 'payment_cancelled'){
+            // Handle payment cancellation error
+            alert("Payment has been cancelled. Please try again or complete the payment later.");
+        }
+
+        completeOrderForRazorPay({
+            'rpPaymentId': response.razorpay_payment_id,
+            'rpOrderId': response.razorpay_order_id,
+            'rpSignature': response.razorpay_signature
+        });
+        setTimeout(function(){
+            location.href = "{% url 'order_success' %}";
+        },400);
+    },
+};
+
+
+var rzpObject = new Razorpay(options);
+
+document.getElementById('rzp-button1').onclick = function(e){
+    var fname = document.getElementById("fname").value;
+    var lname = document.getElementById("lname").value;
+    var uname = document.getElementById("uname").value;
+    var email = document.getElementById("email").value;
+    var address1 = document.getElementById("address1").value;
+    var country = document.getElementById("validationCustom04").value;
+    var city = document.getElementById("validationCustom05").value;
+    var zip = document.getElementById("zip").value;
+
+    handleCheckout()
+    .then((checkOutStatus) => {
+        const options = document.getElementsByName("flexRadioDefaultForAddress");
+        for (let i = 0; i < options.length; i++){
+            if (options[i].checked && options[i].value == "newAddress"){
+                if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip){
+                    alert("Please fill the billing address form.");
+                } else{
+                    if(checkOutStatus){
+                        rzpObject.open();
+                        e.preventDefault();
+                    } else{
+                        return;
+                    }
+                }
+            }
+            if(options[i].checked && options[i].value != "newAddress"){
+                if(checkOutStatus){
+                    rzpObject.open();
+                    e.preventDefault();
+                } else{
+                    return;
+                }
+            }
+        }
+    });
+};
 
 
     // ===============================================================
@@ -398,6 +595,7 @@ function completeOrder(params){
 
   const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
   const paypalProceedButton = document.querySelector("#paypal-button-container");
+  console.log('Paypal Button container =====> ',paypalProceedButton)
   const razorPayProceedButton = document.querySelector("#rzp-button1");
 
   paypalProceedButton.style.display = "none";
@@ -406,21 +604,18 @@ function completeOrder(params){
   paymentMethodRadios.forEach((radio) => {
     radio.addEventListener("click", (event) => {
         const options = document.getElementsByName("flexRadioDefaultForAddress");
-        console.log('options ======>',options)
         let isChecked = false;
         for(let i = 0; i < options.length; i++){
+            
             if(options[i].checked && (options[i].value == "newAddress" || options[i].value != "newAddress")){
                 isChecked = true;
                 break;
             }
         }
-        console.log('NEW FUNCTION ====++>')
         if (!isChecked) {
             event.preventDefault();
-            console.log('IF PART =====>')
             alert("Please select at least one option from the billing address.");
         }else {
-            console.log('ELSE PART ===>')
             const paymentMethod = event.target.value;
             if(paymentMethod === "PayPal"){
                 paypalProceedButton.style.display = "block";
