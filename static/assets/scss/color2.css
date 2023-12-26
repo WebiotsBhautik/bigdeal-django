@@ -12456,7 +12456,8 @@ ul.sosiyal {
             font-weight: 600; }
           .add_to_cart .cart-inner .cart_media ul.cart_total li .buttons {
             display: flex;
-            justify-content: space-between; }
+            justify-content: space-between;
+            gap: 10px; }
     .add_to_cart .cart-inner .cart_top {
       display: flex;
       padding: 20px;

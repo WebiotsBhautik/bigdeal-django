@@ -146,7 +146,7 @@
                                             <ul>
                                                 <li>
                                                     <div class="form-check custome-radio-box">
-                                                        <input type="radio" name="flexRadioDefault" id="paypal" value="PayPal" >
+                                                        <input type="radio" name="flexRadioDefault" id="paypal" value="PayPal">
                                                         <label class="form-check-label" for="paypal">PayPal</label>
                                                     </div>
                                                 </li>
@@ -445,9 +445,9 @@ function completeOrderForRazorPay(params){
   // =======================================================================
   console.log('=====> Starting <======')
 
-
   paypal_sdk.Buttons({ 
     onclick: async function(data,actions){
+    //document.getElementById('paypal-button-container').onclick =  async function(data,actions){
         console.log('=====> Inside PAYPAL <======')
         var fname = document.getElementById("fname").value;
         var lname = document.getElementById("lname").value;

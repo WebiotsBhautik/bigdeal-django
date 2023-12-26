@@ -173,7 +173,8 @@ RAZORPAY_SECRET_KEY = 'gjdchqP3v7shiW7SRKo2xecV'
 # PAYPAL_CLIENT_ID = 'ATWp1z5IroqlimLbKru4uwqcniWEVAjNbN5OBn4A20wBNCEKZiT2Sc0Ywc55plhZZvpyskMqLUGz-Bca'
 # =====================================================================
 
-PAYPAL_CLIENT_ID = 'AbLRgwsEHpVqUQS6M30HsfPa1IFyjhwt_LrNLlQjSIhdQSzDZgHHyn-iNSOkFEO89X6i7csgaz-C7UMG'
+PAYPAL_CLIENT_ID = 'AWSvIg3u2s-p7g2RYkcktJLjtn3Rsw0LZAm0CoS6WeYtEoYmSzRC01bT0wVxz4whG3eN4bCu1vparBbp'
+
 
 
 

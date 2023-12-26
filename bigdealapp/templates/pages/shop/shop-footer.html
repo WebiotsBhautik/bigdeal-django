@@ -401,7 +401,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">check out</a>
             </div>
           </li>
         </ul>
@@ -736,6 +736,66 @@
   {% block script %}
     
   {% endblock script %}
+
+  <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie("csrftoken");
+  
+    async function handleCheckout(params){
+        var url = "{% url 'cart_to_checkout_validation' %}";
+        var pageUrl = window.location.href;
+  
+        await fetch(url,{
+            method: "POST",
+            headers:{
+                "content-type":"application/json",
+                "X-CSRFToken":csrftoken,
+            },
+            body: JSON.stringify({
+                cartId: params.cartId,
+            }),
+            }).then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if(data.flag === "True"){
+                    var cartMsgDiv = document.getElementById("cartMsgDiv");
+                    for(var i=0; i<data.outOfStockProducts.length; i++){
+                        var cartMsg = document.createElement("h5");
+                        cartMsg.setAttribute("id","cartMsg" + i);
+                        cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + " stock of product " + data.outOfStockProducts[i].productName + ".";
+                        cartMsgDiv.append(cartMsg);
+  
+                        // Set a timeout to hide the cartMsg element after 3 seconds
+                        setTimeout(function(index){
+                            var cartMsgElement = document.getElementById("cartMsg" + index);
+                            if(cartMsgElement){
+                                cartMsgElement.remove();
+                            }
+                        },3000 , i);
+                    }
+                }
+                if(data.flag === "False"){
+                    window.location.href = "{% url 'checkout_page' %}";
+                }
+            });
+        }
+    
+  </script>
     
   
   <!-- Bootstrap js-->
@@ -745,4 +805,4 @@
   <!-- Theme js-->
   <script src="{% static 'assets/js/script.js' %}"></script>
   </body>
-  </html>
+  </html> 

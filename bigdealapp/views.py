@@ -5254,7 +5254,7 @@ def checkout_page(request):
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)
     
-    print('settings.PAYPAL_CLIENT_ID ======++>',settings.PAYPAL_CLIENT_ID)
+    print('PAYPAL_CLIENT_ID ======>',settings.PAYPAL_CLIENT_ID)
     
     context = {"breadcrumb": {"parent": "Checkout", "child": "Checkout"},
                "Cart": customer_cart,'cart_products':cart_products,'totalCartProducts':totalCartProducts,
@@ -5314,6 +5314,27 @@ def payment_complete(request):
         
         order_billing_address_instance = OrderBillingAddress.objects.get(id=addressId)
         paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
+        
+        if 'rpPaymentId' in body:
+            rpPaymentId = body['rpPaymentId']
+            order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=rpPaymentId, orderAmount=price, orderPaymentMethodName=paymentmethod,)
+            order_payment_instance.save()
+            cart = Cart.objects.get(id=cartid)
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,
+                                                  orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings=cart.getTotalDiscountAmount)
+            order_instance.save()
+
+            if createHistory:
+                coupon.numOfCoupon = coupon.numOfCoupon-1
+                coupon.save()
+                CouponHistory.objects.create(coupon=coupon, couponHistoryByUser=order_instance.orderedByCustomer, couponHistoryByOrder=order_instance)
+            CartProducts.objects.filter(cartByCustomer=cart.cartByCustomer).delete()
+            remove_coupon = request.COOKIES.get('couponCode')
+            if remove_coupon:
+                response = HttpResponse("Currency removed")
+                response.delete_cookie('couponCode')
+                return response
+            return JsonResponse(data={'message':'Payment completed'},safe=False)
         
 
         if 'payPalTransactionID' in body:
@@ -5380,6 +5401,28 @@ def payment_complete(request):
                                                                             customerEmail=email, customerAddress1=address1, customerCountry=country, customerCity=city, customerZip=zip)
         order_billing_address_instance.save()
         paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
+        
+        if 'rpPaymentId' in body:
+            rpPaymentId = body["rpPaymentId"]
+            order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=rpPaymentId, orderAmount=price, orderPaymentMethodName=paymentmethod)
+            order_payment_instance.save()
+            cart = Cart.objects.get(id=cartid)
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,
+                                                   orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings=cart.getTotalDiscountAmount)
+            order_instance.save()
+            
+            if createHistory:
+                coupon.numOfCoupon = coupon.numOfCoupon-1
+                coupon.save()
+                CouponHistory.objects.create(coupon=coupon, couponHistoryByUser=order_instance.orderedByCustomer, couponHistoryByOrder=order_instance)
+            CartProducts.objects.filter(cartByCustomer=cart.cartByCustomer).delete()
+            remove_coupon = request.COOKIES.get('couponCode')
+            if remove_coupon:
+                response = HttpResponse("Currency removed")
+                response.delete_cookie('couponCode')
+                return response
+            return JsonResponse(data={'message':'Payment completed'},safe=False) 
+        
 
         
         if 'payPalTransactionID' in body:

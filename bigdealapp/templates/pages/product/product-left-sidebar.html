@@ -395,9 +395,13 @@
                     <h6 class="product-title">quantity</h6>
                     <div class="qty-box">
                       <div class="input-group">
-                        <button class="qty-minus" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})"></button>
+                        <button class="qty-minus" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})">                        
+                          <i class="fa fa-minus"></i>
+                        </button>
                         <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
-                        <button class="qty-plus" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})"></button>
+                        <button class="qty-plus" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})">
+                          <i class="fa fa-plus"></i>
+                        </button>
                       </div>
                     </div>
                     <div class="product-buttons">

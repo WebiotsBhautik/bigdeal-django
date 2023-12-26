@@ -18,46 +18,46 @@
        <div class="cart_media">
           {% if request.user.is_authenticated %}
           <ul class="cart_product">
-             {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
-             <li>
-                <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
-             </li>
-             {% else %}
-             {% for product in cart_products|return_cart_products:request %}
-             <li>
-                <div class="media">
-                   <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
-                      <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
-                   </a>
-                   <div class="media-body">
-                     <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
-                      <h4>{{product.cartProduct.variantProduct.productName}}</h4>
-                      </a>
-                      <h6>
-                      {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
-                      <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
-                      </h6>
-                      <div class="addit-box">
-                      <div class="qty-box">
-                         <div class="input-group">
-                            {% comment %} <button class="qty-minus"></button> {% endcomment %}
-                            <input class="qty-adj form-control" readonly type="number" value="1"/>
-                            {% comment %} <button class="qty-plus"></button> {% endcomment %}
-                         </div>
-                      </div>
-                      <div class="pro-add">
-                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                            <i data-feather="edit"></i>
-                         </a>
-                         <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
-                            <i  data-feather="trash-2"></i>
-                         </a>
-                      </div>
-                      </div>
-                   </div>
-                </div>
-             </li>
-             {% endfor %}
+            {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+            <li>
+               <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+            </li>
+            {% else %}
+            {% for product in cart_products|return_cart_products:request %}
+            <li>
+               <div class="media">
+                  <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                     <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
+                  </a>
+                  <div class="media-body">
+                  <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                     <h4>{{product.cartProduct.variantProduct.productName}}</h4>
+                     </a>
+                     <h6>
+                     {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                     <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
+                     </h6>
+                     <div class="addit-box">
+                     <div class="qty-box">
+                        <div class="input-group">
+                           {% comment %} <button class="qty-minus"></button> {% endcomment %}
+                           <input class="qty-adj form-control" readonly type="number" value="1"/>
+                           {% comment %} <button class="qty-plus"></button> {% endcomment %}
+                        </div>
+                     </div>
+                     <div class="pro-add">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                           <i data-feather="edit"></i>
+                        </a>
+                        <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
+                           <i  data-feather="trash-2"></i>
+                        </a>
+                     </div>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            {% endfor %}
           </ul>
           <ul class="cart_total">
              <li>
@@ -77,7 +77,7 @@
              <li>
                <div class="buttons">
                  <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-                 <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+                 <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">check out</a>
                </div>
              </li>
           </ul>
