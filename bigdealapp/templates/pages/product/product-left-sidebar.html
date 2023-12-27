@@ -405,9 +405,14 @@
                       </div>
                     </div>
                     <div class="product-buttons">
-                      <a href="javascript:void(0)"  id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                      {% comment %} <a href="javascript:void(0)"  id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                         <i class="fa fa-shopping-cart"></i>
                         add to cart
+                      </a>  {% endcomment %}
+                      <a id="cartEffect" onclick="add_to_cart_fun({key:'{{firstProductVariant}}'})"
+                        class="btn btn-solid hover-solid btn-animation">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>Add To Cart</span>
                       </a>
                       <a href="javascript:void(0)" class="btn btn-normal add-to-wish tooltip-top" data-tippy-content="Add to wishlist">
                         <i class="fa fa-heart" aria-hidden="true"></i>

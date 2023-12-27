@@ -420,7 +420,7 @@
                   <div class="qty-box">
                     <div class="input-group">
                       {% comment %} <button class="qty-minus"></button> {% endcomment %}
-                      <input class="qty-adj form-control" type="number" value="1"/>
+                      <input class="qty-adj form-control" type="number" readonly value="{{product.cartProductQuantity}}"/>
                       {% comment %} <button class="qty-plus"></button> {% endcomment %}
                     </div>
                   </div>
@@ -1206,6 +1206,28 @@
       // if quantity goes to zero or negative then...rehne do tum se na ho payega
     } else {
       counterAtLeftSlidebar.setAttribute("value", b);
+    }
+  }
+
+  function add_to_cart_fun(params){
+    let counterAtLeftSlidebar = document.getElementById("counterAtLeftSlidebar");
+
+    let quantityValue = counterAtLeftSlidebar.getAttribute("value");
+
+    if(params.key == "No Product Yet"){
+    }else{
+      let url = "{% url 'add_to_cart' 'id' 'quantity' %}";
+      url = url.replace("id", params.key);
+      url = url.replace("quantity", quantityValue);
+      fetch(url,{
+        method: "GET",
+        headers:{
+          "Content-type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+      }).then((data) => {
+        window.location.replace(data.url);
+      });
     }
   }
 

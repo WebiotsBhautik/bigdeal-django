@@ -37,11 +37,11 @@
                                     <div class="row check-out ">
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                            <label for="fname" class="form-label">First Name</label>
-                                           <input type="text" name="fname" class="form-control" id="fname" placeholder="Enter Firstname" required>
+                                           <input type="text" name="fname" class="form-control" id="fname" required placeholder="Enter Firstname">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="lname" class="form-label">Last Name</label>
-                                            <input type="text" name="lname" id="lname" class="form-control"  placeholder="Enter Lastname" required>
+                                            <input type="text" name="lname" id="lname" class="form-control"  required placeholder="Enter Lastname">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <label for="uname" class="form-lable">Username</label>
@@ -161,9 +161,8 @@
                                         <div id="paypal-button-container" class="selected-option"></div>
                                         <div id="smart-button-container" class="selected-option"></div>
                                         <button id="rzp-button1" class="btn-normal btn razorpay-btn" style="display:none;">Pay with Razorpay</button>
-                                        <div style="text-align: center;"></div>
+                                        <div style="text-align:center;"></div>
                                     </div>
-                                    {% comment %} <div class="text-right"><a href="javascript:void(0)" class="btn-normal btn">Place Order</a></div> {% endcomment %}
                                 </div> 
                             </div>
                         </div>
@@ -445,30 +444,37 @@ function completeOrderForRazorPay(params){
   // =======================================================================
   console.log('=====> Starting <======')
 
-  paypal_sdk.Buttons({ 
-    onclick: async function(data,actions){
-    //document.getElementById('paypal-button-container').onclick =  async function(data,actions){
-        console.log('=====> Inside PAYPAL <======')
-        var fname = document.getElementById("fname").value;
-        var lname = document.getElementById("lname").value;
-        var uname = document.getElementById("uname").value;
-        var email = document.getElementById("email").value;
-        var address1 = document.getElementById("address1").value;
-        var country = document.getElementById("validationCustom04").value;
-        var city =  document.getElementById("validationCustom05").value;
-        var zip = document.getElementById("zip").value;
+  document.addEventListener('DOMContentLoaded', function () {
+    paypal_sdk.Buttons({ 
+        onclick: async function(data,actions){
+            console.log('=====> Inside PAYPAL <======')
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var uname = document.getElementById("uname").value;
+            var email = document.getElementById("email").value;
+            var address1 = document.getElementById("address1").value;
+            var country = document.getElementById("validationCustom04").value;
+            var city =  document.getElementById("validationCustom05").value;
+            var zip = document.getElementById("zip").value;
 
-        var checkOutStatus = await handleCheckout();
+            var checkOutStatus = await handleCheckout();
 
-        const options = document.getElementsByName("flexRadioDefaultForAddress");
-        for(let i = 0; i < options.length; i++){
-            console.log('options[i] ====>',options[i])
-            console.log('options[i].checked ====>',options[i].checked)
-            console.log('options[i].value ====>',options[i].value)
-            if(options[i].checked && options[i].value == "newAddress") {
-                if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip ){
-                    alert('Please fill the billing address form.');
-                    return actions.reject();
+            const options = document.getElementsByName("flexRadioDefaultForAddress");
+            for(let i = 0; i < options.length; i++){
+                console.log('options[i] ====>',options[i])
+                console.log('options[i].checked ====>',options[i].checked)
+                console.log('options[i].value ====>',options[i].value)
+                if(options[i].checked && options[i].value == "newAddress") {
+                    if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip ){
+                        alert('Please fill the billing address form.');
+                        return actions.reject();
+                        } else{
+                            if(checkOutStatus){
+                                return actions.resolve();
+                            } else{
+                                return actions.reject();
+                            }
+                        }
                     } else{
                         if(checkOutStatus){
                             return actions.resolve();
@@ -476,45 +482,39 @@ function completeOrderForRazorPay(params){
                             return actions.reject();
                         }
                     }
-                } else{
-                    if(checkOutStatus){
-                        return actions.resolve();
-                    } else{
-                        return actions.reject();
-                    }
-                }
-        }
+            }
 
-    },
-    createOrder: function(data,actions){
-        return actions.order.create({
-            purchase_units: [{
-                amount:{
-                    value:price,
-                },
-            },],
-        });
-    },
-    
-    onApprove: function(data,actions){
-        return actions.order.capture().then(function (details){
-            var transactionId = details.purchase_units[0].payments.captures[0].id;
-            console.log('======> Transaction Id =======>',transactionId)
-            console.log('======> Details <=======',details)
-            console.log('======> data <======',data)
-            console.log('======> data.paymentID <======',data.paymentID)
-            console.log('======> data.order <======',data.orderID)
-
-
-            completeOrder({
-                'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
+        },
+        createOrder: function(data,actions){
+            return actions.order.create({
+                purchase_units: [{
+                    amount:{
+                        value:price,
+                    },
+                },],
             });
-            setTimeout(function(){
-                location.href = "{% url 'order_success' %}";
-            }, 400);
-        });
-    },
-}).render("#paypal-button-container");
+        },
+        
+        onApprove: function(data,actions){
+            return actions.order.capture().then(function (details){
+                var transactionId = details.purchase_units[0].payments.captures[0].id;
+                console.log('======> Transaction Id =======>',transactionId)
+                console.log('======> Details <=======',details)
+                console.log('======> data <======',data)
+                console.log('======> data.paymentID <======',data.paymentID)
+                console.log('======> data.order <======',data.orderID)
+
+
+                completeOrder({
+                    'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
+                });
+                setTimeout(function(){
+                    location.href = "{% url 'order_success' %}";
+                }, 400);
+            });
+        },
+    }).render("#paypal-button-container");
+});
   
   console.log('=====> Ending <======')
 
@@ -719,6 +719,18 @@ async function handleCheckout(){
 
 
 // Set value in cookie Function Start ============================================================
+function getCookie(cookieName){
+    const cookieString = document.cookie;
+    const cookies = cookieString.split(';');
+
+    for(let i=0; i < cookies.length; i++){
+        const cookie = cookies[i].trim();
+        if(cookie.startsWith(`${cookieName}=`)){
+            return cookie.substring(cookieName.length +1);
+        }
+    }
+    return null;
+}
 
 function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds){
     const existingCookie = getCookie(cookieName);
@@ -740,18 +752,6 @@ function setCookie(cookieName,cookieValue,expirationSeconds){
     
 }
 
-function getCookie(cookieName){
-    const cookieString = document.cookie;
-    const cookies = cookieString.split(';');
-
-    for(let i=0; i < cookies.length; i++){
-        const cookie = cookies[i].trim();
-        if(cookie.startsWith(`${cookieName}=`)){
-            return cookie.substring(cookieName.length +1);
-        }
-    }
-    return null;
-}
 
 
 // Set value in cookie Function Start ============================================================
@@ -761,10 +761,13 @@ function getCookie(cookieName){
 
 async function couponvalidation(params){
     const couponCodeEle = document.getElementById('couponCode');
+    console.log('couponCodeEle =====+>',couponCodeEle)
     const couponCode = couponCodeEle.value;
+    console.log('couponCode =======>',couponCode)
 
     if(couponCode == ''){
         alert('Please enter coupon code')
+        console.log('AFTER ALERT ALERT ALERT')
         return;
     }else{
         setOrUpdateCookie('couponCode',couponCode,3600);
