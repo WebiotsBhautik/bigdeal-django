@@ -11,23 +11,6 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-8">
-
-        {% comment %} <div id="couponDiv">
-          <h3 class="mb-3">Do you have coupon?</h3>
-          <div class="d-block my-3">
-            <div class="form-check custome-radio-box">
-              <input class="form-check-input" type="radio" name="flexRadioDefaultForCoupon" value="haveCoupon"
-                id="haveCoupon">
-              <label class="form-check-label" for="haveCoupon">Yes</label>
-            </div>
-            <div class="form-check custome-radio-box">
-              <input class="form-check-input" type="radio" name="flexRadioDefaultForCoupon" value="doNotHaveCoupon"
-                id="doNotHaveCoupon">
-              <label class="form-check-label" for="doNotHaveCoupon">No</label>
-            </div>
-          </div>
-        </div> {% endcomment %}
-
         {% comment %} ----------------------- COUPON MODULE Start -------------------------- {% endcomment %}
         <div id="couponCodeDiv">
           <!-- <div class="col-lg-4 col-sm-6"> -->
@@ -47,8 +30,7 @@
         </div>
         {% comment %} ----------------------- COUPON MODULE End -------------------------- {% endcomment %}
 
-        {% comment %} -------------------- BILLING ADDRESS CHECKBOXED Start -----------------------------
-        {% endcomment %}
+        {% comment %} -------------------- BILLING ADDRESS CHECKBOXED Start -----------------------------{% endcomment %}
         <div id="billingAddressDiv">
           <h3 class="mb-3">Billing address</h3>
           <div class="d-block my-3">
@@ -67,12 +49,12 @@
             {% endfor %}
           </div>
         </div>
-
         {% comment %} ----------------------- BILLING ADDRESS CHECKBOXED End ------------------------ {% endcomment %}
+
+
         {% comment %} ----------------------- BILLING ADDRESS FORM Start ---------------------------- {% endcomment %}
         <form class="needs-validation" id="new-address" style="display: none;">
           <input type="hidden" name="cartid" value="{{Cart.id}}">
-          {% comment %} <div class="row g-4" id="new-address"> {% endcomment %}
             <div class="row g-4">
 
               <div class="col-md-6">
@@ -162,9 +144,11 @@
             </div>
         </form>
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
+
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
         <hr class="my-lg-5 my-4">
         {% comment %} Payment option section START ------------------------------------------------ {% endcomment %}
+
         <div id="payment-option" style="display:none;">
           <h3 class="mb-3">Payment</h3>
           <div class="d-block my-3">
@@ -536,7 +520,7 @@
   // =======================================================================
 
   paypal_sdk.Buttons({
-    onClick: async function (data, actions) {
+    onclick: async function (data, actions) {
       var fname = document.getElementById("fname").value;
       var lname = document.getElementById("lname").value;
       var uname = document.getElementById("uname").value;
@@ -850,7 +834,6 @@
     const couponCodeEle = document.getElementById('couponCode');
     const couponCode = couponCodeEle.value;
     
-    
 
     if (couponCode == '') {
       alert('Please enter a coupon code')
@@ -860,15 +843,10 @@
       setOrUpdateCookie('couponCode', couponCode, 3600);
     }
 
-
-
     window.location.reload();
-
-    
 
   }
   // Handle coupon validation end ========================
-
 
 
 </script>
@@ -1013,6 +991,7 @@
   </div>
 </section>
 <!-- Order Details Section End -->
+
 
 
 
