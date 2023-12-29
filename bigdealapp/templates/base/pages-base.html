@@ -53,7 +53,12 @@
 
 
 {% include 'pages/shop/shop-header.html' %}
+
+
+{% if request.path == '/order_success'  %}
+{% else %}
 {% include 'pages/shop/breadcrumb-section.html' %}
+{% endif %}
 
 
 

@@ -17456,6 +17456,16 @@ ul.sosiyal {
   h3 {
     color: $black;
     text-transform: capitalize;
+
+    span {
+      font-weight: 700;
+      margin-left: 5px;
+
+      [dir="rtl"] & {
+          margin-left: 0;
+          margin-right: 5px;
+      }
+  }
   }
 
   h2 {
@@ -17481,8 +17491,10 @@ ul.sosiyal {
   .product-order-detail {
     margin-top: 15px;
 
-    img {
-      height: 130px;
+    .product-img{
+      img {
+        height: 130px;
+      }
     }
 
     .order_detail {
@@ -22569,6 +22581,7 @@ table {
           background-color: $light-box-bg;
           padding: 20px;
           color: #000;
+          height: 100%;
           .button{
             display: flex;
             gap: 10px;

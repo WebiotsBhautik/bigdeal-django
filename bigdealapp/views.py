@@ -5125,43 +5125,6 @@ def add_cart_data_to_database(request,get_Item):
     return response
 
 
-@login_required(login_url='login_page')
-def cart_to_checkout_validation(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            body = json.loads(request.body)
-            cartId = body["cartId"]
-            cart = Cart.objects.get(id=cartId)
-            cartProducts = CartProducts.objects.filter(cart=cart)
-            productList = []
-            flag = False
-            for product in cartProducts:
-                dbProduct=ProductVariant.objects.get(id=product.cartProduct.id)
-                if product.cartProductQuantity <= dbProduct.productVariantQuantity:
-                    pass
-                else:
-                    productList.append({"productName":str(product.cartProduct.variantProduct.productName),"outOfStockProducts":str(product.cartProduct.productVariantQuantity)})
-            if len(productList) > 0:
-                flag=True
-            
-            if flag:
-                data={"outOfStockProducts":productList,"flag":str(flag),}
-                response = JsonResponse(data,safe=False)
-                expiry_time = datetime.utcnow() + timedelta(seconds=30)
-                response.set_cookie('checkout', 'False',expires=expiry_time)
-                return response
-            else:
-                data={"outOfStockProducts":productList,"flag":str(flag),}
-                response = JsonResponse(data,safe=False)
-                expiry_time = datetime.utcnow() + timedelta(seconds=30)
-                response.set_cookie('checkout', 'True',expires=expiry_time)
-                return response
-    else:
-        return redirect('login_page')
-    
-client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_SECRET_KEY))
-
-
 def validate_coupon(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -5246,6 +5209,7 @@ def checkout_page(request):
 
     finalAmountForRazorPay=(getTotalPriceForRazorPay-couponAmountForRazorPay)+getTotalTaxForRazorPay
     payment = client.order.create({'amount': int(finalAmountForRazorPay), 'currency': currency_code, 'payment_capture': 1})
+    
     finalAmount=(getTotalPrice-couponAmount)+getTotalTax
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
@@ -5342,7 +5306,7 @@ def payment_complete(request):
             order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=payPalTransactionID, orderAmount=price, orderPaymentMethodName=paymentmethod,)
             order_payment_instance.save()
             cart = Cart.objects.get(id=cartid)
-            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, OrderBillingAddress=order_billing_address_instance,
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,
                                                   orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings = cart.getTotalDiscountAmount)
             order_instance.save()
             
@@ -5373,6 +5337,7 @@ def payment_complete(request):
         zip = body["zip"]
         cartid = body["cartid"]
         orderpaymentmethodname = body["orderpaymentmethodname"]
+        print('orderpaymentmethodname ========>',orderpaymentmethodname)
         
         cookie_value = request.COOKIES.get('couponCode')
         if cookie_value:
@@ -5397,10 +5362,11 @@ def payment_complete(request):
                         createHistory = True
             except:
                 pass
-        order_billing_address_instance = OrderBillingAddress.objects.create(customer=request.user, customerFirstName=fname, customerLastName=lname, customerUserName=uname,
+        order_billing_address_instance = OrderBillingAddress.objects.create(customer=request.user, customerFirstName=fname, customerLastName=lname, customerUsername=uname,
                                                                             customerEmail=email, customerAddress1=address1, customerCountry=country, customerCity=city, customerZip=zip)
         order_billing_address_instance.save()
         paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
+        print('paymentmethod =->=======+++>',paymentmethod)
         
         if 'rpPaymentId' in body:
             rpPaymentId = body["rpPaymentId"]
@@ -5432,7 +5398,7 @@ def payment_complete(request):
                                                                  orderAmount=price, orderPaymentMethodName=paymentmethod)
             order_payment_instance.save()      
             cart = Cart.objects.get(id=cartid)                                                           
-            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, OrderBillingAddress=order_billing_address_instance,
+            order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,
                                                   orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings=cart.getTotalDiscountAmount)
             order_instance.save()
             
@@ -5479,7 +5445,7 @@ def order_success(request):
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {
-        "breadcrumb": {"parent": "Order-Success", "child": "Order-Success"},
+        # "breadcrumb": {"parent": "Order-Success", "child": "Order-Success"},
         "Cart":customer_cart,"cart_products":cart_products, 'totalCartProducts':totalCartProducts,
         "wishlist":customer_wishlist, "wishlist_products":wishlist_products,'totalWishlistProducts':totalWishlistProducts,
         "orderid": order.id if order else None,
@@ -5496,6 +5462,9 @@ def order_success(request):
     }
     
     return render(request, 'pages/pages/order-success.html',context)
+
+def order_tracking(request, id):
+    return render(request, 'pages/pages/order-tracking.html' )
 
 
 def checkout_2_page(request):

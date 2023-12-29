@@ -173,7 +173,7 @@ urlpatterns = [
     
     path('payment_complete',views.payment_complete,name='payment_complete'),
     path('order_success',views.order_success,name='order_success'),
-    # path('order_tracking/<str:id>',views.order_tracking,name='order_tracking'),
+    path('order_tracking/<str:id>',views.order_tracking,name='order_tracking'),
 
 
 

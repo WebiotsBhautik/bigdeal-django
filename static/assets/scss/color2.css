@@ -11353,6 +11353,13 @@ ul.sosiyal {
   .delivery-sec h3 {
     color: #000000;
     text-transform: capitalize; }
+    .delivery-sec h2 span,
+    .delivery-sec h3 span {
+      font-weight: 700;
+      margin-left: 5px; }
+      [dir="rtl"] .delivery-sec h2 span, [dir="rtl"] .delivery-sec h3 span {
+        margin-left: 0;
+        margin-right: 5px; }
   .delivery-sec h2 {
     font-weight: 600;
     font-size: calc(20px + (36 - 20) * ((100vw - 320px) / (1920 - 320))); }
@@ -11369,7 +11376,7 @@ ul.sosiyal {
 
 .product-order .product-order-detail {
   margin-top: 15px; }
-  .product-order .product-order-detail img {
+  .product-order .product-order-detail .product-img img {
     height: 130px; }
   .product-order .product-order-detail .order_detail {
     display: flex;
@@ -14557,7 +14564,8 @@ table.invoice-table {
 .tab-pane .save-details-box .save-details {
   background-color: #ebebeb;
   padding: 20px;
-  color: #000; }
+  color: #000;
+  height: 100%; }
   .tab-pane .save-details-box .save-details .button {
     display: flex;
     gap: 10px; }

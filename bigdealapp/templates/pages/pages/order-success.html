@@ -5,7 +5,21 @@
 {% load mathfilters %}
 {% block components %}
 
-
+<!-- thank-you section start -->
+<section class="section-big-py-space light-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="success-text"><i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <h2>thank you</h2>
+                    <p>Payment is successfully processsed and your order is on the way</p>
+                    <p>Transaction ID:{{transactionId}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
 
 <!-- order-detail section start -->
 <section class="section-big-py-space mt--5 b-g-light">
@@ -17,23 +31,27 @@
                     {% for product in products %}
                     <div class="row product-order-detail">
                         <div class="col-3">
-                            <a href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
-                                <img loading="lazy" src="{{product.productOrderedProducts.variantProduct.productImageFront}}" alt="" class="img-fluid "></div>
+                            <a class="product-img" href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
+                                <img loading="lazy" src="{{product.productOrderedProducts.variantProduct.productImageFront}}" alt="" class="img-fluid ">
                             </a>
+                        </div>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>product name</h4>
-                                <h5>{{product.productOrderedProducts.variantProduct.productName}}</h5></div>
+                                <h5>{{product.productOrderedProducts.variantProduct.productName}}</h5>
+                            </div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>quantity</h4>
-                                <h5>{{product.productOrderedProductQuantity}}</h5></div>
+                                <h5>{{product.productOrderedProductQuantity}}</h5>
+                            </div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>price</h4>
-                                <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5></div>
+                                <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5>
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -63,7 +81,8 @@
                         </ul>
                     </div>
                     <div class="final-total">
-                        <h3>total <span>${{orderprice}}.00</span></h3></div>
+                        <h3>total <span>${{orderprice}}.00</span></h3>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -92,8 +111,11 @@
                     </div>
                     <div class="col-md-12">
                         <div class="delivery-sec">
-                            <h3>expected date of delivery</h3>
-                            <h2>october 22, 2018</h2></div>
+                            {% comment %} <h3>expected date of delivery</h3> {% endcomment %}
+                            {% comment %} <h2>october 22, 2018</h2></div> {% endcomment %}
+                            <h3>expected date of delivery: <span>October 23, 2023</span></h3>
+                            {% comment %} <a href="{% url 'order_tracking' orderid %}">track order</a> {% endcomment %}
+                            <a href="javascript:void(0)">Track Order</a>
                     </div>
                 </div>
             </div>

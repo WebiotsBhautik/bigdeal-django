@@ -82,7 +82,7 @@
                                                 <option name="Bhutan" value="Bhutan">Bhutan</option>
                                                 <option name="Burundi" value="Burundi">Burundi</option>
                                                 <option name="Comoros" value="Comoros">Comoros</option>
-                                                <option name="Dilhi" value="Dilhi">Delhi</option>
+                                                <option name="Delhi" value="Delhi">Delhi</option>
                                                 <option name="Mumbai" value="Mumbai">Mumbai</option>
                                                 <option name="Surat" value="Surat">Surat</option>
                                                 <option name="Abu & Ambaji" value="Abu & Ambaji">Abu & Ambaji</option>
@@ -142,30 +142,26 @@
                                         <li>Total (In USD) <span class="count" id="finalAmountInUSD">${{getFinalPriceAfterTax}}</span></li>
                                     </ul>
                                 </div>
-                                {% comment %} <div class="payment-box"> {% endcomment %}
-                                    {% comment %} <div class="upper-box" id="payment-option" style="display:none;"> {% endcomment %}
+
+
                                 <div class="upper-box payment-box" id="payment-option" style="display:none;">
-                                    <ul>
-                                        <li>
-                                            <div class="form-check custome-radio-box">
-                                                <input type="radio" name="flexRadioDefault" id="paypal" value="PayPal">
-                                                <label class="form-check-label" for="paypal">PayPal</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check custome-radio-box">
-                                                <input type="radio" name="flexRadioDefault" id="razorpay" value="RazorPay">
-                                                <label class="form-check-label" for="razorpay">Razorpay</label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <h3 class="mb-3">Payment</h3>
+                                    <div class="d-flex gap-3 my-3">
+                                        <div class="form-check custome-radio-box">
+                                            <input class="form-check-input p-0 rounded-circle mb-0" type="radio" name="flexRadioDefault" value="PayPal" id="paypal">
+                                            <label class="form-check-label" for="paypal">PayPal</label>
+                                        </div>
+                                        <div class="form-check custome-radio-box">
+                                            <input class="form-check-input p-0 rounded-circle mb-0" type="radio" name="flexRadioDefault" value="RazorPay" id="razorpay">
+                                            <label class="form-check-label" for="razorpay">RazorPay</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="paypal-button-container" class="selected-option"></div>
                                 <div id="smart-button-container" class="selected-option"></div>
                                 <button id="rzp-button1" class="btn-normal btn razorpay-btn" style="display:none;">Pay with Razorpay</button>
-                                <div style="text-align:center;"></div>
-                                    {% comment %} </div> {% endcomment %}
-                                {% comment %} </div>  {% endcomment %}
+                                <div style="text-align: center;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,7 +180,9 @@
 
 {% block script %}
 
-<script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypalrestsdk"></script>
+
+<script src="https://www.paypal.com/sdk/js?client-id={{ppl}}&currency=USD" data-namespace="paypal_sdk"></script>
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
@@ -234,6 +232,7 @@ function completeOrder(params){
         var couponCode = document.getElementById("couponCode").value;
 
         var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+        console.log('orderpaymentmethodname =====++>',orderpaymentmethodname)
 
         fetch(url,{
             method: "POST",
@@ -455,76 +454,74 @@ function completeOrderForRazorPay(params){
   // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
   // =======================================================================
 
-  paypalrestsdk.Buttons({ 
-        onclick: async function(data,actions){
-            console.log('=====> Inside PAYPAL <======')
+
+    paypal_sdk.Buttons({
+        onClick: async function (data, actions) {
+
             var fname = document.getElementById("fname").value;
             var lname = document.getElementById("lname").value;
             var uname = document.getElementById("uname").value;
             var email = document.getElementById("email").value;
             var address1 = document.getElementById("address1").value;
             var country = document.getElementById("validationCustom04").value;
-            var city =  document.getElementById("validationCustom05").value;
+            var city = document.getElementById("validationCustom05").value;
             var zip = document.getElementById("zip").value;
 
             var checkOutStatus = await handleCheckout();
 
+
             const options = document.getElementsByName("flexRadioDefaultForAddress");
-            for(let i = 0; i < options.length; i++){
-                console.log('options[i] ====>',options[i])
-                console.log('options[i].checked ====>',options[i].checked)
-                console.log('options[i].value ====>',options[i].value)
-                if(options[i].checked && options[i].value == "newAddress") {
-                    if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip ){
-                        alert('Please fill the billing address form.');
-                        return actions.reject();
-                        } else{
-                            if(checkOutStatus){
-                                return actions.resolve();
-                            } else{
-                                return actions.reject();
-                            }
-                        }
-                    } else{
-                        if(checkOutStatus){
-                            return actions.resolve();
-                        } else{
-                            return actions.reject();
-                        }
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked && options[i].value == "newAddress") {
+                if (!fname || !lname || !uname || !email || !address1  || !country || !city || !zip) {
+                    alert("Please fill the billing address form.");
+                    return actions.reject();
+                } else {
+                    if (checkOutStatus) {
+                    return actions.resolve();
+                    } else {
+                    return actions.reject();
                     }
+                }
+                } else {
+                if (checkOutStatus) {
+                    return actions.resolve();
+                } else {
+                    return actions.reject();
+                }
+                }
             }
-
         },
-        createOrder: function(data,actions){
-            return actions.order.create({
-                purchase_units: [{
-                    amount:{
-                        value:price,
-                    },
-                },],
+
+        createOrder: function (data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+            amount: {
+                value: price,
+            },
+            }, ],
+        });
+        },
+
+        onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+            var transactionId = details.purchase_units[0].payments.captures[0].id;
+            console.log('============>transactionId', transactionId)
+            console.log('==================>details', details)
+            console.log('============>data', data)
+            console.log('============>data.paymentID', data.paymentID)
+            console.log('============>data.order', data.orderID)
+
+
+            completeOrder({
+            'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
             });
+            setTimeout(function () {
+            location.href = "{% url 'order_success' %}";
+            }, 400);
+        });
         },
-        
-        onApprove: function(data,actions){
-            return actions.order.capture().then(function (details){
-                var transactionId = details.purchase_units[0].payments.captures[0].id;
-                console.log('======> Transaction Id =======>',transactionId)
-                console.log('======> Details <=======',details)
-                console.log('======> data <======',data)
-                console.log('======> data.paymentID <======',data.paymentID)
-                console.log('======> data.order <======',data.orderID)
-
-
-                completeOrder({
-                    'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
-                });
-                setTimeout(function(){
-                    location.href = "{% url 'order_success' %}";
-                }, 400);
-            });
-        },
-    }).render("#paypal-button-container"); 
-
+    }).render("#paypal-button-container");
 
 
 

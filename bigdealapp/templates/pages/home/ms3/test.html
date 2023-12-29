@@ -1,23 +1,135 @@
-{% for banner in allbanners  %}
-{% if banner.bannerType|to_str == '	Right Banner' %}
-<div class="col-6 ">
-   <div class="collection-banner-main banner-2">
-      <div class="collection-img">
-         <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
-      </div>
-      <div class="collection-banner-contain ">
-         <div>
-            <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-            <h4>{{banner.titleOne}}</h4>
-            <div class="shop">
-               <a href="product-page(left-sidebar).html">
-                  shop now
-                  <i class="fa fa-arrow-circle-right"></i>
-               </a>
-            </div>
-         </div>
-      </div>
+<!-- order-detail section start -->
+<section class="section-big-py-space mt--5 b-g-light">
+   <div class="custom-container">
+       <div class="row">
+           <div class="col-lg-6">
+               <div class="product-order">
+                   <h3>your order details</h3>
+                   <div class="row product-order-detail">
+                       <div class="col-3"><img src="../assets/images/layout-4/product/1.jpg" alt="" class="img-fluid "></div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>product name</h4>
+                               <h5>cotton shirt</h5></div>
+                       </div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>quantity</h4>
+                               <h5>1</h5></div>
+                       </div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>price</h4>
+                               <h5>$555.00</h5></div>
+                       </div>
+                   </div>
+                   <div class="row product-order-detail">
+                       <div class="col-3"><img src="../assets/images/layout-4/product/2.jpg" alt="" class="img-fluid "></div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>product name</h4>
+                               <h5>cotton shirt</h5></div>
+                       </div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>quantity</h4>
+                               <h5>1</h5></div>
+                       </div>
+                       <div class="col-3 order_detail">
+                           <div>
+                               <h4>price</h4>
+                               <h5>$555.00</h5></div>
+                       </div>
+                   </div>
+                   <div class="total-sec">
+                       <ul>
+                           <li>subtotal <span>$55.00</span></li>
+                           <li>shipping <span>$12.00</span></li>
+                           <li>tax(GST) <span>$10.00</span></li>
+                       </ul>
+                   </div>
+                   <div class="final-total">
+                       <h3>total <span>$77.00</span></h3></div>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="row order-success-sec">
+                   <div class="col-sm-6">
+                       <h4>summery</h4>
+                       <ul class="order-detail">
+                           <li>order ID: 5563853658932</li>
+                           <li>Order Date: October 22, 2018</li>
+                           <li>Order Total: $907.28</li>
+                       </ul>
+                   </div>
+                   <div class="col-sm-6">
+                       <h4>shipping address</h4>
+                       <ul class="order-detail">
+                           <li>gerg harvell</li>
+                           <li>568, suite ave.</li>
+                           <li>Austrlia, 235153</li>
+                           <li>Contact No. 987456321</li>
+                       </ul>
+                   </div>
+                   <div class="col-sm-12 payment-mode">
+                       <h4>payment method</h4>
+                       <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) availabel. Card/Net banking acceptance subject to device availability.</p>
+                   </div>
+                   <div class="col-md-12">
+                       <div class="delivery-sec">
+                           <h3>expected date of delivery</h3>
+                           <h2>october 22, 2018</h2></div>
+                   </div>
+               </div>
+           </div>
+       </div>
    </div>
-</div>
-{% endif %}
-{% endfor %}
+</section>
+<!-- Section ends -->
+
+<script>
+   async function handleCheckout() {
+      var checkOutStatus = true;
+      var url = "{% url 'cart_to_checkout_validation' %}";
+  
+      await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
+            cartId: cartId,
+          }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.flag === "True") {
+            // You can not Buy
+  
+            var checkoutMsgDiv = document.getElementById("checkoutMsgDiv");
+            for (var i = 0; i < data.outOfStockProducts.length; i++) {
+              var checkoutMsg = document.createElement("h5");
+              checkoutMsg.setAttribute("id", "checkoutMsg" + i);
+              checkoutMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts +
+                " stock of product " + data.outOfStockProducts[i].productName + ". Please update your cart.";
+              checkoutMsgDiv.append(checkoutMsg);
+  
+              // Set a timeout to hide the checkoutMsg element after 3 seconds
+              setTimeout(function (index) {
+                var checkoutMsgElement = document.getElementById("checkoutMsg" + index);
+                if (checkoutMsgElement) {
+                  checkoutMsgElement.remove();
+                }
+              }, 3000, i);
+            }
+            checkOutStatus = false;
+          }
+          if (data.flag === "False") {
+            // You can Buy
+          }
+        });
+  
+      return checkOutStatus;
+    }
+</script>

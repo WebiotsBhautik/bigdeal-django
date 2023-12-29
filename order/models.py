@@ -117,7 +117,10 @@ class CartProducts(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.id)
         req = get_request().user
-        self.cartByCustomer = req
+        if req.is_anonymous:
+            self.cartByCustomer = None
+        else:
+            self.cartByCustomer = req
         super(CartProducts, self).save(*args, **kwargs)
 
     class Meta:
@@ -127,6 +130,7 @@ class CartProducts(models.Model):
 
 
 class OrderBillingAddress(models.Model):
+    
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False)
