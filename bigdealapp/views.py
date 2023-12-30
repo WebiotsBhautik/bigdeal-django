@@ -5256,7 +5256,7 @@ def payment_complete(request):
         if cookie_value:
             couponCode = cookie_value
         else:
-            couponCode = ''
+            couponCode = '' 
         
         couponDiscountAmount = 0
         createHistory = False
@@ -5281,11 +5281,14 @@ def payment_complete(request):
         
         if 'rpPaymentId' in body:
             rpPaymentId = body['rpPaymentId']
+            print('rpPaymentId =======+++>',rpPaymentId)
             order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=rpPaymentId, orderAmount=price, orderPaymentMethodName=paymentmethod,)
+            print('order_payment_instance =====+++>',order_payment_instance)
             order_payment_instance.save()
             cart = Cart.objects.get(id=cartid)
             order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,
                                                   orderedCart=cart, orderPayment=order_payment_instance, orderTotalPrice=cart.getFinalPriceAfterTax, orderTotalTax=cart.getTotalTax, orderSavings=cart.getTotalDiscountAmount)
+            print('order_instance ========++++>',order_instance)
             order_instance.save()
 
             if createHistory:
@@ -5337,7 +5340,7 @@ def payment_complete(request):
         zip = body["zip"]
         cartid = body["cartid"]
         orderpaymentmethodname = body["orderpaymentmethodname"]
-        print('orderpaymentmethodname ========>',orderpaymentmethodname)
+        # print('orderpaymentmethodname ========>',orderpaymentmethodname)
         
         cookie_value = request.COOKIES.get('couponCode')
         if cookie_value:
@@ -5366,7 +5369,7 @@ def payment_complete(request):
                                                                             customerEmail=email, customerAddress1=address1, customerCountry=country, customerCity=city, customerZip=zip)
         order_billing_address_instance.save()
         paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
-        print('paymentmethod =->=======+++>',paymentmethod)
+        # print('paymentmethod =->=======+++>',paymentmethod)
         
         if 'rpPaymentId' in body:
             rpPaymentId = body["rpPaymentId"]
@@ -5430,7 +5433,7 @@ def order_success(request):
         customer = Customer.objects.get(customer=request.user)
         
         order = Order.objects.filter(orderedByCustomer=request.user.id).order_by('-orderCreatedAt').first()
-        print('order=======++>',order)
+        # print('order=======++>',order)
         if order is not None:
             paymentmethod = order.orderPayment.orderPaymentMethodName
             products = ProductOrder.objects.filter(productOrderOrderId=order.id)
@@ -5441,7 +5444,7 @@ def order_success(request):
         return redirect('login_page')
     
     
-    print('products on order ====>',products)
+    # print('products on order ====>',products)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {

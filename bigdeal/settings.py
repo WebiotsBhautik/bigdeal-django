@@ -167,6 +167,7 @@ MEDIA_ROOT = BASE_DIR / 'bigdealapp/static/assets/images'
 # Rozarpay settings ===================================================
 RAZORPAY_KEY_ID = 'rzp_test_iV7SM01Wb7wvhv'
 RAZORPAY_SECRET_KEY = 'gjdchqP3v7shiW7SRKo2xecV'
+
 # =====================================================================
 
 # PayPal settings ===================================================
