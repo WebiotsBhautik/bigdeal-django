@@ -5283,7 +5283,6 @@ def payment_complete(request):
             rpPaymentId = body['rpPaymentId']
             print('rpPaymentId =======+++>',rpPaymentId)
             order_payment_instance = OrderPayment.objects.create(orderPaymentFromCustomer=request.user, orderPaymentTransactionId=rpPaymentId, orderAmount=price, orderPaymentMethodName=paymentmethod,)
-            print('order_payment_instance =====+++>',order_payment_instance)
             order_payment_instance.save()
             cart = Cart.objects.get(id=cartid)
             order_instance = Order.objects.create(orderedByCustomer=request.user, orderTransactionId=order_payment_instance.orderPaymentTransactionId, orderBillingAddress=order_billing_address_instance,

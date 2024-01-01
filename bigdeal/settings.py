@@ -16,6 +16,10 @@ from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/javascript", ".js", True)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,7 +30,12 @@ SECRET_KEY = 'django-insecure-sq-%-(rvn6qkp0bv7vbbro=+0-q2v!y1l^$w6cs@4s62%jv4)=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['0.0.0.0','192.168.1.25','127.0.0.1']
+
+# 192.168.1.25
+
 
 
 # Application definition

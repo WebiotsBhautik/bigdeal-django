@@ -208,7 +208,7 @@
     var totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
 
 
-// completeOrder() function for paypal payment start ============================================
+// PayPal Start ============================================
 
 function completeOrder(params){
     var url = "{% url 'payment_complete' %}";
@@ -232,7 +232,6 @@ function completeOrder(params){
         var couponCode = document.getElementById("couponCode").value;
 
         var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-        console.log('orderpaymentmethodname =====++>',orderpaymentmethodname)
 
         fetch(url,{
             method: "POST",
@@ -321,14 +320,15 @@ function completeOrder(params){
     }
 }
 
-// completeOrder() function for paypal payment end ==============================================  
+// PayPal End ==============================================  
 
 
-// completeOrder() function for razorpay payment start ==========================================
+// RazorPay Payment Start ==========================================
 
 function completeOrderForRazorPay(params){
     var url = "{% url 'payment_complete' %}";
     var cartid = "{{Cart.id}}";
+    console.log('cartid in starting=======>',cartid)
 
     var newAddressRadioBtn = document.getElementById("newAddress");
     if(newAddressRadioBtn.checked){
@@ -399,9 +399,12 @@ function completeOrderForRazorPay(params){
 
         var couponCode = document.getElementById("couponCode").value;
 
+        console.log('======> CompleteOrderForRazorPay Function Calling-1 <=======')
+
         for(var i = 0; i < radios.length; i++){
             if (radios[i].checked) {
                 var selectedValue = radios[i].value;
+                console.log('======> CompleteOrderForRazorPay Function Calling-2 <======='),
                 fetch(url, {
                     method:"POST",
                     headers:{
@@ -444,9 +447,7 @@ function completeOrderForRazorPay(params){
     }
 }
 
-
-
-// completeOrder() function for razorpay payment end ============================================
+// RazorPay Payment End ============================================
 
 
 
@@ -537,6 +538,8 @@ var options = {
     name: "Bigdeal Ecommerce",
     description: "Order Transaction",
     order_id: "{{payment.id}}",
+
+    
     handler: function (response){
         if(response.error && response.error.code === 'payment_cancelled'){
             // Handle payment cancellation error
@@ -550,12 +553,14 @@ var options = {
         });
         setTimeout(function(){
             location.href = "{% url 'order_success' %}";
+            console.log('===> RazorPay-2 <====')
         },400);
     },
 };
 
 
 var rzpObject = new Razorpay(options);
+
 
 
 
@@ -568,20 +573,28 @@ document.getElementById('rzp-button1').onclick = function(e){
     var country = document.getElementById("validationCustom04").value;
     var city = document.getElementById("validationCustom05").value;
     var zip = document.getElementById("zip").value;
+    console.log('===> RazorPay-3 <====')
 
     handleCheckout()
     .then((checkOutStatus) => {
         const options = document.getElementsByName("flexRadioDefaultForAddress");
+        console.log('===> RazorPay-4 <====')
+
         for (let i = 0; i < options.length; i++){
-            console.log('RazorPay Payment ===>')
+            console.log('IF BEFORE')
             if (options[i].checked && options[i].value == "newAddress"){
+                console.log('IF AFTER')
                 if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip){
                     alert("Please fill the billing address form.");
                 } else{
+                    console.log('===> RazorPay-5 <====')
+
                     if(checkOutStatus){
                         rzpObject.open();
+                        console.log('===> RazorPay-6 <====')
                         e.preventDefault();
                     } else{
+                        console.log('===> RazorPay-7 <====')
                         return;
                     }
                 }
@@ -589,8 +602,11 @@ document.getElementById('rzp-button1').onclick = function(e){
             if(options[i].checked && options[i].value != "newAddress"){
                 if(checkOutStatus){
                     rzpObject.open();
+                    console.log('===> RazorPay-8 <====')
                     e.preventDefault();
+                    console.log('===> RazorPay-9 <====')
                 } else{
+                    console.log('===> RazorPay-10 <====')
                     return;
                 }
             }
@@ -728,18 +744,6 @@ async function handleCheckout(){
 
 
 // Set value in cookie Function Start ============================================================
-function getCookie(cookieName){
-    const cookieString = document.cookie;
-    const cookies = cookieString.split(';');
-
-    for(let i=0; i < cookies.length; i++){
-        const cookie = cookies[i].trim();
-        if(cookie.startsWith(`${cookieName}=`)){
-            return cookie.substring(cookieName.length +1);
-        }
-    }
-    return null;
-}
 
 function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds){
     const existingCookie = getCookie(cookieName);

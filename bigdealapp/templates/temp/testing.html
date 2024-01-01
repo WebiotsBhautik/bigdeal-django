@@ -13,7 +13,6 @@
       <div class="col-lg-8">
         {% comment %} ----------------------- COUPON MODULE Start -------------------------- {% endcomment %}
         <div id="couponCodeDiv">
-          <!-- <div class="col-lg-4 col-sm-6"> -->
           <div class="promo-section mb-sm-4 mb-2">
             <div class="row g-2">
               <div class="col-7">
@@ -26,11 +25,11 @@
               </div>
             </div>
           </div>
-          <!-- </div> -->
         </div>
         {% comment %} ----------------------- COUPON MODULE End -------------------------- {% endcomment %}
 
         {% comment %} -------------------- BILLING ADDRESS CHECKBOXED Start -----------------------------{% endcomment %}
+        
         <div id="billingAddressDiv">
           <h3 class="mb-3">Billing address</h3>
           <div class="d-block my-3">
@@ -49,12 +48,12 @@
             {% endfor %}
           </div>
         </div>
+
         {% comment %} ----------------------- BILLING ADDRESS CHECKBOXED End ------------------------ {% endcomment %}
-
-
         {% comment %} ----------------------- BILLING ADDRESS FORM Start ---------------------------- {% endcomment %}
         <form class="needs-validation" id="new-address" style="display: none;">
           <input type="hidden" name="cartid" value="{{Cart.id}}">
+          {% comment %} <div class="row g-4" id="new-address"> {% endcomment %}
             <div class="row g-4">
 
               <div class="col-md-6">
@@ -144,11 +143,9 @@
             </div>
         </form>
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
-
         {% comment %} ----------------------- BILLING ADDRESS FORM End ---------------------------- {% endcomment %}
         <hr class="my-lg-5 my-4">
         {% comment %} Payment option section START ------------------------------------------------ {% endcomment %}
-
         <div id="payment-option" style="display:none;">
           <h3 class="mb-3">Payment</h3>
           <div class="d-block my-3">
@@ -221,6 +218,15 @@
               <strong id="finalAmountInUSD">${{getFinalPriceAfterTax}}</strong>
             </li>
           </ul>
+
+          {% comment %} <form class="card border-0">
+            <div class="input-group custome-imput-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-solid-default rounded-0">Redeem</button>
+              </div>
+            </div>
+          </form> {% endcomment %}
         </div>
       </div>
       <div id='checkoutMsgDiv'>
@@ -251,14 +257,13 @@
     }
     return cookieValue;
   }
-  
   var csrftoken = getCookie("csrftoken");
-  var price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
-  var totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
-
-
-// completeOrder() function for paypal payment start ============================================
-
+  var price;
+  price = "{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}";
+  var totalTax;
+  totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
+  // console.log('============>totalTax', totalTax)
+  // completeOrder() function for paypal payment start ============================================
   function completeOrder(params) {
     var url = "{% url 'payment_complete' %}";
     var cartid = "{{Cart.id}}";
@@ -382,10 +387,10 @@
       }
     }
   }
-// completeOrder() function for paypal payment end ==============================================  
+  // completeOrder() function for paypal payment end ==============================================  
 
 
-// completeOrder() function for razorpay payment start ==========================================
+  // completeOrder() function for razorpay payment start ==========================================
   function completeOrderForRazorPay(params) {
     var url = "{% url 'payment_complete' %}";
     var cartid = "{{Cart.id}}";
@@ -512,15 +517,17 @@
       }
     }
   }
-// completeOrder() function for razorpay payment end ============================================
+  // completeOrder() function for razorpay payment end ============================================
 
 
   // =======================================================================
   // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
   // =======================================================================
 
+
   paypal_sdk.Buttons({
-    onclick: async function (data, actions) {
+    onClick: async function (data, actions) {
+
       var fname = document.getElementById("fname").value;
       var lname = document.getElementById("lname").value;
       var uname = document.getElementById("uname").value;
@@ -532,6 +539,7 @@
       var zip = document.getElementById("zip").value;
 
       var checkOutStatus = await handleCheckout();
+
 
       const options = document.getElementsByName("flexRadioDefaultForAddress");
       for (let i = 0; i < options.length; i++) {
@@ -585,6 +593,8 @@
       });
     },
   }).render("#paypal-button-container");
+
+
 
 
   //  =======================================================================
@@ -663,6 +673,8 @@
 
   const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
   const paypalProceedButton = document.querySelector("#paypal-button-container");
+  console.log('Paypal Button container =====> ',paypalProceedButton)
+
   const razorPayProceedButton = document.querySelector("#rzp-button1");
 
   paypalProceedButton.style.display = "none";
@@ -716,11 +728,14 @@
   const couponBtn = document.getElementById('couponBtn');
 
 
- 
+  //addAddressDiv.style.display = "none";
+  //paymentOptions.style.display = "none";
 
   addressMethodRadios.forEach((radio) => {
     radio.addEventListener("change", (event) => {
 
+      // yesOption.disabled = true;
+      // noOption.disabled = true;
       couponCodeEle.disabled = true;
       couponBtn.disabled = true;
 
@@ -784,7 +799,7 @@
 
     return checkOutStatus;
   }
-  // Handle Checkout Function End ============================================================
+  // Handle Checkout Function Start ============================================================
 
   // Set value in cookie Function Start ============================================================
 
@@ -832,207 +847,83 @@
   // Handle coupon validation start ======================
   async function couponvalidation(params) {
     const couponCodeEle = document.getElementById('couponCode');
+    console.log('couponCodeEle =====+>',couponCodeEle)
+
     const couponCode = couponCodeEle.value;
-    
+    console.log('couponCode =======>',couponCode)
+    // const couponBtn = document.getElementById('couponBtn');
+    // const price = params.price
+    // const tax = params.tax
+    // const priceInUSD = params.priceInUSD
+
+
+
 
     if (couponCode == '') {
       alert('Please enter a coupon code')
+      console.log('AFTER ALERT ALERT ALERT')
       return;
     } else {
       // Usage example
       setOrUpdateCookie('couponCode', couponCode, 3600);
     }
 
+
+
     window.location.reload();
+
+    // console.log('============>url',url)
+    // await fetch(url, {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //     "X-CSRFToken": csrftoken,
+    //   },
+    //   // body: JSON.stringify({
+    //     // couponCode: couponCode,
+    //     // price: price,
+    //     // tax: tax,
+    //     // priceInUSD:priceInUSD,
+    //   // }),
+    // })
+
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   if (data.valid) {
+    //     console.log('============>valid',data)
+    //     // couponBtn.disabled = true;
+    //     couponCodeEle.disabled = true;
+    //     var couponAmount = document.getElementById("couponAmount")
+    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
+    //     var finalAmount = document.getElementById("finalAmount")
+    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
+    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
+    //     finalAmountInUSD.innerHTML = '$'+data.finalAmountInUSD
+    //     // priceBt=data.finalAmount
+    //     // yesOption.disabled = true;
+    //     // noOption.disabled = true;
+    //   }
+    //   if (!data.valid) {
+    //     console.log('============>IN valid',data)
+    //     var couponAmount = document.getElementById("couponAmount")
+    //     couponAmount.innerHTML = data.currencySymbol+''+data.couponAmount
+    //     var finalAmount = document.getElementById("finalAmount")
+    //     finalAmount.innerHTML = data.currencySymbol+''+data.finalAmount
+    //     var finalAmountInUSD = document.getElementById("finalAmountInUSD")
+    //     finalAmountInUSD.innerHTML ='$'+data.finalAmountInUSD
+    //     // priceBt=data.finalAmount
+    //     // couponBtn.disabled = true;
+    //     couponCodeEle.disabled = true;
+    //     // yesOption.disabled = true;
+    //     // noOption.disabled = true;
+    //   }
+    // });
 
   }
   // Handle coupon validation end ========================
-
-
 </script>
 
 {% endblock script %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Oder Details Section Start -->
-<section class="section-b-space cart-section order-details-table">
-  <div class="container">
-      <div class="title title1 title-effect mb-1 title-left">
-          <h2 class="mb-3">Order Details</h2>
-      </div>
-      <div class="row g-4">
-          <div class="col-md-6">
-              <div class="col-sm-12 table-responsive">
-                  <table class="table cart-table table-borderless">
-                      <tbody>
-                          {% for product in products %}
-                          <tr class="table-order">
-                              <td>
-                                  <a href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
-                                      <img loading="lazy" src="{{product.productOrderedProducts.variantProduct.productImageFront}}"
-                                          class="img-fluid blur-up lazyload" alt="">
-                                  </a>
-                              </td>
-                              <td>
-                                  <p>Product Name</p>
-                                  <h5>{{product.productOrderedProducts.variantProduct.productName}}</h5>
-                              </td>
-                              <td>
-                                  <p>Quantity</p>
-                                  <h5>{{product.productOrderedProductQuantity}}</h5>
-                              </td>
-                              <td>
-                                  <p>Price</p>
-                                  <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5>
-                              </td>
-                          </tr>
-                          {% endfor %}
-
-                      </tbody>
-                      <tfoot>
-                          <tr class="table-order">
-                              <td colspan="3">
-                                  <h5 class="font-light">Subtotal :</h5>
-                              </td>
-                              <td>
-                                  <h4>${{ordersubtotal}}.00</h4>
-                              </td>
-                          </tr>
-
-                          <tr class="table-order">
-                              <td colspan="3">
-                                  <h5 class="font-light">Shipping :</h5>
-                              </td>
-                              <td>
-                                  <h4>$0.00</h4>
-                              </td>
-                          </tr>
-
-                          <tr class="table-order">
-                              <td colspan="3">
-                                  <h5 class="font-light">Tax(GST) :</h5>
-                              </td>
-                              <td>
-                                  <h4>${{orderTax}}.00</h4>
-                              </td>
-                          </tr>
-
-                          <tr class="table-order">
-                              <td colspan="3">
-                                  <h4 class="theme-color fw-bold">Total Price :</h4>
-                              </td>
-                              <td>
-                                  <h4 class="theme-color fw-bold">${{orderprice}}.00</h4>
-                              </td>
-                          </tr>
-                      </tfoot>
-                  </table>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <div class="order-success">
-                  <div class="row g-4">
-                      <div class="col-sm-6">
-                          <h4>summery</h4>
-                          <ul class="order-details">
-                              <li>Order ID: <br> {{orderid}}</li>
-                              <li>Payment Transaction ID: {{transactionId}}</li>
-                              <li>Order Date: {{orderdate}}</li>
-                              <li>Order Total: ${{orderprice}}.00</li>
-                          </ul>
-                      </div>
-
-                      <div class="col-sm-6">
-                          <h4>shipping address</h4>
-                          <ul class="order-details">
-                              <li>{{orderaddress.customerAddress1}}</li>
-                              <li>{{orderaddress.customerCity}}, {{orderaddress.customerZip}}</li>
-                              <li>{{orderaddress.customerCountry}}</li>
-                              <li>Contact No. {{orderaddress.customerMobile}}</li>
-                          </ul>
-                      </div>
-
-                      <div class="col-12">
-                          <div class="payment-mode">
-                              <h4>payment method</h4>
-                              {% comment %} <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) available. Card/Net banking
-                                  acceptance subject to device availability.</p> {% endcomment %}
-                                  <p>{{paymentmethod}}</p>
-                              </div>
-                      </div>
-
-                      <div class="col-md-12">
-                          <div class="delivery-sec">
-                              <h3>expected date of delivery: <span>October 23, 2023</span></h3>
-                              {% comment %} <a href="{% url 'order_tracking' 1 %}">track order</a> {% endcomment %}
-                              <a href="{% url 'order_tracking' orderid %}">track order</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
-<!-- Order Details Section End -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% block style %}
+{% endblock style %}
