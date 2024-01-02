@@ -1,0 +1,855 @@
+/**============================
+    Order Tracking css Start
+  =================================**/
+  .tracker-title {
+    font-size: 28px;
+    letter-spacing: 1.2px;
+    margin: 0;
+    font-weight: 500;
+
+    @include mq-max(2xs) {
+        font-size: 26px;
+        line-height: 1.5;
+    }
+}
+
+.tracker-number {
+    p {
+        margin-bottom: 10px;
+        letter-spacing: 1.2px;
+
+        span {
+            font-weight: 500;
+            margin-left: 10px;
+            color: $black1;
+        }
+    }
+}
+
+.progtrckr {
+    margin: 40px 0 15px;
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+
+    @include mq-max(sm) {
+        display: block;
+        margin: 30px 0;
+    }
+
+    li {
+        display: inline-block;
+        text-align: center;
+        margin: 10px 0;
+
+        @include mq-max(sm) {
+            margin: 0;
+            width: 50% !important;
+        }
+
+        h5 {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            font-weight: 500;
+
+            @include mq-max(sm) {
+                display: block;
+                text-align: left;
+                margin-top: 0;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
+            }
+        }
+
+        &:before {
+            position: relative;
+            top: -2px;
+            float: left;
+            left: 50% !important;
+            line-height: 1;
+            transform: translate(-50%, -50%) !important;
+
+            @include mq-max(sm) {
+                position: relative;
+                top: 10px;
+                float: left;
+                left: -2px !important;
+                line-height: 1;
+                transform: translate(-50%, -50%) !important;
+
+                [dir="rtl"] & {
+                    float: right;
+                    right: -32px !important;
+                    left: unset !important;
+                }
+            }
+        }
+
+        &.progtrckr-todo {
+            color: $silver;
+            border-top: 4px solid $silver;
+            width: 100% !important;
+
+            @include mq-max(sm) {
+                position: relative;
+                text-align: left;
+                margin-left: 30px;
+                align-items: flex-start;
+                padding-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+                padding-left: 30px;
+                border-top: unset;
+                border-left: 4px solid $silver;
+
+                [dir="rtl"] & {
+                    border-left: none;
+                    border-right: 4px solid $silver;
+                    margin-left: 0;
+                    margin-right: 30px;
+                    align-items: flex-end;
+                    padding-left: 0;
+                    padding-right: 30px;
+                    text-align: right;
+                }
+            }
+
+            &:before {
+                content: "\f111";
+                font-family: "Font Awesome 5 Free";
+                color: $silver;
+                background-color: $white;
+                font-size: 2.2em;
+
+                @include mq-max(sm) {
+                    position: absolute;
+                    top: 10px;
+                    left: -17px;
+                    line-height: 1;
+                    transform: translateY(-50%);
+
+                    [dir="rtl"] & {
+                        left: unset;
+                        right: -17px;
+                    }
+                }
+            }
+
+            h6 {
+                font-size: 13px;
+                margin-top: 8px;
+            }
+        }
+
+        &.progtrckr-done {
+            color: $black1;
+            border-top: 4px solid var(--theme-color);
+            width: 100% !important;
+
+            @include mq-max(sm) {
+                position: relative;
+                text-align: left;
+                margin-left: 30px;
+                align-items: self-start;
+                padding-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+                border-top: unset;
+                border-left: 4px solid var(--theme-color);
+
+                [dir="rtl"] & {
+                    margin-left: 0;
+                    margin-right: 30px;
+                    text-align: right;
+                    border-left: none;
+                    border-right: 4px solid var(--theme-color);
+                    align-items: flex-end;
+                }
+            }
+
+            &:before {
+                content: "\f00c";
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                color: $white;
+                background-color: var(--theme-color);
+                height: 30px;
+                width: 30px;
+                line-height: 2.2em;
+                border: none;
+                border-radius: 2.2em;
+                @include flex_common;
+            }
+
+            h6 {
+                font-size: 13px;
+                margin-top: 8px;
+                color: $font-light;
+            }
+        }
+    }
+}
+
+.order-left-image {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+
+    @include mq-max(lg) {
+        display: block;
+    }
+
+    .tracking-product-image {
+        margin-right: 40px;
+        width: 30%;
+
+        [dir="rtl"] & {
+            margin-right: 0;
+            margin-left: 40px;
+        }
+
+        @include mq-max(lg) {
+            margin-bottom: 18px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+
+            [dir="rtl"] & {
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+
+        @include mq-max(md) {
+            margin: 0 auto;
+            margin-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+        }
+    }
+
+    .order-image-contain {
+        width: calc(100% - 30px);
+
+        @include mq-max(lg) {
+            width: 100%;
+        }
+
+        p {
+            margin-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
+            letter-spacing: 0.05em;
+
+            span {
+                font-weight: 500;
+                margin-left: 10px;
+                color: $black1;
+
+                [dir="rtl"] & {
+                    margin-left: 0;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        h4 {
+            font-size: 22px;
+            letter-spacing: 0.03em;
+            margin-bottom: calc(12px + (23 - 12) * ((100vw - 320px) / (1920 - 320)));
+            font-weight: 500;
+
+            @include mq-max(md) {
+                font-size: calc(16px + (24 - 16) * ((100vw - 320px) / (1920 - 320)));
+            }
+        }
+    }
+}
+
+.order-address {
+    margin-top: 50px;
+
+    @include mq-max(2xs) {
+        margin-top: 20px;
+    }
+
+    li {
+        display: flex;
+        align-items: flex-start;
+
+        @include mq-max(2xs) {
+            display: block;
+        }
+
+        .left-box {
+            text-transform: capitalize;
+            min-width: 210px;
+            padding: 10px 0;
+
+            h6 {
+                font-weight: 500;
+
+                @include mq-max(2xs) {
+                    color: $font-light !important;
+                    margin-bottom: -13px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid $dark-silver;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .right-box {
+            padding: 10px 0;
+            width: 180px;
+
+            p {
+                margin-bottom: 0;
+                line-height: 1.6;
+            }
+        }
+    }
+}
+
+.tracker-table {
+    padding-top: calc(30px + (60 - 30) * ((100vw - 320px) / (1920 - 320)));
+    overflow: hidden;
+    margin-bottom: 0;
+
+    .table {
+        margin-bottom: 0;
+
+        thead {
+            th {
+                border-bottom-width: 1px;
+                font-weight: 500;
+                color: $black1 !important;
+                text-transform: uppercase;
+                font-size: 15px;
+                border-top: 0;
+                text-align: left;
+                padding: 16px;
+                border-bottom: 1px solid $light-blue !important;
+                background-color: $light-blue;
+
+                [dir="rtl"] & {
+                    text-align: right;
+                }
+            }
+        }
+
+        tbody {
+            h2 {
+                margin-bottom: 0;
+            }
+
+            tr {
+                td {
+                    vertical-align: middle;
+                    color: $shade-gray;
+                    border-top: 0;
+                    border-bottom: 1px solid $light-blue !important;
+                    text-align: left;
+                    padding: calc(0px + (16 - 0) * ((100vw - 320px) / (1920 - 320))) calc(6px + (16 - 6) * ((100vw - 320px) / (1920 - 320)));
+                    min-width: 175px;
+
+                    [dir="rtl"] & {
+                        text-align: right;
+                    }
+
+                    p {
+                        margin: 10px 0 !important;
+                    }
+
+                    &:nth-child(odd) {
+                        p {
+                            color: $black1;
+                        }
+                    }
+
+                    a {
+                        font-weight: 400;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**=====================
+    Element Page css Start
+  ==========================**/
+.header-image-contain {
+    margin-bottom: calc(20px + (50 - 20) * ((100vw - 320px) / (1920 - 320)));
+
+    .background-contain {
+        background-image: none;
+        height: 100%;
+    }
+}
+
+.custome-card {
+    border: 1px solid $border-color;
+
+    .card-header {
+        background-color: $light-blue;
+    }
+
+    .card-body {
+        background-color: $white;
+    }
+}
+
+/**=====================
+    About Page css Start
+  ==========================**/
+.about-image {
+    @include mq-max(lg) {
+        display: none;
+    }
+}
+
+.about-details {
+    @include flex_common;
+    height: 100%;
+
+    h2 {
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        color: var(--theme-color);
+    }
+
+    h3 {
+        font-size: calc(18px + (25 - 18) * ((100vw - 320px) / (1920 - 320)));
+        letter-spacing: 1.5px;
+        margin-bottom: 16px;
+        max-width: 80%;
+        line-height: 1.5;
+        text-transform: uppercase;
+
+        @include mq-max(lg) {
+            max-width: 100%;
+        }
+    }
+
+    p {
+        letter-spacing: 1px;
+        line-height: 1.5;
+        color: $font-light;
+    }
+}
+
+.custome-accordion {
+    padding: 25px;
+    border: 1px solid $gray-light;
+    border-radius: 5px;
+
+    .accordion-item {
+        border-top: 1px solid rgba($gray-light, $alpha: 0.5);
+        border: none;
+
+        .accordion-header {
+            border-top: 1px solid rgba($gray-light, $alpha: 0.5);
+
+            .accordion-button {
+                background-color: transparent;
+                font-weight: 600;
+                text-transform: capitalize;
+
+                &:focus {
+                    border-color: $gray;
+                    box-shadow: none;
+                }
+
+                &.collapsed {
+                    background-color: $white;
+                    font-weight: 400;
+                }
+
+                &:after {
+                    flex-shrink: 0;
+                    width: 20px;
+                    height: 20px;
+                    margin-left: auto;
+                    color: $font-light;
+                    content: "\f054";
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    background-image: none;
+                    transition: transform 0.4s ease-in-out;
+                    @include flex_common;
+                }
+
+                &:not(.collapsed) {
+                    color: $black1;
+
+                    &::after {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+
+        .accordion-collapse {
+            .accordion-body {
+                p {
+                    letter-spacing: 1.3px;
+                    margin-bottom: 0;
+                    line-height: 1.4;
+                    text-align: justify;
+                    color: $font-light;
+                }
+            }
+        }
+    }
+}
+
+.team-contain {
+    &.team-center {
+        @include flex_common;
+        position: relative;
+        margin-bottom: 22px;
+
+        img {
+            width: 40%;
+        }
+
+        .team-details {
+            margin-top: 0;
+            margin-left: 20px;
+
+            p {
+                span {
+                    color: $font-light;
+                    display: none;
+                }
+            }
+
+            .moreless-button {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                text-align: right;
+                color: var(--theme-color);
+            }
+        }
+    }
+}
+
+.team-details {
+    margin-top: 30px;
+    position: relative;
+
+    h3 {
+        font-size: 23px;
+        margin-bottom: 10px;
+        color: $black1;
+    }
+
+    p {
+        margin-bottom: 0;
+        letter-spacing: 0.6px;
+        line-height: 1.5;
+        color: $font-light;
+
+        span {
+            color: $font-light;
+            display: none;
+        }
+    }
+
+    .moreless-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        text-align: right;
+        color: var(--theme-color);
+    }
+}
+
+.team-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.team-leader-section {
+    background-color: $light-blue;
+}
+
+.leader-contain {
+    &:hover {
+        .leader-image {
+            .social-media {
+                bottom: 0;
+                opacity: 1;
+
+                @include mq-max(md) {
+                    top: 0;
+                    opacity: 1;
+                    @include flex_common;
+                    height: 100%;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    .leader-image {
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+
+        .social-media {
+            @include flex_common;
+            position: absolute;
+            bottom: -60px;
+            opacity: 0;
+            @include center(horizontal);
+            text-align: center;
+            display: block;
+            padding: calc(8px + (12 - 8) * ((100vw - 320px) / (1920 - 320)));
+            background-color: rgba(226, 46, 83, 0.8);
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            backdrop-filter: blur(5px);
+
+            @include mq-max(md) {
+                top: 0;
+                bottom: unset;
+                opacity: 0;
+                height: 100%;
+                background-color: rgba(226, 46, 83, 0.6);
+            }
+
+            li {
+                margin: 0 5px;
+                width: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+                height: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+                transition: all 0.5s ease-in-out;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: rgba($black1, $alpha: 0.7);
+
+                    a {
+                        color: $white;
+                    }
+                }
+
+                a {
+                    color: $gray-light;
+                    @include pseudowh;
+                    @include flex_common;
+                    transition: all 0.5s ease-in-out;
+                    font-size: calc(14px + (20 - 14) * ((100vw - 320px) / (1920 - 320)));
+                }
+            }
+        }
+    }
+
+    .leader-contain {
+        color: $black1;
+        padding: calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+        width: 100%;
+        text-align: center;
+
+        h3 {
+            letter-spacing: 1px;
+        }
+
+        h6 {
+            margin: calc(6px + (10 - 6) * ((100vw - 320px) / (1920 - 320))) 0 0;
+            letter-spacing: 1.6px;
+            color: $font-light;
+        }
+    }
+}
+
+.testimonial-section {
+    .testimonial-contain {
+        text-align: center;
+        box-shadow: 0 0 8px $gray-light;
+        padding: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+        border-radius: 10px;
+
+        [dir="rtl"] & {
+            direction: rtl;
+        }
+
+        .textimonial-image {
+            text-align: center;
+
+            img {
+                border-radius: 25px;
+                border: 1px solid $gray;
+                padding: 5px;
+                height: 100px;
+                width: 100px;
+                margin: 0 auto;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .testimonial-details {
+        margin: 15px auto 0;
+
+        @include mq-max(md) {
+            width: 100%;
+        }
+
+        .details-images {
+            margin-top: 20px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+            color: $font-light;
+            position: relative;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+
+            i {
+                color: var(--theme-color);
+                font-size: 15px;
+                vertical-align: super;
+
+                [dir="rtl"] & {
+                    transform: rotate(180deg);
+                }
+
+                &.fa-quote-left {
+                    margin-right: 8px;
+
+                    [dir="rtl"] & {
+                        margin-right: 0;
+                        margin-left: 8px;
+                    }
+                }
+
+                &.fa-quote-right {
+                    margin-left: 8px;
+
+                    [dir="rtl"] & {
+                        margin-left: 0;
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            &::before {
+                @include pos;
+                @include center(vertical);
+                bottom: 0;
+                width: 90px;
+                height: 3px;
+                background-color: var(--theme-color);
+            }
+        }
+
+        h5 {
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+        }
+    }
+}
+
+/**=====================
+    Dark and RTL css Start
+  ==========================**/
+.theme-setting {
+    position: fixed;
+    right: 0;
+    @include center(vertical);
+    z-index: 3;
+
+    ul {
+        [dir="rtl"] & {
+            padding-right: 0;
+        }
+
+        li {
+            background-color: $light-blue;
+            border: 1px solid $border-color;
+            margin: 10px 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-right: none;
+            width: 40px;
+            height: 38px;
+            z-index: 1;
+            @include flex_common;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+
+            button {
+                color: $black1;
+
+                &:hover {
+                    color: $black1;
+                }
+            }
+
+            &.color-picker {
+                background: none;
+                overflow: hidden;
+                margin-bottom: 0;
+                border: none;
+
+                input {
+                    height: 100%;
+                    opacity: 1;
+                    padding: 0;
+                    border: none;
+                    font-size: x-large;
+                }
+            }
+        }
+    }
+}
+
+/**=====================
+    Dark and RTL css Start
+  ==========================**/
+.demo-contain {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border: 2px solid rgba($black1, 0.3);
+    border-radius: 5px;
+    position: relative;
+
+    .demo-image {
+        overflow: hidden;
+        width: 100%;
+
+        &:hover {
+            img {
+                transform: translateY(calc(-100% + 500px));
+                transition: transform 5s ease-in-out;
+            }
+        }
+
+        img {
+            object-fit: cover;
+            transition: transform 5s ease-in-out;
+            width: 100%;
+        }
+
+        a {
+            @include pseudowh;
+            @include flex_common;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $red;
+            color: $black1;
+        }
+    }
+}

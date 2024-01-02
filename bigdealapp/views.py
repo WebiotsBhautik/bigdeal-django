@@ -5338,6 +5338,7 @@ def payment_complete(request):
         city = body["city"]
         zip = body["zip"]
         cartid = body["cartid"]
+        print('======> CartID For New Address <=======,',cartid)
         orderpaymentmethodname = body["orderpaymentmethodname"]
         # print('orderpaymentmethodname ========>',orderpaymentmethodname)
         
@@ -5368,7 +5369,6 @@ def payment_complete(request):
                                                                             customerEmail=email, customerAddress1=address1, customerCountry=country, customerCity=city, customerZip=zip)
         order_billing_address_instance.save()
         paymentmethod = PaymentMethod.objects.get(paymentMethodName=orderpaymentmethodname)
-        # print('paymentmethod =->=======+++>',paymentmethod)
         
         if 'rpPaymentId' in body:
             rpPaymentId = body["rpPaymentId"]
@@ -5466,7 +5466,27 @@ def order_success(request):
     return render(request, 'pages/pages/order-success.html',context)
 
 def order_tracking(request, id):
-    return render(request, 'pages/pages/order-tracking.html' )
+    customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
+    customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+    wishlist_products = customer_wishlist.wishlistProducts.all()
+    totalWishlistProducts = wishlist_products.count()
+
+    productOrders = OrderTracking.objects.filter(trackingOrderCustomer=request.user, trackingOrderOrderId=id)
+    
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    
+    context={"breadcrumb":{"parent":"Order Tracking","child":"Order Tracking"},
+             'Cart':customer_cart,'wishlist':customer_wishlist,'wishlist_products':wishlist_products,
+             'totalWishlistProducts':totalWishlistProducts,'productOrders':productOrders,
+             'active_banner_themes':active_banner_themes,
+             'cart_products':cart_products,
+             'totalCartProducts':totalCartProducts,
+             **cart_context,
+    }
+    return render(request, 'pages/pages/order-tracking.html',context)
 
 
 def checkout_2_page(request):
