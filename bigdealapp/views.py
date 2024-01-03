@@ -5432,7 +5432,7 @@ def order_success(request):
         customer = Customer.objects.get(customer=request.user)
         
         order = Order.objects.filter(orderedByCustomer=request.user.id).order_by('-orderCreatedAt').first()
-        # print('order=======++>',order)
+        print('Order Successfully =========>',order)
         if order is not None:
             paymentmethod = order.orderPayment.orderPaymentMethodName
             products = ProductOrder.objects.filter(productOrderOrderId=order.id)

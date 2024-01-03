@@ -27,7 +27,7 @@
             <li>
                <div class="media">
                   <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
-                     <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
+                     <img alt="mega" class="me-3" src="/{{product.cartProduct.variantProduct.productImageFront}}">
                   </a>
                   <div class="media-body">
                   <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
@@ -156,3 +156,63 @@
     </div>
 </div>
 <!-- Add to cart bar end-->
+
+<script>
+   function getCookie(name) {
+       let cookieValue = null;
+       if (document.cookie && document.cookie !== "") {
+           const cookies = document.cookie.split(";");
+           for (let i = 0; i < cookies.length; i++) {
+               const cookie = cookies[i].trim();
+               // Does this cookie string begin with the name we want?
+               if (cookie.substring(0, name.length + 1) === name + "=") {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
+   }
+   var csrftoken = getCookie("csrftoken");
+ 
+   async function handleCheckout(params){
+       var url = "{% url 'cart_to_checkout_validation' %}";
+       var pageUrl = window.location.href;
+ 
+       await fetch(url,{
+           method: "POST",
+           headers:{
+               "content-type":"application/json",
+               "X-CSRFToken":csrftoken,
+           },
+           body: JSON.stringify({
+               cartId: params.cartId,
+           }),
+           }).then((response) => {
+               return response.json();
+           })
+           .then((data) => {
+               if(data.flag === "True"){
+                   var cartMsgDiv = document.getElementById("cartMsgDiv");
+                   for(var i=0; i<data.outOfStockProducts.length; i++){
+                       var cartMsg = document.createElement("h5");
+                       cartMsg.setAttribute("id","cartMsg" + i);
+                       cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + " stock of product " + data.outOfStockProducts[i].productName + ".";
+                       cartMsgDiv.append(cartMsg);
+ 
+                       // Set a timeout to hide the cartMsg element after 3 seconds
+                       setTimeout(function(index){
+                           var cartMsgElement = document.getElementById("cartMsg" + index);
+                           if(cartMsgElement){
+                               cartMsgElement.remove();
+                           }
+                       },3000 , i);
+                   }
+               }
+               if(data.flag === "False"){
+                   window.location.href = "{% url 'checkout_page' %}";
+               }
+           });
+       }
+   
+</script>

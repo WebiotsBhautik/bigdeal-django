@@ -364,11 +364,12 @@ function completeOrderForRazorPay(params){
                 country:country,
                 city:city,
                 zip:zip,
-                cardid:cartid,
-                orderpaymentmethodname:orderpaymentmethodname,
-                rpPaymentId:params.rpPaymentId,
-                rpOrderId:params.rpSignature,
-                couponCode:couponCode,
+                cartid:cartid,
+                orderpaymentmethodname: orderpaymentmethodname,
+                rpPaymentId: params.rpPaymentId,
+                rpOrderId: params.rpOrderId,
+                rpSignature: params.rpSignature,
+                couponCode: couponCode,
             }),
         })
         .then(response => response.json())
@@ -769,7 +770,7 @@ function setCookie(cookieName,cookieValue,expirationSeconds){
 
 // Handle coupon validation start ======================
 
-async function couponvalidation(params){
+/*async function couponvalidation(params){
     const couponCodeEle = document.getElementById('couponCode');
     const couponCode = couponCodeEle.value;
 
@@ -781,9 +782,76 @@ async function couponvalidation(params){
         }
 
     window.location.reload();
+}*/
+
+// Handle coupon validation end ========================
+
+
+function couponvalidation(params) {
+    const { price, tax, priceInUSD } = params;
+    const couponCodeEle = document.getElementById('couponCode');
+    const couponCode = couponCodeEle.value;
+
+    if (couponCode === '') {
+        alert('Please enter a coupon code');
+        return;
+    } else {
+        setOrUpdateCookie('couponCode', couponCode, 3600);
+    }
+
+    // Perform coupon validation
+    validateCoupon(price, tax, priceInUSD, couponCode)
+        .then(isValidCoupon => {
+            const billingAddressDiv = document.querySelector("#billingAddressDiv");
+
+            if (isValidCoupon) {
+                billingAddressDiv.style.display = "block";
+            } else {
+                billingAddressDiv.style.display = "none";
+            }
+
+            // Reload the page after handling coupon validation
+            setTimeout(() => {
+                window.location.reload();
+            }, 500);
+        })
+        .catch(error => {
+            console.error("Error during coupon validation", error);
+        });
 }
 
-  // Handle coupon validation end ========================
+async function validateCoupon(price, tax, priceInUSD, couponCode) {
+    const url = "{% url 'validate_coupon' %}";
+    var csrftoken = getCookie('csrftoken');
+
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+                couponCode: couponCode,
+                price: price,
+                tax: tax,
+                priceInUSD: priceInUSD,
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return data.valid === "True";
+        } else {
+            console.error("Failed to validate coupon");
+            return false;
+        }
+    } catch (error) {
+        console.error("Error during coupon validation", error);
+        return false;
+    }
+}
 
 
 </script>

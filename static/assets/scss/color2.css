@@ -14791,7 +14791,8 @@ table.invoice-table {
       display: block; } }
   .order-left-image .tracking-product-image {
     margin-right: 40px;
-    width: 30%; }
+    width: 30%;
+    margin-block: 40px; }
     [dir="rtl"] .order-left-image .tracking-product-image {
       margin-right: 0;
       margin-left: 40px; }
@@ -14809,7 +14810,8 @@ table.invoice-table {
         margin: 0 auto;
         margin-bottom: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320))); } }
   .order-left-image .order-image-contain {
-    width: calc(100% - 30px); }
+    width: calc(100% - 30px);
+    margin-top: -45px; }
     @media (max-width: 992px) {
       .order-left-image .order-image-contain {
         width: 100%; } }
