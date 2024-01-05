@@ -11,6 +11,7 @@ class RestrictUrlsMiddleware:
     def __call__(self, request):
         # Check for the presence of the 'code' cookie
         code_cookie = request.COOKIES.get('code')
+        checkout_cookie = request.COOKIES.get('checkout')
         
         if request.path == '/verify_token':
             if not code_cookie:
@@ -19,6 +20,14 @@ class RestrictUrlsMiddleware:
         if request.path == '/update_password':
             if not code_cookie:
                 return HttpResponseRedirect(reverse('forgot_password'))
+            
+        if request.path == '/checkout_page':
+            if not checkout_cookie:
+                return HttpResponseRedirect(reverse('cart_page'))
+            
+        if checkout_cookie == 'False' and request.path in ['/checkout_page']:
+            return HttpResponseRedirect(reverse('cart_page'))
+            
         
         # checkout_cookie = request.COOKIES.get('checkout')
 

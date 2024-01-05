@@ -5146,18 +5146,24 @@ def validate_coupon(request):
         if len(coupon) == 1:
             couponStatus = True
             couponUsesByCustomer = CouponHistory.objects.filter(coupon=couponObj)
+            print('couponUsesByCustomer =====+>',couponUsesByCustomer)
+            print('len ===>couponUsesByCustomer',len(couponUsesByCustomer))
             if len(couponUsesByCustomer) < couponObj.usageLimit and int(couponObj.numOfCoupon) > 0:
                 currentDateTime = timezone.now()
                 if couponObj.expirationDateTime >= currentDateTime and price >= couponObj.minAmount:
                     if couponObj.couponType == "Fixed":
+                        print('Inside FIXED ===============>')
                         couponAmount = int(couponObj.couponDiscountOrFixed)
+                        print('couponAmount ===============>',couponAmount)
                     if couponObj.couponType == "Percentage":
+                        print('Inside PERCENTAGE ===============>')
                         couponDiscountAmount = ((price*couponObj.couponDiscountOrFixed)/100)
                         couponAmount = couponDiscountAmount
 
         couponAmountForUSD = couponAmount
         currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))    
         couponAmount = couponAmount * currency.factor
+        print('couponAmount in last =====+>',couponAmount)
         finalAmount = (price-couponAmount)+(tax*currency.factor)
         finalAmountInUSD = finalAmountInUSD-couponAmountForUSD
         
@@ -5217,8 +5223,6 @@ def checkout_page(request):
     
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)
-    
-    print('PAYPAL_CLIENT_ID ======>',settings.PAYPAL_CLIENT_ID)
     
     context = {"breadcrumb": {"parent": "Checkout", "child": "Checkout"},
                "Cart": customer_cart,'cart_products':cart_products,'totalCartProducts':totalCartProducts,
@@ -5338,9 +5342,7 @@ def payment_complete(request):
         city = body["city"]
         zip = body["zip"]
         cartid = body["cartid"]
-        print('======> CartID For New Address <=======,',cartid)
         orderpaymentmethodname = body["orderpaymentmethodname"]
-        # print('orderpaymentmethodname ========>',orderpaymentmethodname)
         
         cookie_value = request.COOKIES.get('couponCode')
         if cookie_value:
@@ -5442,8 +5444,6 @@ def order_success(request):
     else:
         return redirect('login_page')
     
-    
-    # print('products on order ====>',products)
     
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     context = {

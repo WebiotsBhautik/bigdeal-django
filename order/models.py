@@ -8,8 +8,8 @@ import random
 from string import digits, ascii_uppercase
 from django.core.validators import RegexValidator
 
-# Create your models here.
 
+# Create your models here.
 
 
 class Cart(models.Model):

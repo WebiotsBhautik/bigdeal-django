@@ -283,7 +283,7 @@
     <li>
     <a  class="dark-menu-item" href="javascript:void(0)">pages</a>
     <ul>
-        <li>
+        {% comment %} <li>
         <a href="javascript:void(0)">invoice<span class="new-tag">new</span></a>
         <ul>
             <li><a href="../invoice-template/element-invoice.html">invoice one</a></li>
@@ -292,34 +292,34 @@
             <li><a href="../invoice-template/element-invoice4.html">invoice four</a></li>
             <li><a href="../invoice-template/element-invoice5.html">invoice five</a></li>
         </ul>
-        </li>
+        </li> {% endcomment %}
         <li>
         <a href="javascript:void(0)">account</a>
         <ul>
             <li><a href="{% url 'wishlist_page' %}">wishlist</a></li>
             <li><a href="{% url 'cart_page' %}">cart</a></li>
             <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'login_page' %}">login</a></li>
-            <li><a href="{% url 'signup_page' %}">register</a></li>
+            {% comment %} <li><a href="{% url 'login_page' %}">login</a></li> {% endcomment %}
+            {% comment %} <li><a href="{% url 'signup_page' %}">register</a></li> {% endcomment %}
             <li><a href="{% url 'contact_us' %}">contact</a></li>
-            <li><a href="{% url 'forgot_password' %}">forget password</a></li>
-            <li><a href="{% url 'profile' %}">profile </a></li>
-            <li>
+            {% comment %} <li><a href="{% url 'forgot_password' %}">forget password</a></li> {% endcomment %}
+            {% comment %} <li><a href="{% url 'profile' %}">profile </a></li> {% endcomment %}
+            {% comment %} <li>
             <a href="{% url 'checkout_page' %}">checkout</a>
             <ul>
                 <li><a href="{% url 'checkout_page' %}">checkout 1</a></li>
                 <li><a href="{% url 'checkout_2_page' %}">checkout 2<span class="new-tag">new</span></a></li>
             </ul>
-            </li>
+            </li> {% endcomment %}
         </ul>
         </li>
         <li><a href="{% url 'about_page' %}">about us</a></li>
         <li><a href="{% url 'search_bar' %}">search</a></li>
-        <li><a href="{% url 'typography' %}">typography </a></li>
-        <li><a href="{% url 'review' %}">review </a></li>
-        <li><a href="order-success.html">order success</a></li>
-        <li><a href="order-history.html">order history</a></li>
-        <li><a href="order-tracking.html">order tracking</a></li>
+        {% comment %} <li><a href="{% url 'typography' %}">typography </a></li> {% endcomment %}
+        {% comment %} <li><a href="{% url 'review' %}">review </a></li> {% endcomment %}
+        {% comment %} <li><a href="order-success.html">order success</a></li> {% endcomment %}
+        {% comment %} <li><a href="order-history.html">order history</a></li> {% endcomment %}
+        {% comment %} <li><a href="order-tracking.html">order tracking</a></li> {% endcomment %}
         <li>
         <a href="javascript:void(0)">compare</a>
         <ul>

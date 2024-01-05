@@ -238,7 +238,7 @@ class Coupon(models.Model):
     couponDiscountOrFixed = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)],verbose_name='Amount / Discount (%)')
     minAmount = models.DecimalField(default=0, max_digits=10, decimal_places=2,blank=True,null=True,verbose_name='Minimum Amount')
     expirationDateTime = models.DateTimeField(verbose_name='Expiration Date')
-    usageLimit = models.PositiveIntegerField(default=0,blank=True, null=True, verbose_name='Usage Limit')
+    usageLimit = models.PositiveIntegerField(default=1,verbose_name='Usage Limit')
     couponDescription = models.TextField(verbose_name='Description')
     createdAt = models.DateTimeField(auto_now_add=True,verbose_name='Created At')
     updatedAt = models.DateTimeField(auto_now=True,verbose_name='Updated At')

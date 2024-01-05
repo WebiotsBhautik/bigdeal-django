@@ -50,7 +50,9 @@
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>price</h4>
-                                <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5>
+                                {% comment %} <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5> {% endcomment %}
+                                <h5>${{product.productOrderFinalPrice}}.00</h5>
+                                
                             </div>
                         </div>
                     </div>
@@ -115,7 +117,8 @@
                             {% comment %} <h2>october 22, 2018</h2></div> {% endcomment %}
                             <h3>expected date of delivery: <span>October 23, 2023</span></h3>
                             {% comment %} <a href="{% url 'order_tracking' orderid %}">track order</a> {% endcomment %}
-                            <a href="javascript:void(0)">Track Order</a>
+                            <a href="{% url 'order_tracking' orderid %}">Track Order</a>
+                        </div>
                     </div>
                 </div>
             </div>
