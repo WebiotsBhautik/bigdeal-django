@@ -75,7 +75,7 @@
             {% endif %}
         </div>
         <div class="row wishlist-buttons">
-            <div class="col-12"><a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a> <a href="javascript:void(0)" class="btn btn-normal">check out</a></div>
+            <div class="col-12"><a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a> <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-normal">check out</a></div>
         </div>
     </div>
 </section>

@@ -1006,6 +1006,47 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
     }
   }
 
+
+  async function handleCheckout(params){
+    var url = "{% url 'cart_to_checkout_validation' %}";
+    var pageUrl = window.location.href;
+
+    await fetch(url,{
+        method: "POST",
+        headers:{
+            "content-type":"application/json",
+            "X-CSRFToken":csrftoken,
+        },
+        body: JSON.stringify({
+            cartId: params.cartId,
+        }),
+        }).then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if(data.flag === "True"){
+                var cartMsgDiv = document.getElementById("cartMsgDiv");
+                for(var i=0; i<data.outOfStockProducts.length; i++){
+                    var cartMsg = document.createElement("h5");
+                    cartMsg.setAttribute("id","cartMsg" + i);
+                    cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + " stock of product " + data.outOfStockProducts[i].productName + ".";
+                    cartMsgDiv.append(cartMsg);
+
+                    // Set a timeout to hide the cartMsg element after 3 seconds
+                    setTimeout(function(index){
+                        var cartMsgElement = document.getElementById("cartMsg" + index);
+                        if(cartMsgElement){
+                            cartMsgElement.remove();
+                        }
+                    },3000 , i);
+                }
+            }
+            if(data.flag === "False"){
+                window.location.href = "{% url 'checkout_page' %}";
+            }
+        });
+    }
+
 </script>
 
 
