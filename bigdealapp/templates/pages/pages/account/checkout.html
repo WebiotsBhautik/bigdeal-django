@@ -458,7 +458,7 @@ function completeOrderForRazorPay(params){
 
     paypal_sdk.Buttons({
         onClick: async function (data, actions) {
-
+            
             var fname = document.getElementById("fname").value;
             var lname = document.getElementById("lname").value;
             var uname = document.getElementById("uname").value;
@@ -553,7 +553,6 @@ var options = {
         });
         setTimeout(function(){
             location.href = "{% url 'order_success' %}";
-            console.log('===> RazorPay-2 <====')
         },400);
     },
 };
@@ -570,28 +569,21 @@ document.getElementById('rzp-button1').onclick = function(e){
     var country = document.getElementById("validationCustom04").value;
     var city = document.getElementById("validationCustom05").value;
     var zip = document.getElementById("zip").value;
-    console.log('===> RazorPay-3 <====')
 
     handleCheckout()
     .then((checkOutStatus) => {
         const options = document.getElementsByName("flexRadioDefaultForAddress");
-        console.log('===> RazorPay-4 <====')
 
         for (let i = 0; i < options.length; i++){
-            console.log('IF BEFORE')
             if (options[i].checked && options[i].value == "newAddress"){
-                console.log('IF AFTER')
                 if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip){
                     alert("Please fill the billing address form.");
                 } else{
-                    console.log('===> RazorPay-5 <====')
 
                     if(checkOutStatus){
                         rzpObject.open();
-                        console.log('===> RazorPay-6 <====')
                         e.preventDefault();
                     } else{
-                        console.log('===> RazorPay-7 <====')
                         return;
                     }
                 }
@@ -599,11 +591,8 @@ document.getElementById('rzp-button1').onclick = function(e){
             if(options[i].checked && options[i].value != "newAddress"){
                 if(checkOutStatus){
                     rzpObject.open();
-                    console.log('===> RazorPay-8 <====')
                     e.preventDefault();
-                    console.log('===> RazorPay-9 <====')
                 } else{
-                    console.log('===> RazorPay-10 <====')
                     return;
                 }
             }
@@ -700,6 +689,7 @@ async function handleCheckout(){
         },
         body:JSON.stringify({
             cartId:cartId,
+            
         }),
     })
     .then((response) => response.json())
