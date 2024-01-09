@@ -21,6 +21,8 @@
 <!-- Bootstrap css -->
 <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
 
+{% include 'includes/alerts.html' %}
+
 
 
 
@@ -133,7 +135,6 @@
   
     async function handleQuickView(params){
       var url = "{% url 'quick_view' %}";
-      console.log('Quick view function called successfully')
       await fetch(url,{
         method: "POST",
         headers:{

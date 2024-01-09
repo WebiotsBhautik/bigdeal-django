@@ -131,6 +131,9 @@ urlpatterns = [
     
     
     path('user_authenticate',views.user_authenticate, name='user_authenticate'),
+    # path('check_quantity/<str:id>',views.check_quantity, name='check_quantity'),
+    path('check_quantity/<str:id>/', views.check_quantity, name='check_quantity'),
+
     
     path('page_not_found',views.page_not_found, name='page_not_found'),
     path('faq_page',views.faq_page, name='faq_page'),

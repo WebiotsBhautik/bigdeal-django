@@ -2584,9 +2584,48 @@ $('.feature-slide').slick({
   /*=====================
    15. Add to cart
    ==========================*/
-
    $('.add-cartnoty').on('click', function () {
-    console.log('function called ===>');
+    const productId = $(this).data('product-id');
+    if(productId === undefined){
+      console.error('Product ID is Undefined please check your html');
+      return;
+    }
+    const checkQuantityUrl = `/check_quantity/${productId}/`;
+
+    console.log('productId ======>',productId);
+    
+    console.log('checkQuantityUrl ======>',checkQuantityUrl);
+
+    console.log('AJAX CALLING ');
+    $.ajax({
+      url: checkQuantityUrl,
+      method:'GET',
+      success: function (response) {
+        if(response.status == 'available'){
+          console.log('Product is available');
+          const notificationOptions = {
+            icon: "fa fa-check",
+            title: "Success!",
+            message: "Item Successfully added to your cart",
+        };
+    
+        localStorage.setItem("addtocartpopup", JSON.stringify(notificationOptions));
+        setTimeout(function () {
+            localStorage.removeItem("addtocartpopup");
+        }, 5000);
+        }else{
+          console.log('Not Available');
+        }
+        },
+        error: function(error){
+          console.error('Error in AJAX request:',error);
+        }
+        });
+    });   
+ 
+
+
+  $(".add-cartnoty").on("click", function () {
     const notificationOptions = {
         icon: "fa fa-check",
         title: "Success!",
@@ -2598,11 +2637,12 @@ $('.feature-slide').slick({
         localStorage.removeItem("addtocartpopup");
     }, 5000);
 });
-  
+    
+
   $(document).ready(function () {
     const storedNotification = localStorage.getItem('addtocartpopup');
     if (storedNotification) {
-        const notificationOptions = JSON.parse(storedNotification);
+      const notificationOptions = JSON.parse(storedNotification);
       $.notify(notificationOptions,{
         icon: 'fa fa-check',
         title: 'Success!',

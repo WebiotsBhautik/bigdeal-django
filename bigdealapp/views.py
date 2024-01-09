@@ -278,13 +278,15 @@ def index(request):
     response = render(request, template_path, context)
     
     # Deleting all old cookies
-    if not request.session.get('cookies_deleted', False):
-        for cookie in request.COOKIES:
-            response.delete_cookie(cookie)  
-        request.session['cookies_deleted'] = True
+    # if not request.session.get('cookies_deleted', False):
+    #     for cookie in request.COOKIES:
+    #         response.delete_cookie(cookie)
+    #         print('<===== COOKIE DELETED SUCCESSFULLY <======')  
+    #     request.session['cookies_deleted'] = True
 
         
     # Setting the new cookie
+
     response.set_cookie('currency', currency.id)
     return response
 
@@ -4735,8 +4737,8 @@ def add_to_cart(request, id=None, quantity=0):
     
     cart_item['totalPrice'] = format(int(cart_item['quantity']) * cart_item['price'],".2f")  # Calculate total price
     current_user = request.user
-    if current_user.is_authenticated:
-        if productVariant.productVariantQuantity > 0:
+    if productVariant.productVariantQuantity > 0:
+        if current_user.is_authenticated:
             cartObject=Cart.objects.get(cartByCustomer=request.user)
             if CartProducts.objects.filter(cartByCustomer=request.user, cartProduct=productVariant).exists():
                 cartProductObject = CartProducts.objects.get(
@@ -4748,36 +4750,40 @@ def add_to_cart(request, id=None, quantity=0):
                 CartProducts.objects.create(
                     cart=cartObject,cartProduct=productVariant, cartProductQuantity=quantity).save()
                 return redirect(request.META['HTTP_REFERER'])
+        
         else:
-            try:  
-                cart = Cart.objects.create(cart_id=_cart_id(request))
-            except Cart.DoesNotExist:
-                cart = Cart.objects.create(cart_id=_cart_id(request))
-    else:
-        cart_items= []
-        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
-        updated = False
+            cart_items= []
+            get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+            updated = False
 
-        if (get_Item is not None and get_Item != "null"):
-            cart_items = json.loads(get_Item)
-            # Check if the item already exists in the cart_items list and update quantity
-            for cart_item_cookie in cart_items:
+            if (get_Item is not None and get_Item != "null"):
+                cart_items = json.loads(get_Item)
+                # Check if the item already exists in the cart_items list and update quantity
+                for cart_item_cookie in cart_items:
 
-                if cart_item_cookie['product_id'] == str(productVariant.variantProduct.id) and cart_item_cookie['variant_id'] == str(id):
-                    cart_item_cookie['quantity'] = int(cart_item_cookie['quantity']) + 1
+                    if cart_item_cookie['product_id'] == str(productVariant.variantProduct.id) and cart_item_cookie['variant_id'] == str(id):
+                        cart_item_cookie['quantity'] = int(cart_item_cookie['quantity']) + 1
+                        updated = True
+                        break
+
+                if not updated:
+                    cart_items.append(cart_item)
                     updated = True
-                    break
 
             if not updated:
                 cart_items.append(cart_item)
-                updated = True
-
-        if not updated:
-            cart_items.append(cart_item)
-        cart_items_json = json.dumps(cart_items)
-        response = HttpResponseRedirect(reverse('index'))
-        response.set_cookie('cart', cart_items_json)
-        return response
+            cart_items_json = json.dumps(cart_items)
+            response = HttpResponseRedirect(reverse('index'))
+            response.set_cookie('cart', cart_items_json)
+            return response
+    else:
+        print('====> Product is out of stock <=====')
+        try:
+            cart = Cart.objects.create(cart_id=_cart_id(request))
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(cart_id=_cart_id(request))
+        messages.error(request, 'Your product is out of stock')
+        return redirect(request.META['HTTP_REFERER'])
     
 def get_total_tax_values(variant_products):
     TotalVariantTax = 0
@@ -5079,6 +5085,25 @@ def user_authenticate(request):
     is_authenticated = request.user.is_authenticated
     data = {'is_authenticated': is_authenticated}
     return JsonResponse(data)
+
+def check_quantity(request, id):
+    print('INSIDE INSIDE =========+>')
+    product_variant = ''
+    data = ''
+    try:
+        product_variant = ProductVariant.objects.get(id=id)
+        if product_variant.productVariantQuantity > 0:
+            data = {'status': 'available'}
+        else:
+            data = {'status': 'not-available'}
+    except:
+        print('PRODUCT is not get ========>')
+    print('product_variant ======>',product_variant)
+
+    print('DATA DATA ========>',data)
+
+    return JsonResponse(data)
+    
 
 def show_cart_popup(request):
     if request.user.is_authenticated:
@@ -5597,13 +5622,6 @@ def delete_compare_product(request,id):
     customer_compare.save()
     referer_url = request.META.get('HTTP_REFERER', 'compare_page')
     return redirect(referer_url)
-
-
-            
-def user_authenticate(request):
-    is_authenticated = request.user.is_authenticated
-    data = {'is_authenticated': is_authenticated}
-    return JsonResponse(data)
 
 def page_not_found(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)

@@ -879,7 +879,7 @@
                         </span>
                      </div>
                      <div class="addtocart_btn">
-                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" >
+                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-product-id="{{product.id}}" >
                            <button class="add-button add_cart tooltip-top"  data-tippy-content="Add to cart">
                               add to cart
                            </button>
