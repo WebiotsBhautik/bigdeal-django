@@ -63,32 +63,20 @@
               <div class="creative-card">
                   <ul class="comment-section">
                     {% for comment in blogComments %}
-                      <li>
-                          <div class="media"><img src="/{{comment.commentByUser.profilePicture}}" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h6>{{comment.commentByUser.username}} <span>( {{comment.updatedAt|date:"d M Y"}} At {{comment.updatedAt|time:"g:iA"}} )</span></h6>
-                                  {% comment %} ( 12 Jannuary 2018 at 1:30AM ) {% endcomment %}
-                                  <p>{{comment.comment}}</p>
-                              </div>
+                      <li class="w-100">
+                          <div class="media">
+                            {% if comment.commentByUser.profilePicture %}
+                            <img src="/{{comment.commentByUser.profilePicture}}" alt="image"> 
+                            {% else %}
+                            <img src="{% static comment.commentByUser.profilePicture|default:'assets/images/avtar/3.jpg' %}" alt="{{ comment.commentByUser.username|default:'Default Profile' }}'s Profile Picture" />
+                            {% endif %}
+                            <div class="media-body">
+                                <h6>{{comment.commentByUser.username}} <span>( {{comment.updatedAt|date:"d M Y"}} At {{comment.updatedAt|time:"g:iA"}} )</span></h6>
+                                <p>{{comment.comment}}</p>
+                            </div>
                           </div>
                       </li>
                       {% endfor %}
-                      {% comment %} <li>
-                          <div class="media"><img src="{% static 'assets/images/avtar/2.jpg' %}" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                  <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec felis dui.</p>
-                              </div>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="media"><img src="{% static 'assets/images/avtar/3.jpg' %}" alt="Generic placeholder image">
-                              <div class="media-body">
-                                  <h6>Mark Jecno <span>( 12 Jannuary 2018 at 1:30AM )</span></h6>
-                                  <p>Donec rhoncus massa quis nibh imperdiet dictum. Vestibulum id est sit amet felis fringilla bibendum at at leo. Proin molestie ac nisi eu laoreet. Integer faucibus enim nec ullamcorper tempor. Aenean nec felis dui.</p>
-                              </div>
-                          </div>
-                      </li> {% endcomment %}
                   </ul>
               </div>
           </div>
@@ -96,27 +84,19 @@
       <div class=" row blog-contact">
           <div class="col-sm-12  ">
               <div class="creative-card">
-                  <h2>Leave Your Comment</h2>
-                  <form class="theme-form" action="{% url 'add_comment' blog.id %}" method="post">
+                <h2>Leave Your Comment</h2>
+                <form class="theme-form" action="{% url 'add_comment' blog.id %}" method="post">
                     {% csrf_token %}
-                      <div class="row g-3">
-                          <div class="col-md-12">
-                              <label for="exampleFormControlTextarea1">Comment</label>
-                              <textarea class="form-control" name='comment' placeholder="Write Your Comment" id="exampleFormControlTextarea1" rows="6" required></textarea>
-                            </div>
-                            <div class="col-md-12">
-                                <button class="btn btn-normal" type="submit">Post Comment</button>
-                            </div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="exampleFormControlTextarea1">Comment</label>
+                            <textarea class="form-control" name='comment' placeholder="Leave a comment here..." id="exampleFormControlTextarea1" rows="6" required></textarea>
                         </div>
-                    </form>
-                    {% comment %} <div class="col-md-12">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Your name" required="">
+                        <div class="col-md-12">
+                            <button class="btn btn-normal" type="submit">Post Comment</button>
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Email" required="">
-                    </div> {% endcomment %}
+                </form>
               </div>
           </div>
       </div>

@@ -31,7 +31,7 @@ import razorpay
 
 from decimal import Decimal, ROUND_HALF_UP
 
-
+ 
 # Imports For Forgot Password With Email Verification
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -2172,14 +2172,6 @@ def get_product_variant(request):
             return JsonResponse(data, safe=False)
         
         
-def add_to_wishlist(request, id):
-    if request.user.is_authenticated:
-        customer_wishlist = Wishlist.objects.get(
-            wishlistByCustomer=request.user.id)
-        customer_wishlist.wishlistProducts.add(id)
-        customer_wishlist.save()
-    return redirect(request.META['HTTP_REFERER'])
-
 
 def customer_review(request):    
     if request.method == 'POST':
@@ -4115,13 +4107,16 @@ def element_no_slider(request):
 # Blog Pages Section
 
 def add_comment(request, id):
-    if request.method == 'POST':
-        comment = request.POST['comment']
-        blog = Blog.objects.get(id=id)
-        commentInstance = BlogComment.objects.create(
-            commentOfBlog=blog, commentByUser=request.user, comment=comment)
-        commentInstance.save()
-        return redirect('blog_details', id=id)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            comment = request.POST['comment']
+            blog = Blog.objects.get(id=id)
+            commentInstance = BlogComment.objects.create(
+                commentOfBlog=blog, commentByUser=request.user, comment=comment)
+            commentInstance.save()
+            return redirect('blog_details', id=id)
+    else:
+        return redirect('login_page')
 
 
 def blog_details(request, id):
@@ -4777,7 +4772,6 @@ def add_to_cart(request, id=None, quantity=0):
             response.set_cookie('cart', cart_items_json)
             return response
     else:
-        print('====> Product is out of stock <=====')
         try:
             cart = Cart.objects.create(cart_id=_cart_id(request))
         except Cart.DoesNotExist:
@@ -5042,7 +5036,6 @@ def delete_wishlist_product(request,id):
     customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
     customer_wishlist.wishlistProducts.remove(id)
     customer_wishlist.save()
-    messages.success(request,'Product Removed Successfully')
     return redirect(referer)
 
 
@@ -5074,7 +5067,7 @@ def add_to_cart_from_wishlist(request, id, quantity):
             return redirect(referer)
         # CartProducts.objects.create(cartProduct=product,cartProductQuantity=1).save()
     else:
-        messages.success(request, 'Product out of stock.')
+        messages.error(request, 'Product out of stock.')
         return redirect(referer)
 
 
@@ -5086,22 +5079,20 @@ def user_authenticate(request):
     data = {'is_authenticated': is_authenticated}
     return JsonResponse(data)
 
-def check_quantity(request, id):
+def check_quantity(request,id):
     print('INSIDE INSIDE =========+>')
-    product_variant = ''
-    data = ''
+    product_variant = None
+    data = {'status': 'error'}
     try:
         product_variant = ProductVariant.objects.get(id=id)
         if product_variant.productVariantQuantity > 0:
-            data = {'status': 'available'}
+            data['status'] = 'available'
         else:
-            data = {'status': 'not-available'}
-    except:
+            data['status'] =  'not-available'
+    except ObjectDoesNotExist:
         print('PRODUCT is not get ========>')
-    print('product_variant ======>',product_variant)
-
-    print('DATA DATA ========>',data)
-
+    except Exception as e:
+        print('An some error occured',str(e))
     return JsonResponse(data)
     
 
@@ -5758,9 +5749,4 @@ def cart_to_checkout_validation(request):
     else:
         return redirect('login_page')
     
-
-
-
-
-
 

@@ -22,10 +22,9 @@
                                     <h3><strong>Your wishlist is Empty.</strong></h3>
                                       <h4>Explore more shortlist some items.</h4> 
                                 </div>
-                                {% comment %} <div>
-                                    <a href="{% url 'index' %}" class="btn btn-solid-default btn fw-bold mb-0 ms-0">
-                                        <i class="fas fa-arrow-left"></i> Add Products</a>
-                                </div> {% endcomment %}
+                                <div class="col-12">
+                                    <a href="{% url 'index' %}" class="btn btn-normal mt-4">continue shopping</a>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -57,7 +56,8 @@
                                 <div class="col-xs-3">
                                     <h2 class="td-color">{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2></div>
                                 <div class="col-xs-3">
-                                    <h2 class="td-color"><a href="javascript:void(0)" class="icon me-1"><i class="ti-close"></i> </a><a href="javascript:void(0)" class="cart"><i class="ti-shopping-cart"></i></a></h2></div> 
+                                    <h2 class="td-color"><a href="javascript:void(0)" class="icon me-1"><i class="ti-close"></i> </a><a href="javascript:void(0)" class="cart"><i class="ti-shopping-cart"></i></a></h2>
+                                </div> 
                                     
                             </div>
                         </td>
@@ -72,11 +72,21 @@
                     {% endfor %}
                 </table>
             </div>
-            {% endif %}
+            <div class="row wishlist-buttons">
+                <div class="col-12">
+                    <a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a>
+                    {% if request.user.is_authenticated %}
+                    {% if totalCartProducts|to_int == 0|to_int %}
+                    {% else %}
+                    <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-normal">check out</a>
+                    {% endif %}
+                    {% else %}
+                    <a href="{% url 'login_page' %}" class="btn btn-normal">check out</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        <div class="row wishlist-buttons">
-            <div class="col-12"><a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a> <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-normal">check out</a></div>
-        </div>
+        {% endif %}
     </div>
 </section>
 <!--section end-->

@@ -973,137 +973,11 @@
                                                       </span>
                                              </p>
                                           </div>
-                                          <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
+                                          <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id  %}" class="btn btn-normal btn-md ">shop now</a>
                                        </div>
                                     </div>
                                     {% endif %}
                                     {% endfor %}
-                                    {% comment %} <div>
-                                       <div>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h5>Bluetooth Headphone</h5>
-                                          </a>
-                                          <ul class="rating">
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star-o"></i></li>
-                                          </ul>
-                                          <h6>$30.30 <span>40.00</span></h6>
-                                          <p>
-                                             it is a long established fact that a reader.
-                                          </p>
-                                          <div class="timer">
-                                             <p  id="demo1" class="demo1">
-                                                      <span>
-                                                      25
-                                                      <span>days</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      12
-                                                      <span>hrs</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      45
-                                                      <span>min</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      03
-                                                      <span>sec</span>
-                                                      </span>
-                                             </p>
-                                          </div>
-                                          <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
-                                       </div>
-                                    </div>
-                                    <div>
-                                       <div>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h5>women's walking shoes</h5>
-                                          </a>
-                                          <ul class="rating">
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star-o"></i></li>
-                                          </ul>
-                                          <h6>$50.30 <span>80.00</span></h6>
-                                          <p>
-                                             it is a long established fact that a reader.
-                                          </p>
-                                          <div class="timer">
-                                             <p  id="demo2" class="demo1">
-                                                      <span>
-                                                      25
-                                                      <span>days</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      12
-                                                      <span>hrs</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      45
-                                                      <span>min</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      03
-                                                      <span>sec</span>
-                                                      </span>
-                                             </p>
-                                          </div>
-                                          <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
-                                       </div>
-                                    </div>
-                                    <div>
-                                       <div>
-                                          <a href="product-page(left-sidebar).html">
-                                             <h5>electronic kitle</h5>
-                                          </a>
-                                          <ul class="rating">
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star"></i></li>
-                                             <li><i class="fa fa-star-o"></i></li>
-                                          </ul>
-                                          <h6>$75.30 <span>85.00</span></h6>
-                                          <p>
-                                             it is a long established fact that a reader.
-                                          </p>
-                                          <div class="timer">
-                                             <p  id="demo3" class="demo1">
-                                                      <span>
-                                                      25
-                                                      <span>days</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      12
-                                                      <span>hrs</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      45
-                                                      <span>min</span>
-                                                      </span>
-                                                <span>:</span>
-                                                <span>
-                                                      03
-                                                      <span>sec</span>
-                                                      </span>
-                                             </p>
-                                          </div>
-                                          <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md ">shop now</a>
-                                       </div>
-                                    </div> {% endcomment %}
                                  </div>
                               </div>
                               <div class="col-lg-2 col-sm-2 p-l-md-0">
@@ -1483,7 +1357,7 @@
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
-                              <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid" alt="banner">
                            </a>
                            <div class="media-body">
                               <div class="media-contant">

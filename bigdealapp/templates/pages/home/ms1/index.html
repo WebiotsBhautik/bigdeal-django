@@ -188,11 +188,11 @@
                         </a>
                       </div>
                       <div class="product-icon icon-inline">
-                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" data-product-id="{{ product.id }}" >
+                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" data-product-id="{{product.id}}">
                           <i data-feather="shopping-cart"></i>
                         </a>
                         <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
-                          <i  data-feather="heart"></i>
+                          <i data-feather="heart"></i>
                         </a>
                         <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
                           <i data-feather="eye"></i>
@@ -1014,7 +1014,7 @@
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
-                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" data-product-id="{{product.id}}">
                     <i data-feather="shopping-cart"></i>
                   </a>
                   <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
