@@ -30,12 +30,12 @@ SECRET_KEY = 'django-insecure-sq-%-(rvn6qkp0bv7vbbro=+0-q2v!y1l^$w6cs@4s62%jv4)=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['0.0.0.0','192.168.1.25','127.0.0.1']
 
 
-ALLOWED_HOSTS = ['0.0.0.0','192.168.29.132','127.0.0.1']
+# ALLOWED_HOSTS = ['0.0.0.0','192.168.29.132','127.0.0.1']
 
 
 # JIO = 192.168.29.132
@@ -165,7 +165,8 @@ STATICFILES_FINDERS = [
 ]
 
 
-STATIC_URL = '/bigdeal/bigdealapp/static/'
+# STATIC_URL = '/bigdeal/bigdealapp/static/'
+STATIC_URL = '/static/'
 
 
 STATIC_ROOT = BASE_DIR / 'bigdealapp/static'

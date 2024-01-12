@@ -63,7 +63,7 @@
         <div class="col-md-4 col-sm-12">
           <div class="top-header-right">
             <ul>
-              <li onclick="openWishlist()">
+              <li>
                 <a href="{% url 'wishlist_page' %}"><i class="fa fa-heart"></i> wishlist</a>
               </li>
               <li onclick="openAccount()">
@@ -1190,7 +1190,6 @@
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <a href="review.html"><span>(6 reviews)</span></a>
                  </div>
                  <ul class="best-seller">
                     <li>
@@ -1592,12 +1591,12 @@
 
 <!-- My account bar start-->
 <div id="myAccount" class="add_to_cart right account-bar">
-  <a href="javascript:void(0)" class="overlay" onclick="close Account()"></a>
+  <a href="javascript:void(0)" class="overlay"></a>
   <div class="cart-inner">
     <div class="cart_top">
       <h3>my account</h3>
       <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeAccount()">
+        <a href="javascript:void(0)">
           <i class="fa fa-times" aria-hidden="true"></i>
         </a>
       </div>

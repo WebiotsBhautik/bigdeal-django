@@ -21,6 +21,9 @@
 <!-- Bootstrap css -->
 <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
 
+<!-- Theme css -->
+{% comment %} <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color"> {% endcomment %}
+
 {% include 'includes/alerts.html' %}
 
 
@@ -444,8 +447,7 @@
             "add_to_cart_fun_at_quick_view({key:'firstProductVariant'})";
           urlForAddToCartAddToCart = urlForAddToCartAddToCart.replace("firstProductVariant",
             data.productVariantId.toString());
-          document.getElementById("addToCart").setAttribute("onClick",
-            urlForAddToCartAddToCart);
+          document.getElementById("addToCart").setAttribute("onClick",urlForAddToCartAddToCart);
   
         });
       }

@@ -2896,66 +2896,68 @@ $('.tap-top').on('click', function() {
   /*=====================
   20. Color Picker
    ==========================*/
-  var body_event = $("body");
-  body_event.on("click", ".color1", function() {
-    $("#color" ).attr("href", "../assets/css/color1.css" );
+
+
+   var body_event = $("body");
+   body_event.on("click", ".color1", function() {
+    $("#color" ).attr("href", "/static/assets/scss/color1.css" );
     return false;
 
   });
   body_event.on("click", ".color2", function() {
-    $("#color" ).attr("href", "../assets/css/color2.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color2.css" );
     return false;
   });
   body_event.on("click", ".color3", function() {
-    $("#color" ).attr("href", "../assets/css/color3.css" );
+    $("#color").attr("href", "/static/assets/scss/color3.css" );
     return false;
   });
   body_event.on("click", ".color4", function() {
-    $("#color" ).attr("href", "../assets/css/color4.css" );
+    $("#color").attr("href", "/static/assets/scss/color4.css" );
     return false;
   });
   body_event.on("click", ".color5", function() {
-    $("#color" ).attr("href", "../assets/css/color5.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color5.css" );
     return false;
   });
   body_event.on("click", ".color6", function() {
-    $("#color" ).attr("href", "../assets/css/color6.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color6.css" );
     return false;
   });
   body_event.on("click", ".color7", function() {
-    $("#color" ).attr("href", "../assets/css/color7.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color7.css" );
     return false;
   });
   body_event.on("click", ".color8", function() {
-    $("#color" ).attr("href", "../assets/css/color8.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color8.css" );
     return false;
   });
   body_event.on("click", ".color9", function() {
-    $("#color" ).attr("href", "../assets/css/color9.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color9.css" );
     return false;
   });
   body_event.on("click", ".color10", function() {
-    $("#color" ).attr("href", "../assets/css/color10.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color10.css" );
     return false;
   });
   body_event.on("click", ".color11", function() {
-    $("#color" ).attr("href", "../assets/css/color11.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color11.css" );
     return false;
   });
   body_event.on("click", ".color12", function() {
-    $("#color" ).attr("href", "../assets/css/color12.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color12.css" );
     return false;
   });
   body_event.on("click", ".color13", function() {
-    $("#color" ).attr("href", "../assets/css/color13.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color13.css" );
     return false;
   });
   body_event.on("click", ".color14", function() {
-    $("#color" ).attr("href", "../assets/css/color14.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color14.css" );
     return false;
   });
   body_event.on("click", ".color15", function() {
-    $("#color" ).attr("href", "../assets/css/color15.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color15.css" );
     return false;
   });
 

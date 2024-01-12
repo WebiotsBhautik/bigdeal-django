@@ -66,7 +66,7 @@
             <div class="col-md-4 col-sm-12"> 
                <div class="top-header-right">
                   <ul>
-                     <li onclick="openWishlist()">
+                     <li>
                         <a href="{% url 'wishlist_page' %}"><i class="fa fa-heart"></i> wishlist</a>
                      </li>
                      <li onclick="openAccount()"> <a href="javascript:void(0)"><i class="fa fa-user"></i> my profile</a>
@@ -201,7 +201,7 @@
                                  </g>
                               </g>
                            </svg>
-                           <div class="item-count-contain inverce"> 3 </div>
+                           <div class="item-count-contain inverce"> {{totalCartProducts}} </div>
                         </li>
                      </ul>
                      <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
@@ -1309,7 +1309,6 @@
                      <li><i class="fa fa-star"></i></li>
                      <li><i class="fa fa-star-o"></i></li>
                      </ul>
-                     <a href="review.html"><span>(6 reviews)</span></a>
                   </div>
                   <ul class="best-seller">
                      <li>
