@@ -960,7 +960,6 @@
   var csrftoken = getCookie("csrftoken");
 
   async function show_details_ls(params) {
-    console.log("-------Params---------->",params);
     document.getElementById(params.key).setAttribute("value", params.value);
 
     var allAttributesFilled = true;
@@ -1015,9 +1014,7 @@
                 document.getElementById("productFinalPrice");
               let actualPrice = document.createElement("del");
               let discountPercentage = document.createElement("span");
-              console.log("----------------->Before");
               discountPercentage.setAttribute("id", "discountPercentage");
-              console.log("----------------->After");
               GetConvertedValues(data.productVariantActualPrice).then(
                 (Data) => {
                   actualPrice.innerHTML = Data.symbol + Data.value;

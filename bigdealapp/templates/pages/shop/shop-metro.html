@@ -1,4 +1,4 @@
-{% extends 'pages/shop/shop-base.html' %}
+l{% extends 'pages/shop/shop-base.html' %}
 {% load static %}
 {% load sass_tags %}
 {% load custom_templatetags %}
@@ -13,7 +13,7 @@
                 <div class="collection-content col">
                     <div class="page-main-content">
                         <div class="top-banner-wrapper">
-                            <a href="javascript:void(0)">
+                            <a href="{% url 'shop_left_sidebar' %}">
                               <img src="{{shop_banner.bannerImage}}" class="img-fluid w-100" alt="category"></a>
                             <div class="top-banner-content small-section pb-0">
                                 <h4>fashion</h4>
@@ -31,16 +31,16 @@
                                             <div class="product-box">
                                                 <div class="product-imgbox">
                                                     <div class="product-front">
-                                                      <a href="product-page(left-sidebar).html">
-                                                        <img src="{{banner.bannerImage}}" class="img-fluid  " alt="product">
-                                                      </a>
+                                                        <a href="javascript:void(0)">
+                                                            <img src="{{banner.bannerImage}}" class="img-fluid"  alt="product">
+                                                        </a>
                                                     </div>
                                                     <div class="product-icon">
                                                         <button class="tooltip-left add-cartnoty" data-tippy-content="Add to cart"> <i  data-feather="shopping-cart"></i> </button>
                                                         <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
                                                             <i  data-feather="heart"></i>
                                                         </a>
-                                                        <a href="javascript:void(0)" data-bs-toggle="modal"  class="tooltip-left"  data-tippy-content="Quick View">
+                                                        <a href="javascript:void(0)"  class="tooltip-left"  data-tippy-content="Quick View">
                                                             {% comment %} data-bs-target="#quick-view" {% endcomment %}
                                                             <i  data-feather="eye"></i>
                                                         </a>

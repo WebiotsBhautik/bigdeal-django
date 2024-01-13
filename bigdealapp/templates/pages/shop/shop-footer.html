@@ -644,35 +644,23 @@
         >
       </li>
       {% else %}
-      <li>
-        <a href="{% url 'login_page' %}" class="d-block"
-          >Login</a
-        >
-      </li>
-      <li>
-        <a href="{% url 'signup_page' %}" class="d-block"
-          >Register</a
-        >
-      </li>
+      <form class="theme-form" method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label >Email Address</label>
+            <input type="text" class="form-control"  name="name" placeholder="Email" required="">
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
+        </div>
+        <button class="btn btn-normal">Login</button>
+        <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
+      </form>
+      <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
+      <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
       {% endif %}
-      {% comment %} <form class="theme-form">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" placeholder="Email" required="">
-        </div>
-        <div class="form-group">
-          <label for="review">Password</label>
-          <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
-        </div>
-        <div class="form-group">
-          <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
-        </div>
-        <div class="accout-fwd">
-          <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-          <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
-        </div>
-      </form> {% endcomment %}
-    </div>
+      </div>
   </div>
   <!-- Add to account bar end-->
   

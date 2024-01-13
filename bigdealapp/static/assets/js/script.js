@@ -1588,11 +1588,6 @@ $('.feature-slide').slick({
 });
 
 
-
-
-
-
-
 //list layout view
   $('.list-layout-view').on('click', function(e) {
     $('.collection-grid-view').css('opacity', '0');
@@ -1606,6 +1601,7 @@ $('.feature-slide').slick({
       $('.shop-cart-ajax-loader').css("display","none");
     }, 500);
   });
+
 //grid layout view
   $('.grid-layout-view').on('click', function(e) {
     $('.collection-grid-view').css('opacity', '1');
@@ -2773,7 +2769,6 @@ $('.feature-slide').slick({
 
   
   $(".add-to-compare-list").on("click", function () {
-    console.log('Compare called ');
     // Check if the user is authenticated
     $.ajax({
         url: '/user_authenticate', // Replace with the actual URL of your Django view
@@ -3068,7 +3063,6 @@ $('.tap-top').on('click', function() {
               url: "/setCookie",
               method: 'GET',
               success: function(response) {
-                  console.log(response); // Optional: Log the response
               },
           });
       });
@@ -3083,8 +3077,6 @@ $('.tap-top').on('click', function() {
     setTimeout(function(){
       $('#message').fadeOut('slow')
     },5000)
-  
-
 
 
 

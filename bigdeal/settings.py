@@ -30,12 +30,12 @@ SECRET_KEY = 'django-insecure-sq-%-(rvn6qkp0bv7vbbro=+0-q2v!y1l^$w6cs@4s62%jv4)=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 # ALLOWED_HOSTS = ['0.0.0.0','192.168.1.25','127.0.0.1']
 
 
-# ALLOWED_HOSTS = ['0.0.0.0','192.168.29.132','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0','192.168.29.132','127.0.0.1']
 
 
 # JIO = 192.168.29.132
@@ -207,6 +207,8 @@ JAZZMIN_SETTINGS = {
     
     # Keep the same app ordering as above, but also order choice and book model links within the books app
     "order_with_respect_to": [
+        # APPLICATIONS Orderings
+        "accounts", "auth", "product", "order", "payment", "currency", "voxoapp",
     
     # Models Ordering for ACCOUNT Application
     "accounts.CustomUser", "accounts.Admin", "accounts.Vendor", "accounts.Customer",
@@ -214,9 +216,22 @@ JAZZMIN_SETTINGS = {
     # Models Ordering for PRODUCT Application
     "product.Product", "product.ProductVariant", "product.AttributeName", "product.ProCategory",
     "product.ProBrand", "product.ProUnit", "product.ProVideoProvider", "product.ProductReview",
+    
+    # Models Ordering for ORDER Application
+    "order.Order", "order.ProductOrder", "order.OrderPayment", "order.OrderTracking", "order.Cart",
+    "order.Wishlist", "order.Compare", "order.CartProducts", "order.OrderBillingAddress", "order.PaymentMethod",
+    
+    # Models Ordering for CURRENCY Application
+    "payment.Wallet", "payment.WalletHistory",
 
+    # Models Ordering for CURRENCY Application
+    "currency.Currency",
+    
+    # Models Ordering for BIGDEALAPP Application
+    "bigdealapp.BannerTheme", "bigdealapp.BannerType", "bigdealapp.Banner",
+    "bigdealapp.BlogCategory", "bigdealapp.Blog", "bigdealapp.BlogComment",
+    "bigdealapp.Coupon", "bigdealapp.CouponHistory","bigdealapp.ContactUs"
     ],
-
 }
 
 
