@@ -51,6 +51,7 @@
         offset: 70
     });
 
+
     // On render, adjust body padding to ensure last Scroll target can reach top of screen
     var height = $('#howto').innerHeight();
     var windowHeight = $(window).height();

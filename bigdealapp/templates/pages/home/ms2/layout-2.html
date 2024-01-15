@@ -2344,7 +2344,7 @@
  <!-- Quick-view modal popup end-->
  
  <!-- edit product modal start-->
- <div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
+ {% comment %} {% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
        <div class="modal-content ">
           <div class="modal-body">
@@ -2429,8 +2429,8 @@
           </div>
        </div>
     </div>
- </div>
- <!-- edit product modal end-->
+ </div> {% endcomment %}
+ <!-- edit product modal end--> 
  
  <!-- Add to cart bar -->
  <div id="cart_side" class="add_to_cart bottom">
@@ -2542,7 +2542,7 @@
                       </div>
                     </div>
                     <div class="pro-add">
-                      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                      <a href="javascript:void(0)" data-bs-target="#edit-product" >
                         <i data-feather="edit"></i>
                       </a>
                       <a href="{% url 'delete_cart_product' product.variant_id %}">

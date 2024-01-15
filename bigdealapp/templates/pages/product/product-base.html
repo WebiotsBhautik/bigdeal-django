@@ -155,7 +155,7 @@
 {% include 'components/footer/product-footer.html' %}
 
 <!-- edit product modal start-->
-<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
+{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content ">
         <div class="modal-body">
@@ -241,7 +241,7 @@
       </div>
     </div>
 </div>
-<!-- edit product modal end-->
+<!-- edit product modal end--> {% endcomment %}
 
   
   <!-- Add to cart bar -->
@@ -361,7 +361,7 @@
                     </div>
                   </div>
                   <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                    <a href="javascript:void(0)"  data-bs-target="#edit-product" >
                       <i data-feather="edit"></i>
                     </a>
                     <a href="{% url 'delete_cart_product' product.variant_id %}">
