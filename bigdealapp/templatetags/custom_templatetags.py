@@ -13,6 +13,7 @@ import json
 
 # from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
+from uuid import UUID
 
 register = template.Library()
 
@@ -63,6 +64,54 @@ def return_currency_wise_ammount(value, request):
     return amount
 
 
+# @register.filter(name='return_currency_wise_ammount_range')
+# def return_currency_wise_ammount_range(value, request):
+#     result = request.COOKIES.get('currency', '')
+#     print('result =======>',result)
+    
+#     try:
+#         uuid_result = UUID(result)
+#     except ValueError:
+#         print('Invalid UUID, setting default currency')
+#         uuid_result = None
+    
+#     print('uuid_result ======++>',uuid_result)    
+#     if uuid_result:
+#         try:
+#             currency = Currency.objects.get(id=result)
+#             print('===> TRY TRY TRY')
+#         except ObjectDoesNotExist:
+#             print('=====> EXCEPT EXCEPT EXCEPT <======')
+#             currency = Currency.objects.get(code='USD')
+#     else:
+#         print('Invalid UUID, setting default currency')
+#         currency = Currency.objects.get(code='USD')
+#         print('currency ====>',currency)
+        
+        
+#     productVariantMinPrice = int(value[0])*currency.factor
+#     productVariantMaxPrice = int(value[1])*currency.factor
+    
+#     result_str = str(currency.symbol) + str(productVariantMinPrice)
+#     result_str1 = str(currency.symbol) + str(productVariantMaxPrice)
+#     print('Result:', result_str)  # Print the result before returning
+#     print('result_str1:', result_str1)  # Print the result before returning
+    
+#     if str(productVariantMinPrice) == str(productVariantMaxPrice):
+#         return result_str
+#     else:
+#         return result_str
+
+    
+    
+    # if str(productVariantMinPrice) == str(productVariantMaxPrice):
+    #     print('AT THE END 1st =====+>')
+    #     return str(currency.symbol)+str(productVariantMinPrice)
+    # else: 
+    #     print('AT THE END 2nd =====+>')
+    #     return str(currency.symbol)+str(productVariantMinPrice)
+    
+    
 @register.filter(name='return_currency_wise_ammount_range')
 def return_currency_wise_ammount_range(value, request):
     result = request.COOKIES.get('currency', '')
@@ -81,11 +130,16 @@ def return_currency_wise_ammount_range(value, request):
         currency = Currency.objects.get(code='USD')
     productVariantMinPrice = int(value[0])*currency.factor
     productVariantMaxPrice = int(value[1])*currency.factor
+    
+    print(str(currency.symbol)+str(productVariantMinPrice))
+    print(str(currency.symbol)+str(productVariantMaxPrice))
+    
     if str(productVariantMinPrice) == str(productVariantMaxPrice):
         return str(currency.symbol)+str(productVariantMinPrice)
     else:
         return str(currency.symbol)+str(productVariantMinPrice)
-
+        
+            
 
 
 @register.filter(name='return_currency_wise_symbol')

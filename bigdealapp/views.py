@@ -104,6 +104,9 @@ def add_cookie_currency(request):
 
 def signup_page(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    
     if request.method == "POST":
         role = request.POST['role']
         username = request.POST['username']
@@ -134,10 +137,15 @@ def signup_page(request):
                 messages.error(request,'Password Does Not Match')
                 return redirect('signup_page')
         return render(request, 'authentication/sign-up.html')
-    else:
-        context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
-                   'active_banner_themes':active_banner_themes,}
-        return render(request, 'authentication/sign-up.html', context)
+    
+    context = {
+        "breadcrumb": {"parent": "Dashboard", "child": "Default"},
+        'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        'totalCartProducts':totalCartProducts,
+        **cart_context,
+    }
+    return render(request, 'authentication/sign-up.html', context)
                     
 
 def login_page(request):
@@ -4297,6 +4305,9 @@ def search_bar(request,params=None):
 
 def forgot_password(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+    
     if request.method == 'POST':
         email = request.POST['emailname']
         if CustomUser.objects.filter(email=email).exists():
@@ -4328,8 +4339,15 @@ def forgot_password(request):
         else:
             messages.error(request,'Account Does Not Exist!')
             return redirect('forgot_password')
-            
-    return render(request, 'authentication/forget-pwd.html',{'active_banner_themes':active_banner_themes})
+        
+    context = {
+        "breadcrumb":{"parent":"Forget Password", "child":"Forget Password"},
+        'active_banner_themes':active_banner_themes,
+        'cart_products':cart_products,
+        'totalCartProducts':totalCartProducts,
+        **cart_context,
+    }
+    return render(request, 'authentication/forget-pwd.html',context)
     
     
 def verify_token(request):

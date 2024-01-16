@@ -6,34 +6,6 @@
 {% block components %}
 
 
-{% comment %} <script>
-  
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');
-
-  function redirectToCreateQueryParamsUrl(params) {
-      console.log("-------------------Function call",params);
-      var removeTagId = params.value+params.key+"CheckBox";
-      var attributeCheckBox=document.getElementById(removeTagId);
-      attributeCheckBox.checked = false;
-      var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
-      sbmtButton.click();
-  }
-</script> {% endcomment %}
 
 <!-- section start -->
 <section class="section-big-pt-space ratio_asos b-g-light">

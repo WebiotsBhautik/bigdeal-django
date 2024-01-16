@@ -4752,6 +4752,52 @@ def user_authenticate(request):
     data = {'is_authenticated': is_authenticated}
     return JsonResponse(data)
 
+
+
+
+
+
+
+
+
+
+
+
+from uuid import UUID
+
+@register.filter(name='return_currency_wise_ammount_range')
+def return_currency_wise_ammount_range(value, request):
+    result = request.COOKIES.get('currency', '')
+    print('result =======>', result)
+
+    try:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        print('Invalid UUID, setting default currency')
+        uuid_result = None
+
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+            print('INSIDE TRY TRY TRY')
+        except ObjectDoesNotExist:
+            print('=====> INSIDE EXCEPT EXCEPT EXCEPT <======')
+            currency = Currency.objects.get(code='USD')
+    else:
+        print('Invalid UUID, setting default currency')
+        currency = Currency.objects.get(code='USD')
+
+    productVariantMinPrice = int(value[0]) * currency.factor
+    productVariantMaxPrice = int(value[1]) * currency.factor
+
+    if str(productVariantMinPrice) == str(productVariantMaxPrice):
+        return str(currency.symbol) + str(productVariantMinPrice)
+    else:
+        return str(currency.symbol) + str(productVariantMinPrice)
+
+
     
     
 
