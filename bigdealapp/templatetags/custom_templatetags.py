@@ -50,108 +50,86 @@ def return_currency_wise_ammount(value, request):
         return 0 
     
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        amount = int(value)*currency.factor
-        return amount
     
     try:
-        currency = Currency.objects.get(id=result)
-        amount = numeric_value*currency.factor
-    except ObjectDoesNotExist:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+        
+        
+    if len(result) == 0:
         currency = Currency.objects.get(code='USD')
         amount = numeric_value*currency.factor
+        return amount
+    
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
+    else:
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+        
+    amount = numeric_value * currency.factor
     return amount
-
-
-# @register.filter(name='return_currency_wise_ammount_range')
-# def return_currency_wise_ammount_range(value, request):
-#     result = request.COOKIES.get('currency', '')
-#     print('result =======>',result)
-    
-#     try:
-#         uuid_result = UUID(result)
-#     except ValueError:
-#         print('Invalid UUID, setting default currency')
-#         uuid_result = None
-    
-#     print('uuid_result ======++>',uuid_result)    
-#     if uuid_result:
-#         try:
-#             currency = Currency.objects.get(id=result)
-#             print('===> TRY TRY TRY')
-#         except ObjectDoesNotExist:
-#             print('=====> EXCEPT EXCEPT EXCEPT <======')
-#             currency = Currency.objects.get(code='USD')
-#     else:
-#         print('Invalid UUID, setting default currency')
-#         currency = Currency.objects.get(code='USD')
-#         print('currency ====>',currency)
-        
-        
-#     productVariantMinPrice = int(value[0])*currency.factor
-#     productVariantMaxPrice = int(value[1])*currency.factor
-    
-#     result_str = str(currency.symbol) + str(productVariantMinPrice)
-#     result_str1 = str(currency.symbol) + str(productVariantMaxPrice)
-#     print('Result:', result_str)  # Print the result before returning
-#     print('result_str1:', result_str1)  # Print the result before returning
-    
-#     if str(productVariantMinPrice) == str(productVariantMaxPrice):
-#         return result_str
-#     else:
-#         return result_str
-
-    
-    
-    # if str(productVariantMinPrice) == str(productVariantMaxPrice):
-    #     print('AT THE END 1st =====+>')
-    #     return str(currency.symbol)+str(productVariantMinPrice)
-    # else: 
-    #     print('AT THE END 2nd =====+>')
-    #     return str(currency.symbol)+str(productVariantMinPrice)
     
     
 @register.filter(name='return_currency_wise_ammount_range')
 def return_currency_wise_ammount_range(value, request):
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        productVariantMinPrice = int(value[0])*currency.factor
-        productVariantMaxPrice = int(value[1])*currency.factor
-        if str(productVariantMinPrice) == str(productVariantMaxPrice):
-            return str(currency.symbol)+str(productVariantMinPrice)
-        else: 
-            return str(currency.symbol)+str(productVariantMinPrice)
-            
+
     try:
-        currency = Currency.objects.get(id=result)
-    except ObjectDoesNotExist:
-        currency = Currency.objects.get(code='USD')
-    productVariantMinPrice = int(value[0])*currency.factor
-    productVariantMaxPrice = int(value[1])*currency.factor
-    
-    print(str(currency.symbol)+str(productVariantMinPrice))
-    print(str(currency.symbol)+str(productVariantMaxPrice))
-    
-    if str(productVariantMinPrice) == str(productVariantMaxPrice):
-        return str(currency.symbol)+str(productVariantMinPrice)
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
     else:
-        return str(currency.symbol)+str(productVariantMinPrice)
-        
-            
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+
+    productVariantMinPrice = int(value[0]) * currency.factor
+    productVariantMaxPrice = int(value[1]) * currency.factor
+
+    if str(productVariantMinPrice) == str(productVariantMaxPrice):
+        return str(currency.symbol) + str(productVariantMinPrice)
+    else:
+        return str(currency.symbol) + str(productVariantMinPrice)
 
 
 @register.filter(name='return_currency_wise_symbol')
 def return_currency_wise_symbol(value, request):
     result = request.COOKIES.get('currency', '')
+    
+    try:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+        
     if len(result) == 0:
         currency = Currency.objects.get(code='USD')
         return currency.symbol
-    try:
-        currency = Currency.objects.get(id=result)
-    except ObjectDoesNotExist:
-        currency = Currency.objects.get(code='USD')  # For example, return USD as a default
+    
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
+    else:
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+       
     return currency.symbol
 
 
@@ -277,7 +255,6 @@ def update_url_parameters(value, request):
     # Reconstruct the updated URL
     updated_url = urlunparse(parsed_url._replace(query=updated_query_string))
 
-    # print(updated_url)
     return updated_url
 
 

@@ -119,6 +119,7 @@ def search_query_params_url(request,path):
                 
     return redirect(url)
 
+
 def get_currency_instance(request):
     result = request.COOKIES.get('currency', '')
     if len(result) == 0:
@@ -130,7 +131,6 @@ def get_currency_instance(request):
         currency = Currency.objects.get(code='USD')
         
     return currency
-
 
 
 def convert_amount_based_on_currency(amount,request):

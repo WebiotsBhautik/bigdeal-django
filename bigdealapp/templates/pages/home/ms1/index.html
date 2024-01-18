@@ -264,7 +264,6 @@
                           </a>
                         </div>
                         <div class="detail-right">
-                          {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                           <div class="check-price">
                             {% if product.productType == "Simple" %} 
                             {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 

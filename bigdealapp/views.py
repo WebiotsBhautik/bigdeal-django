@@ -57,8 +57,9 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 def setCookie(request):
     response = HttpResponse('Cookie Set')
     response.set_cookie('login_status', True)
-    currency = Currency.objects.get(code='USD')
-    response.set_cookie('currency', currency.id)
+    if 'currency' not in request.COOKIES:
+        currency = Currency.objects.get(code='USD')
+        response.set_cookie('currency', currency.id)
     return response
 
 def set_currency_to_session(request):
@@ -71,6 +72,7 @@ def set_currency_to_session(request):
 
 def get_selected_currency(request):
     currency_cookie = request.COOKIES.get('currency')
+
     if currency_cookie:
         try:
             currency = Currency.objects.get(id=currency_cookie)
@@ -86,19 +88,68 @@ def get_selected_currency(request):
     return JsonResponse(data, safe=False)
 
 
+# def add_cookie_currency(request):
+#     currency_cookie = request.COOKIES.get('currency')
+#     if currency_cookie and len(currency_cookie) < 3:
+#         try:
+#             selected_currency = Currency.objects.get(code='USD')  # Replace with your default currency code
+#             selected_currency.factor = float(currency_cookie) / 100.0
+#         except (ValueError, Currency.DoesNotExist):
+#             raise Http404("Invalid or non-existent currency")
+#         print('INSIDE LEN CONDITION ==>')
+#         # selected_currency = None
+#             # try:
+#             # selected_currency = Currency.objects.get(id=currency_cookie)
+#             # except Currency.DoesNotExist:
+#                 # raise Http404("Currency does not exist")
+#         # else:
+#         #     selected_currency = None
+#     else:
+#         selected_currency = Currency.objects.get(code='USD')
+#         # selected_currency = None
+
+#         # if selected_currency is None:
+#         #     currency = Currency.objects.get(code='USD')
+#         #     response = HttpResponse()
+#         #     response.set_cookie('currency',currency.id)
+#         #     selected_currency = currency
+#     return selected_currency
+
+
+# def add_cookie_currency(request):
+#     currency_cookie = request.COOKIES.get('currency')
+#     selected_currency = None
+#     try:
+#         if currency_cookie and len(currency_cookie) < 36:
+#             selected_currency = Currency.objects.get(code='USD')  # Replace with your default currency code
+#             response = HttpResponse()
+#             print('=====+>',selected_currency,selected_currency.id)
+#             response.set_cookie('currency', selected_currency.id)
+#             print('Cookie set:', response.cookies['currency'].value)  # Verify the cookie value
+
+#         elif currency_cookie:
+#             selected_currency = Currency.objects.get(id=currency_cookie)
+#     except(ValueError, Currency.DoesNotExist):
+#         raise Http404("Currency does not exist")
+    
+
+#     if selected_currency is None:
+#         selected_currency = Currency.objects.get(code='USD')
+        
+#     print('selected_currency in function ======>',selected_currency)
+#     return selected_currency
+
 def add_cookie_currency(request):
-    currency_cookie = request.COOKIES.get('currency')
-    if currency_cookie:
-        try:
-            selected_currency = Currency.objects.get(id=currency_cookie)
-        except Currency.DoesNotExist:
-            raise Http404("Currency does not exist")
-    else:
-        selected_currency = None
-
-    if selected_currency is None:
-        selected_currency = Currency.objects.get(code='USD')
-
+    selected_currency = Currency.objects.get(code='USD')
+    response = HttpResponse('Cookie Set')
+    get_cookie = request.COOKIES['currency']
+    print('get_cookie =======++>',get_cookie)
+    if len(get_cookie) < 36:
+        print('inside first condition= =======>')
+        response = HttpResponse('Cookie removed')
+        response.delete_cookie('currency')
+        response.set_cookie('currency',selected_currency.id)
+        return selected_currency
     return selected_currency
 
 
@@ -236,8 +287,8 @@ def handle_cart_logic(request):
     context["cartTotalPriceAfterTax"]= cartTotalPriceAfterTax
     context["Cart"]= customer_cart
     context["cartId"]=customer_cart.id
-
     return context
+
 
 def index(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
@@ -253,7 +304,7 @@ def index(request):
     
     products_by_subcategory = {}
     
-     # Retrieve products for each subcategory
+    # Retrieve products for each subcategory
     for subcategory in subcategories:
         products = Product.objects.filter(proCategory=subcategory)
         products_by_subcategory[subcategory] = products
@@ -279,25 +330,17 @@ def index(request):
                'active_banner_themes':active_banner_themes,
                 **cart_context,
                }
-        
+
     template_path = 'pages/home/ms1/index.html'
-   
     currency = Currency.objects.get(code='USD')
     response = render(request, template_path, context)
     
-    # Deleting all old cookies
-    # if not request.session.get('cookies_deleted', False):
-    #     for cookie in request.COOKIES:
-    #         response.delete_cookie(cookie)
-    #         print('<===== COOKIE DELETED SUCCESSFULLY <======')  
-    #     request.session['cookies_deleted'] = True
-
-        
-    # Setting the new cookie
-
-    response.set_cookie('currency', currency.id)
+    if 'currency' not in request.COOKIES:
+        currency = Currency.objects.get(code='USD')
+        response = render(request, template_path, context)
+        response.set_cookie('currency', currency.id)
     return response
-
+    
 
 def layout2(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore2 Demo')
@@ -1157,6 +1200,8 @@ def shop_left_sidebar(request):
         max_price = max(list(get_all_prices))
         
     selected_currency = add_cookie_currency(request)
+    print('selected_currency in shop left sodebr',selected_currency)
+    
     if selected_currency:
         min_price = min_price*selected_currency.factor
         max_price = max_price*selected_currency.factor
@@ -1189,9 +1234,7 @@ def shop_left_sidebar(request):
 
             }
     
-    currency = Currency.objects.get(code='USD')
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_right_sidebar(request):
@@ -1275,9 +1318,8 @@ def shop_right_sidebar(request):
             "totalCartProducts": totalCartProducts,
             **cart_context,
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_no_sidebar(request):
@@ -1362,9 +1404,8 @@ def shop_no_sidebar(request):
             **cart_context,
 
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_sidebar_popup(request):
@@ -1448,9 +1489,8 @@ def shop_sidebar_popup(request):
             "totalCartProducts": totalCartProducts,
             **cart_context,
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_metro(request):
@@ -1536,9 +1576,8 @@ def shop_metro(request):
             "totalCartProducts": totalCartProducts,
             **cart_context,
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_full_width(request):
@@ -1556,9 +1595,8 @@ def shop_full_width(request):
             **cart_context,
             }
     
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_infinite_scroll(request):
@@ -1642,9 +1680,8 @@ def shop_infinite_scroll(request):
             "totalCartProducts": totalCartProducts,
             **cart_context, 
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_3grid(request):
@@ -1727,9 +1764,8 @@ def shop_3grid(request):
             "totalCartProducts": totalCartProducts,
             **cart_context,
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_6grid(request):
@@ -1813,9 +1849,8 @@ def shop_6grid(request):
             "totalCartProducts": totalCartProducts,
             **cart_context,
             }
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 def shop_list_view(request):
@@ -1901,9 +1936,8 @@ def shop_list_view(request):
             **cart_context,
             }
 
-    currency = Currency.objects.get(code='USD')
+    
     response = render(request, template_path, context)
-    response.set_cookie('currency', currency.id)
     return response
 
 
@@ -5243,6 +5277,8 @@ def checkout_page(request):
     
     currency = get_currency_instance(request)
     currency_code = currency.code
+
+
     getTotalPriceForRazorPay = (decimal.Decimal(float(getTotalPrice))) * currency.factor * 100
     couponAmountForRazorPay = (decimal.Decimal(float(couponAmount))) * currency.factor * 100
     getTotalTaxForRazorPay = (decimal.Decimal(float(getTotalTax))) * currency.factor * 100
@@ -5766,5 +5802,17 @@ def cart_to_checkout_validation(request):
                 return response
     else:
         return redirect('login_page')
+    
+    
+def manage_currency(request):
+    currency = Currency.objects.get(code='USD')
+    response = HttpResponse('Cookie Set')
+    get_cookie = request.COOKIES['currency']
+    if len(get_cookie) < 36:
+        response.set_cookie('currency',currency.id)
+    return response
+        
+    
+    
     
 

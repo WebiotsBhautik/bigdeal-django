@@ -934,7 +934,6 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
       }).then(response => {
           return response.json()
       }).then(data => {
-          console.log("Plus Plus =====> ",data);
           GetConvertedValues(data.quantityTotalPrice).then((Data) => {
               document.getElementById(totalPriceEle).innerHTML =
                   Data.symbol + " " + Data.value;
@@ -972,8 +971,6 @@ function quantity_wise_price_management(productVariantId, actionType, totalPrice
       }).then(response => {
           return response.json()
       }).then(data => {
-
-        console.log('Minus Minus =====>',data)
           GetConvertedValues(data.quantityTotalPrice).then((Data) => {
               document.getElementById(totalPriceEle).innerHTML =
                   Data.symbol + " " + Data.value;
