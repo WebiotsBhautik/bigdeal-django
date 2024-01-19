@@ -88,68 +88,21 @@ def get_selected_currency(request):
     return JsonResponse(data, safe=False)
 
 
-# def add_cookie_currency(request):
-#     currency_cookie = request.COOKIES.get('currency')
-#     if currency_cookie and len(currency_cookie) < 3:
-#         try:
-#             selected_currency = Currency.objects.get(code='USD')  # Replace with your default currency code
-#             selected_currency.factor = float(currency_cookie) / 100.0
-#         except (ValueError, Currency.DoesNotExist):
-#             raise Http404("Invalid or non-existent currency")
-#         print('INSIDE LEN CONDITION ==>')
-#         # selected_currency = None
-#             # try:
-#             # selected_currency = Currency.objects.get(id=currency_cookie)
-#             # except Currency.DoesNotExist:
-#                 # raise Http404("Currency does not exist")
-#         # else:
-#         #     selected_currency = None
-#     else:
-#         selected_currency = Currency.objects.get(code='USD')
-#         # selected_currency = None
-
-#         # if selected_currency is None:
-#         #     currency = Currency.objects.get(code='USD')
-#         #     response = HttpResponse()
-#         #     response.set_cookie('currency',currency.id)
-#         #     selected_currency = currency
-#     return selected_currency
-
-
-# def add_cookie_currency(request):
-#     currency_cookie = request.COOKIES.get('currency')
-#     selected_currency = None
-#     try:
-#         if currency_cookie and len(currency_cookie) < 36:
-#             selected_currency = Currency.objects.get(code='USD')  # Replace with your default currency code
-#             response = HttpResponse()
-#             print('=====+>',selected_currency,selected_currency.id)
-#             response.set_cookie('currency', selected_currency.id)
-#             print('Cookie set:', response.cookies['currency'].value)  # Verify the cookie value
-
-#         elif currency_cookie:
-#             selected_currency = Currency.objects.get(id=currency_cookie)
-#     except(ValueError, Currency.DoesNotExist):
-#         raise Http404("Currency does not exist")
-    
-
-#     if selected_currency is None:
-#         selected_currency = Currency.objects.get(code='USD')
-        
-#     print('selected_currency in function ======>',selected_currency)
-#     return selected_currency
-
 def add_cookie_currency(request):
-    selected_currency = Currency.objects.get(code='USD')
-    response = HttpResponse('Cookie Set')
-    get_cookie = request.COOKIES['currency']
-    print('get_cookie =======++>',get_cookie)
-    if len(get_cookie) < 36:
-        print('inside first condition= =======>')
-        response = HttpResponse('Cookie removed')
-        response.delete_cookie('currency')
-        response.set_cookie('currency',selected_currency.id)
-        return selected_currency
+    currency_cookie = request.COOKIES.get('currency')
+    selected_currency = None
+    if currency_cookie:
+        if len(currency_cookie) < 36:
+            try:
+                selected_currency = Currency.objects.get(code='USD')
+            except Currency.DoesNotExist:
+                raise Http404("Currency does not exist")
+    else:
+        selected_currency = None
+
+    if selected_currency is None:
+        selected_currency = Currency.objects.get(code='USD')
+
     return selected_currency
 
 
@@ -316,7 +269,6 @@ def index(request):
     
     cart_context = handle_cart_logic(request)
 
-    
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbrands':brands,
                'allbanners':banners,
@@ -332,13 +284,10 @@ def index(request):
                }
 
     template_path = 'pages/home/ms1/index.html'
-    currency = Currency.objects.get(code='USD')
-    response = render(request, template_path, context)
-    
-    if 'currency' not in request.COOKIES:
-        currency = Currency.objects.get(code='USD')
-        response = render(request, template_path, context)
-        response.set_cookie('currency', currency.id)
+    response1 = render(request, template_path, context)
+            
+    response = manage_currency(request,response1)
+            
     return response
     
 
@@ -369,7 +318,7 @@ def layout2(request):
     cart_context = handle_cart_logic(request)
     
     cart_products,totalCartProducts = show_cart_popup(request)
-
+    
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbanners':banners,
@@ -387,7 +336,11 @@ def layout2(request):
                 **cart_context,
                }
     
-    return render(request, 'pages/home/ms2/layout-2.html',context)
+    template_path = 'pages/home/ms2/layout-2.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
+    return response
 
 def layout3(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore3 Demo')
@@ -426,8 +379,11 @@ def layout3(request):
                'cart_products':cart_products,
                'totalCartProducts':totalCartProducts,
                }
-        
-    return render(request, 'pages/home/ms3/layout-3.html',context)
+    template_path = 'pages/home/ms3/layout-3.html'
+    response1 = render(request, template_path,context)
+    response = manage_currency(request,response1)
+    
+    return response
 
 def layout4(request):   
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Megastore4 Demo')
@@ -468,7 +424,11 @@ def layout4(request):
 
                }
     
-    return render(request, 'pages/home/ms4/layout-4.html',context)
+    template_path = 'pages/home/ms4/layout-4.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
+    return response
 
 def layout5(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Megastore5 Demo')
@@ -528,9 +488,11 @@ def layout5(request):
 
             }
     
+    template_path = 'pages/home/ms5/layout-5.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     
-    
-    return render(request, 'pages/home/ms5/layout-5.html',context)
+    return response
 
 def electronics(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Electronics Demo')
@@ -572,7 +534,11 @@ def electronics(request):
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
             }
-    return render(request, 'pages/home/electronics/electronics.html',context)
+    
+    template_path = 'pages/home/electronics/electronics.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def vegetable(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Vegetable Demo')
@@ -635,8 +601,11 @@ def vegetable(request):
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
             }
-
-    return render(request, 'pages/home/vegetables/vegetable.html',context)
+    
+    template_path = 'pages/home/vegetables/vegetable.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def furniture(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Furniture Demo')
@@ -692,7 +661,11 @@ def furniture(request):
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
             }
-    return render(request, 'pages/home/furniture/furniture.html',context)
+    
+    template_path = 'pages/home/furniture/furniture.html'
+    response1 = render(request, template_path,context)
+    response = manage_currency(request,response1)
+    return response
 
 def cosmetic(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Cosmetic Demo')
@@ -750,7 +723,10 @@ def cosmetic(request):
             'totalCartProducts':totalCartProducts,
             }
     
-    return render(request,'pages/home/cosmetic/cosmetic.html',context)
+    template_path = 'pages/home/cosmetic/cosmetic.html'
+    response1 = render(request, template_path,context)
+    response = manage_currency(request,response1)
+    return response
 
 def kids(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Kids Demo')
@@ -787,8 +763,6 @@ def kids(request):
     cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
 
-        
-
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
         #     'last_two_banners':last_two_banners,
@@ -808,8 +782,12 @@ def kids(request):
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
         }   
-
-    return render(request, 'pages/home/kids/kids.html',context)
+    
+    template_path = 'pages/home/kids/kids.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+            
+    return response
 
 def tools(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Tools Demo')
@@ -851,7 +829,12 @@ def tools(request):
             'totalCartProducts':totalCartProducts,
 
             }   
-    return render(request, 'pages/home/tools/tools.html',context)
+    
+    template_path = 'pages/home/tools/tools.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+            
+    return response
 
 def grocery(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Grocery Demo')
@@ -924,7 +907,13 @@ def grocery(request):
             'totalCartProducts':totalCartProducts,
 
             }   
-    return render(request, 'pages/home/grocery/grocery.html',context)
+    
+    template_path = 'pages/home/grocery/grocery.html'
+    response1 = render(request, template_path, context)
+            
+    response = manage_currency(request,response1)
+            
+    return response
 
 def pets(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Pets Demo')
@@ -974,17 +963,17 @@ def pets(request):
             'second_banner':second_banner,
             'third_banner':third_banner,
             'fourth_banner':fourth_banner,
-            # 'five_banner':five_banner,
-            # 'six_banner':six_banner,
-            # 'last_testimonial':last_testimonial,
             'active_banner_themes':active_banner_themes,
             **cart_context,
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
-
-            }   
+        }   
     
-    return render(request, 'pages/home/pets/pets.html',context)
+    template_path = 'pages/home/pets/pets.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)    
+    
+    return response
 
 def farming(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Farming Demo')
@@ -1049,7 +1038,12 @@ def farming(request):
             'totalCartProducts':totalCartProducts,
 
         }
-    return render(request, 'pages/home/farming/farming.html',context)
+    
+    template_path = 'pages/home/farming/farming.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
+    return response
 
 def digital_marketplace(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Digital Marketplace demo')
@@ -1104,10 +1098,12 @@ def digital_marketplace(request):
             **cart_context,
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
-
         }
-    return render(request, 'pages/home/digital_marketplace/digital-marketplace.html',context)
-
+    
+    template_path = 'pages/home/digital_marketplace/digital-marketplace.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 # SHOP PAGES SECTION 
 
@@ -1200,7 +1196,6 @@ def shop_left_sidebar(request):
         max_price = max(list(get_all_prices))
         
     selected_currency = add_cookie_currency(request)
-    print('selected_currency in shop left sodebr',selected_currency)
     
     if selected_currency:
         min_price = min_price*selected_currency.factor
@@ -1231,10 +1226,11 @@ def shop_left_sidebar(request):
             'cart_products':cart_products,
             'totalCartProducts': totalCartProducts,
             **cart_context,
-
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
     return response
 
 def shop_right_sidebar(request):
@@ -1319,7 +1315,9 @@ def shop_right_sidebar(request):
             **cart_context,
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
     return response
 
 def shop_no_sidebar(request):
@@ -1405,7 +1403,9 @@ def shop_no_sidebar(request):
 
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    
     return response
 
 def shop_sidebar_popup(request):
@@ -1490,7 +1490,8 @@ def shop_sidebar_popup(request):
             **cart_context,
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_metro(request):
@@ -1577,7 +1578,8 @@ def shop_metro(request):
             **cart_context,
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_full_width(request):
@@ -1596,7 +1598,8 @@ def shop_full_width(request):
             }
     
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_infinite_scroll(request):
@@ -1681,7 +1684,8 @@ def shop_infinite_scroll(request):
             **cart_context, 
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_3grid(request):
@@ -1765,7 +1769,8 @@ def shop_3grid(request):
             **cart_context,
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_6grid(request):
@@ -1850,7 +1855,8 @@ def shop_6grid(request):
             **cart_context,
             }
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 def shop_list_view(request):
@@ -1937,7 +1943,8 @@ def shop_list_view(request):
             }
 
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
 
@@ -2167,7 +2174,8 @@ def left_slidebar(request,id,brand_id=None):
         
     template_path = 'pages/product/product-left-sidebar.html'
     
-    response = render(request, template_path, context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
     return response
 
     # return render(request, 'pages/product/product-left-sidebar.html',context)
@@ -2348,8 +2356,12 @@ def right_sidebar(request,id):
                 'totalCartProducts': totalCartProducts,
                 **cart_context,
                 }
+    template_path = 'pages/product/product-right-sidebar.html'
     
-    return render(request, 'pages/product/product-right-sidebar.html',context)
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
+
 
 def no_sidebar(request,id):
     # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
@@ -2447,8 +2459,6 @@ def no_sidebar(request,id):
 
     context = {"breadcrumb": {"parent": "Product No Sidebar", "child": "Product No Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2468,16 +2478,15 @@ def no_sidebar(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-no-sidebar.html',context)
+    
+    template_path = 'pages/product/product-no-sidebar.html'
+    response1 = render(request, template_path, context)
+    response =  manage_currency(request, response1)
+    return response
+    
 
 def bundle(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
-    # cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
-    # totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
     try:
         product = Product.objects.get(id=id)
     except (ValidationError, Product.DoesNotExist):
@@ -2561,12 +2570,8 @@ def bundle(request,id):
     cart_products,totalCartProducts = show_cart_popup(request)
     cart_context = handle_cart_logic(request)
 
-
-
     context = {"breadcrumb": {"parent": "Product Bundle", "child": "Product Bundle"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2586,7 +2591,11 @@ def bundle(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-bundle.html',context)
+    
+    template_path = 'pages/product/product-bundle.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def image_swatch(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -2695,7 +2704,10 @@ def image_swatch(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-image-swatch.html',context)
+    template_path = 'pages/product/product-image-swatch.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def vertical_tab(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -2804,7 +2816,11 @@ def vertical_tab(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-vertical-tab.html',context)
+    
+    template_path = 'pages/product/product-vertical-tab.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def video_thumbnail(request,id):
     url = ''
@@ -2897,6 +2913,7 @@ def video_thumbnail(request,id):
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
+                'url':url,
                 "productVariants": productVariants,
                 "firstProductVariant": str(firstProductVariant),
                 "attributeObjects":attributeObjects,
@@ -2915,7 +2932,10 @@ def video_thumbnail(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-video-thumbnail.html',context)
+    template_path = 'pages/product/product-video-thumbnail.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def image_4(request,id):
     url = ''
@@ -3008,6 +3028,7 @@ def image_4(request,id):
                  "cart_products": cart_products, "totalCartProducts": totalCartProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
+                'url':url,
                 "productVariants": productVariants,
                 "firstProductVariant": str(firstProductVariant),
                 "attributeObjects":attributeObjects,
@@ -3026,7 +3047,10 @@ def image_4(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-4-image.html',context)
+    template_path = 'pages/product/product-4-image.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def sticky(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -3139,8 +3163,10 @@ def sticky(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    
-    return render(request, 'pages/product/product-sticky.html',context)
+    template_path = 'pages/product/product-sticky.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def accordian(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -3252,7 +3278,11 @@ def accordian(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-page-accordian.html',context)
+    
+    template_path = 'pages/product/product-page-accordian.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def product_360_view(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -3363,7 +3393,11 @@ def product_360_view(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-page-360-view.html',context)
+    
+    template_path = 'pages/product/product-page-360-view.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def left_image(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
@@ -5804,13 +5838,27 @@ def cart_to_checkout_validation(request):
         return redirect('login_page')
     
     
-def manage_currency(request):
-    currency = Currency.objects.get(code='USD')
-    response = HttpResponse('Cookie Set')
-    get_cookie = request.COOKIES['currency']
-    if len(get_cookie) < 36:
-        response.set_cookie('currency',currency.id)
+def manage_currency(request,response):
+    if 'currency' in request.COOKIES:
+        if len(request.COOKIES['currency']) < 36:
+            currency = Currency.objects.get(code='USD')
+            response.set_cookie('currency', currency.id)
+            return response
+        else:
+            pass
+    else:
+        currency = Currency.objects.get(code='USD')
+        response.set_cookie('currency', currency.id)
+        return response
     return response
+
+         
+# def delete_old_currencies(request,response):
+#     if not request.session.get('cookies_deleted', False):
+#         for cookie in request.COOKIES:
+#             response.delete_cookie(cookie)
+#             request.session['cookies_deleted'] = True
+#     return response
         
     
     
