@@ -380,8 +380,6 @@
             <a href="{% url 'shop_left_sidebar' %}">
               <div class="category-box">
                 <div>
-                  {% comment %} <div class="icon-wrapper"> {% endcomment %}
-                    {% comment %} <svg  enable-background="new 0 0 64 64"  viewBox="0 0 64 64"  xmlns="http://www.w3.org/2000/svg"><g><path d="m12.853 8c0 12.806 5.126 25.087 14.252 34.142l.274.272c.378.375.89.586 1.425.586h6.392c.535 0 1.047-.211 1.425-.586l.274-.272c9.126-9.055 14.252-21.336 14.252-34.142" fill="#976947"/><path d="m39.606 13.5c0-1.877-.174-3.713-.488-5.5h-26.265c0 11.832 4.385 23.21 12.248 32.016 8.721-5.602 14.505-15.381 14.505-26.516z" fill="#c18e59"/><ellipse cx="32" cy="8" fill="#db9b7c" rx="19.147" ry="6"/><path d="m12.853 8c0 3.314 8.573 6 19.147 6 2.704 0 5.273-.178 7.606-.495 0-.002 0-.004 0-.005 0-3.962-.739-7.75-2.074-11.243-1.753-.166-3.608-.257-5.532-.257-10.575 0-19.147 2.686-19.147 6z" fill="#efbe9a"/><path d="m19.005 31.501c-.659 3.178-.998 6.436-.998 9.73v.385c0 .53.212 1.039.59 1.414l4.52 4.485c.378.375.891.586 1.425.586h.388c1.356 0 2.705-.056 4.046-.167l6.047-.883c9.141-1.923 17.606-6.436 24.314-13.092-1.86 1.845-7.202-.316-13.041-4.942-2.349 4.822-5.512 9.267-9.401 13.126l-.274.272c-.378.374-.89.585-1.425.585h-6.392c-.535 0-1.047-.211-1.425-.586l-.274-.272c-3.212-3.187-5.928-6.773-8.1-10.641z" fill="#442518"/><path d="m50.373 16.58c7.288 7.332 11.294 15.067 8.964 17.378-1.86 1.845-7.202-.316-13.041-4.942 1.916-3.932 3.291-8.116 4.077-12.436z" fill="#db9b7c"/><path d="m47.94 25.239c.505-1.312.953-2.647 1.342-4 3.55 3.832 5.733 7.109 5.066 7.77-.582.578-3.181-1.007-6.408-3.77z" fill="#c66b60"/><ellipse cx="32" cy="8" fill="#c66b60" rx="12.093" ry="2"/><path d="m38.938 57.026c-.232-.976-.867-1.837-1.715-2.383-.011-.007-.023-.015-.034-.022-1.404-.885-2.166-2.499-2.166-4.15v-7.471h-6.046v7.471c0 1.65-.763 3.265-2.166 4.15-.011.007-.023.014-.034.022-.848.546-1.482 1.406-1.715 2.383-.626 2.631 1.369 4.974 3.915 4.974.711 0 1.375-.187 1.952-.511.674-.379 1.469-.379 2.143 0 .576.324 1.24.511 1.951.511 2.546 0 4.541-2.343 3.915-4.974z" fill="#f5cf88"/><path d="m15.769 60.058c.531-.853.696-1.907.485-2.888-.003-.013-.006-.026-.009-.039-.362-1.611.249-3.287 1.425-4.454l5.324-5.283-4.276-4.243-5.324 5.283c-1.176 1.167-2.865 1.773-4.489 1.414-.013-.003-.026-.006-.04-.009-.989-.209-2.05-.046-2.91.482-2.318 1.422-2.577 4.478-.776 6.264.503.499 1.105.833 1.744 1.008.747.205 1.309.763 1.515 1.504.177.634.513 1.231 1.016 1.73 1.803 1.788 4.882 1.531 6.315-.769z" fill="#f5cf88"/><g><path d="m27.163 36.608c-4.546-4.51-7.753-10.171-9.275-16.37l1.942-.477c1.435 5.842 4.458 11.177 8.742 15.428z" fill="#976947"/></g><path d="m39.355 9.585c-.136-1.099-.329-2.18-.576-3.241-1.933-.217-4.266-.344-6.779-.344-6.679 0-12.093.895-12.093 2s5.414 2 12.093 2c2.771 0 5.316-.156 7.355-.415z" fill="#e47c6e"/><g fill="#674025"><path d=""/><path d="m19.005 31.501c-.659 3.178-.998 6.436-.998 9.73v.385c0 .53.212 1.039.59 1.414l.131.13c2.257-.808 4.391-1.87 6.376-3.145-2.348-2.631-4.396-5.482-6.099-8.514z"/></g><path d="m26.811 54.621c-.011.007-.023.014-.034.022-.848.546-1.482 1.406-1.715 2.383-.255 1.073-.07 2.094.406 2.932 4.616-3.553 7.603-9.118 7.603-15.394 0-.528-.038-1.046-.079-1.563h-4.015v7.471c0 1.65-.763 3.264-2.166 4.149z" fill="#fadfb2"/></g></svg> {% endcomment %}
                   <div class="img-wrapper">
                     <img src="{{category.categoryImage}}" alt="cosmetic " class="img-fluid">
                   </div>
@@ -1150,76 +1148,15 @@
                     </li>
                  </ul>
               </div>
-              {% comment %} <div class="pro-group">
-                 <h6 class="product-title">product infomation</h6>
-                 <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-              </div>
-              <div class="pro-group pb-0">
-                 <h6 class="product-title size-text">select size<span>
-                 <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                 <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                       <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                       </div>
-                       <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                    </div>
-                    </div>
-                 </div>
-                 <div class="size-box">
-                    <ul>
-                    <li ><a href="javascript:void(0)">s</a></li>
-                    <li><a href="javascript:void(0)">m</a></li>
-                    <li><a href="javascript:void(0)">l</a></li>
-                    <li><a href="javascript:void(0)">xl</a></li>
-                    <li><a href="javascript:void(0)">2xl</a></li>
-                    </ul>
-                 </div>
-                 <h6 class="product-title">color</h6>
-                 <div class="color-selector inline">
-                    <ul>
-                    <li>
-                       <div class="color-1 active"></div>
-                    </li>
-                    <li>
-                       <div class="color-2"></div>
-                    </li>
-                    <li>
-                       <div class="color-3"></div>
-                    </li>
-                    <li>
-                       <div class="color-4"></div>
-                    </li>
-                    <li>
-                       <div class="color-5"></div>
-                    </li>
-                    <li>
-                       <div class="color-6"></div>
-                    </li>
-                    <li>
-                       <div class="color-7"></div>
-                    </li>
-                    </ul>
-                 </div>
-                 <h6 class="product-title">quantity</h6>
-                 <div class="qty-box">
-                    <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1">
-                    <button class="qty-plus"></button>
-                    </div>
-                 </div> {% endcomment %}
-                 <div class="product-buttons">
-                 <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                    <i class="fa fa-shopping-cart"></i> 
-                    add to cart
-                 </a>
-                 <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
-                    view detail
-                 </a>
-                 </div>
+                <div class="product-buttons">
+                <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                  <i class="fa fa-shopping-cart"></i> 
+                  add to cart
+                </a>
+                <a href="javascript.void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                  view detail
+                </a>
+                </div>
               </div>
               </div>
            </div>
@@ -1230,371 +1167,9 @@
 </div>
 <!-- Quick-view modal popup end-->
 
-<!-- edit product modal start-->
-{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="pro-group">
-          <div class="product-img">
-            <div class="media">
-              <div class="img-wraper">
-                <a href="product-page(left-sidebar).html">
-                  <img src="{% static 'assets/images/grocery/product/1.jpg' %}" alt="">
-                </a>
-              </div>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h3>redmi not 3</h3>
-                </a>
-                <h6>$80<span>$120</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select Size</h6>
-          <div class="size-box">
-            <ul>
-              <li ><a href="javascript:void(0)">s</a></li>
-              <li><a href="javascript:void(0)">m</a></li>
-              <li><a href="javascript:void(0)">l</a></li>
-              <li><a href="javascript:void(0)">xl</a></li>
-              <li><a href="javascript:void(0)">2xl</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select color</h6>
-          <div class="color-selector inline">
-            <ul>
-              <li>
-                <div class="color-1 active"></div>
-              </li>
-              <li>
-                <div class="color-2"></div>
-              </li>
-              <li>
-                <div class="color-3"></div>
-              </li>
-              <li>
-                <div class="color-4"></div>
-              </li>
-              <li>
-                <div class="color-5"></div>
-              </li>
-              <li>
-                <div class="color-6"></div>
-              </li>
-              <li>
-                <div class="color-7"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Quantity</h6>
-          <div class="qty-box">
-            <div class="input-group">
-              <button class="qty-minus"></button>
-              <input class="qty-adj form-control" type="number" value="1"/>
-              <button class="qty-plus"></button>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group mb-0">
-          <div class="modal-btn">
-            <a href="cart.html" class="btn btn-solid btn-sm">
-              add to cart
-            </a>
-            <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-              more detail
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- edit product modal end--> {% endcomment %}
-
-<!-- Add to cart bar -->
-{% comment %} <div id="cart_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my cart</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeCart()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> {% endcomment %}
-<!-- Add to cart bar end-->
 
 {% include 'base/cart-popup.html' %}
 
-<!-- wishlistbar bar -->
-{% comment %} <div id="wishlist_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my wishlist</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeWishlist()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/grocery/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> {% endcomment %}
-<!-- wishlistbar bar end-->
 
 <!-- My account bar start-->
 <div id="myAccount" class="add_to_cart right account-bar">
@@ -1610,10 +1185,9 @@
     </div>
     {% if request.user.is_authenticated %}
       <li>
-         <!-- <a href="log-in.html" class="d-block">Profile</a> -->
-            <h6 class="d-block">
-               Welcome, {{request.user.username}}
-            </h6>
+          <h6 class="d-block">
+              Welcome, {{request.user.username}}
+          </h6>
          </li>
          <li>
             <a href="{% url 'logout_page' %}" class="d-block"
@@ -1656,23 +1230,6 @@
       </div>
     </div>
     <div class="setting-block">
-      {% comment %} <div class="form-group">
-        <select>
-          <option value="">language</option>
-          <option value="">english</option>
-          <option value="">french</option>
-          <option value="">hindi</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <select>
-          <option value="">currency</option>
-          <option value="">uro</option>
-          <option value="">ruppees</option>
-          <option value="">piund</option>
-          <option value="">doller</option>
-        </select>
-      </div> {% endcomment %}
       <div class="form-group" id="currency-selection">
         <select id="currency-selection-dropdown">
            <option id="currency-value" value="%">Currency</option>
@@ -1722,19 +1279,6 @@
   </div>
 </div>
 <!-- add to  setting bar  end-->
-
-<!-- notification product -->
-{% comment %} <div class="product-notification" id="dismiss">
-  <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
-  <div class="media">
-    <img class="me-2" src="{% static 'assets/images/grocery/product/2.jpg' %}" alt="Generic placeholder image">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1">Latest trending</h5>
-      Cras sit amet nibh libero, in gravida nulla.
-    </div>
-  </div>
-</div> {% endcomment %}
-<!-- notification product -->
 
 {% endblock components %}
 

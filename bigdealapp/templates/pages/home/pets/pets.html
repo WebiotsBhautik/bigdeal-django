@@ -454,8 +454,6 @@
 <!--home slider start-->
 <section class="pets-slide home-slide" >
    <div class="slide-1 no-arrow">
-      {% comment %} {% for banner in allbanners %}
-      {% if banner.bannerType|to_str == 'Slider' %}  {% endcomment %}
       <div>
          <div class="slide-main">
             {% for bgimage in mainslider  %}
@@ -508,14 +506,11 @@
                <div>
                   <div class="services-box">
                      <div class="media">
-                        {% comment %} <div class="icon-wrraper"> {% endcomment %}
-                           {% comment %} <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="435.783px" height="435.783px" viewBox="0 0 435.783 435.783" style="enable-background:new 0 0 435.783 435.783;" xml:space="preserve"> <g> <g> <path d="M428.251,275.038c-15.706-18.083-52.923-17.488-83.122,1.346c-8.643,5.388-15.771,11.689-21.19,18.356H111.84c-5.411-6.667-12.538-12.979-21.188-18.356c-30.186-18.834-67.402-19.429-83.116-1.346c-15.706,18.083-3.958,48.007,26.228,66.836c4.329,2.687,8.8,5.002,13.335,6.942c-4.524,1.949-9.006,4.25-13.335,6.951C3.585,374.597-8.175,404.521,7.536,422.594c15.706,18.093,52.923,17.499,83.116-1.335c8.65-5.388,15.777-11.689,21.188-18.357h212.11c5.408,6.668,12.527,12.97,21.186,18.357c30.193,18.834,67.41,19.428,83.121,1.335c15.69-18.072,3.95-47.997-26.243-66.826c-4.321-2.701-8.79-5.002-13.324-6.951c4.524-1.94,9.003-4.256,13.324-6.942C432.202,323.045,443.942,293.121,428.251,275.038z"/> <path d="M350.873,164.219c-11.187,0-20.266,0-20.266,0l-6.281-19.276c-3.458-10.651-9.069-10.651-12.513,0c-3.483,10.648-6.281,19.276-6.281,19.276H285.26c-11.187,0-12.934,5.347-3.869,11.921c9.069,6.573,16.401,11.913,16.401,11.913l-6.281,19.284c-3.438,10.656,1.097,13.952,10.166,7.371c9.044-6.581,16.387-11.92,16.387-11.92l16.397,11.92c9.063,6.582,13.599,3.286,10.15-7.371c-3.474-10.656-6.276-19.284-6.276-19.284l16.412-11.913C363.801,169.559,362.055,164.219,350.873,164.219z"/> <path d="M145.471,164.219c-11.187,0-20.264,0-20.264,0l-6.281-19.276c-3.461-10.651-9.069-10.651-12.512,0c-3.486,10.648-6.282,19.276-6.282,19.276H79.861c-11.187,0-12.934,5.347-3.872,11.921c9.069,6.573,16.402,11.913,16.402,11.913l-6.281,19.284c-3.445,10.656,1.097,13.952,10.166,7.371c9.046-6.581,16.387-11.92,16.387-11.92l16.399,11.92c9.062,6.582,13.596,3.286,10.151-7.371c-3.476-10.656-6.279-19.284-6.279-19.284l16.414-11.913C158.402,169.559,156.656,164.219,145.471,164.219z"/> <path d="M393.299,250.699c7.673,0,14.848,1.021,21.389,2.931c4.164-16.321,6.357-33.241,6.357-50.48C421.045,91.126,329.911,0,217.898,0C105.883,0,14.749,91.126,14.749,203.149c0,17.295,2.14,34.221,6.281,50.506c6.563-1.93,13.761-2.956,21.465-2.956c6.391,0,12.9,0.741,19.393,2.062c-5.009-15.812-7.64-32.483-7.64-49.604c0-90.233,73.415-163.648,163.65-163.648c90.233,0,163.645,73.415,163.645,163.648c0,17.08-2.747,33.756-7.789,49.635C380.315,251.451,386.871,250.699,393.299,250.699z"/> <path d="M262.313,133.952c-15.163,0-27.432,0-27.432,0l-8.5-26.108c-4.677-14.409-12.284-14.409-16.953,0c-4.707,14.424-8.485,26.108-8.485,26.108h-27.467c-15.145,0-17.499,7.239-5.23,16.132c12.284,8.904,22.213,16.133,22.213,16.133l-8.5,26.108c-4.674,14.427,1.47,18.891,13.749,9.986c12.251-8.912,22.191-16.133,22.191-16.133l22.199,16.133c12.258,8.904,18.392,4.44,13.721-9.986c-4.683-14.416-8.476-26.108-8.476-26.108l22.217-16.133C279.812,141.19,277.465,133.952,262.313,133.952z"/> </g> </g> </svg> {% endcomment %}
                         <div class="img-wrapper">
                            <img src="{{category.categoryImage}}" alt="Pets" class="img-fluid">
                         </div>
                         <div class="media-body">
                            <h4>{{category.categoryName}}</h4>
-                           {% comment %} <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit expedita.</p> {% endcomment %}
                         </div>
                      </div>
                   </div>
@@ -922,66 +917,6 @@
                {% endif %}
                {% endfor %}
 
-               {% comment %} <div>
-                  <div class="pricing-box">
-                     <div class="pricing-header">
-                        <h2>ultimate Plan</h2>
-                     </div>
-                     <div class="pricing-body">
-                        <h1><sup>$</sup>90<sub> / per visit</sub></h1>
-                        <ul>
-                           <li> <a href="javascript:void(0)">Pet Shower</a></li>
-                           <li> <a href="javascript:void(0)">Fitness Checkup</a></li>
-                           <li> <a href="javascript:void(0)">Pet Grooming</a></li>
-                           <li> <a href="javascript:void(0)">Hair And Nail Cut</a></li>
-                           <li> <a href="javascript:void(0)">Control Hair Falling</a></li>
-                           <li> <a href="javascript:void(0)">Brush & Blow Dry</a></li>
-                           <li> <a href="javascript:void(0)">Pet Park And Games</a></li>
-                        </ul>
-                        <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="pricing-box">
-                     <div class="pricing-header">
-                        <h2>basic plan</h2>
-                     </div>
-                     <div class="pricing-body">
-                        <h1><sup>$</sup>120<sub> / per visit</sub></h1>
-                        <ul>
-                           <li> <a href="javascript:void(0)">Pet Shower</a></li>
-                           <li> <a href="javascript:void(0)">Fitness Checkup</a></li>
-                           <li> <a href="javascript:void(0)">Pet Grooming</a></li>
-                           <li> <a href="javascript:void(0)">Hair And Nail Cut</a></li>
-                           <li> <a href="javascript:void(0)">Control Hair Falling</a></li>
-                           <li> <a href="javascript:void(0)">Brush & Blow Dry</a></li>
-                           <li> <a href="javascript:void(0)">Pet Park And Games</a></li>
-                        </ul>
-                        <a href="javascript:void(0)" class="btn btn-rounded btn-block">order now</a>
-                     </div>
-                  </div>
-               </div>
-               <div>
-                  <div class="pricing-box">
-                     <div class="pricing-header">
-                        <h2>Exclusive Pack</h2>
-                     </div>
-                     <div class="pricing-body">
-                        <h1><sup>$</sup>160<sub> / per visit</sub></h1>
-                        <ul>
-                           <li> <a href="javascript:void(0)">Pet Shower</a></li>
-                           <li> <a href="javascript:void(0)">Fitness Checkup</a></li>
-                           <li> <a href="javascript:void(0)">Pet Grooming</a></li>
-                           <li> <a href="javascript:void(0)">Hair And Nail Cut</a></li>
-                           <li> <a href="javascript:void(0)">Control Hair Falling</a></li>
-                           <li> <a href="javascript:void(0)">Brush & Blow Dry</a></li>
-                           <li> <a href="javascript:void(0)">Pet Park And Games</a></li>
-                        </ul>
-                        <a href="javascript:void(0)" class="btn btn-rounded btn-md btn-block">order now</a>
-                     </div>
-                  </div>
-               </div> {% endcomment %}
             </div>
          </div>
       </div>
@@ -1032,50 +967,6 @@
                            {% endif %}
                         </div>
                      </div>
-                     {% comment %} <div class="col-md-12">
-                        <div class="gallery-slide no-arrow">
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/5.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/5.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/6.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/6.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/7.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/7.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                           <div>
-                              <div class="gallery-box">
-                                 <a class="spotlight" href="{% static 'assets/images/pets/gallery/8.jpg' %}" tabindex="0">
-                                    <img class="img-fluid" src="{% static 'assets/images/pets/gallery/8.jpg' %}" alt="gallery">
-                                    <div class="gallery-contain">
-                                       <i class="fa fa-search-plus"></i>
-                                    </div>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>
-                     </div> {% endcomment %}
                   </div>
                   {% endfor %}
                </div>
@@ -1321,76 +1212,16 @@
                      </li>
                   </ul>
                </div>
-               {% comment %} <div class="pro-group">
-                  <h6 class="product-title">product infomation</h6>
-                  <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-               </div>
-               <div class="pro-group pb-0">
-                  <h6 class="product-title size-text">select size<span>
-                  <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                  <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                     <div class="modal-dialog modal-dialog-centered" role="document">
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                     </div>
-                     </div>
-                  </div>
-                  <div class="size-box">
-                     <ul>
-                     <li ><a href="javascript:void(0)">s</a></li>
-                     <li><a href="javascript:void(0)">m</a></li>
-                     <li><a href="javascript:void(0)">l</a></li>
-                     <li><a href="javascript:void(0)">xl</a></li>
-                     <li><a href="javascript:void(0)">2xl</a></li>
-                     </ul>
-                  </div>
-                  <h6 class="product-title">color</h6>
-                  <div class="color-selector inline">
-                     <ul>
-                     <li>
-                        <div class="color-1 active"></div>
-                     </li>
-                     <li>
-                        <div class="color-2"></div>
-                     </li>
-                     <li>
-                        <div class="color-3"></div>
-                     </li>
-                     <li>
-                        <div class="color-4"></div>
-                     </li>
-                     <li>
-                        <div class="color-5"></div>
-                     </li>
-                     <li>
-                        <div class="color-6"></div>
-                     </li>
-                     <li>
-                        <div class="color-7"></div>
-                     </li>
-                     </ul>
-                  </div>
-                  <h6 class="product-title">quantity</h6>
-                  <div class="qty-box">
-                     <div class="input-group">
-                     <button class="qty-minus"></button>
-                     <input class="qty-adj form-control" type="number" value="1">
-                     <button class="qty-plus"></button>
-                     </div>
-                  </div> {% endcomment %}
-                  <div class="product-buttons">
+               
+               <div class="product-buttons">
                   <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                      <i class="fa fa-shopping-cart"></i> 
                      add to cart
                   </a>
-                  <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                  <a href="javascript.void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                      view detail
                   </a>
-                  </div>
+               </div>
                </div>
                </div>
             </div>
@@ -1401,371 +1232,9 @@
 </div>
 <!-- Quick-view modal popup end-->
 
-<!-- edit product modal start-->
-{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="pro-group">
-          <div class="product-img">
-            <div class="media">
-              <div class="img-wraper">
-                <a href="product-page(left-sidebar).html">
-                  <img src="{% static 'assets/images/pets/product/1.jpg' %}" alt="">
-                </a>
-              </div>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h3>redmi not 3</h3>
-                </a>
-                <h6>$80<span>$120</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select Size</h6>
-          <div class="size-box">
-            <ul>
-              <li ><a href="javascript:void(0)">s</a></li>
-              <li><a href="javascript:void(0)">m</a></li>
-              <li><a href="javascript:void(0)">l</a></li>
-              <li><a href="javascript:void(0)">xl</a></li>
-              <li><a href="javascript:void(0)">2xl</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select color</h6>
-          <div class="color-selector inline">
-            <ul>
-              <li>
-                <div class="color-1 active"></div>
-              </li>
-              <li>
-                <div class="color-2"></div>
-              </li>
-              <li>
-                <div class="color-3"></div>
-              </li>
-              <li>
-                <div class="color-4"></div>
-              </li>
-              <li>
-                <div class="color-5"></div>
-              </li>
-              <li>
-                <div class="color-6"></div>
-              </li>
-              <li>
-                <div class="color-7"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Quantity</h6>
-          <div class="qty-box">
-            <div class="input-group">
-              <button class="qty-minus"></button>
-              <input class="qty-adj form-control" type="number" value="1"/>
-              <button class="qty-plus"></button>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group mb-0">
-          <div class="modal-btn">
-            <a href="cart.html" class="btn btn-solid btn-sm">
-              add to cart
-            </a>
-            <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-              more detail
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- edit product modal end--> {% endcomment %}
-
-<!-- Add to cart bar -->
-{% comment %} <div id="cart_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my cart</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeCart()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> {% endcomment %}
-<!-- Add to cart bar end-->
 
 {% include 'base/cart-popup.html' %}
 
-<!-- wishlistbar bar -->
-{% comment %} <div id="wishlist_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my wishlist</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeWishlist()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">             
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/pets/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> {% endcomment %}
-<!-- wishlistbar bar end-->
 
 <!-- My account bar start-->
 <div id="myAccount" class="add_to_cart right account-bar">
@@ -1782,7 +1251,6 @@
     {% if request.user.is_authenticated %}
 
     <li>
-      <!-- <a href="log-in.html" class="d-block">Profile</a> -->
       <h6 class="d-block">
         Welcome, {{request.user.username}}
       </h6>
@@ -1829,23 +1297,6 @@
       </div>
     </div>
     <div class="setting-block">
-      {% comment %} <div class="form-group">
-        <select>
-          <option value="">language</option>
-          <option value="">english</option>
-          <option value="">french</option>
-          <option value="">hindi</option>
-        </select>
-      </div> 
-      <div class="form-group">
-        <select>
-          <option value="">currency</option>
-          <option value="">uro</option>
-          <option value="">ruppees</option>
-          <option value="">piund</option>
-          <option value="">doller</option>
-        </select>
-      </div> {% endcomment %}
       <div class="form-group" id="currency-selection">
          <select id="currency-selection-dropdown">
             <option id="currency-value" value="%">Currency</option>
@@ -1896,19 +1347,6 @@
 </div>
 <!-- add to  setting bar  end-->
 
-
-<!-- notification product -->
-{% comment %} <div class="product-notification" id="dismiss">
-   <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
-   <div class="media">
-      <img class="me-2" src="{% static 'assets/images/pets/product/1.jpg' %}" alt="Generic placeholder image">
-      <div class="media-body">
-         <h5 class="mt-0 mb-1">Latest trending</h5>
-         Cras sit amet nibh libero, in gravida nulla.
-      </div>
-   </div>
-</div> {% endcomment %}
-<!-- notification product -->
 
 {% endblock components %}
 

@@ -182,144 +182,22 @@
     </li>
     <!--product-meu end-->
 
-    <!--mega-meu start-->
-    {% comment %} <li class="mega" >
-    <a  class="dark-menu-item" href="javascript:void(0)">features</a>
-    <ul class="mega-menu full-mega-menu ratio_landscape">
-        <li>
-        <div class="container">
-            <div class="row">
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>portfolio</h5></div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="grid-2-col.html">portfolio grid 2</a></li>
-                    <li><a href="grid-3-col.html">portfolio grid 3</a></li>
-                    <li><a href="grid-4-col.html">portfolio grid 4</a></li>
-                    <li><a href="grid-6-col.html">portfolio grid 6</a></li><li><a href="masonary-2-grid.html">mesonary grid 2</a></li>
-                    <li><a href="masonary-3-grid.html">mesonary grid 3</a></li>
-                    <li><a href="masonary-4-grid.html">mesonary grid 4</a></li>
-                    <li><a href="masonary-fullwidth.html">mesonary full width</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>add to cart</h5></div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="layout-5.html">cart modal popup</a></li>
-                    <li><a href="layout-6.html">qty. counter </a></li>
-                    <li><a href="index.html">cart top</a></li>
-                    <li><a href="layout-2.html">cart bottom</a></li>
-                    <li><a href="layout-3.html">cart left</a></li>
-                    <li><a href="layout-4.html">cart right</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>shortcodes</h5></div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="element-title.html">title</a></li>
-                    <li><a href="element-banner.html">collection banner</a></li>
-                    <li><a href="element-category.html">category</a></li>
-                    <li><a href="element-service.html">service</a></li>
-                    <li><a href="element-image-ratio.html">image size ratio</a></li>
-                    <li><a href="element-tab.html">tab</a></li>
-                    <li><a href="element-counter.html">counter</a></li>
-                    <li><a href="element-pricingtable.html">pricing table</a></li>
-                    <li><a href="element-team.html">team</a></li>
-                    <li><a href="element-testimonial.html">testimonial</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>email template</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="../email-template/email-order-success.html">order success</a></li>
-                    <li><a href="../email-template/email-order-success-tow.html">order success 2</a></li>
-                    <li><a href="../email-template/email-template.html">email template</a></li>
-                    <li><a href="../email-template/email-template-tow.html">email template 2</a></li>
-                    </ul>
-                </div>
-                <div class="menu-title menu-secon-title">
-                    <h5>Easy to use</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="button.html">element button</a></li>
-                    <li><a href="instagram.html">element instagram</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-
-            <div class="col mega-box product ">
-                <div class="mega-img">
-                <img src="{% static 'assets/images/grocery/menu-banner/3.jpg' %}" alt="menu-banner" class="img-fluid">
-                </div>
-            </div>
-            </div>
-        </div>
-        </li>
-    </ul>
-    </li> {% endcomment %}
-    <!--mega-meu end-->
 
     <!--pages meu start-->
     <li>
     <a  class="dark-menu-item" href="javascript:void(0)">pages</a>
     <ul>
-        {% comment %} <li>
-        <a href="javascript:void(0)">invoice<span class="new-tag">new</span></a>
-        <ul>
-            <li><a href="../invoice-template/element-invoice.html">invoice one</a></li>
-            <li><a href="../invoice-template/element-invoice2.html">invoice two</a></li>
-            <li><a href="../invoice-template/element-invoice3.html">invoice three</a></li>
-            <li><a href="../invoice-template/element-invoice4.html">invoice four</a></li>
-            <li><a href="../invoice-template/element-invoice5.html">invoice five</a></li>
-        </ul>
-        </li> {% endcomment %}
         <li>
         <a href="javascript:void(0)">account</a>
         <ul>
             <li><a href="{% url 'wishlist_page' %}">wishlist</a></li>
             <li><a href="{% url 'cart_page' %}">cart</a></li>
             <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
-            {% comment %} <li><a href="{% url 'login_page' %}">login</a></li> {% endcomment %}
-            {% comment %} <li><a href="{% url 'signup_page' %}">register</a></li> {% endcomment %}
             <li><a href="{% url 'contact_us' %}">contact</a></li>
-            {% comment %} <li><a href="{% url 'forgot_password' %}">forget password</a></li> {% endcomment %}
-            {% comment %} <li><a href="{% url 'profile' %}">profile </a></li> {% endcomment %}
-            {% comment %} <li>
-            <a href="{% url 'checkout_page' %}">checkout</a>
-            <ul>
-                <li><a href="{% url 'checkout_page' %}">checkout 1</a></li>
-                <li><a href="{% url 'checkout_2_page' %}">checkout 2<span class="new-tag">new</span></a></li>
-            </ul>
-            </li> {% endcomment %}
         </ul>
         </li>
         <li><a href="{% url 'about_page' %}">about us</a></li>
         <li><a href="{% url 'search_bar' %}">search</a></li>
-        {% comment %} <li><a href="{% url 'typography' %}">typography </a></li> {% endcomment %}
-        {% comment %} <li><a href="{% url 'review' %}">review </a></li> {% endcomment %}
-        {% comment %} <li><a href="order-success.html">order success</a></li> {% endcomment %}
-        {% comment %} <li><a href="order-history.html">order history</a></li> {% endcomment %}
-        {% comment %} <li><a href="order-tracking.html">order tracking</a></li> {% endcomment %}
         <li>
         <a href="javascript:void(0)">compare</a>
         <ul>

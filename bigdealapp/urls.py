@@ -68,9 +68,6 @@ urlpatterns = [
     path('shop_6grid', views.shop_6grid, name='shop_6grid'),
     path('shop_list_view', views.shop_list_view, name='shop_list_view'),
     
-    
-    
-    
     path('customer_review',views.customer_review, name='customer_review'),
     
 # PRODUCT PAGES ROUTES
@@ -129,7 +126,7 @@ urlpatterns = [
     
     
     path('user_authenticate',views.user_authenticate, name='user_authenticate'),
-    path('check_quantity/<str:id>', views.check_quantity, name='check_quantity'),
+    # path('check_quantity/<str:id>', views.check_quantity, name='check_quantity'),
 
     
     path('page_not_found',views.page_not_found, name='page_not_found'),

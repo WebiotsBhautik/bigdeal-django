@@ -93,10 +93,9 @@ def add_cookie_currency(request):
     selected_currency = None
     if currency_cookie:
         if len(currency_cookie) < 36:
-            try:
-                selected_currency = Currency.objects.get(code='USD')
-            except Currency.DoesNotExist:
-                raise Http404("Currency does not exist")
+            selected_currency = None
+        else:
+            selected_currency = Currency.objects.get(id=currency_cookie)
     else:
         selected_currency = None
 
@@ -1207,6 +1206,7 @@ def shop_left_sidebar(request):
     cart_context = handle_cart_logic(request)
 
     template_path = 'pages/shop/shop-left-sidebar.html'
+    
         
     context = {"breadcrumb": {"parent": "Shop Left Sidebar", "child": "Shop Left Sidebar"},
             'shop_banner':shop_banner,'sidebar_banner':sidebar_banner,
@@ -1947,58 +1947,11 @@ def shop_list_view(request):
     response = manage_currency(request,response1)
     return response
 
-
-# def left_slidebar_with_brands(request, brand_id=None):
-#     # Your existing code for retrieving cart products, product variants, and other data
-#     url = ''
-#     # brandid = ()
-#     brand = ProBrand.objects.all()
-#     category = ProCategory.objects.all()
-#     product = ProductVariant.objects.all()
-
-#     if brand_id:
-#         brand = ProBrand.objects.get(id=brand_id)
-#         product = ProductVariant.objects.filter(variantProduct__productBrand_id=brand)
-#         brandList = []
-#         brand = []
-        
-#         for p in product:
-#             brandList.append(str(p.variantProduct.productBrand.brandName))
-            
-#         for b in list(set(brandList)):
-#             brand.append(ProBrand.objects.get(brandName=b))
-            
-        
-#         url = reverse('left_slidebar_with_brands', args=[id])
-#     # try:
-#     #     brand = ProBrand.objects.get(id=brand_id)
-#     #     products = ProductVariant.objects.filter(variantProduct__productBrand=brand)
-#     # except ProBrand.DoesNotExist:
-#     #     return HttpResponse('Invalid Brand ID')
-    
-#     context = {
-#         "ProductsBrand":brand,
-#         'url':url,
-#         'path':'left_slidebar_with_brands',
-#         'products': product, 'ProductsBrand': brand,
-#         'productVariant':product,'ProductCategory': category,
-
-#     }
-#     return render(request, 'pages/shop/shop-left-sidebar.html',context)
-
-    # Rest of your code for processing the products and rendering the template
-
-
-
 def left_slidebar(request,id,brand_id=None):
     url = ''
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
 
     if brand_id:
         try:
@@ -2022,8 +1975,12 @@ def left_slidebar(request,id,brand_id=None):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -2237,17 +2194,18 @@ def customer_review(request):
 
 
 def right_sidebar(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
+    
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse\('Invalide Product ID'\
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -2332,8 +2290,6 @@ def right_sidebar(request,id):
 
     context = {"breadcrumb": {"parent": "Product Right Sidebar", "child": "Product Right Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
-                #  "Cart": customer_cart,
-                # "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                 "cart_products_demo": cart_products_demo,
                 "product": product, "products": products,
                 "productVariants": productVariants,
@@ -2364,17 +2320,16 @@ def right_sidebar(request,id):
 
 
 def no_sidebar(request,id):
-    # customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     totalCartProducts = cart_products.count()
-    # customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-    # wishlist_products = customer_wishlist.wishlistProducts.all()
-    # totalWishlistProducts = wishlist_products.count()
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -2450,12 +2405,9 @@ def no_sidebar(request,id):
     
     product = get_object_or_404(Product,id=id)
     selected_delivery_options = product.deliveryOption.all()
-    
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     
     cart_context = handle_cart_logic(request)
-
-
 
     context = {"breadcrumb": {"parent": "Product No Sidebar", "child": "Product No Sidebar"},
                 "cart_products": cart_products, "totalCartProducts": totalCartProducts,
@@ -2489,8 +2441,12 @@ def bundle(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -2601,8 +2557,12 @@ def image_swatch(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse\('Invalide Product ID'\
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -2713,8 +2673,12 @@ def vertical_tab(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalide Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse\('Invalide Product ID'\
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -2828,8 +2792,12 @@ def video_thumbnail(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -2943,8 +2911,12 @@ def image_4(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3057,8 +3029,12 @@ def sticky(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3173,8 +3149,12 @@ def accordian(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3289,8 +3269,12 @@ def product_360_view(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3404,8 +3388,12 @@ def left_image(request,id):
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3507,15 +3495,22 @@ def left_image(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-left-image.html',context)
+    template_path = 'pages/product/product-left-image.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def right_image(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3617,15 +3612,22 @@ def right_image(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-right-image.html',context)
+    template_path = 'pages/product/product-right-image.html'
+    response1 = render(request, template_path,context)
+    response = manage_currency(request,response1)
+    return response
 
 def image_outside(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3729,15 +3731,22 @@ def image_outside(request,id):
                 **cart_context,
 
                 }
-    return render(request, 'pages/product/product-page-image-outside.html',context)
+    template_path = 'pages/product/product-page-image-outside.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def thumbnail_left(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3839,15 +3848,22 @@ def thumbnail_left(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-thumbnail-left.html',context)
+    template_path = 'pages/product/product-thumbnail-left.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def thumbnail_right(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -3950,15 +3966,22 @@ def thumbnail_right(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-thumbnail-right.html',context)
+    template_path = 'pages/product/product-thumbnail-right.html'
+    response1 = render(request, template_path,context)
+    response = manage_currency(request,response1)
+    return response
 
 def thumbnail_bottom(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
         
     try:
         product = Product.objects.get(id=id)
-    except (ValidationError, Product.DoesNotExist):
-        return HttpResponse('Invalid Product ID')
+    except (ValidationError, Product.DoesNotExist) as e:
+        if isinstance(e, ValidationError):
+            pass
+        elif isinstance(e, Product.DoesNotExist):
+            pass
+        # return HttpResponse('Invalid Product ID')
     
     products = ProductVariant.objects.all()
     last_added_products = Product.objects.all().order_by('-productCreatedAt')[:9]
@@ -4060,7 +4083,11 @@ def thumbnail_bottom(request,id):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 }
-    return render(request, 'pages/product/product-thumbnail-bottom.html',context)
+    
+    template_path = 'pages/product/product-thumbnail-bottom.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 
 def element_productbox(request):
@@ -4135,7 +4162,11 @@ def element_productbox(request):
         'totalCartProducts':totalCartProducts,
         **cart_context,
     }
-    return render(request, 'pages/product/element-productbox.html',context)
+    
+    template_path = 'pages/product/element-productbox.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def element_product_slider(request):
     products = Product.objects.all()
@@ -4154,7 +4185,10 @@ def element_product_slider(request):
                 **cart_context,
     }
     
-    return render(request, 'pages/product/element-product-slider.html',context)
+    template_path = 'pages/product/element-product-slider.html'
+    response1 = render(request,template_path,context)
+    response = manage_currency(request,response1)
+    return response 
 
 def element_no_slider(request):
     kids = ProCategory.objects.get(categoryName='Kids')
@@ -4177,7 +4211,11 @@ def element_no_slider(request):
                 'totalCartProducts':totalCartProducts,
                 **cart_context,
     }
-    return render(request, 'pages/product/element-no_slider.html',context)
+    
+    template_path = 'pages/product/element-no_slider.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 
 # Blog Pages Section
@@ -4220,7 +4258,11 @@ def blog_details(request, id):
                 "totalCartProducts": totalCartProducts,
                 **cart_context,
                 }
-    return render(request, 'pages/blog/blog-details.html',context)
+    
+    template_path = 'pages/blog/blog-details.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 
 def blog_left_sidebar(request):
@@ -4250,8 +4292,11 @@ def blog_left_sidebar(request):
                 "totalCartProducts": totalCartProducts,
                 **cart_context,
                }
-    return render(request, 'pages/blog/blog-left-sidebar.html', context)
-
+    
+    template_path = 'pages/blog/blog-left-sidebar.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def blog_right_sidebar(request):
     blogs = Blog.objects.filter(status=True, blogStatus=1)
@@ -4281,8 +4326,11 @@ def blog_right_sidebar(request):
         "totalCartProducts": totalCartProducts,
         **cart_context,
     }
-    return render(request, "pages/blog/blog-right-sidebar.html", context)
-
+    
+    template_path = 'pages/blog/blog-right-sidebar.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def blog_no_sidebar(request):
     blogs = Blog.objects.filter(status=True, blogStatus=1)
@@ -4304,8 +4352,11 @@ def blog_no_sidebar(request):
         "totalCartProducts": totalCartProducts,
         **cart_context,
     }
-    return render(request, 'pages/blog/blog-no-sidebar.html',context)
-
+    
+    template_path = 'pages/blog/blog-no-sidebar.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response 
 
 def blog_creative_left_sidebar(request):
     blogs = Blog.objects.filter(status=True, blogStatus=1)
@@ -4335,9 +4386,11 @@ def blog_creative_left_sidebar(request):
         "totalCartProducts": totalCartProducts,
         **cart_context,
     }
-    return render(request, 'pages/blog/blog-creative-left-sidebar.html',context)
-
-
+    
+    template_path = 'pages/blog/blog-creative-left-sidebar.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def search_bar(request,params=None):
     query = ''
@@ -4368,8 +4421,11 @@ def search_bar(request,params=None):
                 'cart_products':cart_products,
                 'totalCartProducts':totalCartProducts,
                 **cart_context,}
-    return render(request, 'pages/pages/search.html',context)
-
+    
+    template_path = 'pages/pages/search.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request,response1)
+    return response
 
 def forgot_password(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
@@ -4415,7 +4471,11 @@ def forgot_password(request):
         'totalCartProducts':totalCartProducts,
         **cart_context,
     }
-    return render(request, 'authentication/forget-pwd.html',context)
+    
+    template_path = 'authentication/forget-pwd.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
     
     
 def verify_token(request):
@@ -4515,7 +4575,11 @@ def user_dashboard(request):
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
             }
-    return render(request, 'pages/pages/account/dashboard.html',context)
+    
+    template_path = 'pages/pages/account/dashboard.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def profile(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
@@ -4528,7 +4592,11 @@ def profile(request):
                'totalCartProducts':totalCartProducts,
                **cart_context,
                }
-    return render(request, 'pages/pages/account/profile.html',context)
+    
+    template_path = 'pages/pages/account/profile.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 
 def save_address(request):
@@ -4665,7 +4733,11 @@ def contact_us(request):
                 'totalCartProducts':totalCartProducts,
                 **cart_context,
                }
-    return render(request, 'pages/pages/account/contact.html',context)
+    
+    template_path = 'pages/pages/account/contact.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def get_subcategories(category,parent=True):
     try:
@@ -5112,10 +5184,12 @@ def wishlist_page(request):
                 'cart_products':cart_products,
                 'totalCartProducts':totalCartProducts,
                 **cart_context,
-}
-
-    return render(request, 'pages/pages/account/wishlist.html', context)
-
+    }
+    
+    template_path = 'pages/pages/account/wishlist.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def delete_wishlist_product(request,id):
     referer = request.META.get('HTTP_REFERER', None)
@@ -5165,21 +5239,20 @@ def user_authenticate(request):
     data = {'is_authenticated': is_authenticated}
     return JsonResponse(data)
 
-def check_quantity(request,id):
-    print('INSIDE INSIDE =========+>')
-    product_variant = None
-    data = {'status': 'error'}
-    try:
-        product_variant = ProductVariant.objects.get(id=id)
-        if product_variant.productVariantQuantity > 0:
-            data['status'] = 'available'
-        else:
-            data['status'] =  'not-available'
-    except ObjectDoesNotExist:
-        print('PRODUCT is not get ========>')
-    except Exception as e:
-        print('An some error occured',str(e))
-    return JsonResponse(data)
+# def check_quantity(request,id):
+#     product_variant = None
+#     data = {'status': 'error'}
+#     try:
+#         product_variant = ProductVariant.objects.get(id=id)
+#         if product_variant.productVariantQuantity > 0:
+#             data['status'] = 'available'
+#         else:
+#             data['status'] =  'not-available'
+#     except ObjectDoesNotExist:
+#         print('PRODUCT is not get ========>')
+#     except Exception as e:
+#         print('An some error occured',str(e))
+#     return JsonResponse(data)
     
 
 def show_cart_popup(request):
@@ -5248,24 +5321,18 @@ def validate_coupon(request):
         if len(coupon) == 1:
             couponStatus = True
             couponUsesByCustomer = CouponHistory.objects.filter(coupon=couponObj)
-            print('couponUsesByCustomer =====+>',couponUsesByCustomer)
-            print('len ===>couponUsesByCustomer',len(couponUsesByCustomer))
             if len(couponUsesByCustomer) < couponObj.usageLimit and int(couponObj.numOfCoupon) > 0:
                 currentDateTime = timezone.now()
                 if couponObj.expirationDateTime >= currentDateTime and price >= couponObj.minAmount:
                     if couponObj.couponType == "Fixed":
-                        print('Inside FIXED ===============>')
                         couponAmount = int(couponObj.couponDiscountOrFixed)
-                        print('couponAmount ===============>',couponAmount)
                     if couponObj.couponType == "Percentage":
-                        print('Inside PERCENTAGE ===============>')
                         couponDiscountAmount = ((price*couponObj.couponDiscountOrFixed)/100)
                         couponAmount = couponDiscountAmount
 
         couponAmountForUSD = couponAmount
         currency = Currency.objects.get(id=request.COOKIES.get('currency', ''))    
         couponAmount = couponAmount * currency.factor
-        print('couponAmount in last =====+>',couponAmount)
         finalAmount = (price-couponAmount)+(tax*currency.factor)
         finalAmountInUSD = finalAmountInUSD-couponAmountForUSD
         
@@ -5344,9 +5411,10 @@ def checkout_page(request):
                'active_banner_themes':active_banner_themes,
 
                }
-    
-    return render(request, 'pages/pages/account/checkout.html',context)
-
+    template_path = 'pages/pages/account/checkout.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def payment_complete(request):
     body = json.loads(request.body)
@@ -5641,8 +5709,12 @@ def compare_page(request):
                "wishlist": customer_wishlist, "wishlist_products": wishlist_products, "totalWishlistProducts": totalWishlistProducts,
                "compare": customer_compare, "compare_products": compare_products,
                 'active_banner_themes':active_banner_themes,
-}
-    return render(request, 'pages/pages/compare/compare.html', context)
+    }
+    
+    template_path = 'pages/pages/compare/compare.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def compare_page2(request):
     wishlist_products = None
@@ -5682,9 +5754,11 @@ def compare_page2(request):
                "compare": customer_compare, "compare_products": compare_products,
                 'active_banner_themes':active_banner_themes,
     }
-    return render(request, 'pages/pages/compare/compare-2.html',context)
-
-
+    
+    template_path = 'pages/pages/compare/compare-2.html'
+    response1 = render(request, template_path, context)
+    response = manage_currency(request, response1)
+    return response
 
 def compare_products(request, id):
     if request.user.is_authenticated:
@@ -5859,6 +5933,8 @@ def manage_currency(request,response):
 #             response.delete_cookie(cookie)
 #             request.session['cookies_deleted'] = True
 #     return response
+
+
         
     
     

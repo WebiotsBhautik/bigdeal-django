@@ -149,24 +149,24 @@
                                  back <i class="fa fa-angle-right ps-2"></i>
                               </div>
                            </li>
-                           <li><a href="category-page(left-sidebar).html">western ware</a></li>
-                           <li><a href="category-page(left-sidebar).html">TV, Appliances</a></li>
-                           <li><a href="category-page(left-sidebar).html">Pets Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Car, Motorbike</a></li>
-                           <li><a href="category-page(left-sidebar).html">Industrial Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Beauty, Health Products</a></li>
-                           <li><a href="category-page(left-sidebar).html">Grocery Products </a></li>
-                           <li><a href="category-page(left-sidebar).html">Sports</a></li>
-                           <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                           <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                           <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                           <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                           <li><a href="javascript:void(0)">western ware</a></li>
+                           <li><a href="javascript:void(0)">TV, Appliances</a></li>
+                           <li><a href="javascript:void(0)">Pets Products</a></li>
+                           <li><a href="javascript:void(0)">Car, Motorbike</a></li>
+                           <li><a href="javascript:void(0)">Industrial Products</a></li>
+                           <li><a href="javascript:void(0)">Beauty, Health Products</a></li>
+                           <li><a href="javascript:void(0)">Grocery Products </a></li>
+                           <li><a href="javascript:void(0)">Sports</a></li>
+                           <li><a href="javascript:void(0)">Bags, Luggage</a></li>
+                           <li><a href="javascript:void(0)">Movies, Music </a></li>
+                           <li><a href="javascript:void(0)">Video Games</a></li>
+                           <li><a href="javascript:void(0)">Toys, Baby Products</a></li>
                            <li class="mor-slide-open">
                               <ul>
-                                 <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                                 <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                                 <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                                 <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                                 <li><a href="javascript:void(0)">Bags, Luggage</a></li>
+                                 <li><a href="javascript:void(0)">Movies, Music </a></li>
+                                 <li><a href="javascript:void(0)">Video Games</a></li>
+                                 <li><a href="javascript:void(0)">Toys, Baby Products</a></li>
                               </ul>
                            </li>
                            <li>
@@ -420,7 +420,6 @@
 </header>  
 <!--header end-->
 
-{% comment %} {% include 'pages/shop/shop-header.html' %} {% endcomment %}
 
 
 <!--slider start-->
@@ -689,13 +688,6 @@
                               <div class="media-contant">
                                  <div>
                                     <div class="product-detail">
-                                       {% comment %} <ul class="rating">
-                                          <li><i class="fa fa-star" ></i></li>
-                                          <li><i class="fa fa-star" ></i></li>
-                                          <li><i class="fa fa-star" ></i></li>
-                                          <li><i class="fa fa-star" ></i></li>
-                                          <li><i class="fa fa-star-o" ></i></li>
-                                       </ul> {% endcomment %}
                                        <div class="rating-star">
                                           {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
                                           {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
@@ -822,12 +814,6 @@
                                        </a>
                                        <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h6>
                                     </div>
-                                    {% comment %} <div class="cart-info">
-                                       <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button>
-                                       <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                       <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                       <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div> {% endcomment %}
                                     <div class="cart-info">
                                        <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                          <i data-feather="shopping-cart"></i> 
@@ -1817,7 +1803,7 @@
 <!--box category end-->
 
 <!--title start-->
-<div class="title1 section-my-space">
+<div class="title1 section-my-space text-center">
    <h4>Special Products</h4>
 </div>
 <!--title end-->
@@ -2329,7 +2315,7 @@
                      <i class="fa fa-shopping-cart"></i> 
                      add to cart
                   </a>
-                  <a href="product-page(left-sidebar).html" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                  <a href="javascript:void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                      view detail
                   </a>
                  </div>
@@ -2343,94 +2329,6 @@
  </div>
  <!-- Quick-view modal popup end-->
  
- <!-- edit product modal start-->
- {% comment %} {% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-       <div class="modal-content ">
-          <div class="modal-body">
-             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             <div class="pro-group">
-                <div class="product-img">
-                   <div class="media">
-                      <div class="img-wraper">
-                         <a href="product-page(left-sidebar).html">
-                            <img src="{% static 'assets/images/layout-2/product/1.jpg' %}" alt="">
-                         </a>
-                      </div>
-                      <div class="media-body">
-                         <a href="product-page(left-sidebar).html">
-                            <h3>redmi not 3</h3>
-                         </a>
-                         <h6>$80<span>$120</span></h6>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="pro-group">
-                <h6 class="product-title">Select Size</h6>
-                <div class="size-box">
-                   <ul>
-                      <li ><a href="javascript:void(0)">s</a></li>
-                      <li><a href="javascript:void(0)">m</a></li>
-                      <li><a href="javascript:void(0)">l</a></li>
-                      <li><a href="javascript:void(0)">xl</a></li>
-                      <li><a href="javascript:void(0)">2xl</a></li>
-                   </ul>
-                </div>
-             </div>
-             <div class="pro-group">
-                <h6 class="product-title">Select color</h6>
-                <div class="color-selector inline">
-                   <ul>
-                      <li>
-                         <div class="color-1 active"></div>
-                      </li>
-                      <li>
-                         <div class="color-2"></div>
-                      </li>
-                      <li>
-                         <div class="color-3"></div>
-                      </li>
-                      <li>
-                         <div class="color-4"></div>
-                      </li>
-                      <li>
-                         <div class="color-5"></div>
-                      </li>
-                      <li>
-                         <div class="color-6"></div>
-                      </li>
-                      <li>
-                         <div class="color-7"></div>
-                      </li>
-                   </ul>
-                </div>
-             </div>
-             <div class="pro-group">
-                <h6 class="product-title">Quantity</h6>
-                <div class="qty-box">
-                   <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                   </div>
-                </div>
-             </div>
-             <div class="pro-group mb-0">
-                <div class="modal-btn">
-                   <a href="cart.html" class="btn btn-solid btn-sm">
-                      add to cart
-                   </a>
-                   <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-                      more detail
-                   </a>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
- </div> {% endcomment %}
- <!-- edit product modal end--> 
  
  <!-- Add to cart bar -->
  <div id="cart_side" class="add_to_cart bottom">
@@ -2459,7 +2357,7 @@
                 <img alt="mega" class="me-3" src="{{product.cartProduct.variantProduct.productImageFront}}">
               </a>
               <div class="media-body">
-                <a href="product-page(left-sidebar).html">
+                <a href="javascript:void(0)">
                   <h4>{{product.cartProduct.variantProduct.productName}}</h4>
                 </a>
                 <h6>
@@ -2506,7 +2404,7 @@
             <li>
               <div class="buttons">
                 <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-                <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+                <a href="javascript:void(0)" class="btn btn-solid btn-sm ">checkout</a>
               </div>
             </li>
           </ul>
@@ -2584,143 +2482,6 @@
  </div>
  <!-- Add to cart bar end-->
  
- <!-- wishlistbar bar -->
- {% comment %} <div id="wishlist_side" class="add_to_cart right ">
-    <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-    <div class="cart-inner">
-       <div class="cart_top">
-          <h3>my wishlist</h3>
-          <div class="close-cart">
-             <a href="javascript:void(0)" onclick="closeWishlist()">
-                <i class="fa fa-times" aria-hidden="true"></i>
-             </a>
-          </div>
-       </div>
-       <div class="cart_media">
-          <ul class="cart_product">
-             <li>
-                <div class="media">
-                   <a href="product-page(left-sidebar).html">
-                      <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
-                   </a>
-                   <div class="media-body">
-                      <a href="product-page(left-sidebar).html">
-                         <h4>redmi not 3</h4>
-                      </a>
-                      <h6>
-                         $80.00 <span>$120.00</span>
-                      </h6>
-                      <div class="addit-box">
-                         <div class="qty-box">
-                            <div class="input-group">
-                               <button class="qty-minus"></button>
-                               <input class="qty-adj form-control" type="number" value="1"/>
-                               <button class="qty-plus"></button>
-                            </div>
-                         </div>
-                         <div class="pro-add">
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                               <i data-feather="edit"></i>
-                            </a>
-                            <a href="javascript:void(0)">
-                               <i  data-feather="trash-2"></i>
-                            </a>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </li>
-             <li>
-                <div class="media">
-                   <a href="product-page(left-sidebar).html">
-                      <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-                   </a>
-                   <div class="media-body">
-                      <a href="product-page(left-sidebar).html">
-                         <h4>Double Door Refrigerator</h4>
-                      </a>
-                      <h6>
-                         $80.00 <span>$120.00</span>
-                      </h6>
-                      <div class="addit-box">
-                         <div class="qty-box">
-                            <div class="input-group">
-                               <button class="qty-minus"></button>
-                               <input class="qty-adj form-control" type="number" value="1"/>
-                               <button class="qty-plus"></button>
-                            </div>
-                         </div>
-                         <div class="pro-add">
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                               <i data-feather="edit"></i>
-                            </a>
-                            <a href="javascript:void(0)">
-                               <i  data-feather="trash-2"></i>
-                            </a>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </li>
-             <li>
-                <div class="media">
-                   <a href="product-page(left-sidebar).html">
-                      <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-                   </a>
-                   <div class="media-body">
-                      <a href="product-page(left-sidebar).html">
-                         <h4>woman hande bag</h4>
-                      </a>
-                      <h6>
-                         $80.00 <span>$120.00</span>
-                      </h6>
-                      <div class="addit-box">
-                         <div class="qty-box">
-                            <div class="input-group">
-                               <button class="qty-minus"></button>
-                               <input class="qty-adj form-control" type="number" value="1"/>
-                               <button class="qty-plus"></button>
-                            </div>
-                         </div>
-                         <div class="pro-add">
-                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                               <i data-feather="edit"></i>
-                            </a>
-                            <a href="javascript:void(0)">
-                               <i  data-feather="trash-2"></i>
-                            </a>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </li>
-          </ul>
-          <ul class="cart_total">
-             <li>
-                subtotal : <span>$1050.00</span>
-             </li>
-             <li>
-                shpping <span>free</span>
-             </li>
-             <li>
-                taxes <span>$0.00</span>
-             </li>
-             <li>
-                <div class="total">
-                   total<span>$1050.00</span>
-                </div>
-             </li>
-             <li>
-                <div class="buttons">
-                   <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-                </div>
-             </li>
-          </ul>
-       </div>
-    </div>
- </div> {% endcomment %}
- <!-- wishlistbar bar end-->
- 
  <!-- My account bar start-->
  <div id="myAccount" class="add_to_cart right account-bar">
     <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
@@ -2735,7 +2496,6 @@
       </div>
       {% if request.user.is_authenticated %}
       <li>
-      <!-- <a href="log-in.html" class="d-block">Profile</a> -->
          <h6 class="d-block">
             Welcome, {{request.user.username}}
          </h6>
