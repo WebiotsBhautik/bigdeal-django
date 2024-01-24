@@ -157,67 +157,7 @@
                     </li>
                   </ul>
                 </div>
-                {% comment %} <div class="pro-group">
-                  <h6 class="product-title">product infomation</h6>
-                  <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-                </div>
-                <div class="pro-group pb-0">
-                  <h6 class="product-title size-text">select size<span>
-                  <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                  <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="size-box">
-                    <ul>
-                      <li ><a href="javascript:void(0)">s</a></li>
-                      <li><a href="javascript:void(0)">m</a></li>
-                      <li><a href="javascript:void(0)">l</a></li>
-                      <li><a href="javascript:void(0)">xl</a></li>
-                      <li><a href="javascript:void(0)">2xl</a></li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">color</h6>
-                  <div class="color-selector inline">
-                    <ul>
-                      <li>
-                        <div class="color-1 active"></div>
-                      </li>
-                      <li>
-                        <div class="color-2"></div>
-                      </li>
-                      <li>
-                        <div class="color-3"></div>
-                      </li>
-                      <li>
-                        <div class="color-4"></div>
-                      </li>
-                      <li>
-                        <div class="color-5"></div>
-                      </li>
-                      <li>
-                        <div class="color-6"></div>
-                      </li>
-                      <li>
-                        <div class="color-7"></div>
-                      </li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">quantity</h6>
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1">
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div> {% endcomment %}
+                
                   <div class="product-btns" id="productBtnDiv">
                    <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                       <i class="fa fa-shopping-cart"></i> 
@@ -325,7 +265,6 @@
             <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
           </li>
           {% else %}
-          {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
           {% for product in cart_products %}
 
           <li>

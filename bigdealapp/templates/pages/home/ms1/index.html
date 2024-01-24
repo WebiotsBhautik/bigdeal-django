@@ -71,17 +71,18 @@
               <div class="slider-img">
                 <ul class="layout1-slide-1">
                   <li id="img-1"><img src="{{banner.bannerImage}}" class="img-fluid" alt="slider"></li>
-                  <li id="img-2" class="slide-center"><img src="{{banner.bannerImage}}" class="img-fluid" alt="slider"></li>
+                  <li id="img-2" class="slide-center"><img src="{{banner.bannerImageTwo}}" class="img-fluid" alt="slider"></li>
                 </ul>
               </div>
               <div class="slider-banner-contain">
                 <div>
                   <h1>{{banner.bannerProduct.variantProduct.productName}}<span>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</span></h1>
                   <h4>{{banner.titleOne}}</h4> 
-                  <h2>{% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                  <h2>{{banner.titleTwo}}</h2>
+                  {% comment %} <h2>{% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                     {% else %}
                     <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
-                    {% endif %}</h2>
+                    {% endif %}</h2> {% endcomment %}
                     {% comment %} <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal"> {% endcomment %}
                     <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
                       Shop Now
@@ -112,8 +113,8 @@
           </div>
           <div class="collection-banner-contain">
             <div>
-              <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-              <h4>{{banner.titleOne}}</h4>
+              <h3>{{banner.titleOne}}</h3>
+              <h4>{{banner.titleTwo}}</h4>
               <div class="shop">
                 <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
@@ -316,7 +317,7 @@
                 {% else %}
                 <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
                 {% endif %}</h3>
-              <h4>{{banner.bannerProduct.variantProduct.productName}}<span>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</span></h4>
+              <h4>{{banner.titleOne}}<span>{{banner.titleTwo}}</span></h4>
               <div class="shop">
                 <a class="btn btn-normal" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
@@ -366,20 +367,90 @@
     <div class="row">
       <div class="col">
         <div class="slide-6 no-arrow">
-          {% for category in subcategories %}
           <div>
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{{category.categoryImage}}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
-                {{category.categoryName}}
+                flower
               </a>
             </div>
           </div>
-          {% endfor %}
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                furniture
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                bag
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                tools
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                grocery
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                camera
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="category-contain">
+              <div class="img-wrapper">
+                <a href="{% url 'shop_left_sidebar' %}">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid">
+                </a>
+              </div>
+              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                shoes
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -492,9 +563,9 @@
           <div class="tab-content-cls">
             <div id="tab-7" class="tab-content active default ">
               <div class="media-slide-5 product-m no-arrow">
-                {% for product in layout1_products  %}
                 <div>
                   <div class="media-banner media-banner-1 border-0">
+                    {% for product in layout1_products|slice:"0:3"  %}
                     <div class="media-banner-box">
                       <div class="media">
                         <a href="{% url 'left_slidebar' product.id %}">
@@ -572,9 +643,175 @@
                         </div>
                       </div>
                     </div>
+                    {% endfor %}
                   </div>
                 </div>
-                {% endfor %}
+                <div>
+                  <div class="media-banner media-banner-1 border-0">
+                      {% for product in layout1_products|slice:"3:6"  %}
+                      <div class="media-banner-box">
+                        <div class="media">
+                          <a href="{% url 'left_slidebar' product.id %}">
+                            <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                          </a>
+                          <div class="media-body">
+                            <div class="media-contant">
+                              <div>
+                                <div class="product-detail">
+                                  <div class="rating-star">
+                                    {% if product.productFinalRating|to_int < 5|to_int %}
+                                    {% for x in product.productFinalRating|times %}
+                                    <li>
+                                      <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                    </li>
+                                    {% endfor %}
+              
+                                    {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                    {% with number3=number1|sub:number2 %}
+              
+                                    {% for x in number3|times %}
+                                    <li>
+                                      <i class="fa fa-star"></i>
+                                    </li>
+                                    {% endfor %}
+              
+                                    {% endwith %}
+                                    {% endwith %}
+              
+                                    
+                                    {% else %}
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    {% endif %}
+                                  </div> 
+                                  <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                                  <h6>
+                                    {% if product.productType == "Simple" %}
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                    {% else %}
+                                    {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                       <span>
+                                       {% if product.productType == "Simple" %} 
+                                       {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                       {% else %} 
+                                       {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                       {% endif %}
+                                     </span>
+                                 </h6>
+                                </div>
+                                <div class="cart-info">
+                                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                    <i data-feather="shopping-cart"></i> 
+                                  </a>
+                                  <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+                </div>
+                <div>
+                  <div class="media-banner media-banner-1 border-0">
+                      {% for product in layout1_products|slice:"6:9"  %}
+                      <div class="media-banner-box">
+                        <div class="media">
+                          <a href="{% url 'left_slidebar' product.id %}">
+                            <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                          </a>
+                          <div class="media-body">
+                            <div class="media-contant">
+                              <div>
+                                <div class="product-detail">
+                                  <div class="rating-star">
+                                    {% if product.productFinalRating|to_int < 5|to_int %}
+                                    {% for x in product.productFinalRating|times %}
+                                    <li>
+                                      <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                    </li>
+                                    {% endfor %}
+              
+                                    {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                    {% with number3=number1|sub:number2 %}
+              
+                                    {% for x in number3|times %}
+                                    <li>
+                                      <i class="fa fa-star"></i>
+                                    </li>
+                                    {% endfor %}
+              
+                                    {% endwith %}
+                                    {% endwith %}
+              
+                                    
+                                    {% else %}
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    <li>
+                                      <i class="fa fa-star theme-color"></i>
+                                    </li>
+                                    {% endif %}
+                                  </div> 
+                                  <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                                  <h6>
+                                    {% if product.productType == "Simple" %}
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                    {% else %}
+                                    {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                       <span>
+                                       {% if product.productType == "Simple" %} 
+                                       {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                       {% else %} 
+                                       {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                       {% endif %}
+                                     </span>
+                                 </h6>
+                                </div>
+                                <div class="cart-info">
+                                  <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                    <i data-feather="shopping-cart"></i> 
+                                  </a>
+                                  <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -598,8 +835,8 @@
           </div>
           <div class="collection-banner-contain ">
             <div>
-              <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-              <h4>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h4>
+              <h3>{{banner.titleOne}}</h3>
+              <h4>{{banner.titleTwo}}</h4>
               <div class="shop">
                 <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
                   shop now
@@ -656,7 +893,7 @@
                     <div>
                       <div>
                         <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}">
-                          <h5>{{banner.bannerProduct.variantProduct.productName}} </h5>
+                          <h5>{{banner.titleOne}} </h5>
                         </a>
                         <div class="rating-star">
                           {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
@@ -698,7 +935,7 @@
                           {% endif %}
                         </div> 
                         <p>
-                          {{banner.bannerProduct.variantProduct.productDescription|safe}}
+                          {{banner.bannerDescription|safe}}
                         </p>
                         <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
                           <span>
@@ -740,7 +977,7 @@
                 </div>
               </div>
                 {% if layout1_products  %}
-                {% for product in layout1_products %}              
+                {% for product in layout1_products|slice:"0:3"  %}
                 <div class="media-banner-box">
                   <div class="media">
                     <a href="{% url 'left_slidebar' product.id %}">
@@ -822,8 +1059,208 @@
                 {% else %}
                 <h2 style="text-align:center;"> No products Yet! </h2>
                 {% endif %}
+                <div class="media-banner-box">
+                  <div class="media-view">
+                    <h5>View More</h5>
+                  </div>
+                </div>
             </div>
           </div>
+          <div>
+            <div class="media-banner border-0">
+              <div class="media-banner-box">
+                <div class="media-heading">
+                  <h5>New Products</h5>
+                </div>
+              </div>
+                {% if layout1_products  %}
+                {% for product in layout1_products|slice:"3:6"  %}
+                <div class="media-banner-box">
+                  <div class="media">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                    </a>
+                    <div class="media-body">
+                      <div class="media-contant">
+                        <div>
+                          <div class="product-detail">
+                            <div class="rating-star">
+                              {% if product.productFinalRating|to_int < 5|to_int %}
+                              {% for x in product.productFinalRating|times %}
+                              <li>
+                                <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                              </li>
+                              {% endfor %}
+        
+                              {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                              {% with number3=number1|sub:number2 %}
+        
+                              {% for x in number3|times %}
+                              <li>
+                                <i class="fa fa-star"></i>
+                              </li>
+                              {% endfor %}
+        
+                              {% endwith %}
+                              {% endwith %}
+        
+                              
+                              {% else %}
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              {% endif %}
+                            </div> 
+                            <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                            <h6>{% if product.productType == "Simple" %}
+                              {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                              {% else %}
+                              {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                              {% endif %} 
+                              <span> {% if product.productType == "Simple" %} 
+                                {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                {% else %} 
+                                {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                {% endif %}  
+                              </span>
+                            </h6>
+                          </div>
+                          <div class="cart-info">
+                            <button  onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart"><i  data-feather="shopping-cart"></i></button>
+                            <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
+                              <i  data-feather="heart"></i>
+                            </a>
+                            <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                              <i data-feather="eye"></i>
+                            </a>
+                            <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h2 style="text-align:center;"> No products Yet! </h2>
+                {% endif %}
+                <div class="media-banner-box">
+                  <div class="media-view">
+                    <h5>View More</h5>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div>
+            <div class="media-banner border-0">
+              <div class="media-banner-box">
+                <div class="media-heading">
+                  <h5>New Products</h5>
+                </div>
+              </div>
+                {% if layout1_products  %}
+                {% for product in layout1_products|slice:"6:9"  %}
+                <div class="media-banner-box">
+                  <div class="media">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                    </a>
+                    <div class="media-body">
+                      <div class="media-contant">
+                        <div>
+                          <div class="product-detail">
+                            <div class="rating-star">
+                              {% if product.productFinalRating|to_int < 5|to_int %}
+                              {% for x in product.productFinalRating|times %}
+                              <li>
+                                <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                              </li>
+                              {% endfor %}
+        
+                              {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                              {% with number3=number1|sub:number2 %}
+        
+                              {% for x in number3|times %}
+                              <li>
+                                <i class="fa fa-star"></i>
+                              </li>
+                              {% endfor %}
+        
+                              {% endwith %}
+                              {% endwith %}
+        
+                              
+                              {% else %}
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-star theme-color"></i>
+                              </li>
+                              {% endif %}
+                            </div> 
+                            <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                            <h6>{% if product.productType == "Simple" %}
+                              {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                              {% else %}
+                              {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                              {% endif %} 
+                              <span> {% if product.productType == "Simple" %} 
+                                {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                {% else %} 
+                                {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                {% endif %}  
+                              </span>
+                            </h6>
+                          </div>
+                          <div class="cart-info">
+                            <button  onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart"><i  data-feather="shopping-cart"></i></button>
+                            <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
+                              <i  data-feather="heart"></i>
+                            </a>
+                            <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                              <i data-feather="eye"></i>
+                            </a>
+                            <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h2 style="text-align:center;"> No products Yet! </h2>
+                {% endif %}
+                <div class="media-banner-box">
+                  <div class="media-view">
+                    <h5>View More</h5>
+                  </div>
+                </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

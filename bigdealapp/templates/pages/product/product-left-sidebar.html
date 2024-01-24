@@ -44,7 +44,7 @@
                   {% for product in last_added_products|slice:"6:9" %}
                   <div class="media-banner-box">
                     <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
+                      <a href="javascript:void(0)" tabindex="0">
                         <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
                       </a>
                       <div class="media-body">
@@ -90,7 +90,7 @@
                                 </li>
                                 {% endif %}
                               </div> 
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                              <a href="javascript:void(0)" tabindex="0"><p>{{product.productName}}</p></a>
                               <h6>
                                 {% if product.productType == "Simple" %}
                                 {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -127,7 +127,7 @@
                   {% for product in last_added_products|slice:"3:6" %}
                   <div class="media-banner-box">
                     <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
+                      <a href="javascript:void(0)" tabindex="0">
                         <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
                       </a>
                       <div class="media-body">
@@ -141,7 +141,7 @@
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star-o"></i></li>
                               </ul>
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                              <a href="javascript:void(0)" tabindex="0"><p>{{product.productName}}</p></a>
                               <h6>
                                 {% if product.productType == "Simple" %}
                                 {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -178,7 +178,7 @@
                   {% for product in last_added_products|slice:"0:3" %}
                   <div class="media-banner-box">
                     <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
+                      <a href="javascript:void(0)" tabindex="0">
                         <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
                       </a>
                       <div class="media-body">
@@ -192,7 +192,7 @@
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star-o"></i></li>
                               </ul>
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                              <a href="javascript:void(0)" tabindex="0"><p>{{product.productName}}</p></a>
                               <h6>
                                 {% if product.productType == "Simple" %}
                                 {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
