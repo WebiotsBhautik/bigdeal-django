@@ -6719,10 +6719,6 @@ ul.sosiyal {
 
 .megastore-slide .mega-slide-block > div:first-child {
   padding-left: 275px; }
-  .megastore-slide .mega-slide-block > div:first-child > div > div:nth-child(n + 2) {
-    padding-top: 15px; }
-  .megastore-slide .mega-slide-block > div:first-child > div > div:last-child {
-    padding-left: 0; }
 
 .megastore-slide .mega-slide-block > div:nth-child(n + 2) {
   padding-left: 0; }

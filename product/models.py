@@ -273,6 +273,15 @@ class Product(models.Model):
             return True
         return False
     
+    @property
+    def availableStock(self):
+        products=ProductVariant.objects.filter(variantProduct=self)
+        availableStack=0
+        for product in products:
+            availableStack+=int(product.productVariantQuantity)
+            
+        return availableStack
+    
     
     
     @property

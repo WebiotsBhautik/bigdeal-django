@@ -294,12 +294,34 @@
                       <h5 class="mb-0  text-white title-font">Shop by category</h5> </nav>
                     <div class="collapse show nav-desk" id="navbarToggleExternalContent">
                       <ul class="nav-cat title-font">
-                        {% for category in subcategories %}
-
-                        <li><a href="{% url 'shop_left_sidebar' %}">{{category.categoryName}}</a></li>
-                       
-                        {% endfor %}
-                        <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a> </li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">speakers</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Garden & Outdoors</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Home Furnishing</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">DSLR Cameras</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Refrigerators</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Bags & Luggage</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Children's Books </a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Western Wear</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Travel Accessories</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Birthday Gift Cards</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Dog supplies</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Gaming Consoles</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Kitchen & Dining</a></li>
+                        <li><a href="category-page(left-s idebar).html">Car Electronics</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Washing Machines</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Echo Plus</a></li>
+                        <li>
+                          <ul class="mor-slide-open">
+                            <li><a href="{% url 'shop_left_sidebar' %}">Gaming Consoles</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Kitchen & Dining</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Car Electronics</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Washing Machines</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Echo Plus</a></li>
+                          </ul>
+                        </li>
+                        <li> <a class="mor-slide-click">mor category <i
+                                                            class="fa fa-angle-down pro-down"></i><i
+                                                            class="fa fa-angle-up pro-up"></i></a> </li>
                       </ul>
                     </div>
                   </div>
@@ -312,10 +334,10 @@
               </div>
               <div class="input-block">
                   <div class="input-box">
-                    <form class="big-deal-form">
+                    <form class="big-deal-form m-0">
                       <div class="input-group ">
                         <span class="search"><i class="fa fa-search"></i></span>                       
-                        <input type="text" class="form-control" id="search-input" placeholder="Search a Product" autofocus>
+                        <input type="text" class="form-control" placeholder="Search a Product" autofocus>
                         <div class="input-group-prepend">
                           <select>
                             <option>All Category</option>
@@ -473,9 +495,9 @@
                 <div class="slider-banner-contain">
                   <div>
                     <h5>{{banner.titleOne}}</h5>
-                    <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-                    <h1>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h1>
-                    <h2>{{banner.titleOne}} only {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2> <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
+                    <h3>{{banner.titleTwo}}</h3>
+                    <h1>{{banner.titleThree}}</h1>
+                    <h2>{{banner.titleFour}} only {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2> <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
                                             shop now
                                         </a> </div>
                 </div>
@@ -501,8 +523,8 @@
             <div class="collection-img" id="img-2"> <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner"> </div>
             <div class="collection-banner-contain">
               <div>
-                <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-                <h4>{{banner.titleOne}}</h4>
+                <h3>{{banner.titleOne}}</h3>
+                <h4>{{banner.titleTwo}}</h4>
                 <div class="shop"> <a href="{% url 'shop_left_sidebar' %}">shop now<i class="fa fa-arrow-circle-right"></i></a> </div>
               </div>
             </div>
@@ -837,12 +859,12 @@
                         </div>
                         <div class="new-label3">
                           {% if product.is_past_due %}
-                          <span class="label label-black">Old</span>
+                          <div>Old</div>
                           {% else %}
-                          <span class="label label-black">New</span>
+                          <div>New</div>
                           {% endif %}
                         </div>
-                        {% comment %} <div class="on-sale3">{{product.productDescription|safe}}</div> {% endcomment %}
+                        <div class="on-sale3">{{product.productDescription|safe}}</div>
                       </div>
                       <div class="product-detail detail-center detail-inverse">
                         <div class="detail-title">
@@ -1007,7 +1029,7 @@
             <div class="collection-banner-contain">
               <div>
                 <h3>{{banner.titleOne}}</h3>
-                <h5>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h5>
+                <h5>{{banner.titleTwo}}</h5>
                 <div class="shop"> <a href="{% url 'shop_left_sidebar' %}">
                                         shop now
                                         <i class="fa fa-arrow-circle-right"></i>
@@ -1134,21 +1156,70 @@
       <div class="row">
         <div class="col">
           <div class="slide-6 no-arrow">
-            {% for category in subcategories %}
             <div>
               <div class="category-contain">
                 <div class="img-wrapper">
-                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{{category.categoryImage}}" alt="category  " class="img-fluid"> </a>
+                  <a href="{% url 'shop_left_sidebar' %}">
+                    <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid"> 
+                  </a>
                 </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
-                {{category.categoryName}}
+                flower
               </a> </div>
             </div>
-            {% endfor %}
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                furniture
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                bag
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                tools
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                grocery
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                camera
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                shoes
+              </a> </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  
   <!--rounded category end-->
 
   <!--title start-->

@@ -1083,12 +1083,12 @@
                               <div class="product-imgbox">
                                  <div class="product-front">
                                     <a href="{% url 'left_slidebar' product.id %}">
-                                       <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                                       <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                                     </a>
                                  </div>
                                  <div class="product-back">
                                     <a href="{% url 'left_slidebar' product.id %}">
-                                       <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                                       <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                                     </a>
                                  </div>
                                  <div class="product-icon">
@@ -1108,9 +1108,9 @@
                                   </div>
                                  <div class="new-label">
                                     {% if product.is_past_due %}
-                                    <span class="label label-black">Old</span>
+                                    <div>Old</div>
                                     {% else %}
-                                    <span class="label label-black">New</span>
+                                    <div>New</div>
                                     {% endif %}
                                  </div>
                                  <div class="on-sale">
@@ -1233,26 +1233,96 @@
 <!--rounded category start-->
 <section class="rounded-category">
    <div class="container">
-      <div class="row">
-         <div class="col">
-            <div class="slide-6 no-arrow">
-               {% for category in subcategories %}
-               <div>
-                  <div class="category-contain">
-                     <div class="img-wrapper">
-                        <a href="{% url 'shop_left_sidebar' %}">
-                           <img src="{{category.categoryImage}}" alt="category  " class="img-fluid">
-                        </a>
-                     </div>
-                     <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
-                        {{category.categoryName}}
-                     </a>
-                  </div>
+     <div class="row">
+       <div class="col">
+         <div class="slide-6 no-arrow">
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid">
+                 </a>
                </div>
-               {% endfor %}
-            </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 flower
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 furniture
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 bag
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 tools
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 grocery
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 camera
+               </a>
+             </div>
+           </div>
+           <div>
+             <div class="category-contain">
+               <div class="img-wrapper">
+                 <a href="{% url 'shop_left_sidebar' %}">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid">
+                 </a>
+               </div>
+               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                 shoes
+               </a>
+             </div>
+           </div>
          </div>
-      </div>
+       </div>
+     </div>
    </div>
 </section>
 <!--rounded category end-->
@@ -1858,9 +1928,9 @@
                          </div>
                         <div class="new-label">
                            {% if product.is_past_due %}
-                           <span class="label label-black">Old</span>
+                           <div>Old</div>
                            {% else %}
-                           <span class="label label-black">New</span>
+                           <div>New</div>
                            {% endif %}
                         </div>
                         <div class="on-sale">
