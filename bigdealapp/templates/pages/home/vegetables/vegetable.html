@@ -311,19 +311,44 @@
                               </button>
                               <h5 class="mb-0 ms-3 text-white title-font">Shop by category</h5>
                            </nav>
-                           <ul class="nav-cat title-font">
                            <div class="collapse show nav-desk" id="navbarToggleExternalContent">
+                              <ul class="nav-cat title-font">
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/1.jpg' %}" alt="catergory-product">Avacado</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/2.jpg' %}" alt="catergory-product"> chili</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/3.jpg' %}" alt="catergory-product"> Capsicums</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/4.jpg' %}" alt="catergory-product">Chilli peppers</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/5.jpg' %}" alt="catergory-product"> Chokos</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/6.jpg' %}" alt="catergory-product"> Cucumber</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/7.jpg' %}" alt="catergory-product">Eggplant </a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/8.jpg' %}" alt="catergory-product"> Melons</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/9.jpg' %}" alt="catergory-product"> Okra</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/10.jpg' %}" alt="catergory-product"> Pumpkins </a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/11.jpg' %}" alt="catergory-product">Tomatoes</a></li>
+                                 <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/12.jpg' %}" alt="catergory-product">Broccoli</a></li>
+                                 <li class="mor-slide-open">
+                                    <ul>
+                                       <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/13.jpg' %}" alt="catergory-product"> Cauliflower</a></li>
+                                       <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/14.jpg' %}" alt="catergory-product"> Mushrooms</a></li>
+                                       <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/15.jpg' %}" alt="catergory-product"> Beetroot </a></li>
+                                       <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/16.jpg' %}" alt="catergory-product">Carrots</a></li>
+                                       <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-6/header-category/17.jpg' %}" alt="catergory-product"> Celeriac</a></li>
+                                    </ul>
+                                 </li>
+                                 <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
+                              </ul>
+                           {% comment %} <ul class="nav-cat title-font">
                                  {% for category in subcategories %}
                                  <li><a href="{% url 'shop_left_sidebar' %}"><img src="{{category.categoryImage}}" alt="catergory-product">{{category.categoryName}}</a></li>
                                  {% endfor %}
                                  <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
-                              </ul>
+                           </ul> {% endcomment %}
                            </div>
+
                         </div>
                      </div>
                      <div class="input-block">
                         <div class="input-box">
-                           <form class="big-deal-form">
+                           <form class="big-deal-form m-0">
                               <div class="input-group ">
                                  <span class="search"><i class="fa fa-search"></i></span>
                                  <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >
@@ -419,23 +444,24 @@
          <div class="col-xl-8 col-lg-9 offset-xl-2 px-abjust">
             <div class="slide-1 no-arrow ">
                <div class="slide-1 no-arrow ">
-                  {% for banner in allbanners  %}
-                  {% if banner.bannerType|to_str == 'Slider' %}
+                  {% comment %} {% for banner in allbanners  %} {% endcomment %}
+                  {% comment %} {% if banner.bannerType|to_str == 'Slider' %} {% endcomment %}
                   <div>
                      <div class="slider-banner slide-banner-5">
                         <div class="slider-img">
+                           <img src="{% static 'assets/images/layout-6/slider/2.1.jpg' %}" class="bg-img" alt="slider">
                            <ul class="layout6-slide-1">
-                              <li id="img-1"><img src="{{banner.bannerImage}}" class="img-fluid" alt="slider"></li>
+                              <li><img src="{% static 'assets/images/layout-6/slider/2.2.png' %}" class="img-fluid" alt="slider"></li>
+                              <li><img src="{% static 'assets/images/layout-6/slider/2.3.png' %}" class="img-fluid" alt="slider"></li>
+                              <li><img src="{% static 'assets/images/layout-6/slider/2.4.png' %}" class="img-fluid" alt="slider"></li>
+                              <li><img src="{% static 'assets/images/layout-6/slider/2.5.png' %}" class="img-fluid" alt="slider"></li>
                            </ul>
                         </div>
                         <div class="slider-banner-contain">
                            <div >
-                              <h5>save {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
-                                 {% else %}
-                                 <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
-                                 {% endif %} </h5>
+                              <h5>save 30%</h5>
                               <h3>@ lowest prices</h3>
-                              <h1>{{banner.titleOne}}</h1>
+                              <h1>fresh vegetables </h1>
                               <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">
                                  shop now
                               </a>
@@ -443,8 +469,27 @@
                         </div>
                      </div>
                   </div> 
-                  {% endif %}
-                  {% endfor %}
+                  <div>
+                     <div class="slider-banner slide-banner-5">
+                        <div class="slider-img">
+                           <ul class="layout6-slide-1">
+                              <li id="img-1"><img src="{% static 'assets/images/layout-6/slider/1.1.png' %}" class="img-fluid" alt="slider"></li>
+                           </ul>
+                        </div>
+                        <div class="slider-banner-contain">
+                           <div >
+                              <h5>save 30%</h5>
+                              <h3>@ lowest prices</h3>
+                              <h1>fresh vegetables </h1>
+                              <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">
+                                 shop now
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  {% comment %} {% endif %} {% endcomment %}
+                  {% comment %} {% endfor %} {% endcomment %}
                </div>
             </div>
          </div>
@@ -476,8 +521,8 @@
                </div>
                <div class="collection-banner-contain">
                   <div>
-                     <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-                     <h4>{{banner.titleOne}}</h4>
+                     <h3>{{banner.titleOne}}</h3>
+                     <h4>{{banner.titleTwo}}</h4>
                      <div class="shop">
                         <a href="{% url 'shop_left_sidebar' %}">
                            shop now
@@ -777,14 +822,16 @@
                            <span class="label label-black">New</span>
                            {% endif %}
                         </div>
-                        {% if product.productDiscount|to_int == 0 %}
-                        {% else %}
-                        {% if product.productType == "Classified" %}
-                        <span class="new-label1">{{product.product_discount_range}} </span>
-                        {% else %}
-                        <span class="new-label1">{{product.product_discount_range}} </span>
-                        {% endif %}
-                        {% endif %}
+                        <div class="new-label1">
+                           {% if product.productDiscount|to_int == 0 %}
+                           {% else %}
+                           {% if product.productType == "Classified" %}
+                           {{product.product_discount_range}} 
+                           {% else %}
+                           {{product.product_discount_range}} 
+                           {% endif %}
+                           {% endif %}
+                        </div>
                      </div>
                      <div class="product-detail detail-center1">
                         <div class="rating-star">
@@ -890,7 +937,7 @@
                            </div>
                            <div class="masonary-banner-contant p-center">
                               <div>
-                                 <h5>{{first_banner.titleone}}</h5>
+                                 <h5>{{first_banner.titleOne}}</h5>
                                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>
@@ -906,7 +953,7 @@
                            </div>
                            <div class="masonary-banner-contant p-center">
                               <div>
-                                 <h5>{{second_banner.bannerImage}}</h5>
+                                 <h5>{{second_banner.titleOne}}</h5>
                                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">shop now</a>
                               </div>
                            </div>

@@ -312,18 +312,44 @@
                                   <h5 class="mb-0 ms-3 text-white title-font">Shop by category</h5>
                                 </nav>
                                 <div class="collapse hide nav-desk" id="navbarToggleExternalContent">
-                                  <ul class="nav-cat title-font">
+                                 {% comment %}  <ul class="nav-cat title-font">
                                     {% for category in subcategories %}
                                       <li><a href="{% url 'shop_left_sidebar' %}"> <img src="{{category.categoryImage}}" alt="catergory-product"> {{category.categoryName}}</a></li>
                                       {% endfor %} 
                                       <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
+                                  </ul> {% endcomment %}
+                                  <ul class="nav-cat title-font">
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/01.png' %}" alt="category-product"> western ware</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/02.png' %}" alt="category-product"> TV, Appliances</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/03.png' %}" alt="category-product"> Pets Products</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/04.png' %}" alt="category-product"> Car, Motorbike</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/05.png' %}" alt="category-product"> Industrial Products</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/06.png' %}" alt="category-product"> Beauty, Health Products</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/07.png' %}" alt="category-product"> Grocery Products </a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/08.png' %}" alt="category-product"> Sports</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/09.png' %}" alt="category-product"> Bags, Luggage</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/10.png' %}" alt="category-product"> Movies, Music </a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/11.png' %}" alt="category-product"> Video Games</a></li>
+                                    <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/12.png' %}" alt="category-product"> Toys, Baby Products</a></li>
+                                    <li>
+                                      <ul class="mor-slide-open">
+                                        <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/08.png' %}" alt="category-product"> Sports</a></li>
+                                        <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/09.png' %}" alt="category-product"> Bags, Luggage</a></li>
+                                        <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/10.png' %}" alt="category-product"> Movies, Music </a></li>
+                                        <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/11.png' %}" alt="category-product"> Video Games</a></li>
+                                        <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/12.png' %}" alt="category-product"> Toys, Baby Products</a></li>
+                                      </ul>
+                                    </li>
+                                    <li>
+                                      <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a>
+                                    </li>
                                   </ul>
                                 </div>
                             </div>
                           </div>
                           <div class="input-block">
                             <div class="input-box">
-                                <form class="big-deal-form">
+                                <form class="big-deal-form m-0">
                                   <div class="input-group ">                                      
                                       <span class="search"><i class="fa fa-search"></i></span>
                                       <input type="text" class="form-control" placeholder="Search a Product" id="search-input">
@@ -434,7 +460,7 @@
                     <div class="slider-banner-contain">
                         <div>
                             <h3>{{banner.titleOne}}</h3>
-                            <h1>{{banner.bannerProduct.variantProduct.productName}}</h1>
+                            <h1>{{banner.titleTwo}}</h1>
                             <h2>{% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                               {% else %}
                               <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
@@ -585,12 +611,12 @@
                 <div class="col-md-4">
                     <div class="collection-banner-main p-right banner-9">
                         <div class="collection-img">
-                            <img src="{{banner.bannerImage}}" class="img-fluid bg-img  "  alt="banner">
+                            <img src="{{banner.bannerImage}}" class="img-fluid bg-img"  alt="banner">
                         </div>
                         <div class="collection-banner-contain">
                             <div>
                                 <h3>{{banner.titleOne}}</h3>
-                                <h4>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h4>
+                                <h4>{{banner.titleTwo}}</h4>
                                 <div class="shop">
                                     <a href="{% url 'shop_left_sidebar' %}">
                                         shop now
@@ -681,9 +707,9 @@
               <div class="tab-content-cls">
                 <div id="tab-7" class="tab-content active default ">
                   <div class="media-slide-5 product-m no-arrow">
-                    {% for product in electronics_products  %}
                     <div>
                       <div class="media-banner media-banner-1 border-0">
+                        {% for product in electronics_products|slice:"0:3"  %}
                         <div class="media-banner-box">
                           <div class="media">
                             <a href="{% url 'left_slidebar' product.id %}">
@@ -761,1721 +787,177 @@
                             </div>
                           </div>
                         </div>   
+                        {% endfor %}
                       </div>
                     </div>
-                    {% endfor %}
+                    <div>
+                      <div class="media-banner media-banner-1 border-0">
+                        {% for product in electronics_products|slice:"3:6"  %}
+                        <div class="media-banner-box">
+                          <div class="media">
+                            <a href="{% url 'left_slidebar' product.id %}">
+                              <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                            </a>
+                            <div class="media-body">
+                              <div class="media-contant">
+                                <div>
+                                  <div class="product-detail">
+                                    <div class="rating-star">
+                                      {% if product.productFinalRating|to_int < 5|to_int %}
+                                      {% for x in product.productFinalRating|times %}
+                                      <li>
+                                        <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                      </li>
+                                      {% endfor %}
+                
+                                      {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                      {% with number3=number1|sub:number2 %}
+                
+                                      {% for x in number3|times %}
+                                      <li>
+                                        <i class="fa fa-star"></i>
+                                      </li>
+                                      {% endfor %}
+                
+                                      {% endwith %}
+                                      {% endwith %}
+                
+                                      
+                                      {% else %}
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      {% endif %}
+                                    </div> 
+                                  <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                                  <h6>
+                                     {% if product.productType == "Simple" %}
+                                     {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                     {% else %}
+                                     {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                     {% endif %}
+                                      <span>
+                                        {% if product.productType == "Simple" %} 
+                                        {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                        {% else %} 
+                                        {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                        {% endif %}
+                                      </span>
+                                  </h6>
+                                  </div>
+                                  <div class="cart-info">
+                                    <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                      <i data-feather="shopping-cart"></i> 
+                                    </a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>   
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="media-banner media-banner-1 border-0">
+                        {% for product in electronics_products|slice:"6:9"  %}
+                        <div class="media-banner-box">
+                          <div class="media">
+                            <a href="{% url 'left_slidebar' product.id %}">
+                              <img src="{{product.productImageFront}}" class="img-fluid " alt="banner">
+                            </a>
+                            <div class="media-body">
+                              <div class="media-contant">
+                                <div>
+                                  <div class="product-detail">
+                                    <div class="rating-star">
+                                      {% if product.productFinalRating|to_int < 5|to_int %}
+                                      {% for x in product.productFinalRating|times %}
+                                      <li>
+                                        <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                      </li>
+                                      {% endfor %}
+                
+                                      {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                      {% with number3=number1|sub:number2 %}
+                
+                                      {% for x in number3|times %}
+                                      <li>
+                                        <i class="fa fa-star"></i>
+                                      </li>
+                                      {% endfor %}
+                
+                                      {% endwith %}
+                                      {% endwith %}
+                
+                                      
+                                      {% else %}
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      <li>
+                                        <i class="fa fa-star theme-color"></i>
+                                      </li>
+                                      {% endif %}
+                                    </div> 
+                                  <a href="{% url 'left_slidebar' product.id %}"><p>{{product.productName}}</p></a>
+                                  <h6>
+                                     {% if product.productType == "Simple" %}
+                                     {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                     {% else %}
+                                     {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                     {% endif %}
+                                      <span>
+                                        {% if product.productType == "Simple" %} 
+                                        {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                        {% else %} 
+                                        {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                        {% endif %}
+                                      </span>
+                                  </h6>
+                                  </div>
+                                  <div class="cart-info">
+                                    <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                      <i data-feather="shopping-cart"></i> 
+                                    </a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>   
+                        {% endfor %}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div id="tab-8" class="tab-content ">
-                  <div class="media-slide-5 product-m no-arrow">
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>   
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                  </div>
-                </div> 
-                <div id="tab-9" class="tab-content ">
-                  <div class="media-slide-5 product-m no-arrow">
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>   
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                  </div>
-                </div>  
-                <div id="tab-10" class="tab-content ">
-                  <div class="media-slide-5 product-m no-arrow">
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                    <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                    <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>                 
-                      </div>
-                    </div>
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> 
-                    <div>
-                      <div class="media-banner media-banner-1 border-0">
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/2.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>usha table fan</p></a>
-                                  <h6>$52.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/3.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>sumsung galaxy</p></a>
-                                  <h6>$47.05 <span>$55.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>  
-                        <div class="media-banner-box">
-                          <div class="media">
-                            <a href="javascript.void(0)">
-                              <img src="{% static 'assets/images/layout-2/media-banner/1.jpg' %}" class="img-fluid " alt="banner">
-                            </a>
-                            <div class="media-body">
-                              <div class="media-contant">
-                                <div>
-                                  <div class="product-detail">
-                                    <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
-                                  </ul>
-                                  <a href="javascript.void(0)"><p>bajaj rex mixer</p></a>
-                                  <h6>$40.05 <span>$60.21</span></h6>
-                                  </div>
-                                  <div class="cart-info">
-                                        <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" ><i  data-feather="shopping-cart"></i></button>
-                                        <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                        <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>   
-                        
-                      </div>
-                    </div>   
-                  </div>
-                </div>  
               </div>
             </div>
           </div>
@@ -2513,7 +995,7 @@
     <!--deal banner end-->
 
     <!--rounded category start-->
-    <section class="rounded-category rounded-category-inverse">
+    {% comment %} <section class="rounded-category rounded-category-inverse">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -2532,6 +1014,100 @@
                 </div>
               </div>
               {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+    <section class="rounded-category rounded-category-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="slide-6 no-arrow">
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    flower
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    furniture
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    bag
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    tools
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    grocery
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    camera
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="category-contain">
+                  <div class="img-wrapper">
+                    <a href="{% url 'shop_left_sidebar' %}">
+                      <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid">
+                    </a>
+                  </div>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                    shoes
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

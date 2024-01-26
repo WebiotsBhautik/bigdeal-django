@@ -685,7 +685,7 @@ def cosmetic(request):
         fourth_banner = collection_banner[3]
     
     cosmetic_category = ProCategory.objects.get(categoryName='Cosmetic')
-    subcategories = cosmetic_category.get_descendants(include_self=False)
+    subcategories = cosmetic_category.get_descendants(include_self=True)
     
     cosmetic_products = Product.objects.filter(proCategory__in=subcategories)
     

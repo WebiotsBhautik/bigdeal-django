@@ -87,7 +87,6 @@ h6 {
 }
 .form-group {
   margin-bottom: 15px;
-  
 }
 label {
   color: $font-color;
@@ -2313,6 +2312,7 @@ button {
   .blog-contain {
     margin-right: 15px;
     position: relative;
+    height: 100%;
 
     .blog-img {
       overflow: hidden;
@@ -2325,6 +2325,7 @@ button {
     }
 
     .blog-details {
+      height: 100%;
       background-color: $white;
       padding: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
 
@@ -2356,6 +2357,7 @@ button {
     }
 
     .blog-details-2 {
+      height: 100%;
       background-color: $white;
       padding: 20px;
 

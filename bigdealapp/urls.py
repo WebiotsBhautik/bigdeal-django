@@ -173,9 +173,6 @@ urlpatterns = [
     path('order_tracking/<str:id>',views.order_tracking,name='order_tracking'),
 
 
-
-    
-
     
 # Blog Pages Routes
 
