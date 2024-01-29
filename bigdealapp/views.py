@@ -745,7 +745,7 @@ def kids(request):
         
         
     kids_category = ProCategory.objects.get(categoryName='Kids')
-    subcategories = kids_category.get_descendants(include_self=False)
+    subcategories = kids_category.get_descendants(include_self=True)
     
     kids_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -792,9 +792,11 @@ def tools(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName = 'Tools Demo')
     collection_banner = list(banners.filter(bannerType__bannerTypeName='Collection Banner'))
     last_three_collection = collection_banner[-3:]
+    video_banner  = banners.filter(bannerType__bannerTypeName='Video Banner')
+
 
     tools_category = ProCategory.objects.get(categoryName ='Tools')
-    subcategories = tools_category.get_descendants(include_self=False)
+    subcategories = tools_category.get_descendants(include_self=True)
     
     tools_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -823,6 +825,7 @@ def tools(request):
             'blogs':blogs,
             'theme':'Tools',
             'active_banner_themes':active_banner_themes,
+            'video_banner':video_banner,
             **cart_context,
             'cart_products':cart_products,
             'totalCartProducts':totalCartProducts,
@@ -848,11 +851,11 @@ def grocery(request):
     six_banner = {}
     
     if collection_banner.count() >= 5:
-        first_banner = collection_banner[0]
-        second_banner = collection_banner[1]
-        third_banner = collection_banner[2]
-        fourth_banner = collection_banner[3]
-        five_banner = collection_banner[4]
+        col_first_banner = collection_banner[0]
+        col_second_banner = collection_banner[1]
+        col_third_banner = collection_banner[2]
+        col_fourth_banner = collection_banner[3]
+        col_five_banner = collection_banner[4]
         
         
     masonary_banner = banners.filter(bannerType__bannerTypeName='masonary-banner')
@@ -866,7 +869,7 @@ def grocery(request):
     
     
     grocery_category = ProCategory.objects.get(categoryName ='Grocery')
-    subcategories = grocery_category.get_descendants(include_self=False)
+    subcategories = grocery_category.get_descendants(include_self=True)
     
     grocery_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -891,6 +894,11 @@ def grocery(request):
             'grocery_products':grocery_products,
             'subcategories':subcategories,
             'products_by_subcategory':products_by_subcategory,
+            'col_first_banner':col_first_banner,
+            'col_second_banner':col_second_banner,
+            'col_third_banner':col_third_banner,
+            'col_fourth_banner':col_fourth_banner,
+            'col_five_banner':col_five_banner,
             'blogs':blogs,
             'theme':'Grocery',
             'first_banner':first_banner,
@@ -930,7 +938,7 @@ def pets(request):
         fourth_banner = collection_banner[3]
         
     pets_category = ProCategory.objects.get(categoryName ='Pets')
-    subcategories = pets_category.get_descendants(include_self=False)
+    subcategories = pets_category.get_descendants(include_self=True)
     
     pets_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -1015,7 +1023,6 @@ def farming(request):
     cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
 
-        
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
@@ -1061,7 +1068,7 @@ def digital_marketplace(request):
         
     
     digital_category = ProCategory.objects.get(categoryName='Digital-Marketplace')
-    subcategories = digital_category.get_descendants(include_self=False)
+    subcategories = digital_category.get_descendants(include_self=True)
     
     digital_products = Product.objects.filter(proCategory__in=subcategories)
     

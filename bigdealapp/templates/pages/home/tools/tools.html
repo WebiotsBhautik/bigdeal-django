@@ -486,9 +486,9 @@
                         <div class="col-12 p-0 position-relative">
                            <div class="slide-contain">
                               <div>
-                                 <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
-                                 <h3>{{banner.titleOne}}</h3>
-                                 <p>{{banner.bannerProduct.variantProduct.productDescription|safe}}
+                                 <h2>{{banner.titleOne}}</h2>
+                                 <h3>{{banner.titleTwo}}</h3>
+                                 <p>{{banner.bannerDescription|safe}}
                                  </p>
                                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded"> Shop Now </a>
                               </div>
@@ -661,8 +661,8 @@
                         " alt="banner"> </div>
                      <div class="collection-banner-contain ">
                         <div>
-                           <h3>{{banner.bannerProduct.variantProduct.productName}} </h3>
-                           <h4>{{banner.titleOne}}</h4>
+                           <h3>{{banner.titleOne}} </h3>
+                           <h4>{{banner.titleTwo}}</h4>
                            <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm">shop now</a>
                         </div>
                      </div>
@@ -811,9 +811,8 @@
       <!-- media tab end -->
 
       <!-- video section start -->
-      {% for banner in allbanners %}
-      {% if banner.bannerType|to_str == 'Video Banner' %}
-      {% if forloop.last  %}
+      {% for banner in video_banner %}
+      {% if forloop.last %}
       <section class="video-banner">
          <img src="{{banner.bannerImage}}" alt="video-banner" class="img-fluid bg-img">
          <div class="custom-container">
@@ -823,17 +822,14 @@
                      <div>
                         <a class="video-btn" tabindex="0" data-bs-toggle="modal" data-bs-target="#v-section1"><i
                            class="fa fa-play"></i></a>
-                        <h3>{{banner.titleOne}}
-                        </h3>
-                        <h2>{{banner.bannerProduct.variantProduct.productName}}
-                        </h2>
+                        <h3>{{banner.titleOne}}</h3>
+                        <h2>{{banner.titleTwo}}</h2>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </section>
-      {% endif %}
       {% endif %}
       {% endfor %}
       <!-- video section end-->

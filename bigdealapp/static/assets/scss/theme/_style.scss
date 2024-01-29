@@ -864,7 +864,7 @@ button {
             font-size: calc(
               16px + (22 - 16) * ((100vw - 320px) / (1920 - 320))
             );
-            margin-bottom: -30px;
+            margin-bottom: 5px;
           }
 
           p {
@@ -2357,7 +2357,7 @@ button {
     }
 
     .blog-details-2 {
-      height: 100%;
+      // height: 100%;
       background-color: $white;
       padding: 20px;
 

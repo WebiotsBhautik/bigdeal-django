@@ -9,6 +9,7 @@ class BannerAdmin(admin.ModelAdmin):
     exclude = ['slug']
     list_display = ['bannerTheme', 'bannerType', 'bannerProduct']
     ordering = ('bannerTheme','bannerType',)
+    search_fields = ['bannerTheme__bannerThemeName',]
     # list_per_page=100
 
 
@@ -17,6 +18,7 @@ admin.site.register(Banner, BannerAdmin)
 
 class BannerTypeAdmin(admin.ModelAdmin):
     exclude = ['slug']
+    search_fields = ['bannerTypeName',]
 
 
 admin.site.register(BannerType, BannerTypeAdmin)
@@ -24,6 +26,7 @@ admin.site.register(BannerType, BannerTypeAdmin)
 
 class BannerThemeAdmin(admin.ModelAdmin):
     exclude = ['slug']
+    search_fields = ['bannerThemeName',]
 
 
 admin.site.register(BannerTheme, BannerThemeAdmin)

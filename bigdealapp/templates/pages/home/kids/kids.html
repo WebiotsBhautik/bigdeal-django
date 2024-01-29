@@ -515,9 +515,9 @@
               <div class="slide-contain">
                 <div>
                   <h4>{{banner.titleOne}}</h4>
-                  <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
-                  <h3>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h3>
-                  <p>{{banner.bannerProduct.variantProduct.productDescription|safe}}</p>
+                  <h2>{{banner.titleTwo}}</h2>
+                  <h3>{{banner.titleThree}}</h3>
+                  <p>{{banner.bannerDescription|safe}}</p>
                   <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">
                     Shop Now
                   </a>
@@ -620,8 +620,8 @@
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>{{first_banner.bannerProduct.variantProduct.productName}}</h3>
-                  <h4>{{first_banner.titleOne}}</h4>
+                  <h3>{{first_banner.titleOne}}</h3>
+                  <h4>{{first_banner.titleTwo}}</h4>
                   <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
@@ -634,8 +634,8 @@
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>{{second_banner.bannerProduct.variantProduct.productName}}</h3>
-                  <h4>{{second_banner.titleOne}}</h4>
+                  <h3>{{second_banner.titleOne}}</h3>
+                  <h4>{{second_banner.titleTwo}}</h4>
                   <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
@@ -652,7 +652,7 @@
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>{{third_banner.bannerProduct.variantProduct.productName}}</h3>
+                  <h3>{{third_banner.titleOne}}</h3>
                   <h4>up to{% if third_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                     {% else %}
                     <span class="theme-color">{{third_banner.bannerProduct.productVariantDiscount}}% OFF</span>
@@ -669,8 +669,8 @@
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>{{fourth_banner.bannerProduct.variantProduct.productName}}</h3>
-                  <h4>{{fourth_banner.titleOne}}</h4>
+                  <h3>{{fourth_banner.titleOne}}</h3>
+                  <h4>{{fourth_banner.titleTwo}}</h4>
                   <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
@@ -683,7 +683,7 @@
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>{{five_banner.bannerProduct.variantProduct.productName}}</h3>
+                  <h3>{{five_banner.titleOne}}</h3>
                   <h4>{% if five_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                     {% else %}
                     <span class="theme-color">{{five_banner.bannerProduct.productVariantDiscount}}% discount</span>
@@ -814,8 +814,8 @@
               {% else %}
               <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
               {% endif %}</h4>
-            <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
-            <h3>{{banner.titleOne}}</h3>
+            <h2>{{banner.titleOne}}</h2>
+            <h3>{{banner.titleTwo}}</h3>
             <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">Shop Now</a>
           </div>
         </div>
