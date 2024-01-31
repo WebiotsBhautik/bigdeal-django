@@ -406,7 +406,6 @@ def layout4(request):
     cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
 
-
     
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
                'allbanners':banners,
@@ -464,7 +463,6 @@ def layout5(request):
     cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
 
-    
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
             'allbrands':brands,
@@ -3745,7 +3743,6 @@ def image_outside(request,id):
 
 def thumbnail_left(request,id):
     cart_products_demo = serializers.serialize("json", CartProducts.objects.filter(cartByCustomer=request.user.id))
-        
     try:
         product = Product.objects.get(id=id)
     except (ValidationError, Product.DoesNotExist) as e:

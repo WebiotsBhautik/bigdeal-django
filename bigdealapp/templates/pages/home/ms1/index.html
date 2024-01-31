@@ -79,11 +79,6 @@
                   <h1>{{banner.bannerProduct.variantProduct.productName}}<span>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</span></h1>
                   <h4>{{banner.titleOne}}</h4> 
                   <h2>{{banner.titleTwo}}</h2>
-                  {% comment %} <h2>{% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
-                    {% else %}
-                    <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
-                    {% endif %}</h2> {% endcomment %}
-                    {% comment %} <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal"> {% endcomment %}
                     <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
                       Shop Now
                     </a>
@@ -1352,7 +1347,7 @@
                     <i data-feather="shopping-cart"></i>
                   </a>
                   <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
+                    <i data-feather="heart"></i>
                   </a>
                   <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
                     <i data-feather="eye"></i>
@@ -1465,7 +1460,7 @@
             {% if banner.bannerType|to_str == 'Instagram' %}
             <div>
               <div class="instagram-box">
-                <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImage}}" class="img-fluid" alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
@@ -1729,12 +1724,9 @@
               <div class="addit-box">
                 <div class="qty-box">
                   <div class="input-group">
-                    {% comment %} <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button> {% endcomment %}
                     <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control input-number"
-                                            value="{{product.cartProductQuantity}}">
+                      name="quantity{{forloop.counter}}" class="form-control input-number"
+                      value="{{product.cartProductQuantity}}">
                   </div>
                 </div>
                 <div class="pro-add">
@@ -1742,7 +1734,7 @@
                     <i data-feather="edit"></i>
                   </a>
                   <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
-                    <i  data-feather="trash-2"></i>
+                    <i data-feather="trash-2"></i>
                   </a>
                 </div>
               </div>

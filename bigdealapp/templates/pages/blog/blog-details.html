@@ -23,40 +23,34 @@
                       <li><i class="fa fa-comments"></i> 10 Comment</li>
                   </ul>
                   <p>{{blog.blogDescription|safe}}</p>
-                  {% comment %} <p>Cras quis neque urna. Pellentesque mollis, dui nec elementum elementum, ipsum quam suscipit ligula, sit amet lobortis dolor sem sed neque. Vivamus consequat est non sodales efficitur. Aliquam sodales eleifend sodales. Aliquam auctor ipsum quis nisl facilisis, at convallis mauris iaculis. Duis eleifend, magna ac convallis blandit, dui dui auctor leo, sed tincidunt nisi mauris ut nulla. Praesent porttitor dui ac turpis commodo porttitor. Integer ligula nisi, bibendum non sem at, porta condimentum dui.</p> {% endcomment %}
-                  {% comment %} <p>Proin id eleifend diam, euismod dictum nibh. Ut ullamcorper in purus at tempor. Nullam mattis risus nec velit semper lobortis. Donec accumsan ligula fermentum, ultricies massa eget, cursus leo. Suspendisse placerat elit et lacus aliquam, ut elementum leo aliquet. Integer ornare, ipsum eu lacinia viverra, lectus ipsum scelerisque nisl, nec iaculis leo elit id arcu. Aliquam id ante elit. Donec commodo purus eget lacus pharetra, et egestas metus blandit. Quisque pellentesque porta urna.</p> {% endcomment %}
               </div>
           </div>
       </div>
       <div class="row section-big-pb-space blog-advance ">
           <div class="col-lg-6 ">
-                  <div class="creative-card">
-                      {% comment %} <img src="{% static 'assets/images/blog/1.jpg' %}" class="img-fluid " alt="blog"> {% endcomment %}
-                      <img src="/{{blog.blogImage}}" class="img-fluid " alt="blog">
-                      <ul>
-                          <li>Donec ut metus sit amet elit consectetur  vel turpis.</li>
-                          <li>Aenean in mi eu elit mollis tincidunt.</li>
-                          <li>Etiam blandit metus vitae purus lacinia ultricies.</li>
-                          <li>Nunc quis nulla sagittis, tempus metus.</li>
-                          <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
-                          <li>Morbi molestie lacus blandit interdum sodales.</li>
-                          <li>Curabitur eleifend velit molestie eleifend interdum.</li>
-                          <li>Vestibulum fringilla tortor et lorem sagittis,</li>
-                          <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
-                          <li>Morbi molestie lacus blandit interdum sodales.</li>
-                          <li>Curabitur eleifend velit molestie eleifend interdum.</li>
-                      </ul>
-                  </div>
-              </div>
-          <div class="col-lg-6 ">
-                  <div class="creative-card">
-                      {% comment %} <img src="{% static 'assets/images/blog/2.jpg' %}" class="img-fluid  " alt="blog"> {% endcomment %}
-                      <img src="/{{blog.blogImage}}" class="img-fluid  " alt="blog">
-                      <p>{{blog.blogDescription|safe}}</p>
-                      {% comment %} <p class="mt-2">Nulla quam turpis, commodo et placerat eu, mollis ut odio. Donec pellentesque egestas consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc at urna dolor. Mauris odio nisi,  rhoncus ac justo eget, lacinia iaculis lectus. rhoncus ac justo eget, lacinia iaculis lectus.</p> {% endcomment %}
-                      {% comment %} <p class="mt-2">Nulla quam turpis, commodo et placerat eu, mollis ut odio. Donec pellentesque egestas consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p> {% endcomment %}
-                  </div>
-              </div>
+            <div class="creative-card">
+                <img src="/{{blog.blogImage}}" class="img-fluid " alt="blog">
+                <ul>
+                    <li>Donec ut metus sit amet elit consectetur  vel turpis.</li>
+                    <li>Aenean in mi eu elit mollis tincidunt.</li>
+                    <li>Etiam blandit metus vitae purus lacinia ultricies.</li>
+                    <li>Nunc quis nulla sagittis, tempus metus.</li>
+                    <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
+                    <li>Morbi molestie lacus blandit interdum sodales.</li>
+                    <li>Curabitur eleifend velit molestie eleifend interdum.</li>
+                    <li>Vestibulum fringilla tortor et lorem sagittis,</li>
+                    <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
+                    <li>Morbi molestie lacus blandit interdum sodales.</li>
+                    <li>Curabitur eleifend velit molestie eleifend interdum.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6 ">
+            <div class="creative-card">
+                <img src="/{{blog.blogImage}}" class="img-fluid  " alt="blog">
+                <p>{{blog.blogDescription|safe}}</p>
+            </div>
+        </div>
       </div>
       <div class="row section-big-pb-space">
           <div class="col-sm-12 ">

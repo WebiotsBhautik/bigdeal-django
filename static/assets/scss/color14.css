@@ -1703,7 +1703,6 @@ button {
       line-height: 1;
       font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))); }
   .blog .blog-contain .blog-details-2 {
-    height: 100%;
     background-color: #ffffff;
     padding: 20px; }
     .blog .blog-contain .blog-details-2 h4 {

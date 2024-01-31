@@ -251,14 +251,15 @@ class ProductAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Product, ProductAdmin,
-                    list_per_page=10)
+                    list_per_page=10,
+                    )
 
 admin.site.register(DeliveryOption)
 
 
 class ProductReviewAdmin(admin.ModelAdmin):
     exclude = ['productReviewByCustomer']
-    search_fields = ['productName', 'productReview', 'productRatings']
+    search_fields = ['productName__productName', 'productReview', 'productRatings']
     list_display = ['productName', 'productReview', 'productRatings','productReviewByCustomer']
 
     def get_queryset(self, request):
