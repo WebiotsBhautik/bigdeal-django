@@ -152,7 +152,7 @@
               </ul>
             </div>
             <div class="brand-logo logo-sm-center">
-              <a href="index.html">
+              <a href="/index_default">
                 <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid  " alt="logo">
               </a>
             </div>
@@ -276,7 +276,7 @@
           <div class="navbar-menu">
             <div class="logo-block">
               <div class="brand-logo logo-sm-center">
-                <a href="index.html">
+                <a href="/index_default">
                   <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid  " alt="logo">
                 </a>
               </div>
@@ -490,7 +490,7 @@
                     <div>
                         <h2>Verify token</h2>
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="/index_default">home</a></li>
                             <li><i class="fa fa-angle-double-right"></i></li>
                             <li><a href="javascript:void(0)">verify token</a></li>
                         </ul>
@@ -510,7 +510,6 @@
                 <div class="theme-card">
                   {% include "includes/alerts.html" %}
                 <h3>Verify Token</h3>
-                {% comment %} <form class="theme-form"> {% endcomment %}
                 <form action="{% url 'verify_token' %}" method="post">
                   {% csrf_token %}
                     <div class="row">
@@ -523,17 +522,6 @@
                           </div>
                         </div>
                     </div> 
-                    {% comment %} <div class="input">
-                      <label for="otp">Enter OTP</label>
-                      <input type="text" name="otp" class="is-invalid" id="otp" required>
-                      <span class="spin"></span>
-                    </div>
-                    <div class="button login button-1">
-                        <button onclick="location.href = ;">
-                            <span>Submit</span>
-                            <i class="fa fa-check"></i>
-                        </button>
-                    </div> {% endcomment %}
                 </form>
                 </div>
             </div>
@@ -556,7 +544,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="index.html">
+                  <a href="/index_default">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -808,94 +796,6 @@
 </div>
 <!-- Quick-view modal popup end-->
 
-<!-- edit product modal start-->
-{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="pro-group">
-          <div class="product-img">
-            <div class="media">
-              <div class="img-wraper">
-                <a href="product-page(left-sidebar).html">
-                  <img src="{% static 'assets/images/layout-2/product/1.jpg' %}" alt="">
-                </a>
-              </div>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h3>redmi not 3</h3>
-                </a>
-                <h6>$80<span>$120</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select Size</h6>
-          <div class="size-box">
-            <ul>
-              <li ><a href="javascript:void(0)">s</a></li>
-              <li><a href="javascript:void(0)">m</a></li>
-              <li><a href="javascript:void(0)">l</a></li>
-              <li><a href="javascript:void(0)">xl</a></li>
-              <li><a href="javascript:void(0)">2xl</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select color</h6>
-          <div class="color-selector inline">
-            <ul>
-              <li>
-                <div class="color-1 active"></div>
-              </li>
-              <li>
-                <div class="color-2"></div>
-              </li>
-              <li>
-                <div class="color-3"></div>
-              </li>
-              <li>
-                <div class="color-4"></div>
-              </li>
-              <li>
-                <div class="color-5"></div>
-              </li>
-              <li>
-                <div class="color-6"></div>
-              </li>
-              <li>
-                <div class="color-7"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Quantity</h6>
-          <div class="qty-box">
-            <div class="input-group">
-              <button class="qty-minus"></button>
-              <input class="qty-adj form-control" type="number" value="1"/>
-              <button class="qty-plus"></button>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group mb-0">
-          <div class="modal-btn">
-            <a href="cart.html" class="btn btn-solid btn-sm">
-              add to cart
-            </a>
-            <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-              more detail
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- edit product modal end--> {% endcomment %}
 
 <!-- Add to cart bar -->
 <div id="cart_side" class="add_to_cart right">

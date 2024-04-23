@@ -30,16 +30,7 @@ SECRET_KEY = 'django-insecure-sq-%-(rvn6qkp0bv7vbbro=+0-q2v!y1l^$w6cs@4s62%jv4)=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
-
-# ALLOWED_HOSTS = ['0.0.0.0','192.168.1.25','127.0.0.1']
-
-
-ALLOWED_HOSTS = ['0.0.0.0','192.168.29.132','127.0.0.1']
-
-
-# JIO = 192.168.29.132
-# GTPL = 192.168.1.25
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,6 +55,7 @@ INSTALLED_APPS = [
     'currency',
     'shell_plus',
     'django_extensions',
+    'django_crontab',
 
 ]
 
@@ -77,6 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
+    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',
 
 ]
 
@@ -110,18 +103,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'mydatabase',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bigdeal',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
-
 
 
 # Password validation
@@ -159,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',  
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
 ]
@@ -205,10 +186,69 @@ JAZZMIN_SETTINGS = {
     "custom_css": "assets/css/backend.css",
     "custom_js": "assets/js/custom.js",
     
+    "use_google_fonts_cdn": False,
+    "site_logo": "assets/images/logos/logo-white.png",
+    "welcome_sign": "Welcome to bigdeal Ecommerce",
+    "copyright": "Bigdeal theme by pixelstrap",
+    # "language_chooser": True,
+    "icons": {
+        # Icon's for Account
+        "accounts.CustomUser": "fa fa-user",
+        "accounts.Admin": "fa fa-user",
+        "accounts.Vendor": "fa fa-user",
+        
+        "product.Product": "fa fa-box",
+        "product.ProductVariant": "fa fa-cube",
+        "product.AttributeName": "fa fa-tasks",
+        "product.ProCategory": "fa fa-stream",
+        "product.ProBrand": "fa fa-gem",
+        "product.ProUnit": "fa fa-archive",
+        "product.ProVideoProvider": "fa fa-video",
+        "product.ProductReview": "fa fa-star",
+        "product.MultipleImages": "fa fa-image",
+
+        "order.Order": "fa fa-boxes",
+        "order.ProductOrder": "fa fa-box",
+        "order.OrderPayment": "fa fa-money-bill-wave-alt",
+        "order.OrderTracking": "fa fa-truck",
+        "order.Cart": "fa fa-shopping-cart",
+        "order.Wishlist": "fa fa-heart",
+        "order.Compare": "fa fa-sync-alt",
+        "order.CartProducts": "fa fa-cart-plus",
+        "order.OrderBillingAddress": "fa fa-address-card",
+        "order.PaymentMethod": "fa fa-credit-card",
+
+        "payment.Card": "fab fa-cc-visa",
+        "payment.Wallet":"fa fa-wallet",
+        "payment.WalletHistory":"fa fa-history",
+        "payment.Withdrawal":"fa fa-money-check-alt",
+
+        "currency.Currency": "fa fa-dollar-sign",
+
+        "bigdealapp.BannerTheme": "fa fa-palette",
+        "bigdealapp.BannerType": "fa fa-image",
+        "bigdealapp.Banner": "fa fa-image",
+        "bigdealapp.BlogCategory": "fa fa-clipboard-list",
+        "bigdealapp.Blog": "fa fa-blog",
+        "bigdealapp.BlogComment": "fa fa-comment-dots",
+        "bigdealapp.Coupon": "fa fa-ticket-alt",
+        "bigdealapp.CouponHistory": "fa fa-history",
+        "bigdealapp.ContactUs": "fa fa-phone-square",
+        # "bigdealapp.TodoTask":"fa fa-list-ul",
+
+        "logout": "fa fa-sign-out-alt",
+        "auth.Group": "fa fa-users",
+    },
+
+    "changeform_format": "vertical_tabs",
+    "related_modal_active": True,
+    "topmenu_links": [],
+    "usermenu_links": [],
+    
     # Keep the same app ordering as above, but also order choice and book model links within the books app
     "order_with_respect_to": [
         # APPLICATIONS Orderings
-        "accounts", "auth", "product", "order", "payment", "currency", "voxoapp",
+        "accounts", "auth", "product", "order", "payment", "currency", "bigdealapp",
     
     # Models Ordering for ACCOUNT Application
     "accounts.CustomUser", "accounts.Admin", "accounts.Vendor", "accounts.Customer",
@@ -253,3 +293,37 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'webapp342@gmail.com'
 EMAIL_HOST_PASSWORD = 'uspgrohipaiawirb'
 EMAIL_PORT = 587
+
+
+import os,logging
+APP_LOG_FILENAME = os.path.join(BASE_DIR, 'log/app.log')
+ERROR_LOG_FILENAME = os.path.join(BASE_DIR, 'log/error.log')
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}
+
+
+
+CRONJOBS = [
+    ('* * * * *', 'bigdealapp.cron.database_replace'),
+    ('* * * * *', 'bigdealapp.cron.print_hello'),
+]

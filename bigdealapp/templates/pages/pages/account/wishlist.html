@@ -23,7 +23,7 @@
                                       <h4>Explore more shortlist some items.</h4> 
                                 </div>
                                 <div class="col-12">
-                                    <a href="{% url 'index' %}" class="btn btn-normal mt-4">continue shopping</a>
+                                    <a href="{% url 'index_default' %}" class="btn btn-normal mt-4">continue shopping</a>
                                 </div> 
                             </div>
                         </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="row wishlist-buttons">
                 <div class="col-12">
-                    <a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a>
+                    <a href="{% url 'index_default' %}" class="btn btn-normal">continue shopping</a>
                     {% if request.user.is_authenticated %}
                     {% if totalCartProducts|to_int == 0|to_int %}
                     {% else %}
