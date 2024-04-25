@@ -17,7 +17,7 @@
                 </div>
                 <div class="footer-contant">
                   <div class="footer-logo">
-                    <a href="{% url 'index_default' %}">
+                    <a href="{% url 'index' %}">
                       <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                     </a>
                   </div>
@@ -70,7 +70,7 @@
                         <span class="input-group-text"><i class="ti-user"></i></span>                      
                       </div>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                       <div class="input-group">
                         <input type="text" class="form-control" placeholder="enter email address" >                     
                         <span class="input-group-text"><i class="ti-email"></i></span>                     
@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="subfooter dark-footer ">
+    <div class="subfooter dark-footer">
       <div class="container">
         <div class="row">
           <div class="col-xl-6 col-md-8 col-sm-12">
@@ -203,7 +203,7 @@
                           <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
+                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid"></div>
                       </div>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
   <!-- Quick-view modal popup end-->
   
   <!-- Add to cart bar -->
-  <div id="cart_side" class="add_to_cart right ">
+  <div id="cart_side" class="add_to_cart right">
     <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
     <div class="cart-inner">
       <div class="cart_top">
@@ -344,7 +344,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm ">checkout</a>
+              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">checkout</a>
             </div>
           </li>
         </ul>
@@ -417,7 +417,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
             </div>
           </li>
         </ul>

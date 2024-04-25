@@ -39,15 +39,15 @@ window.onload = function(){
     //     let ratingHtml = '';
     //     if (parseInt(value.rating) < 5) {
     //       for (let i = 0; i < parseInt(value.rating); i++) {
-    //         ratingHtml += '<li><a class="fas fa-star theme-color" id="productOfStar" href="/product-detail/' + value.id + '"></a></li>';
+    //         ratingHtml += '<li><a class="fa fa-star theme-color" id="productOfStar" href="/product-detail/' + value.id + '"></a></li>';
     //       }
     //       let emptyStars = 5 - parseInt(value.rating);
     //       for (let i = 0; i < emptyStars; i++) {
-    //         ratingHtml += '<li><i class="fas fa-star"></i></li>';
+    //         ratingHtml += '<li><i class="fa fa-star"></i></li>';
     //       }
     //     } else {
     //       for (let i = 0; i < 5; i++) {
-    //         ratingHtml += '<li><a class="fas fa-star theme-color" id="productOfStar" href="/product-detail/' + value.id + '"></a></li>';
+    //         ratingHtml += '<li><a class="fa fa-star theme-color" id="productOfStar" href="/product-detail/' + value.id + '"></a></li>';
     //       }
     //     }
     //     $("#realData").append(`<li>

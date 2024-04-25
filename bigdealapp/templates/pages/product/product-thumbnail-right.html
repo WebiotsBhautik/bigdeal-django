@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="product-right product-description-box ">
+                    <div class="product-right product-description-box">
                         <div class="pro-group">
                           <h2>{{product.productName}}</h2>
                           <ul class="pro-price" id="productFinalPrice">
@@ -112,7 +112,7 @@
                           </ul>
                         </div>
                         
-                        <div class="pro-group ">
+                        <div class="pro-group">
                           <h6 class="product-title">share</h6>
                           <ul class="product-social">
                             <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -127,6 +127,7 @@
                           <ul class="delivery-services">
                             {% for option in selected_delivery_options %}
                             <li>
+                              {% comment %} <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><g><g><path d="M466.244,257.845l-58.193-86.841H300v-120H0v364.992h61.899c6.678,25.849,30.195,45,58.101,45s51.424-19.151,58.101-45h155.797c6.678,25.849,30.195,45,58.101,45s51.424-19.151,58.101-45H512V269.284L466.244,257.845z M135,81.003h30v60h-30V81.003z M120,430.995c-16.542,0-30-13.458-30-30s13.458-30,30-30s30,13.458,30,30S136.542,430.995,120,430.995z M270,385.995h-91.899c-6.677-25.849-30.195-45-58.101-45s-51.424,19.151-58.101,45H30v-75h240V385.995z M270,280.995H30V81.003h75v90h90v-90h75V280.995z M392,430.995c-16.542,0-30-13.458-30-30s13.458-30,30-30s30,13.458,30,30S408.542,430.995,392,430.995z M482,385.995h-31.899c-6.678-25.849-30.195-45-58.101-45s-51.424,19.151-58.101,45H300V201.003h92.041l55.715,83.143L482,292.707V385.995z"></path></g></g></svg> {% endcomment %}
                               {{option.name}}
                             </li>
                             {% endfor %}

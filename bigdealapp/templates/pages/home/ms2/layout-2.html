@@ -73,7 +73,7 @@
                      </ul>
                   </div>
                   <div class="language-block">
-                     <div class="curroncy-dropdown" id="currency-selection">
+                     <div class="currency-dropdown" id="currency-selection">
                         <select id="currency-selection-dropdown">
                            <option id="currency-value" value="%">Currency</option>
                            {% for cur in ""|return_currency %}
@@ -168,7 +168,7 @@
                         </ul>
                      </div>
                      <div class="brand-logo logo-sm-center">
-                        <a href="{% url 'index_default' %}">
+                        <a href="{% url 'index' %}">
                            <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid " alt="logo-header">
                         </a>
                      </div>
@@ -346,7 +346,7 @@
                      <div class="input-block">
                         <div class="input-box">
                            <form class="big-deal-form">
-                              <div class="input-group ">
+                              <div class="input-group">
                                  <span class="search"><i class="fa fa-search"></i></span>
                                  <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >
                                  <select>
@@ -471,7 +471,7 @@
          {% if banner.bannerType|to_str == 'Sideslider' %}
          <div class="col-xl-2 col-sm-3 pl-0 offer-banner">
             <div class="offer-banner-img">
-               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid  ">
+               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid ">
             </div>
             <div class="banner-contain">
                <div>
@@ -500,7 +500,7 @@
 <!--collection banner start-->
 <section class="collection-banner section-pt-space">
    <div class="custom-container">
-      <div class="row justify-content-end collection collection-layout1 ">
+      <div class="row justify-content-end collection collection-layout1">
          {% if both_banners %}
          {% for banner in both_banners  %}
 
@@ -532,7 +532,7 @@
          <div class="col-md-2 pl-md-0">
             <div class="collection-banner-main p-top banner-6">
                <div class="collection-img">
-                  <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                </div>
                <div class="collection-banner-contain">
                   <div>
@@ -573,7 +573,7 @@
 <section class="services">
    <div class="container">
       <div class="row service-block">
-         <div class="col-lg-3 col-md-6  col-sm-12">
+         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="media">
                <svg height="679pt" viewBox="0 -117 679.99892 679" width="679pt" xmlns="http://www.w3.org/2000/svg">
                   <path d="m12.347656 378.382812h37.390625c4.371094 37.714844 36.316407 66.164063 74.277344 66.164063 37.96875 0 69.90625-28.449219 74.28125-66.164063h241.789063c4.382812 37.714844 36.316406 66.164063 74.277343 66.164063 37.96875 0 69.902344-28.449219 74.285157-66.164063h78.890624c6.882813 0 12.460938-5.578124 12.460938-12.460937v-352.957031c0-6.882813-5.578125-12.464844-12.460938-12.464844h-432.476562c-6.875 0-12.457031 5.582031-12.457031 12.464844v69.914062h-105.570313c-4.074218.011719-7.890625 2.007813-10.21875 5.363282l-68.171875 97.582031-26.667969 37.390625-9.722656 13.835937c-1.457031 2.082031-2.2421872 4.558594-2.24999975 7.101563v121.398437c-.09765625 3.34375 1.15624975 6.589844 3.47656275 9.003907 2.320312 2.417968 5.519531 3.796874 8.867187 3.828124zm111.417969 37.386719c-27.527344 0-49.851563-22.320312-49.851563-49.847656 0-27.535156 22.324219-49.855469 49.851563-49.855469 27.535156 0 49.855469 22.320313 49.855469 49.855469 0 27.632813-22.21875 50.132813-49.855469 50.472656zm390.347656 0c-27.53125 0-49.855469-22.320312-49.855469-49.847656 0-27.535156 22.324219-49.855469 49.855469-49.855469 27.539063 0 49.855469 22.320313 49.855469 49.855469.003906 27.632813-22.21875 50.132813-49.855469 50.472656zm140.710938-390.34375v223.34375h-338.375c-6.882813 0-12.464844 5.578125-12.464844 12.460938 0 6.882812 5.582031 12.464843 12.464844 12.464843h338.375v79.761719h-66.421875c-4.382813-37.710937-36.320313-66.15625-74.289063-66.15625-37.960937 0-69.898437 28.445313-74.277343 66.15625h-192.308594v-271.324219h89.980468c6.882813 0 12.464844-5.582031 12.464844-12.464843 0-6.882813-5.582031-12.464844-12.464844-12.464844h-89.980468v-31.777344zm-531.304688 82.382813h99.703125v245.648437h-24.925781c-4.375-37.710937-36.3125-66.15625-74.28125-66.15625-37.960937 0-69.90625 28.445313-74.277344 66.15625h-24.929687v-105.316406l3.738281-5.359375h152.054687c6.882813 0 12.460938-5.574219 12.460938-12.457031v-92.226563c0-6.882812-5.578125-12.464844-12.460938-12.464844h-69.796874zm-30.160156 43h74.777344v67.296875h-122.265625zm0 0"/>
@@ -583,7 +583,7 @@
                </div>
             </div>
          </div>
-         <div class="col-lg-3 col-md-6  col-sm-12">
+         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="media">
                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 417.12 417.12" style="enable-background:new 0 0 417.12 417.12;" xml:space="preserve">
@@ -631,7 +631,7 @@
                </div>
             </div>
          </div>
-         <div class="col-lg-3 col-md-6  col-sm-12 ">
+         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="media">
                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 295.82 295.82" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 295.82 295.82">
                   <g>
@@ -647,7 +647,7 @@
                </div>
             </div>
          </div>
-         <div class="col-lg-3 col-md-6  col-sm-12 ">
+         <div class="col-lg-3 col-md-6 col-sm-12">
             <div class="media">
                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 448 448" style="enable-background:new 0 0 448 448;" xml:space="preserve">
@@ -681,8 +681,8 @@
 <!--media banner start-->
 <section class=" b-g-white section-big-pt-space">
    <div class="container">
-      <div class="row hot-1 ">
-         <div class="col-lg-3 col-sm-6  col-12  ">
+      <div class="row hot-1">
+         <div class="col-lg-3 col-sm-6 col-12">
             <div class="slide-1 no-arrow">
                <div>
                   <div class="media-banner">
@@ -691,7 +691,7 @@
                            <h5>on sale</h5>
                         </div>
                      </div>
-                     {% for banner in media_banners|slice:"2:"  %}
+                     {% for banner in media_banners|slice:"2:" %}
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
@@ -759,10 +759,8 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
@@ -841,10 +839,8 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
@@ -852,7 +848,7 @@
          </div>
          {% for banner in allbanners  %}
          {% if banner.bannerType|to_str == 'Jewellery Banner' %}
-         <div class="col-lg-2 col-sm-6  col-12">
+         <div class="col-lg-2 col-sm-6 col-12">
             <a href="{% url 'shop_left_sidebar' %}">
                <div class="Jewellery-banner">
                   <img src="{{banner.bannerImage}}" alt="collection-banner" class="img-fluid bg-img">
@@ -868,14 +864,14 @@
          </div>
          {% endif %}
          {% endfor %}
-         <div class="col-lg-7  col-sm-12 col-12  ">
+         <div class="col-lg-7 col-sm-12 col-12">
             <div class="hot-deal hotdeal-two">
                <div class="hot-deal-box">
                   <div class="slide-1">
                      <div>
                         <div class="hot-deal-contain  hot-deal-contain1 hot-deal-banner-1">
                            <div class="hot-deal-heading">
-                              <h3>today’s hot deal</h3>
+                              <h3>today's hot deal</h3>
                            </div>
                            <div class="row hot-deal-subcontain">
                               <div class="col-lg-4 col-sm-4 col-12">
@@ -885,7 +881,7 @@
                                     <a href="{% url 'shop_left_sidebar' %}">
                                        <div class="right-slick-img img-wrraper">
                                           <div>
-                                             <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid bg-img ">
+                                             <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid bg-img">
                                           </div>
                                        </div>
                                     </a>
@@ -972,7 +968,7 @@
                                                       </span>
                                              </p>
                                           </div>
-                                          <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id  %}" class="btn btn-normal btn-md ">shop now</a>
+                                          <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id  %}" class="btn btn-normal btn-md">shop now</a>
                                        </div>
                                     </div>
                                     {% endif %}
@@ -983,7 +979,7 @@
                                  <div class="hotdeal-right-nav-1">
                                     {% for banner in allbanners  %}
                                     {% if banner.bannerType|to_str == 'Timer' %}
-                                    <div><img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid  " ></div>
+                                    <div><img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid" ></div>
                                     {% endif %}
                                     {% endfor %}
                                  </div>
@@ -1023,7 +1019,7 @@
 <!--collection banner start-->
 <section class="collection-banner section-pt-space">
    <div class="container-fluid">
-      <div class="row collection2">
+      <div class="row g-3">
          {% for banner in allbanners  %}
          {% if banner.bannerType|to_str == 'Shop Banner' %}
          <div class="col-md-4">
@@ -1216,7 +1212,7 @@
                </h1>
             </div>
          </div>
-         <div class="col-md-12 col-lg-4 ">
+         <div class="col-md-12 col-lg-4">
             <div class="deal-banner-containe">
                <diV class="deal-btn">
                   <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
@@ -1240,7 +1236,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1252,7 +1248,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1264,7 +1260,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1276,7 +1272,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1288,7 +1284,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1300,7 +1296,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1312,7 +1308,7 @@
              <div class="category-contain">
                <div class="img-wrapper">
                  <a href="{% url 'shop_left_sidebar' %}">
-                   <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid">
+                   <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category" class="img-fluid">
                  </a>
                </div>
                <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -1334,7 +1330,7 @@
          <div class="col">
             <div class="media-slide no-arrow">
                <div>
-                  <div class="media-banner ">
+                  <div class="media-banner">
                      <div class="media-banner-box">
                         <div class="media-heading">
                            <h5>New Products</h5>
@@ -1344,7 +1340,7 @@
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
-                              <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid" alt="banner">
                            </a>
                            <div class="media-body">
                               <div class="media-contant">
@@ -1408,15 +1404,13 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
                <div>
-                  <div class="media-banner ">
+                  <div class="media-banner">
                      <div class="media-banner-box">
                         <div class="media-heading">
                            <h5>featured products</h5>
@@ -1490,15 +1484,13 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
                <div>
-                  <div class="media-banner ">
+                  <div class="media-banner">
                      <div class="media-banner-box">
                         <div class="media-heading">
                            <h5>best seller</h5>
@@ -1508,7 +1500,7 @@
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
-                              <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid" alt="banner">
                            </a>
                            <div class="media-body">
                               <div class="media-contant">
@@ -1572,15 +1564,13 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
                <div>
-                  <div class="media-banner ">
+                  <div class="media-banner">
                      <div class="media-banner-box">
                         <div class="media-heading">
                            <h5>50% off</h5>
@@ -1590,7 +1580,7 @@
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
-                              <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid" alt="banner">
                            </a>
                            <div class="media-body">
                               <div class="media-contant">
@@ -1654,15 +1644,13 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
                <div>
-                  <div class="media-banner ">
+                  <div class="media-banner">
                      <div class="media-banner-box">
                         <div class="media-heading">
                            <h5>one sale</h5>
@@ -1672,7 +1660,7 @@
                      <div class="media-banner-box">
                         <div class="media">
                            <a href="{% url 'shop_left_sidebar' %}">
-                              <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid" alt="banner">
                            </a>
                            <div class="media-body">
                               <div class="media-contant">
@@ -1736,10 +1724,8 @@
                         </div>
                      </div>
                      {% endfor %}
-                     <div class="media-banner-box">
-                        <div class="media-view">
-                           <h5>View More</h5>
-                        </div>
+                     <div class="media-banner-box media-view">
+                        <h5>View More</h5>
                      </div>
                   </div>
                </div>
@@ -1751,7 +1737,7 @@
 <!--media-banner end-->
 
 <!--blog start-->
-<section class="blog ">
+<section class="blog">
    <!--title start-->
    <div class="title3">
       <h4>latest blog</h4>
@@ -1797,7 +1783,7 @@
 
 <!--box categroy start-->
 <section class="box-category section-pt-space">
-   <div class="container-fluid ">
+   <div class="container-fluid">
       <div class="row">
          <div class="col pl-0">
             <div class="slide-10 no-arrow">
@@ -1894,7 +1880,7 @@
 <!--product start-->
 <section class="product section-big-pb-space">
    <div class="custom-container">
-      <div class="row ">
+      <div class="row">
          <div class="col pr-0">
             <div class="product-slide-6 no-arrow">
                {% for product in layout2_products  %}
@@ -1903,12 +1889,12 @@
                      <div class="product-imgbox">
                         <div class="product-front">
                            <a href="{% url 'left_slidebar' product.id %}">
-                              <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                            </a>
                         </div>
                         <div class="product-back">
                            <a href="{% url 'left_slidebar' product.id %}">
-                              <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                            </a>
                         </div>
                         <div class="product-icon">
@@ -2037,7 +2023,7 @@
                   <div class="testimonial-contain">
                      <div class="media">
                         <div class="testimonial-img">
-                           <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                           <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                         </div>
                         <div class="media-body">
                            <h5>mark jecno</h5>
@@ -2050,7 +2036,7 @@
                   <div class="testimonial-contain">
                      <div class="media">
                         <div class="testimonial-img">
-                           <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                           <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                         </div>
                         <div class="media-body">
                            <h5>mark jecno</h5>
@@ -2070,20 +2056,20 @@
 <section class="instagram  b-g-white section-big-py-space">
    <div class="container">
       <div class="row">
-         <div class="col ">
+         <div class="col">
             <div class="insta-contant insta-contant-inverse no-arrow">
                <div class="slide-7 no-arrow">
                   {% for banner in allbanners  %}
                   {% if banner.bannerType|to_str == 'Instagram' %}
                   <div>
                      <div class="instagram-box">
-                        <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
+                        <img src="{{banner.bannerImage}}" class="img-fluid" alt="insta">
                         <div class="insta-cover">
                            <i class="fa fa-instagram" ></i>
                         </div>
                      </div>
                      <div class="instagram-box">
-                        <img src="{{banner.bannerImageTwo}}" class="img-fluid  " alt="insta">
+                        <img src="{{banner.bannerImageTwo}}" class="img-fluid" alt="insta">
                         <div class="insta-cover">
                            <i class="fa fa-instagram" ></i>
                         </div>
@@ -2105,7 +2091,7 @@
 <!--instagram end-->
 
 <!-- subscribe start -->
-<section class="subscribe1 ">
+<section class="subscribe1">
    <img src="{% static 'assets/images/marketplace/subscribe2.png' %}"  alt="subscribe" class="bg-img img-fluid">
    <div class="container">
       <div class="row">
@@ -2156,7 +2142,7 @@
 
 <!-- footer start -->
 <footer>
-   <div class="footer1 ">
+   <div class="footer1">
       <div class="container">
          <div class="row">
             <div class="col-12">
@@ -2167,7 +2153,7 @@
                      </div>
                      <div class="footer-contant">
                         <div class="footer-logo">
-                           <a href="{% url 'index_default' %}">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>
@@ -2254,7 +2240,7 @@
 
 
  <!-- Newsletter modal popup start -->
- <div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">-->
+ <div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
          <div class="modal-body">
@@ -2346,7 +2332,7 @@
                          <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                        </div>
-                       <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
+                       <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid"></div>
                      </div>
                    </div>
                  </div>
@@ -2487,7 +2473,7 @@
             <li>
               <div class="buttons">
                 <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-                <a href="javascript:void(0)" class="btn btn-solid btn-sm ">checkout</a>
+                <a href="javascript:void(0)" class="btn btn-solid btn-sm">checkout</a>
               </div>
             </li>
           </ul>
@@ -2554,7 +2540,7 @@
             <li>
               <div class="buttons">
                 <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-                <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+                <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
               </div>
             </li>
           </ul>

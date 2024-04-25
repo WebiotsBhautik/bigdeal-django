@@ -51,7 +51,7 @@
 {% include 'pages/shop/shop-header.html' %}
 
 <!-- breadcrumb start -->
-<div class="breadcrumb-main ">
+<div class="breadcrumb-main">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -59,7 +59,7 @@
                     <div>
                         <h2>register</h2>
                         <ul>
-                            <li><a href="{% url 'index_default' %}">home</a></li>
+                            <li><a href="{% url 'index' %}">home</a></li>
                             <li><i class="fa fa-angle-double-right"></i></li>
                             <li><a href="{% url 'signup_page' %}">register</a></li>
                         </ul>
@@ -111,7 +111,7 @@
                       <div class="col-md-12 form-group"><button class="btn btn-normal">create Account</button></div>
                   </div>
                   <div class="row g-3">
-                      <div class="col-md-12 ">
+                      <div class="col-md-12">
                           <p >Have you already account? <a href="{% url 'login_page' %}" class="txt-default">click</a> here to &nbsp;<a href="{% url 'login_page' %}" class="txt-default">Login</a></p>
                       </div>
                   </div>
@@ -138,7 +138,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="{% url 'index_default' %}">
+                  <a href="{% url 'index' %}">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -191,7 +191,7 @@
                       <span class="input-group-text"><i class="ti-user"></i></span>                      
                     </div>
                   </div>
-                  <div class="form-group ">
+                  <div class="form-group">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="enter email address" >                     
                       <span class="input-group-text"><i class="ti-email"></i></span>                     
@@ -208,7 +208,7 @@
       </div>
     </div>
   </div>
-  <div class="subfooter dark-footer ">
+  <div class="subfooter dark-footer">
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-md-8 col-sm-12">
@@ -324,7 +324,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
+                      <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid"></div>
                     </div>
                   </div>
                 </div>
@@ -392,7 +392,7 @@
 
 
 <!-- Add to cart bar -->
-<div id="cart_side" class="add_to_cart right ">
+<div id="cart_side" class="add_to_cart right">
   <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
   <div class="cart-inner">
     <div class="cart_top">
@@ -429,7 +429,9 @@
               <div class="addit-box">
                 <div class="qty-box">
                   <div class="input-group">
+                    {% comment %} <button class="qty-minus"></button> {% endcomment %}
                     <input class="qty-adj form-control" type="number" readonly value="{{product.cartProductQuantity}}"/>
+                    {% comment %} <button class="qty-plus"></button> {% endcomment %}
                   </div>
                 </div>
                 <div class="pro-add">
@@ -464,7 +466,7 @@
         <li>
           <div class="buttons">
             <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-            <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm ">checkout</a>
+            <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">checkout</a>
           </div>
         </li>
       </ul>
@@ -476,6 +478,7 @@
           <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
         </li>
         {% else %}
+        {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
         {% for product in cart_products %}
 
         <li>
@@ -489,14 +492,19 @@
                 <h4>{{product.productName}}</h4>
               </a>
               <h6>
+                {% comment %} $80.00 <span>$120.00</span> {% endcomment %}
                 {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                {% comment %} <span>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</span> {% endcomment %}
               </h6>
               <div class="addit-box">
                 <div class="qty-box">
                   <div class="input-group">
+                    {% comment %} <button class="qty-minus" disabled></button> {% endcomment %}
+                    {% comment %} <input class="qty-adj form-control" type="number" value="{{product.quantity}}"/> {% endcomment %}
                     <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                             name="quantity{{forloop.counter}}" class="form-control input-number"
                                             value="{{product.quantity}}">
+                    {% comment %} <button class="qty-plus" disabled></button> {% endcomment %}
                   </div>
                 </div>
                 <div class="pro-add">
@@ -531,7 +539,7 @@
         <li>
           <div class="buttons">
             <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
           </div>
         </li>
       </ul>
@@ -543,7 +551,7 @@
 <!-- Add to cart bar end-->
 
 <!-- wishlistbar bar -->
-<div id="wishlist_side" class="add_to_cart right ">
+<div id="wishlist_side" class="add_to_cart right">
   <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
   <div class="cart-inner">
     <div class="cart_top">

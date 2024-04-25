@@ -82,8 +82,8 @@
                <div class="header-contain">
                   <div class="logo-block">
                      <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
-                     <div class="brand-logo logo-sm-center"> <a href="{% url 'index_default' %}"> <img
-                             src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid  " alt="logo">
+                     <div class="brand-logo logo-sm-center"> <a href="{% url 'index' %}"> <img
+                             src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid" alt="logo">
                      </a>
                      </div>
                   </div>
@@ -253,10 +253,10 @@
                         </ul>
                      </div>
                      <div class="logo-block">
-                        <div class="mobilecat-toggle "> <i class="fa fa-bars sidebar-bar"></i> </div>
+                        <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
                         <div class="brand-logo logo-sm-center">
-                           <a href="{% url 'index_default' %}">
-                              <img src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid  " alt="logo">
+                           <a href="{% url 'index' %}">
+                              <img src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>
                      </div>
@@ -459,9 +459,9 @@
                      <div class="col-12">
                         <div class="collection-banner-main banner-17 banner-style7 collection-color14 p-left text-center">
                            <div class="collection-img">
-                              <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                              <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                            </div>
-                           <div class="collection-banner-contain ">
+                           <div class="collection-banner-contain">
                               <div>
                                  <h3>{{banner.titleOne}}</h3>
                                  <h4>{{banner.titleTwo}}</h4>
@@ -480,9 +480,9 @@
                   <div class="col-4">
                      <div class="collection-banner-main banner-18 banner-style7 collection-color13 p-left text-center">
                         <div class="collection-img">
-                           <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                           <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                         </div>
-                        <div class="collection-banner-contain ">
+                        <div class="collection-banner-contain">
                            <div>
                               <h3>{{banner.titleOne}}</h3>
                               <h4>{{banner.titleTwo}}</h4>
@@ -566,12 +566,12 @@
                      <div class="product-imgbox">
                         <div class="product-front">
                            <a href="{% url 'left_slidebar' product.id %}">
-                              <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                              <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                            </a>
                         </div>
                         <div class="product-back">
                            <a href="{% url 'left_slidebar' product.id %}">
-                              <img src="{{product.productImageBack}}" class="img-fluid  " alt="product"> 
+                              <img src="{{product.productImageBack}}" class="img-fluid" alt="product"> 
                            </a>
                          </div>
                         <div class="product-icon icon-inline">
@@ -600,7 +600,7 @@
                            {{product.productDescription|safe}}
                         </div>
                      </div>
-                     <div class="product-detail product-detail2 ">
+                     <div class="product-detail product-detail2">
                         <div class="rating-star">
                            {% if product.productFinalRating|to_int < 5|to_int %}
                            {% for x in product.productFinalRating|times %}
@@ -677,9 +677,9 @@
          <div class="col-md-4">
             <div class="collection-banner-main p-center text-center p-top banner-16 banner-style7">
                <div class="collection-img">
-                  <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                </div>
-               <div class="collection-banner-contain ">
+               <div class="collection-banner-contain">
                   <div>
                      <h3>{{first_banner.titleone}}</h3>
                      <h4>{% if first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
@@ -700,9 +700,9 @@
                <div class="col-12">
                   <div class="collection-banner-main p-left text-center banner-13 banner-style7">
                      <div class="collection-img">
-                        <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                      </div>
-                     <div class="collection-banner-contain ">
+                     <div class="collection-banner-contain">
                         <div>
                            <h3>{{third_banner.titleOne}}</h3>
                            <h4>{{third_banner.titleTwo}}</h4>
@@ -717,9 +717,9 @@
                <div class="col-12">
                   <div class="collection-banner-main p-left text-center banner-13 banner-style7">
                      <div class="collection-img">
-                        <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                        <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                      </div>
-                     <div class="collection-banner-contain ">
+                     <div class="collection-banner-contain">
                         <div>
                            <h3>{{fourth_banner.titleOne}}</h3>
                            <h4>{{fourth_banner.titleTwo}}</h4>
@@ -736,9 +736,9 @@
          <div class="col-md-4">
             <div class="collection-banner-main p-center p-top text-center banner-16 banner-style7">
                <div class="collection-img">
-                  <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                </div>
-               <div class="collection-banner-contain ">
+               <div class="collection-banner-contain">
                   <div>
                      <h3>{{second_banner.titleOne}}</h3>
                      <h4>{{second_banner.titleTwo}}</h4>
@@ -1011,7 +1011,7 @@
 <!--sale banner ned-->
 
 <!--title-start-->
-<div class="title8 section-mb-space ">
+<div class="title8 section-mb-space">
    <h4>deal of the day</h4>
 </div>
 <!--title-end-->
@@ -1126,13 +1126,13 @@
 <!-- product start -->
 {% comment %} <section class="section-big-py-space">
    <div class="custom-container">
-      <div class="row ">
+      <div class="row">
          <div class="col-12 p-0">
             <div class="theme-tab product">
-               <div class="tab-content-cls ">
+               <div class="tab-content-cls">
                   {% for subcategory,products in products_by_subcategory.items %}
                   <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product-block3 {% endif %}" data-subcategory-id="{{ subcategory.id }}">
-                     <div class="col-12 ">
+                     <div class="col-12">
                         <div class="product-slide-3 no-arrow">
                            {% if products %}
                            {% for product in products %}
@@ -1224,12 +1224,12 @@
 </section> {% endcomment %}
 <section class="section-big-py-space">
    <div class="custom-container">
-      <div class="row ">
-         <div class="col-12 p-0">
+      <div class="row g-3">
+         <div class="col-12">
             <div class="theme-tab product">
-               <div class="tab-content-cls ">
-                  <div id="tab-1" class="tab-content active default product-block3">
-                     <div class="col-12 ">
+               <div class="tab-content-cls">
+                  <div id="tab-1" class="tab-content g-3 active default product-block3 row">
+                     <div class="col-12">
                         <div class="product-slide-3 no-arrow">
                            <div>
                               <div class="product-box3">
@@ -2100,7 +2100,7 @@
 
 
 <!--deal banner start-->
-<section class="deal-banner ">
+<section class="deal-banner">
    <div class="custom-container">
       <div class="row">
          <div class="col-md-12 col-lg-8">
@@ -2113,7 +2113,7 @@
                </h1>
             </div>
          </div>
-         <div class="col-md-12 col-lg-4 ">
+         <div class="col-md-12 col-lg-4">
             <div class="deal-banner-containe">
                <diV class="deal-btn">
                   <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
@@ -2136,7 +2136,7 @@
             <div class="discount-banner-contain">
                <h2>Discount on every single item on our site.</h2>
                <h1><span>OMG! Just Look at the</span> <span>great Deals!</span></h1>
-               <div class="rounded-contain ">
+               <div class="rounded-contain">
                   <div class="rounded-subcontain">
                      How does it feel, when you see great discount deals for each product?
                   </div>
@@ -2150,7 +2150,7 @@
 
 
 <!--title-start-->
-<div class="title8 section-big-my-space ">
+<div class="title8 section-big-my-space">
    <h4>our happy clients</h4>
 </div>
 <!--title-end-->
@@ -2245,7 +2245,7 @@
 <!--testimonial end-->
 
 <!--title-start-->
-<div class="title8 section-mb-space ">
+<div class="title8 section-mb-space">
    <h4>featured brands</h4>
 </div>
 <!--title-end-->
@@ -2342,7 +2342,7 @@
                      </div>
                      <div class="footer-contant">
                         <div class="footer-logo">
-                           <a href="{% url 'index_default' %}">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/mega-store/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>
@@ -2395,7 +2395,7 @@
                                  <span class="input-group-text"><i class="ti-user"></i></span>
                               </div>
                            </div>
-                           <div class="form-group ">
+                           <div class="form-group">
                               <div class="input-group">
                                  <input type="text" class="form-control" placeholder="enter email address" >
                                  <span class="input-group-text"><i class="ti-email"></i></span>
@@ -2412,7 +2412,7 @@
          </div>
       </div>
    </div>
-   <div class="subfooter dark-footer ">
+   <div class="subfooter dark-footer">
       <div class="container">
          <div class="row">
             <div class="col-xl-6 col-md-8 col-sm-12">
@@ -2441,14 +2441,14 @@
 <!--Newsletter modal popup start-->
 <div class="modal fade bd-example-modal-lg blackfriday-modal theme-modal " id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
    <div class="modal-dialog  modal-dialog-centered" role="document">
-      <div class="modal-content ">
+      <div class="modal-content">
          <div class="modal-body">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="rainbow">
                <span></span>
                <span></span>
             </div>
-            <div class="offer-content ">
+            <div class="offer-content">
                <img src="{% static 'assets/images/theme-modal/black-friday.jpg' %}" class="img-fluid bg-img" alt="">
                <div>
                   <div>

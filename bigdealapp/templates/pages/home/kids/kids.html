@@ -78,8 +78,8 @@
               </ul>
             </div>
             <div class="language-block">
-              <div class="curroncy-dropdown" id="currency-selection">
-                <select id="currency-selection-dropdown">
+              <div class="currency-dropdown" id="currency-selection">
+                <select id="currency-selection-dropdown" class="">
                    <option id="currency-value" value="%">Currency</option>
                    {% for cur in ""|return_currency %}
                    <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
@@ -174,15 +174,15 @@
               </ul>
             </div>
             <div class="brand-logo logo-sm-center">
-              <a href="{% url 'index_default' %}">
-                <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid  " alt="logo">
+              <a href="{% url 'index' %}">
+                <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid" alt="logo">
               </a>
             </div>
           </div>
           <div class="input-block">
             <div class="input-box">
               <form class="big-deal-form">
-                <div class="input-group ">                 
+                <div class="input-group">                 
                   <span class="search"><i class="fa fa-search"></i></span>                 
                   <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >                 
                   <select>
@@ -268,7 +268,7 @@
             </div>
             <div class="menu-nav">
                 <span class="toggle-nav">
-                  <i class="fa fa-bars "></i>
+                  <i class="fa fa-bars"></i>
                 </span>
             </div>
           </div>
@@ -290,8 +290,8 @@
           <div class="navbar-menu">
             <div class="logo-block">
               <div class="brand-logo logo-sm-center">
-                <a href="{% url 'index_default' %}">
-                  <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid  " alt="logo">
+                <a href="{% url 'index' %}">
+                  <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid" alt="logo">
                 </a>
               </div>
             </div>
@@ -538,7 +538,7 @@
 <!--home slider end-->
 
 <!--services start-->
-<section class="services1 section-py-space block ">
+<section class="services1 section-py-space block">
   <div class="custom-container">
     <div class="row">
       <div class="col-12 pr-0">
@@ -609,16 +609,15 @@
 {% if first_banner and second_banner and third_banner and fourth_banner and five_banner %}
 <section class="collection-banner b-g-white section-py-space">
   <div class="custom-container">
-    <div class="row collection-p3">
+    <div class="row g-3">
       <div class="col-md-4">
-        <div class="row">
-
+        <div class="row g-3">
           <div class="col-md-12">
             <div class="collection-banner-main p-left collection-color7 text-center banner-style5  banner-13">
               <div class="collection-img">
-                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{first_banner.titleOne}}</h3>
                   <h4>{{first_banner.titleTwo}}</h4>
@@ -630,9 +629,9 @@
           <div class="col-md-12">
             <div class="collection-banner-main p-left text-center collection-color10 banner-style5  banner-13">
               <div class="collection-img">
-                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{second_banner.titleOne}}</h3>
                   <h4>{{second_banner.titleTwo}}</h4>
@@ -644,13 +643,13 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div class="row">
+        <div class="row g-3">
           <div class="col-md-6">
             <div class="collection-banner-main p-left collection-color9 text-center banner-style5 banner-13">
               <div class="collection-img">
                 <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{third_banner.titleOne}}</h3>
                   <h4>up to{% if third_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
@@ -665,9 +664,9 @@
           <div class="col-md-6">
             <div class="collection-banner-main p-left collection-color11 text-center banner-style5 banner-13">
               <div class="collection-img">
-                <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{fourth_banner.titleOne}}</h3>
                   <h4>{{fourth_banner.titleTwo}}</h4>
@@ -679,9 +678,9 @@
           <div class="col-md-12">
             <div class="collection-banner-main p-left collection-color12 text-center banner-style5 banner-13">
               <div class="collection-img">
-                <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{five_banner.titleOne}}</h3>
                   <h4>{% if five_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
@@ -702,14 +701,14 @@
 <!--collection big banner end-->
 
 <!--title-start-->
-<div class="title8  section-big-pt-space ">
+<div class="title8  section-big-pt-space">
   <h4>new arrival product</h4>
 </div>
 <!--title-end-->
 
 
 <!-- media tab start -->
-<section class="ratio_40 section-big-pb-space ">
+<section class="ratio_40 section-big-pb-space">
   <div class="custom-container product">
     <div class="row">
       <div class="col pr-0">
@@ -722,7 +721,7 @@
                   <div class="tab-content" >
                     <div class="tab-pane fade show active" id="pro1" >
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                        <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                   </div>
@@ -751,7 +750,7 @@
 
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <ul class="nav nav-tabs color-variant" id="myTab" role="tablist">
                   <li class="nav-item " >
                     <a class="nav-link check-color pro-color1 active"  data-bs-toggle="tab" href="#pro1" ></a>
@@ -842,13 +841,13 @@
         <div class="slide-5 no-arrow">
           {% for product in kids_products %}
           <div>
-            <div class="product-box ">
+            <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
                   <div class="tab-content" >
                     <div class="tab-pane fade show active" id="pro25" >
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                        <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                   </div>
@@ -866,10 +865,10 @@
                   </a> 
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <ul class="nav nav-tabs color-variant" >
                   <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  "  data-bs-toggle="tab" href="#pro27" ></a>
+                    <a class="nav-link check-color pro-color1"  data-bs-toggle="tab" href="#pro27" ></a>
                   </li>
                   <li class="nav-item " >
                     <a class="nav-link check-color pro-color2 "  data-bs-toggle="tab" href="#pro26" ></a>
@@ -929,7 +928,7 @@
           </h1>
         </div>
       </div>
-      <div class="col-md-12 col-lg-4 ">
+      <div class="col-md-12 col-lg-4">
         <div class="deal-banner-containe">
           <diV class="deal-btn">
             <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
@@ -997,7 +996,7 @@
 <!--discount banner end-->
 
 <!--title-start-->
-<div class="title8 section-big-my-space ">
+<div class="title8 section-big-my-space">
   <h4>latest blog</h4>
 </div>
 <!--title-end-->
@@ -1041,17 +1040,17 @@
 <!--blog end-->
 
 <!--instagram start-->
-<section class="instagram ">
+<section class="instagram">
   <div class="container-fluid">
     <div class="row">
       <div class="col p-0 position-relative">
-        <div class="insta-contant1 ">
+        <div class="insta-contant1">
           <div class="slide-7 no-arrow">
             {% for banner in allbanners %}
             {% if banner.bannerType|to_str == 'Instagram' %}
             <div>
               <div class="instagram-box">
-                <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImage}}" class="img-fluid" alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
@@ -1081,7 +1080,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="{% url 'index_default' %}">
+                  <a href="{% url 'index' %}">
                     <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -1245,10 +1244,10 @@
 <!--Newsletter modal popup start-->
 <div class="modal fade bd-example-modal-lg cyber-monday  theme-modal " id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg  modal-dialog-centered" role="document">
-    <div class="modal-content ">
+    <div class="modal-content">
       <div class="modal-body">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="offer-content ">
+        <div class="offer-content">
           <img src="{% static 'assets/images/theme-modal/1.png' %}" class="img-fluid bg-img" alt="">
           <div>
             <div>
@@ -1303,7 +1302,7 @@
       <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
     </div>
     <div class="form-group">
-      <button class="btn btn-solid btn-md btn-block ">Login</button>
+      <button class="btn btn-solid btn-md btn-block">Login</button>
     </div>
     <div class="accout-fwd">
       <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>

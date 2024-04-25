@@ -4,7 +4,7 @@
 {% load mathfilters %}
 
 <!-- Add to cart bar -->
-<div id="cart_side" class="add_to_cart right ">
+<div id="cart_side" class="add_to_cart right">
     <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
     <div class="cart-inner">
        <div class="cart_top">
@@ -40,7 +40,9 @@
                      <div class="addit-box">
                      <div class="qty-box">
                         <div class="input-group">
+                           {% comment %} <button class="qty-minus"></button> {% endcomment %}
                            <input class="qty-adj form-control" readonly type="number" value="{{product.cartProductQuantity}}"/>
+                           {% comment %} <button class="qty-plus"></button> {% endcomment %}
                         </div>
                      </div>
                      <div class="pro-add">
@@ -144,7 +146,7 @@
           <li>
              <div class="buttons">
                 <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-                <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+                <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
              </div>
           </li>
           </ul>

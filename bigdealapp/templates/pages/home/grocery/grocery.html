@@ -47,10 +47,10 @@
           <div class="top-header-left">
             <ul>
               <li>
-                <a href="{% url 'index_default' %}">bigdeal ecommerce always free delevery</a>
+                <a href="{% url 'index' %}">bigdeal ecommerce always free delevery</a>
               </li>
               <li>
-                <a href="{% url 'index_default' %}"><i class="fa fa-phone"></i>Call Us: 123 - 456 - 7890</a>
+                <a href="{% url 'index' %}"><i class="fa fa-phone"></i>Call Us: 123 - 456 - 7890</a>
               </li>
             </ul>
           </div>
@@ -80,8 +80,8 @@
                 <i class="fa fa-bars sidebar-bar"></i>
               </div>
               <div class="brand-logo logo-sm-center">
-                <a href="{% url 'index_default' %}">
-                  <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid  " alt="logo">
+                <a href="{% url 'index' %}">
+                  <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
                 </a>
               </div>
               </div>   
@@ -182,10 +182,10 @@
                 </ul>
                   </div>
                   <div class="logo-block">
-                    <div class="mobilecat-toggle "> <i class="fa fa-bars sidebar-bar"></i> </div>
+                    <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
                     <div class="brand-logo logo-sm-center"> 
-                    <a href="{% url 'index_default' %} "> 
-                      <img src="{% static 'assets/images/tools/logo.png' %}" class="img-fluid  " alt="logo">
+                    <a href="{% url 'index' %}"> 
+                      <img src="{% static 'assets/images/tools/logo.png' %}" class="img-fluid" alt="logo">
                     </a> 
                   </div>
                   </div>
@@ -341,12 +341,12 @@
 <section class=" section-pb-space  grocery-slide bg-white home-slide">
   <div class="custom-container">
     <div class="row grocery-slide-block">     
-      <div class="col-md-12 ">
+      <div class="col-md-12">
         <div class="slide-1 no-arrow">
           {% for banner in allbanners  %}
           {% if banner.bannerType|to_str == 'Slider' %}
           <div>
-            <div class="slide-main ">
+            <div class="slide-main">
               <img  src="{{banner.bannerImageTwo}}" class="img-fluid bg-img " alt="grocery-slider">
               <div class="animat-block">
                 <img id="img-1" src="{{banner.bannerImage}}" class="img-fluid animat1" alt="grocery-slider">
@@ -418,11 +418,11 @@
         <div class="product-slide-5 product-m no-arrow">
           {% for product in grocery_products %}
           <div>
-            <div class="product-box ">
+            <div class="product-box">
                 <div class="product-imgbox">
                   <div class="product-front">
                     <a href="{% url 'left_slidebar' product.id %}">
-                      <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                      <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                     </a>
                   </div>
                   <div class="counter-cart">
@@ -461,7 +461,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="product-detail product-detail2 ">
+                <div class="product-detail product-detail2">
                   <a href="{% url 'left_slidebar' product.id %}">
                     <h3>{{product.productName}}</h3>
                   </a>
@@ -502,7 +502,7 @@
                 <div class="collection-img">
                   <img src="{{col_first_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                 </div>
-                <div class="collection-banner-contain ">
+                <div class="collection-banner-contain">
                   <div>
                     <h3>up to {% if col_first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                       {% else %}
@@ -517,9 +517,9 @@
             <div class="col-md-6">
               <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
                 <div class="collection-img">
-                  <img src="{{col_second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{col_second_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                 </div>
-                <div class="collection-banner-contain ">
+                <div class="collection-banner-contain">
                   <div>
                     <h3>up to {% if col_second_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                       {% else %}
@@ -538,9 +538,9 @@
              <div class="col-md-4">
               <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
                 <div class="collection-img">
-                  <img src="{{col_third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{col_third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                 </div>
-                <div class="collection-banner-contain ">
+                <div class="collection-banner-contain">
                   <div>
                     <h3>{{col_third_banner.titleOne}}</h3>
                     <h4>{{col_third_banner.titleTwo}}</h4>
@@ -552,9 +552,9 @@
         <div class="col-md-4">
           <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
             <div class="collection-img">
-              <img src="{{col_fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+              <img src="{{col_fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
             </div>
-            <div class="collection-banner-contain ">
+            <div class="collection-banner-contain">
               <div>
                 <h3>{{col_fourth_banner.titleOne}}</h3>
                 <h4>{{col_fourth_banner.titleTwo}}</h4>
@@ -566,9 +566,9 @@
         <div class="col-md-4">
           <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
             <div class="collection-img">
-              <img src="{{col_five_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+              <img src="{{col_five_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
             </div>
-            <div class="collection-banner-contain ">
+            <div class="collection-banner-contain">
               <div>
                 <h3>{{col_five_banner.titleOne}}</h3>
                 <h4>{{col_five_banner.titleTwo}}</h4>
@@ -605,19 +605,19 @@
   <div class="custom-container addtocart_count">
     <div class="row">
       <div class="col pr-0">
-        <div class="theme-tab product no-arrow ">
-          <div class="tab-content-cls ">
+        <div class="theme-tab product no-arrow">
+          <div class="tab-content-cls">
             {% for subcategory,products in products_by_subcategory.items  %}
             <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product {% endif %}">
               <div class="product-slide-5 product-m no-arrow">
                 {% if products %}
                 {% for product in products %}
                 <div>
-                  <div class="product-box ">
+                  <div class="product-box">
                       <div class="product-imgbox">
                         <div class="product-front">
                           <a href="{% url 'left_slidebar' product.id %}">
-                            <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                            <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                           </a>
                         </div>
                         <div class="counter-cart">
@@ -656,7 +656,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="product-detail product-detail2 ">
+                      <div class="product-detail product-detail2">
                         <a href="{% url 'left_slidebar' product.id %}">
                           <h3>{{product.productName}}</h3>
                         </a>
@@ -693,7 +693,7 @@
 <!-- product tab end -->
 
 <!--testimonial start-->
-<section class="testimonial block ">
+<section class="testimonial block">
   {% for banner in last_testimonial   %}
   <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
   {% endfor %}
@@ -707,7 +707,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{{banner.bannerImage}}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{{banner.bannerImage}}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>{{banner.titleOne}}</h5>
@@ -877,7 +877,7 @@
 
 
 <!--title-start-->
-<div class="title8  section-big-pt-space ">
+<div class="title8  section-big-pt-space">
   <h4>latest blog</h4>
 </div>
 <!--title-end-->
@@ -927,7 +927,7 @@
 
 
 <!-- subscribe start -->
-<section class="subscribe1 ">
+<section class="subscribe1">
       <img src="{% static 'assets/images/marketplace/subscribe2.png' %}"  alt="subscribe" class="bg-img img-fluid">
          <div class="container">
             <div class="row">
@@ -990,7 +990,7 @@
                   </div>
                   <div class="footer-contant">
                     <div class="footer-logo">
-                      <a href="{% url 'index_default' %}">
+                      <a href="{% url 'index' %}">
                         <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
                       </a>    
                     </div>

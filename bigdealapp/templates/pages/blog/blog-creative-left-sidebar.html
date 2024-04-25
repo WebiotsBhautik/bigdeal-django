@@ -33,15 +33,17 @@
                         <h4>Popular Blog</h4>
                         <ul class="popular-blog">
                             {% for blog in popular_blogs %}
-                            <li>
-                                <div class="media">
-                                    <div class="blog-date"><span>{{blog.updatedAt|date:"d"}} </span><span>{{blog.updatedAt|date:"M"}}</span></div>
-                                    <div class="media-body align-self-center">
-                                        <h6>{{blog.blogTitle}}</h6>
-                                        {% comment %} <p>0 hits</p> {% endcomment %}
-                                    </div>
-                                </div>
+                            <li class="media blog-box">
+                                <span>{{blog.updatedAt|date:"d"}} {{blog.updatedAt|date:"M"}}</span>
+                                <h6>{{blog.blogTitle}}</h6>
                                 <p>{{blog.blogDescription|safe}}</p>
+                                {% comment %} <div class="media">
+                                    <div class="blog-date">
+                                    </div>
+                                    <div class="media-body align-self-center">
+                                        <p>0 hits</p> 
+                                    </div>
+                                </div>{% endcomment %}
                             </li>
                             {% endfor %}
                         </ul>
@@ -56,7 +58,7 @@
                 <div class="row blog-media {% if forloop.counter|divisibleby:2 %}media-change {% endif %}">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a href="{% url 'blog_details' blog.id %}"><img src="/{{blog.blogImage}}" class="img-fluid  " alt="blog-left"></a>
+                            <a href="{% url 'blog_details' blog.id %}"><img src="/{{blog.blogImage}}" class="img-fluid" alt="blog-left"></a>
                             <div class="label-block">
                                 <div class="date-label">
                                   {{blog.createdAt|date:"d M Y"}}
@@ -64,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 ">
+                    <div class="col-xl-6">
                         <div class="blog-right">
                             <div>
                                 <a href="{% url 'blog_details' blog.id %}"><h4>{{blog.blogTitle}}</h4></a>

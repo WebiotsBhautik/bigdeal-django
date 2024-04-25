@@ -1250,9 +1250,9 @@ $('.feature-slide').slick({
   $('.language-dropdown-click').on('click', function (){
     $('.language-dropdown-open').slideToggle()
   });
-  $('.curroncy-dropdown-open').slideUp();
-  $('.curroncy-dropdown-click').on('click', function (){
-    $('.curroncy-dropdown-open').slideToggle()
+  $('.currency-dropdown-open').slideUp();
+  $('.currency-dropdown-click').on('click', function (){
+    $('.currency-dropdown-open').slideToggle()
   })
   $('.pro-up').hide();
   $('.mor-slide-open').slideUp();
@@ -3070,13 +3070,13 @@ $('.tap-top').on('click', function() {
 
 
   
-  /*=====================
-      25.  django Messages js
-  ==========================*/
+    /*=====================
+        25.  django Messages js
+    ==========================*/
 
-  setTimeout(function(){
-    $('#message').fadeOut('slow')
-  },5000)
+    setTimeout(function(){
+      $('#message').fadeOut('slow')
+    },5000)
 
 
 

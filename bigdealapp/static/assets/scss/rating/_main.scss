@@ -1,5 +1,6 @@
 @import "variables.scss";
 @import "mixins.scss";
+
 .antennaio {
     @include retina-image('../img/antenna.png', '../img/antenna$2x.png', 60px, 60px);
     background-repeat: no-repeat;
@@ -9,13 +10,11 @@
     display: block;
     margin: auto;
     font-weight: 400;
-    font-size: 0.6em; /* 12px */
+    font-size: 0.6em;
     line-height: 5.5;
     letter-spacing: 2px;
     margin-bottom: 7em;
-
-    -webkit-transition: color  2s;
-    transition: color  2s;
+    transition: color 2s;
 
     &:hover {
         color: $textColor;
@@ -37,7 +36,8 @@
 .section-intro {
     text-align: center;
     margin: 3em 0 4em 0;
-    max-height: 9999px; /* no font boosting please */
+    max-height: 9999px;
+    /* no font boosting please */
 
     h1 {
         line-height: 2.4;
@@ -49,7 +49,8 @@
     }
 
     p.tagline {
-        font-size: 0.8em; /* 16px */
+        font-size: 0.8em;
+        /* 16px */
         color: lighten($textColor, 20%);
         margin-bottom: 3em;
     }
@@ -64,7 +65,7 @@
     margin: 3em 0;
 }
 
-@mixin coloredDocs($color){
+@mixin coloredDocs($color) {
     header {
         background: $color;
     }
@@ -89,7 +90,8 @@
 
     code {
         font-family: $fontFamilyMonospaced;
-        font-size: 0.9em; /* 18px */
+        font-size: 0.9em;
+        /* 18px */
         color: $color;
     }
 }
@@ -97,16 +99,22 @@
 .docs {
     width: 800px;
     margin: auto;
-    max-height: 9999px; /* no font boosting please */
-    .how-to-use, .callbacks, .download {
+    max-height: 9999px;
+
+    /* no font boosting please */
+    .how-to-use,
+    .callbacks,
+    .download {
         @include coloredDocs($blueColor);
     }
 
-    .configuration, .faq {
+    .configuration,
+    .faq {
         @include coloredDocs($greenColor);
     }
 
-    .license, .methods {
+    .license,
+    .methods {
         @include coloredDocs($orangeColor);
     }
 
@@ -147,8 +155,8 @@
         text-align: center;
         font-weight: 400;
 
-        -webkit-transition: background-color  2s;
-        transition: background-color  2s;
+        -webkit-transition: background-color 2s;
+        transition: background-color 2s;
 
         &:hover {
             background-color: darken($greenColor, 5%);
@@ -192,11 +200,10 @@
    Media Queries
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
-
-}
+@media only screen and (min-width: 35em) {}
 
 @media print {
+
     .controls,
     .github,
     .antennaio {
@@ -224,6 +231,7 @@
     }
 
     .docs {
+
         .how-to-use,
         .callbacks,
         .download,
@@ -245,7 +253,8 @@
                 color: black;
             }
 
-            code, strong {
+            code,
+            strong {
                 color: black;
             }
 

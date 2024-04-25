@@ -4,15 +4,14 @@ from .import views
 urlpatterns = [
     
 # AUTHNTICATION ROUTES
-
-    path('admin/', views.index),
+    
     path('setCookie',views.setCookie, name='setCookie'),
     path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
     path('get_selected_currency',views.get_selected_currency,name='get_selected_currency'),
     path('add_cookie_currency',views.add_cookie_currency,name='add_cookie_currency'),
 
 
-    path('', views.index_default, name='index_default'),
+    path('', views.index, name='index'),
     path('signup_page', views.signup_page, name='signup_page'),
     path('login_page', views.login_page, name='login_page'),
     path('logout_page', views.logout_page, name='logout_page'),
@@ -32,7 +31,7 @@ urlpatterns = [
     
 # HOME PAGES ROUTES
 
-    path('index_default',views.index_default,name='index_default'),
+    path('index',views.index,name='index'),
     path('layout2',views.layout2,name='layout2'),
     path('layout3',views.layout3,name='layout3'),
     path('layout4',views.layout4,name='layout4'),
@@ -80,6 +79,13 @@ urlpatterns = [
     
     path('quick_view',views.quick_view,name='quick_view'),
 
+    # path('product-detail/<slug:brand_slug>', views.left_slidebar, name='left_slidebar_with_brands'),
+
+    # path('shop-left-sidebar/<slug:brand_slug>', views.products_by_brand, name='products_by_brand'),
+    
+    # path('shop-left-sidebar/<str:brand_id>', views.left_slidebar_with_brands, name='left_slidebar_with_brands'),
+    
+
     path('right_sidebar/<str:id>', views.right_sidebar, name='right_sidebar'),
     path('no_sidebar/<str:id>', views.no_sidebar, name='no_sidebar'),
     path('bundle/<str:id>', views.bundle, name='bundle'),
@@ -118,13 +124,19 @@ urlpatterns = [
     path('compare_products/<str:id>',views.compare_products,name='compare_products'),
     path('delete_compare_product/<str:id>',views.delete_compare_product, name='delete_compare_product'),
     
+    
     path('user_authenticate',views.user_authenticate, name='user_authenticate'),
+    # path('check_quantity/<str:id>', views.check_quantity, name='check_quantity'),
 
     
     path('page_not_found',views.page_not_found, name='page_not_found'),
+    path('faq_page',views.faq_page, name='faq_page'),
     path('coming_soon',views.coming_soon, name='coming_soon'),
     path('about_page',views.about_page, name='about_page'),
     path('review',views.review, name='review'),
+    path('typography',views.typography, name='typography'),
+    path('look_book',views.look_book, name='look_book'),
+    path('collection',views.collection, name='collection'),
     
     # User dashboard routes
     path('user_dashboard',views.user_dashboard,name='user_dashboard'),
@@ -146,6 +158,7 @@ urlpatterns = [
     path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
     path('cart_page', views.cart_page, name='cart_page'),
     path('delete_cart_product/<str:id>',views.delete_cart_product, name='delete_cart_product'),
+    # path('delete_cart_product_form_header_button/<str:id>',views.delete_cart_product_form_header_button,name='delete_cart_product_form_header_button'),
     path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
     
     
@@ -168,6 +181,7 @@ urlpatterns = [
     
     
     path('blog_left_sidebar',views.blog_left_sidebar, name='blog_left_sidebar'),
+    # path('left_sidebar_for_selected_category/<str:id>',views.left_sidebar_for_selected_category, name='left_sidebar_for_selected_category'),
     path('blog_right_sidebar',views.blog_right_sidebar, name='blog_right_sidebar'),
     path('blog_no_sidebar',views.blog_no_sidebar,name='blog_no_sidebar'),
     path('blog_creative_left_sidebar',views.blog_creative_left_sidebar,name='blog_creative_left_sidebar'),

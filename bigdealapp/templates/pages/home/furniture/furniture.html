@@ -79,7 +79,7 @@
               </ul>
             </div>
             <div class="language-block">
-              <div class="curroncy-dropdown" id="currency-selection">
+              <div class="currency-dropdown" id="currency-selection">
                 <select id="currency-selection-dropdown">
                    <option id="currency-value" value="%">Currency</option>
                    {% for cur in ""|return_currency %}
@@ -175,15 +175,15 @@
               </ul>
             </div>
             <div class="brand-logo logo-sm-center">
-              <a href="{% url 'index_default' %}">
-                <img src="{% static 'assets/images/furniture1/logo.png' %}" class="img-fluid  " alt="logo">
+              <a href="{% url 'index' %}">
+                <img src="{% static 'assets/images/furniture1/logo.png' %}" class="img-fluid" alt="logo">
               </a>
             </div>
           </div>
           <div class="input-block">
             <div class="input-box">
               <form class="big-deal-form">
-                <div class="input-group ">                 
+                <div class="input-group">                 
                     <span class="search"><i class="fa fa-search"></i></span>                 
                   <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >                 
                   <select>
@@ -269,7 +269,7 @@
             </div>
             <div class="menu-nav">
                 <span class="toggle-nav">
-                  <i class="fa fa-bars "></i>
+                  <i class="fa fa-bars"></i>
                 </span>
             </div>
           </div>
@@ -295,8 +295,8 @@
           <div class="navbar-menu">
             <div class="logo-block">
               <div class="brand-logo logo-sm-center">
-                <a href="{% url 'index_default' %}">
-                  <img src="{% static 'assets/images/furniture1/logo.png' %}" class="img-fluid  " alt="logo">
+                <a href="{% url 'index' %}">
+                  <img src="{% static 'assets/images/furniture1/logo.png' %}" class="img-fluid" alt="logo">
                 </a>
               </div>
             </div>
@@ -542,7 +542,7 @@
 <!--home slider end-->
 
 <!-- services start -->
-<section class="services1 section-pt-space ">
+<section class="services1 section-pt-space">
   <div class="custom-container">
     <div class="row">
       <div class="col-12 pr-0">
@@ -721,7 +721,7 @@
                   {{product.productDescription|safe}}
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <div class="rating-star">
                   {% if product.productFinalRating|to_int < 5|to_int %}
                   {% for x in product.productFinalRating|times %}
@@ -813,15 +813,15 @@
 {% if first_banner and second_banner and third_banner and  fourth_banner and five_banner  %}
 <section class="collection-banner b-g-white section-py-space">
   <div class="custom-container">
-    <div class="row collection-p1">
+    <div class="row g-3">
       <div class="col-md-4 col-sm-12">
-        <div class="row">
-          <div class="col-md-12 ">
+        <div class="row g-3">
+          <div class="col-md-12">
             <div class="collection-banner-main banner-10 banner-style3 p-right text-center">
               <div class="collection-img">
-                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{first_banner.titleOne}}</h3>
                   <h4>{{first_banner.titleTwo}}</h4>
@@ -832,12 +832,12 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12 ">
+          <div class="col-md-12">
             <div class="collection-banner-main banner-10 banner-style3 p-right text-center">
               <div class="collection-img">
-                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div >
                   <h3>up to{% if first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                     {% else %}
@@ -854,12 +854,12 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4 ">
-        <div class="collection-banner-main banner-11 banner-style3 p-right p-top  text-center ">
+      <div class="col-md-4">
+        <div class="collection-banner-main banner-11 banner-style3 p-right p-top  text-center">
           <div class="collection-img">
-            <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+            <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
           </div>
-          <div class="collection-banner-contain ">
+          <div class="collection-banner-contain">
             <div>
               <h3>{{third_banner.titleOne}}</h3>
               <h4>{{third_banner.titleTwo}}</h4>
@@ -871,13 +871,13 @@
         </div>
       </div>
       <div class="col-md-4 col-sm-12">
-        <div class="row">
-          <div class="col-md-12 ">
+        <div class="row g-3">
+          <div class="col-md-12">
             <div class="collection-banner-main banner-10  banner-style3 text-center p-right">
               <div class="collection-img">
-                <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div>
                   <h3>{{fourth_banner.titleOne}}</h3>
                   <h4>{{fourth_banner.titleTwo}}</h4>
@@ -888,12 +888,12 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12 ">
+          <div class="col-md-12">
             <div class="collection-banner-main banner-10 banner-style3 p-right text-center">
               <div class="collection-img">
-                <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
-              <div class="collection-banner-contain ">
+              <div class="collection-banner-contain">
                 <div >
                   <h3>{{five_banner.titleOne}}</h3>
                   <h4>{{five_banner.titleTwo}}</h4>
@@ -913,7 +913,7 @@
 <!--collection big banner end-->
 
 <!--testimonial start-->
-<section class="testimonial block section-mb-space ">
+<section class="testimonial block section-mb-space">
   {% for banner in allbanners  %}
   {% if banner.bannerType == 'Banner' %}
   <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
@@ -927,7 +927,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/1.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/1.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -940,7 +940,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -953,7 +953,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -970,7 +970,7 @@
 <!--testimonial end-->
 
 <!--tab product-->
-<section class="section-pb-space  " >
+<section class="section-pb-space" >
   <div class="tab-product-main tab-second">
     <div class="tab-prodcut-contain">
       <ul class="tabs tab-title">
@@ -991,7 +991,7 @@
 <!--media banner start-->
 <section class="section-pb-space">
   <div class="custom-container">
-    <div class="row ">
+    <div class="row">
       <div class="col-12">
         <div class="theme-tab">
           <div class="tab-content-cls">
@@ -1000,12 +1000,12 @@
               <div class="media-slide-5 no-arrow">
                 {% if products %}
                 <div>
-                  <div class="media-banner b-g-white1 border-0">
+                  <div class="media-banner b-g-white border-0">
                     {% for product in products|slice:"0:3" %}
                     <div class="media-banner-box">
                       <div class="media">
                         <a href="{% url 'left_slidebar' product.id %}">
-                          <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner">
+                          <img src="{{product.productImageFront}}" class="img-fluid" alt="banner">
                         </a>
                         <div class="media-body">
                           <div class="media-contant">
@@ -1082,13 +1082,13 @@
                   </div>
                 </div>
 
-                <div class="media-banner b-g-white1 border-0">
+                <div class="media-banner b-g-white border-0">
                   <div>
                   {% for product in products|slice:"3:6" %}
                     <div class="media-banner-box">
                       <div class="media">
                         <a href="{% url 'left_slidebar' product.id %}">
-                          <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner">
+                          <img src="{{product.productImageFront}}" class="img-fluid" alt="banner">
                         </a>
                         <div class="media-body">
                           <div class="media-contant">
@@ -1186,12 +1186,12 @@
     <div class="row layout-3-collection">
       {% for banner in allbanners  %}
       {% if banner.bannerType|to_str == 'Shop Banner' %}
-      <div class="col-md-6 ">
+      <div class="col-md-6">
         <div class="collection-banner-main banner-12 banner-style3 text-center p-right">
           <div class="collection-img">
             <img src="{{banner.bannerImage}}" class="img-fluid bg-img " alt="banner">
           </div>
-          <div class="collection-banner-contain ">
+          <div class="collection-banner-contain">
             <div>
               <h3>{{banner.titleOne}}</h3>
               <h4>{{banner.titleTwo}}</h4>
@@ -1251,7 +1251,7 @@
                   </a> 
                </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <div class="rating-star">
                   {% if product.productFinalRating|to_int < 5|to_int %}
                   {% for x in product.productFinalRating|times %}
@@ -1321,7 +1321,7 @@
 
 
 <!--category start-->
-<section class="category1 ">
+<section class="category1">
   <div class="custom-container">
     <div class="row">
       <div class="col-12 pr-0">
@@ -1367,7 +1367,7 @@
             <div class="blog-contain">
               <div class="blog-img">
                 <a href="{% url 'blog_details' blog.id %}">
-                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid ">
+                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid">
                 </a>
               </div>
               <div class="blog-details">
@@ -1398,13 +1398,13 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col p-0 position-relative">
-        <div class="insta-contant1 ">
+        <div class="insta-contant1">
           <div class="slide-7 no-arrow">
             {% for banner in allbanners  %}
             {% if banner.bannerType|to_str == 'Instagram' %}
             <div>
               <div class="instagram-box">
-                <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImage}}" class="img-fluid" alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
@@ -1428,7 +1428,7 @@
 
 <!--box categroy start-->
 <section class="box-category big-category section-py-space">
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <div class="row">
       <div class="col pl-0">
         <div class="category-slide5 no-arrow">
@@ -1451,7 +1451,7 @@
 
 <!-- footer start -->
 <footer>
-  <div class="footer1 ">
+  <div class="footer1">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -1462,7 +1462,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="{% url 'index_default' %}">
+                  <a href="{% url 'index' %}">
                     <img src="{% static 'assets/images/furniture1/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -1694,7 +1694,7 @@
       <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
     </div>
     <div class="form-group">
-      <button class="btn btn-solid btn-md btn-block ">Login</button>
+      <button class="btn btn-solid btn-md btn-block">Login</button>
     </div>
     <div class="accout-fwd">
       <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>

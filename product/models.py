@@ -525,3 +525,14 @@ class AttributeValue(models.Model):
 
     def __str__(self):
         return str(self.attributeValue) + " - " + str(self.attributeName)
+        
+            
+        
+        
+        
+        
+        
+        
+        
+        
+

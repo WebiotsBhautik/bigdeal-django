@@ -27,7 +27,7 @@
    <!-- Theme css -->
    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color6.scss' %}" media="screen" id="color">
 </head>
-<body class="bg-light ">
+<body class="bg-light">
 
 <!-- loader start -->
 <div class="loader-wrapper">
@@ -74,7 +74,7 @@
                      </ul>
                   </div>
                   <div class="language-block">
-                     <div class="curroncy-dropdown" id="currency-selection">
+                     <div class="currency-dropdown" id="currency-selection">
                         <select id="currency-selection-dropdown">
                            <option id="currency-value" value="%">Currency</option>
                            {% for cur in ""|return_currency %}
@@ -169,7 +169,7 @@
                         </ul>
                      </div>
                      <div class="brand-logo logo-sm-center">
-                        <a href="{% url 'index_default' %}">
+                        <a href="{% url 'index' %}">
                            <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid " alt="logo-header">
                         </a>
                      </div>
@@ -349,7 +349,7 @@
                      <div class="input-block">
                         <div class="input-box">
                            <form class="big-deal-form m-0">
-                              <div class="input-group ">
+                              <div class="input-group">
                                  <span class="search"><i class="fa fa-search"></i></span>
                                  <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >
                                  <select>
@@ -442,8 +442,8 @@
    <div class="custom-container">
       <div class="row">
          <div class="col-xl-8 col-lg-9 offset-xl-2 px-abjust">
-            <div class="slide-1 no-arrow ">
-               <div class="slide-1 no-arrow ">
+            <div class="slide-1 no-arrow">
+               <div class="slide-1 no-arrow">
                   {% comment %} {% for banner in allbanners  %} {% endcomment %}
                   {% comment %} {% if banner.bannerType|to_str == 'Slider' %} {% endcomment %}
                   <div>
@@ -498,7 +498,7 @@
          {% if banner.bannerType|to_str == 'Sideslider' %}
          <div class="col-xl-2 col-sm-3 pl-0 offer-banner">
             <div class="offer-banner-img">
-               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid  ">
+               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid ">
             </div>
          </div>
          {% endif %}
@@ -541,7 +541,7 @@
          <div class="col-md-2  pl-md-0">
             <div class="collection-banner-main p-top banner-6">
                <div class="collection-img">
-                  <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+                  <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
                </div>
                <div class="collection-banner-contain">
                   <div>
@@ -566,7 +566,7 @@
    <div class="container">
       <div class="row">
          <div class="col">
-            <div class="slide-6 no-arrow ">
+            <div class="slide-6 no-arrow">
                {% for category in subcategories %}
                <div>
                   <div class="category-contain">
@@ -595,7 +595,7 @@
    <section class="services services-inverse">
       <div class="container">
          <div class="row service-block">
-            <div class="col-lg-3 col-md-6  col-sm-12">
+            <div class="col-lg-3 col-12">
                <div class="media">
                   <svg height="679pt" viewBox="0 -117 679.99892 679" width="679pt" xmlns="http://www.w3.org/2000/svg"><path d="m12.347656 378.382812h37.390625c4.371094 37.714844 36.316407 66.164063 74.277344 66.164063 37.96875 0 69.90625-28.449219 74.28125-66.164063h241.789063c4.382812 37.714844 36.316406 66.164063 74.277343 66.164063 37.96875 0 69.902344-28.449219 74.285157-66.164063h78.890624c6.882813 0 12.460938-5.578124 12.460938-12.460937v-352.957031c0-6.882813-5.578125-12.464844-12.460938-12.464844h-432.476562c-6.875 0-12.457031 5.582031-12.457031 12.464844v69.914062h-105.570313c-4.074218.011719-7.890625 2.007813-10.21875 5.363282l-68.171875 97.582031-26.667969 37.390625-9.722656 13.835937c-1.457031 2.082031-2.2421872 4.558594-2.24999975 7.101563v121.398437c-.09765625 3.34375 1.15624975 6.589844 3.47656275 9.003907 2.320312 2.417968 5.519531 3.796874 8.867187 3.828124zm111.417969 37.386719c-27.527344 0-49.851563-22.320312-49.851563-49.847656 0-27.535156 22.324219-49.855469 49.851563-49.855469 27.535156 0 49.855469 22.320313 49.855469 49.855469 0 27.632813-22.21875 50.132813-49.855469 50.472656zm390.347656 0c-27.53125 0-49.855469-22.320312-49.855469-49.847656 0-27.535156 22.324219-49.855469 49.855469-49.855469 27.539063 0 49.855469 22.320313 49.855469 49.855469.003906 27.632813-22.21875 50.132813-49.855469 50.472656zm140.710938-390.34375v223.34375h-338.375c-6.882813 0-12.464844 5.578125-12.464844 12.460938 0 6.882812 5.582031 12.464843 12.464844 12.464843h338.375v79.761719h-66.421875c-4.382813-37.710937-36.320313-66.15625-74.289063-66.15625-37.960937 0-69.898437 28.445313-74.277343 66.15625h-192.308594v-271.324219h89.980468c6.882813 0 12.464844-5.582031 12.464844-12.464843 0-6.882813-5.582031-12.464844-12.464844-12.464844h-89.980468v-31.777344zm-531.304688 82.382813h99.703125v245.648437h-24.925781c-4.375-37.710937-36.3125-66.15625-74.28125-66.15625-37.960937 0-69.90625 28.445313-74.277344 66.15625h-24.929687v-105.316406l3.738281-5.359375h152.054687c6.882813 0 12.460938-5.574219 12.460938-12.457031v-92.226563c0-6.882812-5.578125-12.464844-12.460938-12.464844h-69.796874zm-30.160156 43h74.777344v67.296875h-122.265625zm0 0"/></svg>
                   <div class="media-body">
@@ -603,7 +603,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-6  col-sm-12">
+            <div class="col-lg-3 col-12">
                <div class="media">
                   <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 417.12 417.12" style="enable-background:new 0 0 417.12 417.12;" xml:space="preserve">
@@ -651,7 +651,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-6  col-sm-12 ">
+            <div class="col-lg-3 col-12">
                <div class="media">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 295.82 295.82" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 295.82 295.82">
                      <g>
@@ -667,7 +667,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-3 col-md-6  col-sm-12 ">
+            <div class="col-lg-3 col-12">
                <div class="media">
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 448 448" style="enable-background:new 0 0 448 448;" xml:space="preserve">
@@ -785,13 +785,13 @@
 
 <!--product box start -->
 <section class=" ratio_asos product  section-big-pb-space">
-   <div class="custom-container  addtocart_count ">
+   <div class="custom-container  addtocart_count">
       <div class="row">
          <div class="col pr-0">
             <div class="product-slide-6 no-arrow">
                {% for product in vegetable_products  %}
                <div>
-                  <div class="product-box ">
+                  <div class="product-box">
                      <div class="product-imgbox">
                         <div class="product-front">
                            <a href="{% url 'left_slidebar' product.id %}">
@@ -924,9 +924,9 @@
 {% if first_banner and second_banner and third_banner and four_banner and five_banner and six_banner  %}
 <section class="masonory-banner o-hidden">
    <div class="container-fluid">
-      <div class="row masonary-banner-block1 gutter-15">
-         <div class="col-xl-6 col-lg-12 ">
-            <div class="row">
+      <div class="row g-3">
+         <div class="col-xl-6">
+            <div class="row g-3">
                <div class="col-sm-6">
                   <div class="row masonary-banner-block">
                      {% if first_banner %}
@@ -964,7 +964,7 @@
                </div>
 
                {% if third_banner  %}
-               <div class="col-sm-6 ps-3">
+               <div class="col-sm-6">
                   <div class="masonary-banner-main">
                      <div class="masonory-banner-img masonory-img1">
                         <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
@@ -983,11 +983,11 @@
             </div>
          </div>
 
-         <div class="col-xl-6 col-lg-12 ">
-            <div class="row masonary-banner-block masonary-inner1">
+         <div class="col-xl-6 col-12">
+            <div class="row g-3">
                {% if four_banner and five_banner  %}
-               <div class="col-md-12">
-                  <div class="row masonary-banner-block2">
+               <div class="col-12">
+                  <div class="row g-3">
                      <div class="col-sm-6 pr-0">
                         <div class="masonary-banner-main">
                            <div class="masonory-banner-img">
@@ -1019,7 +1019,7 @@
                {% endif %}
 
                {% if six_banner %}
-               <div class="col-md-12 pr-0">
+               <div class="col-md-12">
                   <div class="masonary-banner-main">
                      <div class="masonory-banner-img">
                         <img src="{{six_banner.bannerImage}}" alt="masonary-banner" class="img-fluid bg-img">
@@ -1059,12 +1059,12 @@
 <!--tab product-->
 
 <!-- product tab  -->
-<section class="section-pt-space ratio_square ">
+<section class="section-pt-space ratio_square">
    <div class="custom-container addtocart_count">
       <div class="row">
          <div class="col pr-0">
             <div class="theme-tab product no-arrow mb--5">
-               <div class="tab-content-cls ">
+               <div class="tab-content-cls">
                   {% for subcategory,products in products_by_subcategory.items %}
                   <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product {% endif %}">
                      <div class="product-slide-6 no-arrow">
@@ -1197,7 +1197,7 @@
 {% if banner.bannerType|to_str == 'Parallax banner' %}
 <section class="section-big-pt-space">
    <div class="full-banner parallax text-left p-left">
-      <img src="{{banner.bannerImage}}" alt="" class="bg-img ">
+      <img src="{{banner.bannerImage}}" alt="" class="bg-img">
       <div class="container">
          <div class="row">
             <div class="col">
@@ -1217,13 +1217,13 @@
 <!-- Parallax banner end -->
 
 <!--title start-->
-<div class="title4 ">
+<div class="title4">
    <h4>latest <span>blog</span></h4>
 </div>
 <!--title end-->
 
 <!--blog start-->
-<section class="blog section-big-mb-space mb--5 ">
+<section class="blog section-big-mb-space mb--5">
    <div class="custom-container">
       <div class="row">
          <div class="col pr-0">
@@ -1267,7 +1267,7 @@
 
 
 <!-- subscribe start -->
-<section class="subscribe1 ">
+<section class="subscribe1">
    <img src="{% static 'assets/images/marketplace/subscribe2.png' %}"  alt="subscribe" class="bg-img img-fluid">
    <div class="container">
       <div class="row">
@@ -1319,7 +1319,7 @@
 
 <!-- footer start -->
 <footer>
-   <div class="footer1 ">
+   <div class="footer1">
       <div class="container">
          <div class="row">
             <div class="col-12">
@@ -1330,7 +1330,7 @@
                      </div>
                      <div class="footer-contant">
                         <div class="footer-logo">
-                           <a href="{% url 'index_default' %}">
+                           <a href="{% url 'index' %}">
                               <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid" alt="logo">
                            </a>
                         </div>
@@ -1553,7 +1553,7 @@
            <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
          </div>
          <div class="form-group">
-           <button class="btn btn-solid btn-md btn-block ">Login</button>
+           <button class="btn btn-solid btn-md btn-block">Login</button>
          </div>
          <div class="accout-fwd">
            <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>

@@ -16,15 +16,15 @@
               {% if page_obj %}
               {% for obj in page_obj %}
                 <div class="row blog-media">
-                    <div class="col-xl-6 ">
+                    <div class="col-xl-6">
                         <div class="blog-left">
-                            <a href="{% url 'blog_details' obj.id %}"><img src="{{obj.blogImage}}"  class="img-fluid  " alt="blog"></a>
+                            <a href="{% url 'blog_details' obj.id %}"><img src="{{obj.blogImage}}"  class="img-fluid" alt="blog"></a>
                             <div class="date-label">
                                 {{obj.createdAt|date:"d M Y"}}
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 ">
+                    <div class="col-xl-6">
                         <div class="blog-right">
                             <div>
                                 <a href="{% url 'blog_details' obj.id %}"><h4>{{obj.blogTitle}}</h4> </a>
@@ -49,7 +49,7 @@
 
                         {% for num in page_obj.paginator.page_range %}
                         {% if page_obj.number == num %}
-                        <span class="current-page">{{ num }}</span>
+                        <a href="#!" class="current-page">{{ num }}</a>
                         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                         <a href="?page={{ num }}" class="page">{{ num }}</a>
                         {% endif %}

@@ -171,9 +171,9 @@ class AdminAdmin(admin.ModelAdmin):
 class VendorAdmin(admin.ModelAdmin):
     list_display = ('vendorName','vendor','vendorContact','vendorGst','vendorWalletBalance','created_at')
 
-@admin.register(TemporaryData)
-class TemporaryDataAdmin(admin.ModelAdmin):
-    list_display = ('TemporaryDataByUser','otpNumber','otpExpiryTime')
+# @admin.register(TemporaryData)
+# class TemporaryDataAdmin(admin.ModelAdmin):
+#     list_display = ('TemporaryDataByUser','otpNumber','otpExpiryTime')
     
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):

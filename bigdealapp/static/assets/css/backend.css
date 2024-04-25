@@ -693,7 +693,9 @@ input[type=checkbox]:checked:before {
       -ms-flex-align: center;
           align-items: center;
 }
-
+/* .form-group label span {
+  display: none;
+} */
 .form-group [class*=field-] input,
 .form-group [class*=field-] textarea {
   border: 1px solid #e5e5e5;

@@ -103,7 +103,7 @@
                     </a> 
                   </div>
                 </div>
-                <div class="product-detail detail-inline ">
+                <div class="product-detail detail-inline">
                   <div class="detail-title">
                     <div class="detail-left">
                       <div class="rating-star">
@@ -188,7 +188,7 @@
 
 
   <!-- Add to cart bar -->
-  <div id="cart_side" class="add_to_cart right ">
+  <div id="cart_side" class="add_to_cart right">
     <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
     <div class="cart-inner">
       <div class="cart_top">
@@ -262,7 +262,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm ">checkout</a>
+              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">checkout</a>
             </div>
           </li>
         </ul>
@@ -335,7 +335,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
             </div>
           </li>
         </ul>
@@ -431,7 +431,7 @@
   <div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
-              <div class="modal-body modal1 ">
+              <div class="modal-body modal1">
                   <div class="container-fluid p-0">
                       <div class="row">
                           <div class="col-12">
@@ -606,7 +606,7 @@
   
   
   <!-- added to cart notification -->
-  <div class="added-notification ">
+  <div class="added-notification">
       <img src="{% static 'assets/images/product-sidebar/001.jpg' %}" class="img-fluid" alt="">
       <h3>added to cart</h3>
   </div>
@@ -891,7 +891,7 @@
       for (let j = 1; j <= 5; j++) {
         let ratingLi = document.createElement("li"),
           icon = document.createElement("i");
-        icon.setAttribute("class", "fas fa-star");
+        icon.setAttribute("class", "fa fa-star");
         if (j <= data.productFinalRating) {
           icon.classList.add("theme-color");
         }
@@ -935,7 +935,7 @@
           ).then((Data) => {
             document.getElementById("productPrice").innerHTML =
               Data.symbol +
-              " " +
+            " " +
               Data.value1
               
           });
@@ -946,7 +946,7 @@
           ).then((Data) => {
             document.getElementById("actualPriceAtQuickView").innerHTML =
               Data.symbol +
-              " " +
+            " " +
               Data.value1
               
           });
@@ -1152,7 +1152,7 @@
 
           GetConvertedValues(data.productVariantActualPrice).then((Data) => {
             document.getElementById("actualPriceAtQuickView").innerHTML = Data.symbol +
-              " " + Data.value;
+            " " + Data.value;
           });
 
           document.getElementById("discountPercentageAtQuickView").innerHTML = data

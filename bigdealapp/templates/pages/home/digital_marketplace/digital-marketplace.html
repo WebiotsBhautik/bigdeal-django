@@ -30,7 +30,7 @@
   <!-- Theme css -->
   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color15.scss' %}" media="screen" id="color">
 </head>
-<body class="bg-white ">
+<body class="bg-white">
 
 <!-- loader start -->
 <div class="loader-wrapper">
@@ -77,7 +77,7 @@
               </ul>
             </div>
             <div class="language-block">
-              <div class="curroncy-dropdown" id="currency-selection">
+              <div class="currency-dropdown" id="currency-selection">
                 <select id="currency-selection-dropdown">
                    <option id="currency-value" value="%">Currency</option>
                    {% for cur in ""|return_currency %}
@@ -173,15 +173,15 @@
               </ul>
             </div>
             <div class="brand-logo logo-sm-center">
-              <a href="{% url 'index_default'  %}">
-                <img src="{% static 'assets/images/marketplace/logo.png' %}" class="img-fluid  " alt="logo">
+              <a href="{% url 'index'  %}">
+                <img src="{% static 'assets/images/marketplace/logo.png' %}" class="img-fluid" alt="logo">
               </a>
             </div>
           </div>
           <div class="input-block">
             <div class="input-box">
-              <form class="big-deal-form ">
-                <div class="input-group ">
+              <form class="big-deal-form">
+                <div class="input-group">
                   <div class="input-group-text">
                     <span class="search"><i class="fa fa-search"></i></span>
                   </div>
@@ -271,7 +271,7 @@
             </div>
             <div class="menu-nav">
                 <span class="toggle-nav">
-                  <i class="fa fa-bars "></i>
+                  <i class="fa fa-bars"></i>
                 </span>
             </div>
           </div>
@@ -297,8 +297,8 @@
           <div class="navbar-menu">
             <div class="logo-block">
               <div class="brand-logo logo-sm-center">
-                <a href="{% url 'index_default'  %}">
-                  <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid  " alt="logo">
+                <a href="{% url 'index'  %}">
+                  <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                 </a>
               </div>
             </div>
@@ -558,7 +558,7 @@
 <!-- title end -->
 
 <!-- key-feature start -->
-<section class="key-feature b-g-white ">
+<section class="key-feature b-g-white">
   <div class="container">
     <div class="row">
       <div class="col-12 pr-0">
@@ -597,7 +597,7 @@
 <!-- product box start -->
 <section class="our-gallery b-g-white section-big-pb-space">
   <div class="custom-container">
-    <div class="row  ">
+    <div class="row ">
       <div class="col-12 p-0">
         <div class="theme-tab">
           <div class="tab-content-cls">
@@ -804,8 +804,8 @@
 <section class="services1  block style2   border-services b-g-white">
   <div class="custom-container">
     <div class="row service-block">
-      <div class="col-12 ">
-        <div class="services-slide4 no-arrow ">
+      <div class="col-12">
+        <div class="services-slide4 no-arrow">
           <div>
             <div class="services-box">
               <div class="media">
@@ -883,7 +883,7 @@
   <section class="pricing-table3 b-g-white">
     <div class="custom-container">
       <div class="row price-block">
-        <div class="col-12 ">
+        <div class="col-12">
           <div class="pricing-slide4 no-arrow">
             <div>
                 <div class="pricing-box">
@@ -988,7 +988,7 @@
   <section class="blog  section-big-pb-space b-g-white blog-inverce">
     <div class="custom-container">
       <div class="row blog-block">
-        <div class="col-12 ">
+        <div class="col-12">
           <div class="blog-slide-4 no-arrow">
             {% if blogs %}
             {% for blog in blogs %}
@@ -1024,7 +1024,7 @@
 
 
 <!-- subscribe start -->
-<section class="subscribe1 ">
+<section class="subscribe1">
   <img src="{% static 'assets/images/marketplace/subscribe2.png' %}"  alt="subscribe" class="bg-img img-fluid">
          <div class="container">
             <div class="row">
@@ -1147,7 +1147,7 @@
           </div>
       </div>
     </div>
-    <div class="subfooter dark-footer ">
+    <div class="subfooter dark-footer">
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-md-8 col-sm-12">
@@ -1265,7 +1265,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
+                      <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid"></div>
                     </div>
                   </div>
                 </div>
@@ -1369,7 +1369,7 @@
       <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
     </div>
     <div class="form-group">
-      <button class="btn btn-solid btn-md btn-block ">Login</button>
+      <button class="btn btn-solid btn-md btn-block">Login</button>
     </div>
     <div class="accout-fwd">
       <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>

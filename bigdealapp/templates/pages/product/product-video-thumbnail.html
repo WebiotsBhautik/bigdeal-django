@@ -38,7 +38,7 @@
             <h5 class="title-border">new product</h5>
             <div class="slide-1">
               <div>
-                <div class="media-banner plrb-0 b-g-white1 border-0">
+                <div class="media-banner plrb-0 b-g-white border-0">
                   {% for product in last_added_products|slice:"6:9" %}
                   <div class="media-banner-box">
                     <div class="media">
@@ -89,7 +89,7 @@
                 </div>
               </div>
               <div>
-                <div class="media-banner plrb-0 b-g-white1 border-0">
+                <div class="media-banner plrb-0 b-g-white border-0">
                   {% for product in last_added_products|slice:"3:6" %}
                   <div class="media-banner-box">
                     <div class="media">
@@ -140,7 +140,7 @@
                 </div>
               </div>
               <div>
-                <div class="media-banner plrb-0 b-g-white1 border-0">
+                <div class="media-banner plrb-0 b-g-white border-0">
                   {% for product in last_added_products|slice:"0:3" %}
                   <div class="media-banner-box">
                     <div class="media">
@@ -201,9 +201,9 @@
                 <div class="filter-main-btn mb-2"><span class="filter-btn"><i class="fa fa-filter" aria-hidden="true"></i> filter</span></div>
               </div>
             </div>
-            <div class="row ">
+            <div class="row">
               <div class="col-lg-5">
-                <div class="product-slick ">
+                <div class="product-slick">
                   {% for image in images %}
                   <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-{{image.id}}"></div>
                   {% endfor %}
@@ -237,7 +237,7 @@
                 </div>
               </div>
               <div class="col-lg-7 rtl-text">
-                <div class="product-right ">
+                <div class="product-right">
                   <div class="pro-group">
                     <h2>{{product.productName}}</h2>
                     <ul class="pro-price" id="productFinalPrice">

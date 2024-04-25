@@ -8,7 +8,7 @@
 {% block components %}
 
 <!-- product slider -->
-<section class="ratio_asos  product b-g-light  mb--10 ">
+<section class="ratio_asos  product b-g-light  mb--10">
     <div class="custom-container">
         <div class="row">
             <div class="col pr-0">
@@ -52,7 +52,7 @@
                         on sale
                       </div>
                     </div>
-                    <div class="product-detail detail-inline ">
+                    <div class="product-detail detail-inline">
                       <div class="detail-title">
                         <div class="detail-left">
                           <div class="rating-star">
@@ -138,7 +138,7 @@
 <!--title end-->
 
 <!--four row product slider -->
-<section class="b-g-light ">
+<section class="b-g-light">
     <div class="custom-container">
         <div class="row multiple-slider">
             <div class="col-lg-3 col-sm-6">
@@ -146,11 +146,11 @@
                     <h5 class="title-border">new products</h5>
                     <div class="slide-1">
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"0:3"  %}
                               <div class="media-banner-box">
                                 <div class="media">
-                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                   <div class="media-body">
                                     <div class="media-contant">
                                       <div>
@@ -184,11 +184,11 @@
                           </div>
                         </div>
                         <div>
-                          <div class="media-banner b-g-white1 border-0">
+                          <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"3:6"  %}
                             <div class="media-banner-box">
                               <div class="media">
-                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                 <div class="media-body">
                                   <div class="media-contant">
                                     <div>
@@ -229,11 +229,11 @@
                     <h5 class="title-border">onsale products</h5>
                     <div class="slide-1">
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"6:9" %}
                               <div class="media-banner-box">
                                 <div class="media">
-                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                   <div class="media-body">
                                     <div class="media-contant">
                                       <div>
@@ -270,11 +270,11 @@
                           </div>
                         </div>
                         <div>
-                          <div class="media-banner b-g-white1 border-0">
+                          <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"9:12"  %}
                             <div class="media-banner-box">
                               <div class="media">
-                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                 <div class="media-body">
                                   <div class="media-contant">
                                     <div>
@@ -315,11 +315,11 @@
                     <h5 class="title-border">feature products</h5>
                     <div class=" slide-1">
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"12:15"  %}
                               <div class="media-banner-box">
                                 <div class="media">
-                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                   <div class="media-body">
                                     <div class="media-contant">
                                       <div>
@@ -353,11 +353,11 @@
                           </div>
                         </div>
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"15:18" %}
                             <div class="media-banner-box">
                               <div class="media">
-                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                 <div class="media-body">
                                   <div class="media-contant">
                                     <div>
@@ -398,11 +398,11 @@
                     <h5 class="title-border">best seller products</h5>
                     <div class=" slide-1">
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"18:21" %}
                               <div class="media-banner-box">
                                 <div class="media">
-                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                  <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                   <div class="media-body">
                                     <div class="media-contant">
                                       <div>
@@ -436,11 +436,11 @@
                           </div>
                         </div>
                         <div>
-                           <div class="media-banner b-g-white1 border-0">
+                           <div class="media-banner b-g-white border-0">
                             {% for product in recent_products|slice:"21:24" %}
                             <div class="media-banner-box">
                               <div class="media">
-                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
+                                <a href="{% url 'left_slidebar' product.id %}" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid" alt="banner"> </a>
                                 <div class="media-body">
                                   <div class="media-contant">
                                     <div>
@@ -482,7 +482,7 @@
 <!-- product slider end -->
 
 <!--title start-->
-<div class="title6 ">
+<div class="title6">
     <h4>tab with multi slider</h4>
 </div>
 <!--title end-->
@@ -500,7 +500,7 @@
             <li class=""><a href="tab-10">On Sale</a></li>
           </ul>
           <div class="tab-content-cls">
-            <div id="tab-7" class="tab-content active default ">
+            <div id="tab-7" class="tab-content active default">
               <div class="media-slide-5 product-m no-arrow">
                 <div>
                   <div class="media-banner media-banner-1 border-0">
@@ -794,7 +794,7 @@
                 </div>
               </div>
             </div>
-            <div id="tab-8" class="tab-content ">
+            <div id="tab-8" class="tab-content">
               <div class="media-slide-5 product-m no-arrow">
                 <div>
                   <div class="media-banner media-banner-1 border-0">
@@ -1364,7 +1364,7 @@
                 </div>
               </div>
             </div>
-            <div id="tab-9" class="tab-content ">
+            <div id="tab-9" class="tab-content">
               <div class="media-slide-5 product-m no-arrow">
                 <div>
                   <div class="media-banner media-banner-1 border-0">
@@ -1934,7 +1934,7 @@
                 </div>
               </div>
             </div>
-            <div id="tab-10" class="tab-content ">
+            <div id="tab-10" class="tab-content">
               <div class="media-slide-5 product-m no-arrow">
                 <div>
                   <div class="media-banner media-banner-1 border-0">

@@ -7,12 +7,12 @@
 
 {% block components %}
 
-<div class="title6 ">
+<div class="title6">
   <h4>product style 1</h4>
 </div>
 
 <!--element product box start -->
-<section class=" ratio_asos product b-g-light ">
+<section class=" ratio_asos product b-g-light">
   <div class="custom-container">
     <div class="row">
       <div class="col pr-0">
@@ -23,12 +23,12 @@
                 <div class="product-imgbox">
                     <div class="product-front">
                       <a href="{% url 'left_slidebar' product.id %}">
-                          <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                          <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                     <div class="product-back">
                       <a href="{% url 'left_slidebar' product.id %}">
-                          <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product">
+                          <img src="/{{product.productImageBack}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                     <div class="product-icon">
@@ -140,7 +140,7 @@
 
 <!--element product box start -->
 <section class=" ratio_asos product  section-big-pb-space">
-  <div class="custom-container ">
+  <div class="custom-container">
     <div class="row">
       <div class="col pr-0">
         <div class="product-slide-6 product-m no-arrow">
@@ -150,12 +150,12 @@
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageBack}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 
@@ -180,7 +180,7 @@
                   on sale
                 </div>
               </div>
-              <div class="product-detail detail-inline ">
+              <div class="product-detail detail-inline">
                 <div class="detail-title">
                   <div class="detail-left">
                     <div class="rating-star">
@@ -263,7 +263,7 @@
 </div>
 
 <!--element product box start -->
-<section class=" ratio_asos product -big-pt-space b-g-light ">
+<section class=" ratio_asos product -big-pt-space b-g-light">
   <div class="custom-container">
     <div class="row">
       <div class="col pr-0">
@@ -274,7 +274,7 @@
                 <div class="product-imgbox">
                     <div class="product-front">
                       <a href="{% url 'left_slidebar' product.id %}">
-                      <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                      <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                     <div class="product-icon icon-center">
@@ -380,7 +380,7 @@
 </div>
 
 <!--element product box start -->
-<section class=" ratio_asos product  b-g-light ">
+<section class=" ratio_asos product  b-g-light">
   <div class="custom-container">
     <div class="row">
       <div class="col pr-0">
@@ -391,11 +391,11 @@
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                  <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product"></a>
+                  <img src="/{{product.productImageFront}}" class="img-fluid" alt="product"></a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product"></a>
+                    <img src="/{{product.productImageBack}}" class="img-fluid" alt="product"></a>
                 </div>
                 <div class="new-label3">
                   <div>new</div>
@@ -500,13 +500,13 @@
 
 <!--product box start -->
 <section class=" ratio_asos product">
-  <div class="custom-container  addtocart_count ">
+  <div class="custom-container  addtocart_count">
     <div class="row">
       <div class="col pr-0">
         <div class="product-slide-6 no-arrow">
           {% for product in ms5_products %}
           <div>
-            <div class="product-box ">
+            <div class="product-box">
                 <div class="product-imgbox">
                   <div class="product-front">
                       <a href="{% url 'left_slidebar' product.id %}">
@@ -643,12 +643,12 @@
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageBack}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
@@ -672,7 +672,7 @@
                   on sale
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <div class="rating-star">
                   {% if product.productFinalRating|to_int < 5|to_int %}
                   {% for x in product.productFinalRating|times %}
@@ -758,22 +758,22 @@
                   <div class="tab-content" >
                     <div class="tab-pane fade show active" id="pro1" >
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                        <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                       </a>
                     </div>  
                     <div class="tab-pane fade" id="pro2">
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product">
+                        <img src="/{{product.productImageBack}}" class="img-fluid" alt="product">
                       </a>
                     </div>
                     <div class="tab-pane fade" id="pro3">
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="{% static 'assets/images/kids/product/6.jpg' %}" class="img-fluid  " alt="product">
+                        <img src="{% static 'assets/images/kids/product/6.jpg' %}" class="img-fluid" alt="product">
                       </a>
                     </div>
                     <div class="tab-pane fade" id="pro4">
                       <a href="{% url 'left_slidebar' product.id %}">
-                        <img src="{% static 'assets/images/kids/product/5.jpg' %}" class="img-fluid  " alt="product">
+                        <img src="{% static 'assets/images/kids/product/5.jpg' %}" class="img-fluid" alt="product">
                       </a>
                     </div>
                   </div>
@@ -796,7 +796,7 @@
                   on sale
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <ul class="nav nav-tabs color-variant" id="myTab" role="tablist">
                   <li class="nav-item " >
                     <a class="nav-link check-color pro-color1 active"  data-bs-toggle="tab" href="#pro1" ></a>
@@ -849,21 +849,21 @@
 <!--product start-->
 <section class="product">
   <div class="custom-container">
-    <div class="row ">
+    <div class="row">
       <div class="col pr-0">
         <div class="product-slide-5 product-m no-arrow">
           {% for product in pets_products %}
           <div>
-            <div class="product-box ">
+            <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageBack}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageBack}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-icon icon-top">
@@ -882,7 +882,7 @@
                   <div>new</div>
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <div class="rating-star">
                   {% if product.productFinalRating|to_int < 5|to_int %}
                   {% for x in product.productFinalRating|times %}
@@ -962,11 +962,11 @@
         <div class="product-slide-5 product-m no-arrow">
           {% for product in kids_products %}
           <div>
-            <div class="product-box ">
+            <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="/{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="/{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="counter-cart">
@@ -1000,7 +1000,7 @@
                   <div>new</div>
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <a href="{% url 'left_slidebar' product.id %}">
                   <h3>{{product.productName}}</h3>
                 </a>
@@ -1142,12 +1142,12 @@
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}"> 
-                    <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
@@ -1162,7 +1162,7 @@
                   </a>
                 </div>
               </div>
-              <div class="product-detail product-detail2 ">
+              <div class="product-detail product-detail2">
                 <div class="rating-star">
                   {% if product.productFinalRating|to_int < 5|to_int %}
                   {% for x in product.productFinalRating|times %}
@@ -1258,7 +1258,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="/index_default">
+                  <a href="index.html">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -1311,7 +1311,7 @@
                       <span class="input-group-text"><i class="ti-user"></i></span>                      
                     </div>
                   </div>
-                  <div class="form-group ">
+                  <div class="form-group">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="enter email address" >                     
                       <span class="input-group-text"><i class="ti-email"></i></span>                     
@@ -1328,7 +1328,7 @@
       </div>
     </div>
   </div>
-  <div class="subfooter dark-footer ">
+  <div class="subfooter dark-footer">
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-md-8 col-sm-12">
@@ -1453,7 +1453,7 @@
 
 
 <!-- wishlistbar bar -->
-<div id="wishlist_side" class="add_to_cart right ">
+<div id="wishlist_side" class="add_to_cart right">
   <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
   <div class="cart-inner">
     <div class="cart_top">
@@ -1611,7 +1611,7 @@
         <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
       </div>
       <div class="form-group">
-        <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+        <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block">Login</a>
       </div>
       <div class="accout-fwd">
         <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>

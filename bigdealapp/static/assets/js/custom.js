@@ -49,7 +49,6 @@
       var productTabAreaControlValue = "product-tab";
     
       var productTabElement = document.querySelector("[aria-controls='" + productTabAreaControlValue + "']");
-      console.log("dropdownValue dropdownValue dropdownValue ====>",dropdownValue)
       if(dropdownValue==""){
         productTabElement.classList.add("d-none");
       }
@@ -93,7 +92,6 @@
               {
               // var deleteCheckbox = productForms[i].getElementsByClassName("vCheckboxLabel inline");
               var deleteCheckbox = productForms[i].querySelector('input[type=checkbox]')
-              console.log('deleteCheckbox.checked ===>',deleteCheckbox.checked);
               if(deleteCheckbox.checked){
                 productForms[i].classList.add("d-none");
               }
@@ -322,34 +320,5 @@
         updateInlines();
       });
     });
-
-
-// ====================================================================================
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Get the main-sidebar element
-  var mainSidebar = document.getElementById('jazzy-sidebar');
-
-  // Get all the menu items within the main-sidebar
-  var menuItems = mainSidebar.querySelectorAll('a');
-
-  // Add a click event listener to each menu item
-  menuItems.forEach(function(item) {
-    item.addEventListener('click', function(event) {
-      // Get the active menu item
-      var activeMenuItem = mainSidebar.querySelector('.active');
-
-    });
-  });
-});
-
-
-
-
-setTimeout(function () {
-  $('#error-message').fadeOut('slow')
-}, 6000)
-
-
   
     

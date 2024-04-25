@@ -1,2 +1,0 @@
-# bigdeal-django
- 

@@ -18,7 +18,7 @@
                 <div class="row blog-media">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a href="{% url 'blog_details' obj.id %}"><img src="/{{obj.blogImage}}" class="img-fluid  " alt=""></a>
+                            <a href="{% url 'blog_details' obj.id %}"><img src="/{{obj.blogImage}}" class="img-fluid" alt=""></a>
                             <div class="date-label">
                                 {{obj.createdAt|date:"d M Y"}}
                             </div>
@@ -44,22 +44,28 @@
                 <div class="page-section">
                     <div class="pagination">
                         {% if page_obj.has_previous %}
-                        <a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
-                        {% endif %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="previous">
+                          <i class="fa fa-angle-double-left"></i>
+                          <span>Previous</span>
+                      </a>
+                      {% endif %}
 
                         {% for num in page_obj.paginator.page_range %}
                         {% if page_obj.number == num %}
-                        <span class="current-page">{{ num }}</span>
+                        <a href="#!" class="current-page">{{ num }}</a>
                         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                         <a href="?page={{ num }}" class="page">{{ num }}</a>
                         {% endif %}
                         {% endfor %}
-
+                        
                         {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+                        <a href="?page={{ page_obj.next_page_number }}" class="next">
+                          <i class="fa fa-angle-double-right"></i>
+                          <span>Next</span>
+                        </a>
                         {% endif %}
                     </div>
-                {% endif %}
+                    {% endif %}
                 </div>
                 {% else %}
                 <div>
@@ -88,14 +94,15 @@
                         <h4>Popular Blog</h4>
                         <ul class="popular-blog">
                             {% for blog in popular_blogs %}
-                            <li>
-                                <div class="media">
-                                    <div class="blog-date"><span>{{blog.updatedAt|date:"d"}} </span><span>{{blog.updatedAt|date:"M"}}</span></div>
-                                    <div class="media-body align-self-center">
-                                        <h6>{{blog.blogTitle}}</h6>
-                                    </div>
-                                </div>
+                            <li class="media blog-box">
+                                <span>{{blog.updatedAt|date:"d"}} {{blog.updatedAt|date:"M"}}</span>
+                                <h6>{{blog.blogTitle}}</h6>
                                 <p>{{blog.blogDescription|safe}}</p>
+                                {% comment %} <div class="media">
+                                    <div class="blog-date">
+                                    <div class="media-body align-self-center">
+                                    </div>
+                                </div> {% endcomment %}
                             </li>
                             {% endfor %}
                         </ul>

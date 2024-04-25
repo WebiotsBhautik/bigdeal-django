@@ -40,7 +40,7 @@
                 </ul>
               </div>
               <div class="language-block">
-                <div class="curroncy-dropdown" id="currency-selection">
+                <div class="currency-dropdown" id="currency-selection">
                   <select id="currency-selection-dropdown">
                      <option id="currency-value" value="%">Currency</option>
                      {% for cur in ""|return_currency %}
@@ -135,15 +135,15 @@
                 </ul>
               </div>
               <div class="brand-logo logo-sm-center">
-                <a href="/index_default">
-                  <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid  " alt="logo">
+                <a href="{% url 'index' %}">
+                  <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                 </a>
               </div>
             </div>
             <div class="input-block">
               <div class="input-box">
-                <form class="big-deal-form ">
-                  <div class="input-group ">
+                <form class="big-deal-form">
+                  <div class="input-group">
                     <div class="input-group-text">
                       <span class="search"><i class="fa fa-search"></i></span>
                     </div>
@@ -169,19 +169,19 @@
                                 </a>
                                 <ul class="rating p-0">
                                     <li>
-                                        <i class="fas fa-star theme-color"></i>
+                                        <i class="fa fa-star theme-color"></i>
                                     </li>
                                     <li>
-                                        <i class="fas fa-star theme-color"></i>
+                                        <i class="fa fa-star theme-color"></i>
                                     </li>
                                     <li>
-                                        <i class="fas fa-star theme-color"></i>
+                                        <i class="fa fa-star theme-color"></i>
                                     </li>
                                     <li>
-                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </li>
                                     <li>
-                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star"></i>
                                     </li>
                                 </ul>
                                 <p class="mb-0 mt-1">$28.00</p>
@@ -269,7 +269,7 @@
               </div>
               <div class="menu-nav">
                   <span class="toggle-nav">
-                    <i class="fa fa-bars "></i>
+                    <i class="fa fa-bars"></i>
                   </span>
               </div>
             </div>
@@ -295,8 +295,8 @@
             <div class="navbar-menu">
               <div class="logo-block">
                 <div class="brand-logo logo-sm-center">
-                  <a href="{% url 'index_default' %}">
-                    <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid  " alt="logo">
+                  <a href="{% url 'index' %}">
+                    <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
               </div>

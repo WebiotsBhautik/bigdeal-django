@@ -703,7 +703,7 @@ async function handleCheckout(){
                 var checkoutMsg = document.createElement("h5");
                 checkoutMsg.setAttribute("id","checkoutMsg" + i);
                 checkoutMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + 
-                " stock of product " + data.outOfStockProducts[i].productName + ". Please update your cart.";
+              " stock of product " + data.outOfStockProducts[i].productName + ". Please update your cart.";
                 checkoutMsgDiv.append(checkoutMsg);
 
                 // Set a timeout to hide the checkoutMsg element after 3 seconds

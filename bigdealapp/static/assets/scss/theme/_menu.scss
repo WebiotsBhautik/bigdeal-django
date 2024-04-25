@@ -1,4 +1,3 @@
-
 /*=====================
     27.Menu css start
 ==========================*/
@@ -6,28 +5,37 @@
 @mixin round_corner($amount, $chainable: 'ul > li:last-child > ', $level: 4, $chain_prefix: '> li:last-child > ', $chain: '', $selector: '') {
   $chain: $chain_prefix;
   $selector: $chain + 'a, ' + $chain + '*:not(ul) a, ' + $chain + 'ul';
+
   @for $i from 1 through $level {
     $chain: $chain + $chainable;
     $selector: $selector + ',
-' + $chain + ' a, ' + $chain + '*:not(ul) a, ' + $chain + ' ul';
+ ' + $chain + ' a, ' + $chain + ' *:not(ul) a, ' + $chain + ' ul';
+
   }
+
   #{$selector} {
     border-radius: 0 0 0 0;
   }
+
   $chain: $chain_prefix;
-  $selector: $chain + 'a.highlighted, ' + $chain + '*:not(ul) a.highlighted';
+  $selector: $chain+'a.highlighted, ' +$chain+'*:not(ul) a.highlighted';
+
   @for $i from 1 through $level {
     $chain: $chain + $chainable;
     $selector: $selector + ',
-' + $chain + ' a.highlighted, ' + $chain + '*:not(ul) a.highlighted';
+ ' + $chain + ' a.highlighted, ' + $chain + ' *:not(ul) a.highlighted';
+
   }
+
   #{$selector} {
     border-radius: 0;
   }
 }
+
 @mixin sub_items($amount, $chainable: 'ul ', $level: 4, $chain: '') {
   @for $i from 1 through $level {
     $chain: $chain + $chainable;
+
     #{$chain} a,
     #{$chain} a:hover,
     #{$chain} a:focus,
@@ -36,6 +44,7 @@
     }
   }
 }
+
 %extend_1 {
   display: block;
   list-style: none;
@@ -45,62 +54,77 @@
   direction: ltr;
   text-align: left;
 }
+
 .sm {
   box-sizing: border-box;
   position: static;
   z-index: 1;
   @extend %extend_1;
+
   ul {
     @extend %extend_1;
     display: none;
   }
+
   li {
     @extend %extend_1;
     position: relative;
   }
-  > li {
-    > h1 {
+
+  >li {
+    >h1 {
       margin: 0;
       padding: 0;
     }
-    > h2 {
+
+    >h2 {
       margin: 0;
       padding: 0;
     }
-    > h3 {
+
+    >h3 {
       margin: 0;
       padding: 0;
     }
-    > h4 {
+
+    >h4 {
       margin: 0;
       padding: 0;
     }
-    > h5 {
+
+    >h5 {
       margin: 0;
       padding: 0;
     }
-    > h6 {
+
+    >h6 {
       margin: 0;
       padding: 0;
     }
   }
+
   a {
     position: relative;
     display: block;
+
     &.disabled {
       cursor: default;
     }
   }
+
   * {
     box-sizing: inherit;
   }
+
   *::before {
     box-sizing: inherit;
   }
+
   *::after {
     box-sizing: inherit;
   }
 }
+
 .sm::after {
   content: "";
   display: block;
@@ -109,8 +133,9 @@
   clear: both;
   overflow: hidden;
 }
+
 .menu-banner {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -122,125 +147,127 @@
 // ----------------------------------------------------------
 
 
-$theme-deafult-dark:									darken($theme-color1, 5%) !default;
-$theme-deafult-light:									lighten($theme-color1, 30%) !default;
-$theme-deafult__white:										#fff !default;
-$theme-deafult__gray:											darken($theme-deafult__white, 34%) !default;
+$theme-default-dark: darken($theme-color1, 5%) !default;
+$theme-default-light: lighten($theme-color1, 30%) !default;
+$theme-default__white: #fff !default;
+$theme-default__gray: darken($theme-default__white, 34%) !default;
 //$dark :	#333333;
-$theme-deafult__text-shadow:									rgba(0, 0, 0, 0.2) !default;
+$theme-default__text-shadow: rgba(0, 0, 0, 0.2) !default;
 
 // ----------------------------------------------------------
 // :: 1.2. Typography
 // ----------------------------------------------------------
-$theme-deafult__font-size-base:								14px !default;
-$theme-deafult__font-size-small:								16px !default;
-$theme-deafult__line-height:									23px !default;
+$theme-default__font-size-base: 14px !default;
+$theme-default__font-size-small: 16px !default;
+$theme-default__line-height: 23px !default;
 
 // ----------------------------------------------------------
 // :: 1.3. Borders
 // ----------------------------------------------------------
-$theme-deafult__border-width:									1px !default;
-$theme-deafult__border-radius-base:							8px !default;
-$theme-deafult__border-radius-small:							4px !default;
+$theme-default__border-width: 1px !default;
+$theme-default__border-radius-base: 8px !default;
+$theme-default__border-radius-small: 4px !default;
 
 // ----------------------------------------------------------
 // :: 1.4. Collapsible main menu
 // ----------------------------------------------------------
 // Menu box
-$theme-deafult__collapsible-bg:								transparent !default;
-$theme-deafult__collapsible-border-radius:					$theme-deafult__border-radius-base !default;
+$theme-default__collapsible-bg: transparent !default;
+$theme-default__collapsible-border-radius: $theme-default__border-radius-base !default;
 
 // Items
-$theme-deafult__collapsible-item-color:						$theme-deafult__white !default;
-$theme-deafult__collapsible-item-bg:							$theme-color1 !default;
-$theme-deafult__collapsible-item-current-color:				$theme-deafult__white !default;
-$theme-deafult__collapsible-item-current-bg:					$theme-color1 !default;
-$theme-deafult__collapsible-item-disabled-color:				lighten($theme-color1, 30%) !default;
-$theme-deafult__collapsible-item-padding-vertical:			10px !default;
-$theme-deafult__collapsible-item-padding-horizontal:			20px !default;
+$theme-default__collapsible-item-color: $theme-default__white !default;
+$theme-default__collapsible-item-bg: $theme-color1 !default;
+$theme-default__collapsible-item-current-color: $theme-default__white !default;
+$theme-default__collapsible-item-current-bg: $theme-color1 !default;
+$theme-default__collapsible-item-disabled-color: lighten($theme-color1, 30%) !default;
+$theme-default__collapsible-item-padding-vertical: 10px !default;
+$theme-default__collapsible-item-padding-horizontal: 20px !default;
 
 // Toggle button (sub menu indicators)
-$theme-deafult__collapsible-toggle-bg:						rgba(0, 0, 0, 0.1) !default;
+$theme-default__collapsible-toggle-bg: rgba(0, 0, 0, 0.1) !default;
 
 // ----------------------------------------------------------
 // :: 1.5. Collapsible sub menus
 // ----------------------------------------------------------
 
 // Menu box
-$theme-deafult__collapsible-sub-bg:							$theme-deafult__white !default;
+$theme-default__collapsible-sub-bg: $theme-default__white !default;
 
 // Items
-$theme-deafult__collapsible-sub-item-color:					$theme-deafult-dark !default;
-$theme-deafult__collapsible-sub-item-bg:						transparent !default;
-$theme-deafult__collapsible-sub-item-current-color:			$theme-deafult__white !default;
-$theme-deafult__collapsible-sub-item-current-bg:				$theme-color1 !default;
-$theme-deafult__collapsible-sub-item-disabled-color:			darken($theme-deafult__white, 30%) !default;
+$theme-default__collapsible-sub-item-color: $theme-default-dark !default;
+$theme-default__collapsible-sub-item-bg: transparent !default;
+$theme-default__collapsible-sub-item-current-color: $theme-default__white !default;
+$theme-default__collapsible-sub-item-current-bg: $theme-color1 !default;
+$theme-default__collapsible-sub-item-disabled-color: darken($theme-default__white, 30%) !default;
 
 // Items separators
-$theme-deafult__collapsible-sub-separators-color:				rgba(0, 0, 0, 0.05) !default;
+$theme-default__collapsible-sub-separators-color: rgba(0, 0, 0, 0.05) !default;
 
 // Items text indentation for deeper levels
-$theme-deafult__collapsible-sub-item-indentation:				8px !default;
+$theme-default__collapsible-sub-item-indentation: 8px !default;
 
 // ----------------------------------------------------------
 // :: 1.6. Desktop main menu
 // ----------------------------------------------------------
 
 // Items separators
-$theme-deafult__desktop-separators-size:						1px !default;
-$theme-deafult__desktop-separators-color:						darken($theme-color1, 5%) !default;
+$theme-default__desktop-separators-size: 1px !default;
+$theme-default__desktop-separators-color: darken($theme-color1, 5%) !default;
 
 // Sub menu indicators
-$theme-deafult__desktop-arrow-size:							5px !default;		// border-width
-$theme-deafult__desktop-arrow-color:							$theme-deafult-light !default;
+$theme-default__desktop-arrow-size: 5px !default; // border-width
+$theme-default__desktop-arrow-color: $theme-default-light !default;
 
 
 // Vertical items
-$theme-deafult__desktop-vertical-item-padding-vertical:		9px !default;
-$theme-deafult__desktop-vertical-item-padding-horizontal:		23px !default;
+$theme-default__desktop-vertical-item-padding-vertical: 9px !default;
+$theme-default__desktop-vertical-item-padding-horizontal: 23px !default;
 
 // ----------------------------------------------------------
 // :: 1.7. Desktop sub menus
 // ----------------------------------------------------------
 
 // Menu box
-$theme-deafult__desktop-sub-bg:								$theme-deafult__white !default;
-$theme-deafult__desktop-sub-border-color:						$theme-deafult__gray !default;
-$theme-deafult__desktop-sub-border-radius:					$theme-deafult__border-radius-small !default;
-$theme-deafult__desktop-sub-padding-vertical:					7px !default;
-$theme-deafult__desktop-sub-padding-horizontal:				0 !default;
+$theme-default__desktop-sub-bg: $theme-default__white !default;
+$theme-default__desktop-sub-border-color: $theme-default__gray !default;
+$theme-default__desktop-sub-border-radius: $theme-default__border-radius-small !default;
+$theme-default__desktop-sub-padding-vertical: 7px !default;
+$theme-default__desktop-sub-padding-horizontal: 0 !default;
 
 // Items
-$theme-deafult__desktop-sub-item-color:						$theme-deafult-dark !default;
-$theme-deafult__desktop-sub-item-bg:							transparent !default;
-$theme-deafult__desktop-sub-item-hover-color:					$theme-deafult__white !default;
-$theme-deafult__desktop-sub-item-hover-bg:					$theme-color1 !default;
-$theme-deafult__desktop-sub-item-current-color:				$theme-deafult__white !default;
-$theme-deafult__desktop-sub-item-current-bg:					$theme-color1 !default;
-$theme-deafult__desktop-sub-item-disabled-color:				darken($theme-deafult__white, 30%) !default;
-$theme-deafult__desktop-sub-item-padding-vertical:			9px !default;
-$theme-deafult__desktop-sub-item-padding-horizontal:			23px !default;
+$theme-default__desktop-sub-item-color: $theme-default-dark !default;
+$theme-default__desktop-sub-item-bg: transparent !default;
+$theme-default__desktop-sub-item-hover-color: $theme-default__white !default;
+$theme-default__desktop-sub-item-hover-bg: $theme-color1 !default;
+$theme-default__desktop-sub-item-current-color: $theme-default__white !default;
+$theme-default__desktop-sub-item-current-bg: $theme-color1 !default;
+$theme-default__desktop-sub-item-disabled-color: darken($theme-default__white, 30%) !default;
+$theme-default__desktop-sub-item-padding-vertical: 9px !default;
+$theme-default__desktop-sub-item-padding-horizontal: 23px !default;
 
 // ----------------------------------------------------------
 // desktop mode
 // ----------------------------------------------------------
 
 // calc item height and sub menus toggle button size
-$theme-deafult__item-height: $theme-deafult__line-height + $theme-deafult__collapsible-item-padding-vertical * 2;
+$theme-default__item-height: $theme-default__line-height+$theme-default__collapsible-item-padding-vertical * 2;
 // set toggle button size to 80% of item height
-$theme-deafult__toggle-size: floor($theme-deafult__item-height * 0.8);
-$theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
+$theme-default__toggle-size: floor($theme-default__item-height * 0.8);
+$theme-default__toggle-spacing: floor($theme-default__item-height * 0.1);
 
 .toggle-nav {
   position: relative;
   // padding-top: 40px;
   // padding-bottom:40px;
   cursor: pointer;
+
   i {
     font-size: 24px;
-    color:lighten($theme-color1, 5%);
+    color: lighten($theme-color1, 5%);
   }
 }
+
 .mega-menu-banner {
   &:hover {
     &:before {
@@ -248,6 +275,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 .new-tag {
   padding-left: 3px;
   color: $theme-color1;
@@ -255,17 +283,20 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
   font-size: 12px;
   font-weight: 700;
 }
+
 .up-text {
   position: relative;
+
   span {
     position: absolute;
-    top:-5px;
+    top: -5px;
     right: -10px;
     color: $theme-color1;
     font-size: 12px;
     font-weight: 700;
   }
 }
+
 .pixelstrap {
   &.sm-vertical {
     a {
@@ -275,17 +306,28 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   ul {
     border-radius: 0;
   }
+
   &.light-font-menu {
     li {
-      > a {
+      >a {
         color: $dark;
       }
     }
   }
+
   a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:hover {
+      color: $theme-color1;
+    }
+
     &,
     &:hover,
     &:active {
@@ -293,91 +335,108 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       color: $dark;
       font-size: 14px;
       font-weight: 700;
-      line-height: $theme-deafult__line-height;
+      line-height: $theme-default__line-height;
       text-decoration: none;
       text-transform: uppercase;
       padding-top: 22px;
       padding-bottom: 22px;
       letter-spacing: 0.07em;
     }
-    &:hover {
-      color: $theme-color1;
-    }
+
     &.disabled {
-      color: $theme-deafult__collapsible-item-disabled-color;
+      color: $theme-default__collapsible-item-disabled-color;
     }
+
     .sub-arrow {
       position: absolute;
       top: 50%;
-      margin-top: -(ceil($theme-deafult__toggle-size / 2));
+      margin-top: -(ceil($theme-default__toggle-size / 2));
       left: auto;
       right: 14px;
-      width: $theme-deafult__toggle-size;
-      height: $theme-deafult__toggle-size;
+      width: $theme-default__toggle-size;
+      height: $theme-default__toggle-size;
       overflow: hidden;
-      font: bold #{$theme-deafult__font-size-small}/#{$theme-deafult__toggle-size} monospace !important;
+      font: bold #{$theme-default__font-size-small}/#{$theme-default__toggle-size} monospace !important;
       text-align: center;
       text-shadow: none;
-      border-radius: $theme-deafult__border-radius-small;
+      border-radius: $theme-default__border-radius-small;
     }
   }
-  @include round_corner($theme-deafult__collapsible-border-radius);
+
+  @include round_corner($theme-default__collapsible-border-radius);
+
   ul {
-    background: $theme-deafult__collapsible-sub-bg;
+    background: $theme-default__collapsible-sub-bg;
+
     ul {
       background: rgba(lighten($theme-color1, 2%), 0.04);
     }
+
     a {
+
       &,
       &:hover,
       &:focus,
       &:active {
-        background: $theme-deafult__collapsible-sub-item-bg;
+        background: $theme-default__collapsible-sub-item-bg;
         color: $dark !important;
         font-size: 14px;
         text-shadow: none;
         // add indentation for sub menus text
-        //border-left: $theme-deafult__collapsible-sub-item-indentation solid transparent;
+        //border-left: $theme-default__collapsible-sub-item-indentation solid transparent;
       }
+
       &.current {
-        background: $theme-deafult__collapsible-sub-item-current-bg;
-        color: $theme-deafult__collapsible-sub-item-current-color;
+        background: $theme-default__collapsible-sub-item-current-bg;
+        color: $theme-default__collapsible-sub-item-current-color;
       }
+
       &.disabled {
-        color: $theme-deafult__collapsible-sub-item-disabled-color;
+        color: $theme-default__collapsible-sub-item-disabled-color;
       }
     }
-    @include sub_items($theme-deafult__collapsible-sub-item-indentation);
+
+    @include sub_items($theme-default__collapsible-sub-item-indentation);
+
     li {
-      border-top: 1px solid $theme-deafult__collapsible-sub-separators-color;
+      border-top: 1px solid $theme-default__collapsible-sub-separators-color;
+
       &:first-child {
         border-top: 0;
       }
     }
   }
-  &.sm-horizontal{
+
+  &.sm-horizontal {
     .mega {
       position: unset !important;
+
       .full-mega-menu {
         &.center-mega-menu {
           margin-left: 0 !important;
         }
       }
+
       ul {
         margin-left: 0 !important;
         max-width: max-content;
       }
     }
   }
+
   .icon-trend {
     color: $theme-color1;
   }
-  .full-mega-menu, .clothing-menu {
+
+  .full-mega-menu,
+  .clothing-menu {
     max-width: inherit !important;
     padding: 20px 0px 20px 5px;
+
     a {
       padding: 0;
       position: relative;
+
       h6 {
         font-size: 14px;
         text-align: center;
@@ -386,29 +445,35 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         text-transform: capitalize;
         color: #222222;
       }
+
       img {
         display: flex;
         margin: 0 auto;
       }
+
       &:hover {
         padding: 0;
+
         &:before {
           width: 50px;
           height: 2px;
           transition: 0.5s ease;
         }
+
         h6 {
           transition: all 0.5s ease;
         }
       }
     }
   }
+
   .link-section {
     .menu-secon-title {
       h5 {
         padding-top: 10px;
       }
     }
+
     h5 {
       font-weight: 700;
       text-transform: capitalize;
@@ -416,10 +481,12 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       margin-bottom: 10px;
       color: $dark;
     }
+
     ul {
       position: relative;
       display: block;
       padding: 0;
+
       li {
         a {
           padding-top: 3px;
@@ -430,6 +497,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .full-mega-menu {
     width: 100% !important;
     border-radius: 0;
@@ -437,11 +505,13 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     left: 50% !important;
     margin-right: -50%;
     transform: translate(-50%, 0);
+
     .mega-box {
       .link-section {
         ul {
           li {
             a {
+
               &:hover,
               &:focus {
                 padding-top: 3px;
@@ -452,50 +522,59 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .img-section {
       img {
         margin-top: 15px;
       }
     }
   }
+
   .clothing-menu {
     width: 815px !important;
     padding: 15px 30px 25px !important;
     background-color: $white;
+
     li {
       img {
         padding: 20px 0 10px 0;
       }
     }
+
     .link-section {
       h5 {
         margin-top: 15px;
       }
+
       ul {
         background: none;
       }
     }
   }
+
   .mega-menu {
     ul {
       box-shadow: none;
     }
   }
 }
-.pixelstrap li{
+
+.pixelstrap li {
   a {
     position: relative;
   }
+
   .label-nav {
     position: absolute;
     background-color: $theme-color1;
     padding: 2px 7px;
-    color:$white;
+    color: $white;
     top: 7px;
     text-transform: uppercase;
     font-size: 9px;
     left: 0;
     line-height: 1.3;
+
     &:before {
       position: absolute;
       content: "";
@@ -507,26 +586,31 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       top: 15px;
       left: 5px;
     }
+
     &.label-red {
       background-color: $theme-color1;
+
       &:before {
         border-top: 5px solid $theme-color1;
       }
     }
   }
 }
+
 .sm-vertical {
   background-color: $white;
 }
+
 .sidenav {
   height: 100vh;
-  width:300px;
+  width: 300px;
   position: fixed;
   z-index: 9999;
   top: 0;
   left: -300px;
   background-color: $white;
-  transition:all 0.5s ease;
+  transition: all 0.5s ease;
+
   .sidebar-back {
     padding: 20px;
     font-size: 18px;
@@ -537,7 +621,8 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     margin-bottom: 20px;
     cursor: pointer;
   }
-  nav{
+
+  nav {
     background-color: $white;
     z-index: 9;
     position: relative;
@@ -545,14 +630,17 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     top: 0;
     overflow-y: auto;
   }
+
   &.open-side {
     left: 0;
-    transition:all 0.5s ease;
+    transition: all 0.5s ease;
+
     .sidebar-overlay {
-      opacity:0.8;
+      opacity: 0.8;
       visibility: visible;
     }
   }
+
   .sidebar-overlay {
     visibility: hidden;
     opacity: 0;
@@ -563,10 +651,9 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     left: 0;
     width: 100%;
     height: 100%;
-    -o-transition: all 1s;
-    -webkit-transition: all 1s;
     transition: all 1s;
   }
+
   .closebtn {
     position: absolute;
     top: 0;
@@ -575,34 +662,41 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     margin-top: 50px;
     color: $dark;
   }
+
   .pixelstrap {
     li {
       a {
         padding: 10px 50px 20px 40px;
       }
+
       ul {
         li {
           a {
             padding: 5px 35px;
+
             &:active,
             &:focus,
-            &.highlighted{
+            &.highlighted {
               padding: 5px 35px;
             }
           }
         }
       }
+
       .clothing-menu {
         li {
           a {
             padding: 5px 0 !important;
+
             &:focus {
               font-size: 14px;
             }
+
             &:hover {
               font-size: 14px;
               padding: 5px 0;
             }
+
             &:focus,
             &:hover {
               padding: 5px 0 !important;
@@ -613,6 +707,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 .mega-box {
   .link-section {
     .demo {
@@ -620,14 +715,16 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         li {
           a {
             position: relative;
+
             &:hover,
-            &:focus{
-              padding-top: 3px ;
-              padding-bottom: 3px ;
+            &:focus {
+              padding-top: 3px;
+              padding-bottom: 3px;
             }
           }
         }
       }
+
       .new {
         position: absolute;
         top: -8px;
@@ -639,12 +736,14 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         font-size: 9px;
         line-height: 1.3;
       }
+
       .title {
         border-bottom: 2px solid red !important;
       }
     }
   }
 }
+
 .rtl {
   .sidenav {
     .pixelstrap {
@@ -653,16 +752,19 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .link-section {
     float: right;
   }
+
   .pixelstrap {
     li {
       .label-nav {
-        left:unset;
+        left: unset;
       }
     }
   }
+
   .mega-box {
     .link-section {
       .demo {
@@ -672,7 +774,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
               span {
                 img {
                   right: unset;
-                  left:-120px;
+                  left: -120px;
                 }
               }
             }
@@ -688,6 +790,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
   .toggle-nav {
     display: none;
   }
+
   .sm-vertical {
     li {
       ul {
@@ -701,41 +804,69 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
-  .mobile-back  {
+
+  .mobile-back {
     display: none !important;
   }
-  .pixelstrap ul{position:absolute;width:14em !important;}
-  .pixelstrap li{
+
+  .pixelstrap ul {
+    position: absolute;
+    width: 14em !important;
+  }
+
+  .pixelstrap li {
     position: relative;
-    float:left;
-    &:before{
+    float: left;
+
+    &:before {
       content: "";
       position: absolute;
 
     }
   }
-  .pixelstrap.sm-rtl li{float:right;}
-  .pixelstrap ul li,.pixelstrap.sm-rtl ul li,.pixelstrap.sm-vertical li{float:none;}
-  .pixelstrap a{white-space:nowrap;}
-  .pixelstrap ul a,.pixelstrap.sm-vertical a{white-space:normal;}
-  .pixelstrap .sm-nowrap > li > a,.pixelstrap .sm-nowrap > li > :not(ul) a{
-    white-space:nowrap;
+
+  .pixelstrap.sm-rtl li {
+    float: right;
+  }
+
+  .pixelstrap ul li,
+  .pixelstrap.sm-rtl ul li,
+  .pixelstrap.sm-vertical li {
+    float: none;
+  }
+
+  .pixelstrap a {
+    white-space: nowrap;
+  }
+
+  .pixelstrap ul a,
+  .pixelstrap.sm-vertical a {
+    white-space: normal;
+  }
+
+  .pixelstrap .sm-nowrap>li>a,
+  .pixelstrap .sm-nowrap>li> :not(ul) a {
+    white-space: nowrap;
     transition: all 0.3s ease;
-    &:hover{
+
+    &:hover {
       letter-spacing: 1.5px;
       transition: all 0.3s ease;
     }
-    &.highlighted{
-      white-space:nowrap;
+
+    &.highlighted {
+      white-space: nowrap;
       color: $dark;
     }
   }
+
   // Main menu box
   .sm-horizontal {
     .mega-menu {
       li {
         a {
           padding: 0;
+
           &:focus,
           &:active {
             padding: 0;
@@ -744,10 +875,12 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .pixelstrap {
-    &.sm-vertical{
+    &.sm-vertical {
       ul {
         a {
+
           &,
           &:hover,
           &:focus,
@@ -760,19 +893,22 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
 
     ul {
-      box-shadow: 0 0 1px 0 rgba(235,235,235,1);
+      box-shadow: 0 0 1px 0 rgba(235, 235, 235, 1);
     }
-    &.sm-horizontal{
+
+    &.sm-horizontal {
       .mega {
         position: unset !important;
 
-        &.product{
-          >div{
+        &.product {
+          >div {
             border: 1px solid #f1f1f1;
           }
         }
+
         ul {
           margin-left: 0 !important;
+
           ul {
             box-shadow: none;
           }
@@ -780,61 +916,73 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
 
-    .full-mega-menu, .clothing-menu {
-      -webkit-box-shadow: 0 0 1px 0 rgba(235,235,235,1);
-      -moz-box-shadow: 0 0 1px 0 rgba(235,235,235,1);
-      box-shadow: 0 0 1px 0 rgba(235,235,235,1);
+    .full-mega-menu,
+    .clothing-menu {
+      box-shadow: 0 0 1px 0 rgba(235, 235, 235, 1);
+
       a {
         padding: 0;
         position: relative;
       }
     }
-    .sm-horizontal{
+
+    .sm-horizontal {
       .full-mega-menu {
         position: absolute;
         left: unset !important;
         right: 0;
       }
     }
-    &.sm-vertical{
-      .full-mega-menu .mega-box{
+
+    &.sm-vertical {
+      .full-mega-menu .mega-box {
         max-width: 100%;
         padding: 0 20px;
         margin-bottom: 20px;
-        .mega-img,.menu-banner{
+
+        .mega-img,
+        .menu-banner {
           display: none;
         }
-        ul a:hover{
+
+        ul a:hover {
           padding-left: 5px;
         }
       }
     }
+
     .full-mega-menu {
       &.center-mega-menu {
         left: 50% !important;
         transform: translateX(-50%);
       }
+
       &.layout-3 {
         margin-left: -100px !important;
         transform: unset !important;
       }
+
       ul {
         background-color: transparent;
         border: 0;
       }
+
       .mega-box {
         max-width: 16.666%;
-        &.product{
+
+        &.product {
           max-width: 33%;
         }
       }
     }
+
     .category-menu {
       &.center-menu {
         left: 50% !important;
         transform: translateX(-50%);
       }
     }
+
     a {
       .sub-arrow::before {
         content: "\f107";
@@ -842,39 +990,51 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         position: absolute;
       }
     }
+
     ul {
-      padding: 15px 0px 15px 0px;
+      padding: 15px 0px;
       background: $white;
       border: 5px solid $body-back;
+
       ul {
         background: white;
         border: 5px solid $body-back;
       }
+
       a {
         position: relative;
+
         &:before {
           position: absolute;
           bottom: 8px;
+          left: 25px;
           content: "";
-          height:5px;
+          height: 5px;
           width: 0;
           background-color: $theme-color1;
           transition: 0.5s ease;
           opacity: 0.12;
+
+          body.rtl & {
+            left: unset;
+            right: 25px;
+          }
         }
+
         &,
         &:hover,
         &:focus,
         &:active,
         &.highlighted {
           border: 0 !important;
-          background: $theme-deafult__desktop-sub-item-bg;
+          background: $theme-default__desktop-sub-item-bg;
           color: $black;
           border-radius: 0 !important;
           font-size: 14px;
           font-weight: 400;
           text-transform: capitalize;
           padding: 5px 25px;
+
           &:hover {
             &:before {
               width: 50px;
@@ -883,6 +1043,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         .sub-arrow {
           &:before {
             content: "\f105";
@@ -891,19 +1052,31 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           }
         }
       }
+
       li {
         border: 0;
       }
     }
+
     .scroll-up,
     .scroll-down {
       position: absolute;
       display: none;
       visibility: hidden;
       overflow: hidden;
-      background: $theme-deafult__desktop-sub-bg;
+      background: $theme-default__desktop-sub-bg;
       height: 20px;
+
+      body.rtl & {
+        left: unset !important;
+        right: 5px !important;
+      }
+
+      body.dark & {
+        background: #262626;
+      }
     }
+
     .scroll-up-arrow,
     .scroll-down-arrow {
       position: absolute;
@@ -915,13 +1088,15 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       overflow: hidden;
       border-width: 8px; // tweak size of the arrow
       border-style: dashed dashed solid dashed;
-      border-color: transparent transparent $theme-deafult__desktop-sub-item-color transparent;
+      border-color: transparent transparent $theme-default__desktop-sub-item-color transparent;
     }
+
     .scroll-down-arrow {
       top: 6px;
       border-style: solid dashed dashed dashed;
-      border-color: $theme-deafult__desktop-sub-item-color transparent transparent transparent;
+      border-color: $theme-default__desktop-sub-item-color transparent transparent transparent;
     }
+
     // Main menu box
     &.sm-rtl {
       &.sm-vertical {
@@ -935,14 +1110,17 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           }
         }
       }
-      > li {
+
+      >li {
         &:first-child {
-          border-left: $theme-deafult__desktop-separators-size solid $theme-deafult__desktop-separators-color;
+          border-left: $theme-default__desktop-separators-size solid $theme-default__desktop-separators-color;
         }
+
         &:last-child {
           border-left: 0;
         }
       }
+
       ul {
         a {
           .sub-arrow {
@@ -952,21 +1130,25 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     // Main menu box
     &.sm-vertical {
       a {
-        padding: $theme-deafult__desktop-vertical-item-padding-vertical $theme-deafult__desktop-vertical-item-padding-horizontal;
-        .sub-arrow {
-          &:before {
-            content: "\f104";
-            font-family: $font-awesome;
-            position: absolute;
-          }
-        }
+        padding: $theme-default__desktop-vertical-item-padding-vertical $theme-default__desktop-vertical-item-padding-horizontal;
+
+        // .sub-arrow {
+        //   &:before {
+        //     content: "\f104";
+        //     font-family: $font-awesome;
+        //     position: absolute;
+        //   }
+        // }
       }
-      > li {
+
+      >li {
         border-left: 0 !important;
-        ul{
+
+        ul {
           a {
             .sub-arrow {
               &:before {
@@ -978,24 +1160,29 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .main-nav-center {
     >nav {
       text-align: center;
     }
+
     .sm {
       display: inline-block;
       vertical-align: middle;
-      >li{
+
+      >li {
         .label-nav {
           top: 3px;
         }
-        > a {
+
+        >a {
           padding-top: 20px;
           padding-bottom: 20px;
         }
       }
     }
   }
+
   .layout3-menu {
     .pixelstrap {
       a {
@@ -1003,29 +1190,35 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         padding-right: 34px;
         letter-spacing: 0.04em;
       }
+
       .sub-arrow {
         right: 12px;
       }
     }
   }
+
   .rtl {
     .pixelstrap {
       .category-menu {
         width: 698px !important;
+
         &.center-menu {
           left: 0 !important;
           transform: unset;
         }
       }
+
       .full-mega-menu {
         right: auto !important;
       }
     }
+
     .mega {
       .full-mega-menu {
         float: left !important;
         left: 50% !important;
-        right:auto !important;
+        right: auto !important;
+
         &.center-mega-menu {
           margin-right: 0 !important;
           margin-left: 0 !important;
@@ -1034,10 +1227,12 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .layout3-menu {
       .light-font-menu {
         li {
-          > a {
+          >a {
+
             &,
             &:hover,
             &:active {
@@ -1046,24 +1241,29 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         .sub-arrow {
           left: -5px;
           right: auto;
         }
       }
     }
+
     .sm-horizontal {
-      .mega  {
+      .mega {
         ul {
           float: right;
+
           li {
             text-align: right;
           }
         }
       }
+
       ul {
         li {
           text-align: right;
+
           a {
             .sub-arrow {
               left: 15px;
@@ -1073,6 +1273,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .pixelstrap {
       .full-mega-menu {
         &.layout-3 {
@@ -1080,6 +1281,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .light-font-menu {
       .mega {
         ul {
@@ -1089,23 +1291,27 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .sidenav {
       .pixelstrap {
         li {
           ul {
             li {
               a {
+
                 &:hover,
                 &:focus {
                   padding: 5px 35px;
                 }
+
                 &:before {
-                  right:35px;
+                  right: 35px;
                 }
               }
             }
           }
         }
+
         li {
           a {
             .sub-arrow {
@@ -1114,13 +1320,14 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         .mega-menu {
           li {
             ul {
               li {
                 a {
                   &:before {
-                    right:0;
+                    right: 0;
                   }
                 }
               }
@@ -1128,17 +1335,19 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           }
         }
       }
+
       .sidebar-back {
         i {
           float: left;
         }
       }
     }
+
     header {
       &.header-5 {
         .top-header {
           .header-dropdown {
-            > li {
+            >li {
               &:last-child {
                 padding: 15px 25px;
                 padding-left: 0;
@@ -1150,23 +1359,27 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (max-width: 1440px) {
   .pixelstrap {
     .category-menu {
       width: 698px !important;
     }
+
     .full-mega-menu {
       &.layout-3 {
         margin-left: 0 !important;
       }
     }
   }
+
   .rtl {
     .pixelstrap {
       .mega {
         .full-mega-menu {
           margin-left: 0 !important;
           margin-right: 162px !important;
+
           &.layout-3 {
             margin-right: 0 !important;
           }
@@ -1175,6 +1388,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (max-width: 1367px) {
   .pixelstrap {
     .full-mega-menu {
@@ -1182,8 +1396,10 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         width: 1079px !important;
       }
     }
+
     a {
       font-size: 14px;
+
       &:hover,
       &:active {
         font-size: 14px;
@@ -1191,6 +1407,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (max-width: 1199px) {
   .pixelstrap {
     .full-mega-menu {
@@ -1202,9 +1419,11 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       transform: unset;
     }
   }
+
   .menu-banner {
     margin-top: 0px;
-}
+  }
+
   .mega-box {
     .link-section {
       .demo {
@@ -1213,7 +1432,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             a {
               span {
                 img {
-                  top:30px;
+                  top: 30px;
                   right: -60px;
                 }
               }
@@ -1223,6 +1442,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .sm-horizontal {
     position: fixed;
     background-color: #fff;
@@ -1249,30 +1469,38 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       align-items: center;
     }
   }
+
   .mega-box {
     &.col {
       flex-basis: unset;
     }
   }
+
   .pixelstrap {
     .feature-menu {
       &.product-menu {
         width: 100% !important;
       }
     }
+
     .mega {
       position: unset !important;
+
       .full-mega-menu {
         margin-left: 0 !important;
       }
+
       ul {
         margin-left: 0 !important;
       }
     }
-    .full-mega-menu, .clothing-menu {
+
+    .full-mega-menu,
+    .clothing-menu {
       width: 100% !important;
       padding: 0 30px !important;
     }
+
     a {
       &.highlighted {
         .sub-arrow {
@@ -1281,16 +1509,20 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           }
         }
       }
+
       .sub-arrow {
         right: 0;
+
         &:before {
           content: '+';
         }
       }
     }
-   > li {
-      > a {
+
+    >li {
+      >a {
         font-weight: 700;
+
         &:hover,
         &:focus,
         &:active {
@@ -1298,14 +1530,17 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .link-section {
       .menu-title {
         h5 {
           cursor: pointer;
         }
+
         &.active {
           .according-menu {
             font: bold 16px/34px monospace !important;
+
             &:before {
               content: "-";
               position: absolute;
@@ -1313,8 +1548,10 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         .according-menu {
           font: bold 16px/34px monospace !important;
+
           &:before {
             content: "+";
             position: absolute;
@@ -1322,24 +1559,29 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           }
         }
       }
+
       .menu-content {
         a {
           text-transform: capitalize;
         }
       }
+
       ul {
         background-color: unset;
       }
+
       h5 {
         font-weight: 700;
       }
     }
+
     .full-mega-menu {
       .mega-box {
-        border-right:none;
+        border-right: none;
         margin-bottom: 0;
       }
     }
+
     .category-menu {
       a {
         img {
@@ -1347,21 +1589,26 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .clothing-menu {
       background: none;
     }
+
     li {
       .label-nav {
         left: 15px;
-        top:-8px;
+        top: -8px;
       }
+
       a {
         padding: 10px 15px;
         font-size: 14px;
+
         &:hover {
           padding: 10px 15px;
         }
       }
+
       ul {
         li {
           a {
@@ -1370,8 +1617,10 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             color: $dark;
             font-weight: 400;
             text-transform: capitalize;
+
             &:hover {
-              color: $theme-color1 !important; ;
+              color: $theme-color1 !important;
+              ;
               font-size: 14px;
               padding: 5px 35px;
               text-transform: capitalize;
@@ -1380,6 +1629,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .category-menu {
       a {
         &:hover {
@@ -1389,6 +1639,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     &.sm-vertical {
       a {
         .sub-arrow {
@@ -1396,25 +1647,30 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .mega {
       ul {
         max-width: 100%;
       }
     }
+
     ul {
       li {
         border-top: none;
       }
     }
   }
+
   .sidenav {
     overflow-y: auto;
+
     .pixelstrap {
       li {
         ul {
           li {
             a {
               padding: 5px 45px;
+
               &:hover,
               &.highlighted {
                 padding: 5px 45px;
@@ -1422,8 +1678,10 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         a {
           padding: 10px 25px;
+
           &:hover {
             padding: 10px 25px;
           }
@@ -1431,10 +1689,12 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .main-menu {
     &.border-section {
       border: none;
     }
+
     .menu-left {
       .main-menu-right {
         .toggle-nav {
@@ -1442,6 +1702,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           z-index: 2;
           right: 145px;
           top: 6px;
+
           .sidebar-name {
             font-size: 18px;
             padding-left: 5px;
@@ -1451,6 +1712,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .main-nav-center {
     .toggle-nav {
       position: absolute;
@@ -1459,6 +1721,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       top: -105px;
     }
   }
+
   .layout3-menu {
     .main-menu {
       .menu-left {
@@ -1471,6 +1734,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .rtl {
     .mega-box {
       .link-section {
@@ -1489,22 +1753,26 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
+
     .sm {
       li {
         text-align: right;
       }
     }
+
     .pixelstrap {
       a {
         .sub-arrow {
           right: unset;
-          left:0;
+          left: 0;
         }
       }
+
       li {
         .label-nav {
           left: unset;
           right: 15px;
+
           &:before {
             left: unset;
             right: 5px;
@@ -1514,6 +1782,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (max-width: 991px) {
   .top-header {
     .header-contact {
@@ -1521,20 +1790,26 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (min-width: 578px) {
   .main-menu {
     .menu-right {
       .icon-nav {
-        .mobile-search, .mobile-cart, .mobile-setting {
+
+        .mobile-search,
+        .mobile-cart,
+        .mobile-setting {
           i {
             display: none;
           }
+
           .close-circle {
             i {
               display: block;
             }
           }
         }
+
         .mobile-search {
           .show-div {
             .form-inline {
@@ -1550,27 +1825,32 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
     }
   }
 }
+
 @media (max-width:577px) {
   .top-header {
     height: 0;
   }
+
   .main-nav-center {
     .toggle-nav {
       right: 15px;
-      top:-85px;
+      top: -85px;
     }
   }
 
   .header-5 {
     .top-header {
       .header-dropdown {
-        .mobile-wishlist, .mobile-account {
+
+        .mobile-wishlist,
+        .mobile-account {
           img {
             filter: brightness(5);
           }
         }
       }
     }
+
     .main-menu {
       .brand-logo {
         margin: 0;
@@ -1579,39 +1859,49 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .top-header {
     .header-dropdown {
-      .mobile-account, .mobile-wishlist{
+
+      .mobile-account,
+      .mobile-wishlist {
         position: fixed;
         bottom: 20px;
         right: 32%;
         font-size: 0;
         padding: 0;
         z-index: 9;
+
         i {
           font-size: 22px;
           font-family: $font-themify;
           color: $white;
+
           &:before {
             content: "\e602";
           }
         }
+
         .onhover-show-div {
           top: unset;
           bottom: 42px;
-          right:0;
+          right: 0;
         }
+
         &:hover {
           i {
             color: $white;
           }
         }
       }
+
       .mobile-wishlist {
         right: 64%;
+
         i {
           font-family: $font-themify;
           color: $white !important;
+
           &:before {
             content: "\e634";
           }
@@ -1619,6 +1909,7 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
       }
     }
   }
+
   .main-menu {
     .menu-left {
       &.category-nav-right {
@@ -1626,21 +1917,28 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
           padding-left: 0 !important;
         }
       }
+
       .navbar {
         padding: 30px 45px 30px 0 !important;
       }
     }
+
     .menu-right {
       .icon-nav {
-        .mobile-setting, .mobile-cart,.mobile-search {
+
+        .mobile-setting,
+        .mobile-cart,
+        .mobile-search {
           position: fixed;
           bottom: 20px;
           right: 16%;
           font-size: 0;
           padding: 0;
+
           .show-div {
             top: -58px;
             left: 0;
+
             &.shopping-cart {
               top: unset;
               bottom: 42px;
@@ -1648,56 +1946,68 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
             }
           }
         }
+
         .mobile-setting {
           i {
             display: inline-block;
             font-size: 22px;
             color: $white;
           }
-          > div {
+
+          >div {
             img {
               display: none;
             }
           }
+
           .setting {
             top: unset;
             bottom: 42px;
             left: unset !important;
           }
         }
+
         .mobile-cart {
           right: 48%;
+
           .close-circle {
             i {
               font-size: 14px;
             }
           }
+
           i {
             display: inline-block;
             font-size: 22px;
             color: $white;
           }
-          > div {
+
+          >div {
             img {
               display: none;
             }
           }
         }
+
         .mobile-search {
           right: 80%;
           z-index: 1;
+
           i {
             display: inline-block;
             font-size: 22px;
             color: $white;
           }
+
           img {
             display: none;
           }
+
           .show-div {
             .form-group {
               margin-bottom: 0;
             }
+
             .form-inline {
               button {
                 i {
@@ -1709,62 +2019,78 @@ $theme-deafult__toggle-spacing: floor($theme-deafult__item-height * 0.1);
         }
       }
     }
-  } 
+  }
+
   .rtl {
     .main-nav-center {
       .toggle-nav {
         right: unset;
-        left:15px;
+        left: 15px;
       }
     }
+
     .main-menu {
       .menu-right {
         .icon-nav {
-          .mobile-setting, .mobile-cart,.mobile-search {
+
+          .mobile-setting,
+          .mobile-cart,
+          .mobile-search {
             right: unset;
-            left:16%;
+            left: 16%;
+
             .show-div {
               left: unset;
-              right:0;
+              right: 0;
+
               &.shopping-cart {
                 left: unset !important;
                 right: -118px !important;
               }
             }
           }
+
           .mobile-setting {
             .setting {
               left: unset !important;
             }
           }
+
           .mobile-cart {
             right: unset;
-            left:48%;
+            left: 48%;
           }
+
           .mobile-search {
             right: unset;
             left: 80%;
           }
         }
       }
+
       .menu-left {
         .navbar {
           padding: 30px 0 30px 25px !important;
         }
       }
     }
+
     .top-header {
       .header-dropdown {
-        .mobile-account, .mobile-wishlist{
-          right: unset;
-          left: 32%;
-          .onhover-show-div {
-            right:0;
-          }
-        }
+
+        .mobile-account,
         .mobile-wishlist {
           right: unset;
-          left:64%;
+          left: 32%;
+
+          .onhover-show-div {
+            right: 0;
+          }
+        }
+
+        .mobile-wishlist {
+          right: unset;
+          left: 64%;
         }
       }
     }

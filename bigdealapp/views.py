@@ -28,8 +28,6 @@ from django.http import Http404
 import json
 import decimal
 import razorpay
-import logging
-logger = logging.getLogger(__name__)
 
 from decimal import Decimal, ROUND_HALF_UP
 
@@ -40,6 +38,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode
+# from django.contrib.auth.tokens import default_token_generator,PasswordResetTokenGenerator
 from django.core.mail import EmailMultiAlternatives
 from datetime import datetime, timedelta
 from django.utils import timezone
@@ -53,12 +52,6 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 # Create your views here.
-
-
-def index(request):
-    product = ProductOrder.objects.all()
-    context = {'product': product}
-    return render(request, 'admin/index.html', context)
 
 
 def setCookie(request):
@@ -249,7 +242,7 @@ def handle_cart_logic(request):
     return context
 
 
-def index_default(request):
+def index(request):
     banners = Banner.objects.filter(bannerTheme__bannerThemeName='Megastore1 Demo')
     collection_banner  = banners.filter(bannerType__bannerTypeName='Collection Banner')
     col_banner = {}
@@ -566,6 +559,7 @@ def vegetable(request):
     
     vegetable_category = ProCategory.objects.get(categoryName='Vegetables')
     subcategories = vegetable_category.get_descendants(include_self=True)
+    # subcategories = ProCategory.objects.get(categoryName='Vegetables').get_descendants(include_self=True)
 
     vegetable_products = Product.objects.filter(proCategory__in=subcategories)
     
@@ -2573,6 +2567,7 @@ def image_swatch(request,id):
             pass
         elif isinstance(e, Product.DoesNotExist):
             pass
+        # return HttpResponse\('Invalide Product ID'\
     
     products = ProductVariant.objects.all()
     images = MultipleImages.objects.filter(multipleImageOfProduct=product)
@@ -4935,7 +4930,7 @@ def add_to_cart(request, id=None, quantity=0):
             if not updated:
                 cart_items.append(cart_item)
             cart_items_json = json.dumps(cart_items)
-            response = HttpResponseRedirect(reverse('index_default'))
+            response = HttpResponseRedirect(reverse('index'))
             response.set_cookie('cart', cart_items_json)
             return response
     else:
@@ -4961,6 +4956,8 @@ def get_total_tax_values(variant_products):
             TotalVariantTax += 0
             TotalVariantTaxPrice += 0
             TotalVariantFinalPriceAfterTax += 0
+            # Handle the case where the ProductVariant does not exist
+            print(f"ProductVariant with id {variant_product['variant_id']} does not exist.")
 
         
     return TotalVariantTax,TotalVariantTaxPrice,TotalVariantFinalPriceAfterTax
@@ -5027,12 +5024,14 @@ def add_to_cart_product_quantity_management(request, id, actionType):
 
 
         if actionType == "plus" and cart_products:
+            print('=======>Inside plus condition <==========')
             for item in cart_products:
                 if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
                     item['quantity'] = int(item['quantity']) + 1
                     item['totalPrice'] = format(item['quantity'] * item['price'],".2f")
 
         if actionType == "minus" and cart_products:
+            print('=======>Inside minus condition <==========')
             for item in cart_products:
                 if str(id) == item['variant_id'] and str(product_id) == item['product_id']:
                     if item['quantity'] >= 1:
@@ -5234,6 +5233,9 @@ def add_to_cart_from_wishlist(request, id, quantity):
     else:
         messages.error(request, 'Product out of stock.')
         return redirect(referer)
+
+
+        
 
 
 def user_authenticate(request):
@@ -5590,6 +5592,7 @@ def order_success(request):
         customer = Customer.objects.get(customer=request.user)
         
         order = Order.objects.filter(orderedByCustomer=request.user.id).order_by('-orderCreatedAt').first()
+        print('Order Successfully =========>',order)
         if order is not None:
             paymentmethod = order.orderPayment.orderPaymentMethodName
             products = ProductOrder.objects.filter(productOrderOrderId=order.id)
@@ -5774,6 +5777,19 @@ def page_not_found(request):
     return render(request, 'pages/pages/404.html', context)
 
 
+def faq_page(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    cart_context = handle_cart_logic(request)
+
+    context = {"breadcrumb": {"parent": 'FAQ', "child": 'FAQ'},
+               "cart_products": cart_products, "totalCartProducts": totalCartProducts,
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                }
+
+    return render(request,'pages/pages/faq.html',context)
+
 def coming_soon(request):
     active_banner_themes = BannerTheme.objects.filter(is_active=True)
     cart_context = handle_cart_logic(request)
@@ -5812,6 +5828,40 @@ def review(request):
                 'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/review.html',context)
 
+
+def typography(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    context = {"breadcrumb":{"parent":"TYPOGRAPHY","child":"TYPOGRAPHY"},
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
+    return render(request, 'pages/pages/typography.html',context)
+
+def look_book(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    context = {"breadcrumb":{"parent":"Look book","child":"Look book"},
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,
+                }
+    return render(request, 'pages/pages/look-book.html',context)
+
+def collection(request):
+    active_banner_themes = BannerTheme.objects.filter(is_active=True)
+    cart_context = handle_cart_logic(request)
+    cart_products,totalCartProducts = show_cart_popup(request)
+    context = {"breadcrumb":{"parent":"collection","child":"collection"},
+                'active_banner_themes':active_banner_themes,
+                **cart_context,
+                'cart_products':cart_products,
+                'totalCartProducts':totalCartProducts,}
+    return render(request, 'pages/pages/collection.html',context)
 
 @login_required(login_url='login_page')
 def cart_to_checkout_validation(request):

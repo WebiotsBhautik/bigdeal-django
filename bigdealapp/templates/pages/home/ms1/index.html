@@ -6,27 +6,13 @@
 {% block components %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="big-deal">
-  <meta name="keywords" content="big-deal">
-  <meta name="author" content="big-deal">
-  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
 
-  <!--Google font-->
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+{% block style %}
 
-  
-  <!-- Theme css -->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
+<!-- Theme css -->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
 
+{% endblock style %}
 </head>
 <body class="bg-light">
 
@@ -45,7 +31,7 @@
 <!--top brand panel start-->  
 <section class="brand-panel">
   <div class="brand-panel-box">
-    <div class="brand-panel-contain ">
+    <div class="brand-panel-contain">
       <ul>
         <li><a href="javascript:void(0)">top brand</a></li>
         <li><a>:</a></li>
@@ -96,15 +82,15 @@
 <!--slider end-->
 
 <!--collection banner start-->
-<section class="collection-banner section-pt-space b-g-white ">
+<section class="collection-banner section-pt-space b-g-white">
   <div class="custom-container">
-    <div class="row collection2">
+    <div class="row g-3">
       {% for banner in allbanners  %}
       {% if banner.bannerType|to_str == 'Banner' %}
       <div class="col-md-4">
-        <div class="collection-banner-main banner-1  p-right">
+        <div class="collection-banner-main banner-1 p-right">
           <div class="collection-img">
-            <img src="{{banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
+            <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
           </div>
           <div class="collection-banner-contain">
             <div>
@@ -164,9 +150,9 @@
 <section class="section-py-space ratio_square product">
   <div class="custom-container">
     <div class="row">
-      <div class="col pr-0">
+      <div class="col">
         <div class="theme-tab product mb--5">
-          <div class="tab-content-cls ">
+          <div class="tab-content-cls">
             {% for subcategory,products in products_by_subcategory.items %}
             <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default {% endif %}" data-subcategory-id="{{ subcategory.id }}" >
               <div class="product-slide-6 product-m no-arrow">
@@ -182,7 +168,7 @@
                       </div>
                       <div class="product-back">
                         <a href="{% url 'left_slidebar' product.id %}">
-                          <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                          <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                         </a>
                       </div>
                       <div class="product-icon icon-inline">
@@ -211,7 +197,7 @@
                         {% comment %} {{product.productDescription|safe}} {% endcomment %}
                       </div>
                     </div>
-                    <div class="product-detail detail-inline ">
+                    <div class="product-detail detail-inline">
                       <div class="detail-title">
                         <div class="detail-left">
                           <div class="rating-star">
@@ -297,16 +283,16 @@
 <!-- slider tab end -->
 
 <!--collection banner start-->
-<section class="collection-banner section-pb-space ">
+<section class="collection-banner section-pb-space">
   <div class="custom-container">
     {% for banner in col_banner  %}
     <div class="row"> 
       <div class="col">
         <div class="collection-banner-main banner-5 p-center">
           <div class="collection-img">
-            <img src="{{banner.bannerImage}}" class="bg-img  " alt="banner">
+            <img src="{{banner.bannerImage}}" class="bg-img" alt="banner">
           </div>
-          <div class="collection-banner-contain ">
+          <div class="collection-banner-contain">
             <div class="sub-contain">
               <h3>save up to {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                 {% else %}
@@ -342,7 +328,7 @@
           </h1>
         </div>
       </div>
-      <div class="col-md-12 col-lg-4 ">
+      <div class="col-md-12 col-lg-4">
         <div class="deal-banner-containe">
           <diV class="deal-btn">
             <a href="{% url 'shop_left_sidebar'  %}" class="btn-white">
@@ -366,7 +352,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -378,7 +364,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -390,7 +376,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -402,7 +388,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -414,7 +400,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -426,7 +412,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -438,7 +424,7 @@
             <div class="category-contain">
               <div class="img-wrapper">
                 <a href="{% url 'shop_left_sidebar' %}">
-                  <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid">
+                  <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category" class="img-fluid">
                 </a>
               </div>
               <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
@@ -455,7 +441,7 @@
 
 <!--box categroy start-->
 <section class="box-category section-py-space">
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <div class="row">
       <div class="col pl-0">
         <div class="slide-10 no-arrow">
@@ -544,7 +530,7 @@
 <!--box category end-->
 
 <!-- media banner tab start-->
-<section class=" ratio_square">
+<section class="overflow-hidden ratio_square">
   <div class="custom-container b-g-white section-pb-space">
     <div class="row">
       <div class="col p-0">
@@ -556,7 +542,7 @@
             <li class=""><a href="tab-10">On Sale</a></li>
           </ul>
           <div class="tab-content-cls">
-            <div id="tab-7" class="tab-content active default ">
+            <div id="tab-7" class="tab-content active default">
               <div class="media-slide-5 product-m no-arrow">
                 <div>
                   <div class="media-banner media-banner-1 border-0">
@@ -820,7 +806,7 @@
 <!--collection banner start-->
 <section class="collection-banner section-py-space">
   <div class="container-fluid">
-    <div class="row collection2">
+    <div class="row g-3">
       {% for banner in allbanners  %}
       {% if banner.bannerType|to_str == 'Shop Banner' %}
       <div class="col-md-4">
@@ -828,7 +814,7 @@
           <div class="collection-img">
             <img src="{{banner.bannerImage}}" class="img-fluid bg-img " alt="banner">
           </div>
-          <div class="collection-banner-contain ">
+          <div class="collection-banner-contain">
             <div>
               <h3>{{banner.titleOne}}</h3>
               <h4>{{banner.titleTwo}}</h4>
@@ -853,7 +839,7 @@
 <!--hot deal start-->
 <section class="hot-deal hotdeal-first b-g-white section-big-pb-space space-abjust">
   <div class="custom-container">
-    <div class="row hot-2 ">
+    <div class="row g-sm-4 g-3">
       <div class="col-12">
         <!--title start-->
         <div class="title3 b-g-white text-left">
@@ -864,9 +850,9 @@
       <div class="col-lg-9">
         <div class="slide-1 no-arrow">
           <div>
-            <div class="hot-deal-contain ">
+            <div class="hot-deal-contain">
               <div class="row hot-deal-subcontain hotdeal-block1">
-                <div class="col-lg-4 col-md-4  ">
+                <div class="col-lg-4 col-md-4 ">
                   <div class="hotdeal-right-slick border-0">
                     {% for banner in allbanners  %}
                     {% if banner.bannerType|to_str == 'Timer' %}
@@ -941,18 +927,18 @@
                           <p id="demo">
                           </p>
                         </div>
-                        <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal btn-md ">shop now</a>
+                        <a href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}" class="btn btn-normal btn-md">shop now</a>
                       </div>
                     </div>
                     {% endif %}
                     {% endfor %}
                   </div>
                 </div>
-                <div class="col-md-2 ">
+                <div class="col-md-2">
                   <div class="hotdeal-right-nav">
                     {% for banner in allbanners  %}
                     {% if banner.bannerType|to_str == 'Timer' %}
-                    <div><img src="{{banner.bannerImage}}" alt="hot-dea" class="img-fluid  " ></div>
+                    <div><img src="{{banner.bannerImage}}" alt="hot-dea" class="img-fluid" ></div>
                     {% endif %}
                     {% endfor %}
                   </div>
@@ -1273,7 +1259,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/1.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/1.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -1286,7 +1272,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/2.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -1299,7 +1285,7 @@
             <div class="testimonial-contain">
               <div class="media">
                 <div class="testimonial-img">
-                  <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle  " alt="testimonial">
+                  <img src="{% static 'assets/images/testimonial/3.jpg' %}" class="img-fluid rounded-circle" alt="testimonial">
                 </div>
                 <div class="media-body">
                   <h5>mark jecno</h5>
@@ -1325,7 +1311,7 @@
 <section class="product section-pb-space mb--5">
   <div class="custom-container">
     <div class="row">
-      <div class="col pr-0">
+      <div class="col">
         <div class="product-slide-6 no-arrow">
           {% if layout1_products  %}
           {% for product in layout1_products %}
@@ -1334,12 +1320,12 @@
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageFront}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-back">
                   <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="{{product.productImageBack}}" class="img-fluid  " alt="product">
+                    <img src="{{product.productImageBack}}" class="img-fluid" alt="product">
                   </a>
                 </div>
                 <div class="product-icon icon-inline">
@@ -1368,7 +1354,7 @@
                   {% comment %} {{product.productDescription|safe}} {% endcomment %}
                 </div>
               </div>
-              <div class="product-detail detail-inline ">
+              <div class="product-detail detail-inline">
                 <div class="detail-title">
                   <div class="detail-left">
                     <div class="rating-star">
@@ -1450,11 +1436,11 @@
 <!--product end-->
 
 <!--instagram start-->
-<section class="instagram">
+<section class="instagram overflow-hidden">
   <div class="container-fluid">
     <div class="row">
       <div class="col p-0 position-relative">
-        <div class="insta-contant1 ">
+        <div class="insta-contant1">
           <div class="slide-7 no-arrow">
             {% for banner in allbanners  %}
             {% if banner.bannerType|to_str == 'Instagram' %}
@@ -1494,7 +1480,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="{% url 'index_default' %}">
+                  <a href="{% url 'index' %}">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -1547,7 +1533,7 @@
                       <span class="input-group-text"><i class="ti-user"></i></span>
                     </div>
                   </div>
-                  <div class="form-group ">
+                  <div class="form-group">
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="enter email address" >
                       <span class="input-group-text"><i class="ti-email"></i></span>
@@ -1564,7 +1550,7 @@
       </div>
     </div>
   </div>
-  <div class="subfooter dark-footer ">
+  <div class="subfooter dark-footer">
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-md-8 col-sm-12">
@@ -1687,7 +1673,7 @@
 <!-- Quick-view modal popup end-->
 
 <!-- Add to cart bar -->
-<div id="cart_side" class="add_to_cart top ">
+<div id="cart_side" class="add_to_cart top">
   <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
   <div class="cart-inner">
     <div class="cart_top">
@@ -1834,7 +1820,7 @@
         <li>
           <div class="buttons">
             <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+            <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
           </div>
         </li>
       </ul>

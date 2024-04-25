@@ -16,7 +16,7 @@
                 </div>
                 <div class="footer-contant">
                   <div class="footer-logo">
-                    <a href="{% url 'index_default' %}">
+                    <a href="{% url 'index' %}">
                       <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                     </a>
                   </div>
@@ -69,7 +69,7 @@
                         <span class="input-group-text"><i class="ti-user"></i></span>                      
                       </div>
                     </div>
-                    <div class="form-group ">
+                    <div class="form-group">
                       <div class="input-group">
                         <input type="text" class="form-control" placeholder="enter email address" >                     
                         <span class="input-group-text"><i class="ti-email"></i></span>                     
@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="subfooter dark-footer ">
+    <div class="subfooter dark-footer">
       <div class="container">
         <div class="row">
           <div class="col-xl-6 col-md-8 col-sm-12">
@@ -322,7 +322,7 @@
           <li>
             <div class="buttons">
               <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
-              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm">checkout</a>
             </div>
           </li>
         </ul>
