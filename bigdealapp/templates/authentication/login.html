@@ -56,9 +56,9 @@
                     <div>
                         <h2>login</h2>
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="{% url 'index_default' %}">home</a></li>
                             <li><i class="fa fa-angle-double-right"></i></li>
-                            <li><a href="javascript:void(0)">login</a></li>
+                            <li><a href="{% url 'login_page' %}">login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
       <div class="col-xl-4 col-lg-6 col-md-8 offset-xl-4 offset-lg-3 offset-md-2">
         <div class="theme-card">
           <h3 class="text-center">Login</h3>
-          <form class="theme-form" method="post" action=''>
+          <form class="theme-form" method="post" action="{% url 'login_page' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label >Email Address</label>
@@ -87,7 +87,7 @@
                 <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
             </div>
             <button class="btn btn-normal">Login</button>
-            <a class="float-end txt-default mt-2" href="forget-pwd.html">Forgot your password?</a>
+            <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
           </form>
           <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
           <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
@@ -112,7 +112,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="index.html">
+                  <a href="{% url 'index_default' %}">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -271,7 +271,7 @@
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star-o"></i></li>
                   </ul>
-                  <a href="review.html"><span>(6 reviews)</span></a>
+                  
                 </div>
                 <ul class="best-seller">
                   <li>
@@ -350,7 +350,7 @@
                     <i class="fa fa-shopping-cart"></i>
                     add to cart
                   </a>
-                  <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                  <a href="javascript:void(0)" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                     view detail
                   </a>
                 </div>
@@ -364,376 +364,16 @@
 </div>
 <!-- Quick-view modal popup end-->
 
-<!-- edit product modal start-->
-<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="pro-group">
-          <div class="product-img">
-            <div class="media">
-              <div class="img-wraper">
-                <a href="product-page(left-sidebar).html">
-                  <img src="{% static 'assets/images/layout-2/product/1.jpg' %}" alt="">
-                </a>
-              </div>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h3>redmi not 3</h3>
-                </a>
-                <h6>$80<span>$120</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select Size</h6>
-          <div class="size-box">
-            <ul>
-              <li ><a href="javascript:void(0)">s</a></li>
-              <li><a href="javascript:void(0)">m</a></li>
-              <li><a href="javascript:void(0)">l</a></li>
-              <li><a href="javascript:void(0)">xl</a></li>
-              <li><a href="javascript:void(0)">2xl</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select color</h6>
-          <div class="color-selector inline">
-            <ul>
-              <li>
-                <div class="color-1 active"></div>
-              </li>
-              <li>
-                <div class="color-2"></div>
-              </li>
-              <li>
-                <div class="color-3"></div>
-              </li>
-              <li>
-                <div class="color-4"></div>
-              </li>
-              <li>
-                <div class="color-5"></div>
-              </li>
-              <li>
-                <div class="color-6"></div>
-              </li>
-              <li>
-                <div class="color-7"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Quantity</h6>
-          <div class="qty-box">
-            <div class="input-group">
-              <button class="qty-minus"></button>
-              <input class="qty-adj form-control" type="number" value="1"/>
-              <button class="qty-plus"></button>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group mb-0">
-          <div class="modal-btn">
-            <a href="cart.html" class="btn btn-solid btn-sm">
-              add to cart
-            </a>
-            <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-              more detail
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- edit product modal end-->
 
-<!-- Add to cart bar -->
-<div id="cart_side" class="add_to_cart right">
-  <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my cart</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeCart()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- Add to cart bar end-->
+{% include 'base/cart-popup.html' %}
 
-<!-- wishlistbar bar -->
-<div id="wishlist_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my wishlist</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeWishlist()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- wishlistbar bar end-->
 
 <!-- My account bar start-->
 <div id="myAccount" class="add_to_cart right account-bar">
   <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
   <div class="cart-inner">
     <div class="cart_top">
-      <h3>my account 123</h3>
+      <h3>my account </h3>
       <div class="close-cart">
         <a href="javascript:void(0)" onclick="closeAccount()">
           <i class="fa fa-times" aria-hidden="true"></i>
@@ -753,8 +393,8 @@
         <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
       </div>
       <div class="accout-fwd">
-        <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-        <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+        <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>
+        <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
       </div>
     </form>
   </div>

@@ -78,17 +78,6 @@
               </ul>
             </div>
             <div class="language-block">
-              <div class="language-dropdown">
-                  <span  class="language-dropdown-click">
-                    english <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                <ul class="language-dropdown-open">
-                  <li><a href="javascript:void(0)">hindi</a></li>
-                  <li><a href="javascript:void(0)">english</a></li>
-                  <li><a href="javascript:void(0)">marathi</a></li>
-                  <li><a href="javascript:void(0)">spanish</a></li>
-                </ul>
-              </div>
               <div class="curroncy-dropdown" id="currency-selection">
                 <select id="currency-selection-dropdown">
                    <option id="currency-value" value="%">Currency</option>
@@ -155,24 +144,24 @@
                     back <i class="fa fa-angle-right ps-2"></i>
                   </div>
                 </li>
-                <li><a href="category-page(left-sidebar).html">western ware</a></li>
-                <li><a href="category-page(left-sidebar).html">TV, Appliances</a></li>
-                <li><a href="category-page(left-sidebar).html">Pets Products</a></li>
-                <li><a href="category-page(left-sidebar).html">Car, Motorbike</a></li>
-                <li><a href="category-page(left-sidebar).html">Industrial Products</a></li>
-                <li><a href="category-page(left-sidebar).html">Beauty, Health Products</a></li>
-                <li><a href="category-page(left-sidebar).html">Grocery Products </a></li>
-                <li><a href="category-page(left-sidebar).html">Sports</a></li>
-                <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">western ware</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">TV, Appliances</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Pets Products</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Car, Motorbike</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Industrial Products</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Beauty, Health Products</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Grocery Products </a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Sports</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                 <li class="mor-slide-open">
                   <ul>
-                    <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                    <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                    <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                    <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                   </ul>
                 </li>
                 <li>
@@ -185,7 +174,7 @@
               </ul>
             </div>
             <div class="brand-logo logo-sm-center">
-              <a href="index.html">
+              <a href="{% url 'index_default' %}">
                 <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid  " alt="logo">
               </a>
             </div>
@@ -195,7 +184,7 @@
               <form class="big-deal-form">
                 <div class="input-group ">                 
                   <span class="search"><i class="fa fa-search"></i></span>                 
-                  <input type="text" class="form-control" placeholder="Search a Product" >                 
+                  <input type="text" class="form-control" id="search-input" placeholder="Search a Product" >                 
                   <select>
                     <option>All Category</option>
                     <option>indurstrial</option>
@@ -251,7 +240,7 @@
                     <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><path d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z"/><path d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z"/></svg>
                   </a>
                 </li>
-                <li class="mobile-wishlist item-count" onclick="openWishlist()">
+                <li class="mobile-wishlist item-count">
                   <a href="javascript:void(0)">
                     <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg"><path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/></svg>
                     <div class="item-count-contain" >
@@ -272,7 +261,7 @@
                     </div>
                   </a>
                   <div class="item-count-contain">
-                    3
+                    {{totalCartProducts}}
                   </div>
                 </li>
               </ul>
@@ -301,7 +290,7 @@
           <div class="navbar-menu">
             <div class="logo-block">
               <div class="brand-logo logo-sm-center">
-                <a href="index.html">
+                <a href="{% url 'index_default' %}">
                   <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid  " alt="logo">
                 </a>
               </div>
@@ -318,25 +307,25 @@
                 </nav>
                 <div class="collapse  nav-desk" id="navbarToggleExternalContent">
                   <ul class="nav-cat title-font">
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/1.jpg' %}" alt="category-product"> topwear</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/2.jpg' %}" alt="category-product"> bottomwear</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/3.jpg' %}" alt="category-product"> dresses</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/4.jpg' %}" alt="category-product"> winterwear</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/5.jpg' %}" alt="category-product"> partywear</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/6.jpg' %}" alt="category-product"> bag</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/7.jpg' %}" alt="category-product"> shocks </a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/8.jpg' %}" alt="category-product"> shoes</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/9.jpg' %}" alt="category-product"> night wear</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/10.jpg' %}" alt="category-product"> t-shirts</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/11.jpg' %}" alt="category-product"> watches</a></li>
-                    <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/12.jpg' %}" alt="category-product"> cap</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/1.jpg' %}" alt="category-product"> topwear</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/2.jpg' %}" alt="category-product"> bottomwear</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/3.jpg' %}" alt="category-product"> dresses</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/4.jpg' %}" alt="category-product"> winterwear</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/5.jpg' %}" alt="category-product"> partywear</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/6.jpg' %}" alt="category-product"> bag</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/7.jpg' %}" alt="category-product"> shocks </a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/8.jpg' %}" alt="category-product"> shoes</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/9.jpg' %}" alt="category-product"> night wear</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/10.jpg' %}" alt="category-product"> t-shirts</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/11.jpg' %}" alt="category-product"> watches</a></li>
+                    <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/12.jpg' %}" alt="category-product"> cap</a></li>
                     <li>
                       <ul class="mor-slide-open">
-                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/13.jpg' %}" alt="category-product"> shoes</a></li>
-                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/14.jpg' %}" alt="category-product"> night wear</a></li>
-                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/15.jpg' %}" alt="category-product"> t-shirts</a></li>
-                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/16.jpg' %}" alt="category-product"> watches</a></li>
-                        <li><a href="category-page(left-sidebar).html"> <img src="{% static 'assets/images/kids/header-category/17.jpg' %}" alt="category-product"> cap</a></li>
+                        <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/13.jpg' %}" alt="category-product"> shoes</a></li>
+                        <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/14.jpg' %}" alt="category-product"> night wear</a></li>
+                        <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/15.jpg' %}" alt="category-product"> t-shirts</a></li>
+                        <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/16.jpg' %}" alt="category-product"> watches</a></li>
+                        <li><a href="{% url 'shop_left_sidebar'  %}"> <img src="{% static 'assets/images/kids/header-category/17.jpg' %}" alt="category-product"> cap</a></li>
                       </ul>
                     </li>
                     <li>
@@ -399,16 +388,26 @@
                     <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><path d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z"/><path d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z"/></svg>
                   </a>
                 </li>
-                <li class="mobile-wishlist item-count" onclick="openWishlist()">
-                  <a href="javascript:void(0)">
+                <li class="mobile-wishlist item-count">
+                  <a href="{% url 'wishlist_page' %}">
                     <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg"><path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/></svg>
+                    {% if request.user.is_authenticated %}
+                    <div class="cart-item">
+                      <div>{{totalWishlistProducts}} item<span>wishlist</span>
+                      </div>
+                    </div>
+                    <div class="item-count-contain" >
+                      {{totalWishlistProducts|return_totalWishlistProducts:request}}
+                    </div>
+                    {% else %}
                     <div class="cart-item">
                       <div>0 item<span>wishlist</span>
                       </div>
                     </div>
                     <div class="item-count-contain" >
-                      2
+                      0
                     </div>
+                    {% endif %}
                   </a>
                 </li>
                 <li class="mobile-cart item-count" onclick="openCart()">
@@ -416,7 +415,7 @@
                     <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><path d="m497 401.667c-415.684 0-397.149.077-397.175-.139-4.556-36.483-4.373-34.149-4.076-34.193 199.47-1.037-277.492.065 368.071.065 26.896 0 47.18-20.377 47.18-47.4v-203.25c0-19.7-16.025-35.755-35.725-35.79l-124.179-.214v-31.746c0-17.645-14.355-32-32-32h-29.972c-17.64 0-31.99 14.351-31.99 31.99v31.594l-133.21-.232-9.985-54.992c-2.667-14.694-15.443-25.36-30.378-25.36h-68.561c-8.284 0-15 6.716-15 15s6.716 15 15 15c72.595 0 69.219-.399 69.422.719 16.275 89.632 5.917 26.988 49.58 306.416l-38.389.2c-18.027.069-32.06 15.893-29.81 33.899l4.252 34.016c1.883 15.06 14.748 26.417 29.925 26.417h26.62c-18.8 36.504 7.827 80.333 49.067 80.333 41.221 0 67.876-43.813 49.067-80.333h142.866c-18.801 36.504 7.827 80.333 49.067 80.333 41.22 0 67.875-43.811 49.066-80.333h31.267c8.284 0 15-6.716 15-15s-6.716-15-15-15zm-209.865-352.677c0-1.097.893-1.99 1.99-1.99h29.972c1.103 0 2 .897 2 2v111c0 8.284 6.716 15 15 15h22.276l-46.75 46.779c-4.149 4.151-10.866 4.151-15.015 0l-46.751-46.779h22.277c8.284 0 15-6.716 15-15v-111.01zm-30 61.594v34.416h-25.039c-20.126 0-30.252 24.394-16.014 38.644l59.308 59.342c15.874 15.883 41.576 15.885 57.452 0l59.307-59.342c14.229-14.237 4.13-38.644-16.013-38.644h-25.039v-34.254l124.127.214c3.186.005 5.776 2.603 5.776 5.79v203.25c0 10.407-6.904 17.4-17.18 17.4h-299.412l-35.477-227.039zm-56.302 346.249c0 13.877-11.29 25.167-25.167 25.167s-25.166-11.29-25.166-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167zm241 0c0 13.877-11.289 25.167-25.166 25.167s-25.167-11.29-25.167-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167z"/></g></svg>
                   </a>
                   <div class="item-count-contain">
-                    3
+                    {{totalCartProducts}}
                   </div>
                 </li>
               </ul>
@@ -503,22 +502,23 @@
 <!--header end-->
 
 <!--home slider start-->
-<section class="kids-slide">
+<section class="kids-slide">  
   <div class="slide-1 no-arrow">
+    {% for banner in allbanners  %}
+    {% if banner.bannerType|to_str == 'Slider' %}
     <div>
       <div class="slide-main">
-        <img src="{% static 'assets/images/kids/slider/1.png' %}" class="img-fluid bg-img" alt="kids-slider" />
+        <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="kids-slider" />
         <div class="custom-container">
           <div class="row">
             <div class="col-12 p-0">
               <div class="slide-contain">
                 <div>
-                  <h4>Free deivery</h4>
-                  <h2>Baby & Kids</h2>
-                  <h3>Biggest Offers On This Season</h3>
-                  <p>Browse through a lovely vairety of clothing collection for you
-                    little ones. and best styles for your little one!</p>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded">
+                  <h4>{{banner.titleOne}}</h4>
+                  <h2>{{banner.titleTwo}}</h2>
+                  <h3>{{banner.titleThree}}</h3>
+                  <p>{{banner.bannerDescription|safe}}</p>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">
                     Shop Now
                   </a>
                 </div>
@@ -527,78 +527,12 @@
           </div>
         </div>
         <div class="animat-block">
-          <img src="{% static 'assets/images/kids/slider/animat/1.png' %}" class="img-fluid animat1" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/2.png' %}" class="img-fluid animat2" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/3.png' %}" class="img-fluid animat3" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/4.png' %}" class="img-fluid animat4" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/5.png' %}" class="img-fluid animat5" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/6.png' %}" class=" animat6" alt="kids-slider">
+          <img src="{{banner.bannerImageTwo}}" class="img-fluid animat1" alt="kids-slider">
         </div>
       </div>
     </div>
-    <div>
-      <div class="slide-main">
-        <img src="{% static 'assets/images/kids/slider/2.png' %}" class="img-fluid bg-img" alt="kids-slider" />
-        <div class="custom-container">
-          <div class="row">
-            <div class="col-12 p-0">
-              <div class="slide-contain">
-                <div>
-                  <h4>Free deivery</h4>
-                  <h2>Baby & Kids</h2>
-                  <h3>Biggest Offers On This Season</h3>
-                  <p>Browse through a lovely vairety of clothing collection for you
-                    little ones. and best styles for your little one!</p>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="animat-block">
-          <img src="{% static 'assets/images/kids/slider/animat/1.png' %}" class="img-fluid animat1" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/2.png' %}" class="img-fluid animat2" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/3.png' %}" class="img-fluid animat3" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/4.png' %}" class="img-fluid animat4" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/5.png' %}" class="img-fluid animat5" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/6.png' %}" class=" animat6" alt="kids-slider">
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="slide-main">
-        <img src="{% static 'assets/images/kids/slider/3.png' %}" class="img-fluid bg-img" alt="kids-slider" />
-        <div class="custom-container">
-          <div class="row">
-            <div class="col-12 p-0">
-              <div class="slide-contain">
-                <div>
-                  <h4>Free deivery</h4>
-                  <h2>Baby & Kids</h2>
-                  <h3>Biggest Offers On This Season</h3>
-                  <p>Browse through a lovely vairety of clothing collection for you
-                    little ones. and best styles for your little one!</p>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded">
-                    Shop Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="animat-block">
-          <img src="{% static 'assets/images/kids/slider/animat/1.png' %}" class="img-fluid animat1" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/2.png' %}" class="img-fluid animat2" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/3.png' %}" class="img-fluid animat3" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/4.png' %}" class="img-fluid animat4" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/5.png' %}" class="img-fluid animat5" alt="kids-slider">
-          <img src="{% static 'assets/images/kids/slider/animat/6.png' %}" class=" animat6" alt="kids-slider">
-        </div>
-      </div>
-    </div>
-
+    {% endif %}
+    {% endfor %}
   </div>
 </section>
 <!--home slider end-->
@@ -672,21 +606,23 @@
 <!--services end-->
 
 <!--collection big banner start-->
+{% if first_banner and second_banner and third_banner and fourth_banner and five_banner %}
 <section class="collection-banner b-g-white section-py-space">
   <div class="custom-container">
     <div class="row collection-p3">
       <div class="col-md-4">
         <div class="row">
+
           <div class="col-md-12">
             <div class="collection-banner-main p-left collection-color7 text-center banner-style5  banner-13">
               <div class="collection-img">
-                <img src="{% static 'assets/images/kids/collection-banner/1.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>socks collection</h3>
-                  <h4>best choise</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm"> shop now</a>
+                  <h3>{{first_banner.titleOne}}</h3>
+                  <h4>{{first_banner.titleTwo}}</h4>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
             </div>
@@ -694,13 +630,13 @@
           <div class="col-md-12">
             <div class="collection-banner-main p-left text-center collection-color10 banner-style5  banner-13">
               <div class="collection-img">
-                <img src="{% static 'assets/images/kids/collection-banner/2.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>kids fashion talk</h3>
-                  <h4>best offer</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm"> shop now</a>
+                  <h3>{{second_banner.titleOne}}</h3>
+                  <h4>{{second_banner.titleTwo}}</h4>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
             </div>
@@ -712,13 +648,16 @@
           <div class="col-md-6">
             <div class="collection-banner-main p-left collection-color9 text-center banner-style5 banner-13">
               <div class="collection-img">
-                <img src="{% static 'assets/images/kids/collection-banner/3.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>footwear shoes</h3>
-                  <h4>up to 50% off</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm"> shop now</a>
+                  <h3>{{third_banner.titleOne}}</h3>
+                  <h4>up to{% if third_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                    {% else %}
+                    <span class="theme-color">{{third_banner.bannerProduct.productVariantDiscount}}% OFF</span>
+                    {% endif %}</h4>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
             </div>
@@ -726,13 +665,13 @@
           <div class="col-md-6">
             <div class="collection-banner-main p-left collection-color11 text-center banner-style5 banner-13">
               <div class="collection-img">
-                <img src="{% static 'assets/images/kids/collection-banner/4.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{fourth_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>kids night wear</h3>
-                  <h4>super sale</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm"> shop now</a>
+                  <h3>{{fourth_banner.titleOne}}</h3>
+                  <h4>{{fourth_banner.titleTwo}}</h4>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
             </div>
@@ -740,13 +679,16 @@
           <div class="col-md-12">
             <div class="collection-banner-main p-left collection-color12 text-center banner-style5 banner-13">
               <div class="collection-img">
-                <img src="{% static 'assets/images/kids/collection-banner/5.jpg' %}" class="img-fluid bg-img  " alt="banner">
+                <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img  " alt="banner">
               </div>
               <div class="collection-banner-contain ">
                 <div>
-                  <h3>kids fashion week</h3>
-                  <h4>50% dicount</h4>
-                  <a href="product-page(left-sidebar).html" class="btn btn-rounded btn-sm"> shop now</a>
+                  <h3>{{five_banner.titleOne}}</h3>
+                  <h4>{% if five_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                    {% else %}
+                    <span class="theme-color">{{five_banner.bannerProduct.productVariantDiscount}}% discount</span>
+                    {% endif %} </h4>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-sm"> shop now</a>
                 </div>
               </div>
             </div>
@@ -756,6 +698,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 <!--collection big banner end-->
 
 <!--title-start-->
@@ -771,49 +714,41 @@
     <div class="row">
       <div class="col pr-0">
         <div class="slide-5 product-m no-arrow">
+          {% for product in kids_products %}
           <div>
             <div class="product-box">
               <div class="product-imgbox">
                 <div class="product-front">
                   <div class="tab-content" >
                     <div class="tab-pane fade show active" id="pro1" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/1.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro2">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/2.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro3">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/3.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro4">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/4.jpg' %}" class="img-fluid  " alt="product">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
+                  <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                     <i  data-feather="heart"></i>
                   </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
+                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                      <i data-feather="eye"></i>
                   </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
+                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                      class="add-to-compare-list" data-tippy-content="Compare">
+                      <i data-feather="refresh-cw"></i>
+                  </a> 
                 </div>
                 <div class="new-label">
-                  <div>new</div>
+                  <div>{% if product.is_past_due %}
+                    <span class="label label-black">Old</span>
+                    {% else %}
+                    <span class="label label-black">New</span>
+                    {% endif %}</div>
                 </div>
                 <div class="on-sale">
-                  on sale
+                  {{product.productDescription|safe}}
+
                 </div>
               </div>
               <div class="product-detail product-detail2 ">
@@ -831,375 +766,32 @@
                     <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro4" ></a>
                   </li>
                 </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>baby girls satin dress</h3>
+                <a href="{% url 'left_slidebar' product.id %}">
+                  <h3>{{product.productName}}</h3>
                 </a>
                 <h5>
-                  $90
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
+                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                  {% endif %} 
                   <span>
-                    $120
-                    
+                    {% if product.productType == "Simple" %} 
+                    {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                    {% else %} 
+                    {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                    {% endif %} 
                   </span>
                 </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
+                <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}">
+                  <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
+                    add to cart
+                  </button>
+                </a>
               </div>
             </div>
           </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content" >
-                    <div class="tab-pane fade show active" id="pro5" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/5.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro6" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/6.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro7" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/7.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro8" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/8.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1"  data-bs-toggle="tab" href="#pro6" ></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link check-color pro-color2 active"  data-bs-toggle="tab" href="#pro5" ></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link check-color pro-color3"  data-bs-toggle="tab" href="#pro7" ></a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro8" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>baby girl's midi dress</h3>
-                </a>
-                <h5>
-                  $80
-                  <span>
-                    $90
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content" >
-                    <div class="tab-pane fade show active" id="pro9" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/9.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro10" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/10.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro11" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/11.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro12" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/12.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant" >
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1 "  data-bs-toggle="tab" href="#pro11" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 "  data-bs-toggle="tab" href="#pro10" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3 active"  data-bs-toggle="tab" href="#pro9" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro12" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>sleeves cool checked  dress</h3>
-                </a>
-                <h5>
-                  $60
-                  <span>
-                    $80
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content">
-                    <div class="tab-pane fade show active" id="pro13" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/13.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro14" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/14.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro15" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/15.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro16" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/16.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  "  data-bs-toggle="tab" href="#pro16" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 "  data-bs-toggle="tab" href="#pro14" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3  "  data-bs-toggle="tab" href="#pro15" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4 active"  data-bs-toggle="tab" href="#pro13" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>knee length dress</h3>
-                </a>
-                <h5>
-                  $120
-                  <span>
-                    $140
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content" >
-                    <div class="tab-pane fade show active" id="pro17" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/17.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro18" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/18.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro19" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/19.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro20" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/20.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-                <div class="new-label">
-                  <div>new</div>
-                </div>
-                <div class="on-sale">
-                  on sale
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1"  data-bs-toggle="tab" href="#pro19" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2"  data-bs-toggle="tab" href="#pro18" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3 active "  data-bs-toggle="tab" href="#pro17" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro20" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>cotton tunic t-shirts</h3>
-                </a>
-                <h5>
-                  $60
-                  <span>
-                    $70
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content">
-                    <div class="tab-pane fade " id="pro22" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/11.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade show active" id="pro21" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/10.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro23" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/9.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro24" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/12.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant" >
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  "  data-bs-toggle="tab" href="#pro22" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 active"  data-bs-toggle="tab" href="#pro21" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3  "  data-bs-toggle="tab" href="#pro23" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4 "  data-bs-toggle="tab" href="#pro24" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>short sleeve t-shirts tops</h3>
-                </a>
-                <h5>
-                  $140
-                  <span>
-                    $180
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -1208,23 +800,32 @@
 <!-- media tab end -->
 
 <!--sale banner start-->
+{% for banner in allbanners  %}
+{% if banner.bannerType|to_str == 'Sale Banner' %}
+
 <section class="sale-banenr banner-style1">
-  <img src="{% static 'assets/images/kids/sale-banner/1.jpg' %}" alt="sale-banenr" class="img-fluid bg-img">
+  <img src="{{banner.bannerImage}}" alt="sale-banenr" class="img-fluid bg-img">
   <div class="custom-container">
     <div class="row">
       <div class="col-12 position-relative">
         <div class="sale-banenr-contain text-center p-left">
           <div>
-            <h4>summer sale 20% off</h4>
-            <h2>special kids</h2>
-            <h3>fashion trends</h3>
-            <a href="product-page(left-sidebar).html" class="btn btn-rounded">Shop Now</a>
+            <h4>summer sale {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+              {% else %}
+              <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span>
+              {% endif %}</h4>
+            <h2>{{banner.titleOne}}</h2>
+            <h3>{{banner.titleTwo}}</h3>
+            <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded">Shop Now</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+{% endif %}
+{% endfor %}
 <!--sale banner ned-->
 
 <!--title start-->
@@ -1239,43 +840,30 @@
     <div class="row">
       <div class="col pr-0">
         <div class="slide-5 no-arrow">
+          {% for product in kids_products %}
           <div>
             <div class="product-box ">
               <div class="product-imgbox">
                 <div class="product-front">
                   <div class="tab-content" >
                     <div class="tab-pane fade show active" id="pro25" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/21.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro26" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/22.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro27" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/23.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro28" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/24.jpg' %}" class="img-fluid  " alt="product">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <img src="{{product.productImageFront}}" class="img-fluid  " alt="product">
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
+                  <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
                     <i  data-feather="heart"></i>
                   </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
+                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                      <i data-feather="eye"></i>
                   </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
+                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                      class="add-to-compare-list" data-tippy-content="Compare">
+                      <i data-feather="refresh-cw"></i>
+                  </a> 
                 </div>
               </div>
               <div class="product-detail product-detail2 ">
@@ -1293,384 +881,32 @@
                     <a class="nav-link check-color pro-color4 "  data-bs-toggle="tab" href="#pro28" ></a>
                   </li>
                 </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>cotton short sleeves frock</h3>
+                <a href="{% url 'left_slidebar' product.id %}">
+                  <h3>{{product.productName}}</h3>
                 </a>
                 <h5>
-                  $85
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
+                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                  {% endif %}
                   <span>
-                    $95
+                    {% if product.productType == "Simple" %} 
+                    {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                    {% else %} 
+                    {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                    {% endif %}
                   </span>
                 </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
+                <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}">
+                  <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
+                    add to cart
+                  </button>
+                </a>
               </div>
             </div>
           </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content">
-                    <div class="tab-pane fade show active" id="pro29" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/25.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro30" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/26.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro31" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/27.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro32" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/28.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-                <div class="new-label">
-                  <div>new</div>
-                </div>
-                <div class="on-sale">
-                  on sale
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  "  data-bs-toggle="tab" href="#pro30" ></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link check-color pro-color2 active"  data-bs-toggle="tab" href="#pro29" ></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link check-color pro-color3"  data-bs-toggle="tab" href="#pro31" ></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro32" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>short sleeve t-shirts tops</h3>
-                </a>
-                <h5>
-                  $57
-                  <span>
-                    $76
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content" >
-                    <div class="tab-pane fade show active" id="pro33" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/29.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro34" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/30.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro35" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/31.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro36" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/32.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  active "  data-bs-toggle="tab" href="#pro33" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 "  data-bs-toggle="tab" href="#pro34" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3  "  data-bs-toggle="tab" href="#pro35" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4 "  data-bs-toggle="tab" href="#pro36" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>orange toddler girls dress</h3>
-                </a>
-                <h5>
-                  $158
-                  <span>
-                    $170
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content">
-                    <div class="tab-pane fade " id="pro37">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/33.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro38">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/34.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro39">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/35.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade show active" id="pro40">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/36.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="product-detail product-detail2">
-                <ul class="nav nav-tabs color-variant">
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  active "  data-bs-toggle="tab" href="#pro40" ></a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link check-color pro-color2 "  data-bs-toggle="tab" href="#pro38" ></a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link check-color pro-color3  "  data-bs-toggle="tab" href="#pro39" ></a>
-                  </li>
-                  <li class="nav-item ">
-                    <a class="nav-link check-color pro-color4 "  data-bs-toggle="tab" href="#pro37" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>blue knee length dress</h3>
-                </a>
-                <h5>
-                  $120
-                  <span>
-                    $130
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content">
-                    <div class="tab-pane fade show active" id="pro41">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/37.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro42">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/38.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro43">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/39.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro44">
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/40.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-                <div class="new-label">
-                  <div>new</div>
-                </div>
-                <div class="on-sale">
-                  on sale
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant" >
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1 "  data-bs-toggle="tab" href="#pro43" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 " data-bs-toggle="tab" href="#pro42" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3 active "  data-bs-toggle="tab" href="#pro41" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4 "  data-bs-toggle="tab" href="#pro44" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>girl's regular fit t-shirt</h3>
-                </a>
-                <h5>
-                  $125
-                  <span>
-                    $148
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="product-box ">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <div class="tab-content" >
-                    <div class="tab-pane fade show active" id="pro45" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/2.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro46" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/1.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro47" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/6.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                    <div class="tab-pane fade" id="pro48" >
-                      <a href="product-page(left-sidebar).html">
-                        <img src="{% static 'assets/images/kids/product/5.jpg' %}" class="img-fluid  " alt="product">
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-icon">
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-left"  data-tippy-content="Add to Wishlist" >
-                    <i  data-feather="heart"></i>
-                  </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View">
-                    <i  data-feather="eye"></i>
-                  </a>
-                  <a href="compare.html" class="tooltip-left" data-tippy-content="Compare">
-                    <i  data-feather="refresh-cw"></i>
-                  </a>
-                </div>
-                <div class="new-label">
-                  <div>new</div>
-                </div>
-                <div class="on-sale">
-                  on sale
-                </div>
-              </div>
-              <div class="product-detail product-detail2 ">
-                <ul class="nav nav-tabs color-variant" >
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color1  "  data-bs-toggle="tab" href="#pro46" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color2 active"  data-bs-toggle="tab" href="#pro45" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color3"  data-bs-toggle="tab" href="#pro47" ></a>
-                  </li>
-                  <li class="nav-item " >
-                    <a class="nav-link check-color pro-color4"  data-bs-toggle="tab" href="#pro48" ></a>
-                  </li>
-                </ul>
-                <a href="product-page(left-sidebar).html">
-                  <h3>baby girl's midi dress</h3>
-                </a>
-                <h5>
-                  $72
-                  <span>
-                    $98
-                  </span>
-                </h5>
-                <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
-                  add to cart
-                </button>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -1696,7 +932,7 @@
       <div class="col-md-12 col-lg-4 ">
         <div class="deal-banner-containe">
           <diV class="deal-btn">
-            <a href="product-page(left-sidebar).html" class="btn-white">
+            <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
               View more
             </a>
           </div>
@@ -1714,134 +950,25 @@
     <div class="row">
       <div class="col-12 pr-0">
         <div class="category-slide6 no-arrow">
+          {% for category in subcategories %}
           <div>
-            <a href="category-page(left-sidebar).html">
+            <a href="{% url 'shop_left_sidebar' %}">
               <div class="category-box">
                 <div>
-                  <div class="icon-wrapper">
-                    <svg  enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m451 284.299v2.701l-195 30-195-30c0-40.501 27.299-73.2 64.799-80.4 39.002-7.8 85.201-26.4 85.201-69.6l45-30 45 30c0 43.2 46.199 61.8 85.201 69.6 37.5 7.2 64.799 39.899 64.799 77.699z" fill="#5e79bc"/><path d="m386.201 206.6c-39.002-7.8-85.201-26.4-85.201-69.6l-45-30v210l195-30v-2.701c0-37.8-27.299-70.499-64.799-77.699z" fill="#47568c"/><g id="Spinning_Top_2_"><g><g><path d="m451 287c0 61.199-51.899 91.199-97.5 117.9-42.299 24.9-82.5 48.299-82.5 92.1 0 8.399-6 14.399-14.399 15h-1.201c-8.4-.601-14.4-6.601-14.4-15 0-43.801-40.201-67.2-82.5-92.1-45.601-26.7-97.5-56.7-97.5-117.9h135l60 18.9 60-18.9z" fill="#fabe2c"/></g></g></g><path d="m256 305.9v206.1h.601c8.399-.601 14.399-6.601 14.399-15 0-43.801 40.201-67.2 82.5-92.1 45.601-26.7 97.5-56.7 97.5-117.9h-135z" fill="#ff884d"/><path d="m316 287c0 99.899-54.3 131.7-59.399 225h-1.201c-5.1-93.001-59.4-124.801-59.4-225z" fill="#ffe14d"/><path d="m256 512h.601c5.099-93.3 59.399-125.101 59.399-225h-60z" fill="#fb3"/><path d="m301 45v92h-90v-92c0-24.901 20.099-45 45-45s45 20.099 45 45z" fill="#ff9580"/><path d="m256 0v137h45v-92c0-24.901-20.099-45-45-45z" fill="#f66"/></g></svg>
+                  <div class="img-wrapper">
+                  <img src="{{category.categoryImage}}" class="img-fluid" alt="kids">
                   </div>
                   <div class="category-details">
                     <h6>
-                      toys
+                      {{category.categoryName}}
                     </h6>
                   </div>
                 </div>
               </div>
             </a>
           </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g id="flat"><path d="m136 96v89.163a100 100 0 0 0 35.982 76.822l111.326 92.771a160.683 160.683 0 0 0 102.869 37.244 101.823 101.823 0 0 0 101.823-101.823 101.823 101.823 0 0 0 -29.823-72l-67.55-67.55a77.254 77.254 0 0 1 -22.627-54.627z" fill="#48bdff"/><path d="m318.627 246.627a77.22 77.22 0 0 1 -16.909-25.486l10.282-5.141-24-48v-48h-152v65.163a100 100 0 0 0 35.981 76.822l111.327 92.771a160.683 160.683 0 0 0 102.869 37.244 101.788 101.788 0 0 0 29.805-4.437c.007-.462.018-.923.018-1.386a101.823 101.823 0 0 0 -29.823-72z" fill="#3ba4f2"/><path d="m136 24h224v48h-224z" fill="#48bdff"/><g fill="#e6e6e6"><path d="m160 24h16v64h-16z"/><path d="m224 24h16v64h-16z"/><path d="m192 24h16v64h-16z"/><path d="m256 24h16v64h-16z"/><path d="m288 24h16v64h-16z"/><path d="m320 24h16v64h-16z"/></g><path d="m136 72-24 48 24.845 12.422a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l17.69-8.844a33.883 33.883 0 0 1 15.155-3.578 33.883 33.883 0 0 1 15.155 3.578l17.69 8.844a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l17.69-8.844a33.883 33.883 0 0 1 15.155-3.578 33.883 33.883 0 0 1 15.155 3.578l17.69 8.844a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l24.845-12.422-24-48z" fill="#ffcd01"/><path d="m482.724 257.836-118.84 71.3 8.232 13.72 114.6-68.759a101.846 101.846 0 0 0 -3.992-16.261z" fill="#e6e6e6"/><path d="m387.153 315.178-23.269 13.962 8.232 13.72 25.374-15.224a101.773 101.773 0 0 0 -10.337-12.458z" fill="#ccc"/><path d="m48 120h224v64h-224z" fill="#48bdff"/><path d="m72 120h16v64h-16z" fill="#e6e6e6"/><path d="m136 120h16v64h-16z" fill="#e6e6e6"/><path d="m104 120h16v64h-16z" fill="#e6e6e6"/><path d="m168 120h16v64h-16z" fill="#e6e6e6"/><path d="m200 120h16v64h-16z" fill="#e6e6e6"/><path d="m232 120h16v64h-16z" fill="#e6e6e6"/><path d="m48 192v89.163a100 100 0 0 0 35.982 76.822l111.326 92.771a160.683 160.683 0 0 0 102.869 37.244 101.823 101.823 0 0 0 101.823-101.823 101.823 101.823 0 0 0 -29.823-72l-67.55-67.55a77.254 77.254 0 0 1 -22.627-54.627z" fill="#48bdff"/><path d="m48 168-24 48 24.845 12.422a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l17.69-8.844a33.883 33.883 0 0 1 15.155-3.578 33.883 33.883 0 0 1 15.155 3.578l17.69 8.844a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l17.69-8.844a33.883 33.883 0 0 1 15.155-3.578 33.883 33.883 0 0 1 15.155 3.578l17.69 8.844a33.883 33.883 0 0 0 15.155 3.578 33.883 33.883 0 0 0 15.155-3.578l24.845-12.422-24-48z" fill="#ffcd01"/><path d="m394.724 353.836-118.84 71.3 8.232 13.72 114.6-68.759a101.846 101.846 0 0 0 -3.992-16.261z" fill="#e6e6e6"/><path d="m348 444.067c-127.787 0-239.486-68.878-300-171.532v8.628a100 100 0 0 0 35.981 76.822l111.327 92.771a160.683 160.683 0 0 0 102.869 37.244 101.725 101.725 0 0 0 84.956-45.687q-17.333 1.737-35.133 1.754z" fill="#3ba4f2"/></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      socks
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg viewBox="-27 1 511 511.99998" xmlns="http://www.w3.org/2000/svg"><path d="m339.890625 22.925781c-19.539063-5.082031-40.015625 2.769531-51.492187 19.378907-11.5625 16.734374-30.53125 34.507812-58.925782 34.507812-28.394531 0-47.359375-17.773438-58.925781-34.507812-11.476563-16.609376-31.953125-24.460938-51.492187-19.378907l-85.75 22.308594c-21.332032 5.550781-35.226563 26.078125-32.453126 47.949219l6.3125 49.742187c3.347657 26.394531 29.246094 43.75 54.929688 36.804688l16.851562-4.554688 150.527344 17.691407 150.527344-17.691407 16.855469 4.554688c25.683593 6.941406 51.582031-10.410157 54.929687-36.804688l6.3125-49.742187c2.773438-21.871094-11.121094-42.398438-32.457031-47.949219zm0 0" fill="#ccf8ff"/><path d="m221.542969 76.335938c-24.042969-2.929688-40.542969-18.90625-50.996094-34.03125-11.472656-16.609376-31.953125-24.460938-51.488281-19.378907l-85.753906 22.308594c-21.332032 5.550781-35.226563 26.078125-32.453126 47.949219l6.3125 49.742187c3.347657 26.394531 29.246094 43.75 54.929688 36.804688l16.851562-4.554688 129.496094 15.21875c-4.140625-54.328125 3.816406-90.855469 13.101563-114.058593zm0 0" fill="#9ff6ff"/><path d="m380 175.175781-24.746094-66.5625h-247.992187l-28.316407 66.5625-49.636718 248.785157c-6.6875 33.527343 15.046875 66.074218 48.554687 72.878906 37.410157 7.601562 90.085938 15.160156 151.609375 15.160156 61.527344 0 114.203125-7.558594 151.613282-15.160156 33.503906-6.804688 55.242187-39.351563 48.550781-72.878906zm0 0" fill="#ffabcd"/><path d="m107.261719 108.613281-28.316407 66.5625-49.636718 248.785157c-6.6875 33.527343 15.046875 66.074218 48.554687 72.878906 17.050781 3.464844 37.28125 6.917968 60.066407 9.65625 16.167968-29.382813 89.570312-170.820313 73.386718-289.265625-6.378906-46.71875-4.398437-82.210938.851563-108.617188zm0 0" fill="#ff8fb4"/><path d="m107.261719 217.230469c-15.164063 0-27.570313-12.40625-27.570313-27.570313v-162.089844c0-15.164062 12.40625-27.570312 27.570313-27.570312 15.167969 0 27.574219 12.40625 27.574219 27.570312v162.089844c0 15.164063-12.40625 27.570313-27.574219 27.570313zm0 0" fill="#ffabcd"/><path d="m351.683594 217.230469c-15.164063 0-27.570313-12.40625-27.570313-27.570313v-162.089844c0-15.164062 12.40625-27.570312 27.570313-27.570312 15.164062 0 27.574218 12.40625 27.574218 27.570312v162.089844c0 15.164063-12.410156 27.570313-27.574218 27.570313zm0 0" fill="#ffc2e1"/><path d="m249.597656 290.050781c38.667969-66.976562-78.917968-66.976562-40.25 0-38.667968-66.976562-97.460937 34.855469-20.121094 34.855469-77.339843 0-18.546874 101.832031 20.121094 34.855469-38.667968 66.980469 78.917969 66.980469 40.25 0 38.667969 66.980469 97.464844-34.855469 20.125-34.855469 77.339844 0 18.542969-101.832031-20.125-34.855469zm0 0" fill="#ffeb99"/><path d="m213.5 243.902344c-11.824219 6.832031-17.964844 22.21875-4.148438 46.144531-38.671874-66.976563-97.464843 34.859375-20.125 34.859375-66.351562 0-32.503906 74.949219 2.871094 53.957031 13.058594-42.03125 22.792969-89.417969 21.402344-134.960937zm0 0" fill="#ffde55"/><path d="m254.710938 324.90625c0 13.9375-11.300782 25.238281-25.238282 25.238281s-25.234375-11.300781-25.234375-25.238281 11.296875-25.234375 25.234375-25.234375 25.238282 11.296875 25.238282 25.234375zm0 0" fill="#eac2ff"/></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      dress
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g ><path d="m399.871 142.569a115.121 115.121 0 0 0 -96.823-93.386 39.806 39.806 0 0 0 8.952-25.183 8 8 0 0 0 -8-8h-16a39.964 39.964 0 0 0 -32 16.028 39.964 39.964 0 0 0 -32-16.028h-16a8 8 0 0 0 -8 8 39.806 39.806 0 0 0 8.952 25.183 115.121 115.121 0 0 0 -96.823 93.386 7.983 7.983 0 0 0 -.129 1.431v24h16v-23.265a99.127 99.127 0 0 1 97.442-80.735h6.558v32h16v-32h16v32h16v-32h6.558a99.127 99.127 0 0 1 97.442 80.735v15.265h16v-16a7.983 7.983 0 0 0 -.129-1.431zm-111.871-110.569h6.629a24.042 24.042 0 0 1 -22.629 16h-6.629a24.042 24.042 0 0 1 22.629-16zm-64 0a24.042 24.042 0 0 1 22.629 16h-6.629a24.042 24.042 0 0 1 -22.629-16z" fill="#ffcd01"/><path d="m390.369 139.862a144.047 144.047 0 0 1 -268.738 0 199.485 199.485 0 0 0 -65.631 148.138c0 110.457 89.543 200 200 200s200-89.543 200-200a199.485 199.485 0 0 0 -65.631-148.138z" fill="#48bdff"/><path d="m407.447 157.385c-7.125 137.973-82.8 257.817-193.611 326.147a200.718 200.718 0 0 0 42.164 4.468c110.457 0 200-89.543 200-200a199.208 199.208 0 0 0 -48.553-130.615z" fill="#3ba4f2"/><g fill="#8726e2"><path d="m202.078 263.968c5.315 1.627 10.768 3.027 16.209 4.16l3.264-15.663c-4.964-1.034-9.941-2.312-14.789-3.8z"/><path d="m235.844 270.908c5.508.6 11.119.957 16.678 1.06l.3-16c-5.082-.095-10.209-.42-15.241-.969z"/><path d="m141.4 231.947c4.341 3.462 8.894 6.766 13.533 9.822l8.8-13.362c-4.235-2.79-8.392-5.807-12.356-8.969z"/><path d="m170.222 250.815c4.918 2.6 10.009 5 15.133 7.128l6.149-14.771c-4.676-1.946-9.322-4.135-13.812-6.5z"/><path d="m128.7 197.62-12.119 10.446c3.625 4.206 7.485 8.295 11.473 12.156l11.129-11.5c-3.64-3.522-7.166-7.26-10.483-11.102z"/><path d="m269.044 255.5 1.225 15.953c5.545-.426 11.128-1.11 16.594-2.033l-2.663-15.775c-4.993.843-10.092 1.467-15.156 1.855z"/><path d="m300.024 250.173 4.184 15.443c5.358-1.451 10.714-3.169 15.917-5.1l-5.578-15c-4.747 1.766-9.634 3.333-14.523 4.657z"/><path d="m389.481 190.007c-3.081 4.026-6.384 7.96-9.82 11.695l11.776 10.832c3.76-4.088 7.377-8.4 10.75-12.8z"/><path d="m356.3 222.774 9.562 12.827c4.447-3.314 8.8-6.877 12.936-10.587l-10.682-11.914c-3.779 3.393-7.754 6.646-11.816 9.674z"/><path d="m329.445 239.134 7.008 14.384c4.99-2.432 9.929-5.122 14.68-8l-8.285-13.687c-4.337 2.627-8.848 5.083-13.403 7.303z"/><path d="m99.092 319.467-15.692 3.133c1.088 5.456 2.454 10.924 4.06 16.255l15.32-4.615c-1.459-4.846-2.7-9.815-3.688-14.773z"/><path d="m96 288.247-16 .024c.008 5.573.28 11.2.81 16.72l15.927-1.528c-.482-5.023-.729-10.143-.737-15.216z"/><path d="m131.744 412.645c3.942 3.929 8.116 7.713 12.408 11.25l10.174-12.349c-3.9-3.216-7.7-6.659-11.285-10.233z"/><path d="m108.229 349.466-14.769 6.151c2.137 5.132 4.55 10.226 7.174 15.142l14.115-7.532c-2.384-4.468-4.577-9.098-6.52-13.761z"/><path d="m99 257.012-15.7-3.084c-1.071 5.454-1.893 11.03-2.44 16.573l15.922 1.572c.498-5.037 1.243-10.105 2.218-15.061z"/><path d="m123.082 377.1-13.282 8.919c3.1 4.617 6.462 9.141 9.989 13.446l12.376-10.14c-3.206-3.915-6.265-8.025-9.083-12.225z"/><path d="m416 287.753 16-.023c-.008-5.581-.281-11.211-.811-16.733l-15.927 1.528c.482 5.024.73 10.147.738 15.228z"/><path d="m412.9 256.513 15.692-3.131c-1.09-5.46-2.458-10.932-4.067-16.264l-15.318 4.622c1.463 4.843 2.706 9.813 3.693 14.773z"/><path d="m418.52 220.354c-2.14-5.135-4.556-10.23-7.181-15.145l-14.113 7.54c2.385 4.465 4.582 9.095 6.526 13.76z"/><path d="m122.82 199.311-13.308-8.882c-3.089 4.629-5.991 9.46-8.626 14.361l14.092 7.577c2.395-4.455 5.034-8.848 7.842-13.056z"/><path d="m108.049 226.987-14.787-6.109c-2.126 5.146-4.027 10.455-5.649 15.778l15.305 4.664c1.474-4.836 3.2-9.658 5.131-14.333z"/><path d="m389.2 376.683 13.309 8.88c3.087-4.625 5.988-9.457 8.624-14.36l-14.092-7.577c-2.402 4.458-5.041 8.852-7.841 13.057z"/><path d="m345.1 420.918 8.922 13.283c4.613-3.1 9.136-6.46 13.445-9.989l-10.139-12.378c-3.923 3.21-8.037 6.266-12.228 9.084z"/><path d="m158.438 434.505c4.633 3.092 9.465 5.994 14.363 8.624l7.572-14.094c-4.451-2.391-8.843-5.029-13.055-7.839z"/><path d="m413 318.986 15.7 3.081c1.069-5.451 1.89-11.026 2.437-16.572l-15.922-1.572c-.495 5.041-1.24 10.109-2.215 15.063z"/><path d="m403.958 349.011 14.789 6.1c2.125-5.145 4.024-10.453 5.646-15.777l-15.307-4.662c-1.473 4.841-3.198 9.663-5.128 14.339z"/><path d="m369.313 400.96 11.333 11.3c3.924-3.938 7.709-8.112 11.25-12.407l-12.348-10.176c-3.22 3.904-6.663 7.701-10.235 11.283z"/><path d="m221.935 460.7c5.45 1.069 11.025 1.889 16.571 2.437l1.572-15.923c-5.041-.5-10.109-1.243-15.063-2.215z"/><path d="m188.885 450.749c5.148 2.125 10.457 4.024 15.778 5.645l4.66-15.307c-4.833-1.472-9.656-3.2-14.333-5.128z"/><path d="m256.245 448 .026 16c5.572-.009 11.2-.281 16.717-.81l-1.525-15.927c-5.025.481-10.144.729-15.218.737z"/><path d="m287.468 444.908 3.132 15.692c5.459-1.089 10.927-2.454 16.256-4.06l-4.616-15.319c-4.84 1.458-9.812 2.698-14.772 3.687z"/><path d="m317.465 435.77 6.152 14.771c5.137-2.14 10.231-4.554 15.142-7.176l-7.535-14.114c-4.462 2.382-9.091 4.575-13.759 6.519z"/></g><path d="m256 424-60.4-60.4a39.6 39.6 0 0 1 -11.6-28 39.6 39.6 0 0 1 39.6-39.6 39.6 39.6 0 0 1 28 11.6l4.4 4.4 4.4-4.4a39.6 39.6 0 0 1 28-11.6 39.6 39.6 0 0 1 39.6 39.6 39.6 39.6 0 0 1 -11.6 28z" fill="#ff2b63"/><path d="m251.029 364h33.941v16h-33.941z" fill="#e6e6e6" transform="matrix(.707 -.707 .707 .707 -184.552 298.48)"/><path d="m286.343 340h11.314v16h-11.314z" fill="#e6e6e6" transform="matrix(.707 -.707 .707 .707 -160.55 308.422)"/></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      bib
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg  enable-background="new 0 0 511.999 511.999" viewBox="0 0 511.999 511.999"  xmlns="http://www.w3.org/2000/svg"><g><g><g><path d="m362.949 466.999h-240c-8.291 0-15-6.709-15-15s6.709-15 15-15h240c8.291 0 15 6.709 15 15s-6.709 15-15 15z" fill="#dfe7f4"/></g></g><g><path d="m419.649 92.299c-44.267 9.907-81.62-29.666-72.001-72.001 1.5-6.599-1.5-13.2-7.5-16.5l-69.975 68.972-10.725 130.828c2.701 5.101 7.8 8.401 13.5 8.401l119.022-34.349 41.179-81.451c-3.601-3.602-8.701-4.801-13.5-3.9z" fill="#c7cfe1"/><path d="m340.148 3.799-80.7 199.799-90-180c-3.3-6.599-1.199-14.399 4.801-18.9 5.999-4.199 14.099-3.6 19.199 1.8 13.5 13.5 31.201 21.601 49.501 24.3 28.5 4.2 58.801-3.9 79.501-24.3 4.498-4.8 11.998-5.7 17.698-2.699z" fill="#f0f7ff"/></g><path d="m497.949 198.799c-.901 7.5-7.5 13.2-15 13.2h-210l160.201-115.8c3.6 3.3 5.4 8.399 4.499 13.198-5.099 33.301 16.201 65.402 48.9 72.902 7.199 1.8 12.301 9 11.4 16.5z" fill="#dfe7f4"/><path d="m340.148 3.799-80.7 199.799-16.5-32.999v-139.801c28.5 4.2 58.801-3.9 79.501-24.3 4.499-4.8 11.999-5.7 17.699-2.699z" fill="#dfe7f4"/><path d="m362.949 436.999h-120v30h120c8.291 0 15-6.709 15-15s-6.709-15-15-15z" fill="#c7cfe1"/><g><path d="m332.949 361.999h-150c-90.967 0-165-74.019-165-165 0-8.291 6.709-15 15-15h450c8.291 0 15 6.709 15 15 0 90.981-74.034 165-165 165z" fill="#9df"/></g><path d="m482.949 181.999h-240v180h90c90.967 0 165-74.019 165-165 0-8.291-6.709-15-15-15z" fill="#66b3ff"/><path d="m391.599 426.699c-6.24 5.48-15.72 4.83-21.15-1.39l-127.34-145.37-.16.19-125.07 146.76c-5.52 6.44-15.02 6.96-21.15 1.69-6.3-5.36-7.06-14.84-1.7-21.14l128.1-150.31-205.47-232.25c-5.45-6.24-4.83-15.72 1.41-21.17 6.21-5.44 15.7-4.83 21.15 1.4l202.73 230.11 150.06 170.32c5.45 6.24 4.83 15.71-1.41 21.16z" fill="#dfe7f4"/><path d="m391.599 426.699c-6.24 5.48-15.72 4.83-21.15-1.39l-127.34-145.37-.16.19v-44.91l150.06 170.32c5.45 6.24 4.83 15.71-1.41 21.16z" fill="#c7cfe1"/><g><path d="m77.949 511.999c-33.076 0-60-26.909-60-60s26.924-60 60-60 60 26.909 60 60-26.924 60-60 60z" fill="#5e79bc"/><circle cx="77.949" cy="451.999" fill="#f0f7ff" r="30"/></g><g><path d="m407.949 511.999c-33.076 0-60-26.909-60-60s26.924-60 60-60 60 26.909 60 60-26.924 60-60 60z" fill="#47568c"/><circle cx="407.949" cy="451.999" fill="#dfe7f4" r="30"/></g></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      storoller
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g ><path d="m29.657 445.657-11.314-11.314 17.007-17.007a24.588 24.588 0 0 0 6.745-12.6 40.682 40.682 0 0 1 45.627-32.286l21.449 3.065 29.172-29.172 11.314 11.314-32 32a8 8 0 0 1 -6.788 2.263l-25.41-3.63a24.674 24.674 0 0 0 -27.675 19.581 40.531 40.531 0 0 1 -11.121 20.779z" fill="#8726e2"/><path d="m160 216a468.317 468.317 0 0 1 -47.517 167.034l-.483.966a388.815 388.815 0 0 1 135.2-39.12l8.8-.88z" fill="#48bdff"/><path d="m150.962 367.129a388.773 388.773 0 0 1 96.238-22.249l8.8-.88-73.494-97.992a468.32 468.32 0 0 1 -31.544 121.121z" fill="#3ba4f2"/><g fill="#8726e2"><path d="m24.883 495.951-1.766-15.9 48.767-5.419a9.787 9.787 0 0 0 8.007-13.363 25.786 25.786 0 0 1 16.859-34.369l35.059-10.018 22.534-22.534 11.314 11.314-24 24a8.013 8.013 0 0 1 -3.459 2.035l-37.053 10.587a9.787 9.787 0 0 0 -6.4 13.045 25.788 25.788 0 0 1 -21.1 35.208z"/><path d="m424 16h16v24h-16z"/><path d="m400 22.111h16v35.777h-16z" transform="matrix(.894 -.447 .447 .894 25.185 186.686)"/><path d="m384.287 38.368h16v35.264h-16z" transform="matrix(.454 -.891 .891 .454 164.396 380.177)"/><path d="m448 102.081h16.001v35.264h-16.001z" transform="matrix(.891 -.454 .454 .891 -4.678 219.925)"/><path d="m463.713 86.368h16v35.264h-16z" transform="matrix(.454 -.891 .891 .454 165.01 477.179)"/><path d="m472 72h24v16h-24z"/><path d="m454.081 48h35.264v16h-35.264z" transform="matrix(.891 -.454 .454 .891 25.945 220.134)"/><path d="m438.368 32.287h35.264v16.001h-35.264z" transform="matrix(.454 -.891 .891 .454 213.202 428.37)"/></g><path d="m184 256a468.317 468.317 0 0 1 -47.517 167.034l-.483.966a388.815 388.815 0 0 1 135.2-39.12l8.8-.88z" fill="#48bdff"/><path d="m104 168 33.9-46.232a180.519 180.519 0 0 1 145.578-73.768 180.523 180.523 0 0 1 180.522 180.522 116.373 116.373 0 0 1 -38.09 86.106l-12.472 11.337a193.617 193.617 0 0 0 -53.438 82.035l-135.26-35.6a32 32 0 0 1 -22.214-20.827l-26.526-79.573z" fill="#ffcd01"/><path d="m450.5 159.937a181.189 181.189 0 0 0 -81.776-90.571 79.895 79.895 0 0 0 79.276 90.634c.839 0 1.668-.038 2.5-.063z" fill="#ffba01"/><circle cx="432" cy="80" fill="#ff2b63" r="48"/><path d="m298 276a248.964 248.964 0 0 1 -158.413-56.6l36.413 52.6 26.526 79.578a32 32 0 0 0 22.214 20.827l135.26 35.595a193.607 193.607 0 0 1 53.438-82.035l12.472-11.338a116.369 116.369 0 0 0 38.09-86.105c0-5.069-.22-10.087-.63-15.051a249.029 249.029 0 0 1 -165.37 62.529z" fill="#ffba01"/><path d="m237.463 327.544-18.272-60.908a64 64 0 0 0 -9.778-19.575l-81.89-111.137-23.523 32.076 72 104 26.526 79.578a32 32 0 0 0 22.214 20.827l135.26 35.595a193.656 193.656 0 0 1 15.34-34.406l-126.834-35.231a16 16 0 0 1 -11.043-10.819z" fill="#ff2b63"/><path d="m237.463 327.544-18.272-60.908c-.379-1.261-.809-2.5-1.263-3.736a249.539 249.539 0 0 1 -78.341-43.5l36.413 52.6 26.526 79.578a32 32 0 0 0 22.214 20.827l135.26 35.595a193.656 193.656 0 0 1 15.34-34.406l-126.834-35.231a16 16 0 0 1 -11.043-10.819z" fill="#e5235f"/><path d="m411 95.333a101.145 101.145 0 0 1 -25.461-3.239 48 48 0 0 0 93.231-22.874 100.63 100.63 0 0 1 -67.77 26.113z" fill="#e5235f"/></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      hat
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg  viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><g ><path d="m432 368 32 72-15.515 15.515a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-7.03-7.03a28.971 28.971 0 0 0 -20.485-8.485 28.971 28.971 0 0 0 -20.485 8.485l-7.03 7.03a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-7.03-7.03a28.971 28.971 0 0 0 -20.485-8.485 28.971 28.971 0 0 0 -20.485 8.485l-7.03 7.03a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-15.515-15.515 32-72-9.644-16.532a340.3 340.3 0 0 1 -46.356-171.468 156 156 0 0 1 156-156 156 156 0 0 1 156 156 340.3 340.3 0 0 1 -46.356 171.468z" fill="#fedb01"/><path d="m239.721 54.22a155.768 155.768 0 0 0 -63.721 125.78 340.3 340.3 0 0 0 46.356 171.468l9.644 16.532-32 72 15.515 15.515a28.971 28.971 0 0 0 40.97 0l7.03-7.03a28.971 28.971 0 0 1 40.97 0l7.03 7.03a28.974 28.974 0 0 0 16.352 8.186l-31.867-71.701 9.644-16.532a340.3 340.3 0 0 0 46.356-171.468 156.061 156.061 0 0 0 -112.279-149.78z" fill="#ffc70d"/><rect fill="#48bdff" height="16" rx="8" width="200" x="232" y="360"/><path d="m240 360a8 8 0 0 0 0 16h65.333l.311-.532q4.452-7.633 8.487-15.468z" fill="#3ba4f2"/><path d="m352 365.029-2.011-5.029h-17.233l4.389 10.971 16 40 14.855-5.942z" fill="#8726e2"/><path d="m315.156 360-2.011 5.029-16 40 14.855 5.942 16-40 4.388-10.971z" fill="#8726e2"/><path d="m299.345 399.527-2.2 5.502 5.65 2.26z" fill="#7704e2"/><path d="m320 365.029-27.446 3.921a12.9 12.9 0 0 1 -12.554-19.921 12.9 12.9 0 0 1 12.554-19.921l27.446 3.921z" fill="#ff2b63"/><path d="m280 349.029a12.9 12.9 0 0 0 12.554 19.921l18.217-2.6q4.9-9.025 9.229-18.307v-15.014l-27.446-3.921a12.9 12.9 0 0 0 -12.554 19.921z" fill="#ff0547"/><path d="m320 333.029h24v32h-24z" fill="#8726e2"/><path d="m320 333.029v15.011q3.472-7.433 6.578-15.011z" fill="#7704e2"/><path d="m344 365.029 27.446 3.921a12.9 12.9 0 0 0 12.554-19.921 12.9 12.9 0 0 0 -12.554-19.921l-27.446 3.921z" fill="#ff2b63"/><path d="m280 392 32 72-15.515 15.515a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-7.03-7.03a28.971 28.971 0 0 0 -20.485-8.485 28.971 28.971 0 0 0 -20.485 8.485l-7.03 7.03a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-7.03-7.03a28.971 28.971 0 0 0 -20.485-8.485 28.971 28.971 0 0 0 -20.485 8.485l-7.03 7.03a28.971 28.971 0 0 1 -20.485 8.485 28.971 28.971 0 0 1 -20.485-8.485l-15.515-15.515 32-72-9.644-16.532a340.3 340.3 0 0 1 -46.356-171.468 156 156 0 0 1 156-156 156 156 0 0 1 156 156 340.3 340.3 0 0 1 -46.356 171.468z" fill="#fedb01"/><rect fill="#48bdff" height="16" rx="8" width="200" x="80" y="384"/><g fill="#ff2b63"><ellipse cx="84.287" cy="176" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 -110.277 160.995)"/><ellipse cx="84.287" cy="206.292" rx="23.807" ry="15.582" transform="matrix(.884 -.467 .467 .884 -86.645 63.314)"/><ellipse cx="139.713" cy="208" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 -110.277 224.995)"/><ellipse cx="139.713" cy="175.378" rx="23.807" ry="15.582" transform="matrix(.884 -.467 .467 .884 -65.77 85.635)"/><ellipse cx="112" cy="160" rx="16" ry="24"/><ellipse cx="112" cy="224" rx="16" ry="24"/></g><circle cx="112" cy="192" fill="#48bdff" r="16"/><ellipse cx="212.287" cy="256" fill="#ff2b63" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 -115.559 311.846)"/><ellipse cx="212.287" cy="288" fill="#ff2b63" rx="24" ry="16" transform="matrix(.866 -.5 .5 .866 -115.559 144.728)"/><ellipse cx="267.713" cy="288" fill="#ff2b63" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 -115.559 375.846)"/><ellipse cx="267.713" cy="256" fill="#ff2b63" rx="24" ry="16" transform="matrix(.866 -.5 .5 .866 -92.133 168.154)"/><ellipse cx="240" cy="240" fill="#ff2b63" rx="16" ry="24"/><ellipse cx="240" cy="304" fill="#ff2b63" rx="16" ry="24"/><circle cx="240" cy="272" fill="#48bdff" r="16"/><ellipse cx="380.287" cy="152" fill="#ff2b63" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 58.508 405.338)"/><ellipse cx="380.287" cy="184" fill="#ff2b63" rx="24" ry="16" transform="matrix(.866 -.5 .5 .866 -41.051 214.795)"/><ellipse cx="435.713" cy="184" fill="#ff2b63" rx="16" ry="24" transform="matrix(.5 -.866 .866 .5 58.508 469.338)"/><ellipse cx="435.713" cy="152" fill="#ff2b63" rx="24" ry="16" transform="matrix(.866 -.5 .5 .866 -17.626 238.221)"/><ellipse cx="408" cy="136" fill="#ff2b63" rx="16" ry="24"/><ellipse cx="408" cy="200" fill="#ff2b63" rx="16" ry="24"/><circle cx="408" cy="168" fill="#48bdff" r="16"/><path d="m199.428 389.029-2.012-5.029h-17.232l4.388 10.971 16 40 14.856-5.942z" fill="#8726e2"/><path d="m162.584 384-2.012 5.029-16 40 14.856 5.942 16-40 4.388-10.971z" fill="#8726e2"/><path d="m168 392-27.446 3.921a12.9 12.9 0 0 1 -12.554-19.921 12.9 12.9 0 0 1 12.554-19.921l27.446 3.921z" fill="#ff2b63"/><path d="m168 360h24v32h-24z" fill="#8726e2"/><path d="m192 392 27.446 3.921a12.9 12.9 0 0 0 12.554-19.921 12.9 12.9 0 0 0 -12.554-19.921l-27.446 3.921z" fill="#ff2b63"/></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      gloves
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a href="category-page(left-sidebar).html">
-              <div class="category-box">
-                <div>
-                  <div class="icon-wrapper">
-                    <svg  enable-background="new 0 0 329.906 329.906" height="512" viewBox="0 0 329.906 329.906" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m69.28 169.182 23.22-44.114 13.704 44.114h124.434l13.704-44.114 23.22 44.114 55.619-24.193c-22.628-51.77-38.447-86.748-48.936-104.808-11.635-20.213-31.078-34.745-53.758-40.181-21.951 58.664-86.156 58.664-108.108 0-23.38 5.087-43.617 19.614-55.915 40.139-10.447 18.06-27.111 54.984-49.74 106.67z" fill="#fcd462"/><path d="m247.768 329.906-.296-141.267h.254s-2.157-50.374-4.23-74.483c-2.072-24.109-19.329-28.465-19.329-28.465l23.474-74.313c-6.679-4.627-14.064-8.141-21.867-10.405l-34.217 87.552h-46.525l-36.544-88.525c-7.361 1.174-14.41 3.821-20.725 7.782l24.828 77.993s-16.918 4.23-19.16 28.38-5.668 74.44-5.668 74.44l-.127 141.31h50.459l21.825-69.492 37.389 69.492h50.459z" fill="#3a556a"/><g fill="#fff"><path d="m203.569 101.087c-4.181 0-7.571 3.39-7.571 7.571s3.39 7.571 7.571 7.571 7.571-3.39 7.571-7.571-3.39-7.571-7.571-7.571z"/><path d="m133.316 101.087c-4.181 0-7.571 3.39-7.571 7.571s3.39 7.571 7.571 7.571 7.571-3.39 7.571-7.571-3.39-7.571-7.571-7.571z"/></g></g></svg>
-                  </div>
-                  <div class="category-details">
-                    <h6>
-                      suti
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+          {% endfor %}
+
         </div>
       </div>
     </div>
@@ -1871,7 +998,7 @@
 
 <!--title-start-->
 <div class="title8 section-big-my-space ">
-  <h4>letest blog</h4>
+  <h4>latest blog</h4>
 </div>
 <!--title-end-->
 
@@ -1881,101 +1008,31 @@
     <div class="row">
       <div class="col pr-0">
         <div class="blog-slide-4 no-arrow">
+          {% if blogs %}
+          {% for blog in blogs %}
           <div>
             <div class="blog-contain">
               <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/kids/blog/1.jpg' %}" alt="blog" class="img-fluid w-100">
+                <a href="{% url 'blog_details' blog.id %}">
+                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
                 </a>
               </div>
               <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>Simple Guidance Kids. </h4>
+                <a href="{% url 'blog_details' blog.id %}">
+                  <h4>{{blog.blogTitle}} </h4>
                 </a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal   btn-xs btn-outline">
+                <p>{{blog.blogDescription|safe}}</p>
+                <a href="{% url 'blog_details' blog.id %}" class=" btn btn-normal   btn-xs btn-outline">
                   read more
                 </a>
               </div>
-              <div class="blog-label1 square">27 <br>nov</div>
+              <div class="blog-label1 square">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"M"}}</div>
             </div>
           </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/kids/blog/2.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>fashion suitable.</h4>
-                </a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal   btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/kids/blog/3.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>the hidden agenda.</h4>
-                </a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal   btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/kids/blog/4.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>Simple Guidance  Kids. </h4>
-                </a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal   btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="blog-details.html">
-                  <img src="{% static 'assets/images/kids/blog/5.jpg' %}" alt="blog" class="img-fluid w-100">
-                </a>
-              </div>
-              <div class="blog-details-2">
-                <a href="blog-details.html">
-                  <h4>Kids Fashion  Famous.</h4>
-                </a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend a massa rhoncus gravida.</p>
-                <a href="blog-details.html" class=" btn btn-normal   btn-xs btn-outline">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1 square">27 <br>nov</div>
-            </div>
-          </div>
+          {% endfor %}
+          {% else %}
+          <h2 style="text-align:center;"> No Blogs Yet! </h2>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -1990,62 +1047,18 @@
       <div class="col p-0 position-relative">
         <div class="insta-contant1 ">
           <div class="slide-7 no-arrow">
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Instagram' %}
             <div>
               <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/1.jpg' %}" class="img-fluid  " alt="insta">
+                <img src="{{banner.bannerImage}}" class="img-fluid  " alt="insta">
                 <div class="insta-cover">
                   <i class="fa fa-instagram" ></i>
                 </div>
               </div>
             </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/2.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/3.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/4.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/5.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/6.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="instagram-box">
-                <img src="{% static 'assets/images/kids/insta/7.jpg' %}" class="img-fluid  " alt="insta">
-                <div class="insta-cover">
-                  <i class="fa fa-instagram" ></i>
-                </div>
-              </div>
-            </div>
+            {% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -2068,17 +1081,17 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="index.html">
+                  <a href="{% url 'index_default' %}">
                     <img src="{% static 'assets/images/kids/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
                 <p>It is a long established fact that a reader will be distracted by the readable content.</p>
                 <ul class="sosiyal">
-                  <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+                  <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="javascript:void(0)" target ="_blank"><i class="fa fa-rss"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -2172,30 +1185,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           <div class="col-lg-6 col-xs-12">
-            <div class="quick-view-img">
-              <img src="{% static 'assets/images/kids/product/11.jpg' %}" alt="" class="img-fluid bg-img">
+            <div class="quick-view-img" id="quickViewImagesDiv">
+              <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
             </div>
           </div>
           <div class="col-lg-6 rtl-text">
-            <div class="product-right">
+            <div class="product-right" id="productRight">
               <div class="pro-group">
-                <h2>
+                <h2 id="productName">
                   reader will be distracted
                 </h2>
-                <ul class="pro-price">
-                  <li>$70</li>
-                  <li><span>mrp $140</span></li>
-                  <li>50% off</li>
-                </ul>
+                <div class="pro-price" id="priceLabel">
+                  <h3 id="productPrice">$20.00</h3>
+                  <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                  <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                </div>
+                <div class="price mt-3" id="priceLabel2"></div>
+
                 <div class="revieu-box">
-                  <ul>
+                  <ul id="productRating">
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star-o"></i></li>
                   </ul>
-                  <a href="review.html"><span>(6 reviews)</span></a>
+                  
                 </div>
                 <ul class="best-seller">
                   <li>
@@ -2208,76 +1223,15 @@
                   </li>
                 </ul>
               </div>
-              <div class="pro-group">
-                <h6 class="product-title">product infomation</h6>
-                <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-              </div>
-              <div class="pro-group pb-0">
-                <h6 class="product-title size-text">select size<span>
-                <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="size-box">
-                  <ul>
-                    <li ><a href="javascript:void(0)">s</a></li>
-                    <li><a href="javascript:void(0)">m</a></li>
-                    <li><a href="javascript:void(0)">l</a></li>
-                    <li><a href="javascript:void(0)">xl</a></li>
-                    <li><a href="javascript:void(0)">2xl</a></li>
-                  </ul>
-                </div>
-                <h6 class="product-title">color</h6>
-                <div class="color-selector inline">
-                  <ul>
-                    <li>
-                      <div class="color-1 active"></div>
-                    </li>
-                    <li>
-                      <div class="color-2"></div>
-                    </li>
-                    <li>
-                      <div class="color-3"></div>
-                    </li>
-                    <li>
-                      <div class="color-4"></div>
-                    </li>
-                    <li>
-                      <div class="color-5"></div>
-                    </li>
-                    <li>
-                      <div class="color-6"></div>
-                    </li>
-                    <li>
-                      <div class="color-7"></div>
-                    </li>
-                  </ul>
-                </div>
-                <h6 class="product-title">quantity</h6>
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1">
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="product-buttons">
-                  <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                    <i class="fa fa-shopping-cart"></i>
+                <div class="product-btns" id="productBtnDiv">
+                 <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                    <i class="fa fa-shopping-cart"></i> 
                     add to cart
-                  </a>
-                  <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                 </a>
+                 <a href="javascript.void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                     view detail
-                  </a>
-                </div>
+                 </a>
+                </div>  
               </div>
             </div>
           </div>
@@ -2311,369 +1265,9 @@
 </div>
 <!--Newsletter Modal popup end-->
 
-<!-- edit product modal start-->
-<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content ">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="pro-group">
-          <div class="product-img">
-            <div class="media">
-              <div class="img-wraper">
-                <a href="product-page(left-sidebar).html">
-                  <img src="{% static 'assets/images/kids/product/1.jpg' %}" alt="">
-                </a>
-              </div>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h3>redmi not 3</h3>
-                </a>
-                <h6>$80<span>$120</span></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select Size</h6>
-          <div class="size-box">
-            <ul>
-              <li ><a href="javascript:void(0)">s</a></li>
-              <li><a href="javascript:void(0)">m</a></li>
-              <li><a href="javascript:void(0)">l</a></li>
-              <li><a href="javascript:void(0)">xl</a></li>
-              <li><a href="javascript:void(0)">2xl</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Select color</h6>
-          <div class="color-selector inline">
-            <ul>
-              <li>
-                <div class="color-1 active"></div>
-              </li>
-              <li>
-                <div class="color-2"></div>
-              </li>
-              <li>
-                <div class="color-3"></div>
-              </li>
-              <li>
-                <div class="color-4"></div>
-              </li>
-              <li>
-                <div class="color-5"></div>
-              </li>
-              <li>
-                <div class="color-6"></div>
-              </li>
-              <li>
-                <div class="color-7"></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="pro-group">
-          <h6 class="product-title">Quantity</h6>
-          <div class="qty-box">
-            <div class="input-group">
-              <button class="qty-minus"></button>
-              <input class="qty-adj form-control" type="number" value="1"/>
-              <button class="qty-plus"></button>
-            </div>
-          </div>
-        </div>
-        <div class="pro-group mb-0">
-          <div class="modal-btn">
-            <a href="cart.html" class="btn btn-solid btn-sm">
-              add to cart
-            </a>
-            <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-              more detail
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- edit product modal end-->
 
-<!-- Add to cart bar -->
-<div id="cart_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my cart</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeCart()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/5.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/11.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="cart.html" class="btn btn-solid btn-sm">cart</a>
-            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- Add to cart bar end-->
+{% include 'base/cart-popup.html' %}
 
-<!-- wishlistbar bar -->
-<div id="wishlist_side" class="add_to_cart right ">
-  <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my wishlist</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeWishlist()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-    <div class="cart_media">
-      <ul class="cart_product">
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/1.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>redmi not 3</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/5.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>Double Door Refrigerator</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="media">
-            <a href="product-page(left-sidebar).html">
-              <img alt="megastore1" class="me-3" src="{% static 'assets/images/kids/product/11.jpg' %}">
-            </a>
-            <div class="media-body">
-              <a href="product-page(left-sidebar).html">
-                <h4>woman hande bag</h4>
-              </a>
-              <h6>
-                $80.00 <span>$120.00</span>
-              </h6>
-              <div class="addit-box">
-                <div class="qty-box">
-                  <div class="input-group">
-                    <button class="qty-minus"></button>
-                    <input class="qty-adj form-control" type="number" value="1"/>
-                    <button class="qty-plus"></button>
-                  </div>
-                </div>
-                <div class="pro-add">
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                    <i data-feather="edit"></i>
-                  </a>
-                  <a href="javascript:void(0)">
-                    <i  data-feather="trash-2"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="cart_total">
-        <li>
-          subtotal : <span>$1050.00</span>
-        </li>
-        <li>
-          shpping <span>free</span>
-        </li>
-        <li>
-          taxes <span>$0.00</span>
-        </li>
-        <li>
-          <div class="total">
-            total<span>$1050.00</span>
-          </div>
-        </li>
-        <li>
-          <div class="buttons">
-            <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<!-- wishlistbar bar end-->
 
 <!-- My account bar start-->
 <div id="myAccount" class="add_to_cart right account-bar">
@@ -2687,23 +1281,36 @@
         </a>
       </div>
     </div>
-    <form class="theme-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" placeholder="Email" required="">
-      </div>
-      <div class="form-group">
-        <label for="review">Password</label>
-        <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
-      </div>
-      <div class="form-group">
-        <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
-      </div>
-      <div class="accout-fwd">
-        <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-        <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
-      </div>
-    </form>
+    {% if request.user.is_authenticated %}
+    <li>
+      <h6 class="d-block">
+        Welcome, {{request.user.username}}
+      </h6>
+    </li>
+    <li>
+      <a href="{% url 'logout_page' %}" class="d-block"
+         >Logout</a>
+    </li>
+   {% else %}
+   <form class="theme-form" method="post" action="{% url 'login_page' %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" name="name" id="email" placeholder="Email" required="">
+    </div>
+    <div class="form-group">
+      <label for="review">Password</label>
+      <input type="password" class="form-control" name="password" id="review" placeholder="Enter your password" required="">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-solid btn-md btn-block ">Login</button>
+    </div>
+    <div class="accout-fwd">
+      <a href="{% url 'forgot_password' %}" class="d-block"><h5>forget password?</h5></a>
+      <a href="{% url 'signup_page' %}" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
+    </div>
+  </form>
+  {% endif %}
   </div>
 </div>
 <!-- Add to account bar end-->
@@ -2742,20 +1349,6 @@
   </div>
 </div>
 <!-- add to  setting bar  end-->
-
-
-<!-- notification product -->
-<div class="product-notification" id="dismiss">
-  <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
-  <div class="media">
-    <img class="me-2" src="{% static 'assets/images/kids/product/3.jpg' %}" alt="Generic placeholder image">
-    <div class="media-body">
-      <h5 class="mt-0 mb-1">Latest trending</h5>
-      Cras sit amet nibh libero, in gravida nulla.
-    </div>
-  </div>
-</div>
-<!-- notification product -->
 
 {% endblock components %}
 

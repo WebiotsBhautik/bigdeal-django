@@ -1,0 +1,216 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- Add to cart bar -->
+<div id="cart_side" class="add_to_cart right ">
+    <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
+    <div class="cart-inner">
+       <div class="cart_top">
+          <h3>my cart</h3>
+          <div class="close-cart">
+             <a href="javascript:void(0)" onclick="closeCart()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+             </a>
+          </div>
+       </div>
+       <div class="cart_media">
+          {% if request.user.is_authenticated %}
+          <ul class="cart_product">
+            {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+            <li>
+               <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+            </li>
+            {% else %}
+            {% for product in cart_products|return_cart_products:request %}
+            <li>
+               <div class="media">
+                  <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                     <img alt="mega" class="me-3" src="/{{product.cartProduct.variantProduct.productImageFront}}">
+                  </a>
+                  <div class="media-body">
+                  <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                     <h4>{{product.cartProduct.variantProduct.productName}}</h4>
+                     </a>
+                     <h6>
+                     {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                     <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
+                     </h6>
+                     <div class="addit-box">
+                     <div class="qty-box">
+                        <div class="input-group">
+                           <input class="qty-adj form-control" readonly type="number" value="{{product.cartProductQuantity}}"/>
+                        </div>
+                     </div>
+                     <div class="pro-add">
+                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
+                           <i data-feather="edit"></i>
+                        </a>
+                        <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
+                           <i  data-feather="trash-2"></i>
+                        </a>
+                     </div>
+                     </div>
+                  </div>
+               </div>
+            </li>
+            {% endfor %}
+          </ul>
+          <ul class="cart_total">
+             <li>
+               subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
+             </li>
+             <li>
+               shpping <span>free</span>
+             </li>
+             <li>
+               taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
+             </li>
+             <li>
+               <div class="total">
+                 total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+               </div>
+             </li>
+             <li>
+               <div class="buttons">
+                 <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+                 <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">check out</a>
+               </div>
+             </li>
+          </ul>
+          {% endif %}
+          {% else %}
+          <ul class="cart_product">
+             {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+             <li>
+               <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+             </li>
+             {% else %}
+             {% for product in cart_products %}
+     
+             <li>
+               <div class="media">
+                 {% comment %} <a href="{% url 'left_slidebar' product.product_id %}"> {% endcomment %}
+                 <a>
+                   <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+                 </a> 
+                 
+                 <div class="media-body">
+                   {% comment %} <a href="{% url 'left_slidebar' product.product_id %}"> {% endcomment %}
+                   <a>
+                     <h4>{{product.productName}}</h4>
+                   </a>
+                   <h6>
+                     {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                   </h6>
+                   <div class="addit-box">
+                     <div class="qty-box">
+                       <div class="input-group">
+                         <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                                 name="quantity{{forloop.counter}}" class="form-control input-number"
+                                                 value="{{product.quantity}}">
+                       </div>
+                     </div>
+                     <div class="pro-add">
+                       <a href="javascript:void(0)"  data-bs-target="#edit-product" >
+                         <i data-feather="edit"></i>
+                       </a>
+                       <a href="{% url 'delete_cart_product' product.variant_id %}">
+                         <i  data-feather="trash-2"></i>
+                       </a>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </li>
+             {% endfor %}
+          </ul>
+          <ul class="cart_total">
+          <li>
+             subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+             shipping <span>free</span>
+          </li>
+          <li>
+             taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+             <div class="total">
+                total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+             </div>
+          </li>
+          <li>
+             <div class="buttons">
+                <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+                <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+             </div>
+          </li>
+          </ul>
+          {% endif %}
+          {% endif %}
+       </div>
+    </div>
+</div>
+<!-- Add to cart bar end-->
+
+<script>
+   function getCookie(name) {
+       let cookieValue = null;
+       if (document.cookie && document.cookie !== "") {
+           const cookies = document.cookie.split(";");
+           for (let i = 0; i < cookies.length; i++) {
+               const cookie = cookies[i].trim();
+               // Does this cookie string begin with the name we want?
+               if (cookie.substring(0, name.length + 1) === name + "=") {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
+   }
+   var csrftoken = getCookie("csrftoken");
+ 
+   async function handleCheckout(params){
+       var url = "{% url 'cart_to_checkout_validation' %}";
+       var pageUrl = window.location.href;
+ 
+       await fetch(url,{
+           method: "POST",
+           headers:{
+               "content-type":"application/json",
+               "X-CSRFToken":csrftoken,
+           },
+           body: JSON.stringify({
+               cartId: params.cartId,
+           }),
+           }).then((response) => {
+               return response.json();
+           })
+           .then((data) => {
+               if(data.flag === "True"){
+                   var cartMsgDiv = document.getElementById("cartMsgDiv");
+                   for(var i=0; i<data.outOfStockProducts.length; i++){
+                       var cartMsg = document.createElement("h5");
+                       cartMsg.setAttribute("id","cartMsg" + i);
+                       cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + " stock of product " + data.outOfStockProducts[i].productName + ".";
+                       cartMsgDiv.append(cartMsg);
+ 
+                       // Set a timeout to hide the cartMsg element after 3 seconds
+                       setTimeout(function(index){
+                           var cartMsgElement = document.getElementById("cartMsg" + index);
+                           if(cartMsgElement){
+                               cartMsgElement.remove();
+                           }
+                       },3000 , i);
+                   }
+               }
+               if(data.flag === "False"){
+                   window.location.href = "{% url 'checkout_page' %}";
+               }
+           });
+       }
+   
+</script>

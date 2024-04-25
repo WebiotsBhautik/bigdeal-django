@@ -1,0 +1,76 @@
+{% extends 'pages/blog/blog-base.html' %}
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+{% block components %}
+
+
+<!-- section start -->
+<section class="section-big-py-space blog-page ratio2_3">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-12">
+              {% if page_obj %}
+              {% for obj in page_obj %}
+                <div class="row blog-media">
+                    <div class="col-xl-6 ">
+                        <div class="blog-left">
+                            <a href="{% url 'blog_details' obj.id %}"><img src="{{obj.blogImage}}"  class="img-fluid  " alt="blog"></a>
+                            <div class="date-label">
+                                {{obj.createdAt|date:"d M Y"}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 ">
+                        <div class="blog-right">
+                            <div>
+                                <a href="{% url 'blog_details' obj.id %}"><h4>{{obj.blogTitle}}</h4> </a>
+                                <ul class="post-social">
+                                    <li>Posted By : Admin Admin</li>
+                                    <li><i class="fa fa-heart"></i> 5 Hits</li>
+                                    <li><i class="fa fa-comments"></i> 10 Comment</li>
+                                </ul>
+                                <p>{{obj.blogDescription|safe}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if page_obj.has_other_pages %}
+                <div class="page-section">
+                    <div class="pagination">
+                        {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}" class="previous">Previous</a>
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <span class="current-page">{{ num }}</span>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}" class="page">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="next">Next</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div>
+                  <h2 style="text-align:center"> No Blogs Yet </h2>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+
+
+{% endblock components %}

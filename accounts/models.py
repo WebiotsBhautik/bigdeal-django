@@ -8,7 +8,7 @@ from accounts.managers import CustomUserManager
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import Group
 from django.utils.html import mark_safe
-
+    
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True,

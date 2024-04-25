@@ -56,7 +56,7 @@
                     <div>
                         <h2>login</h2>
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="/index_default">home</a></li>
                             <li><i class="fa fa-angle-double-right"></i></li>
                             <li><a href="javascript:void(0)">login</a></li>
                         </ul>
@@ -110,7 +110,7 @@
               </div>
               <div class="footer-contant">
                 <div class="footer-logo">
-                  <a href="index.html">
+                  <a href="/index_default">
                     <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
                   </a>
                 </div>
@@ -269,7 +269,7 @@
                     <li><i class="fa fa-star"></i></li>
                     <li><i class="fa fa-star-o"></i></li>
                   </ul>
-                  <a href="review.html"><span>(6 reviews)</span></a>
+                  
                 </div>
                 <ul class="best-seller">
                   <li>
@@ -363,7 +363,7 @@
 <!-- Quick-view modal popup end-->
 
 <!-- edit product modal start-->
-<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
+{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content ">
       <div class="modal-body">
@@ -449,7 +449,7 @@
     </div>
   </div>
 </div>
-<!-- edit product modal end-->
+<!-- edit product modal end--> {% endcomment %}
 
 <!-- Add to cart bar -->
 <div id="cart_side" class="add_to_cart right">

@@ -1321,9 +1321,9 @@ $('.feature-slide').slick({
 
     $(window).scroll(function() {
         if ($(this).scrollTop() > 300) {
-            $('header').addClass("sticky");
+            $('stickyheader').addClass("sticky");
         } else {
-            $('header').removeClass("sticky");
+            $('stickyheader').removeClass("sticky");
         }
     });
 
@@ -1588,11 +1588,6 @@ $('.feature-slide').slick({
 });
 
 
-
-
-
-
-
 //list layout view
   $('.list-layout-view').on('click', function(e) {
     $('.collection-grid-view').css('opacity', '0');
@@ -1606,6 +1601,7 @@ $('.feature-slide').slick({
       $('.shop-cart-ajax-loader').css("display","none");
     }, 500);
   });
+
 //grid layout view
   $('.grid-layout-view').on('click', function(e) {
     $('.collection-grid-view').css('opacity', '1');
@@ -1647,39 +1643,39 @@ $('.feature-slide').slick({
   /*=====================
    10. Product page Quantity Counter
    ==========================*/
-  // $('.qty-box .quantity-right-plus').on('click', function () {
-  //   var $qty = $('.qty-box .input-number');
-  //   var currentVal = parseInt($qty.val(), 10);
-  //   if (!isNaN(currentVal)) {
-  //     $qty.val(currentVal + 1);
-  //   }
-  // });
-  // $('.qty-box .quantity-left-minus').on('click', function () {
-  //   var $qty = $('.qty-box .input-number');
-  //   var currentVal = parseInt($qty.val(), 10);
-  //   if (!isNaN(currentVal) && currentVal > 1) {
-  //     $qty.val(currentVal - 1);
-  //   }
-  // });
+  $('.qty-box .quantity-right-plus').on('click', function () {
+    var $qty = $('.qty-box .input-number');
+    var currentVal = parseInt($qty.val(), 10);
+    if (!isNaN(currentVal)) {
+      $qty.val(currentVal + 1);
+    }
+  });
+  $('.qty-box .quantity-left-minus').on('click', function () {
+    var $qty = $('.qty-box .input-number');
+    var currentVal = parseInt($qty.val(), 10);
+    if (!isNaN(currentVal) && currentVal > 1) {
+      $qty.val(currentVal - 1);
+    }
+  });
 
 
   // var qtyHolders = document.querySelectorAll(".qty-holder");
-  var qtyDecs = document.querySelectorAll(".qty-minus");
-  var qtyIncs = document.querySelectorAll(".qty-plus");
-  qtyDecs.forEach((qtyDec) => {
-    qtyDec.addEventListener("click",function(e){
-      if(e.target.nextElementSibling.value > 0){
-        e.target.nextElementSibling.value--;
-      } else {
-        // delete the item, etc
-      }
-    })
-  })
-  qtyIncs.forEach((qtyDec) => {
-    qtyDec.addEventListener("click",function(e){
-      e.target.previousElementSibling.value++;
-    })
-  })
+  // var qtyDecs = document.querySelectorAll(".qty-minus");
+  // var qtyIncs = document.querySelectorAll(".qty-plus");
+  // qtyDecs.forEach((qtyDec) => {
+  //   qtyDec.addEventListener("click",function(e){
+  //     if(e.target.nextElementSibling.value > 0){
+  //       e.target.nextElementSibling.value--;
+  //     } else {
+  //       // delete the item, etc
+  //     }
+  //   })
+  // })
+  // qtyIncs.forEach((qtyDec) => {
+  //   qtyDec.addEventListener("click",function(e){
+  //     e.target.previousElementSibling.value++;
+  //   })
+  // })
 
 
 
@@ -1711,7 +1707,7 @@ $('.feature-slide').slick({
       e.preventDefault();
       $(".col-grid-box:hidden").slice(0, 4).slideDown();
       if ($(".col-grid-box:hidden").length == 0) {
-        $(".load-more-sec").text('no more products');
+        $(".load-more-sec").text('No more products');
       }
     });
   });
@@ -2542,7 +2538,7 @@ $('.feature-slide').slick({
    14. RTL & Dark Light
    ==========================*/
 
-  $('<div class="theme-pannel-main"><ul><li id="rtl_btn"><a href="javascript:void(0)" class="btn setting_btn"><span class="rtl-txt">Rtl</span></a></li><li id="ltr_btn"><a href="javascript:void(0)" class="btn setting_btn"><span class="rtl-txt">Ltr</span></a></li><li class="sidebar-btn dark-light-btn"><a href="javascript:void(0)" class="dark-light"><span class="theme-layout-version">Dark</span></a></li></ul></div><div class="color-picker"> <a href="#" class="handle title"> <img src="paint.png"/> </a> <div> <h4>Choose color</h4> <ul class="colors"> <li class="color1"></li><li class="color2"></li><li class="color3"></li><li class="color4"></li><li class="color5"></li><li class="color6"></li><li class="color7"></li><li class="color8"></li><li class="color9"></li><li class="color10"></li><li class="color11"></li><li class="color12"></li><li class="color13"></li><li class="color14"></li><li class="color15"></li></ul> </div></div>').appendTo($('body'));
+  $('<div class="theme-pannel-main"><ul><li id="rtl_btn"><a href="javascript:void(0)" class="btn setting_btn"><span class="rtl-txt">Rtl</span></a></li><li id="ltr_btn"><a href="javascript:void(0)" class="btn setting_btn"><span class="rtl-txt">Ltr</span></a></li><li class="sidebar-btn dark-light-btn"><a href="javascript:void(0)" class="dark-light"><span class="theme-layout-version">Dark</span></a></li></ul></div><div class="color-picker"> <a href="#" class="handle title"> <img src="/paint.png"/> </a> <div> <h4>Choose color</h4> <ul class="colors"> <li class="color1"></li><li class="color2"></li><li class="color3"></li><li class="color4"></li><li class="color5"></li><li class="color6"></li><li class="color7"></li><li class="color8"></li><li class="color9"></li><li class="color10"></li><li class="color11"></li><li class="color12"></li><li class="color13"></li><li class="color14"></li><li class="color15"></li></ul> </div></div>').appendTo($('body'));
   (function() {
   })();
   $('#ltr_btn').hide();
@@ -2584,54 +2580,158 @@ $('.feature-slide').slick({
   /*=====================
    15. Add to cart
    ==========================*/
-  $('.add-cartnoty').on('click', function () {
-    $.notify({
-      icon: 'fa fa-check',
-      title: 'Success!',
-      message: 'Item Successfully added to your cart'
-    },{
-      element: 'body',
-      position: null,
-      type: "success",
-      allow_dismiss: true,
-      newest_on_top: false,
-      showProgressbar: true,
-      placement: {
-        from: "top",
-        align: "right"
-      },
-      offset: 20,
-      spacing: 10,
-      z_index: 1031,
-      delay: 5000,
-      animate: {
-        enter: 'animated fadeInDown',
-        exit: 'animated fadeOutUp'
-      },
-      icon_type: 'class',
-      template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-        '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
-        '<span data-notify="icon"></span> ' +
-        '<span data-notify="title">{1}</span> ' +
-        '<span data-notify="message">{2}</span>' +
-        '<div class="progress" data-notify="progressbar">' +
-        '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-        '</div>' +
-        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
-    });
+   /*$('.add-cartnoty').on('click', function () {
+    const productId = $(this).data('product-id');
+    console.log('productId ======>',productId);
+
+    if(productId === undefined){
+      console.error('Product ID is Undefined please check your html');
+      return;
+    }
+    // const checkQuantityUrl = `/check_quantity/${productId}`;
+    const checkQuantityUrl = `/add_to_cart/${productId}/`;
+    console.log('checkQuantityUrl ======>',checkQuantityUrl);
+    console.log('AJAX CALLING ');
+
+    $.ajax({
+      url: checkQuantityUrl,
+      method:'GET',
+      success: function (data) {
+        if(data.status == 'available'){
+          console.log('Product is available');
+          const notificationOptions = {
+            icon: "fa fa-check",
+            title: "Success!",
+            message: "Item Successfully added to your cart",
+        };
+    
+        localStorage.setItem("addtocartpopup", JSON.stringify(notificationOptions));
+        setTimeout(function () {
+            localStorage.removeItem("addtocartpopup");
+        }, 5000);
+        }else{
+          console.log('Not Available');
+          const notificationOptions = {
+            icon: "fa fa-check",
+            title: "Warning!",
+            message: "Product is out of stock",
+        };
+    
+        localStorage.setItem("addtocartpopup", JSON.stringify(notificationOptions));
+        setTimeout(function () {
+            localStorage.removeItem("addtocartpopup");
+        }, 5000);
+        }
+        },
+        error: function(error){
+          console.error('Error in AJAX request:',error);
+          
+        }
+        });
+    });   */
+ 
+
+
+  $(".add-cartnoty").on("click", function () {
+    const notificationOptions = {
+        icon: "fa fa-check",
+        title: "Success!",
+        message: "Item Successfully added to your cart",
+    };
+
+    localStorage.setItem("addtocartpopup", JSON.stringify(notificationOptions));
+    setTimeout(function () {
+        localStorage.removeItem("addtocartpopup");
+    }, 5000);
+});
+    
+
+  $(document).ready(function () {
+    const storedNotification = localStorage.getItem('addtocartpopup');
+    if (storedNotification) {
+      const notificationOptions = JSON.parse(storedNotification);
+      $.notify(notificationOptions,{
+        icon: 'fa fa-check',
+        title: 'Success!',
+        message: 'Item Successfully added to your cart'
+      },{
+        element: 'body',
+        position: null,
+        type: "success",
+        allow_dismiss: true,
+        newest_on_top: false,
+        showProgressbar: true,
+        placement: {
+          from: "top",
+          align: "right"
+        },
+        offset: 20,
+        spacing: 10,
+        z_index: 1031,
+        delay: 5000,
+        animate: {
+          enter: 'animated fadeInDown',
+          exit: 'animated fadeOutUp'
+        },
+        icon_type: 'class',
+        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+          '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+          '<span data-notify="icon"></span> ' +
+          '<span data-notify="title">{1}</span> ' +
+          '<span data-notify="message">{2}</span>' +
+          '<div class="progress" data-notify="progressbar">' +
+          '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+          '</div>' +
+          '<a href="{3}" target="{4}" data-notify="url"></a>' +
+          '</div>'
+      });
+      localStorage.removeItem('addtocartpopup');
+    }
   });
 
   /*=====================
    16.  Add to wishlist
    ==========================*/
-  $('.add-to-wish').on('click', function () {
 
-    $.notify({
-      icon: 'fa fa-check',
-      title: 'Success!',
-      message: 'Item Successfully added in wishlist'
-    },{
+  $(document).ready(function (){
+    $.ajax({
+      url:'/user_authenticate',
+      method:'GET',
+      dataType: 'json',
+      success: function (data) {
+        const isAuthenticated = data.is_authenticated;
+
+        if (isAuthenticated){
+          $('.add-to-wish ').on('click', function () {
+            const notificationOptions = {
+              icon: 'fa fa-check',
+              title: 'Success!',
+              message: 'Item Successfully added in wishlist'
+            };
+
+            localStorage.setItem("wishlistpopup", JSON.stringify(notificationOptions));
+            setTimeout(function () {
+                localStorage.removeItem("wishlistpopup");
+            }, 5000);
+          });
+        }
+      },
+    error: function(error){
+      console.error(error);
+    }
+  });
+});
+
+  $(document).ready(function () {
+    const storedNotification = localStorage.getItem("wishlistpopup");
+    if (storedNotification) {
+        const notificationOptions = JSON.parse(storedNotification);
+        $.notify(notificationOptions, {
+            icon: "fa fa-check",
+            title: "Success!",
+            message: "Item Successfully added in wishlist",
+
+        },{
       element: 'body',
       position: null,
       type: "info",
@@ -2662,7 +2762,65 @@ $('.feature-slide').slick({
         '<a href="{3}" target="{4}" data-notify="url"></a>' +
         '</div>'
     });
+    localStorage.removeItem("wishlistpopup"); // Remove the notification after displaying
+  }
+
   });
+
+  
+  $(".add-to-compare-list").on("click", function () {
+    // Check if the user is authenticated
+    $.ajax({
+        url: '/user_authenticate', // Replace with the actual URL of your Django view
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const isAuthenticated = data.is_authenticated;
+            
+            if (isAuthenticated) {
+                // User is authenticated, show the success notification
+                $.notify({
+                    icon: "fa fa-check",
+                    title: "Success!",
+                    message: "Item Successfully added to your compare list",
+                }, {
+                    element: "body",
+                    position: null,
+                    type: "success",
+                    allow_dismiss: true,
+                    newest_on_top: false,
+                    showProgressbar: true,
+                    placement: {
+                        from: "top",
+                        align: "right",
+                    },
+                    offset: 20,
+                    spacing: 10,
+                    z_index: 1031,
+                    delay: 5000,
+                    animate: {
+                        enter: "animated fadeInDown",
+                        exit: "animated fadeOutUp",
+                    },
+                    icon_type: "class",
+                    template: '<div data-notify="container" class="col-xl-4 col-lg-5 col-md-7 col-sm-8 col-12 alert alert-{0}" role="alert">' +
+                        '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+                        '<span data-notify="icon"></span> ' +
+                        '<span data-notify="title">{1}</span> ' +
+                        '<span data-notify="message">{2}</span>' +
+                        '<div class="progress" data-notify="progressbar">' +
+                        '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" style="width: 0%;"></div>' +
+                        "</div>" +
+                        '<a href="{3}" target="{4}" data-notify="url"></a>' +
+                        "</div>",
+                });
+            } 
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+});
 
 
 
@@ -2675,7 +2833,7 @@ $(window).on('scroll', function() {
     }
   });
 
-$(' <div class="tap-top" style="display: block;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 285 285" style="enable-background:new 0 0 285 285;" xml:space="preserve"><g><path d="M88.4,87.996c2.525-2.146,2.832-5.933,0.687-8.458C82.801,72.144,79.34,62.719,79.34,53c0-22.607,18.393-41,41-41c22.607,0,41,18.393,41,41c0,9.729-3.467,19.161-9.761,26.557c-2.148,2.523-1.843,6.311,0.681,8.458c1.129,0.961,2.511,1.431,3.886,1.431c1.698,0,3.386-0.717,4.572-2.111C168.858,77.77,173.34,65.576,173.34,53c0-29.225-23.775-53-53-53c-29.225,0-53,23.775-53,53c0,12.563,4.476,24.748,12.602,34.31C82.089,89.835,85.873,90.141,88.4,87.996z"/><path d="M120.186,41.201c13.228,0,23.812,8.105,27.313,19.879c0.761-2.562,1.176-5.271,1.176-8.08c0-15.649-12.685-28.335-28.335-28.335c-15.648,0-28.334,12.686-28.334,28.335c0,2.623,0.364,5.16,1.031,7.571C96.691,49.076,107.152,41.201,120.186,41.201z"/><path d="M234.21,169.856c-3.769-22.452-19.597-26.04-27.034-26.462c-2.342-0.133-4.516-1.32-5.801-3.282c-5.388-8.225-12.609-10.4-18.742-10.4c-4.405,0-8.249,1.122-10.449,1.932c-0.275,0.102-0.559,0.15-0.837,0.15c-0.87,0-1.701-0.47-2.163-1.262c-5.472-9.387-13.252-11.809-19.822-11.809c-3.824,0-7.237,0.82-9.548,1.564c-0.241,0.077-0.764,0.114-1.001,0.114c-1.256,0-2.637-1.03-2.637-2.376V69.753c0-11.035-8.224-16.552-16.5-16.552c-8.276,0-16.5,5.517-16.5,16.552v84.912c0,4.989-3.811,8.074-7.918,8.074c-2.495,0-4.899-1.138-6.552-3.678l-7.937-12.281c-3.508-5.788-8.576-8.188-13.625-8.189c-11.412-0.001-22.574,12.258-14.644,25.344l62.491,119.692c0.408,0.782,1.225,1.373,2.108,1.373h87.757c1.253,0,2.289-1.075,2.365-2.325l2.196-35.816c0.025-0.413,0.162-0.84,0.39-1.186C231.591,212.679,237.828,191.414,234.21,169.856z"/></g></svg></div>').appendTo($('body'));
+$('<div class="tap-top" style="display: block;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 285 285" style="enable-background:new 0 0 285 285;" xml:space="preserve"><g><path d="M88.4,87.996c2.525-2.146,2.832-5.933,0.687-8.458C82.801,72.144,79.34,62.719,79.34,53c0-22.607,18.393-41,41-41c22.607,0,41,18.393,41,41c0,9.729-3.467,19.161-9.761,26.557c-2.148,2.523-1.843,6.311,0.681,8.458c1.129,0.961,2.511,1.431,3.886,1.431c1.698,0,3.386-0.717,4.572-2.111C168.858,77.77,173.34,65.576,173.34,53c0-29.225-23.775-53-53-53c-29.225,0-53,23.775-53,53c0,12.563,4.476,24.748,12.602,34.31C82.089,89.835,85.873,90.141,88.4,87.996z"/><path d="M120.186,41.201c13.228,0,23.812,8.105,27.313,19.879c0.761-2.562,1.176-5.271,1.176-8.08c0-15.649-12.685-28.335-28.335-28.335c-15.648,0-28.334,12.686-28.334,28.335c0,2.623,0.364,5.16,1.031,7.571C96.691,49.076,107.152,41.201,120.186,41.201z"/><path d="M234.21,169.856c-3.769-22.452-19.597-26.04-27.034-26.462c-2.342-0.133-4.516-1.32-5.801-3.282c-5.388-8.225-12.609-10.4-18.742-10.4c-4.405,0-8.249,1.122-10.449,1.932c-0.275,0.102-0.559,0.15-0.837,0.15c-0.87,0-1.701-0.47-2.163-1.262c-5.472-9.387-13.252-11.809-19.822-11.809c-3.824,0-7.237,0.82-9.548,1.564c-0.241,0.077-0.764,0.114-1.001,0.114c-1.256,0-2.637-1.03-2.637-2.376V69.753c0-11.035-8.224-16.552-16.5-16.552c-8.276,0-16.5,5.517-16.5,16.552v84.912c0,4.989-3.811,8.074-7.918,8.074c-2.495,0-4.899-1.138-6.552-3.678l-7.937-12.281c-3.508-5.788-8.576-8.188-13.625-8.189c-11.412-0.001-22.574,12.258-14.644,25.344l62.491,119.692c0.408,0.782,1.225,1.373,2.108,1.373h87.757c1.253,0,2.289-1.075,2.365-2.325l2.196-35.816c0.025-0.413,0.162-0.84,0.39-1.186C231.591,212.679,237.828,191.414,234.21,169.856z"/></g></svg></div>').appendTo($('body'));
     (function() {
     })();
 $('.tap-top').on('click', function() {
@@ -2733,66 +2891,68 @@ $('.tap-top').on('click', function() {
   /*=====================
   20. Color Picker
    ==========================*/
-  var body_event = $("body");
-  body_event.on("click", ".color1", function() {
-    $("#color" ).attr("href", "../assets/css/color1.css" );
+
+
+   var body_event = $("body");
+   body_event.on("click", ".color1", function() {
+    $("#color" ).attr("href", "/static/assets/scss/color1.css" );
     return false;
 
   });
   body_event.on("click", ".color2", function() {
-    $("#color" ).attr("href", "../assets/css/color2.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color2.css" );
     return false;
   });
   body_event.on("click", ".color3", function() {
-    $("#color" ).attr("href", "../assets/css/color3.css" );
+    $("#color").attr("href", "/static/assets/scss/color3.css" );
     return false;
   });
   body_event.on("click", ".color4", function() {
-    $("#color" ).attr("href", "../assets/css/color4.css" );
+    $("#color").attr("href", "/static/assets/scss/color4.css" );
     return false;
   });
   body_event.on("click", ".color5", function() {
-    $("#color" ).attr("href", "../assets/css/color5.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color5.css" );
     return false;
   });
   body_event.on("click", ".color6", function() {
-    $("#color" ).attr("href", "../assets/css/color6.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color6.css" );
     return false;
   });
   body_event.on("click", ".color7", function() {
-    $("#color" ).attr("href", "../assets/css/color7.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color7.css" );
     return false;
   });
   body_event.on("click", ".color8", function() {
-    $("#color" ).attr("href", "../assets/css/color8.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color8.css" );
     return false;
   });
   body_event.on("click", ".color9", function() {
-    $("#color" ).attr("href", "../assets/css/color9.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color9.css" );
     return false;
   });
   body_event.on("click", ".color10", function() {
-    $("#color" ).attr("href", "../assets/css/color10.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color10.css" );
     return false;
   });
   body_event.on("click", ".color11", function() {
-    $("#color" ).attr("href", "../assets/css/color11.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color11.css" );
     return false;
   });
   body_event.on("click", ".color12", function() {
-    $("#color" ).attr("href", "../assets/css/color12.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color12.css" );
     return false;
   });
   body_event.on("click", ".color13", function() {
-    $("#color" ).attr("href", "../assets/css/color13.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color13.css" );
     return false;
   });
   body_event.on("click", ".color14", function() {
-    $("#color" ).attr("href", "../assets/css/color14.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color14.css" );
     return false;
   });
   body_event.on("click", ".color15", function() {
-    $("#color" ).attr("href", "../assets/css/color15.css" );
+    $("#color" ).attr("href", "/static/assets/scss/color15.css" );
     return false;
   });
 
@@ -2903,13 +3063,20 @@ $('.tap-top').on('click', function() {
               url: "/setCookie",
               method: 'GET',
               success: function(response) {
-                  console.log(response); // Optional: Log the response
               },
           });
       });
   }); 
-  
 
+
+  
+  /*=====================
+      25.  django Messages js
+  ==========================*/
+
+  setTimeout(function(){
+    $('#message').fadeOut('slow')
+  },5000)
 
 
 
@@ -2931,15 +3098,46 @@ function closeAccount() {
   document.getElementById("myAccount").classList.remove('open-side');
 }
 
-function openWishlist() {
-  document.getElementById("wishlist_side").classList.add('open-side');
-}
-function closeWishlist() {
-  document.getElementById("wishlist_side").classList.remove('open-side');
-}
+// function openWishlist() {
+//   document.getElementById("wishlist_side").classList.add('open-side');
+// }
+// function closeWishlist() {
+//   document.getElementById("wishlist_side").classList.remove('open-side');
+// }
 function openSetting() {
   document.getElementById("mySetting").classList.add('open-side');
 }
 function closeSetting() {
   document.getElementById("mySetting").classList.remove('open-side');
 }
+
+
+// Shop page Filter js
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function redirectToCreateQueryParamsUrl(params) {
+    var removeTagId = params.value+params.key+"CheckBox";
+    var attributeCheckBox=document.getElementById(removeTagId);
+    attributeCheckBox.checked = false;
+    var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
+    sbmtButton.click();
+}
+
+
+
+

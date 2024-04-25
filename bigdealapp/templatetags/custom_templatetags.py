@@ -1,17 +1,19 @@
 from urllib.parse import urlencode, urlparse, urlunparse
 from django import template
-from django.http import QueryDict
+from django.http import QueryDict,HttpResponse
 
 from currency.models import Currency
 
-# from order.models import (Cart, CartProducts,Wishlist,Compare)
+from order.models import (Cart, CartProducts,Wishlist,Compare)
 from product.models import (Product, ProductVariant)
 from django.http import QueryDict
 
 from urllib.parse import urlparse, parse_qs, urlencode
+import json
 
 # from django.core.cache import cache
-# from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist
+from uuid import UUID
 
 register = template.Library()
 
@@ -37,50 +39,97 @@ def return_first_product_variant(value):
     productVariant = ProductVariant.objects.filter(variantProduct=product).first()
     if productVariant is not None:
         return productVariant.id
-    pass
+    pass    
 
 
 @register.filter(name='return_currency_wise_ammount')
 def return_currency_wise_ammount(value, request):
+    try:
+        numeric_value = int(value)
+    except ValueError:
+        return 0 
+    
     result = request.COOKIES.get('currency', '')
+    
+    try:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+        
+        
     if len(result) == 0:
         currency = Currency.objects.get(code='USD')
-        amount = int(value)*currency.factor
+        amount = numeric_value*currency.factor
         return amount
-
-    currency = Currency.objects.get(id=result)
-    amount = int(value)*currency.factor
+    
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
+    else:
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+        
+    amount = numeric_value * currency.factor
     return amount
-
-
+    
+    
 @register.filter(name='return_currency_wise_ammount_range')
 def return_currency_wise_ammount_range(value, request):
     result = request.COOKIES.get('currency', '')
-    if len(result) == 0:
-        currency = Currency.objects.get(code='USD')
-        productVariantMinPrice = int(value[0])*currency.factor
-        productVariantMaxPrice = int(value[1])*currency.factor
-        if str(productVariantMinPrice) == str(productVariantMaxPrice):
-            return str(currency.symbol)+str(productVariantMinPrice)
-        else: 
-            return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
 
-    currency = Currency.objects.get(id=result)
-    productVariantMinPrice = int(value[0])*currency.factor
-    productVariantMaxPrice = int(value[1])*currency.factor
-    if str(productVariantMinPrice) == str(productVariantMaxPrice):
-        return str(currency.symbol)+str(productVariantMinPrice)
+    try:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
     else:
-        return str(currency.symbol)+str(productVariantMinPrice) + " - " + str(currency.symbol)+str(productVariantMaxPrice)
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+
+    productVariantMinPrice = int(value[0]) * currency.factor
+    productVariantMaxPrice = int(value[1]) * currency.factor
+
+    if str(productVariantMinPrice) == str(productVariantMaxPrice):
+        return str(currency.symbol) + str(productVariantMinPrice)
+    else:
+        return str(currency.symbol) + str(productVariantMinPrice)
 
 
 @register.filter(name='return_currency_wise_symbol')
 def return_currency_wise_symbol(value, request):
     result = request.COOKIES.get('currency', '')
+    
+    try:
+        # Try to parse the result as a UUID
+        uuid_result = UUID(result)
+    except ValueError:
+        # Handle the case where result is not a valid UUID
+        uuid_result = None
+        
     if len(result) == 0:
         currency = Currency.objects.get(code='USD')
         return currency.symbol
-    currency = Currency.objects.get(id=result)
+    
+    if uuid_result:
+        try:
+            currency = Currency.objects.get(id=result)
+        except ObjectDoesNotExist:
+            currency = Currency.objects.get(code='USD')
+    else:
+        # Handle the case where result is not a valid UUID
+        currency = Currency.objects.get(code='USD')
+       
     return currency.symbol
 
 
@@ -101,41 +150,84 @@ def return_currency(value):
 
 # Functions to return context for ''''''HEADER'''''' for all pages start
 
-# @register.filter(name='return_totalWishlistProducts')
-# def return_totalWishlistProducts(value,request):
-#     customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
-#     wishlist_products = customer_wishlist.wishlistProducts.all()
-#     totalWishlistProducts = wishlist_products.count()
-#     return totalWishlistProducts
+@register.filter(name='return_totalWishlistProducts')
+def return_totalWishlistProducts(value,request):
+    if request.user.is_authenticated:
+        try:
+            customer_wishlist = Wishlist.objects.get(wishlistByCustomer=request.user.id)
+            wishlist_products = customer_wishlist.wishlistProducts.all()
+            totalWishlistProducts = wishlist_products.count()
+            return totalWishlistProducts
+        except Wishlist.DoesNotExist:
+            return 0
+    else:
+        return 0
 
-# @register.filter(name='return_totalComparelistProducts')
-# def return_totalCompareProducts(value,request):
-#     customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
-#     comparelist_products = customer_comparelist.compareProducts.all()
-#     totalComparelistProducts = comparelist_products.count()
-#     return totalComparelistProducts
+@register.filter(name='return_totalComparelistProducts')
+def return_totalCompareProducts(value,request):
+    if request.user.is_authenticated:
+        customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
+        comparelist_products = customer_comparelist.compareProducts.all()
+        totalComparelistProducts = comparelist_products.count()
+        return totalComparelistProducts
+    else:
+        return 0
 
-# @register.filter(name='return_totalCartProducts')
-# def return_totalCartProducts(value,request):
-#     totalCartProducts = CartProducts.objects.filter(cartByCustomer=request.user.id).count()
-#     return totalCartProducts
+@register.filter(name='return_totalCartProducts')
+def return_totalCartProducts(value,request):
+    if request.user.is_authenticated:
+        totalCartProducts = CartProducts.objects.filter(cartByCustomer=request.user.id).count()
+    else:
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        if (get_Item is not None and get_Item != "null"):
+            cart_products = json.loads(get_Item)
+        else:
+            cart_products = None
+            
+        if cart_products:
+            totalCartProducts = len(cart_products)
+        else:
+            totalCartProducts = 0
+    return totalCartProducts
 
-# @register.filter(name='return_cart_products')
-# def return_cart_products(value,request):
-#     cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
-#     return cart_products
+@register.filter(name='return_cart_products')
+def return_cart_products(value,request):
+    if request.user.is_authenticated:
+        cart_products = CartProducts.objects.filter(cartByCustomer=request.user.id)
+    else:
+        cart_products = CartProducts.objects.all()
+    return cart_products
 
-# @register.filter(name='return_cartTotalPrice')
-# def return_cartTotalPrice(value,request):
-#     customer_cart = Cart.objects.get(cartByCustomer=request.user.id)
-#     return customer_cart.getTotalPrice
+@register.filter(name='return_cartTotalPrice')
+def return_cartTotalPrice(value,request):
+    if request.user.is_authenticated:
+        try:
+            cartTotalPrice = Cart.objects.get(cartByCustomer=request.user.id).getTotalPrice
+        except Cart.DoesNotExist:
+            return HttpResponse("Cart does not exist for this user 123.")
 
-# @register.filter(name='return_totalComparelistProducts')
-# def return_totalCompareProducts(value,request):
-#     customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
-#     comparelist_products = customer_comparelist.compareProducts.all()
-#     totalComparelistProducts = comparelist_products.count()
-#     return totalComparelistProducts
+    else:
+        get_Item = request.COOKIES.get('cart').replace("\'", "\"") if request.COOKIES.get('cart') is not None else None
+        if (get_Item is not None and get_Item != "null"):
+            cart_products = json.loads(get_Item)
+        else:
+            cart_products = None
+            
+        if cart_products:
+                cartTotalPrice = sum([float(i['totalPrice']) for i in cart_products])
+        else:
+            cartTotalPrice = 0
+    return cartTotalPrice
+
+@register.filter(name='return_totalComparelistProducts')
+def return_totalCompareProducts(value,request):
+    if request.user.is_authenticated:
+        customer_comparelist = Compare.objects.get(compareByCustomer=request.user.id)
+        comparelist_products = customer_comparelist.compareProducts.all()
+        totalComparelistProducts = comparelist_products.count()
+        return totalComparelistProducts
+    else:
+        return 0
 
 # Functions to return context for ''''''HEADER'''''' for all pages end
 
@@ -163,7 +255,6 @@ def update_url_parameters(value, request):
     # Reconstruct the updated URL
     updated_url = urlunparse(parsed_url._replace(query=updated_query_string))
 
-    # print(updated_url)
     return updated_url
 
 

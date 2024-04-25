@@ -69,16 +69,6 @@
                 </ul>
               </div>
               <div class="language-block">
-                <div class="language-dropdown"> <span class="language-dropdown-click">
-                                        english <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                    </span>
-                  <ul class="language-dropdown-open">
-                    <li><a href="javascript:void(0)">hindi</a></li>
-                    <li><a href="javascript:void(0)">english</a></li>
-                    <li><a href="javascript:void(0)">marathi</a></li>
-                    <li><a href="javascript:void(0)">spanish</a></li>
-                  </ul>
-                </div>
                 <div class="curroncy-dropdown" id="currency-selection">
                   <select id="currency-selection-dropdown">
                      <option id="currency-value" value="%">Currency</option>
@@ -140,24 +130,24 @@
                   <li>
                     <div class="nav-sm-back"> back <i class="fa fa-angle-right ps-2"></i> </div>
                   </li>
-                  <li><a href="category-page(left-sidebar).html">western ware</a></li>
-                  <li><a href="category-page(left-sidebar).html">TV, Appliances</a></li>
-                  <li><a href="category-page(left-sidebar).html">Pets Products</a></li>
-                  <li><a href="category-page(left-sidebar).html">Car, Motorbike</a></li>
-                  <li><a href="category-page(left-sidebar).html">Industrial Products</a></li>
-                  <li><a href="category-page(left-sidebar).html">Beauty, Health Products</a></li>
-                  <li><a href="category-page(left-sidebar).html">Grocery Products </a></li>
-                  <li><a href="category-page(left-sidebar).html">Sports</a></li>
-                  <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                  <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                  <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                  <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">western ware</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">TV, Appliances</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Pets Products</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Car, Motorbike</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Industrial Products</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Beauty, Health Products</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Grocery Products </a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Sports</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                  <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                   <li class="mor-slide-open">
                     <ul>
-                      <li><a href="category-page(left-sidebar).html">Bags, Luggage</a></li>
-                      <li><a href="category-page(left-sidebar).html">Movies, Music </a></li>
-                      <li><a href="category-page(left-sidebar).html">Video Games</a></li>
-                      <li><a href="category-page(left-sidebar).html">Toys, Baby Products</a></li>
+                      <li><a href="{% url 'shop_left_sidebar' %}">Bags, Luggage</a></li>
+                      <li><a href="{% url 'shop_left_sidebar' %}">Movies, Music </a></li>
+                      <li><a href="{% url 'shop_left_sidebar' %}">Video Games</a></li>
+                      <li><a href="{% url 'shop_left_sidebar' %}">Toys, Baby Products</a></li>
                     </ul>
                   </li>
                   <li> <a class="mor-slide-click">
@@ -201,7 +191,7 @@
           </div>
           <div class="col-4">
             <div class="logo-block">
-              <a href="{% url 'index' %}"> <img src="{% static 'assets/images/layout-4/logo/logo.png' %}" alt="logo" class="img-fluid  "> </a>
+              <a href="{% url 'index_default' %}"> <img src="{% static 'assets/images/layout-4/logo/logo.png' %}" alt="logo" class="img-fluid  "> </a>
             </div>
           </div>
           <div class="col-4">
@@ -246,9 +236,15 @@
                   </a> 
                 </li>
                 <li class="mobile-wishlist item-count" onclick="openWishlist()">
-                  <a href="javascript:void(0)"> 
+                  <a href="{% url 'wishlist_page' %}">
                     <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg"><path d="m256 455.515625c-7.289062 0-14.316406-2.640625-19.792969-7.4375-20.683593-18.085937-40.625-35.082031-58.21875-50.074219l-.089843-.078125c-51.582032-43.957031-96.125-81.917969-127.117188-119.3125-34.644531-41.804687-50.78125-81.441406-50.78125-124.742187 0-42.070313 14.425781-80.882813 40.617188-109.292969 26.503906-28.746094 62.871093-44.578125 102.414062-44.578125 29.554688 0 56.621094 9.34375 80.445312 27.769531 12.023438 9.300781 22.921876 20.683594 32.523438 33.960938 9.605469-13.277344 20.5-24.660157 32.527344-33.960938 23.824218-18.425781 50.890625-27.769531 80.445312-27.769531 39.539063 0 75.910156 15.832031 102.414063 44.578125 26.191406 28.410156 40.613281 67.222656 40.613281 109.292969 0 43.300781-16.132812 82.9375-50.777344 124.738281-30.992187 37.398437-75.53125 75.355469-127.105468 119.308594-17.625 15.015625-37.597657 32.039062-58.328126 50.167969-5.472656 4.789062-12.503906 7.429687-19.789062 7.429687zm-112.96875-425.523437c-31.066406 0-59.605469 12.398437-80.367188 34.914062-21.070312 22.855469-32.675781 54.449219-32.675781 88.964844 0 36.417968 13.535157 68.988281 43.882813 105.605468 29.332031 35.394532 72.960937 72.574219 123.476562 115.625l.09375.078126c17.660156 15.050781 37.679688 32.113281 58.515625 50.332031 20.960938-18.253907 41.011719-35.34375 58.707031-50.417969 50.511719-43.050781 94.136719-80.222656 123.46875-115.617188 30.34375-36.617187 43.878907-69.1875 43.878907-105.605468 0-34.515625-11.605469-66.109375-32.675781-88.964844-20.757813-22.515625-49.300782-34.914062-80.363282-34.914062-22.757812 0-43.652344 7.234374-62.101562 21.5-16.441406 12.71875-27.894532 28.796874-34.609375 40.046874-3.453125 5.785157-9.53125 9.238282-16.261719 9.238282s-12.808594-3.453125-16.261719-9.238282c-6.710937-11.25-18.164062-27.328124-34.609375-40.046874-18.449218-14.265626-39.34375-21.5-62.097656-21.5zm0 0"/></svg>
-                    <div class="item-count-contain"> 3 </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="item-count-contain">
+                      {{totalWishlistProducts|return_totalWishlistProducts:request}}
+                   </div>
+                   {% else %}
+                    <div class="item-count-contain"> 0 </div>
+                    {% endif %}
                   </a>
                 </li>
                 <li class="mobile-setting" onclick="openSetting()">
@@ -264,7 +260,7 @@
                         <div>shopping<span>cart</span></div>
                       </div>
                     </div>  
-                    <div class="item-count-contain"> 3 </div>
+                    <div class="item-count-contain"> {{totalCartProducts}} </div>
                   </a>
                 </li>
               </ul> 
@@ -287,7 +283,7 @@
                   <i class="fa fa-bars"></i>
                 </div>
                 <div class="logo-block logo-sm-center ">
-                  <a href="index.html">
+                  <a href="{% url 'index_default' %}">
                       <img src="{% static 'assets/images/layout-4/logo/logo.png' %}" alt="logo" class="img-fluid  ">
                   </a>
                 </div>
@@ -298,35 +294,34 @@
                       <h5 class="mb-0  text-white title-font">Shop by category</h5> </nav>
                     <div class="collapse show nav-desk" id="navbarToggleExternalContent">
                       <ul class="nav-cat title-font">
-                        {% for category in subcategories %}
-
-                        <li><a href="category-page(left-sidebar).html">{{category.categoryName}}</a></li>
-                        {% comment %}  <li><a href="category-page(left-sidebar).html">Garden & Outdoors</a></li>
-                        <li><a href="category-page(left-sidebar).html">Home Furnishing</a></li>
-                        <li><a href="category-page(left-sidebar).html">DSLR Cameras</a></li>
-                        <li><a href="category-page(left-sidebar).html">Refrigerators</a></li>
-                        <li><a href="category-page(left-sidebar).html">Bags & Luggage</a></li>
-                        <li><a href="category-page(left-sidebar).html">Children's Books </a></li>
-                        <li><a href="category-page(left-sidebar).html">Western Wear</a></li>
-                        <li><a href="category-page(left-sidebar).html">Travel Accessories</a></li>
-                        <li><a href="category-page(left-sidebar).html">Birthday Gift Cards</a></li>
-                        <li><a href="category-page(left-sidebar).html">Dog supplies</a></li>
-                        <li><a href="category-page(left-sidebar).html">Gaming Consoles</a></li>
-                        <li><a href="category-page(left-sidebar).html">Kitchen & Dining</a></li>
-                        <li><a href="category-page(left-sidebar).html">Car Electronics</a></li>
-                        <li><a href="category-page(left-sidebar).html">Washing Machines</a></li>
-                        <li><a href="category-page(left-sidebar).html">Echo Plus</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">speakers</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Garden & Outdoors</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Home Furnishing</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">DSLR Cameras</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Refrigerators</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Bags & Luggage</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Children's Books </a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Western Wear</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Travel Accessories</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Birthday Gift Cards</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Dog supplies</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Gaming Consoles</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Kitchen & Dining</a></li>
+                        <li><a href="category-page(left-s idebar).html">Car Electronics</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Washing Machines</a></li>
+                        <li><a href="{% url 'shop_left_sidebar' %}">Echo Plus</a></li>
                         <li>
                           <ul class="mor-slide-open">
-                            <li><a href="category-page(left-sidebar).html">Gaming Consoles</a></li>
-                            <li><a href="category-page(left-sidebar).html">Kitchen & Dining</a></li>
-                            <li><a href="category-page(left-sidebar).html">Car Electronics</a></li>
-                            <li><a href="category-page(left-sidebar).html">Washing Machines</a></li>
-                            <li><a href="category-page(left-sidebar).html">Echo Plus</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Gaming Consoles</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Kitchen & Dining</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Car Electronics</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Washing Machines</a></li>
+                            <li><a href="{% url 'shop_left_sidebar' %}">Echo Plus</a></li>
                           </ul>
-                        </li>  {% endcomment %}
-                        {% endfor %}
-                        <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a> </li>
+                        </li>
+                        <li> <a class="mor-slide-click">mor category <i
+                                                            class="fa fa-angle-down pro-down"></i><i
+                                                            class="fa fa-angle-up pro-up"></i></a> </li>
                       </ul>
                     </div>
                   </div>
@@ -339,10 +334,10 @@
               </div>
               <div class="input-block">
                   <div class="input-box">
-                    <form class="big-deal-form">
+                    <form class="big-deal-form m-0">
                       <div class="input-group ">
                         <span class="search"><i class="fa fa-search"></i></span>                       
-                        <input type="text" class="form-control" placeholder="Search a Product">
+                        <input type="text" class="form-control" placeholder="Search a Product" autofocus>
                         <div class="input-group-prepend">
                           <select>
                             <option>All Category</option>
@@ -457,7 +452,7 @@
                         <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><path d="m497 401.667c-415.684 0-397.149.077-397.175-.139-4.556-36.483-4.373-34.149-4.076-34.193 199.47-1.037-277.492.065 368.071.065 26.896 0 47.18-20.377 47.18-47.4v-203.25c0-19.7-16.025-35.755-35.725-35.79l-124.179-.214v-31.746c0-17.645-14.355-32-32-32h-29.972c-17.64 0-31.99 14.351-31.99 31.99v31.594l-133.21-.232-9.985-54.992c-2.667-14.694-15.443-25.36-30.378-25.36h-68.561c-8.284 0-15 6.716-15 15s6.716 15 15 15c72.595 0 69.219-.399 69.422.719 16.275 89.632 5.917 26.988 49.58 306.416l-38.389.2c-18.027.069-32.06 15.893-29.81 33.899l4.252 34.016c1.883 15.06 14.748 26.417 29.925 26.417h26.62c-18.8 36.504 7.827 80.333 49.067 80.333 41.221 0 67.876-43.813 49.067-80.333h142.866c-18.801 36.504 7.827 80.333 49.067 80.333 41.22 0 67.875-43.811 49.066-80.333h31.267c8.284 0 15-6.716 15-15s-6.716-15-15-15zm-209.865-352.677c0-1.097.893-1.99 1.99-1.99h29.972c1.103 0 2 .897 2 2v111c0 8.284 6.716 15 15 15h22.276l-46.75 46.779c-4.149 4.151-10.866 4.151-15.015 0l-46.751-46.779h22.277c8.284 0 15-6.716 15-15v-111.01zm-30 61.594v34.416h-25.039c-20.126 0-30.252 24.394-16.014 38.644l59.308 59.342c15.874 15.883 41.576 15.885 57.452 0l59.307-59.342c14.229-14.237 4.13-38.644-16.013-38.644h-25.039v-34.254l124.127.214c3.186.005 5.776 2.603 5.776 5.79v203.25c0 10.407-6.904 17.4-17.18 17.4h-299.412l-35.477-227.039zm-56.302 346.249c0 13.877-11.29 25.167-25.167 25.167s-25.166-11.29-25.166-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167zm241 0c0 13.877-11.289 25.167-25.166 25.167s-25.167-11.29-25.167-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167z"/></g></svg>                                                 
                         <div class="item-count-contain item-whtie"> 3 </div>
                       </a>
-                    </li>
+                    </li> 
                   </ul>
                   <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>            
                 </div>
@@ -500,9 +495,9 @@
                 <div class="slider-banner-contain">
                   <div>
                     <h5>{{banner.titleOne}}</h5>
-                    <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-                    <h1>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h1>
-                    <h2>{{banner.titleOne}} only {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2> <a href="product-page(left-sidebar).html" class="btn btn-normal">
+                    <h3>{{banner.titleTwo}}</h3>
+                    <h1>{{banner.titleThree}}</h1>
+                    <h2>{{banner.titleFour}} only {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2> <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal">
                                             shop now
                                         </a> </div>
                 </div>
@@ -525,12 +520,12 @@
         {% if banner.bannerType|to_str == 'Banner' %}
         <div class="col-md-4  ">
           <div class="collection-banner-main p-left  height-equal">
-            <div class="collection-img"> <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner"> </div>
+            <div class="collection-img" id="img-2"> <img src="{{banner.bannerImage}}" class="img-fluid bg-img" alt="banner"> </div>
             <div class="collection-banner-contain">
               <div>
-                <h3>{{banner.bannerProduct.variantProduct.productName}}</h3>
-                <h4>{{banner.titleOne}}</h4>
-                <div class="shop"> <a href="product-page(left-sidebar).html">shop now<i class="fa fa-arrow-circle-right"></i></a> </div>
+                <h3>{{banner.titleOne}}</h3>
+                <h4>{{banner.titleTwo}}</h4>
+                <div class="shop"> <a href="{% url 'shop_left_sidebar' %}">shop now<i class="fa fa-arrow-circle-right"></i></a> </div>
               </div>
             </div>
           </div>
@@ -546,7 +541,7 @@
                 <h3>50% off</h3>
                 <h1>sale</h1>
                 <h6>free shipping</h6>
-                <div class="shop"> <a href="product-page(left-sidebar).html">shop now<i class="fa fa-arrow-circle-right"></i></a> </div>
+                <div class="shop"> <a href="{% url 'shop_left_sidebar' %}">shop now<i class="fa fa-arrow-circle-right"></i></a> </div>
               </div>
             </div>
           </div>
@@ -563,7 +558,7 @@
         <ul>
           <li><a href="javascript:void(0)">top brand</a></li>
           <li><a>:</a></li>
-          {% for brand in allbrands %}
+          {% for brand in allbrands|slice:":10" %}
           <li><a href="javascript:void(0)">{{brand.brandName}}</a></li>
           {% endfor %}
         </ul>
@@ -585,26 +580,61 @@
             {% for banner in media_banners|slice:"0:4"  %}
             <div class="media-banner-box">
               <div class="media">
-                <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner"> </a>
+                <a href="{% url 'shop_left_sidebar' %}" tabindex="0" id="img-3"> <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner"> </a>
                 <div class="media-body">
                   <div class="media-contant">
                     <div>
                       <div class="product-detail">
-                        <ul class="rating">
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html" tabindex="0">
+                        <div class="rating-star">
+                          {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
+                          {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
+                          <li>
+                            <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}"></a>
+                          </li>
+                          {% endfor %}
+    
+                          {% with number1=5|to_int number2=banner.bannerProduct.variantProduct.productFinalRating|to_int %}
+                          {% with number3=number1|sub:number2 %}
+    
+                          {% for x in number3|times %}
+                          <li>
+                            <i class="fa fa-star"></i>
+                          </li>
+                          {% endfor %}
+    
+                          {% endwith %}
+                          {% endwith %}
+    
+                          
+                          {% else %}
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          {% endif %}
+                        </div> 
+                        <a href="{% url 'shop_left_sidebar' %}" tabindex="0">
                           <p> {{banner.titleOne}}</p>
                         </a>
                         <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h6>
                       </div>
                       <div class="cart-info">
-                        <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button> <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
-                    </div>
+                        <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}"  class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </a>
+                        <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
+                         <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                         <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-listtooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -625,7 +655,7 @@
                         {% for banner in allbanners  %}
                         {% if banner.bannerType|to_str == 'Timer' %}
                         <div>
-                          <a href="product-page(left-sidebar).html">
+                          <a href="{% url 'shop_left_sidebar' %}">
                             <div class="img-wrraper">
                               <div> <img src="{{banner.bannerImage}}" alt="hot-deal" class="img-fluid bg-img "> </div>
                             </div>
@@ -641,15 +671,47 @@
                         {% if banner.bannerType|to_str == 'Timer' %}
                         <div>
                           <div>
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'shop_left_sidebar' %}">
                               <h5>{{banner.titleOne}} </h5> </a>
-                            <ul class="rating">
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star"></i></li>
-                              <li><i class="fa fa-star-o"></i></li>
-                            </ul>
+                              <div class="rating-star">
+                                {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
+                                {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
+                                <li>
+                                  <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}"></a>
+                                </li>
+                                {% endfor %}
+          
+                                {% with number1=5|to_int number2=banner.bannerProduct.variantProduct.productFinalRating|to_int %}
+                                {% with number3=number1|sub:number2 %}
+          
+                                {% for x in number3|times %}
+                                <li>
+                                  <i class="fa fa-star"></i>
+                                </li>
+                                {% endfor %}
+          
+                                {% endwith %}
+                                {% endwith %}
+          
+                                
+                                {% else %}
+                                <li>
+                                  <i class="fa fa-star theme-color"></i>
+                                </li>
+                                <li>
+                                  <i class="fa fa-star theme-color"></i>
+                                </li>
+                                <li>
+                                  <i class="fa fa-star theme-color"></i>
+                                </li>
+                                <li>
+                                  <i class="fa fa-star theme-color"></i>
+                                </li>
+                                <li>
+                                  <i class="fa fa-star theme-color"></i>
+                                </li>
+                                {% endif %}
+                              </div> 
                             <p> {{banner.bannerProduct.variantProduct.productDescription|safe}}</p>
                             <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
                               <span>
@@ -658,7 +720,7 @@
                             </h6>
                             <div class="timer">
                               <p id="demo"> </p>
-                            </div> <a href="product-page(left-sidebar).html" class="btn btn-normal btn-md">shop now</a> </div>
+                            </div> <a href="{% url 'shop_left_sidebar' %}" class="btn btn-normal btn-md">shop now</a> </div>
                         </div>
                         {% endif %}
                         {% endfor %}
@@ -688,106 +750,70 @@
             {% for banner in media_banners|slice:"::-1"  %}
             <div class="media-banner-box">
               <div class="media">
-                <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner"> </a>
+                <a href="{% url 'shop_left_sidebar' %}" tabindex="0"> <img src="{{banner.bannerImage}}" class="img-fluid  " alt="banner"> </a>
                 <div class="media-body">
                   <div class="media-contant">
                     <div>
                       <div class="product-detail">
-                        <ul class="rating">
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html" tabindex="0">
+                        <div class="rating-star">
+                          {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
+                          {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
+                          <li>
+                            <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}"></a>
+                          </li>
+                          {% endfor %}
+    
+                          {% with number1=5|to_int number2=banner.bannerProduct.variantProduct.productFinalRating|to_int %}
+                          {% with number3=number1|sub:number2 %}
+    
+                          {% for x in number3|times %}
+                          <li>
+                            <i class="fa fa-star"></i>
+                          </li>
+                          {% endfor %}
+    
+                          {% endwith %}
+                          {% endwith %}
+    
+                          
+                          {% else %}
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          <li>
+                            <i class="fa fa-star theme-color"></i>
+                          </li>
+                          {% endif %}
+                        </div> 
+                        <a href="{% url 'shop_left_sidebar' %}" tabindex="0">
                           <p> {{banner.titleOne}}</p>
                         </a>
                         <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h6>
                       </div>
                       <div class="cart-info">
-                        <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button> <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
+                        <div class="cart-info">
+                          <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                            <i data-feather="shopping-cart"></i> 
+                          </a>
+                          <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                          <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                          <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {% endfor %}
-            {% comment %} <div class="media-banner-box">
-              <div class="media">
-                <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{% static 'assets/images/layout-1/media-banner/4.jpg'  %}" class="img-fluid  " alt="banner"> </a>
-                <div class="media-body">
-                  <div class="media-contant">
-                    <div>
-                      <div class="product-detail">
-                        <ul class="rating">
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html" tabindex="0">
-                          <p> Maroon dresh</p>
-                        </a>
-                        <h6>$80.00</h6> </div>
-                      <div class="cart-info">
-                        <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button> <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="media-banner-box">
-              <div class="media">
-                <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{% static 'assets/images/layout-1/media-banner/1.jpg'  %}" class="img-fluid  " alt="banner"> </a>
-                <div class="media-body">
-                  <div class="media-contant">
-                    <div>
-                      <div class="product-detail">
-                        <ul class="rating">
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html" tabindex="0">
-                          <p> multicolor dresh</p>
-                        </a>
-                        <h6>$30.00</h6> </div>
-                      <div class="cart-info">
-                        <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button> <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="media-banner-box">
-              <div class="media">
-                <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{% static 'assets/images/layout-1/media-banner/2.jpg'  %}" class="img-fluid  " alt="banner"> </a>
-                <div class="media-body">
-                  <div class="media-contant">
-                    <div>
-                      <div class="product-detail">
-                        <ul class="rating">
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <a href="product-page(left-sidebar).html" tabindex="0">
-                          <p> Leriya Fashion</p>
-                        </a>
-                        <h6>$35.00</h6> </div>
-                      <div class="cart-info">
-                        <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button> <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> {% endcomment %}
           </div>
         </div>
       </div>
@@ -826,16 +852,16 @@
                     <div class="product-box">
                       <div class="product-imgbox">
                         <div class="product-front">
-                          <a href="product-page(left-sidebar).html"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="product"> </a>
+                          <a href="{% url 'left_slidebar' product.id %}"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="product"> </a>
                         </div>
                         <div class="product-back">
-                          <a href="product-page(left-sidebar).html"> <img src="{{product.productImageBack}}" class="img-fluid  " alt="product"> </a>
+                          <a href="{% url 'left_slidebar' product.id %}"> <img src="{{product.productImageBack}}" class="img-fluid  " alt="product"> </a>
                         </div>
                         <div class="new-label3">
                           {% if product.is_past_due %}
-                          <span class="label label-black">Old</span>
+                          <div>Old</div>
                           {% else %}
-                          <span class="label label-black">New</span>
+                          <div>New</div>
                           {% endif %}
                         </div>
                         <div class="on-sale3">{{product.productDescription|safe}}</div>
@@ -844,7 +870,7 @@
                         <div class="detail-title">
                           <div class="detail-left">
                             <div class="rating-star"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'left_slidebar' product.id %}">
                               <h6 class="price-title">
                                 {{product.productName}}
                               </h6>
@@ -870,10 +896,12 @@
                           </div>
                         </div>
                         <div class="icon-detail">
-                          <button onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart"> <i  data-feather="shopping-cart"></i> </button>
-                          <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" > <i  data-feather="heart"></i> </a>
-                          <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
-                          <a href="compare.html" class="tooltip-top" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i> </a>
+                          <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                            <i data-feather="shopping-cart"></i> 
+                          </a>
+                          <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                          <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                          <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                         </div>
                       </div>
                     </div>
@@ -1001,8 +1029,8 @@
             <div class="collection-banner-contain">
               <div>
                 <h3>{{banner.titleOne}}</h3>
-                <h5>{{banner.bannerProduct.variantProduct.proCategory.categoryName}}</h5>
-                <div class="shop"> <a href="product-page(left-sidebar).html">
+                <h5>{{banner.titleTwo}}</h5>
+                <div class="shop"> <a href="{% url 'shop_left_sidebar' %}">
                                         shop now
                                         <i class="fa fa-arrow-circle-right"></i>
                                     </a> </div>
@@ -1017,85 +1045,6 @@
   </section>
   <!--collection banner end-->
 
-  <!--tab product-->
-  <section class="section-pb-space">
-    <div class="tab-product-main">
-      <div class="tab-prodcut-contain">
-        <ul class="tabs tab-title">
-          {% for category in subcategories %}
-          <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </section>
-  <!--tab product-->
-  
-  <!--media banner start-->
-  <section class="section-pb-space">
-    <div class="custom-container">
-      <div class="row ">
-        <div class="col-12">
-          <div class="theme-tab">
-            <div class="tab-content-cls">
-              {% for subcategory,products in products_by_subcategory.items %}
-              <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product {% endif %}" data-subcategory-id="{{subcategory.id}}">
-                <div class="slide-5 no-arrow">
-                  {% if products %}
-                  {% for product in products %}
-                  <div>
-                    <div class="media-banner b-g-white1 border-0">
-                      <div class="media-banner-box">
-                        <div class="media">
-                          <a href="product-page(left-sidebar).html" tabindex="0"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="banner"> </a>
-                          <div class="media-body">
-                            <div class="media-contant">
-                              <div>
-                                <div class="product-detail">
-                                  <ul class="rating">
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star-o"></i></li>
-                                  </ul>
-                                  <a href="product-page(left-sidebar).html" tabindex="0">
-                                    <p> {{product.productName}}</p>
-                                  </a>
-                                  <h6>
-                                  {% if product.productType == "Simple" %}
-                                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                  {% else %}
-                                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                  {% endif %} 
-                                  </h6> 
-                                </div>
-                                <div class="cart-info">
-                                  <button class="tooltip-top" data-tippy-content="Add to cart" onclick="openCart()"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> </button>
-                                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a> 
-                                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a> 
-                                  <a href="compare.html"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a> </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                  {% else %}
-                  <h2 style="text-align:center;"> No products Yet! </h2>
-                  {% endif %}
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--media banner end-->
 
   <!--box categroy start-->
   <section class="box-category section-pb-space">
@@ -1104,67 +1053,67 @@
         <div class="col pl-0">
           <div class="slide-10 no-arrow">
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>10% off</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>under @99</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>free shipping</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>extra 10% off</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>$79 cashback</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>80% off</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>on sale</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>only $49</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>under @150</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>save money</h4> </div>
               </a>
             </div>
             <div>
-              <a href="category-page(left-sidebar).html">
+              <a href="{% url 'shop_left_sidebar' %}">
                 <div class="box-category-contain">
                   <h4>80% off</h4> </div>
               </a>
@@ -1191,7 +1140,7 @@
         </div>
         <div class="col-md-12 col-lg-4 ">
           <div class="deal-banner-containe">
-            <diV class="deal-btn"> <a href="category-page(left-sidebar).html" class="btn-white">
+            <diV class="deal-btn"> <a href="{% url 'shop_left_sidebar' %}" class="btn-white">
               View more
             </a> </div>
           </div>
@@ -1207,25 +1156,74 @@
       <div class="row">
         <div class="col">
           <div class="slide-6 no-arrow">
-            {% for category in subcategories %}
             <div>
               <div class="category-contain">
                 <div class="img-wrapper">
-                  <a href="category-page(left-sidebar).html"> <img src="{{category.categoryImage}}" alt="category  " class="img-fluid"> </a>
-                </div> <a href="category-page(left-sidebar).html" class="btn-rounded">
-                {{category.categoryName}}
+                  <a href="{% url 'shop_left_sidebar' %}">
+                    <img src="{% static 'assets/images/layout-1/rounded-cat/1.png' %}" alt="category  " class="img-fluid"> 
+                  </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                flower
               </a> </div>
             </div>
-            {% endfor %}
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/2.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                furniture
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/3.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                bag
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/4.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                tools
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/5.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                grocery
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/6.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                camera
+              </a> </div>
+            </div>
+            <div>
+              <div class="category-contain">
+                <div class="img-wrapper">
+                  <a href="{% url 'shop_left_sidebar' %}"> <img src="{% static 'assets/images/layout-1/rounded-cat/7.png' %}" alt="category  " class="img-fluid"> </a>
+                </div> <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
+                shoes
+              </a> </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  
   <!--rounded category end-->
 
   <!--title start-->
-  <div class="title1 section-my-space">
+  <div class="title1 section-my-space text-center ">
     <h4>Special Products</h4> </div>
   <!--title end-->
 
@@ -1240,10 +1238,10 @@
               <div class="product-box">
                 <div class="product-imgbox">
                   <div class="product-front">
-                    <a href="product-page(left-sidebar).html"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="product"> </a>
+                    <a href="{% url 'left_slidebar' product.id %}"> <img src="{{product.productImageFront}}" class="img-fluid  " alt="product"> </a>
                   </div>
                   <div class="product-back">
-                    <a href="product-page(left-sidebar).html"> <img src="{{product.productImageBack}}" class="img-fluid  " alt="product"> </a>
+                    <a href="{% url 'left_slidebar' product.id %}"> <img src="{{product.productImageBack}}" class="img-fluid  " alt="product"> </a>
                   </div>
                   <div class="new-label3">
                     {% if product.is_past_due %}
@@ -1252,14 +1250,14 @@
                     <span class="label label-black">New</span>
                     {% endif %}
                   </div>
-                  <div class="on-sale3">{{product.productDescription|safe}}
-                  </div>
+                  {% comment %} <div class="on-sale3">{{product.productDescription|safe}}
+                  </div> {% endcomment %}
                 </div>
                 <div class="product-detail detail-center detail-inverse">
                   <div class="detail-title">
                     <div class="detail-left">
                       <div class="rating-star"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> </div>
-                      <a href="product-page(left-sidebar).html">
+                      <a href="{% url 'left_slidebar' product.id %}">
                         <h6 class="price-title">
                           {{product.productName}}
                         </h6> 
@@ -1285,10 +1283,12 @@
                     </div>
                   </div>
                   <div class="icon-detail">
-                    <button onclick="openCart()" class="tooltip-top" data-tippy-content="Add to cart"> <i  data-feather="shopping-cart"></i> </button>
-                    <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" > <i  data-feather="heart"></i> </a>
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
-                    <a href="compare.html" class="tooltip-top" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i> </a>
+                    <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                      <i data-feather="shopping-cart"></i> 
+                    </a>
+                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                   </div>
                 </div>
               </div>
@@ -1387,15 +1387,15 @@
                   <h5>about</h5> </div>
                 <div class="footer-contant">
                   <div class="footer-logo">
-                    <a href="index.html"> <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid" alt="logo"> </a>
+                    <a href="{% url 'index' %}"> <img src="{% static 'assets/images/layout-1/logo/logo.png' %}" class="img-fluid" alt="logo"> </a>
                   </div>
                   <p>It is a long established fact that a reader will be distracted by the readable content.</p>
                   <ul class="sosiyal">
-                    <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+                    <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="javascript:void(0)" ><i class="fa fa-rss"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -1404,8 +1404,8 @@
                   <h5>my account</h5> </div>
                 <div class="footer-contant">
                   <ul>
-                    <li><a href="javascript:void(0)">about us</a></li>
-                    <li><a href="javascript:void(0)">contact us</a></li>
+                    <li><a href="{% url 'about_page' %}">about us</a></li>
+                    <li><a href="{% url 'contact_us' %}">contact us</a></li>
                     <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
                     <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
                     <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
@@ -1528,30 +1528,32 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-lg-6 col-xs-12">
-              <div class="quick-view-img">
-                <img src="{% static 'assets/images/layout-1/product/3.jpg'  %}" alt="" class="img-fluid bg-img">
+              <div class="quick-view-img" id="quickViewImagesDiv">
+                <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
             </div>
             <div class="col-lg-6 rtl-text">
-              <div class="product-right">
+              <div class="product-right" id="productRight">
                 <div class="pro-group">
-                  <h2>
+                  <h2 id="productName">
                     reader will be distracted
                   </h2>
-                  <ul class="pro-price">
-                    <li>$70</li>
-                    <li><span>mrp $140</span></li>
-                    <li>50% off</li>
-                  </ul>
+                  <div class="pro-price" id="priceLabel">
+                    <h3 id="productPrice">$20.00</h3>
+                    <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                    <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                  </div>
+                  <div class="price mt-3" id="priceLabel2"></div>
+  
                   <div class="revieu-box">
-                    <ul>
+                    <ul id="productRating">
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <a href="review.html"><span>(6 reviews)</span></a>
+                    <a href="{% url 'review' %}"><span>(6 reviews)</span></a>
                   </div>
                   <ul class="best-seller">
                     <li>
@@ -1564,75 +1566,14 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pro-group">
-                  <h6 class="product-title">product infomation</h6>
-                  <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-                </div>
-                <div class="pro-group pb-0">
-                  <h6 class="product-title size-text">select size<span>
-                  <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                  <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg'  %}" alt="" class="img-fluid "></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="size-box">
-                    <ul>
-                      <li ><a href="javascript:void(0)">s</a></li>
-                      <li><a href="javascript:void(0)">m</a></li>
-                      <li><a href="javascript:void(0)">l</a></li>
-                      <li><a href="javascript:void(0)">xl</a></li>
-                      <li><a href="javascript:void(0)">2xl</a></li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">color</h6>
-                  <div class="color-selector inline">
-                    <ul>
-                      <li>
-                        <div class="color-1 active"></div>
-                      </li>
-                      <li>
-                        <div class="color-2"></div>
-                      </li>
-                      <li>
-                        <div class="color-3"></div>
-                      </li>
-                      <li>
-                        <div class="color-4"></div>
-                      </li>
-                      <li>
-                        <div class="color-5"></div>
-                      </li>
-                      <li>
-                        <div class="color-6"></div>
-                      </li>
-                      <li>
-                        <div class="color-7"></div>
-                      </li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">quantity</h6>
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1">
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
                   <div class="product-buttons">
-                    <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                      <i class="fa fa-shopping-cart"></i>
+                   <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                      <i class="fa fa-shopping-cart"></i> 
                       add to cart
-                    </a>
-                    <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                   </a>
+                   <a href="javascript:void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                       view detail
-                    </a>
+                   </a>
                   </div>
                 </div>
               </div>
@@ -1641,372 +1582,12 @@
         </div>
       </div>
     </div>
-  </div>
+ </div>
   <!-- Quick-view modal popup end-->
 
-  <!-- edit product modal start-->
-  <div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content ">
-        <div class="modal-body">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="pro-group">
-            <div class="product-img">
-              <div class="media">
-                <div class="img-wraper">
-                  <a href="product-page(left-sidebar).html">
-                    <img src="{% static 'assets/images/layout-2/product/1.jpg'  %}" alt="">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <a href="product-page(left-sidebar).html">
-                    <h3>redmi not 3</h3>
-                  </a>
-                  <h6>$80<span>$120</span></h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Select Size</h6>
-            <div class="size-box">
-              <ul>
-                <li ><a href="javascript:void(0)">s</a></li>
-                <li><a href="javascript:void(0)">m</a></li>
-                <li><a href="javascript:void(0)">l</a></li>
-                <li><a href="javascript:void(0)">xl</a></li>
-                <li><a href="javascript:void(0)">2xl</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Select color</h6>
-            <div class="color-selector inline">
-              <ul>
-                <li>
-                  <div class="color-1 active"></div>
-                </li>
-                <li>
-                  <div class="color-2"></div>
-                </li>
-                <li>
-                  <div class="color-3"></div>
-                </li>
-                <li>
-                  <div class="color-4"></div>
-                </li>
-                <li>
-                  <div class="color-5"></div>
-                </li>
-                <li>
-                  <div class="color-6"></div>
-                </li>
-                <li>
-                  <div class="color-7"></div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Quantity</h6>
-            <div class="qty-box">
-              <div class="input-group">
-                <button class="qty-minus"></button>
-                <input class="qty-adj form-control" type="number" value="1"/>
-                <button class="qty-plus"></button>
-              </div>
-            </div>
-          </div>
-          <div class="pro-group mb-0">
-            <div class="modal-btn">
-              <a href="cart.html" class="btn btn-solid btn-sm">
-                add to cart
-              </a>
-              <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-                more detail
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- edit product modal end-->
 
-  <!-- Add to cart bar -->
-  <div id="cart_side" class="add_to_cart right">
-    <a href="javascript:void(0)" class="overlay" onclick="closeCart()"></a>
-    <div class="cart-inner">
-      <div class="cart_top">
-        <h3>my cart</h3>
-        <div class="close-cart">
-          <a href="javascript:void(0)" onclick="closeCart()">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-      <div class="cart_media">
-        <ul class="cart_product">
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>redmi not 3</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>Double Door Refrigerator</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>woman hande bag</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul class="cart_total">
-          <li>
-            subtotal : <span>$1050.00</span>
-          </li>
-          <li>
-            shpping <span>free</span>
-          </li>
-          <li>
-            taxes <span>$0.00</span>
-          </li>
-          <li>
-            <div class="total">
-              total<span>$1050.00</span>
-            </div>
-          </li>
-          <li>
-            <div class="buttons">
-              <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-              <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- Add to cart bar end-->
+  {% include 'base/cart-popup.html' %}
 
-  <!-- wishlistbar bar -->
-  <div id="wishlist_side" class="add_to_cart right ">
-    <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-    <div class="cart-inner">
-      <div class="cart_top">
-        <h3>my wishlist</h3>
-        <div class="close-cart">
-          <a href="javascript:void(0)" onclick="closeWishlist()">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-      <div class="cart_media">
-        <ul class="cart_product">
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>redmi not 3</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>Double Door Refrigerator</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg'  %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>woman hande bag</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul class="cart_total">
-          <li>
-            subtotal : <span>$1050.00</span>
-          </li>
-          <li>
-            shpping <span>free</span>
-          </li>
-          <li>
-            taxes <span>$0.00</span>
-          </li>
-          <li>
-            <div class="total">
-              total<span>$1050.00</span>
-            </div>
-          </li>
-          <li>
-            <div class="buttons">
-              <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- wishlistbar bar end-->
 
   <!-- My account bar start-->
   <div id="myAccount" class="add_to_cart right account-bar">
@@ -2020,23 +1601,36 @@
           </a>
         </div>
       </div>
-      <form class="theme-form">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" placeholder="Email" required="">
-        </div>
-        <div class="form-group">
-          <label for="review">Password</label>
-          <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
-        </div>
-        <div class="form-group">
-          <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
-        </div>
-        <div class="accout-fwd">
-          <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-          <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
-        </div>
-      </form>
+      {% if request.user.is_authenticated %}
+      <li>
+           <h6 class="d-block">
+              Welcome, {{request.user.username}}
+           </h6>
+        </li>
+        <li>
+           <a href="{% url 'logout_page' %}" class="d-block"
+              >Logout</a>
+        </li>
+  
+        {% else %}
+
+        <form class="theme-form" method="post" action="{% url 'login_page' %}">
+          {% csrf_token %}
+          <div class="form-group">
+              <label >Email Address</label>
+              <input type="text" class="form-control"  name="name" placeholder="Email" required="">
+          </div>
+          <div class="form-group">
+              <label >Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
+          </div>
+          <button class="btn btn-normal">Login</button>
+          <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
+       </form>
+        <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
+        <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
+ 
+       {% endif %}
     </div>
   </div>
   <!-- Add to account bar end-->
@@ -2075,19 +1669,6 @@
     </div>
   </div>
   <!-- add to  setting bar  end-->
-
-  <!-- notification product -->
-  {% comment %} <div class="product-notification" id="dismiss">
-    <span  onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
-    <div class="media">
-      <img class="me-2" src="{% static 'assets/images/layout-1/product/5.jpg'  %}" alt="Generic placeholder image">
-      <div class="media-body">
-        <h5 class="mt-0 mb-1">Latest trending</h5>
-        Cras sit amet nibh libero, in gravida nulla.
-      </div>
-    </div>
-  </div> {% endcomment %}
-  <!-- notification product -->
 
 
 {% endblock components %}

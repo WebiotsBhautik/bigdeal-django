@@ -126,8 +126,15 @@ class ProBrand(models.Model):
         blank=True, null=True, default=0, verbose_name='No. of Product')
     slug = models.SlugField(unique=True, blank=True)
 
+            
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.brandName) 
+        self.slug = slugify(self.brandName)
+
+        # Check if a brand with the same name already exists
+        existing_brand = ProBrand.objects.filter(brandName=self.brandName).exclude(pk=self.pk).first()
+        if existing_brand:
+            raise ValueError("Brand with this name already exists.")
+        
         super(ProBrand, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -166,6 +173,15 @@ class ProVideoProvider(models.Model):
 
     class Meta:
         verbose_name = 'Video Provider'
+        
+        
+class DeliveryOption(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    
+    def __str__(self):
+        return self.name
+
         
         
         
@@ -215,11 +231,10 @@ class Product(models.Model):
         blank=True, null=True, default=0, verbose_name='Rating Count')
     productFinalRating = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Rating (5)')
-
+    deliveryOption = models.ManyToManyField(DeliveryOption, blank=True, verbose_name='Delivery Option')
     productSoldQuantity = models.PositiveIntegerField(
         blank=True, null=True, default=0, verbose_name='Sold')
-    slug = models.SlugField(unique=True,max_length=255, blank=True)
-    
+    slug = models.SlugField(max_length=255, blank=True)
     
     
     
@@ -242,7 +257,6 @@ class Product(models.Model):
         
         super(Product, self).save(*args, **kwargs)
         
-        
     
 
     def __str__(self):
@@ -258,6 +272,15 @@ class Product(models.Model):
         if self.productEndDate and date.today() > self.productEndDate.date():
             return True
         return False
+    
+    @property
+    def availableStock(self):
+        products=ProductVariant.objects.filter(variantProduct=self)
+        availableStack=0
+        for product in products:
+            availableStack+=int(product.productVariantQuantity)
+            
+        return availableStack
     
     
     
@@ -404,8 +427,7 @@ class ProductMeta(models.Model):
     
 class ProductReview(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    productRatingsChoices = [('0', '0'), ('1', '1'),
-                             ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
+    productRatingsChoices = [('0', '0'), ('1', '1'),('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')]
     productReviewByCustomer = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, blank=True, verbose_name='Customer')
     productName = models.ForeignKey(
@@ -414,24 +436,38 @@ class ProductReview(models.Model):
     productRatings = models.CharField(
         default=0, max_length=10, choices=productRatingsChoices, verbose_name='Rating')
 
+    
     def save(self, *args, **kwargs):
         req = get_request().user
 
         product = Product.objects.get(id=self.productName.id)
-        count = int(product.productNoOfReview)+1
-        product.productNoOfReview = count
-        product.productRatingCount = int(product.productRatingCount)+int(self.productRatings)
+        productNoOfReview=product.productNoOfReview
 
-        x = product.productNoOfReview
-        x1 = x*5
-        y = product.productRatingCount
-        z = (5*int(y))/int(x1)
-
-        product.productFinalRating = round(z)
-
-        product.save()
+        if productNoOfReview == 0:
+            product.productNoOfReview=1
+            product.productRatingCount=int(self.productRatings)
+            product.productFinalRating=int(self.productRatings)
+            product.save()
+        if productNoOfReview > 0:
+            product.productNoOfReview = int(product.productNoOfReview) + 1
+            product.productRatingCount = int(product.productRatingCount) + int(self.productRatings)
+            totalStar=5*int(product.productNoOfReview)
+            actualStar=int(product.productRatingCount)
+            average=(5*actualStar)/totalStar
+            product.productFinalRating=round(average)
+            product.save()
+        
         self.productReviewByCustomer = req
         super(ProductReview, self).save(*args, **kwargs)
+        
+    def update_product_rating(self):
+        total_reviews = self.productreview_set.count()
+        if total_reviews > 0:
+            total_rating = sum([int(review.productRatings) for review in self.productreview_set.all()])
+            self.productFinalRating = round(total_rating / total_reviews)
+        else:
+            self.productFinalRating = 0
+        self.save()
 
     def __str__(self):
         return str(self.productName)
@@ -489,14 +525,3 @@ class AttributeValue(models.Model):
 
     def __str__(self):
         return str(self.attributeValue) + " - " + str(self.attributeName)
-        
-            
-        
-        
-        
-        
-        
-        
-        
-        
-

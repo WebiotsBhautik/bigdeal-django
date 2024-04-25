@@ -21,8 +21,8 @@ from django.contrib import admin, messages
 # admin.site.register(Group)
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='Password*', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation*', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
     # is_vendor = forms.BooleanField(
     #     label='Vendor', widget=forms.CheckboxInput, required=False)
     # is_customer = forms.BooleanField(

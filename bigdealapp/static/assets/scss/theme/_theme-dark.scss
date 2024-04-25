@@ -2120,7 +2120,57 @@ body {
         border-color: $dark-border;
       }
     }
+    .welcome-msg {
+      p {
+        margin-bottom: 0;
+        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+        line-height: 1.6;
+
+        span{
+          font-weight: 600;
+          color:#20cff9;
+        }
+      }
+    }
   }
+
+  .save-details-box{
+    .save-details{
+        background-color: $dark-color;
+        .button{
+          .remove-edit{
+            color: black;
+          }
+        }
+    }
+  }
+
+  // For dashboard Security
+  .dashboard-security{
+    .security-details{
+      h5{
+        span{
+          font-weight: 600;
+          color:#20cff9;
+        }
+      }
+    }
+  }
+
+  .security-details-1{
+    border: 1px dashed lightgray;
+    padding: 20px;
+    margin-top: calc(8px + (20 - 8) * ((100vw - 320px) / (1920 - 320)));
+    .page-title{
+      .notes{
+        font-weight: 600;
+        color:#20cff9;
+        padding-bottom: calc(5px + (10 - 5) * ((100vw - 320px) / (1920 - 320)));
+          }
+    }
+    
+  }
+
 
 
   // product dark// 
@@ -2533,6 +2583,7 @@ body {
 
   .dashboard {
     .box-head {
+      
       h2 {
         color: $font-layout-3;
       }
@@ -3436,8 +3487,6 @@ body {
       }
     }
   }
-
-
 
   // typografy //
 

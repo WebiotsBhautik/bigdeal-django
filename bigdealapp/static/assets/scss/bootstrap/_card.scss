@@ -135,11 +135,11 @@
   @include border-radius($card-inner-border-radius);
 }
 
-.card-img,
-.card-img-top,
-.card-img-bottom {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
-}
+// .card-img,
+// .card-img-top,
+// .card-img-bottom {
+//   // width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+// }
 
 .card-img,
 .card-img-top {

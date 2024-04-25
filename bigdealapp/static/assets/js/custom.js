@@ -155,7 +155,6 @@
       // Run when user change Product Type by clicking on the Product Type dropdown
       function updateInlines() {
         var selectedValue = dropdown.val();
-        console.log("Product Type: ================> ", selectedValue);
          
         if(selectedValue==""){
           productTabElement.classList.add("d-none");
@@ -323,5 +322,34 @@
         updateInlines();
       });
     });
+
+
+// ====================================================================================
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the main-sidebar element
+  var mainSidebar = document.getElementById('jazzy-sidebar');
+
+  // Get all the menu items within the main-sidebar
+  var menuItems = mainSidebar.querySelectorAll('a');
+
+  // Add a click event listener to each menu item
+  menuItems.forEach(function(item) {
+    item.addEventListener('click', function(event) {
+      // Get the active menu item
+      var activeMenuItem = mainSidebar.querySelector('.active');
+
+    });
+  });
+});
+
+
+
+
+setTimeout(function () {
+  $('#error-message').fadeOut('slow')
+}, 6000)
+
+
   
     

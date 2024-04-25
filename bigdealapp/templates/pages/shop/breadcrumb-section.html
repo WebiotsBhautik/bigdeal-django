@@ -5,11 +5,11 @@
             <div class="col">
                 <div class="breadcrumb-contain">
                     <div>
-                        <h2>category</h2>
+                        <h2>{{breadcrumb.parent}}</h2>
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="{% url 'index_default' %}">home</a></li>
                             <li><i class="fa fa-angle-double-right"></i></li>
-                            <li><a href="javascript:void(0)">category</a></li>
+                            <li><a href="{% url 'index_default' %}">{{breadcrumb.child}}</a></li>
                         </ul>
                     </div>
                 </div>

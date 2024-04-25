@@ -1,0 +1,1020 @@
+{% extends "admin/base_site.html" %}
+{% block content %} 
+
+{% if messages %}
+  <div class="col-12">
+    <ul class="messages" id="error-message">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% if request.user.is_superuser %}
+{% comment %} {% if request.user %} {% endcomment %}
+
+<div class="container-fluid">
+  {% comment %} {% endcomment %}
+    <div class="row">
+      <!-- Wallet and Commision section start -->
+      <div class="col-sm-3 col-xxl-3 col-lg-6">
+        <div class="b-b-primary border-5 border-0 card o-hidden">
+          <div class="custome-1-bg b-r-4 card-body">
+            <div class="media align-items-center static-top-widget">
+              <div class="media-body p-0">
+                <span class="m-0">Wallet Balance</span>
+                <h4 class="mb-0 counter mt-2">
+                  {{adminWalletBalance}}
+                  <span class="badge badge-light-primary grow">
+                    <i data-feather="trending-up"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                    
+                    </span>
+                </h4>
+              </div>
+              <div class="align-self-center text-center">
+                <i data-feather="database"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3 col-xxl-3 col-lg-6">
+        <div class="b-b-danger border-5 border-0 card o-hidden">
+          <div class="custome-2-bg b-r-4 card-body">
+            <div class="media static-top-widget">
+              <div class="media-body p-0">
+                <span class="m-0">Total Commission Profit</span>
+                <h4 class="mb-0 counter mt-2">
+                  {{adminTotalCommissionProfit}}
+                  <span class="badge badge-light-danger grow">
+                    <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                    </span
+                  >
+                </h4>
+              </div>
+              <div class="align-self-center text-center">
+                <i data-feather="shopping-bag"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Wallet and Commision section End -->
+    </div>
+
+    <div class="row">
+      <!-- chart caard section start -->
+      {% comment %}
+      <div class="col-sm-6 col-xxl-3 col-lg-6">
+        {% endcomment %}
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-primary border-5 border-0 card o-hidden">
+            <div class="custome-1-bg b-r-4 card-body">
+              <div class="media align-items-center static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Revenue</span>
+                  <h4 class="mb-0 counter mt-2 mt-3">
+                    {{totalRevenue}}
+                    {% comment %} <span class="badge badge-light-primary grow">
+                      <i data-feather="trending-up"></i>
+                      8.5%
+                      
+                      </span> {% endcomment %}
+                  </h4>
+                </div>
+                <div class="align-self-center text-center">
+                  <i data-feather="database"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-danger border-5 border-0 card o-hidden">
+            <div class="custome-2-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Orders</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalProductOrders}}
+                    <span class="badge badge-light-danger grow">
+                      <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      
+                      </span
+                    >
+                  </h4>
+                </div>
+                <div class="align-self-center text-center">
+                  <i data-feather="shopping-bag"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-secondary border-5 border-0 card o-hidden">
+            <div class="custome-3-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Vendors</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalVendors}}
+                    <span class="badge badge-light-secondary grow">
+                      <i data-feather="trending-up"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      </span
+                    >
+                  </h4>
+                </div>
+
+                <div class="align-self-center text-center">
+                  <i data-feather="message-circle"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-success border-5 border-0 card o-hidden">
+            <div class="custome-4-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total User</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalUser}}
+                    <span class="badge badge-light-success grow">
+                      <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      </span
+                    >
+                  </h4>
+                </div>
+
+                <div class="align-self-center text-center">
+                  <i data-feather="user-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- chart caard section End -->
+      </div>
+
+      <div class="row">
+        
+        <div class="col-xl-6 ">
+          <div class="card o-hidden border-0">
+            <div class="card-header border-0 pb-1">
+              <div class="card-header-title">
+                <h4>Most Sold Products</h4>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <canvas id="top-sold" style="width: 100%"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart star-->
+        <div class="col-xl-6">
+          <div class="card o-hidden border-0">
+            <div class="card-header border-0 pb-1">
+              <div class="card-header-title">
+                <h4>Most Popular Categories</h4>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <canvas id="top-categories" style="width: 100%"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart  end-->
+      </div>
+         
+      {% comment %} <br />
+      <br />
+      <div class="row">
+        <!-- Earning chart star-->
+        <div class="col-xl-4">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0 pb-1">
+              <div class="card-header-title">
+                <h4>Earning</h4>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div id="bar-chart-earning"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart end-->
+        <!-- Earning chart star-->
+        <div class="col-xl-8">
+          <div class="card o-hidden">
+            
+            <div class="card-header border-0 pb-1">            
+              <div class="card-header-title">
+              <h4>Revenue Report</h4>
+              <label for="date-range">Select a range of dates:</label>
+              <input type="date" id="start-date" name="start-date" min="2000-01-01" max="">
+              
+              <input type="date" id="end-date" name="end-date" min="2000-01-01" max="">
+              <!-- Example single danger button -->
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <canvas id="revenue-report" style="width: 100%"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart  end-->
+
+        <!-- Transactions start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0">
+              <div class="card-header-title">
+                <h4>Transactions</h4>
+              </div>
+            </div>
+
+            <div class="card-body pt-0">
+              <div>
+                <div class="table-responsive table-desi">
+                  <table class="user-table transactions-table table border-0">
+                    <tbody>
+                      {% for payment in recentPayments %}
+                      <tr>
+                        <td>
+                          <div class="transactions-icon">
+                            <i data-feather="shield"></i>
+                          </div>
+                          <div class="transactions-name">
+                            <h6>{{payment.orderPaymentMethodName}}</h6>
+                            <p>
+                              By {{payment.orderPaymentFromCustomer.username}}
+                              At {{payment.orderPaymentCreatedAt|date:'d M Y'}}
+                            </p>
+                          </div>
+                        </td>
+
+                        <td class="lost">+{{payment.orderAmount}}$</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Transactions end-->
+
+        <!-- visitors chart start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="h-100">
+            <div class="card o-hidden card-hover">
+              <div class="card-header border-0">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="card-header-title">
+                    <h4>Visitors</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body pt-0">
+                <div class="pie-chart">
+                  <div id="pie-chart-visitors"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- visitors chart end-->
+
+        <!-- New & Update start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0">
+              <div class="card-header-title">
+                <h4>New & Update</h4>
+              </div>
+            </div>
+
+            <div class="card-body pt-0">
+              <ul class="StepProgress">
+                <li class="StepProgress-item">
+                  <strong>Update Product</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </li>
+                <li class="StepProgress-item">
+                  <strong>James liked Nike Shoes</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </li>
+                <li class="StepProgress-item">
+                  <strong>john just buy your product</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </li>
+                <li class="StepProgress-item">
+                  <strong>Jihan dor just save your product</strong>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- New & Update end-->
+
+        <!-- To Do List start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0">
+              <div class="card-header-title">
+                <h4>To Do List</h4>
+              </div>
+            </div>
+
+            <div class="card-body pt-0">
+              <ul class="to-do-list">
+      
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- To Do List end-->
+
+        <!-- Recent Activity start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0">
+              <div class="card-header-title">
+                <h4>Recent Activity</h4>
+              </div>
+            </div>
+
+            <div class="card-body pt-0">
+              <ul class="recent-activity">
+                <li class="recent-item">
+                  <div class="recent-icon">
+                    <span class="lnr lnr-calendar-full"></span>
+                    <p>Calendar Updated</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-1">Just Now</h6>
+                  </div>
+                </li>
+                <li class="recent-item">
+                  <div class="recent-icon">
+                    <i data-feather="alert-circle"></i>
+                    <p>Commrnted on a post</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-2">5 Min</h6>
+                  </div>
+                </li>
+                <li class="recent-item">
+                  <div class="recent-icon">
+                    <i data-feather="truck"></i>
+                    <p>Order 392 shipped</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-3">12 Min</h6>
+                  </div>
+                </li>
+                <li class="recent-item">
+                  <div class="recent-icon">
+                    <i data-feather="dollar-sign"></i>
+                    <p>Invoice 653 has been paid</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-4">45 Min</h6>
+                  </div>
+                </li>
+                <li class="recent-item">
+                  <div class="recent-icon">
+                    <span class="lnr lnr-user"></span>
+                    <p>A new user has been added</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-1">1 Hr</h6>
+                  </div>
+                </li>
+                <li class="recent-item mb-0">
+                  <div class="recent-icon">
+                    <span class="lnr lnr-select"></span>
+                    <p>Finace report</p>
+                  </div>
+
+                  <div class="recent-timer">
+                    <h6 class="color-2">Just Now</h6>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Recent Activity end-->
+
+        <!-- Browser States start-->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card o-hidden card-hover">
+            <div class="card-header border-0">
+              <div class="card-header-title">
+                <h4>Browser States</h4>
+              </div>
+            </div>
+
+            <div class="card-body pt-0">
+              <ul class="brower-states">
+                <li class="brower-item">
+                  <div class="browser-image">
+                    <img
+                      loading="lazy"
+                      src="assets/images/brower-image/chrome.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <h5>Chrome</h5>
+                  </div>
+
+                  <div class="browser-progressbar">
+                    <h6>84%</h6>
+                  </div>
+                </li>
+                <li class="brower-item">
+                  <div class="browser-image">
+                    <img
+                      loading="lazy"
+                      src="assets/images/brower-image/firefox.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <h5>Firefox</h5>
+                  </div>
+
+                  <div class="browser-progressbar">
+                    <h6>48%</h6>
+                  </div>
+                </li>
+                <li class="brower-item">
+                  <div class="browser-image">
+                    <img
+                      loading="lazy"
+                      src="assets/images/brower-image/internet-explorer.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <h5>internet Explorer</h5>
+                  </div>
+
+                  <div class="browser-progressbar">
+                    <h6>35%</h6>
+                  </div>
+                </li>
+                <li class="brower-item">
+                  <div class="browser-image">
+                    <img
+                      loading="lazy"
+                      src="assets/images/brower-image/opera.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <h5>Opera Mini</h5>
+                  </div>
+
+                  <div class="browser-progressbar">
+                    <h6>55%</h6>
+                  </div>
+                </li>
+                <li class="brower-item">
+                  <div class="browser-image">
+                    <img
+                      loading="lazy"
+                      src="assets/images/brower-image/safari.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                    <h5>Safari</h5>
+                  </div>
+
+                  <div class="browser-progressbar">
+                    <h6>20%</h6>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Browser States end-->
+      </div>
+      <br />
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <canvas id="top-brands" style="width: 100%"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="top-brand" style="width: 100%"></canvas>
+        </div>
+      </div> {% endcomment %}
+      {% comment %}
+      ===================================================================================
+      {% endcomment %}
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+      {% comment %} <div class="row">
+        <div class="col-md-6">
+          <canvas id="top-sold" style="width: 100%"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="top-categories" style="width: 100%"></canvas>
+        </div>       
+      </div> {% endcomment %}
+
+      <script>
+
+        var barColors = ["#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40"];
+
+        
+        new Chart("top-sold", {
+
+        type: "bar",
+        data: {
+            labels: {{sold_product_labels | safe}},
+            datasets: [{
+            backgroundColor: barColors,
+            data: {{sold_product_count}},
+            borderColor: "black",
+            borderWidth: 0,
+
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+              display: true,
+              // text: "Most Sold Products",
+            },
+            scales: {
+              xAxes: [{
+                 gridLines: {
+                    display: false,
+                    
+                 }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                },
+                 gridLines: {
+                    display: true
+                 }
+              }]
+         },
+        }
+        
+        });
+
+        new Chart("top-categories", {
+          type: "bar",
+          data: {
+              labels: {{popular_categories_labels | safe}},
+              datasets: [{
+              backgroundColor: barColors,
+              data: {{popular_categories_count}},
+              borderColor: "black",
+              borderWidth: 0,
+        
+              }]
+          },
+          options: {
+              legend: {display: false},
+              title: {
+                display: true,
+                // text: "Most Popular Categories",
+              },
+              scales: {
+                xAxes: [{
+                   gridLines: {
+                      display: false
+                   }
+                }],
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                    
+                  },
+                   gridLines: {
+                      display: true
+                   }
+                }]
+           }
+        
+          }
+          });
+
+        new Chart("top-brands", {
+
+            type: "polarArea",
+            data: {
+                labels: {{brand_labels | safe}},
+                datasets: [{
+                backgroundColor: barColors,
+                data: {{brand_product_count}},
+                borderColor: "white",
+                borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                // text: "Top Brand",
+                }
+            }
+        });
+
+        new Chart("top-brand", {
+
+            type: "polarArea",
+            data: {
+                labels: {{brand_labels | safe}},
+                datasets: [{
+                backgroundColor: barColors,
+                data: {{brand_product_count}},
+                borderColor: "white",
+                borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                // text: "Top Brand",
+                }
+            }
+        }); 
+        
+        
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = String(today.getMonth() + 1).padStart(2, '0');
+          const day = String(today.getDate()).padStart(2, '0');
+          const date = `${year}-${month}-${day}`;
+          console.log(date);
+          document.getElementById('start-date').setAttribute('max',date)
+          document.getElementById('end-date').setAttribute('max',date)
+
+      </script>
+      {% comment %}
+      ===================================================================================
+      {% endcomment %}
+    </div>
+  </div>
+    <!-- Container-fluid Ends-->
+    {% elif request.user.is_vendor %}
+    {% comment %} <h1>Vendor</h1> {% endcomment %}
+    
+<div class="container-fluid">
+  {% comment %} {% endcomment %}
+    <div class="row">
+      <!-- Wallet and Commision section start -->
+      <div class="col-sm-3 col-xxl-3 col-lg-6">
+        <div class="b-b-primary border-5 border-0 card o-hidden">
+          <div class="custome-1-bg b-r-4 card-body">
+            <div class="media align-items-center static-top-widget">
+              <div class="media-body p-0">
+                <span class="m-0">Wallet Balance</span>
+                <h4 class="mb-0 counter mt-2">
+                  {{vendorWaletBalance}}
+                  <span class="badge badge-light-primary grow">
+                    <i data-feather="trending-up"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                    
+                    </span>
+                </h4>
+              </div>
+              <div class="align-self-center text-center">
+                <i data-feather="database"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-3 col-xxl-3 col-lg-6">
+        <div class="b-b-danger border-5 border-0 card o-hidden">
+          <div class="custome-2-bg b-r-4 card-body">
+            <div class="media static-top-widget">
+              <div class="media-body p-0">
+                <span class="m-0">Total Commission Profit</span>
+                <h4 class="mb-0 counter mt-2">
+                  {{adminTotalCommissionProfit}}
+                  <span class="badge badge-light-danger grow">
+                    <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                    </span
+                  >
+                </h4>
+              </div>
+              <div class="align-self-center text-center">
+                <i data-feather="shopping-bag"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Wallet and Commision section End -->
+    </div>
+
+    <div class="row">
+      <!-- chart caard section start -->
+      {% comment %}
+      <div class="col-sm-6 col-xxl-3 col-lg-6">
+        {% endcomment %}
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-primary border-5 border-0 card o-hidden">
+            <div class="custome-1-bg b-r-4 card-body">
+              <div class="media align-items-center static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Revenue</span>
+                  <h4 class="mb-0 counter mt-2 mt-3">
+                    {{totalRevenueForVendor}}
+                    {% comment %} <span class="badge badge-light-primary grow">
+                      <i data-feather="trending-up"></i>
+                      8.5%
+                    </span> {% endcomment %}
+                  </h4>
+                </div>
+                <div class="align-self-center text-center">
+                  <i data-feather="database"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-danger border-5 border-0 card o-hidden">
+            <div class="custome-2-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Orders</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalVendorProductOrders}}
+                    <span class="badge badge-light-danger grow">
+                      <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      
+                      </span
+                    >
+                  </h4>
+                </div>
+                <div class="align-self-center text-center">
+                  <i data-feather="shopping-bag"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-secondary border-5 border-0 card o-hidden">
+            <div class="custome-3-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total Vendors</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalVendors}}
+                    <span class="badge badge-light-secondary grow">
+                      <i data-feather="trending-up"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      </span
+                    >
+                  </h4>
+                </div>
+
+                <div class="align-self-center text-center">
+                  <i data-feather="message-circle"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xxl-3 col-lg-3">
+          <div class="b-b-success border-5 border-0 card o-hidden">
+            <div class="custome-4-bg b-r-4 card-body">
+              <div class="media static-top-widget">
+                <div class="media-body p-0">
+                  <span class="m-0">Total User</span>
+                  <h4 class="mb-0 counter mt-2">
+                    {{totalUser}}
+                    <span class="badge badge-light-success grow">
+                      <i data-feather="trending-down"></i>
+                      {% comment %} 8.5% {% endcomment %}
+                      </span
+                    >
+                  </h4>
+                </div>
+                <div class="align-self-center text-center">
+                  <i data-feather="user-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- chart caard section End -->
+      </div>
+
+      <div class="row">
+        
+        <div class="col-xl-6 ">
+          <div class="card o-hidden border-0">
+            <div class="card-header border-0 pb-1">
+              <div class="card-header-title">
+                <h4>Most Sold Products</h4>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <canvas id="top-sold" style="width: 100%"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart star-->
+        <div class="col-xl-6">
+          <div class="card o-hidden border-0">
+            <div class="card-header border-0 pb-1">
+              <div class="card-header-title">
+                <h4>Most Popular Categories</h4>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <canvas id="top-categories" style="width: 100%"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Earning chart  end-->
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+      <script>
+        var barColors = ["#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40", "#e22454", "#343a40"];
+        new Chart("top-sold", {
+
+        type: "bar",
+        data: {
+            labels: {{sold_product_labels | safe}},
+            datasets: [{
+            backgroundColor: barColors,
+            data: {{sold_product_count}},
+            borderColor: "black",
+            borderWidth: 0,
+
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+              display: true,
+              // text: "Most Sold Products",
+            },
+            scales: {
+              xAxes: [{
+                 gridLines: {
+                    display: false,
+                    
+                 }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                },
+                 gridLines: {
+                    display: true
+                 }
+              }]
+         },
+        }
+        
+        });
+
+        new Chart("top-categories", {
+          type: "bar",
+          data: {
+              labels: {{popular_categories_labels | safe}},
+              datasets: [{
+              backgroundColor: barColors,
+              data: {{popular_categories_count}},
+              borderColor: "black",
+              borderWidth: 0,
+        
+              }]
+          },
+          options: {
+              legend: {display: false},
+              title: {
+                display: true,
+                // text: "Most Popular Categories",
+              },
+              scales: {
+                xAxes: [{
+                   gridLines: {
+                      display: false
+                   }
+                }],
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                    
+                  },
+                   gridLines: {
+                      display: true
+                   }
+                }]
+           }
+        
+          }
+          });
+
+        new Chart("top-brands", {
+
+            type: "polarArea",
+            data: {
+                labels: {{brand_labels | safe}},
+                datasets: [{
+                backgroundColor: barColors,
+                data: {{brand_product_count}},
+                borderColor: "white",
+                borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                // text: "Top Brand",
+                }
+            }
+        });
+
+        new Chart("top-brand", {
+
+            type: "polarArea",
+            data: {
+                labels: {{brand_labels | safe}},
+                datasets: [{
+                backgroundColor: barColors,
+                data: {{brand_product_count}},
+                borderColor: "white",
+                borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                display: true,
+                // text: "Top Brand",
+                }
+            }
+        }); 
+        
+        
+          const today = new Date();
+          const year = today.getFullYear();
+          const month = String(today.getMonth() + 1).padStart(2, '0');
+          const day = String(today.getDate()).padStart(2, '0');
+          const date = `${year}-${month}-${day}`;
+          console.log(date);
+          document.getElementById('start-date').setAttribute('max',date)
+          document.getElementById('end-date').setAttribute('max',date)
+
+      </script>
+      {% comment %}
+      ===================================================================================
+      {% endcomment %}
+    </div>
+  </div>
+    {% else %}
+    {% comment %} <h1>Staff User</h1> {% endcomment %}
+    
+    {% endif %}
+    {% endblock %}
+
+{% comment %} </div> {% endcomment %}

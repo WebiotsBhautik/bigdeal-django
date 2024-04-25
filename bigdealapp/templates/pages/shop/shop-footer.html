@@ -1,80 +1,83 @@
 {% load static %}
 {% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
 
-<!-- footer start -->
-<footer>
-  <div class="footer1">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="footer-main">
-            <div class="footer-box">
-              <div class="footer-title mobile-title">
-                <h5>about</h5>
-              </div>
-              <div class="footer-contant">
-                <div class="footer-logo">
-                  <a href="index.html">
-                    <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
-                  </a>
+  <!-- footer start -->
+  <footer>
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="footer-main">
+              <div class="footer-box">
+                <div class="footer-title mobile-title">
+                  <h5>about</h5>
                 </div>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-                <ul class="paymant">
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/1.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/2.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/3.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/4.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/5.png' %}" class="img-fluid" alt="pay"></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>my account</h5>
-              </div>
-              <div class="footer-contant">
-                <ul>
-                  <li><a href="javascript:void(0)">about us</a></li>
-                  <li><a href="javascript:void(0)">contact us</a></li>
-                  <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
-                  <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
-                  <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>contact us</h5>
-              </div>
-              <div class="footer-contant">
-                <ul class="contact-list">
-                  <li><i class="fa fa-map-marker"></i>big deal store demo store <br> india-<span>3654123</span></li>
-                  <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
-                  <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
-                  <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>newsletter</h5>
-              </div>
-              <div class="footer-contant">
-                <div class="newsletter-second">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="enter full name" >                     
-                      <span class="input-group-text"><i class="ti-user"></i></span>                      
-                    </div>
+                <div class="footer-contant">
+                  <div class="footer-logo">
+                    <a href="{% url 'index_default' %}">
+                      <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
+                    </a>
                   </div>
-                  <div class="form-group ">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="enter email address" >                     
-                      <span class="input-group-text"><i class="ti-email"></i></span>                     
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                  <ul class="paymant">
+                    <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/1.png' %}" class="img-fluid" alt="pay"></a></li>
+                    <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/2.png' %}" class="img-fluid" alt="pay"></a></li>
+                    <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/3.png' %}" class="img-fluid" alt="pay"></a></li>
+                    <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/4.png' %}" class="img-fluid" alt="pay"></a></li>
+                    <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/5.png' %}" class="img-fluid" alt="pay"></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>my account</h5>
+                </div>
+                <div class="footer-contant">
+                  <ul>
+                    <li><a href="javascript:void(0)">about us</a></li>
+                    <li><a href="javascript:void(0)">contact us</a></li>
+                    <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
+                    <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
+                    <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>contact us</h5>
+                </div>
+                <div class="footer-contant">
+                  <ul class="contact-list">
+                    <li><i class="fa fa-map-marker"></i>big deal store demo store <br> india-<span>3654123</span></li>
+                    <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
+                    <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
+                    <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>newsletter</h5>
+                </div>
+                <div class="footer-contant">
+                  <div class="newsletter-second">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="enter full name" >                     
+                        <span class="input-group-text"><i class="ti-user"></i></span>                      
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group mb-0">
-                    <a href="javascript:void(0)" class="btn btn-solid btn-sm">submit now</a>
+                    <div class="form-group ">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="enter email address" >                     
+                        <span class="input-group-text"><i class="ti-email"></i></span>                     
+                      </div>
+                    </div>
+                    <div class="form-group mb-0">
+                      <a href="javascript:void(0)" class="btn btn-solid btn-sm">submit now</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -83,32 +86,31 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="subfooter dark-footer ">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-6 col-md-8 col-sm-12">
-          <div class="footer-left">
-            <p>2019-20 Copy Right by Themeforest Powered by pixel strap</p>
+    <div class="subfooter dark-footer ">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-md-8 col-sm-12">
+            <div class="footer-left">
+              <p>2019-20 Copy Right by Themeforest Powered by pixel strap</p>
+            </div>
           </div>
-        </div>
-        <div class="col-xl-6 col-md-4 col-sm-12">
-          <div class="footer-right">
-            <ul class="sosiyal">
-              <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
-            </ul>
+          <div class="col-xl-6 col-md-4 col-sm-12">
+            <div class="footer-right">
+              <ul class="sosiyal">
+                <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
+                <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-</div>
   </footer>
-<!-- footer end -->
-  
+  <!-- footer end -->
+
   <!-- Quick-view modal popup start-->
   <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -117,30 +119,32 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-lg-6 col-xs-12">
-              <div class="quick-view-img">
-                <img src="{% static 'assets/images/layout-1/product/3.jpg' %}" alt="" class="img-fluid bg-img">
+              <div class="quick-view-img" id="quickViewImagesDiv">
+                <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
             </div>
             <div class="col-lg-6 rtl-text">
-              <div class="product-right">
+              <div class="product-right" id="productRight">
                 <div class="pro-group">
-                  <h2>
+                  <h2 id="productName">
                     reader will be distracted
                   </h2>
-                  <ul class="pro-price">
-                    <li>$70</li>
-                    <li><span>mrp $140</span></li>
-                    <li>50% off</li>
-                  </ul>
+                  <div class="pro-price" id="priceLabel">
+                    <h3 id="productPrice">$20.00</h3>
+                    <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
+                    <span class="theme-color" id="discountPercentageAtQuickView"></span>
+                  </div>
+                  <div class="price mt-3" id="priceLabel2"></div>
+  
                   <div class="revieu-box">
-                    <ul>
+                    <ul id="productRating">
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star"></i></li>
                       <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <a href="review.html"><span>(6 reviews)</span></a>
+                    
                   </div>
                   <ul class="best-seller">
                     <li>
@@ -153,75 +157,15 @@
                     </li>
                   </ul>
                 </div>
-                <div class="pro-group">
-                  <h6 class="product-title">product infomation</h6>
-                  <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
-                </div>
-                <div class="pro-group pb-0">
-                  <h6 class="product-title size-text">select size<span>
-                  <a href="" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                  <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body"><img src="{% static 'assets/images/size-chart.jpg' %}" alt="" class="img-fluid "></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="size-box">
-                    <ul>
-                      <li ><a href="javascript:void(0)">s</a></li>
-                      <li><a href="javascript:void(0)">m</a></li>
-                      <li><a href="javascript:void(0)">l</a></li>
-                      <li><a href="javascript:void(0)">xl</a></li>
-                      <li><a href="javascript:void(0)">2xl</a></li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">color</h6>
-                  <div class="color-selector inline">
-                    <ul>
-                      <li>
-                        <div class="color-1 active"></div>
-                      </li>
-                      <li>
-                        <div class="color-2"></div>
-                      </li>
-                      <li>
-                        <div class="color-3"></div>
-                      </li>
-                      <li>
-                        <div class="color-4"></div>
-                      </li>
-                      <li>
-                        <div class="color-5"></div>
-                      </li>
-                      <li>
-                        <div class="color-6"></div>
-                      </li>
-                      <li>
-                        <div class="color-7"></div>
-                      </li>
-                    </ul>
-                  </div>
-                  <h6 class="product-title">quantity</h6>
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1">
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="product-buttons">
-                    <a href="javascript:void(0)" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                      <i class="fa fa-shopping-cart"></i>
+                
+                  <div class="product-btns" id="productBtnDiv">
+                   <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                      <i class="fa fa-shopping-cart"></i> 
                       add to cart
-                    </a>
-                    <a href="product-page(left-sidebar).html" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
+                   </a>
+                   <a href="javascript:void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
                       view detail
-                    </a>
+                   </a>
                   </div>
                 </div>
               </div>
@@ -232,95 +176,7 @@
     </div>
   </div>
   <!-- Quick-view modal popup end-->
-  
-  <!-- edit product modal start-->
-  <div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <div class="modal-content ">
-        <div class="modal-body">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          <div class="pro-group">
-            <div class="product-img">
-              <div class="media">
-                <div class="img-wraper">
-                  <a href="product-page(left-sidebar).html">
-                    <img src="{% static 'assets/images/layout-2/product/1.jpg' %}" alt="">
-                  </a>
-                </div>
-                <div class="media-body">
-                  <a href="product-page(left-sidebar).html">
-                    <h3>redmi not 3</h3>
-                  </a>
-                  <h6>$80<span>$120</span></h6>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Select Size</h6>
-            <div class="size-box">
-              <ul>
-                <li ><a href="javascript:void(0)">s</a></li>
-                <li><a href="javascript:void(0)">m</a></li>
-                <li><a href="javascript:void(0)">l</a></li>
-                <li><a href="javascript:void(0)">xl</a></li>
-                <li><a href="javascript:void(0)">2xl</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Select color</h6>
-            <div class="color-selector inline">
-              <ul>
-                <li>
-                  <div class="color-1 active"></div>
-                </li>
-                <li>
-                  <div class="color-2"></div>
-                </li>
-                <li>
-                  <div class="color-3"></div>
-                </li>
-                <li>
-                  <div class="color-4"></div>
-                </li>
-                <li>
-                  <div class="color-5"></div>
-                </li>
-                <li>
-                  <div class="color-6"></div>
-                </li>
-                <li>
-                  <div class="color-7"></div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="pro-group">
-            <h6 class="product-title">Quantity</h6>
-            <div class="qty-box">
-              <div class="input-group">
-                <button class="qty-minus"></button>
-                <input class="qty-adj form-control" type="number" value="1"/>
-                <button class="qty-plus"></button>
-              </div>
-            </div>
-          </div>
-          <div class="pro-group mb-0">
-            <div class="modal-btn">
-              <a href="cart.html" class="btn btn-solid btn-sm">
-                add to cart
-              </a>
-              <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
-                more detail
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- edit product modal end-->
+
   
   <!-- Add to cart bar -->
   <div id="cart_side" class="add_to_cart top">
@@ -335,24 +191,33 @@
         </div>
       </div>
       <div class="cart_media">
+        {% if request.user.is_authenticated %}
         <ul class="cart_product">
+          {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+          <li>
+            <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+          </li>
+          {% else %}
+          {% for product in cart_products|return_cart_products:request %}
+
           <li>
             <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
+              <a href="{% url 'left_slidebar' product.id %}">
+                <img alt="mega" class="me-3" src="/{{product.cartProduct.variantProduct.productImageFront}}">
               </a>
               <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>redmi not 3</h4>
+                <a href="{% url 'left_slidebar' product.id %}">
+                  <h4>{{product.cartProduct.variantProduct.productName}}</h4>
                 </a>
                 <h6>
-                  $80.00 <span>$120.00</span>
+                  {{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} 
+                  <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantPrice|return_currency_wise_ammount:request}}</span>
                 </h6>
                 <div class="addit-box">
                   <div class="qty-box">
                     <div class="input-group">
                       <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
+                      <input class="qty-adj form-control" type="number" value="{{product.cartProductQuantity}}"/>
                       <button class="qty-plus"></button>
                     </div>
                   </div>
@@ -360,7 +225,7 @@
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
                       <i data-feather="edit"></i>
                     </a>
-                    <a href="javascript:void(0)">
+                    <a href="{% url 'delete_cart_product' product.cartProduct.id %}">
                       <i  data-feather="trash-2"></i>
                     </a>
                   </div>
@@ -368,265 +233,148 @@
               </div>
             </div>
           </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>Double Door Refrigerator</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>woman hande bag</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
+          {% endfor %}
         </ul>
         <ul class="cart_total">
           <li>
-            subtotal : <span>$1050.00</span>
+            subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
           </li>
           <li>
             shpping <span>free</span>
           </li>
           <li>
-            taxes <span>$0.00</span>
+            taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
           </li>
           <li>
             <div class="total">
-              total<span>$1050.00</span>
+              total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
             </div>
           </li>
           <li>
             <div class="buttons">
-              <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-              <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+              <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+              <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-solid btn-sm">check out</a>
             </div>
           </li>
         </ul>
+        {% endif %}
+        {% else %}
+        <ul class="cart_product">
+          {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+          <li>
+            <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+          </li>
+          {% else %}
+          {% for product in cart_products %}
+
+          <li>
+            <div class="media">
+              <a href="{% url 'left_slidebar' product.product_id %}">
+                <img src="{{product.productImage}}" class="me-3"  alt="mega" >
+              </a>
+              <div class="media-body">
+                <a href="{% url 'left_slidebar' product.product_id %}">
+                  <h4>{{product.productName}}</h4>
+                </a>
+                <h6>
+                  {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                </h6>
+                <div class="addit-box">
+                  <div class="qty-box">
+                    <div class="input-group">
+                      {% comment %} <button class="qty-minus"></button>
+                      <input class="qty-adj form-control" type="number" value="1"/>
+                      <button class="qty-plus"></button> {% endcomment %}
+                      <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                            name="quantity{{forloop.counter}}" class="form-control input-number"
+                                            value="{{product.quantity}}">
+                    </div>
+                  </div>
+                  <div class="pro-add">
+                    <a href="javascript:void(0)" data-bs-target="#edit-product" >
+                      <i data-feather="edit"></i>
+                    </a>
+                    <a href="{% url 'delete_cart_product' product.variant_id %}">
+                      <i  data-feather="trash-2"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        <ul class="cart_total">
+          <li>
+            subtotal : <span id="cartTotalPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalPrice|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+            shipping <span>free</span>
+          </li>
+          <li>
+            taxes <span id="taxPrice">{{""|return_currency_wise_symbol:request}}{{cartTotalTax|return_currency_wise_ammount:request}}</span>
+          </li>
+          <li>
+            <div class="total">
+              total<span id="priceAfterTax">{{""|return_currency_wise_symbol:request}}{{cartTotalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+            </div>
+          </li>
+          <li>
+            <div class="buttons">
+              <a href="{% url 'cart_page' %}" class="btn btn-solid btn-sm">view cart</a>
+              <a href="{% url 'login_page' %}" class="btn btn-solid btn-sm ">checkout</a>
+            </div>
+          </li>
+        </ul>
+        {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>
   <!-- Add to cart bar end-->
   
-  <!-- wishlistbar bar -->
-  <div id="wishlist_side" class="add_to_cart right">
-    <a href="javascript:void(0)" class="overlay"  onclick="closeWishlist()"></a>
-    <div class="cart-inner">
-      <div class="cart_top">
-        <h3>my wishlist</h3>
-        <div class="close-cart">
-          <a href="javascript:void(0)" onclick="closeWishlist()">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-      <div class="cart_media">
-        <ul class="cart_product">
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/1.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>redmi not 3</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/2.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>Double Door Refrigerator</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="media">
-              <a href="product-page(left-sidebar).html">
-                <img alt="megastore1" class="me-3" src="{% static 'assets/images/layout-2/product/3.jpg' %}">
-              </a>
-              <div class="media-body">
-                <a href="product-page(left-sidebar).html">
-                  <h4>woman hande bag</h4>
-                </a>
-                <h6>
-                  $80.00 <span>$120.00</span>
-                </h6>
-                <div class="addit-box">
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <button class="qty-minus"></button>
-                      <input class="qty-adj form-control" type="number" value="1"/>
-                      <button class="qty-plus"></button>
-                    </div>
-                  </div>
-                  <div class="pro-add">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#edit-product" >
-                      <i data-feather="edit"></i>
-                    </a>
-                    <a href="javascript:void(0)">
-                      <i  data-feather="trash-2"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <ul class="cart_total">
-          <li>
-            subtotal : <span>$1050.00</span>
-          </li>
-          <li>
-            shpping <span>free</span>
-          </li>
-          <li>
-            taxes <span>$0.00</span>
-          </li>
-          <li>
-            <div class="total">
-              total<span>$1050.00</span>
-            </div>
-          </li>
-          <li>
-            <div class="buttons">
-              <a href="wishlist.html" class="btn btn-solid btn-block btn-md">view wislist</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- wishlistbar bar end-->
   
   <!-- My account bar start-->
   <div id="myAccount" class="add_to_cart right account-bar">
     <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
     <div class="cart-inner">
       <div class="cart_top">
-        <h3>my account</h3>
+        <h3>my account </h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeAccount()">
             <i class="fa fa-times" aria-hidden="true"></i>
           </a>
         </div>
       </div>
-      <form class="theme-form">
+      {% if request.user.is_authenticated %}
+      <li>
+        <h6 class="d-block">
+          Welcome, {{request.user.username}}
+        </h6>
+      </li>
+      <li>
+        <a href="{% url 'logout_page' %}" class="d-block"
+          >Logout</a
+        >
+      </li>
+      {% else %}
+      <form class="theme-form" method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" placeholder="Email" required="">
+            <label >Email Address</label>
+            <input type="text" class="form-control"  name="name" placeholder="Email" required="">
         </div>
         <div class="form-group">
-          <label for="review">Password</label>
-          <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+            <label >Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
         </div>
-        <div class="form-group">
-          <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
-        </div>
-        <div class="accout-fwd">
-          <a href="forget-pwd.html" class="d-block"><h5>forget password?</h5></a>
-          <a href="register.html" class="d-block"><h6 >you have no account ?<span>signup now</span></h6></a>
-        </div>
+        <button class="btn btn-normal">Login</button>
+        <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
       </form>
-    </div>
+      <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
+      <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
+      {% endif %}
+      </div>
   </div>
   <!-- Add to account bar end-->
   
@@ -678,9 +426,6 @@
   <!-- popper js-->
   <script src="{% static 'assets/js/popper.min.js' %}" ></script>
   
-  <!-- range sldier -->
-  <script src="{% static 'assets/js/ion.rangeSlider.js' %}"></script>
-  <script src="{% static 'assets/js/rangeslidermain.js' %}"></script>
   
   <!-- father icon -->
   <script src="{% static 'assets/js/feather.min.js' %}"></script>
@@ -693,6 +438,66 @@
   {% block script %}
     
   {% endblock script %}
+
+  <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie("csrftoken");
+  
+    async function handleCheckout(params){
+        var url = "{% url 'cart_to_checkout_validation' %}";
+        var pageUrl = window.location.href;
+  
+        await fetch(url,{
+            method: "POST",
+            headers:{
+                "content-type":"application/json",
+                "X-CSRFToken":csrftoken,
+            },
+            body: JSON.stringify({
+                cartId: params.cartId,
+            }),
+            }).then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                if(data.flag === "True"){
+                    var cartMsgDiv = document.getElementById("cartMsgDiv");
+                    for(var i=0; i<data.outOfStockProducts.length; i++){
+                        var cartMsg = document.createElement("h5");
+                        cartMsg.setAttribute("id","cartMsg" + i);
+                        cartMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + " stock of product " + data.outOfStockProducts[i].productName + ".";
+                        cartMsgDiv.append(cartMsg);
+  
+                        // Set a timeout to hide the cartMsg element after 3 seconds
+                        setTimeout(function(index){
+                            var cartMsgElement = document.getElementById("cartMsg" + index);
+                            if(cartMsgElement){
+                                cartMsgElement.remove();
+                            }
+                        },3000 , i);
+                    }
+                }
+                if(data.flag === "False"){
+                    window.location.href = "{% url 'checkout_page' %}";
+                }
+            });
+        }
+    
+  </script>
     
   
   <!-- Bootstrap js-->
@@ -702,4 +507,4 @@
   <!-- Theme js-->
   <script src="{% static 'assets/js/script.js' %}"></script>
   </body>
-  </html>
+  </html> 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment
+from .models import Banner, BannerType, BannerTheme, Blog,BlogCategory,BlogComment,ContactUs, Coupon, CouponHistory
 from django.utils.safestring import mark_safe
 
 
@@ -9,7 +9,8 @@ class BannerAdmin(admin.ModelAdmin):
     exclude = ['slug']
     list_display = ['bannerTheme', 'bannerType', 'bannerProduct']
     ordering = ('bannerTheme','bannerType',)
-    list_per_page=10
+    search_fields = ['bannerTheme__bannerThemeName',]
+    # list_per_page=100
 
 
 admin.site.register(Banner, BannerAdmin)
@@ -17,6 +18,7 @@ admin.site.register(Banner, BannerAdmin)
 
 class BannerTypeAdmin(admin.ModelAdmin):
     exclude = ['slug']
+    search_fields = ['bannerTypeName',]
 
 
 admin.site.register(BannerType, BannerTypeAdmin)
@@ -24,6 +26,7 @@ admin.site.register(BannerType, BannerTypeAdmin)
 
 class BannerThemeAdmin(admin.ModelAdmin):
     exclude = ['slug']
+    search_fields = ['bannerThemeName',]
 
 
 admin.site.register(BannerTheme, BannerThemeAdmin)
@@ -81,4 +84,36 @@ class BlogCommentAdmin(admin.ModelAdmin):
             return queryset
 
 admin.site.register(BlogComment, BlogCommentAdmin)
+
+
+class ContactUsAdmin(admin.ModelAdmin):
+    list_display=['contactUsName','contactUsEmail','contactUsNumber','createdAt']
+    ordering=['-createdAt']
+        
+admin.site.register(ContactUs, ContactUsAdmin)
+
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['couponCode','couponType','couponDiscountOrFixed','numOfCoupon','minAmount','expirationDateTime','usageLimit','couponDescription','createdAt']
+    ordering = ['-createdAt']
+
+admin.site.register(Coupon, CouponAdmin)
+
+class CouponHistoryAdmin(admin.ModelAdmin):
+    list_display = ['coupon','couponHistoryByUser','order_id','couponHistoryByOrder']
+    ordering = ['-createdAt']
+    
+    @admin.display(description='Order ID')
+    def order_id(self,obj):
+        return str(obj.couponHistoryByOrder.id)
+    
+    @admin.display(description='Order ID')
+    def order_id(self,obj):
+        return str(obj.couponHistoryByOrder.id)
+    
+admin.site.register(CouponHistory,CouponHistoryAdmin)
+    
+    
+    
+
 
