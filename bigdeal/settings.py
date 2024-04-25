@@ -69,7 +69,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
-    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',
 
 ]
 
@@ -148,7 +147,6 @@ STATICFILES_FINDERS = [
 
 # STATIC_URL = '/bigdeal/bigdealapp/static/'
 STATIC_URL = '/static/'
-
 
 STATIC_ROOT = BASE_DIR / 'bigdealapp/static'
 

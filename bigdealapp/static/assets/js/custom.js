@@ -155,7 +155,6 @@
       // Run when user change Product Type by clicking on the Product Type dropdown
       function updateInlines() {
         var selectedValue = dropdown.val();
-        console.log("Product Type: ================> ", selectedValue);
          
         if(selectedValue==""){
           productTabElement.classList.add("d-none");
