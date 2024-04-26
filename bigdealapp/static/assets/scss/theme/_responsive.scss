@@ -1868,14 +1868,14 @@
   // blog-pages //
   .blog-page {
     .blog-media {
-      padding: 25px 15px;
-      border-width: 25px;
+      // padding: 25px 15px;
+      // border-width: 25px;
 
       .blog-right {
-        h4 {
-          line-height: 1.2;
-          margin-bottom: 10px;
-        }
+        // h4 {
+        //   line-height: 1.2;
+        //   margin-bottom: 10px;
+        // }
 
         h6 {
           margin-bottom: 5px;
@@ -1891,12 +1891,12 @@
       }
     }
 
-    .blog-sidebar {
-      .theme-card {
-        border-width: 25px;
-        padding: 25px;
-      }
-    }
+    // .blog-sidebar {
+    //   .theme-card {
+    //     border-width: 25px;
+    //     padding: 25px;
+    //   }
+    // }
   }
 
   // product //
@@ -4175,7 +4175,7 @@
 
   .blog-page {
     .blog-media {
-      margin-bottom: 20px;
+      // margin-bottom: 20px;
 
       .blog-right {
         display: block;
@@ -8505,9 +8505,9 @@
 
   // footer //
   .footer-title {
-    border-bottom: 1px solid $gray;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
+    margin-bottom: calc(10px + (15 - 10) * ((100vw - 320px) / (1920 - 320)));
     position: relative;
 
     body.dark & {
@@ -9209,8 +9209,8 @@
     }
 
     .blog-media {
-      border-width: 20px;
-      padding: 20px 0;
+      // border-width: 20px;
+      // padding: 20px 0;
       text-align: center;
 
       &:last-child {
@@ -9223,10 +9223,10 @@
     }
 
     .blog-sidebar {
-      .theme-card {
-        border-width: 20px;
-        padding: 20px 15px;
-      }
+      // .theme-card {
+      //   border-width: 20px;
+      //   padding: 20px 15px;
+      // }
 
       ul {
         li {
@@ -11657,13 +11657,13 @@
       }
     }
 
-    .blog-sidebar {
-      .theme-card {
-        border-width: 0;
-        padding: 0;
-        background-color: transparent;
-      }
-    }
+    // .blog-sidebar {
+    //   .theme-card {
+    //     border-width: 0;
+    //     padding: 0;
+    //     background-color: transparent;
+    //   }
+    // }
   }
 
   .blog-detail-page {

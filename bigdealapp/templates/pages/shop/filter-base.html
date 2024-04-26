@@ -16,7 +16,7 @@
           <div class="collection-collapse-block-content">
             <div class="collection-brand-filter">
               {% for brand in ProductsBrand %}
-              <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
+              <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
                 <input type="checkbox" name="allbrand" value="{{brand.brandName}}" class="custom-control-input form-check-input" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
                 <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
               </div>
@@ -34,7 +34,7 @@
             <div class="size-selector">
               <div class="collection-brand-filter">
                 {% for value in values %}
-                <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
                   <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %}>
                   <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
                 </div>
@@ -48,7 +48,7 @@
 
 
         <!-- price filter start here -->
-        <div class="collection-collapse-block border-0 open">
+        <div class="collection-collapse-block open">
           <h3 class="collapse-block-title">price</h3>
           <div class="collection-collapse-block-content">
             <div class="filter-slide">

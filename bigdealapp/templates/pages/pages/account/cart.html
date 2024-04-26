@@ -15,7 +15,7 @@
             <section class="pt-0">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-12 p-0">
+                        <div class="col-12 p-0 mb-3">
                             <div class="empty-product-box success-icon" style="text-align:center;">
                                 <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"
                                     alt="">
@@ -31,172 +31,176 @@
             {% else %}
 
             <div class="col-sm-12">
-                <table class="table cart-table table-responsive-xs">
-                    <thead>
-                    <tr class="table-head">
-                        <th scope="col">image</th>
-                        <th scope="col">product name</th>
-                        <th scope="col">price</th>
-                        <th scope="col">quantity</th>
-                        <th scope="col">action</th>
-                        <th scope="col">total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% if request.user.is_authenticated %}
-                        {% for product in cart_products %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
-                                    <img loading="lazy" src="{{product.cartProduct.variantProduct.productImageFront}}"
-                                        class=" blur-up lazyload" alt="">
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">{{product.cartProduct.variantProduct.productName}}</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                    value="1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                        </h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group cart-input-group">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                                data-field=""
-                                                onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </span>
-                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control"
-                                            value="{{product.cartProductQuantity}}">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-right-plus"
-                                                onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <a href="{% url 'delete_cart_product' product.cartProduct.id %}"
-                                    class="icon"><i class="ti-close"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
-                                    {{""|return_currency_wise_symbol:request}}{{product.cartProductQuantityTotalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% else %}
-                        {% for product in cart_products %}
-                        <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.product_id %}">
-                                    <img loading="lazy" src="{{product.productImage}}"
-                                        class=" blur-up lazyload" alt="">
-                                </a>
-                            </td>
-                            <td>
-                                <a
-                                    href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
-                                <div class="mobile-cart-content row">
-                                    <div class="col">
-                                        <div class="qty-box">
-                                            <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                    value="1">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                                        </h2>
-                                    </div>
-                                    <div class="col">
-                                        <h2 class="td-color">
-                                            <a href="javascript:void(0)">
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                        </h2>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                            <td>
-                                <div class="qty-box">
-                                    <div class="input-group cart-input-group">
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                                data-field=""
-                                                onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                        </span>
-                                        <input type="text" readonly id="quantityInput{{forloop.counter}}"
-                                            name="quantity{{forloop.counter}}" class="form-control"
-                                            value="{{product.quantity}}"> 
-                                        <span class="input-group-prepend">
-                                            <button type="button" class="btn quantity-right-plus"
-                                                onclick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td>
-                                <a href="{% url 'delete_cart_product' product.variant_id %}"
-                                    class="icon"><i class="ti-close"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
-                                    {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
-                                </h2>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
                 <div class="left-side-button text-end d-flex d-block justify-content-end">
+                    <h4>4 Products</h4>
                     <a href="{% url 'delete_cart_all_product' %}"
                         class="text-decoration-underline theme-color d-block text-capitalize">clear
                         all items</a>
                 </div>
+                <div class="table-responsive">
+                    <table class="table cart-table">
+                        <thead>
+                        <tr class="table-head">
+                            <th scope="col">image</th>
+                            <th scope="col">product name</th>
+                            <th scope="col">price</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">action</th>
+                            <th scope="col">total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% if request.user.is_authenticated %}
+                            {% for product in cart_products %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">
+                                        <img loading="lazy" src="{{product.cartProduct.variantProduct.productImageFront}}"
+                                            class=" blur-up lazyload" alt="">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a
+                                        href="{% url 'left_slidebar' product.cartProduct.variantProduct.id %}">{{product.cartProduct.variantProduct.productName}}</a>
+                                    <div class="mobile-cart-content row">
+                                        <div class="col">
+                                            <div class="qty-box">
+                                                <div class="input-group">
+                                                    <input type="text" name="quantity" class="form-control input-number"
+                                                        value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                            </h2>
+                                        </div>
+                                        <div class="col">
+                                            <h2 class="td-color">
+                                                <a href="javascript:void(0)">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h2>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                    </h2>
+                                </td>
+                                <td>
+                                    <div class="qty-box">
+                                        <div class="input-group cart-input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                    data-field=""
+                                                    onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                                name="quantity{{forloop.counter}}" class="form-control"
+                                                value="{{product.cartProductQuantity}}">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-right-plus"
+                                                    onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+    
+                                <td>
+                                    <a href="{% url 'delete_cart_product' product.cartProduct.id %}"
+                                        class="icon"><i class="ti-close"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
+                                        {{""|return_currency_wise_symbol:request}}{{product.cartProductQuantityTotalPrice|return_currency_wise_ammount:request}}
+                                    </h2>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            {% for product in cart_products %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'left_slidebar' product.product_id %}">
+                                        <img loading="lazy" src="{{product.productImage}}"
+                                            class=" blur-up lazyload" alt="">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a
+                                        href="{% url 'left_slidebar' product.product_id %}">{{product.productName}}</a>
+                                    <div class="mobile-cart-content row">
+                                        <div class="col">
+                                            <div class="qty-box">
+                                                <div class="input-group">
+                                                    <input type="text" name="quantity" class="form-control input-number"
+                                                        value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                                            </h2>
+                                        </div>
+                                        <div class="col">
+                                            <h2 class="td-color">
+                                                <a href="javascript:void(0)">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h2>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                                    </h2>
+                                </td>
+                                <td>
+                                    <div class="qty-box">
+                                        <div class="input-group cart-input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                                    data-field=""
+                                                    onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </span>
+                                            <input type="text" readonly id="quantityInput{{forloop.counter}}"
+                                                name="quantity{{forloop.counter}}" class="form-control"
+                                                value="{{product.quantity}}"> 
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-right-plus"
+                                                    onclick="beforecounterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.variant_id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.quantity}}'})">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </td>
+    
+                                <td>
+                                    <a href="{% url 'delete_cart_product' product.variant_id %}"
+                                        class="icon"><i class="ti-close"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <h2 class="td-color" id="priceOfTotalQuantity{{forloop.counter}}">
+                                        {{""|return_currency_wise_symbol:request}}{{product.totalPrice|return_currency_wise_ammount:request}}
+                                    </h2>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                
                 <table class="table cart-table table-responsive-md">
                     <tfoot>
                         <tr>

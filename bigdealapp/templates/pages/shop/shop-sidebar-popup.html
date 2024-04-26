@@ -24,7 +24,7 @@
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-12">
                   <ul class="short-name">
                       {% for key, value in request.GET.items %}
                       {% if key != 'selectedAttribute' and key != 'price' %}
@@ -109,7 +109,7 @@
                                                   <div class="collection-collapse-block-content">
                                                       <div class="collection-brand-filter">
                                                         {% for brand in ProductsBrand %}
-                                                          <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                                                          <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
                                                               <input type="checkbox" class="custom-control-input form-check-input" name="allbrand" value="{{brand.brandName}}" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
                                                               <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
                                                           </div>
@@ -127,7 +127,7 @@
                                                       <div class="size-selector">                              
                                                         <div class="collection-brand-filter">
                                                           {% for value in values %}
-                                                            <div class="custom-control custom-checkbox  form-check collection-filter-checkbox">
+                                                            <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
                                                                 <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %} >
                                                                 <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
                                                             </div>
@@ -138,13 +138,13 @@
                                                 </div> 
                                               {% endfor %}
                                               <!-- price filter start here -->
-                                              <div class="collection-collapse-block border-0 open">
-                                                  <h3 class="collapse-block-title">price</h3>
-                                                  <div class="collection-collapse-block-content">
-                                                    <div class="filter-slide">     
-                                                      <input class="js-range-slider" type="text" name="pricefilter" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" value="" data-filter="price" id="filter-price-range" data-type="double"/>                          
-                                                    </div>
+                                              <div class="collection-collapse-block open">
+                                                <h3 class="collapse-block-title">price</h3>
+                                                <div class="collection-collapse-block-content">
+                                                  <div class="filter-slide">     
+                                                    <input class="js-range-slider" type="text" name="pricefilter" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" value="" data-filter="price" id="filter-price-range" data-type="double"/>                          
                                                   </div>
+                                                </div>
                                               </div>
 
                                               <!-- submit button -->

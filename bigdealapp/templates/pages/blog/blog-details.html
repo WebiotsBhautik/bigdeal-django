@@ -82,11 +82,11 @@
                 <form class="theme-form" action="{% url 'add_comment' blog.id %}" method="post">
                     {% csrf_token %}
                     <div class="row g-3">
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <label for="exampleFormControlTextarea1">Comment</label>
                             <textarea class="form-control" name='comment' placeholder="Leave a comment here..." id="exampleFormControlTextarea1" rows="6" required></textarea>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <button class="btn btn-normal" type="submit">Post Comment</button>
                         </div>
                     </div>
