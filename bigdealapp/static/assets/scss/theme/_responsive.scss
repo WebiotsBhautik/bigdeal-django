@@ -1362,13 +1362,13 @@
   }
 
   .cart-section {
-    .cart-buttons {
-      >div {
-        &:last-child {
-          padding-right: 38px;
-        }
-      }
-    }
+    // .cart-buttons {
+    //   >div {
+    //     &:last-child {
+    //       padding-right: 38px;
+    //     }
+    //   }
+    // }
 
     tbody {
       tr {
@@ -1386,13 +1386,13 @@
       }
     }
 
-    tfoot {
-      tr {
-        td {
-          padding-right: 41px;
-        }
-      }
-    }
+    // tfoot {
+    //   tr {
+    //     td {
+    //       padding-right: 41px;
+    //     }
+    //   }
+    // }
   }
 
   .product-right {
@@ -4124,13 +4124,13 @@
       }
     }
 
-    tfoot {
-      tr {
-        td {
-          padding-right: 25px;
-        }
-      }
-    }
+    // tfoot {
+    //   tr {
+    //     td {
+    //       padding-right: 25px;
+    //     }
+    //   }
+    // }
   }
 
   .collection-collapse-block {
@@ -6398,21 +6398,21 @@
       }
     }
 
-    .cart-buttons {
-      >div {
-        &:last-child {
-          padding-right: 15px;
-        }
-      }
-    }
+    // .cart-buttons {
+    //   >div {
+    //     &:last-child {
+    //       padding-right: 15px;
+    //     }
+    //   }
+    // }
 
-    tfoot {
-      tr {
-        td {
-          padding-right: 0;
-        }
-      }
-    }
+    // tfoot {
+    //   tr {
+    //     td {
+    //       padding-right: 0;
+    //     }
+    //   }
+    // }
 
     &.order-history {
       tbody {
@@ -8985,9 +8985,9 @@
             display: none;
           }
 
-          .mobile-cart-content {
-            display: flex;
-          }
+          // .mobile-cart-content {
+          //   display: flex;
+          // }
         }
       }
     }
@@ -9934,11 +9934,11 @@
 
   .cart-section {
     .cart-buttons {
-      >div {
-        &:last-child {
-          padding-right: 15px
-        }
-      }
+      // >div {
+      //   &:last-child {
+      //     padding-right: 15px
+      //   }
+      // }
 
       .btn-solid {
         padding: 7px 8px;
@@ -11674,11 +11674,11 @@
 
   // dashboard //
   .dashboard {
-    .box-head {
-      h2 {
-        margin-top: 5px;
-      }
-    }
+    // .box-head {
+    //   h2 {
+    //     margin-top: 5px;
+    //   }
+    // }
 
     .box {
       .box-title {
@@ -13903,17 +13903,17 @@
       }
     }
 
-    tfoot {
-      tr {
-        td {
-          padding-right: 27px;
+    // tfoot {
+    //   tr {
+    //     td {
+    //       // padding-right: 27px;
 
-          h2 {
-            font-size: 21px;
-          }
-        }
-      }
-    }
+    //       h2 {
+    //         font-size: 21px;
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   .wishlist-section {

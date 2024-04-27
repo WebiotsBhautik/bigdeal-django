@@ -3,100 +3,121 @@
 {% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
-
-
 {% block components %}
-  
 
 <!--section start-->
 <section class="blog-detail-page section-big-py-space ratio2_3">
   <div class="container">
-      <div class="row section-big-pb-space">
-          <div class="col-sm-12 blog-detail">
-              <div class="creative-card">
-                  <img src="/{{blog.blogImage}}" class="img-fluid w-100 " alt="blog">
-                  <h3>{{blog.blogTitle}}</h3>
-                  <ul class="post-social">
-                      <li>{{blog.createdAt|date:"d M Y"}}</li>
-                      <li>Posted By : Admin Admin</li>
-                      <li><i class="fa fa-heart"></i> 5 Hits</li>
-                      <li><i class="fa fa-comments"></i> 10 Comment</li>
-                  </ul>
-                  <p>{{blog.blogDescription|safe}}</p>
-              </div>
-          </div>
-      </div>
-      <div class="row section-big-pb-space blog-advance">
-          <div class="col-lg-6">
-            <div class="creative-card">
-                <img src="/{{blog.blogImage}}" class="img-fluid " alt="blog">
-                <ul>
-                    <li>Donec ut metus sit amet elit consectetur  vel turpis.</li>
-                    <li>Aenean in mi eu elit mollis tincidunt.</li>
-                    <li>Etiam blandit metus vitae purus lacinia ultricies.</li>
-                    <li>Nunc quis nulla sagittis, tempus metus.</li>
-                    <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
-                    <li>Morbi molestie lacus blandit interdum sodales.</li>
-                    <li>Curabitur eleifend velit molestie eleifend interdum.</li>
-                    <li>Vestibulum fringilla tortor et lorem sagittis,</li>
-                    <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
-                    <li>Morbi molestie lacus blandit interdum sodales.</li>
-                    <li>Curabitur eleifend velit molestie eleifend interdum.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="creative-card">
-                <img src="/{{blog.blogImage}}" class="img-fluid" alt="blog">
-                <p>{{blog.blogDescription|safe}}</p>
-            </div>
+    <div class="row section-big-pb-space">
+      <div class="blog-detail">
+        <div class="creative-card">
+          <img src="/{{blog.blogImage}}" class="img-fluid w-100" alt="blog" />
+          <h3>{{blog.blogTitle}}</h3>
+          <ul class="post-social">
+            <li>{{blog.createdAt|date:"d M Y"}}</li>
+            <li>Posted By : Admin Admin</li>
+            <li><i class="fa fa-heart"></i> 5 Hits</li>
+            <li><i class="fa fa-comments"></i> 10 Comment</li>
+          </ul>
+          <p>{{blog.blogDescription|safe}}</p>
         </div>
       </div>
-      <div class="row section-big-pb-space">
-          <div class="col-sm-12">
-              <div class="creative-card">
-                  <ul class="comment-section">
-                    {% for comment in blogComments %}
-                      <li class="w-100">
-                          <div class="media">
-                            {% if comment.commentByUser.profilePicture %}
-                            <img src="/{{comment.commentByUser.profilePicture}}" alt="image"> 
-                            {% else %}
-                            <img src="{% static comment.commentByUser.profilePicture|default:'assets/images/avtar/3.jpg' %}" alt="{{ comment.commentByUser.username|default:'Default Profile' }}'s Profile Picture" />
-                            {% endif %}
-                            <div class="media-body">
-                                <h6>{{comment.commentByUser.username}} <span>( {{comment.updatedAt|date:"d M Y"}} At {{comment.updatedAt|time:"g:iA"}} )</span></h6>
-                                <p>{{comment.comment}}</p>
-                            </div>
-                          </div>
-                      </li>
-                      {% endfor %}
-                  </ul>
-              </div>
-          </div>
+    </div>
+    <div class="row section-big-pb-space blog-advance">
+      <div class="col-lg-6">
+        <div class="creative-card">
+          <img src="/{{blog.blogImage}}" class="img-fluid" alt="blog" />
+          <ul>
+            <li>Donec ut metus sit amet elit consectetur vel turpis.</li>
+            <li>Aenean in mi eu elit mollis tincidunt.</li>
+            <li>Etiam blandit metus vitae purus lacinia ultricies.</li>
+            <li>Nunc quis nulla sagittis, tempus metus.</li>
+            <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
+            <li>Morbi molestie lacus blandit interdum sodales.</li>
+            <li>Curabitur eleifend velit molestie eleifend interdum.</li>
+            <li>Vestibulum fringilla tortor et lorem sagittis,</li>
+            <li>In scelerisque libero ut mi ornare, neque pulvinar.</li>
+            <li>Morbi molestie lacus blandit interdum sodales.</li>
+            <li>Curabitur eleifend velit molestie eleifend interdum.</li>
+          </ul>
+        </div>
       </div>
-      <div class=" row blog-contact">
-          <div class="col-sm-12 ">
-              <div class="creative-card">
-                <h2>Leave Your Comment</h2>
-                <form class="theme-form" action="{% url 'add_comment' blog.id %}" method="post">
-                    {% csrf_token %}
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label for="exampleFormControlTextarea1">Comment</label>
-                            <textarea class="form-control" name='comment' placeholder="Leave a comment here..." id="exampleFormControlTextarea1" rows="6" required></textarea>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-normal" type="submit">Post Comment</button>
-                        </div>
-                    </div>
-                </form>
-              </div>
-          </div>
+      <div class="col-lg-6">
+        <div class="creative-card">
+          <img src="/{{blog.blogImage}}" class="img-fluid" alt="blog" />
+          <p>{{blog.blogDescription|safe}}</p>
+        </div>
       </div>
+    </div>
+    <div class="row section-big-pb-space">
+      <div class="col-12">
+        <div class="creative-card">
+          <ul class="comment-section">
+            {% for comment in blogComments %}
+            <li class="w-100">
+              <div class="media">
+                {% if comment.commentByUser.profilePicture %}
+                <img
+                  src="/{{comment.commentByUser.profilePicture}}"
+                  alt="image"
+                />
+                {% else %}
+                <img
+                  src="{% static comment.commentByUser.profilePicture|default:'assets/images/avtar/3.jpg' %}"
+                  alt="{{ comment.commentByUser.username|default:'Default Profile' }}'s Profile Picture"
+                />
+                {% endif %}
+                <div class="media-body">
+                  <h6>
+                    {{comment.commentByUser.username}}
+                    <span
+                      >( {{comment.updatedAt|date:"d M Y"}} At
+                      {{comment.updatedAt|time:"g:iA"}} )</span
+                    >
+                  </h6>
+                  <p>{{comment.comment}}</p>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row blog-contact">
+      <div class="col-12">
+        <div class="creative-card">
+          <h2>Leave Your Comment</h2>
+          <form
+            class="theme-form"
+            action="{% url 'add_comment' blog.id %}"
+            method="post"
+          >
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="exampleFormControlTextarea1">Comment</label>
+                <textarea
+                  class="form-control"
+                  name="comment"
+                  placeholder="Leave a comment here..."
+                  id="exampleFormControlTextarea1"
+                  rows="6"
+                  required
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-normal" type="submit">
+                  Post Comment
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <!--Section ends-->
-
 
 {% endblock components %}

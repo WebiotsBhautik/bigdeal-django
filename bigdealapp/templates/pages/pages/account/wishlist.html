@@ -5,93 +5,129 @@
 {% load sass_tags %}
 {% block components %}
 
-
-
 <!--section start-->
 <section class="wishlist-section section-big-py-space b-g-light">
-    <div class="custom-container">
-        <div class="row">
-          {% if totalWishlistProducts|to_int == 0|to_int %}  
-              <section class="pt-0">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 p-0">    
-                            <div class="empty-product-box success-icon text-center">
-                                <img loading="lazy" src="{% static 'assets/images/empty-wishlist.png' %}" class="img-fluid"  alt="">
-                                <div class="success-contain">
-                                    <h3><strong>Your wishlist is Empty.</strong></h3>
-                                      <h4>Explore more shortlist some items.</h4> 
-                                </div>
-                                <div class="col-12">
-                                    <a href="{% url 'index' %}" class="btn btn-normal mt-4">continue shopping</a>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
+  <div class="custom-container">
+    <div class="row">
+      {% if totalWishlistProducts|to_int == 0|to_int %}
+      <section class="pt-0">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 p-0">
+              <div class="empty-product-box success-icon text-center">
+                <img
+                  loading="lazy"
+                  src="{% static 'assets/images/empty-wishlist.png' %}"
+                  class="img-fluid"
+                  alt=""
+                />
+                <div class="success-contain">
+                  <h3><strong>Your wishlist is Empty.</strong></h3>
+                  <h4>Explore more shortlist some items.</h4>
                 </div>
-            </section>
-          {% else %}
-            <div class="col-sm-12">
-                <div class="table-responsive">
-                    <table class="table cart-table">
-                        <thead>
-                        <tr class="table-head">
-                            <th scope="col">image</th>
-                            <th scope="col">product name</th>
-                            <th scope="col">price</th>
-                            <th scope="col">availability</th>
-                            <th scope="col">action</th>
-                        </tr>
-                        </thead>
-                        {% for product in wishlist_products %}
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a href="{% url 'left_slidebar' product.variantProduct.id %}"><img src="{{product.variantProduct.productImageFront}}" alt="product" class="img-fluid "></a>
-                            </td>
-                            <td><a href="{% url 'left_slidebar' product.variantProduct.id %}">{{product.variantProduct.productName}}</a>
-                                <div class="mobile-cart-content">
-                                    <div class="col-xs-3">
-                                      <p>{{product.productVariantStockStatus}}</p>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <h2 class="td-color">{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2></div>
-                                    <div class="col-xs-3">
-                                        <h2 class="td-color"><a href="javascript:void(0)" class="icon me-1"><i class="ti-close"></i> </a><a href="javascript:void(0)" class="cart"><i class="ti-shopping-cart"></i></a></h2>
-                                    </div> 
-                                        
-                                </div>
-                            </td>
-                            <td>
-                                <h2>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</h2></td>
-                            <td>
-                                <p>{{product.productVariantStockStatus}}</p>
-                            </td>
-                            <td><a href="{% url 'delete_wishlist_product' product.id %}" class="icon me-3"><i class="ti-close"></i> </a><a href="{% url 'add_to_cart_from_wishlist' product.id 1 %}" class="cart"><i class="ti-shopping-cart"></i></a></td>
-                        </tr>
-                        </tbody>
-                        {% endfor %}
-                    </table>
-                </div>
-            </div>
-            <div class="row wishlist-buttons">
                 <div class="col-12">
-                    <a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a>
-                    {% if request.user.is_authenticated %}
-                    {% if totalCartProducts|to_int == 0|to_int %}
-                    {% else %}
-                    <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-normal">check out</a>
-                    {% endif %}
-                    {% else %}
-                    <a href="{% url 'login_page' %}" class="btn btn-normal">check out</a>
-                    {% endif %}
+                  <a href="{% url 'index' %}" class="btn btn-normal mt-4"
+                    >continue shopping</a
+                  >
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        {% endif %}
+      </section>
+      {% else %}
+      <div class="col-12">
+        <div class="cart-table-box">
+          <div class="table-responsive cart-table wishlist-table">
+            <table class="table m-0">
+              <thead>
+                <tr class="table-head">
+                  <th>image</th>
+                  <th>product name</th>
+                  <th>price</th>
+                  <th>availability</th>
+                  <th>action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in wishlist_products %}
+                <tr>
+                  <td>
+                    <a
+                      href="{% url 'left_slidebar' product.variantProduct.id %}"
+                      ><img
+                        src="{{product.variantProduct.productImageFront}}"
+                        alt="product"
+                        class="img-fluid"
+                    /></a>
+                  </td>
+                  <td>
+                    <a
+                      href="{% url 'left_slidebar' product.variantProduct.id %}"
+                      >{{product.variantProduct.productName}}</a
+                    >
+                    <div class="mobile-cart-content row gx-2">
+                      <div class="col">
+                        <p>{{product.productVariantStockStatus}}</p>
+                      </div>
+                      <div class="col">
+                        <h2 class="td-color">
+                          {{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                        </h2>
+                      </div>
+                      <div class="col">
+                        <h2 class="td-color">
+                          <div class="icon-box">
+                            <a href="javascript:void(0)" class="icon">
+                              <i class="ti-close"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="cart">
+                              <i class="ti-shopping-cart"></i>
+                            </a>
+                          </div>
+                        </h2>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h2>
+                      {{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                    </h2>
+                  </td>
+                  <td>
+                    <p>{{product.productVariantStockStatus}}</p>
+                  </td>
+                  <td>
+                    <div class="icon-box">
+                      <a href="{% url 'delete_wishlist_product' product.id %}" class="icon">
+                        <i class="ti-close"></i>
+                      </a>
+                      <a href="{% url 'add_to_cart_from_wishlist' product.id 1 %}" class="cart">
+                        <i class="ti-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row wishlist-buttons">
+        <div class="col-12">
+          <a href="{% url 'index' %}" class="btn btn-normal">continue shopping</a>
+          {% if request.user.is_authenticated %} {% if totalCartProducts|to_int == 0|to_int %} {% else %}
+          <a onclick="handleCheckout({'cartId':'{{cartId}}'})" class="btn btn-normal">check out</a>
+          {% endif %} {% else %}
+          <a href="{% url 'login_page' %}" class="btn btn-normal">check out</a>
+          {% endif %}
+        </div>
+      </div>
     </div>
+    {% endif %}
+  </div>
 </section>
 <!--section end-->
 
 {% endblock components %}
-

@@ -88,7 +88,7 @@ body {
       background-color: $dark-layout;
 
       .media {
-        &+.media {
+        +.media {
           border-top: 1px solid $dark-border;
         }
       }
@@ -193,8 +193,10 @@ body {
     color: $font-layout-3 !important;
   }
 
-  .toggle-nav i {
-    color: $font-layout-1;
+  .toggle-nav{
+    i {
+      color: $font-layout-1;
+    }
   }
 
   .sm-horizontal,
@@ -2488,7 +2490,7 @@ body {
     .cart-table {
       thead {
         th {
-          border-color: $dark-border !important;
+          // border-color: $dark-border !important;
           color: $font-layout-4;
         }
       }
@@ -3057,8 +3059,10 @@ body {
 
   // menu dark //
   .layout-5 {
-    .media-banner.media-banner-1 {
-      background-color: $dark-layout;
+    .media-banner{
+      &.media-banner-1 {
+        background-color: $dark-layout;
+      }
     }
   }
 
@@ -3112,11 +3116,17 @@ body {
     }
   }
 
-  .pixelstrap ul a,
-  .pixelstrap ul a:hover,
-  .pixelstrap ul a:focus,
-  .pixelstrap ul a:active {
-    color: $font-layout-3 !important;
+  .pixelstrap {
+    ul {
+      a{
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          color: $font-layout-3 !important;
+        }
+      }
+    }
   }
 
   // .testimonial .testimonial-contain .media .media-body p {

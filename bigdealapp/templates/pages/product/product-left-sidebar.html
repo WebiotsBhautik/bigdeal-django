@@ -228,7 +228,7 @@
           </div>
           <!-- side-bar single product slider end -->
         </div>
-        <div class="col-lg-9 col-sm-12 col-xs-12">
+        <div class="col-lg-9 col-12">
           <div class="container-fluid">
             <div class="row">
               <div class="col-xl-12">
@@ -237,16 +237,22 @@
             </div>
             <div class="row">
               <div class="col-lg-5">
-                <div class="product-slick">
-                  {% for image in images %}
-                  <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
-                  {% endfor %}
-                </div>
-                <div class="row">
-                  <div class="col-12 p-0">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="product-slick">
+                      {% for image in images %}
+                      <div>
+                        <img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0">
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-12">
                     <div class="slider-nav">
                       {% for image in images %}
-                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid"></div>
+                      <div>
+                        <img src="/{{image.multipleImages}}" alt="" class="img-fluid">
+                      </div>
                       {% endfor %}
                     </div>
                   </div>
@@ -337,8 +343,7 @@
                   <div class="pro-group">
                     <h6 class="product-title">hurry  up ! Deal end in :</h6>
                     <div class="timer">
-                      <p id="demo">
-                      </p>
+                      <p id="demo"></p>
                     </div>
                   </div>
                   <div id="selectSize" class="pro-group addeffect-section product-description border-product">
@@ -421,7 +426,7 @@
 
           <section class="tab-product tab-exes creative-card creative-inner">
             <div class="row">
-              <div class="col-sm-12 col-lg-12">
+              <div class="col-lg-12">
                 <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
                   <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"><i class="icofont icofont-ui-home"></i>Description</a>
                     <div class="material-border"></div>

@@ -1318,8 +1318,6 @@ progress {
     vertical-align: inherit; }
   .table > thead {
     vertical-align: bottom; }
-  .table > :not(:last-child) > :last-child > * {
-    border-bottom-color: currentColor; }
 
 .caption-top {
   caption-side: top; }

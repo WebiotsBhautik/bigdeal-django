@@ -9,45 +9,51 @@
 {% block components %}
   
 <!-- user dashboard section start -->
-<section class="section-b-space">
+<section class="section-b-space section-big-py-space dashboard-section">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <ul class="nav nav-tabs custome-nav-tabs flex-column category-option" id="myTab">
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light active" id="tab" data-bs-toggle="tab" data-bs-target="#dash"
-                            ><i class="fa fa-angle-right"></i>Dashboard</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light" id="1-tab" data-bs-toggle="tab" data-bs-target="#order"
-                            ><i class="fa fa-angle-right"></i>Orders</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light" id="2-tab" data-bs-toggle="tab" data-bs-target="#wishlist"
-                            ><i class="fa fa-angle-right"></i>Wishlist</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light" id="3-tab" data-bs-toggle="tab" data-bs-target="#save"
-                            ><i class="fa fa-angle-right"></i>Saved
-                            Address</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light" id="4-tab" data-bs-toggle="tab" data-bs-target="#pay"
-                            ><i class="fa fa-angle-right"></i>Payment</a>
-                    </li>
-
-                    <li class="nav-item mb-2">
-                        <a class="nav-link font-light" id="5-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                            ><i class="fa fa-angle-right"></i>Profile</a>
+                <ul class="nav nav-tabs custome-nav" id="myTab">
+                    <li class="nav-item">
+                        <a class="nav-link font-light active" id="tab" data-bs-toggle="tab" href="#dash">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Dashboard</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link font-light" id="6-tab" data-bs-toggle="tab" data-bs-target="#security"
-                            ><i class="fa fa-angle-right"></i>Security</a>
+                        <a class="nav-link font-light" id="1-tab" data-bs-toggle="tab" href="#order">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Orders</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link font-light" id="2-tab" data-bs-toggle="tab" href="#wishlist">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Wishlist</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link font-light" id="3-tab" data-bs-toggle="tab" href="#save">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Saved Address</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link font-light" id="4-tab" data-bs-toggle="tab" href="#pay">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Payment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link font-light" id="5-tab" data-bs-toggle="tab" href="#profile">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link font-light" id="6-tab" data-bs-toggle="tab" href="#security">
+                            {% comment %} <i class="fa fa-angle-right"></i> {% endcomment %}
+                            Security</a>
                     </li>
                 </ul>
             </div>
@@ -55,9 +61,9 @@
             <div class="col-lg-9">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="dash">
-                        <div class="dashboard-right">
+                        <div class="dashboard-right dashboard-white">
                             <div class="dashboard">
-                                <div class="page-title title title1 title-effect">
+                                <div class="page-title">
                                     <h2>My Dashboard</h2>
                                 </div>
                                 <div class="welcome-msg"> 
@@ -226,12 +232,13 @@
                     </div>
 
                     <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="order">
-                        <div class="box-head mb-3">
-                            <h3>My Order</h3>
-                        </div>
+                        <div class="dashboard-right dashboard-white">
+                            <div class="page-title">
+                                <h2>My Order</h2>
+                            </div>
                         <div class="table-responsive">
                             {% if orders %}
-                            <table class="table cart-table">
+                            <table class="table dashboard-table">
                                 <thead>
                                     <tr class="table-head">
                                         <th scope="col">Order Id</th>
@@ -293,10 +300,12 @@
                             {% endif %}
                         </div>
                     </div>
+                    </div>
 
                     <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="wishlist">
-                        <div class="box-head mb-3">
-                            <h3>My Wishlist</h3>
+                        <div class="dashboard-right dashboard-white">
+                            <div class="page-title">
+                            <h2>My Wishlist</h2>
                         </div>
                         <div class="table-responsive">
                             {% if totalWishlistProducts|to_int == 0|to_int %}
@@ -316,7 +325,7 @@
                             {% else %}
                             {% include 'includes/alerts.html' %}
 
-                            <table class="table cart-table">
+                            <table class="table dashboard-table">
                                 <thead>
                                     <tr class="table-head">
                                         <th scope="col">image</th>
@@ -368,10 +377,12 @@
                             {% endif %}
                         </div>
                     </div>
+                    </div>
 
                     <div class="tab-pane fade dashboard" id="save">
-                        <div class="box-head">
-                            <h3>Save Address</h3>
+                        <div class="dashboard-right dashboard-white">
+                        <div class="box-head page-title">
+                            <h2>Save Address</h2>
                             <button class="btn btn-normal" data-bs-toggle="modal"
                                 data-bs-target="#addAddress">
                                 Add New Address
@@ -383,7 +394,7 @@
                                 {% include 'includes/alerts.html' %}
                                 {% if orderaillingaddress %}
                                 {% for address in orderaillingaddress %}
-                                <div class="col-xl-4 col-md-6">
+                                <div class="col-md-6">
                                     <div class="save-details">
                                         <div class="save-name">
                                             <h5>{{address.customerFirstName}} {{address.customerLastName}}</h5>
@@ -421,7 +432,8 @@
                                 </div>
                                 {% endif %}
                             </div>
-                        </div>
+                        </div>  
+                    </div>
                     </div>
 
                     <script>
@@ -759,47 +771,56 @@
                     <!-- Edit Address Modal End -->
 
                     <div class="tab-pane fade dashboard" id="pay">
-                        <div class="box-head">
-                            <h3>Card & Payment</h3>
-                            <button class="btn btn-normal" ><i class="fa fa-plus"></i>
-                                Add New Card</button>
-                        </div>  
+                        <div class="dashboard-right dashboard-white">
+                            <div class="box-head page-title">
+                                <h2>Card & Payment</h2>
+                                <button class="btn btn-normal" ><i class="fa fa-plus"></i>
+                                    Add New Card</button>
+                            </div>  
 
-                        <div class="card-details-section">
-                            <div class="row g-4">
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 2548</h4>
+                            <div class="card-details-section">
+                                <div class="row g-md-4 g-3">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 2548</h4>
+                                                </div>
+
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>06/25</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">primary</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>Brendan Canty</h5>
+                                                    </div>
+                                                    <div class="card-img">
+                                                        <img loading="lazy"
+                                                            src="{% static 'assets/images/payment-icon/1.jpg' %}"
+                                                            class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>06/25</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">primary</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Brendan Canty</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/1.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                    href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
+                                                    delete</a>
                                             </div>
                                         </div>
 
-                                        <div class="edit-card">
+                                        <div class="edit-card-mobile">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
                                                 href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
                                             <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
@@ -807,47 +828,47 @@
                                         </div>
                                     </div>
 
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
-                                            delete</a>
-                                    </div>
-                                </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details card-visa">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 0506</h4>
+                                                </div>
 
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details card-visa">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 0506</h4>
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>10/26</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">Visa</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>Robin Banks</h5>
+                                                    </div>
+                                                    <div class="card-img">
+                                                        <img loading="lazy"
+                                                            src="{% static 'assets/images/payment-icon/2.jpg' %}"
+                                                            class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>10/26</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">Visa</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Robin Banks</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/2.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                    href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
+                                                    delete</a>
                                             </div>
                                         </div>
 
-                                        <div class="edit-card">
+                                        <div class="edit-card-mobile">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
                                                 href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
                                             <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
@@ -855,59 +876,52 @@
                                         </div>
                                     </div>
 
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
-                                            delete</a>
-                                    </div>
-                                </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details dabit-card">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 4617</h4>
+                                                </div>
 
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="payment-card-detail">
-                                        <div class="card-details dabit-card">
-                                            <div class="card-number">
-                                                <h4>XXXX - XXXX - XXXX - 4617</h4>
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>12/30</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">Rupay</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>Matthew Taylor</h5>
+                                                    </div>
+                                                    <div class="card-img">
+                                                        <img loading="lazy"
+                                                            src="{% static 'assets/images/payment-icon/3.jpg' %}"
+                                                            class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="valid-detail">
-                                                <div class="title">
-                                                    <span>valid</span>
-                                                    <span>thru</span>
-                                                </div>
-                                                <div class="date">
-                                                    <h3>12/30</h3>
-                                                </div>
-                                                <div class="primary">
-                                                    <span class="badge bg-pill badge-light">Rupay</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="name-detail">
-                                                <div class="name">
-                                                    <h5>Matthew Taylor</h5>
-                                                </div>
-                                                <div class="card-img">
-                                                    <img loading="lazy"
-                                                        src="{% static 'assets/images/payment-icon/3.jpg' %}"
-                                                        class="img-fluid blur-up lazyloaded" alt="">
-                                                </div>
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#addPayment"
+                                                    href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
+                                                    delete</a>
                                             </div>
                                         </div>
 
-                                        <div class="edit-card">
+                                        <div class="edit-card-mobile">
                                             <a data-bs-toggle="modal" data-bs-target="#addPayment"
                                                 href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
                                             <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
                                                 delete</a>
                                         </div>
-                                    </div>
-
-                                    <div class="edit-card-mobile">
-                                        <a data-bs-toggle="modal" data-bs-target="#addPayment"
-                                            href="javascript:void(0)"><i class="fa fa-edit"></i> edit</a>
-                                        <a href="javascript:void(0)"><i class="fa fa-minus-square"></i>
-                                            delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -915,165 +929,171 @@
                     </div>
 
                     <div class="tab-pane fade dashboard-profile dashboard" id="profile">
-                        <div class="box-head">
-                            <h3>Profile</h3>
-                            <button class="btn btn-normal"
-                                onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
-                                data-bs-target="#editAddress">
-                                Edit
-                            </button>
+                        <div class="dashboard-right dashboard-white">
+                            <div class="box-head page-title">
+                                <h2>Profile</h2>
+                                <button class="btn btn-normal"
+                                    onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
+                                    data-bs-target="#editAddress">
+                                    Edit
+                                </button>
+                            </div>
+
+                            <ul class="dash-profile">
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">First Name</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerFirstName}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Last Name</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerLastName}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Username</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerUsername}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Email Address</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerEmail}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Mob No</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerMobile}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Addressline-1</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerAddress1}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Addressline-2</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerAddress2}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Country</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerCountry}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">City</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerCity}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Zip Code</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerZip}}</h6>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="box-head mt-lg-5 mt-3">
+                                <h3>Login Details</h3>
+                            </div>
+
+                            <ul class="dash-profile mb-5">
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Email Address</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerEmail}}</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="left">
+                                        <h6 class="font-light">Phone No.</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>{{lastAddress.customerMobile}}</h6>
+                                    </div>
+                                </li>
+
+                                <li class="mb-0">
+                                    <div class="left">
+                                        <h6 class="font-light">Password</h6>
+                                    </div>
+                                    <div class="right">
+                                        <h6>●●●●●●</h6>
+                                    </div>
+                                </li>
+
+                            </ul>
                         </div>
-                        <ul class="dash-profile">
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">First Name</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerFirstName}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Last Name</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerLastName}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Username</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerUsername}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Email Address</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerEmail}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Mob No</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerMobile}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Addressline-1</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerAddress1}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Addressline-2</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerAddress2}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Country</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerCountry}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">City</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerCity}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Zip Code</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerZip}}</h6>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="box-head mt-lg-5 mt-3">
-                            <h3>Login Details</h3>
-                        </div>
-
-                        <ul class="dash-profile mb-5">
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Email Address</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerEmail}}</h6>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="left">
-                                    <h6 class="font-light">Phone No.</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>{{lastAddress.customerMobile}}</h6>
-                                </div>
-                            </li>
-
-                            <li class="mb-0">
-                                <div class="left">
-                                    <h6 class="font-light">Password</h6>
-                                </div>
-                                <div class="right">
-                                    <h6>●●●●●●</h6>
-                                </div>
-                            </li>
-
-                        </ul>
                     </div>
 
                     <div class="tab-pane fade dashboard-security dashboard" id="security">
-                        <div class="box-head">
-                            <h3>Delete Your Account</h3>
-                        </div>
-                        <div class="security-details">
-                            <h5 class="font-light mt-3">Hi <span> {{request.user.username}},</span>
-                            </h5>
-                            <p class="font-light mt-1">We Are Sorry To Here You Would Like To Delete Your Account.
-                            </p>
-                        </div>
-
-                        <div class="security-details-1 mb-0">
-                            <div class="page-title">
-                                <h4 class="notes">Note</h4>
+                        <div class="dashboard-right dashboard-white">
+                            <div class="box-head page-title">
+                                <h2>Delete Your Account</h2>
                             </div>
-                            <p class="font-light">Deleting your account will permanently remove your profile,
-                                personal settings, and all other associated information. Once your account is
-                                deleted, You will be logged out and will be unable to log back in.</p>
 
-                            <p class="font-light mb-4">If you understand and agree to the above statement, and would
-                                still like to delete your account, than click below</p>
+                            <div class="security-details">
+                                <h5 class="font-light mt-3">Hi <span> {{request.user.username}},</span>
+                                </h5>
+                                <p class="font-light mt-1">We Are Sorry To Here You Would Like To Delete Your Account.
+                                </p>
+                            </div>
 
-                            <button class="btn btn-normal" onclick="DeleteAccount();">Delete Your
-                                Account</button>
+                            <div class="security-details-1 mb-0">
+                                <div class="page-title">
+                                    <h4 class="notes">Note</h4>
+                                </div>
+                                <p class="font-light">Deleting your account will permanently remove your profile,
+                                    personal settings, and all other associated information. Once your account is
+                                    deleted, You will be logged out and will be unable to log back in.</p>
+
+                                <p class="font-light mb-4">If you understand and agree to the above statement, and would
+                                    still like to delete your account, than click below</p>
+
+                                <button class="btn btn-normal" onclick="DeleteAccount();">Delete Your
+                                    Account</button>
+                            </div>
                         </div>
                     </div>
                 </div>
