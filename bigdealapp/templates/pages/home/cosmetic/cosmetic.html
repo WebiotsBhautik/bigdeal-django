@@ -668,7 +668,7 @@
           <div>
             <div class="hot-deal-contain">
               <div class="row hot-deal-subcontain hotdeal-block1">
-                <div class="col-lg-4 col-md-4 ">
+                <div class="col-lg-4 col-md-4">
                   <div class="hotdeal-right-slick border-0">
                     {% for banner in allbanners  %}
                     {% if banner.bannerType|to_str == 'Timer' %}
@@ -1479,9 +1479,7 @@
       </h6>
     </li>
     <li>
-      <a href="{% url 'logout_page' %}" class="d-block"
-        >Logout</a
-      >
+      <a href="{% url 'logout_page' %}" class="d-block">Logout</a>
     </li>
     {% else %}
     <form class="theme-form" method="post" action="{% url 'login_page' %}">

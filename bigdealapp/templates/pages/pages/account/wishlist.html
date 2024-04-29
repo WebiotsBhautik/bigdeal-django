@@ -26,9 +26,7 @@
                   <h4>Explore more shortlist some items.</h4>
                 </div>
                 <div class="col-12">
-                  <a href="{% url 'index' %}" class="btn btn-normal mt-4"
-                    >continue shopping</a
-                  >
+                  <a href="{% url 'index' %}" class="btn btn-normal mt-4">continue shopping</a>
                 </div>
               </div>
             </div>
@@ -54,18 +52,16 @@
                 <tr>
                   <td>
                     <a
-                      href="{% url 'left_slidebar' product.variantProduct.id %}"
-                      ><img
+                      href="{% url 'left_slidebar' product.variantProduct.id %}">
+                      <img
                         src="{{product.variantProduct.productImageFront}}"
                         alt="product"
-                        class="img-fluid"
-                    /></a>
+                        class="img-fluid"/>
+                      </a>
                   </td>
                   <td>
                     <a
-                      href="{% url 'left_slidebar' product.variantProduct.id %}"
-                      >{{product.variantProduct.productName}}</a
-                    >
+                      href="{% url 'left_slidebar' product.variantProduct.id %}">{{product.variantProduct.productName}}</a>
                     <div class="mobile-cart-content row gx-2">
                       <div class="col">
                         <p>{{product.productVariantStockStatus}}</p>

@@ -498,7 +498,7 @@
          {% if banner.bannerType|to_str == 'Sideslider' %}
          <div class="col-xl-2 col-sm-3 pl-0 offer-banner">
             <div class="offer-banner-img">
-               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid ">
+               <img src="{{banner.bannerImage}}" alt="offer-banner" class="img-fluid">
             </div>
          </div>
          {% endif %}
@@ -1536,8 +1536,7 @@
          </h6>
       </li>
       <li>
-         <a href="{% url 'logout_page' %}" class="d-block"
-            >Logout</a>
+         <a href="{% url 'logout_page' %}" class="d-block">Logout</a>
       </li>
    
       {% else %}

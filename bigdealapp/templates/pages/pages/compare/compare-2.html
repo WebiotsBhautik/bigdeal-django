@@ -5,98 +5,110 @@
 {% load sass_tags %}
 {% block components %}
 
-
 <!-- section start -->
 <section class="compare-section section-big-py-space ratio_asos b-g-light">
-    <div class="custom-container">
-        <div class="row">
-            <div class="col-12">
-                <div class="slide-4 no-arrow">
-                  {% if compare_products %}
-                  {% for product in compare_products %}
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-12">
+        <div class="compare-page white-space-box">
+          <div class="slide-4 no-arrow">
+            {% if compare_products %} {% for product in compare_products %}
+            <div>
+              <div class="compare-part">
+                {% comment %} <button type="button" class="close-btn"></button> {% endcomment %}
+                <div class="img-secton">
                   <div>
-                      <div class="compare-part">
-                          <button type="button" class="close-btn">
-                              
-                          </button>
-                          <div class="img-secton">
-                              <div>
-                                  <img src="{{product.variantProduct.productImageFront}}" class="img-fluid  bg-img" alt="">
-                              </div>
-                              <a href="javascript:void(0)"><h5>{{product.variantProduct.productName}}</h5></a>
-                              <h5>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</h5>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>description</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>{{product.variantProduct.productDescription|safe}} </p>
-                              </div>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>Brand Name</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>{{product.variantProduct.productBrand}}</p>
-                              </div>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>size</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>XL, L, M, S, XS</p>
-                              </div>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>color</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>Red , Blue , Pink</p>
-                              </div>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>material</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>cotton</p>
-                              </div>
-                          </div>
-                          <div class="detail-part">
-                              <div class="title-detail">
-                                  <h5>availability</h5>
-                              </div>
-                              <div class="inner-detail">
-                                  <p>{{product.productVariantStockStatus}}</p>
-                              </div>
-                          </div>
-                          <div class="btn-part">
-                              <a href="{% url 'delete_compare_product' product.id %}"> <button type="button"  class="btn btn-danger remove-compare">Remove</button></a>
-                          </div>
-                      </div>
+                    <img
+                      src="{{product.variantProduct.productImageFront}}"
+                      class="img-fluid bg-img"
+                      alt=""
+                    />
                   </div>
-                  {% endfor %}
-                  {% else %}
-                  <div class="col-12 p-0">    
-                    <div class="empty-product-box success-icon text-center">
-                        <img loading="lazy" src="{% static 'assets/images/empty-compare.png' %}" class="img-fluid"  alt="">
-                        <div class="success-contain">
-                            <h3><strong>Your compare list is Empty.</strong></h3>
-                              <h4>Explore more shortlist some items.</h4> 
-                        </div>
-                    </div>
-                  </div>
-                  {% endif %}
-
-
+                  <a href="javascript:void(0)">
+                    <h5>{{product.variantProduct.productName}}</h5>
+                  </a>
+                  <h5>
+                    {{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                  </h5>
                 </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>description</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>{{product.variantProduct.productDescription|safe}}</p>
+                  </div>
+                </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>Brand Name</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>{{product.variantProduct.productBrand}}</p>
+                  </div>
+                </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>size</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>XL, L, M, S, XS</p>
+                  </div>
+                </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>color</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>Red , Blue , Pink</p>
+                  </div>
+                </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>material</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>cotton</p>
+                  </div>
+                </div>
+                <div class="detail-part">
+                  <div class="title-detail">
+                    <h5>availability</h5>
+                  </div>
+                  <div class="inner-detail">
+                    <p>{{product.productVariantStockStatus}}</p>
+                  </div>
+                </div>
+                <div class="btn-part">
+                  <a href="{% url 'delete_compare_product' product.id %}">
+                    <button type="button" class="btn btn-danger remove-compare">
+                      Remove
+                    </button>
+                    </a>
+                </div>
+              </div>
             </div>
+            {% endfor %} {% else %}
+            <div class="col-12 p-0">
+              <div class="empty-product-box success-icon text-center">
+                <img
+                  loading="lazy"
+                  src="{% static 'assets/images/empty-compare.png' %}"
+                  class="img-fluid"
+                  alt=""
+                />
+                <div class="success-contain">
+                  <h3><strong>Your compare list is Empty.</strong></h3>
+                  <h4>Explore more shortlist some items.</h4>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <!-- Section ends -->
 

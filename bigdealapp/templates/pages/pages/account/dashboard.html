@@ -59,6 +59,7 @@
             </div>
 
             <div class="col-lg-9">
+                <button class="btn btn-normal d-lg-none mb-3" id="myDashboard">show sidebar</button>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="dash">
                         <div class="dashboard-right dashboard-white">
@@ -238,7 +239,7 @@
                             </div>
                         <div class="table-responsive">
                             {% if orders %}
-                            <table class="table dashboard-table">
+                            <table class="table dashboard-table m-0">
                                 <thead>
                                     <tr class="table-head">
                                         <th scope="col">Order Id</th>
@@ -259,7 +260,7 @@
                                         </td>
                                         {% else %}
                                         <td>
-                                            <p class="btn-danger btn btn-sm">Pending</p>
+                                            <label class="danger-label">Pending</label>
                                         </td>
                                         {% endif %}
                                         <td>
@@ -325,7 +326,7 @@
                             {% else %}
                             {% include 'includes/alerts.html' %}
 
-                            <table class="table dashboard-table">
+                            <table class="table dashboard-table m-0">
                                 <thead>
                                     <tr class="table-head">
                                         <th scope="col">image</th>
@@ -346,7 +347,7 @@
                                         </td>
 
                                         <td>
-                                            <p class="d-flex align-items-center">{{wishlist_product.variantProduct.productName}}</p>
+                                            <p>{{wishlist_product.variantProduct.productName}}</p>
                                         </td>
                                         <td>
                                             <p class="theme-color fs-6">
@@ -355,7 +356,7 @@
                                         </td>
 
                                         <td>
-                                            <div class="d-flex align-items-center">
+                                            <div class="icon-box">
                                                 <h2 class="td-color">
                                                     <a href="{% url 'delete_wishlist_product' wishlist_product.id %}"
                                                         class="icon">
@@ -389,7 +390,7 @@
                             </button>
                         </div>
 
-                        <div class="save-details-box mt-4">
+                        <div class="save-details-box">
                             <div class="row g-3">
                                 {% include 'includes/alerts.html' %}
                                 {% if orderaillingaddress %}
@@ -542,11 +543,10 @@
                                                 id="zipcode" required>
                                         </div>
 
-                                        <div class="modal-footer pt-0 text-end d-block">
+                                        <div class="modal-footer pt-0 text-end d-block p-0 border-0">
                                             <button type="button"
-                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button class="btn btn-normal" id="saveNewAddress"
+                                                class="btn btn-normal m-0" data-bs-dismiss="modal">Close</button>
+                                            <button class="btn btn-normal m-0" id="saveNewAddress"
                                                 onclick="addNewAddress()" data-bs-dismiss="modal">Save Address</button>
                                         </div>
                                     </form>
@@ -754,11 +754,10 @@
                                                 id="zipcodeEdit" required>
                                         </div>
 
-                                        <div class="modal-footer pt-0 text-end d-block">
+                                        <div class="modal-footer pt-0 text-end d-block p-0 border-0">
                                             <button type="button"
-                                                class="btn bg-secondary text-white rounded-1 modal-close-button"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button class="btn btn-normal" id="saveEditAddress"
+                                                class="btn btn-normal m-0" data-bs-dismiss="modal">Close</button>
+                                            <button class="btn btn-normal m-0" id="saveEditAddress"
                                                 onclick="handleSaveAddress()" data-bs-dismiss="modal">Save
                                                 Address</button>
 
@@ -780,7 +779,7 @@
 
                             <div class="card-details-section">
                                 <div class="row g-md-4 g-3">
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-sm-6">
                                         <div class="payment-card-detail">
                                             <div class="card-details">
                                                 <div class="card-number">
@@ -828,7 +827,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-sm-6">
                                         <div class="payment-card-detail">
                                             <div class="card-details card-visa">
                                                 <div class="card-number">
@@ -876,7 +875,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-sm-6">
                                         <div class="payment-card-detail">
                                             <div class="card-details dabit-card">
                                                 <div class="card-number">
@@ -930,13 +929,9 @@
 
                     <div class="tab-pane fade dashboard-profile dashboard" id="profile">
                         <div class="dashboard-right dashboard-white">
-                            <div class="box-head page-title">
+                            <div class="box-head page-title mb-0">
                                 <h2>Profile</h2>
-                                <button class="btn btn-normal"
-                                    onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal"
-                                    data-bs-target="#editAddress">
-                                    Edit
-                                </button>
+                                <button class="btn btn-normal" onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal" data-bs-target="#editAddress">Edit</button>
                             </div>
 
                             <ul class="dash-profile">
@@ -1031,11 +1026,11 @@
                                 </li>
                             </ul>
 
-                            <div class="box-head mt-lg-5 mt-3">
-                                <h3>Login Details</h3>
+                            <div class="box-head page-title mt-lg-5 mt-3 mb-2">
+                                <h2>Login Details</h2>
                             </div>
 
-                            <ul class="dash-profile mb-5">
+                            <ul class="dash-profile">
                                 <li>
                                     <div class="left">
                                         <h6 class="font-light">Email Address</h6>
@@ -1074,7 +1069,7 @@
                             </div>
 
                             <div class="security-details">
-                                <h5 class="font-light mt-3">Hi <span> {{request.user.username}},</span>
+                                <h5 class="font-light">Hi <span> {{request.user.username}},</span>
                                 </h5>
                                 <p class="font-light mt-1">We Are Sorry To Here You Would Like To Delete Your Account.
                                 </p>

@@ -70,10 +70,7 @@
                 <div class="media-body">
                   <h6>
                     {{comment.commentByUser.username}}
-                    <span
-                      >( {{comment.updatedAt|date:"d M Y"}} At
-                      {{comment.updatedAt|time:"g:iA"}} )</span
-                    >
+                    <span>( {{comment.updatedAt|date:"d M Y"}} At {{comment.updatedAt|time:"g:iA"}} )</span>
                   </h6>
                   <p>{{comment.comment}}</p>
                 </div>
@@ -91,8 +88,7 @@
           <form
             class="theme-form"
             action="{% url 'add_comment' blog.id %}"
-            method="post"
-          >
+            method="post">
             {% csrf_token %}
             <div class="row g-3">
               <div class="col-12">
@@ -103,8 +99,7 @@
                   placeholder="Leave a comment here..."
                   id="exampleFormControlTextarea1"
                   rows="6"
-                  required
-                ></textarea>
+                  required></textarea>
               </div>
               <div class="col-12">
                 <button class="btn btn-normal" type="submit">

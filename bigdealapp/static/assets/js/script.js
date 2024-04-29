@@ -1684,10 +1684,10 @@ $('.feature-slide').slick({
    ==========================*/
   $('.sidebar-popup').on('click', function(e) {
     $('.open-popup').toggleClass('open');
-    $('.collection-filter').css("left","-15px");
+    $('.collection-filter').css("left","0");
   });
   $('.filter-main-btn').on('click', function(e) {
-    $('.collection-filter').css("left","-15px");
+    $('.collection-filter').css("left","0");
   });
   $('.filter-back').on('click', function(e) {
     $('.collection-filter').css("left","-365px");
@@ -3139,5 +3139,8 @@ function redirectToCreateQueryParamsUrl(params) {
 }
 
 
-
-
+$(document).ready(function() {
+  $("#myDashboard").on('click', function(){
+    $("#myTab").addClass("open");
+  });
+});

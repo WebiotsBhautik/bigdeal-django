@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="product-detail detail-center">
-                            <div class="detail-title">
+                            <div class="detail-title m-0">
                                 <div class="detail-left">
                                     <div class="rating-star">
                                         {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
@@ -104,13 +104,11 @@
                                       {% endif %}
                                     </div>
                                     <div class="price">
-                                        <div class="price">
-                                          {% if product.variantProduct.productType == "Simple" %}
-                                          {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
-                                          {% else %}
-                                          {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
-                                          {% endif %}
-                                        </div>
+                                      {% if product.variantProduct.productType == "Simple" %}
+                                      {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
+                                      {% else %}
+                                      {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
+                                      {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -132,19 +130,23 @@
           <div class="page-section">
             <div class="pagination">
                 {% if page_obj.has_previous %}
-                    <a href="{{page_obj.previous_page_number|update_url_parameters:request}}" class="previous">Previous</a>
+                    <a href="{{page_obj.previous_page_number|update_url_parameters:request}}" class="previous">
+                      <i class="fa fa-angle-double-left d-block"></i>
+                    </a>
                 {% endif %}
                 
                 {% for num in page_obj.paginator.page_range %}
                     {% if page_obj.number == num %}
-                    <span class="current-page">{{ num }}</span>
+                    <a class="current-page">{{ num }}</a>
                     {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                         <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
                     {% endif %}
                 {% endfor %}
                 
                 {% if page_obj.has_next %}
-                <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">Next</a>
+                <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">
+                  <i class="fa fa-angle-double-right d-block"></i>
+                </a>
                 {% endif %}
             </div>
           </div>

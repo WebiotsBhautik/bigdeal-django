@@ -2104,11 +2104,12 @@ body {
 
   .save-details-box {
     .save-details {
-      background-color: $dark-color;
+      background-color: #1b1b1b;
 
       .button {
         .remove-edit {
-          color: black;
+          color: #eee;
+          background-color: #262626;
         }
       }
     }
@@ -2571,9 +2572,8 @@ body {
   // login dark //
   .login-page {
     .theme-card {
-      border-color: $dark-border;
-      background-color: $light-layout;
-
+      border-color: #262626;
+      background-color: #1b1b1b;
       input {
         background-color: $light-layout;
       }
@@ -3043,18 +3043,18 @@ body {
       }
     }
 
-    .accordion-item {
-      .accordion-header {
-        .accordion-button {
-          background-color: $light-layout;
-          border-color: $dark-border;
-        }
-      }
+    // .accordion-item {
+    //   .accordion-header {
+    //     .accordion-button {
+    //       background-color: $light-layout;
+    //       border-color: $dark-border;
+    //     }
+    //   }
 
-      .accordion-collapse {
-        border-color: $dark-border;
-      }
-    }
+    //   .accordion-collapse {
+    //     border-color: $dark-border;
+    //   }
+    // }
   }
 
   // menu dark //
@@ -3535,7 +3535,7 @@ body {
             }
 
             td {
-              background-color: $light-layout;
+              // background-color: $light-layout;
               color: $font-layout-4;
               border-color: $dark-border;
             }
@@ -3546,7 +3546,7 @@ body {
 
             td,
             th {
-              background-color: $light-layout;
+              // background-color: $light-layout;
               color: $font-layout-4;
               border-color: $dark-border;
             }
@@ -3597,7 +3597,7 @@ body {
 
       .detail-part {
         .title-detail {
-          background-color: $light-layout;
+          background-color: $dark-layout;
           border-color: $dark-border;
 
           h5 {
@@ -3615,6 +3615,7 @@ body {
       }
 
       .btn-part {
+        background-color: $dark-layout;
         border-color: $dark-border;
       }
     }

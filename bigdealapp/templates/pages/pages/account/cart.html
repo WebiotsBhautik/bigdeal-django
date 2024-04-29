@@ -93,8 +93,7 @@
                             class="btn quantity-left-minus"
                             data-type="minus"
                             data-field=""
-                            onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})"
-                          ></button>
+                            onclick="counterMinusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}'})"></button>
                         </span>
                         <input
                           type="text"
@@ -108,8 +107,7 @@
                           <button
                             type="button"
                             class="btn quantity-right-plus"
-                            onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})"
-                          ></button>
+                            onclick="counterPlusAtCart({key:'quantityInput{{forloop.counter}}',productVariantId:'{{product.cartProduct.id}}',totalPriceEle:'priceOfTotalQuantity{{forloop.counter}}',productQuantity:'{{product.cartProduct.productVariantQuantity}}'})"></button>
                         </span>
                       </div>
                     </div>

@@ -10,59 +10,62 @@
       <div class="collection-filter-block creative-card creative-inner category-side">
         <!-- brand filter start -->
         <div class="collection-mobile-back">
-          <span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
-        <div class="collection-collapse-block open">
-          <h3 class="collapse-block-title mt-0">brand</h3>
-          <div class="collection-collapse-block-content">
-            <div class="collection-brand-filter">
-              {% for brand in ProductsBrand %}
-              <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                <input type="checkbox" name="allbrand" value="{{brand.brandName}}" class="custom-control-input form-check-input" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
-                <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
+          <span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span>
         </div>
-
-        {% for name,values in attributeDict.items %}
-
-        <!-- size filter start here -->
-        <div class="collection-collapse-block open">
-          <h3 class="collapse-block-title">{{name}}</h3>
-          <div class="collection-collapse-block-content">
-            <div class="size-selector">
+        <div class="main-filter-box">
+          <div class="collection-collapse-block open">
+            <h3 class="collapse-block-title mt-0">brand</h3>
+            <div class="collection-collapse-block-content">
               <div class="collection-brand-filter">
-                {% for value in values %}
+                {% for brand in ProductsBrand %}
                 <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                  <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %}>
-                  <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
+                  <input type="checkbox" name="allbrand" value="{{brand.brandName}}" class="custom-control-input form-check-input" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
+                  <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}} ({{brand.brandTotalProduct}})</label>
                 </div>
                 {% endfor %}
               </div>
             </div>
           </div>
-        </div>
 
-        {% endfor %}
+          {% for name,values in attributeDict.items %}
 
-
-        <!-- price filter start here -->
-        <div class="collection-collapse-block open">
-          <h3 class="collapse-block-title">price</h3>
-          <div class="collection-collapse-block-content">
-            <div class="filter-slide">
-              <input class="js-range-slider" type="text" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" name="pricefilter" data-filter="price" id="filter-price-range" value="" data-type="double"/>
+          <!-- size filter start here -->
+          <div class="collection-collapse-block open">
+            <h3 class="collapse-block-title">{{name}}</h3>
+            <div class="collection-collapse-block-content">
+              <div class="size-selector">
+                <div class="collection-brand-filter">
+                  {% for value in values %}
+                  <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
+                    <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %}>
+                    <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
           </div>
+
+          {% endfor %}
+
+
+          <!-- price filter start here -->
+          <div class="collection-collapse-block open">
+            <h3 class="collapse-block-title">price</h3>
+            <div class="collection-collapse-block-content">
+              <div class="filter-slide">
+                <input class="js-range-slider" type="text" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" name="pricefilter" data-filter="price" id="filter-price-range" value="" data-type="double"/>
+              </div>
+            </div>
+          </div>
+          
+          <!-- submit button -->
+          <div>
+            <button type="submit" class="btn submit-btn btn-normal" id="submitBtnAtFilterSidebar">Submit</button>
+          </div>
         </div>
-        
-        <!-- submit button -->
-        <div>
-          <button type="submit" class="btn btn-primary" id="submitBtnAtFilterSidebar">Submit</button>
         </div>
-      </div>
-    </form>
+      </form>
     <!-- silde-bar colleps block end here -->
 
     <!-- side-bar single product slider start -->
