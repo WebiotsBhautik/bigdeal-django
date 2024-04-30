@@ -6,7 +6,7 @@ l{% extends 'pages/shop/shop-base.html' %}
 {% block components %}
 
 <!-- section start -->
-<section class="section-big-pt-space b-g-light">
+<section class="section-big-pt-space section-big-pb-space b-g-light">
     <div class="collection-wrapper">
         <div class="custom-container">
             <div class="row">
@@ -15,18 +15,18 @@ l{% extends 'pages/shop/shop-base.html' %}
                         <div class="top-banner-wrapper">
                             <a href="{% url 'shop_left_sidebar' %}">
                               <img src="{{shop_banner.bannerImage}}" class="img-fluid w-100" alt="category"></a>
-                            <div class="top-banner-content small-section pb-0">
+                            <div class="top-banner-content small-section">
                                 <h4>fashion</h4>
                                 <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                             </div>
                         </div>
                         <div class="collection-product-wrapper">
-                            <div class="section-big-pt-space portfolio-section portfolio-padding metro-section port-col">
+                            <div class="section-big-pt-space portfolio-section metro-section port-col">
                                 <div class="isotopeContainer row metro-block">
                                    {% for banner in allbanners %} 
                                    {% if banner.bannerType|to_str == 'Shop metro' %}
-                                    <div class="col-xl-3 col-lg-4 col-sm-6  isotopeSelector">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 isotopeSelector">
                                         <div class="product">
                                             <div class="product-box">
                                                 <div class="product-imgbox">
@@ -64,24 +64,35 @@ l{% extends 'pages/shop/shop-base.html' %}
                             </div>
                             <div class="product-pagination mt-0">
                                 <div class="theme-paggination-block">
-                                    <div class="row">
-                                        <div class="col-xl-6 col-md-6">
-                                            <nav aria-label="Page navigation">
-                                                <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> <span class="sr-only">Previous</span></a></li>
-                                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span> <span class="sr-only">Next</span></a></li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                        <div class="col-xl-6 col-md-6">
-                                            <div class="product-search-count-bottom">
-                                                <h5>Showing Products 1-24 of 10 Result</h5>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                    <span>
+                                                        <i class="fa fa-chevron-left"></i>
+                                                    </span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">2</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)">3</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="javascript:void(0)" aria-label="Next">
+                                                    <span>
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>

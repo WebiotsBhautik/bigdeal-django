@@ -1614,21 +1614,21 @@ $('.feature-slide').slick({
     if($('.product-wrapper-grid').hasClass("list-view")) {}
     else{
       $(".product-wrapper-grid").children().children().removeClass();
-      $(".product-wrapper-grid").children().children().addClass("col-lg-6");
+      $(".product-wrapper-grid").children().children().addClass("col-6");
     }
   });
   $('.product-3-layout-view').on('click', function(e) {
     if($('.product-wrapper-grid').hasClass("list-view")) {}
     else{
       $(".product-wrapper-grid").children().children().removeClass();
-      $(".product-wrapper-grid").children().children().addClass("col-lg-4");
+      $(".product-wrapper-grid").children().children().addClass("col-lg-4 col-6");
     }
   });
   $('.product-4-layout-view').on('click', function(e) {
     if($('.product-wrapper-grid').hasClass("list-view")) {}
     else{
       $(".product-wrapper-grid").children().children().removeClass();
-      $(".product-wrapper-grid").children().children().addClass("col-lg-3");
+      $(".product-wrapper-grid").children().children().addClass("col-lg-3 col-md-4 col-6");
     }
   });
   $('.product-6-layout-view').on('click', function(e) {
@@ -1687,10 +1687,13 @@ $('.feature-slide').slick({
     $('.collection-filter').css("left","0");
   });
   $('.filter-main-btn').on('click', function(e) {
-    $('.collection-filter').css("left","0");
+    // $('.collection-filter').css("left", "0");
+    $("#filterBase, .bg-overlay").addClass("open");
+
   });
-  $('.filter-back').on('click', function(e) {
-    $('.collection-filter').css("left","-365px");
+  $('.filter-back, .bg-overlay').on('click', function (e) {
+    $("#filterBase").removeClass("open");
+    // $('.collection-filter').css("left","-365px");
     $('.sidebar-popup').trigger('click');
   });
 
@@ -1699,6 +1702,17 @@ $('.feature-slide').slick({
   });
   $('.filter-back').on('click', function(e) {
     $('.dashboard-left').css("left","-365px");
+  });
+
+  $('.filter-main-btn').on('click', function(e) {
+    // $('.collection-filter').css("left", "0");
+    $(".horizontal-filter, .bg-overlay").addClass("open");
+
+  });
+  $('.filter-back, .bg-overlay').on('click', function (e) {
+    $(".horizontal-filter, .bg-overlay").removeClass("open");
+    // $('.collection-filter').css("left","-365px");
+    // $('.sidebar-popup').trigger('click');
   });
 
   $(function () {

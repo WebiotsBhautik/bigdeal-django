@@ -71,7 +71,7 @@
 {% include 'components/footer/product-footer.html' %}
 
 <!-- edit product modal start-->
-{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
+{% comment %}<div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-body">
@@ -168,7 +168,7 @@
         <h3>my cart</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeCart()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -309,7 +309,7 @@
         <h3>my wishlist</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeWishlist()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -446,7 +446,7 @@
         <h3>my account</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeAccount()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -493,7 +493,7 @@
         <h3>my setting</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeSetting()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -521,7 +521,7 @@
   <!-- add to  setting bar  end-->
   
   <!-- Add to cart modal popup start-->
-  <div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
               <div class="modal-body modal1">
@@ -633,14 +633,14 @@
   <!-- Add to cart modal popup end-->
   
   <!-- Quick-view modal popup start-->
-  <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content quick-view-modal">
         <div class="modal-body">
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-lg-6 col-12">
-              <div class="quick-view-img">
+              <div class="quick-view-img b_size_content">
                 <img src="{% static 'assets/images/layout-1/product/3.jpg' %}" alt="" class="img-fluid bg-img">
               </div>
             </div>
@@ -807,7 +807,7 @@
 <script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
 
 <!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
 
 
 <!-- father icon -->

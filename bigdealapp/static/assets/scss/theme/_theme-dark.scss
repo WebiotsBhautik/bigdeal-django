@@ -1893,7 +1893,7 @@ body {
       .product-filter-content,
       .popup-filter {
         .search-count {
-          border-color: $dark-border;
+          // border-color: $dark-border;
 
           h5 {
             color: $font-layout-3;
@@ -1918,13 +1918,13 @@ body {
           select {
             color: $font-layout-3;
             border-color: $dark-border;
-            background-color: $dark-layout;
+            // background-color: $dark-layout;
           }
         }
 
-        select {
-          background-color: $dark-layout;
-        }
+        // select {
+        //   background-color: $dark-layout;
+        // }
 
         &.horizontal-filter-mian {
           .horizontal-filter-toggle {
@@ -2047,13 +2047,13 @@ body {
       }
     }
 
-    .product-search-count-bottom {
-      border-color: $dark-border;
+    // .product-search-count-bottom {
+    //   border-color: $dark-border;
 
-      h5 {
-        color: $font-layout-3;
-      }
-    }
+    //   h5 {
+    //     color: $font-layout-3;
+    //   }
+    // }
   }
 
   .filter-slide {
@@ -3671,9 +3671,9 @@ body {
             border-color: $dark-border;
           }
 
-          .collection-view {
-            border-color: $dark-border;
-          }
+          // .collection-view {
+          //   border-color: $dark-border;
+          // }
         }
       }
     }

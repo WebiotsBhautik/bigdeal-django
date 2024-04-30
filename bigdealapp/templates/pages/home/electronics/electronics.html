@@ -51,9 +51,9 @@
                             Download aap
                           </h6>
                           <ul>
-                            <li><a><i class="fa fa-apple" ></i></a></li>
-                            <li><a><i class="fa fa-android" ></i></a></li>
-                            <li><a><i class="fa fa-windows" ></i></a></li>
+                            <li><a><i class="fa fa-apple"></i></a></li>
+                            <li><a><i class="fa fa-android"></i></a></li>
+                            <li><a><i class="fa fa-windows"></i></a></li>
                           </ul>
                       </div>
                     </div>
@@ -160,8 +160,8 @@
                                 <li>
                                   <a class="mor-slide-click">
                                   mor category
-                                  <i class="fa fa-angle-down pro-down" ></i>
-                                  <i class="fa fa-angle-up pro-up" ></i>
+                                  <i class="fa fa-angle-down pro-down"></i>
+                                  <i class="fa fa-angle-up pro-up"></i>
                                   </a>
                                 </li>
                             </ul>
@@ -778,7 +778,7 @@
                                     <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                       <i data-feather="shopping-cart"></i> 
                                     </a>
-                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
                                     <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                     <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                   </div>
@@ -861,7 +861,7 @@
                                     <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                       <i data-feather="shopping-cart"></i> 
                                     </a>
-                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
                                     <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                     <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                   </div>
@@ -944,7 +944,7 @@
                                     <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                       <i data-feather="shopping-cart"></i> 
                                     </a>
-                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
                                     <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                     <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                   </div>
@@ -1411,7 +1411,7 @@
                       <div class="hotdeal-right-nav">
                         {% for banner in allbanners  %}
                         {% if banner.bannerType|to_str == 'Timer' %}
-                        <div><img src="{{banner.bannerImage}}" alt="hot-dea" class="img-fluid" ></div>
+                        <div><img src="{{banner.bannerImage}}" alt="hot-dea" class="img-fluid"></div>
                         {% endif %}
                         {% endfor %}
                       </div>
@@ -1490,7 +1490,7 @@
                                   <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                     <i data-feather="shopping-cart"></i> 
                                   </a>
-                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
                                   <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                   <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                 </div>
@@ -1526,11 +1526,11 @@
                               <div>
                                 <div class="product-detail">
                                   <ul class="rating">
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>
-                                    <li><i class="fa fa-star" ></i></li>                                
-                                    <li><i class="fa fa-star-o" ></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>                                
+                                    <li><i class="fa fa-star-o"></i></li>
                                   </ul>
                                 <a href="{% url 'shop_left_sidebar' %}"><p>{{banner.titleOne}}</p></a>
                                 <h6>{{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
@@ -1543,7 +1543,7 @@
                                   <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
                                     <i data-feather="shopping-cart"></i> 
                                   </a>
-                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
+                                  <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
                                   <a onclick="handleQuickView({'productId':'{{banner.bannerProduct.variantProduct.id}}','productVariantId':'{{banner.bannerProduct.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                   <a href="{% url 'compare_products' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                 </div>
@@ -1627,7 +1627,7 @@
                                 </div>
                                 <div class="cart-info">
                                       <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart"><i  data-feather="shopping-cart"></i></button>
-                                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart" class="add-to-wish"></i></a>
+                                      <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist"><i  data-feather="heart" class="add-to-wish"></i></a>
                                       <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
                                       <a href="javascript.void(0)"  class="tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
                                   </div>
@@ -1710,13 +1710,13 @@
                         <div class="instagram-box">
                             <img src="{{banner.bannerImage}}" class="img-fluid" alt="insta">
                             <div class="insta-cover">
-                                <i class="fa fa-instagram" ></i>
+                                <i class="fa fa-instagram"></i>
                             </div>
                         </div>
                         <div class="instagram-box">
                             <img src="{{banner.bannerImageTwo}}" class="img-fluid" alt="insta">
                             <div class="insta-cover">
-                                <i class="fa fa-instagram" ></i>
+                                <i class="fa fa-instagram"></i>
                             </div>
                         </div>
                     </div>
@@ -1890,7 +1890,7 @@
 
 
 <!--Newsletter modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -1923,14 +1923,14 @@
 <!--Newsletter Modal popup end-->
 
 <!-- Quick-view modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content quick-view-modal">
       <div class="modal-body">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="row">
           <div class="col-lg-6 col-12">
-            <div class="quick-view-img" id="quickViewImagesDiv">
+            <div class="quick-view-img b_size_content" id="quickViewImagesDiv">
               <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
             </div>
           </div>
@@ -1990,7 +1990,7 @@
 {% include 'base/cart-popup.html' %}
 
 <!-- Add to cart modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body modal1">
@@ -2110,7 +2110,7 @@
       <h3>my account</h3>
       <div class="close-cart">
         <a href="javascript:void(0)" onclick="closeAccount()">
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fa fa-times"></i>
         </a>
       </div>
     </div>
@@ -2156,7 +2156,7 @@
       <h3>my setting</h3>
       <div class="close-cart">
         <a href="javascript:void(0)" onclick="closeSetting()">
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fa fa-times"></i>
         </a>
       </div>
     </div>

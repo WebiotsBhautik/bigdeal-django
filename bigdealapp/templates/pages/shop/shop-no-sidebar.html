@@ -7,7 +7,7 @@
 
 
 <!-- section start -->
-<section class="section-big-pt-space ratio_asos b-g-light">
+<section class="section-big-pt-space section-big-pb-space ratio_asos b-g-light overflow-hidden">
   <div class="collection-wrapper">
     <div class="custom-container">
       <div class="row">
@@ -22,6 +22,11 @@
                         <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
+                </div>
+                <div class="filter-main-btn">
+                  <span class="filter-btn">
+                    <i class="fa fa-filter"></i> Filter
+                  </span>
                 </div>
                 <div class="col-12">
                   <ul class="short-name">
@@ -93,21 +98,12 @@
                 <div class="collection-product-wrapper">
                   <div class="product-top-filter">
                       <div class="container-fluid p-0">
-                        <div class="row">
-                          <div class="col-xl-12">
-                              <div class="filter-main-btn">
-                                <span class="filter-btn">
-                                  <i class="fa fa-filter" aria-hidden="true"></i> Filter
-                                </span>
-                              </div>
-                          </div>
-                      </div>
                       <div class="row">
                         <div class="col-12 position-relative">
                           <div class="product-filter-content horizontal-filter-mian">
                             <div class="horizontal-filter-toggle">
                               <h4><i data-feather="filter"></i>latest filter</h4>
-                              <h5>Showing Products of {{totalCount}} Result</h5>
+                              {% comment %} <h5>Showing Products of {{totalCount}} Result</h5> {% endcomment %}
                             </div>
                             <div class="collection-view">
                                 <ul>
@@ -141,8 +137,12 @@
                               {% csrf_token %}
                               <div class="horizontal-filter collection-filter">
                                 <div class="horizontal-filter-contain">
-                                  <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left" aria-hidden="true"></i> back</span></div>
+                                  <div class="collection-mobile-back">
+                                    <span class="filter-back">
+                                      <i class="fa fa-angle-left"></i> back</span>
+                                  </div>
                                   
+                                  <div class="main-filter-box">
                                     {% for name,values in attributeDict.items %}
                                     <div class="filter-group">
                                       <div class="collection-collapse-block">
@@ -188,10 +188,13 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div>                                                         
-                                  <a href="javascript:void(0)" class="btn btn-solid btn-sm close-filter"> close filter</a>                                                         
-                                  <div>
-                                    <button type="submit" class="btn btn-primary" id="submitBtnAtFilterSidebar">Submit</button>
+                                  </div>
+                                </div>
+                                  <div class="filter-close-box">
+                                    <a href="javascript:void(0)" class="btn close-filter">close filter</a>                                                         
+                                    <div>
+                                      <button type="submit" class="btn filter-submit-btn" id="submitBtnAtFilterSidebar">Submit</button>
+                                    </div>
                                   </div>
                                 </div>
                                 <!-- submit button -->

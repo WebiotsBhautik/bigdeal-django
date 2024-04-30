@@ -11,10 +11,14 @@
         <div class="product-box">
           <div class="product-imgbox">
             <div class="product-front">
-              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid" alt="product"> </a>
+              <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                <img src="{{product.variantProduct.productImageFront}}" class="img-fluid" alt="product">
+              </a>
             </div>
             <div class="product-back">
-              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid" alt="product"> </a>
+              <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                <img src="{{product.variantProduct.productImageBack}}" class="img-fluid" alt="product">
+              </a>
             </div>
           </div>
           <div class="product-detail detail-center detail-inverse">
@@ -105,50 +109,42 @@
 {% if page_obj.has_other_pages %}
 <div class="product-pagination">
 <div class="theme-paggination-block">
-    <div class="row">
-    <div class="col-xl-6 col-md-6">
-        <nav aria-label="Page navigation">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-            <li class="page-item">
-              <a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}" aria-label="Previous">
-                <span aria-hidden="true">
-                  <i class="fa fa-angle-left" aria-hidden="true"></i>
-                </span>
-                <span class="sr-only">Previous</span>
-              </a>
-            </li>
-            {% endif %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}" aria-label="Previous">
+            <span>
+              <i class="fa fa-angle-left"></i>
+            </span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
 
-            {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-            <li class="current-page page-item">
-              <a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a>
-            </li>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
-            {% endif %}
-            {% endfor %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <li class="current-page page-item">
+          <a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a>
+        </li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="{{num|update_url_parameters:request}}">{{num}}</a></li>
+        {% endif %}
+        {% endfor %}
 
-            {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}" aria-label="Next">
-                <span aria-hidden="true">
-                  <i class="fa fa-angle-right" aria-hidden="true"></i>
-                </span>
-                <span class="sr-only">Next</span>
-              </a>
-            </li>
-            {% endif %}
-            {% endif %}
-        </ul>
-        </nav>
-    </div>
-    <div class="col-xl-6 col-md-6">
-        <div class="product-search-count-bottom">
-        <h5>Showing Products 1-24 of {{totalCount}} Result</h5></div>
-    </div>
-    </div>
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}" aria-label="Next">
+            <span>
+              <i class="fa fa-angle-right"></i>
+            </span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %}
+        {% endif %}
+    </ul>
+    </nav>
 </div>
 </div>
 {% else %}
