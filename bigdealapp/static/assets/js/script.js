@@ -3143,4 +3143,7 @@ $(document).ready(function() {
   $("#myDashboard").on('click', function(){
     $("#myTab").addClass("open");
   });
+  $(".nav-item").on('click', function(){
+    $("#myTab").removeClass("open");
+  }); 
 });
