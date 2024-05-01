@@ -2197,8 +2197,8 @@ body {
       .timer {
         p {
           span {
-            background-color: $light-layout;
-            border-color: $dark-border;
+            // background-color: $light-layout;
+            // border-color: $dark-border;
             color: $font-layout-3;
           }
         }
@@ -2221,8 +2221,9 @@ body {
 
         &.delivery-services {
           li {
-            border-color: $light-layout;
-            color: $font-layout-3;
+            border-color: #3c3c3c;
+            color: #e7eaec;
+            background-color: #1b1b1b;
           }
         }
       }
@@ -2257,6 +2258,7 @@ body {
       .product-social {
         li {
           a {
+            background-color: #1b1b1b;
             color: $font-layout-3;
             border-color: $dark-border;
           }

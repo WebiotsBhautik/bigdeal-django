@@ -5,10 +5,8 @@
 {% load mathfilters %}
 {% block components %}
 
-
-
 <!-- section start -->
-<section class="section-big-pt-space section-big-pb-space ratio_asos b-g-light overflow-hidden">
+<section class="section-big-pt-space section-big-pb-space ratio_asos b-g-light">
   <div class="collection-wrapper">
     <div class="custom-container">
       <div class="row">
@@ -17,177 +15,197 @@
             <div class="row">
               <div class="col-12">
                 <div class="top-banner-wrapper">
-                  <a href="{% url 'shop_left_sidebar' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid  w-100" alt="category"></a>
-                    <div class="top-banner-content small-section">
-                        <h4>fashion</h4>
-                        <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    </div>
+                  <a href="{% url 'shop_left_sidebar' %}">
+                    <img src="{{shop_banner.bannerImage}}" class="img-fluid w-100" alt="category"/>
+                  </a>
+                  <div class="top-banner-content small-section">
+                    <h4>fashion</h4>
+                    <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                  </div>
                 </div>
                 <div class="col-12">
                   <ul class="short-name">
-                      {% for key, value in request.GET.items %}
-                      {% if key != 'selectedAttribute' and key != 'price' %}
-                      {% for attribute in value|return_selected_attribute_list:request %}
-                      <li>
-                          <div class="label-tag">
-                              <span>{{attribute}}-{{key}}</span>
-                              <button type="button" class="btn-close"
-                                  onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
-                          </div>
-                      </li>
-                      {% endfor %}
-                      {% endif %}
-
-                      {% if key == 'price' %}
-                      {% with price_values=value|return_selected_attribute_list:request %}
-                      {% if price_values %}
-                      <li>
-                          <div class="label-tag">
-                              <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
-                                  {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
-                          </div>
-                      </li>
-                      {% endif %}
-                      {% endwith %}
-                      {% endif %}
-
-                      {% endfor %}
-
-                      {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
-                      {% if request.GET.page %}
-
+                    {% for key, value in request.GET.items %}
+                    {% if key != 'selectedAttribute' and key != 'price' %}
+                    {% for attribute in value|return_selected_attribute_list:request %}
+                    <li>
                       <div class="label-tag">
-                          <a href="{% url 'shop_sidebar_popup' %}"><span>Clear All</span></a>
+                        <span>{{attribute}}-{{key}}</span>
+                        <button type="button" class="btn-close" onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
                       </div>
-
-                      {% endif %}
-                      {% endif %}
-
-
-                      {% if request.path == '/shop_sidebar_popup' or request.GET.page %}
-                      {% if 'price' not in request.GET %}
-
-                      <li>
-                          <div class="label-tag">
-                              <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
-                                  {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
-                          </div>
-                      </li>
-
-                      {% endif %}
-                      {% endif %}
-
-
-                      {% if request.path != '/shop_sidebar_popup' or request.GET %}
-                      {% if not request.GET.page %}
-
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                    {% if key == 'price' %}
+                    {% with price_values=value|return_selected_attribute_list:request %}
+                    {% if price_values %}
+                    <li>
                       <div class="label-tag">
-                          <a href="{% url 'shop_sidebar_popup' %}"><span>Clear All</span></a>
+                        <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} - {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
                       </div>
-                      {% endif %}
-                      {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endwith %}
+                    {% endif %}
+                    {% endfor %}
+                    {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                    {% if request.GET.page %}
 
+                    <div class="label-tag">
+                      <a href="{% url 'shop_sidebar_popup' %}">
+                        <span>Clear All</span>
+                      </a>
+                    </div>
+
+                    {% endif %}
+                    {% endif %}
+                    {% if request.path == '/shop_sidebar_popup' or request.GET.page %}
+                    {% if 'price' not in request.GET %}
+
+                    <li>
+                      <div class="label-tag">
+                        <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} - {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                      </div>
+                    </li>
+
+                    {% endif %}
+                    {% endif %}
+                    {% if request.path != '/shop_sidebar_popup' or request.GET %}
+                    {% if not request.GET.page %}
+
+                    <div class="label-tag">
+                      <a href="{% url 'shop_sidebar_popup' %}">
+                        <span>Clear All</span>
+                      </a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
                   </ul>
                 </div>
                 <div class="collection-product-wrapper">
                   <div class="product-top-filter">
-                      <div class="row">
-                          <div class="col-12 position-relative">
-                              <div class="popup-filter">
-                                  <div class="sidebar-popup"><a class="popup-btn">filter products</a></div>
-                                  <div class="open-popup">
-                                      <div class="collection-filter category-side category-page-side">
-                                        <form action="{% url 'create_query_params_url' path %}" method="post">
-                                          {% csrf_token %}
-                                          <!-- side-bar colleps block stat -->
-                                          <div class="collection-filter-block creative-card creative-inner">
-                                              <!-- brand filter start -->
-                                              <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left"></i> back</span></div>
-                                              <div class="collection-collapse-block open">
-                                                  <h3 class="collapse-block-title mt-0">brand</h3>
-                                                  <div class="collection-collapse-block-content">
-                                                      <div class="collection-brand-filter">
-                                                        {% for brand in ProductsBrand %}
-                                                          <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                                                              <input type="checkbox" class="custom-control-input form-check-input" name="allbrand" value="{{brand.brandName}}" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
-                                                              <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
-                                                          </div>
-                                                        {% endfor %}
-                                                      </div>
-                                                  </div>
-                                              </div> 
-
-                                              {% for name,values in attributeDict.items %}
-
-                                              <!-- size filter start here -->
-                                                <div class="collection-collapse-block open">
-                                                    <h3 class="collapse-block-title">{{name}}</h3>
-                                                    <div class="collection-collapse-block-content">
-                                                      <div class="size-selector">                              
-                                                        <div class="collection-brand-filter">
-                                                          {% for value in values %}
-                                                            <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                                                                <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %} >
-                                                                <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
-                                                            </div>
-                                                          {% endfor %}                               
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                </div> 
-                                              {% endfor %}
-                                              <!-- price filter start here -->
-                                              <div class="collection-collapse-block open">
-                                                <h3 class="collapse-block-title">price</h3>
-                                                <div class="collection-collapse-block-content">
-                                                  <div class="filter-slide">     
-                                                    <input class="js-range-slider" type="text" name="pricefilter" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" value="" data-filter="price" id="filter-price-range" data-type="double"/>                          
-                                                  </div>
-                                                </div>
-                                              </div>
-
-                                              <!-- submit button -->
-                                              <div>
-                                                <button type="submit" class="btn btn-primary" id="submitBtnAtFilterSidebar">Submit</button>
-                                              </div>
-                                          </div>
-                                          <!-- silde-bar colleps block end here -->
-                                        </form>
-                                      </div>
-                                  </div>
-                                  <div class="collection-view">
-                                      <ul>
-                                          <li><i class="fa fa-th grid-layout-view"></i></li>
-                                          <li><i class="fa fa-list-ul list-layout-view"></i></li>
-                                          {% comment %} <li style='margin-left:60px'><h5>Showing Products of {{totalCount}} Result</h5></li> {% endcomment %}
-                                      </ul>
-                                  </div>
-                                  <div class="collection-grid-view">
-                                      <ul>
-                                          <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"></li>
-                                          <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"></li>
-                                          <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"></li>
-                                          <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"></li>
-                                      </ul>
-                                  </div>
-                                  <div class="product-page-per-view">
-                                      <select>
-                                          <option value="High to low">24 Products Par Page</option>
-                                          <option value="Low to High">50 Products Par Page</option>
-                                          <option value="Low to High">100 Products Par Page</option>
-                                      </select>
-                                  </div>
-                                  <div class="product-page-filter">
-                                      <select>
-                                          <option value="High to low">Sorting items</option>
-                                          <option value="Low to High">50 Products</option>
-                                          <option value="Low to High">100 Products</option>
-                                      </select>
-                                  </div>
-                              </div>
+                    <div class="row">
+                      <div class="col-12 position-relative">
+                        <div class="popup-filter">
+                          <div class="sidebar-popup">
+                            <a class="popup-btn">filter products</a>
                           </div>
+                          <div class="open-popup">
+                            <div class="collection-filter category-side category-page-side">
+                              <form action="{% url 'create_query_params_url' path %}" method="post">
+                                {% csrf_token %}
+                                <!-- side-bar colleps block stat -->
+                                <div class="collection-filter-block creative-card creative-inner">
+                                  <!-- brand filter start -->
+                                  <button class="collection-mobile-back">
+                                    <span class="filter-back">
+                                      <i class="fa fa-angle-left"></i>
+                                      back
+                                    </span>
+                                  </button>
+                                  <div class="main-filter-box">
+                                    <div class="collection-collapse-block open">
+                                      <h3 class="collapse-block-title mt-0">brand</h3>
+                                      <div
+                                        class="collection-collapse-block-content"
+                                      >
+                                        <div class="collection-brand-filter">
+                                          {% for brand in ProductsBrand %}
+                                          <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
+                                            <input type="checkbox" class="custom-control-input form-check-input" name="allbrand" value="{{brand.brandName}}" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}/>
+                                            <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}}({{brand.brandTotalProduct}})</label>
+                                          </div>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    </div>
+  
+                                    {% for name,values in attributeDict.items %}
+  
+                                    <!-- size filter start here -->
+                                    <div class="collection-collapse-block open">
+                                      <h3 class="collapse-block-title">{{name}}</h3>
+                                      <div class="collection-collapse-block-content">
+                                        <div class="size-selector">
+                                          <div class="collection-brand-filter">
+                                            {% for value in values %}
+                                            <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
+                                              <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked {% endif %}/>
+                                              <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox" >{{value}}</label>
+                                            </div>
+                                            {% endfor %}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {% endfor %}
+                                    <!-- price filter start here -->
+                                    <div class="collection-collapse-block open">
+                                      <h3 class="collapse-block-title">price</h3>
+                                      <div class="collection-collapse-block-content">
+                                        <div class="filter-slide">
+                                          <input class="js-range-slider" type="text" name="pricefilter" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" value="" data-filter="price" id="filter-price-range" data-type="double"/>
+                                        </div>
+                                      </div>
+                                    </div>
+  
+                                    <!-- submit button -->
+                                  </div>
+                                  <div class="submit-btn-box">
+                                    <button type="submit" class="btn submit-btn" id="submitBtnAtFilterSidebar">Submit</button>
+                                  </div>
+                                </div>
+                                <!-- silde-bar colleps block end here -->
+                              </form>
+                            </div>
+                          </div>
+                          <div class="collection-view">
+                            <ul>
+                              <li>
+                                <i class="fa fa-th grid-layout-view"></i>
+                              </li>
+                              <li>
+                                <i class="fa fa-list-ul list-layout-view"></i>
+                              </li>
+                              {% comment %} <li style="margin-left: 60px">
+                                <h5>Showing Products of {{totalCount}} Result</h5>
+                              </li> {% endcomment %}
+                            </ul>
+                          </div>
+                          <div class="collection-grid-view">
+                            <ul>
+                              <li>
+                                <img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"/>
+                              </li>
+                              <li>
+                                <img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"/>
+                              </li>
+                              <li>
+                                <img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"/>
+                              </li>
+                              <li>
+                                <img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"/>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="product-page-per-view">
+                            <select>
+                              <option value="High to low">24 Products Par Page</option>
+                              <option value="Low to High">50 Products Par Page</option>
+                              <option value="Low to High">100 Products Par Page</option>
+                            </select>
+                          </div>
+                          <div class="product-page-filter">
+                            <select>
+                              <option value="High to low">Sorting items</option>
+                              <option value="Low to High">50 Products</option>
+                              <option value="Low to High">100 Products</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
 
                   {% include 'pages/shop/shop-product.html' %}
@@ -202,14 +220,9 @@
 </section>
 <!-- section End -->
 
-
-
 {% endblock components %}
-
-
-
 {% block script %}
-  
+
 <!-- range sldier -->
 <script src="{% static 'assets/js/ion.rangeSlider.js' %}"></script>
 <script src="{% static 'assets/js/rangeslidermain.js' %}"></script>

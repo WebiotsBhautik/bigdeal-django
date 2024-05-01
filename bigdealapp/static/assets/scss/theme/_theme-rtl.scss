@@ -1133,10 +1133,10 @@ body.rtl {
       }
 
       .popup-filter {
-        .open-popup {
-          left: unset;
-          right: 0;
-        }
+        // .open-popup {
+        //   left: unset;
+        //   right: 0;
+        // }
 
         .collection-grid-view,
         .product-page-per-view,
@@ -5461,7 +5461,7 @@ body.rtl {
           }
 
           .sidebar-popup {
-            background: none $theme-color1;
+            background: none;
           }
         }
       }

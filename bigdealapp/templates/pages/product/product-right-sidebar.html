@@ -196,27 +196,27 @@
                       <div class="row">
                         <div class="col-lg-12">
                           <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                            <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"><i class="icofont icofont-ui-home"></i>Description</a>
+                            <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"><i class="icofont icofont-ui-home"></i>Description</a>
                               <div class="material-border"></div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Details</a>
+                            <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab"><i class="icofont icofont-man-in-glasses"></i>Details</a>
                               <div class="material-border"></div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Video</a>
+                            <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab"><i class="icofont icofont-contacts"></i>Video</a>
                               <div class="material-border"></div>
                             </li>
-                            <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Write Review</a>
+                            <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab"><i class="icofont icofont-contacts"></i>Write Review</a>
                               <div class="material-border"></div>
                             </li>
                           </ul>
                           <div class="tab-content nav-material" id="top-tabContent">
-                            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                            <div class="tab-pane fade show active" id="top-home" role="tabpanel">
                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                             </div>
-                            <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                            <div class="tab-pane fade" id="top-profile" role="tabpanel">
                               <p class="pl-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                               <div class="single-product-tables">
-                                <table>
+                                <table class="table">
                                   <tbody>
                                   <tr>
                                     <td>Febric</td>
@@ -230,9 +230,17 @@
                                     <td>Material</td>
                                     <td>Crepe printed</td>
                                   </tr>
+                                  <tr>
+                                    <td>Length</td>
+                                    <td>50 Inches</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Size</td>
+                                    <td>S, M, L, XXL</td>
+                                  </tr>
                                   </tbody>
                                 </table>
-                                <table>
+                                {% comment %} <table class="table">
                                   <tbody>
                                   <tr>
                                     <td>Length</td>
@@ -243,15 +251,15 @@
                                     <td>S, M, L .XXL</td>
                                   </tr>
                                   </tbody>
-                                </table>
+                                </table> {% endcomment %}
                               </div>
                             </div>
-                            <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+                            <div class="tab-pane fade" id="top-contact" role="tabpanel">
                               <div class="mt-3 text-center">
                                 <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                               </div>
                             </div>
-                            <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                            <div class="tab-pane fade" id="top-review" role="tabpanel">
                               <form class="theme-form">
                                 <div class="row">
                                   <div class="col-12">
@@ -285,9 +293,10 @@
                       </div>
                     </section>
                 </div>
-                <div class="col-sm-3 collection-filter">
+                <div class="col-sm-3">
+                  <div class="collection-filter">
                     <div class="collection-filter-block creative-card creative-inner">
-                        <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left"></i> back</span></div>
+                        <button class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left"></i> back</span></button>
                         <div class="collection-collapse-block open">
                             <h3 class="collapse-block-title">brand</h3>
                             <div class="collection-collapse-block-content">
@@ -461,6 +470,7 @@
                         </div>
                     </div>
                     <!-- side-bar single product slider end -->
+                  </div>
                 </div> 
             </div>
         </div>

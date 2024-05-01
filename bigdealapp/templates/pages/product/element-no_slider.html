@@ -63,21 +63,19 @@
                 </a>
               </div>
               <div class="detail-right">
+                <div class="price">
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
+                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                  {% endif %}
+                </div>
                 <div class="check-price">
                   {% if product.productType == "Simple" %} 
                   {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                   {% else %} 
                   {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                   {% endif %} 
-                </div>
-                <div class="price">
-                  <div class="price">
-                    {% if product.productType == "Simple" %}
-                    {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                    {% else %}
-                    {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                    {% endif %}
-                  </div>
                 </div>
               </div>
             </div>
@@ -119,21 +117,19 @@
                     </a>
                   </div>
                   <div class="detail-right">
+                    <div class="price">
+                      {% if product.productType == "Simple" %}
+                      {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                      {% else %}
+                      {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                      {% endif %}
+                      </div>
                     <div class="check-price">
                       {% if product.productType == "Simple" %} 
                       {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                       {% else %} 
                       {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                       {% endif %} 
-                    </div>
-                    <div class="price">
-                      <div class="price">
-                        {% if product.productType == "Simple" %}
-                        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                        {% else %}
-                        {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                        {% endif %}
-                        </div>
                     </div>
                   </div>
                 </div>

@@ -152,21 +152,19 @@
                       </a>
                     </div>
                     <div class="detail-right">
+                      <div class="price">
+                        {% if product.productType == "Simple" %}
+                        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                        {% else %}
+                        {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                        {% endif %} 
+                      </div>
                       <div class="check-price">
                         {% if product.productType == "Simple" %} 
                         {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                         {% else %} 
                         {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                         {% endif %}  
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          {% if product.productType == "Simple" %}
-                          {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                          {% else %}
-                          {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                          {% endif %} 
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -434,7 +432,7 @@
                       <div class="row">
                           <div class="col-12">
                               <div class="modal-bg addtocart">
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal">
                                       
                                   </button>
                                   <div class="media">
@@ -542,7 +540,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content quick-view-modal">
         <div class="modal-body">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           <div class="row">
             <div class="col-lg-6 col-12">
               <div class="quick-view-img b_size_content" id="quickViewImagesDiv">

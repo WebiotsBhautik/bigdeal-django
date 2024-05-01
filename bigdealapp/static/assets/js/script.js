@@ -1684,7 +1684,7 @@ $('.feature-slide').slick({
    ==========================*/
   $('.sidebar-popup').on('click', function(e) {
     $('.open-popup').toggleClass('open');
-    $('.collection-filter').css("left","0");
+    // $('.collection-filter').css("left","0");
   });
   $('.filter-main-btn').on('click', function(e) {
     // $('.collection-filter').css("left", "0");

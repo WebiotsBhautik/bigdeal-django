@@ -24,7 +24,7 @@
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                             </div>
                         </div>
-
+                        <div class="filter-main-btn"><span class="filter-btn"><i class="fa fa-filter"></i> Filter</span></div>
                         <div class="col-12">
                           <ul class="short-name">
                               {% for key, value in request.GET.items %}
@@ -94,11 +94,6 @@
 
                         <div class="collection-product-wrapper">
                             <div class="product-top-filter">
-                              <div class="row">
-                                <div class="col-12">
-                                  <div class="filter-main-btn"><span class="filter-btn"><i class="fa fa-filter"></i> Filter</span></div>
-                                </div>
-                              </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="product-filter-content">
@@ -137,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="product-wrapper-grid product">
-                                <div class="row">
+                                <div class="row g-sm-4 g-3">
                                   {% if page_obj %}
                                   {% for product in page_obj %}
                                   <div class="col-md-4 col-6 col-grid-box">
@@ -201,21 +196,19 @@
                                               </h6> </a>
                                           </div>
                                           <div class="detail-right">
+                                            <div class="price">
+                                              {% if product.variantProduct.productType == "Simple" %}
+                                              <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}</h3>
+                                              {% else %}  
+                                              <h3 class="theme-color m-0">{{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                                              {% endif %}
+                                            </div>
                                             <div class="check-price">
                                               {% if product.variantProduct.productType == "Simple" %}
                                                 <del>{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}</del>
                                               {% else %}
                                                 <del>{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}</del>
                                               {% endif %}
-                                            </div>
-                                            <div class="price">
-                                              <div class="price">
-                                                {% if product.variantProduct.productType == "Simple" %}
-                                                <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}</h3>
-                                                {% else %}  
-                                                <h3 class="theme-color">{{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}</h3>
-                                                {% endif %}
-                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -241,11 +234,11 @@
                             {% if page_obj.has_other_pages %}
                             <div class="product-pagination">
                               <div class="theme-paggination-block">
-                                <nav aria-label="Page navigation">
+                                <nav>
                                   <ul class="pagination">
                                     {% if page_obj.has_previous %}
                                     <li class="page-item">
-                                      <a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}" aria-label="Previous">
+                                      <a class="page-link" href="{{page_obj.previous_page_number|update_url_parameters:request}}">
                                         <span>
                                           <i class="fa fa-angle-left"></i>
                                         </span>
@@ -266,7 +259,7 @@
 
                                     {% if page_obj.has_next %}
                                     <li class="page-item">
-                                      <a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}" aria-label="Next">
+                                      <a class="page-link" href="{{page_obj.next_page_number|update_url_parameters:request}}">
                                         <span>
                                           <i class="fa fa-angle-right"></i>
                                         </span>

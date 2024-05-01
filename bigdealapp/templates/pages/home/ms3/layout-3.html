@@ -824,21 +824,19 @@
                                        </a>
                                     </div>
                                     <div class="detail-right">
+                                       <div class="price">
+                                          {% if product.productType == "Simple" %}
+                                          {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                          {% else %}
+                                          {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                          {% endif %}
+                                       </div>
                                        <div class="check-price">
                                           {% if product.productType == "Simple" %} 
                                           {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                                           {% else %} 
                                           {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                                           {% endif %} 
-                                       </div>
-                                       <div class="price">
-                                          <div class="price">
-                                             {% if product.productType == "Simple" %}
-                                             {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                             {% else %}
-                                             {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                             {% endif %}
-                                          </div>
                                        </div>
                                     </div>
                                  </div>
@@ -1500,21 +1498,19 @@
                               </a>
                            </div>
                            <div class="detail-right">
+                              <div class="price">
+                                 {% if product.productType == "Simple" %}
+                                 {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                 {% else %}
+                                 {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                 {% endif %} 
+                              </div>
                               <div class="check-price">
                                  {% if product.productType == "Simple" %} 
                                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                                  {% else %} 
                                  {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                                  {% endif %}  
-                              </div>
-                              <div class="price">
-                                 <div class="price">
-                                    {% if product.productType == "Simple" %}
-                                    {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                    {% else %}
-                                    {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                    {% endif %} 
-                                 </div>
                               </div>
                            </div>
                         </div>
@@ -1845,7 +1841,7 @@
                <div class="newslatter-main">
                <div class="offer-content">
                <div>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                   <h2>newsletter</h2>
                   <p>Subscribe to our website mailling list <br> and get a Offer, Just for you!</p>
                   <form action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda" class="auth-form needs-validation" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
@@ -1873,7 +1869,7 @@
    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
      <div class="modal-content quick-view-modal">
        <div class="modal-body">
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
          <div class="row">
            <div class="col-lg-6 col-12">
              <div class="quick-view-img b_size_content" id="quickViewImagesDiv">

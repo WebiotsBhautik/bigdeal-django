@@ -1860,10 +1860,10 @@
   }
 
   // creative card //
-  .creative-card {
-    border-width: 25px;
-    padding: 25px;
-  }
+  // .creative-card {
+  //   border-width: 25px;
+  //   padding: 25px;
+  // }
 
   // blog-pages //
   .blog-page {
@@ -6103,10 +6103,10 @@
     .product-slick {
       background-color: $white1;
 
-      img {
-        width: 50%;
-        margin: 0 auto;
-      }
+      // img {
+      //   // width: 50%;
+      //   margin: 0 auto;
+      // }
     }
 
     .tab-product {
@@ -6308,11 +6308,19 @@
     transition: all 0.5s ease;
     box-shadow: 1px 0 5px rgba(158, 158, 158, 0.2);
     transition: all 0.2s ease-in-out;
+    body.rtl & {
+      left: unset;
+      right: -350px;
+    }
     body.dark & {
       box-shadow: 1px 0 5px rgba(158, 158, 158, 0.2);
     }
 &.open{
   left: 0;
+  body.rtl & {
+    left: unset;
+    right: 0;
+  }
 }
     // >div {
     //   &:first-child {
@@ -6344,12 +6352,11 @@
     }
 
     .theme-card {
-      padding-left: 30px;
-      padding-right: 30px;
+      padding-inline: calc(15px + (30 - 15) * ((100vw - 320px) / (991 - 320)));
     }
 
     .collection-sidebar-banner {
-      padding: 0 30px;
+      padding: 0 calc(15px + (30 - 15) * ((100vw - 320px) / (991 - 320)));
     }
   }
 
@@ -6577,12 +6584,14 @@
     .product-top-filter {
       .popup-filter {
         .sidebar-popup {
-          width: 55%;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          text-align: center;
-          margin-bottom: 20px;
-          background: none $theme-color1;
+          width: 100%;
+          padding: 0 calc(8px + (15 - 8) * ((100vw - 320px) / (1920 - 320)));
+          margin-bottom: 0;
+          background: none;
+          border: unset;
+          body.rtl & {
+            border: unset;
+          }
 
           .open-popup {
             text-align: left;
@@ -6592,6 +6601,12 @@
             color: $white;
             font-weight: 700;
             letter-spacing: 0.05em;
+            width: max-content;
+            padding: calc(7px + (10 - 7) * ((100vw - 320px) / (991 - 320))) 10px;
+            text-align: center;
+            margin-bottom: calc(10px + (14 - 10) * ((100vw - 320px) / (991 - 320)));
+            background: none $theme-color1;
+            display: block;
           }
 
           .collection-filter {

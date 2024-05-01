@@ -12,187 +12,189 @@
   <div class="collection-wrapper">
     <div class="custom-container">
       <div class="row">
-        <div class="col-sm-3 collection-filter">
-          <div class="collection-filter-block creative-card creative-inner">
-            <div class="collection-mobile-back">
-              <span class="filter-back">
-                  <i class="fa fa-angle-left"></i>
-                  back
-              </span>
+        <div class="col-sm-3">
+          <div class="collection-filter">
+            <div class="collection-filter-block creative-card creative-inner">
+              <button class="collection-mobile-back">
+                <span class="filter-back">
+                    <i class="fa fa-angle-left"></i>
+                    back
+                </span>
+              </button>
+              <div class="collection-collapse-block open">
+                <h3 class="collapse-block-title">brand</h3>
+                <div class="collection-collapse-block-content">
+                  <div class="collection-brand-filter">
+                    <ul class="category-list">
+                      {% for brand in ProductsBrand %} 
+                      <li><a href="{% url 'shop_left_sidebar' %}">{{brand.brandName}}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="collection-collapse-block open">
-              <h3 class="collapse-block-title">brand</h3>
-              <div class="collection-collapse-block-content">
-                <div class="collection-brand-filter">
-                  <ul class="category-list">
-                    {% for brand in ProductsBrand %} 
-                    <li><a href="{% url 'shop_left_sidebar' %}">{{brand.brandName}}</a></li>
+            <!-- side-bar single product slider start -->
+            <div class="theme-card creative-card creative-inner">
+              <h5 class="title-border">new product</h5>
+              <div class="slide-1">
+                <div>
+                  <div class="media-banner plrb-0 b-g-white border-0">
+                    {% for product in last_added_products|slice:"6:9" %}
+                    <div class="media-banner-box">
+                      <div class="media">
+                        <a href="product-page(left-sidebar).html" tabindex="0">
+                          <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
+                        </a>
+                        <div class="media-body">
+                          <div class="media-contant">
+                            <div>
+                              <div class="product-detail">
+                                <ul class="rating">
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                                <h6>
+                                  {% if product.productType == "Simple" %}
+                                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                  {% else %}
+                                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                  {% endif %}
+                                  <span>
+                                    {% if product.productType == "Simple" %} 
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                    {% else %} 
+                                    {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                  </span>
+                                </h6>
+                              </div>
+                              <div class="cart-info">
+                                <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                  <i data-feather="shopping-cart"></i> 
+                                </a>
+                                <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
+                                <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {% endfor %}
-                  </ul>
+                  </div>
+                </div>
+                <div>
+                  <div class="media-banner plrb-0 b-g-white border-0">
+                    {% for product in last_added_products|slice:"3:6" %}
+                    <div class="media-banner-box">
+                      <div class="media">
+                        <a href="product-page(left-sidebar).html" tabindex="0">
+                          <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
+                        </a>
+                        <div class="media-body">
+                          <div class="media-contant">
+                            <div>
+                              <div class="product-detail">
+                                <ul class="rating">
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                                <h6>
+                                  {% if product.productType == "Simple" %}
+                                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                  {% else %}
+                                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                  {% endif %}
+                                  <span>
+                                    {% if product.productType == "Simple" %} 
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                    {% else %} 
+                                    {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                  </span>
+                                </h6>
+                              </div>
+                              <div class="cart-info">
+                                <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                  <i data-feather="shopping-cart"></i> 
+                                </a>
+                                <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
+                                <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div>
+                  <div class="media-banner plrb-0 b-g-white border-0">
+                    {% for product in last_added_products|slice:"0:3" %}
+                    <div class="media-banner-box">
+                      <div class="media">
+                        <a href="product-page(left-sidebar).html" tabindex="0">
+                          <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
+                        </a>
+                        <div class="media-body">
+                          <div class="media-contant">
+                            <div>
+                              <div class="product-detail">
+                                <ul class="rating">
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                                <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
+                                <h6>
+                                  {% if product.productType == "Simple" %}
+                                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                  {% else %}
+                                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                  {% endif %}
+                                  <span>
+                                    {% if product.productType == "Simple" %} 
+                                    {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                    {% else %} 
+                                    {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                    {% endif %}
+                                  </span>
+                                </h6>
+                              </div>
+                              <div class="cart-info">
+                                <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
+                                  <i data-feather="shopping-cart"></i> 
+                                </a>
+                                <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
+                                <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
+                                <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
             </div>
+            <!-- side-bar single product slider end -->
           </div>
-          <!-- side-bar single product slider start -->
-          <div class="theme-card creative-card creative-inner">
-            <h5 class="title-border">new product</h5>
-            <div class="slide-1">
-              <div>
-                <div class="media-banner plrb-0 b-g-white border-0">
-                  {% for product in last_added_products|slice:"6:9" %}
-                  <div class="media-banner-box">
-                    <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
-                        <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
-                      </a>
-                      <div class="media-body">
-                        <div class="media-contant">
-                          <div>
-                            <div class="product-detail">
-                              <ul class="rating">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                              </ul>
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
-                              <h6>
-                                {% if product.productType == "Simple" %}
-                                {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                {% else %}
-                                {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                {% endif %}
-                                <span>
-                                  {% if product.productType == "Simple" %} 
-                                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                                  {% else %} 
-                                  {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                                  {% endif %}
-                                </span>
-                              </h6>
-                            </div>
-                            <div class="cart-info">
-                              <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                                <i data-feather="shopping-cart"></i> 
-                              </a>
-                              <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                              <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                              <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-              <div>
-                <div class="media-banner plrb-0 b-g-white border-0">
-                  {% for product in last_added_products|slice:"3:6" %}
-                  <div class="media-banner-box">
-                    <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
-                        <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
-                      </a>
-                      <div class="media-body">
-                        <div class="media-contant">
-                          <div>
-                            <div class="product-detail">
-                              <ul class="rating">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                              </ul>
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
-                              <h6>
-                                {% if product.productType == "Simple" %}
-                                {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                {% else %}
-                                {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                {% endif %}
-                                <span>
-                                  {% if product.productType == "Simple" %} 
-                                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                                  {% else %} 
-                                  {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                                  {% endif %}
-                                </span>
-                              </h6>
-                            </div>
-                            <div class="cart-info">
-                              <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                                <i data-feather="shopping-cart"></i> 
-                              </a>
-                              <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                              <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                              <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-              <div>
-                <div class="media-banner plrb-0 b-g-white border-0">
-                  {% for product in last_added_products|slice:"0:3" %}
-                  <div class="media-banner-box">
-                    <div class="media">
-                      <a href="product-page(left-sidebar).html" tabindex="0">
-                        <img src="/{{product.productImageFront}}" class="img-fluid " alt="banner">
-                      </a>
-                      <div class="media-body">
-                        <div class="media-contant">
-                          <div>
-                            <div class="product-detail">
-                              <ul class="rating">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                              </ul>
-                              <a href="product-page(left-sidebar).html" tabindex="0"><p>{{product.productName}}</p></a>
-                              <h6>
-                                {% if product.productType == "Simple" %}
-                                {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                                {% else %}
-                                {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                                {% endif %}
-                                <span>
-                                  {% if product.productType == "Simple" %} 
-                                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                                  {% else %} 
-                                  {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                                  {% endif %}
-                                </span>
-                              </h6>
-                            </div>
-                            <div class="cart-info">
-                              <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                                <i data-feather="shopping-cart"></i> 
-                              </a>
-                              <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                              <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                              <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- side-bar single product slider end -->
         </div>
         <div class="col-lg-9 col-12">
           <div class="container-fluid">
@@ -398,27 +400,27 @@
             <div class="row">
               <div class="col-lg-12">
                 <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"><i class="icofont icofont-ui-home"></i>Description</a>
+                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"><i class="icofont icofont-ui-home"></i>Description</a>
                     <div class="material-border"></div>
                   </li>
-                  <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Details</a>
+                  <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab"><i class="icofont icofont-man-in-glasses"></i>Details</a>
                     <div class="material-border"></div>
                   </li>
-                  <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Video</a>
+                  <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab"><i class="icofont icofont-contacts"></i>Video</a>
                     <div class="material-border"></div>
                   </li>
-                  <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Write Review</a>
+                  <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab"><i class="icofont icofont-contacts"></i>Write Review</a>
                     <div class="material-border"></div>
                   </li>
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
-                  <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                  <div class="tab-pane fade show active" id="top-home" role="tabpanel">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                   </div>
-                  <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                  <div class="tab-pane fade" id="top-profile" role="tabpanel">
                     <p class="pl-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     <div class="single-product-tables">
-                      <table>
+                      <table class="table">
                         <tbody>
                         <tr>
                           <td>Febric</td>
@@ -432,9 +434,17 @@
                           <td>Material</td>
                           <td>Crepe printed</td>
                         </tr>
+                        <tr>
+                          <td>Length</td>
+                          <td>50 Inches</td>
+                        </tr>
+                        <tr>
+                          <td>Size</td>
+                          <td>S, M, L, XXL</td>
+                        </tr>
                         </tbody>
                       </table>
-                      <table>
+                      {% comment %} <table class="table">
                         <tbody>
                         <tr>
                           <td>Length</td>
@@ -445,15 +455,15 @@
                           <td>S, M, L .XXL</td>
                         </tr>
                         </tbody>
-                      </table>
+                      </table> {% endcomment %}
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
+                  <div class="tab-pane fade" id="top-contact" role="tabpanel">
                     <div class="mt-3 text-center">
                       <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                  <div class="tab-pane fade" id="top-review" role="tabpanel">
                     <form class="theme-form">
                       <div class="row">
                         <div class="col-12">

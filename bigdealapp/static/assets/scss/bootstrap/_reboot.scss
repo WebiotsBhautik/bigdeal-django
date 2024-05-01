@@ -274,11 +274,11 @@ a {
 // See https://github.com/twbs/bootstrap/issues/19402
 
 a:not([href]):not([class]) {
-  &,
-  &:hover {
+  // &,
+  // &:hover {
     color: inherit;
     text-decoration: none;
-  }
+  // }
 }
 
 
