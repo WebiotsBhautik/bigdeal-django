@@ -50,31 +50,12 @@
                         <div class="col-3 order_detail">
                             <div>
                                 <h4>price</h4>
-                                {% comment %} <h5>${{product.productVariantOrderFinalPriceAfterTax}}.00</h5> {% endcomment %}
                                 <h5>${{product.productOrderFinalPrice}}.00</h5>
                                 
                             </div>
                         </div>
                     </div>
                     {% endfor %}
-                    {% comment %} <div class="row product-order-detail">
-                        <div class="col-3"><img src="{% static 'assets/images/layout-4/product/2.jpg' %}" alt="" class="img-fluid"></div>
-                        <div class="col-3 order_detail">
-                            <div>
-                                <h4>product name</h4>
-                                <h5>cotton shirt</h5></div>
-                        </div>
-                        <div class="col-3 order_detail">
-                            <div>
-                                <h4>quantity</h4>
-                                <h5>1</h5></div>
-                        </div>
-                        <div class="col-3 order_detail">
-                            <div>
-                                <h4>price</h4>
-                                <h5>$555.00</h5></div>
-                        </div>
-                    </div> {% endcomment %}
                     <div class="total-sec">
                         <ul>
                             <li>subtotal <span>${{ordersubtotal}}.00</span></li>
@@ -108,15 +89,11 @@
                     </div>
                     <div class="payment-mode">
                         <h4>payment method</h4>
-                        {% comment %} <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) availabel. Card/Net banking acceptance subject to device availability.</p> {% endcomment %}
                         <p>{{paymentmethod}}</p>
                     </div>
                     <div class="col-12">
                         <div class="delivery-sec">
-                            {% comment %} <h3>expected date of delivery</h3> {% endcomment %}
-                            {% comment %} <h2>october 22, 2018</h2></div> {% endcomment %}
                             <h3>expected date of delivery: <span>October 23, 2023</span></h3>
-                            {% comment %} <a href="{% url 'order_tracking' orderid %}">track order</a> {% endcomment %}
                             <a href="{% url 'order_tracking' orderid %}">Track Order</a>
                         </div>
                     </div>

@@ -8,14 +8,14 @@
 {% block components %}
 
 <!-- section start -->
-<section class="section-big-pt-space b-g-light">
+<section class="section-big-pt-space b-g-light product-box-section">
     <div class="collection-wrapper">
         <div class="custom-container">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="product-slick no-arrow">
                       {% for image in images %}
-                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                       {% endfor %}
                     </div>
                     <div class="row">

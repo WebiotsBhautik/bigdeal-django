@@ -336,12 +336,6 @@
                                  </li>
                                  <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
                               </ul>
-                           {% comment %} <ul class="nav-cat title-font">
-                                 {% for category in subcategories %}
-                                 <li><a href="{% url 'shop_left_sidebar' %}"><img src="{{category.categoryImage}}" alt="catergory-product">{{category.categoryName}}</a></li>
-                                 {% endfor %}
-                                 <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
-                           </ul> {% endcomment %}
                            </div>
 
                         </div>
@@ -444,8 +438,6 @@
          <div class="col-xl-8 col-lg-9 offset-xl-2 px-abjust">
             <div class="slide-1 no-arrow">
                <div class="slide-1 no-arrow">
-                  {% comment %} {% for banner in allbanners  %} {% endcomment %}
-                  {% comment %} {% if banner.bannerType|to_str == 'Slider' %} {% endcomment %}
                   <div>
                      <div class="slider-banner slide-banner-5">
                         <div class="slider-img">
@@ -488,8 +480,6 @@
                         </div>
                      </div>
                   </div>
-                  {% comment %} {% endif %} {% endcomment %}
-                  {% comment %} {% endfor %} {% endcomment %}
                </div>
             </div>
          </div>

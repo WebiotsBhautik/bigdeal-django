@@ -22,7 +22,6 @@
                               <div class="media"><img class="img-fluid " src="/{{blog.blogImage}}" alt="Generic placeholder image">
                                   <div class="media-body align-self-center">
                                       <h6>{{blog.createdAt|date:"d M Y"}}</h6>
-                                      {% comment %} <p>0 h  its</p> {% endcomment %}
                                   </div>
                               </div>
                             </li>
@@ -37,13 +36,6 @@
                                 <span>{{blog.updatedAt|date:"d"}} {{blog.updatedAt|date:"M"}}</span>
                                 <h6 class="blog-name">{{blog.blogTitle}}</h6>
                                 <p>{{blog.blogDescription|safe}}</p>
-                                {% comment %} <div class="media">
-                                    <div class="blog-date">
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <p>0 hits</p> 
-                                    </div>
-                                </div>{% endcomment %}
                             </li>
                             {% endfor %}
                         </ul>

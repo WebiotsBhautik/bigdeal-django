@@ -312,12 +312,6 @@
                                   <h5 class="mb-0 ms-3 text-white title-font">Shop by category</h5>
                                 </nav>
                                 <div class="collapse hide nav-desk" id="navbarToggleExternalContent">
-                                 {% comment %}  <ul class="nav-cat title-font">
-                                    {% for category in subcategories %}
-                                      <li><a href="{% url 'shop_left_sidebar' %}"> <img src="{{category.categoryImage}}" alt="catergory-product"> {{category.categoryName}}</a></li>
-                                      {% endfor %} 
-                                      <li> <a class="mor-slide-click">mor category <i class="fa fa-angle-down pro-down"></i><i class="fa fa-angle-up pro-up"></i></a></li>
-                                  </ul> {% endcomment %}
                                   <ul class="nav-cat title-font">
                                     <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/01.png' %}" alt="category-product"> western ware</a></li>
                                     <li> <a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/layout-1/nav-img/02.png' %}" alt="category-product"> TV, Appliances</a></li>
@@ -991,32 +985,6 @@
       </div>
     </section>
     <!--deal banner end-->
-
-    <!--rounded category start-->
-    {% comment %} <section class="rounded-category rounded-category-inverse">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="slide-6 no-arrow">
-              {% for category in subcategories %}
-              <div>
-                <div class="category-contain">             
-                  <div class="img-wrapper">
-                    <a href="{% url 'shop_left_sidebar' %}">
-                      <img src="{{category.categoryImage}}" alt="category" class="img-fluid">
-                    </a>
-                  </div>
-                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded">
-                    {{category.categoryName}}
-                  </a>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> {% endcomment %}
     <section class="rounded-category rounded-category-inverse">
       <div class="container">
         <div class="row">

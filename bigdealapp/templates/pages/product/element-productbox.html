@@ -19,7 +19,7 @@
         <div class="product-slide-6 product-m no-arrow">
           {% for product in ms1_products %}
           <div>
-              <div class="product-box">
+              <div class="product-box product-box-1">
                 <div class="product-imgbox">
                     <div class="product-front">
                       <a href="{% url 'left_slidebar' product.id %}">
@@ -107,9 +107,9 @@
                       <div class="detail-right">
                         <div class="price">
                           {% if product.productType == "Simple" %}
-                          <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                          <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                           {% else %}  
-                          <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                          <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                           {% endif %}
                         </div>
                           <div class="check-price">
@@ -144,7 +144,7 @@
         <div class="product-slide-6 product-m no-arrow">
           {% for product in ms2_products %}
           <div>
-            <div class="product-box">
+            <div class="product-box product-box-2">
               <div class="product-imgbox">
                 <div class="product-front">
                   <a href="{% url 'left_slidebar' product.id %}">
@@ -229,9 +229,9 @@
                   <div class="detail-right">
                     <div class="price">
                       {% if product.productType == "Simple" %}
-                      <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                      <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                       {% else %}  
-                      <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                      <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                       {% endif %}
                     </div>
                     <div class="check-price">
@@ -266,7 +266,7 @@
         <div class="product-slide-6 product-m no-arrow">
           {% for product in ms3_products %}
           <div>
-              <div class="product-box">
+            <div class="product-box product-box-2">
                 <div class="product-imgbox">
                     <div class="product-front">
                       <a href="{% url 'left_slidebar' product.id %}">
@@ -344,9 +344,9 @@
                       <div class="detail-right">
                         <div class="price">
                           {% if product.productType == "Simple" %}
-                          <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                          <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                           {% else %}  
-                          <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                          <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                           {% endif %}
                         </div>
                           <div class="check-price">
@@ -397,7 +397,7 @@
                 <div class="on-sale3"> on sale </div>
               </div>
               <div class="product-detail detail-center detail-inverse">
-                <div class="detail-title">
+                <div class="detail-title mt-0">
                   <div class="detail-left">
                     <div class="rating-star">
                       {% if product.productFinalRating|to_int < 5|to_int %}
@@ -447,9 +447,9 @@
                   <div class="detail-right">
                     <div class="price">
                       {% if product.productType == "Simple" %}
-                      <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                      <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                       {% else %}  
-                      <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                      <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                       {% endif %}
                     </div>
                     <div class="check-price">
@@ -584,11 +584,11 @@
                       {% else %}
                         <del>{{product.product_actual_price_range|return_currency_wise_ammount_range:request}}</del>
                       {% endif %}
-                    <span>
+                    <span class="m-0">
                       {% if product.productType == "Simple" %}
-                      <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                      <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                       {% else %}  
-                      <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                      <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                       {% endif %}
                     </span>
                   </span>
@@ -715,9 +715,9 @@
                   {% endif %}
                   <h4>
                     {% if product.productType == "Simple" %}
-                    <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                    <h3 class="theme-color mb-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                     {% else %}  
-                    <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                    <h3 class="theme-color mb-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                     {% endif %}
                   </h4>
                 </h5>
@@ -814,9 +814,9 @@
                   {% endif %}
                   <h4>
                     {% if product.productType == "Simple" %}
-                    <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                    <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                     {% else %}  
-                    <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                    <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                     {% endif %}
                   </h4>
                 </h5>
@@ -919,9 +919,9 @@
                 </a>
                 <h5>
                   {% if product.productType == "Simple" %}
-                  <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                  <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                   {% else %}  
-                  <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                  <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                   {% endif %}
                   <span>
                     {% if product.productType == "Simple" %}
@@ -994,13 +994,13 @@
               </div>
               <div class="product-detail product-detail2">
                 <a href="{% url 'left_slidebar' product.id %}">
-                  <h3>{{product.productName}}</h3>
+                  <h3 class="mt-0">{{product.productName}}</h3>
                 </a>
                 <h5> 
                   {% if product.productType == "Simple" %}
-                  <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                  <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                   {% else %}  
-                  <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                  <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                   {% endif %}
                   <span>
                     {% if product.productType == "Simple" %}
@@ -1036,7 +1036,6 @@
           <div>
             <div class="digipro-box">
               <div class="img-wrraper">
-                {% comment %} <a href="https://themeforest.net/item/bigdeal-ecommerce-html-template/24809149"> {% endcomment %}
                 <a href="{{product.productVideoLink}}">
                   <img src="{{product.productImageFront}}" alt="product" class="img-fluid">
                 </a>
@@ -1199,9 +1198,9 @@
                 </a>
                 <h5>
                   {% if product.productType == "Simple" %}
-                  <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
+                  <h3 class="theme-color m-0">{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</h3>
                   {% else %}  
-                  <h3 class="theme-color">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                  <h3 class="theme-color m-0">{{product.product_price_range|return_currency_wise_ammount_range:request}}</h3>
                   {% endif %}
                   <span>
                     {% if product.productType == "Simple" %}
@@ -1236,114 +1235,6 @@
 <!-- product end -->
 
 
-
-<!-- footer start -->
-<footer>
-  <div class="footer1">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="footer-main">
-            <div class="footer-box">
-              <div class="footer-title mobile-title">
-                <h5>about</h5>
-              </div>
-              <div class="footer-contant">
-                <div class="footer-logo">
-                  <a href="index.html">
-                    <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" class="img-fluid" alt="logo">
-                  </a>
-                </div>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-                <ul class="paymant">
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/1.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/2.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/3.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/4.png' %}" class="img-fluid" alt="pay"></a></li>
-                  <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/5.png' %}" class="img-fluid" alt="pay"></a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>my account</h5>
-              </div>
-              <div class="footer-contant">
-                <ul>
-                  <li><a href="javascript:void(0)">about us</a></li>
-                  <li><a href="javascript:void(0)">contact us</a></li>
-                  <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
-                  <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
-                  <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>contact us</h5>
-              </div>
-              <div class="footer-contant">
-                <ul class="contact-list">
-                  <li><i class="fa fa-map-marker"></i>big deal store demo store <br> india-<span>3654123</span></li>
-                  <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
-                  <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
-                  <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
-                </ul>
-              </div>
-            </div>
-            <div class="footer-box">
-              <div class="footer-title">
-                <h5>newsletter</h5>
-              </div>
-              <div class="footer-contant">
-                <div class="newsletter-second">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="enter full name" >                     
-                      <span class="input-group-text"><i class="ti-user"></i></span>                      
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="enter email address" >                     
-                      <span class="input-group-text"><i class="ti-email"></i></span>                     
-                    </div>
-                  </div>
-                  <div class="form-group mb-0">
-                    <a href="javascript:void(0)" class="btn btn-solid btn-sm">submit now</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="subfooter dark-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-6 col-md-8">
-          <div class="footer-left">
-            <p>2019-20 Copy Right by Themeforest Powered by pixel strap</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-md-4">
-          <div class="footer-right">
-            <ul class="sosiyal">
-              <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-instagram"></i></a></li>
-              <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-<!-- footer end -->
 
 <!--Newsletter modal popup start-->
 <div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog">

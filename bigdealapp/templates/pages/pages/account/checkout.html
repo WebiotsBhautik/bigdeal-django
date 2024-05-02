@@ -11,7 +11,6 @@
     <div class="custom-container">
         <div class="checkout-page contact-page">
             <div class="checkout-form">
-                {% comment %} <form> {% endcomment %}
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="checkout-title" id="billingAddressDiv">
@@ -31,7 +30,6 @@
                                     </div>
                                     {% endfor %}
                                 </div>
-                            {% comment %} <div class="theme-form" id="new-address" style="display:none;" > {% endcomment %}
                                 <form class="needs-validation theme-form" id="new-address" style="display:none;">
                                     <input type="hidden" name="cartid" value="{{Cart.id}}">
                                     <div class="row check-out" >
@@ -101,7 +99,6 @@
                                         </div>
                                     </div>
                                 </form>
-                            {% comment %} </div> {% endcomment %}
                         </div>
                         <div class="col-lg-6 col-12">
                             <div id="couponCodeDiv">
@@ -165,7 +162,6 @@
                             </div>
                         </div>
                     </div>
-                {% comment %} </form> {% endcomment %}
             </div>
         </div>
         <div id='checkoutMsgDiv'>

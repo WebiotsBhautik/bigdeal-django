@@ -510,7 +510,6 @@
                 <div class="theme-card">
                   {% include "includes/alerts.html" %}
                 <h3>Verify Token</h3>
-                {% comment %} <form class="theme-form"> {% endcomment %}
                 <form action="{% url 'verify_token' %}" method="post">
                   {% csrf_token %}
                     <div class="row">
@@ -522,18 +521,7 @@
                             <button class="btn btn-normal">Submit</button>
                           </div>
                         </div>
-                    </div> 
-                    {% comment %} <div class="input">
-                      <label for="otp">Enter OTP</label>
-                      <input type="text" name="otp" class="is-invalid" id="otp" required>
-                      <span class="spin"></span>
                     </div>
-                    <div class="button login button-1">
-                        <button onclick="location.href = ;">
-                            <span>Submit</span>
-                            <i class="fa fa-check"></i>
-                        </button>
-                    </div> {% endcomment %}
                 </form>
                 </div>
             </div>

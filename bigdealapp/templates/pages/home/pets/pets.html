@@ -752,7 +752,6 @@
                         </div>
                         <div class="on-sale1">
                            On sale
-                           {% comment %} {{product.productDescription|safe}} {% endcomment %}
                         </div>
                      </div>
                      <div class="product-detail product-detail2">
@@ -956,7 +955,6 @@
                      <div class="pricing-body">
                         <h1><sup>$</sup>{{banner.titleOne}}<sub> / per visit</sub></h1>
                         <ul>
-                           {% comment %} <li> <a href="javascript:void(0)">{{banner.titleOne}}</a> </li> {% endcomment %}
                            <li> <a href="{% url 'shop_left_sidebar' %}">{{banner.titleTwo}}</a> </li>
                            <li> <a href="{% url 'shop_left_sidebar' %}">{{banner.titleThree}}</a> </li>
                            <li> <a href="{% url 'shop_left_sidebar' %}">{{banner.titleFour}}</a> </li>

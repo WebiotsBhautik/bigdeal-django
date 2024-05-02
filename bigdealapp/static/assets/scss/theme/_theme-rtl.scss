@@ -1218,15 +1218,15 @@ body.rtl {
     }
   }
 
-  .qty-box {
-    .input-group {
-      button {
-        &:last-child {
-          border-left: 1px solid $light-border;
-        }
-      }
-    }
-  }
+  // .qty-box {
+  //   .input-group {
+  //     button {
+  //       &:last-child {
+  //         border-left: 1px solid $light-border;
+  //       }
+  //     }
+  //   }
+  // }
 
   .product-pagination {
     // .product-search-count-bottom {
@@ -1386,16 +1386,16 @@ body.rtl {
         }
       }
 
-      .timer {
-        p {
-          span {
-            &:nth-child(n+2) {
-              margin-left: unset;
-              margin-right: 15px;
-            }
-          }
-        }
-      }
+      // .timer {
+      //   p {
+      //     span {
+      //       &:nth-child(n+2) {
+      //         margin-left: unset;
+      //         margin-right: 15px;
+      //       }
+      //     }
+      //   }
+      // }
 
       .product-buttons {
         a {
@@ -1565,12 +1565,12 @@ body.rtl {
       .size-box {
         text-align: center;
 
-        ul {
-          li {
-            margin-right: 0;
-            margin-left: 10px;
-          }
-        }
+        // ul {
+        //   li {
+        //     margin-right: 0;
+        //     margin-left: 10px;
+        //   }
+        // }
       }
 
       .product-description {

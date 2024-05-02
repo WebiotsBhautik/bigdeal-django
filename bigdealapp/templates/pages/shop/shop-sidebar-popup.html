@@ -96,7 +96,7 @@
                               <form action="{% url 'create_query_params_url' path %}" method="post">
                                 {% csrf_token %}
                                 <!-- side-bar colleps block stat -->
-                                <div class="collection-filter-block creative-card creative-inner">
+                                <div class="collection-filter-block creative-card creative-inner pb-lg-0">
                                   <!-- brand filter start -->
                                   <button class="collection-mobile-back">
                                     <span class="filter-back">
@@ -107,9 +107,7 @@
                                   <div class="main-filter-box">
                                     <div class="collection-collapse-block open">
                                       <h3 class="collapse-block-title mt-0">brand</h3>
-                                      <div
-                                        class="collection-collapse-block-content"
-                                      >
+                                      <div class="collection-collapse-block-content">
                                         <div class="collection-brand-filter">
                                           {% for brand in ProductsBrand %}
                                           <div class="custom-control custom-checkbox form-check collection-filter-checkbox">

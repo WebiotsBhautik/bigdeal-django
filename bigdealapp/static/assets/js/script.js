@@ -1457,6 +1457,43 @@ $('.feature-slide').slick({
   /*=====================
    08. Product page
    ==========================*/
+  
+   $('.product-left-mian-box').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: '.product-left-thumbnail'
+  });
+  $('.product-left-thumbnail').slick({
+    slidesToShow: 3,
+    vertical: true,
+    slidesToScroll: 1,
+    asNavFor: '.product-left-mian-box',
+    dots: false,
+    // centerMode: true,
+    focusOnSelect: true,
+    responsive: [
+      {
+        breakpoint: 576,
+        settings: {
+          vertical: false,
+        }
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          vertical: true,
+        }
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          vertical: false,
+        }
+      }
+    ]
+  });
 
   $('.product-slick').slick({
     slidesToShow: 1,

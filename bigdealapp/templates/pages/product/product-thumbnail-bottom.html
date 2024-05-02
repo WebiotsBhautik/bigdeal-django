@@ -3,27 +3,25 @@
 {% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
-
-
 {% block components %}
 
 
 <!-- section start -->
-<section class="section-big-pt-space b-g-light">
+<section class="section-big-pt-space b-g-light product-box-section">
     <div class="collection-wrapper">
         <div class="custom-container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="product-slick">
                       {% for image in images %}
-                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                       {% endfor %}
                     </div>
                     <div class="row">
                       <div class="col-12 p-0">
                         <div class="slider-nav">
                           {% for image in images %}
-                          <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                          <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                           {% endfor %}
                         </div>
                       </div>
@@ -134,12 +132,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                  <div class="product-right product-form-box  product-right-exes">
+                  <div class="product-right product-form-box product-right-exes">
                     <div class="pro-group">
                     <h6 class="product-title">hurry  up ! Deal end in :</h6>
                     <div class="timer">
-                        <p id="demo">                                             
-                        </p>
+                        <p id="demo"></p>
                     </div>
                     </div>
                     <div id="selectSize" class="pro-group addeffect-section product-description border-product">

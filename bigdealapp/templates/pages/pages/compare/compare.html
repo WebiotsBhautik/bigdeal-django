@@ -41,7 +41,6 @@
                                     <form class="variants clearfix">
                                         <input type="hidden">
                                         <button title="Add to Cart" class="add-to-cart btn btn-normal">Add to Cart</button>
-                                        {% comment %} <a href="{% url 'delete_compare_product' product.id %}" title="Remove from Compare" class="remove-compare btn btn-warning">Remove</a> {% endcomment %}
                                     </form>
                                     <p class="grid-link__title hidden">{{product.variantProduct.proCategory}}</p>
                                 </td>
@@ -77,7 +76,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {% comment %} <h2> No compare Products Found!</h2> {% endcomment %}
                             {% endif %}
                         </table>
                     </div>

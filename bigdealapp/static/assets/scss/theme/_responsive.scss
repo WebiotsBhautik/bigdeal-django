@@ -2140,23 +2140,23 @@
 
     &.product-form-box {
       .pro-group {
-        .timer {
-          p {
-            >span {
-              font-size: 16px;
-              width: 60px;
-              height: 60px;
+        // .timer {
+        //   p {
+        //     >span {
+        //       font-size: 16px;
+        //       width: 60px;
+        //       height: 60px;
 
-              .timer-cal {
-                font-size: 12px;
-              }
+        //       .timer-cal {
+        //         font-size: 12px;
+        //       }
 
-              &:nth-child(n+2) {
-                margin-left: 5px;
-              }
-            }
-          }
-        }
+        //       &:nth-child(n+2) {
+        //         margin-left: 5px;
+        //       }
+        //     }
+        //   }
+        // }
 
         .size-box {
           ul {
@@ -4163,11 +4163,11 @@
     }
   }
 
-  .product-right {
-    h2 {
-      font-size: 20px;
-    }
-  }
+  // .product-right {
+  //   h2 {
+  //     font-size: 20px;
+  //   }
+  // }
 
   .search-product {
     >div {
@@ -6502,21 +6502,21 @@
     margin-top: 0;
   }
 
-  .product-right {
-    h2 {
-      margin-top: 15px;
-    }
-  }
+  // .product-right {
+  //   h2 {
+  //     margin-top: 15px;
+  //   }
+  // }
 
   .product-right {
     text-align: center;
 
     .pro-group {
-      .product-title {
-        &.size-text {
-          text-align: left;
-        }
-      }
+      // .product-title {
+      //   &.size-text {
+      //     text-align: left;
+      //   }
+      // }
 
       .revieu-box {
         justify-content: center;
@@ -6571,9 +6571,9 @@
     }
   }
 
-  .product-form-box {
-    margin-top: 30px;
-  }
+  // .product-form-box {
+  //   margin-top: 30px;
+  // }
 
   .product_img_scroll {
     display: flex;
@@ -12013,8 +12013,10 @@
     }
   }
 
-  .layout-3-hotdeal .media-banner {
-    padding-bottom: 1px;
+  .layout-3-hotdeal{
+    .media-banner {
+      padding-bottom: 1px;
+    }
   }
 
   .layout-5 {
@@ -12842,25 +12844,25 @@
 
   .product-right {
     .pro-group {
-      .timer {
-        p {
-          span {
-            width: 50px;
-            height: 50px;
-            font-size: 14px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+      // .timer {
+      //   p {
+      //     span {
+      //       width: 50px;
+      //       height: 50px;
+      //       font-size: 14px;
+      //       padding-top: 10px;
+      //       padding-bottom: 10px;
 
-            .timer-cal {
-              font-size: 12px;
-            }
+      //       .timer-cal {
+      //         font-size: 12px;
+      //       }
 
-            &:nth-child(n+2) {
-              margin-left: 5px;
-            }
-          }
-        }
-      }
+      //       &:nth-child(n+2) {
+      //         margin-left: 5px;
+      //       }
+      //     }
+      //   }
+      // }
 
       .delivery-detail {
         .delivery-detail-contian {

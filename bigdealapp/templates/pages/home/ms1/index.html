@@ -194,7 +194,6 @@
                         {% endif %}
                       </div>
                       <div class="on-sale1">
-                        {% comment %} {{product.productDescription|safe}} {% endcomment %}
                       </div>
                     </div>
                     <div class="product-detail detail-inline">
@@ -1349,7 +1348,6 @@
                   {% endif %}
                 </div>
                 <div class="on-sale1">
-                  {% comment %} {{product.productDescription|safe}} {% endcomment %}
                 </div>
               </div>
               <div class="product-detail detail-inline">
@@ -1755,7 +1753,6 @@
           <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
         </li>
         {% else %}
-        {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
         {% for product in cart_products %}
 
         <li>
@@ -1769,19 +1766,14 @@
                 <h4>{{product.productName}}</h4>
               </a>
               <h6>
-                {% comment %} $80.00 <span>$120.00</span> {% endcomment %}
                 {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                {% comment %} <span>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</span> {% endcomment %}
               </h6>
               <div class="addit-box">
                 <div class="qty-box">
                   <div class="input-group">
-                    {% comment %} <button class="qty-minus" disabled></button> {% endcomment %}
-                    {% comment %} <input class="qty-adj form-control" type="number" value="{{product.quantity}}"/> {% endcomment %}
                     <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                             name="quantity{{forloop.counter}}" class="form-control input-number"
                                             value="{{product.quantity}}">
-                    {% comment %} <button class="qty-plus" disabled></button> {% endcomment %}
                   </div>
                 </div>
                 <div class="pro-add">

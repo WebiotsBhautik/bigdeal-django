@@ -8,13 +8,13 @@
 {% block components %}
 
 <!-- section start -->
-<section class="section-big-pt-space b-g-light">
+<section class="section-big-pt-space b-g-light product-box-section">
   <div class="collection-wrapper">
     <div class="custom-container">
       <div class="row">
         <div class="col-sm-3">
           <div class="collection-filter">
-            <div class="collection-filter-block creative-card creative-inner">
+            <div class="collection-filter-block creative-card creative-inner pn-lg-0">
               <button class="collection-mobile-back">
                 <span class="filter-back">
                     <i class="fa fa-angle-left"></i>
@@ -198,10 +198,11 @@
         </div>
         <div class="col-lg-9 col-12">
           <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <div class="filter-main-btn mb-2"><span class="filter-btn"><i class="fa fa-filter"></i> filter</span></div>
-              </div>
+            <div class="filter-main-btn mb-2">
+              <span class="filter-btn">
+                <i class="fa fa-filter"></i> 
+                filter
+              </span>
             </div>
             <div class="row">
               <div class="col-lg-5">
@@ -396,21 +397,21 @@
             </div>
           </div>
 
-          <section class="tab-product tab-exes creative-card creative-inner">
+          <section class="product-tabs-box">
             <div class="row">
               <div class="col-lg-12">
-                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                <ul class="nav nav-tabs" id="top-tab" role="tablist">
                   <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"><i class="icofont icofont-ui-home"></i>Description</a>
-                    <div class="material-border"></div>
+                    {% comment %} <div class="material-border"></div> {% endcomment %}
                   </li>
                   <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab"><i class="icofont icofont-man-in-glasses"></i>Details</a>
-                    <div class="material-border"></div>
+                    {% comment %} <div class="material-border"></div> {% endcomment %}
                   </li>
                   <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab"><i class="icofont icofont-contacts"></i>Video</a>
-                    <div class="material-border"></div>
+                    {% comment %} <div class="material-border"></div> {% endcomment %}
                   </li>
                   <li class="nav-item"><a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab"><i class="icofont icofont-contacts"></i>Write Review</a>
-                    <div class="material-border"></div>
+                    {% comment %} <div class="material-border"></div> {% endcomment %}
                   </li>
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
