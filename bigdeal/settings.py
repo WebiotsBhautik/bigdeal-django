@@ -190,7 +190,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 JAZZMIN_SETTINGS = {
-    "custom_css": "assets/css/backend.css",
+    "custom_css": "assets/css/backend-1.css",
     "custom_js": "assets/js/custom.js",
     
     # Keep the same app ordering as above, but also order choice and book model links within the books app

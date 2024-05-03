@@ -19,8 +19,11 @@
             <div class="collection-brand-filter">
               {% for brand in ProductsBrand %}
               <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                <input type="checkbox" name="allbrand" value="{{brand.brandName}}" class="custom-control-input form-check-input" id="{{brand.brandName}}brandsCheckBox" {% if brand.brandName in request.GET.brands %} checked {% endif %}>
-                <label class="custom-control-label form-check-label" for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}} ({{brand.brandTotalProduct}})</label>
+                <input type="checkbox" name="allbrand" value="{{brand.brandName}}"
+                  class="custom-control-input form-check-input" id="{{brand.brandName}}brandsCheckBox"
+                  {% if brand.brandName in request.GET.brands %} checked {% endif %}>
+                <label class="custom-control-label form-check-label"
+                  for="{{brand.brandName}}brandsCheckBox">{{brand.brandName}} ({{brand.brandTotalProduct}})</label>
               </div>
               {% endfor %}
             </div>
@@ -37,7 +40,10 @@
               <div class="collection-brand-filter">
                 {% for value in values %}
                 <div class="custom-control custom-checkbox form-check collection-filter-checkbox">
-                  <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox" name="{{name}}" value="{{value}}" {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked  {% endif %}>
+                  <input type="checkbox" class="custom-control-input form-check-input" id="{{value}}{{name}}CheckBox"
+                    name="{{name}}" value="{{value}}"
+                    {% if value in request.GET.selectedAttribute|return_selected_attribute_list:request %} checked
+                    {% endif %}>
                   <label class="custom-control-label form-check-label" for="{{value}}{{name}}CheckBox">{{value}}</label>
                 </div>
                 {% endfor %}
@@ -54,18 +60,19 @@
           <h3 class="collapse-block-title">price</h3>
           <div class="collection-collapse-block-content">
             <div class="filter-slide">
-              <input class="js-range-slider" type="text" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}" name="pricefilter" data-filter="price" id="filter-price-range" value="" data-type="double"/>
+              <input class="js-range-slider" type="text" min="{{min_price}}" max="{{max_price}}" prefix="{{symbol}}"
+                name="pricefilter" data-filter="price" id="filter-price-range" value="" data-type="double" />
             </div>
           </div>
         </div>
-        
+
         <!-- submit button -->
         <div class="submit-btn-box">
           <button type="submit" class="btn submit-btn" id="submitBtnAtFilterSidebar">Submit</button>
         </div>
       </div>
-      </div>
-    </form>
+    </div>
+  </form>
   <!-- silde-bar colleps block end here -->
 
   <!-- side-bar single product slider start -->
@@ -88,23 +95,24 @@
                         {% if product.productFinalRating|to_int < 5|to_int %}
                         {% for x in product.productFinalRating|times %}
                         <li>
-                          <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                          <a class="fa fa-star theme-color" id="productOfStar"
+                            href="{% url 'left_slidebar' product.id %}"></a>
                         </li>
                         {% endfor %}
-  
+
                         {% with number1=5|to_int number2=product.productFinalRating|to_int %}
                         {% with number3=number1|sub:number2 %}
-  
+
                         {% for x in number3|times %}
                         <li>
                           <i class="fa fa-star"></i>
                         </li>
                         {% endfor %}
-  
+
                         {% endwith %}
                         {% endwith %}
-  
-                        
+
+
                         {% else %}
                         <li>
                           <i class="fa fa-star theme-color"></i>
@@ -122,30 +130,39 @@
                           <i class="fa fa-star theme-color"></i>
                         </li>
                         {% endif %}
-                      </div> 
-                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0"><p>{{product.productName}}</p></a>
+                      </div>
+                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0">
+                        <p>{{product.productName}}</p>
+                      </a>
                       <h6>
                         {% if product.productType == "Simple" %}
                         {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
                         {% else %}
                         {{product.product_price_range|return_currency_wise_ammount_range:request}}
                         {% endif %}
-                          <span>
-                          {% if product.productType == "Simple" %} 
-                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                          {% else %} 
+                        <span>
+                          {% if product.productType == "Simple" %}
+                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                          {% else %}
                           {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                           {% endif %}
                         </span>
                       </h6>
                     </div>
                     <div class="cart-info">
-                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                        <i data-feather="shopping-cart"></i> 
+                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                        class="add-cartnoty tooltip-top" data-tippy-content="Add to cart">
+                        <i data-feather="shopping-cart"></i>
                       </a>
-                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                        class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist"><i
+                          data-feather="heart"></i></a>
+                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                        href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+                        class="tooltip-top" data-tippy-content="Quick View"><i data-feather="eye"></i></a>
+                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                        class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i
+                          data-feather="refresh-cw"></i></a>
                     </div>
                   </div>
                 </div>
@@ -172,23 +189,24 @@
                         {% if product.productFinalRating|to_int < 5|to_int %}
                         {% for x in product.productFinalRating|times %}
                         <li>
-                          <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                          <a class="fa fa-star theme-color" id="productOfStar"
+                            href="{% url 'left_slidebar' product.id %}"></a>
                         </li>
                         {% endfor %}
-  
+
                         {% with number1=5|to_int number2=product.productFinalRating|to_int %}
                         {% with number3=number1|sub:number2 %}
-  
+
                         {% for x in number3|times %}
                         <li>
                           <i class="fa fa-star"></i>
                         </li>
                         {% endfor %}
-  
+
                         {% endwith %}
                         {% endwith %}
-  
-                        
+
+
                         {% else %}
                         <li>
                           <i class="fa fa-star theme-color"></i>
@@ -206,8 +224,10 @@
                           <i class="fa fa-star theme-color"></i>
                         </li>
                         {% endif %}
-                      </div> 
-                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0"><p>{{product.productName}}</p></a>
+                      </div>
+                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0">
+                        <p>{{product.productName}}</p>
+                      </a>
                       <h6>
                         {% if product.productType == "Simple" %}
                         {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -215,21 +235,28 @@
                         {{product.product_price_range|return_currency_wise_ammount_range:request}}
                         {% endif %}
                         <span>
-                          {% if product.productType == "Simple" %} 
-                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                          {% else %} 
+                          {% if product.productType == "Simple" %}
+                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                          {% else %}
                           {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                           {% endif %}
                         </span>
                       </h6>
                     </div>
                     <div class="cart-info">
-                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                        <i data-feather="shopping-cart"></i> 
+                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                        class="add-cartnoty tooltip-top" data-tippy-content="Add to cart">
+                        <i data-feather="shopping-cart"></i>
                       </a>
-                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                        class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist"><i
+                          data-feather="heart"></i></a>
+                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                        href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+                        class="tooltip-top" data-tippy-content="Quick View"><i data-feather="eye"></i></a>
+                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                        class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i
+                          data-feather="refresh-cw"></i></a>
                     </div>
                   </div>
                 </div>
@@ -255,23 +282,24 @@
                         {% if product.productFinalRating|to_int < 5|to_int %}
                         {% for x in product.productFinalRating|times %}
                         <li>
-                          <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                          <a class="fa fa-star theme-color" id="productOfStar"
+                            href="{% url 'left_slidebar' product.id %}"></a>
                         </li>
                         {% endfor %}
-  
+
                         {% with number1=5|to_int number2=product.productFinalRating|to_int %}
                         {% with number3=number1|sub:number2 %}
-  
+
                         {% for x in number3|times %}
                         <li>
                           <i class="fa fa-star"></i>
                         </li>
                         {% endfor %}
-  
+
                         {% endwith %}
                         {% endwith %}
-  
-                        
+
+
                         {% else %}
                         <li>
                           <i class="fa fa-star theme-color"></i>
@@ -289,8 +317,10 @@
                           <i class="fa fa-star theme-color"></i>
                         </li>
                         {% endif %}
-                      </div> 
-                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0"><p>{{product.productName}}</p></a>
+                      </div>
+                      <a href="{% url 'left_slidebar' product.id %}" tabindex="0">
+                        <p>{{product.productName}}</p>
+                      </a>
                       <h6>
                         {% if product.productType == "Simple" %}
                         {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
@@ -298,21 +328,28 @@
                         {{product.product_price_range|return_currency_wise_ammount_range:request}}
                         {% endif %}
                         <span>
-                          {% if product.productType == "Simple" %} 
-                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                          {% else %} 
+                          {% if product.productType == "Simple" %}
+                          {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                          {% else %}
                           {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                           {% endif %}
                         </span>
                       </h6>
                     </div>
                     <div class="cart-info">
-                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                        <i data-feather="shopping-cart"></i> 
+                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                        class="add-cartnoty tooltip-top" data-tippy-content="Add to cart">
+                        <i data-feather="shopping-cart"></i>
                       </a>
-                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist"><i  data-feather="heart"></i></a>
-                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
+                      <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                        class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist"><i
+                          data-feather="heart"></i></a>
+                      <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                        href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+                        class="tooltip-top" data-tippy-content="Quick View"><i data-feather="eye"></i></a>
+                      <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                        class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i
+                          data-feather="refresh-cw"></i></a>
                     </div>
                   </div>
                 </div>

@@ -16,7 +16,7 @@
   <div class="custom-container">
     <div class="row product-block4">
       {% for product in kids_products %}
-      <div class="col-lg-3 col-md-4 col-sm-6">     
+      <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="product-box">
           <div class="product-imgbox">
             <div class="slide-1 arrow-1">
@@ -36,26 +36,31 @@
               </div>
             </div>
 
-           
+
             <div class="product-icon icon-inline">
-              <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="tooltip-top add-cartnoty" data-tippy-content="Add to cart" >
-                <i  data-feather="shopping-cart"></i>
+              <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                class="tooltip-top add-cartnoty" data-tippy-content="Add to cart">
+                <i data-feather="shopping-cart"></i>
               </a>
-              <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
-                <i  data-feather="heart"></i>
+              <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist">
+                <i data-feather="heart"></i>
               </a>
-              <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
-                <i  data-feather="eye"></i>
+              <a href="javascript:void(0)"
+                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top" data-tippy-content="Quick View">
+                <i data-feather="eye"></i>
               </a>
-              <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="add-to-compare-list" data-tippy-content="Compare">
-                <i  data-feather="refresh-cw"></i>
+              <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="add-to-compare-list"
+                data-tippy-content="Compare">
+                <i data-feather="refresh-cw"></i>
               </a>
             </div>
           </div>
           <div class="product-detail detail-inline">
             <div class="detail-title">
               <div class="detail-left">
-                
+
                 <a href="{% url 'left_slidebar' product.id %}">
                   <h6 class="price-title">
                     {{product.productName}}
@@ -71,18 +76,18 @@
                   {% endif %}
                 </div>
                 <div class="check-price">
-                  {% if product.productType == "Simple" %} 
-                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                  {% else %} 
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
                   {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                  {% endif %} 
+                  {% endif %}
                 </div>
               </div>
             </div>
           </div>
-        </div>  
-      </div>    
-      {% endfor %}  
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -99,46 +104,50 @@
       {% for product in pets_products  %}
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="product-box">
-              <div class="product-imgbox">
-                <div class="product-front">
-                  <a href="{% url 'left_slidebar' product.id %}">
-                    <img src="{{product.productImageFront}}"  class="innerzoom" alt="deal-banner"/>
-                  </a>
+          <div class="product-imgbox">
+            <div class="product-front">
+              <a href="{% url 'left_slidebar' product.id %}">
+                <img src="{{product.productImageFront}}" class="innerzoom" alt="deal-banner" />
+              </a>
+            </div>
+          </div>
+          <div class="product-detail detail-center detail-inverse">
+            <div class="detail-title">
+              <div class="detail-left">
+                <a href="{% url 'left_slidebar' product.id %}">
+                  <h6 class="price-title">
+                    {{product.productName}}
+                  </h6>
+                </a>
+              </div>
+              <div class="detail-right">
+                <div class="price">
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
+                  {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                  {% endif %}
+                </div>
+                <div class="check-price">
+                  {% if product.productType == "Simple" %}
+                  {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                  {% else %}
+                  {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                  {% endif %}
                 </div>
               </div>
-              <div class="product-detail detail-center detail-inverse">
-                <div class="detail-title">
-                  <div class="detail-left">
-                    <a href="{% url 'left_slidebar' product.id %}">
-                      <h6 class="price-title">
-                        {{product.productName}}
-                      </h6>
-                    </a>
-                  </div>
-                  <div class="detail-right">
-                    <div class="price">
-                      {% if product.productType == "Simple" %}
-                      {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                      {% else %}
-                      {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                      {% endif %}
-                      </div>
-                    <div class="check-price">
-                      {% if product.productType == "Simple" %} 
-                      {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                      {% else %} 
-                      {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                      {% endif %} 
-                    </div>
-                  </div>
-                </div>
-                <div class="icon-detail">
-                  <button  class="tooltip-top add-cartnoty" data-tippy-content="Add to cart"> <i  data-feather="shopping-cart"></i> </button>
-                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" > <i  data-feather="heart"></i> </a>
-                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
-                  <a href="javascript:void(0)" class="tooltip-top" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i> </a>
-                </div>
-              </div>
+            </div>
+            <div class="icon-detail">
+              <button class="tooltip-top add-cartnoty" data-tippy-content="Add to cart"> <i
+                  data-feather="shopping-cart"></i> </button>
+              <a href="javascript:void(0)" class="add-to-wish tooltip-top" data-tippy-content="Add to Wishlist"> <i
+                  data-feather="heart"></i> </a>
+              <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"
+                data-tippy-content="Quick View"> <i data-feather="eye"></i> </a>
+              <a href="javascript:void(0)" class="tooltip-top" data-tippy-content="Compare"> <i
+                  data-feather="refresh-cw"></i> </a>
+            </div>
+          </div>
         </div>
       </div>
       {% endfor %}
@@ -158,6 +167,7 @@
 <!-- Theme js-->
 <script src="{% static 'assets/js/modal.js' %}"></script>
 </body>
+
 </html>
 
 {% endblock script %}

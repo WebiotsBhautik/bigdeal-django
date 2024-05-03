@@ -12,8 +12,28 @@
 <section class="section-big-pt-space b-g-light product-box-section">
     <div class="collection-wrapper">
         <div class="custom-container">
-            <div class="row">
-                <div class="col-lg-1 col-sm-2 col-12">
+            <div class="row g-sm-4 g-3">
+              <div class="col-lg-5">
+                <div class="row g-xxl-4 g-3">
+                  <div class="col-xl-3 col-lg-12 col-sm-2 order-xl-0 order-lg-1 order-sm-0 order-1">
+                    <div class="product-left-thumbnail no-arrow">
+                      {% for image in images %}
+                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-12 col-sm-10 order-xl-1 order-lg-0 order-sm-1 order-0">
+                    <div class="no-arrow product-left-mian-box">
+                      {% for image in images %}
+                      <div>
+                        <img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0">
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+                {% comment %} <div class="col-lg-1 col-sm-2 col-12">
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
@@ -30,7 +50,7 @@
                       <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                       {% endfor %}
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="col-lg-7 rtl-text">
                   <div class="product-right">                                 
                     <div class="pro-group">
@@ -142,11 +162,11 @@
                       <div class="qty-box">
                         <div class="input-group">
                           <button class="qty-minus btn" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})">
-                            <i class="fa fa-minus"></i>
+                            <i class="ti-minus"></i>
                           </button>
                           <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
                           <button class="qty-plus btn" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})">
-                            <i class="fa fa-plus"></i>
+                            <i class="ti-plus"></i>
                           </button>
                         </div>
                       </div>

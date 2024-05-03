@@ -26,7 +26,12 @@
           <p>{{product.productDescription|safe}}</p>
         </div>
         <div class="tab-pane fade" id="top-profile" role="tabpanel">
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.</p>
           <div class="single-product-tables">
             <table class="table">
               <tbody>
@@ -52,31 +57,12 @@
                 </tr>
               </tbody>
             </table>
-            {% comment %}
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>Length</td>
-                  <td>50 Inches</td>
-                </tr>
-                <tr>
-                  <td>Size</td>
-                  <td>S, M, L .XXL</td>
-                </tr>
-              </tbody>
-            </table>
-            {% endcomment %}
           </div>
         </div>
         <div class="tab-pane fade" id="top-contact" role="tabpanel">
           <div class="mt-4 text-center">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/BUWzX78Ye_8"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-            ></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8"
+              allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </div>
         <div class="tab-pane fade" id="top-review" role="tabpanel">
@@ -99,10 +85,12 @@
               </div>
               <div class="col-12">
                 <label for="comments">Comments</label>
-                <textarea class="form-control" name="comment" placeholder="Leave a comment here..." id="comments" rows="6" required></textarea>
+                <textarea class="form-control" name="comment" placeholder="Leave a comment here..." id="comments"
+                  rows="6" required></textarea>
               </div>
               <div class="col-12">
-                <button class="btn btn-normal" onclick="submitReview({'productId':'{{product.id}}'})" type="submit">Submit your review</button>
+                <button class="btn btn-normal" onclick="submitReview({'productId':'{{product.id}}'})"
+                  type="submit">Submit your review</button>
               </div>
             </div>
           </form>

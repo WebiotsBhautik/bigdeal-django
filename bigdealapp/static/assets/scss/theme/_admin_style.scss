@@ -338,7 +338,7 @@ a {
   }
 }
 
-// customer
+/* customer */
 .custom-theme {
   position: fixed;
   right: 0;
@@ -359,7 +359,7 @@ a {
   cursor: pointer;
 }
 
-// category
+/* category */
 .product-physical {
   table {
     .jsgrid-filter-row {
@@ -479,17 +479,10 @@ a {
 
       .btn-primary {
         background-color: $transparent-color !important;
-        // border: 1px solid #ddd !important;
-        // &.bootstrap-touchspin-down {
-        //   border-right: none !important;
-        // }
       }
 
       .input-group-append {
         margin-left: 0;
-        // .btn {
-        //   border-left: none !important;
-        // }
       }
     }
   }
@@ -734,7 +727,7 @@ a {
   }
 }
 
-// product list
+/* product list */
 .products-admin {
   .product {
     .product-box {
@@ -759,7 +752,7 @@ a {
   }
 }
 
-// product Detail
+/* product Detail */
 .product-page-main {
   .product-slider {
     .owl-stage-outer {
@@ -810,7 +803,7 @@ a {
   }
 }
 
-// profile
+/* profile */
 .nav-pills {
 
   .nav-link,
@@ -933,9 +926,6 @@ a {
         td {
           padding: .75rem;
           border: none;
-          // &:first-child {
-          //   // min-width: 250px;
-          // }
         }
       }
     }
@@ -947,7 +937,7 @@ a {
   }
 }
 
-// reports
+/* reports */
 .report-employee {
   .card-header {
     border-bottom: none !important;
@@ -980,7 +970,7 @@ a {
   }
 }
 
-// profile
+/* profile */
 .tab2-card {
   .media {
     align-items: center;
@@ -991,7 +981,7 @@ a {
   }
 }
 
-//typography//
+/* typography */
 footer {
   &.blockquote-footer {
     bottom: unset;
@@ -1002,7 +992,7 @@ footer {
   background-color: $black;
 }
 
-// datepicker
+/* datepicker */
 .datepicker {
   box-shadow: 0 4px 14px rgba($primary-color, 0.15);
 }
@@ -1030,7 +1020,7 @@ footer {
   }
 }
 
-// Media
+/* Media */
 .dropzone {
   .dz-preview {
     box-shadow: 0px 0px 3px $primary-color;
@@ -1047,7 +1037,7 @@ footer {
   }
 }
 
-//tabs
+/* tabs */
 .tab-coupon {
   margin-bottom: 30px;
 }
@@ -1164,7 +1154,7 @@ footer {
   }
 }
 
-// datatable
+/* datatable */
 .badge-warning {
   color: $white;
 }
@@ -1423,7 +1413,7 @@ div {
   margin-bottom: -20px;
 }
 
-// outline buttons//
+/* outline buttons */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -1445,7 +1435,7 @@ $btn-color in (primary, $primary-color),
   }
 }
 
-// forms //
+/* forms */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -1464,7 +1454,7 @@ $btn-color in (primary, $primary-color),
   }
 }
 
-//input background //
+/* Input background */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -1840,7 +1830,7 @@ footer {
 /**=====================
       General CSS Start
 ==========================**/
-//Custom css Start
+/* Custom css Start */
 body {
   background-color: $body-bg-color;
   font-size: $body-font-size;
@@ -1932,8 +1922,6 @@ input {
 /**=====================
       General CSS Ends
 ==========================**/
-
-$header-size: 80px;
 
 /**=====================
     Header CSS Start
@@ -3530,7 +3518,7 @@ $label-color: $primary-color,
 /*======= Font-color css end  ======= */
 
 /*======= Button-color css starts  ======= */
-// btn--color//
+/* btn--color */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -3596,7 +3584,7 @@ $btn-color in (primary, $primary-color),
   }
 }
 
-// outline buttons//
+/*  outline buttons */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -3630,7 +3618,7 @@ $btn-color in (primary, $primary-color),
   }
 }
 
-//active button css //
+/* active button css  */
 @each $btn-name,
 $btn-color in (primary, $primary-color),
 (secondary, $secondary-color),
@@ -3656,7 +3644,7 @@ $btn-color in (primary, $primary-color),
   }
 }
 
-//* active button css end *//
+/* active button css end */
 
 @each $btn-name,
 $btn-color in (primary, $primary-color),
@@ -4457,7 +4445,6 @@ $i: 1;
 .datepicker--cell {
   &.-current- {
     color: $black;
-    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 5px;
     font-weight: bold;
     border: 2px solid $primary-color;
@@ -4866,7 +4853,7 @@ $i: 1;
     }
   }
 
-  // media
+  /* media */
   .media-table {
     table {
       tr {
@@ -4888,12 +4875,12 @@ $i: 1;
 
 @media only screen and (max-width: 1199px) {
 
-  // product detail
+  /* product detail */
   .product-page-details {
     margin-top: 30px;
   }
 
-  // datatable
+  /* datatable */
   .product-physical {
     table {
       tr {
@@ -5025,7 +5012,7 @@ $i: 1;
     }
   }
 
-  // datatable
+  /* datatable */
   .category-table {
     table {
       tr {
@@ -5068,7 +5055,7 @@ $i: 1;
     }
   }
 
-  // profile
+  /* profile */
   .profile-table {
     table {
       tr {
@@ -5321,7 +5308,7 @@ $i: 1;
     }
   }
 
-  // product detail
+  /* product detail */
   .product-page-details {
     text-align: left !important;
   }
@@ -5332,14 +5319,14 @@ $i: 1;
     }
   }
 
-  // order
+  /* order */
   .dataTables_wrapper {
     .dataTables_length {
       margin-bottom: 20px;
     }
   }
 
-  // add product page
+  /* add product page */
   .add-product {
     img {
       width: 460px;
@@ -5352,17 +5339,17 @@ $i: 1;
     }
   }
 
-  // tab css
+  /* tab css */
   .tab-coupon {
     margin-bottom: 20px;
   }
 
-  // profile
+  /* profile */
   .deactivate-account {
     margin-top: 20px;
   }
 
-  // reports
+  /* reports */
   .sell-graph {
     canvas {
       height: 312px !important;
@@ -5505,7 +5492,7 @@ $i: 1;
     }
   }
 
-  // add product page
+  /* add product page */
   .add-product-form {
     .form-group {
 
@@ -5561,7 +5548,7 @@ $i: 1;
     }
   }
 
-  // digital list
+  /* digital list */
   .digital-product {
     table {
       tr {
@@ -5574,7 +5561,7 @@ $i: 1;
     }
   }
 
-  // report page
+  /* report page */
   .report-table {
     table {
       tr {
@@ -5587,7 +5574,7 @@ $i: 1;
     }
   }
 
-  // coupon page
+  /* coupon page */
   .needs-validation {
     .form-group {
       &.row {
@@ -5625,7 +5612,7 @@ $i: 1;
     }
   }
 
-  // order
+  /* order */
   .dataTables_wrapper {
     .dataTables_paginate {
       float: none !important;
@@ -5932,14 +5919,14 @@ $i: 1;
     }
   }
 
-  // product detail
+  /* product detail */
   .product-page-main {
     .owl-stage-outer {
       margin-top: 15px;
     }
   }
 
-  // profile
+  /* profile */
   .profile-details {
     img {
       margin-bottom: 15px;
@@ -5997,7 +5984,7 @@ $i: 1;
     }
   }
 
-  // create user
+  /* create user */
   .sm-label-radio {
     margin-bottom: 4px !important;
   }
@@ -6044,12 +6031,12 @@ $i: 1;
     }
   }
 
-  // tab css
+  /* tab css */
   .tab-coupon {
     display: grid;
   }
 
-  // translation
+  /* translation */
   .translation-list {
     table {
       tr {
@@ -6066,7 +6053,7 @@ $i: 1;
     }
   }
 
-  // datatable css
+  /* datatable css */
   .product-list {
     table {
       tr {
@@ -6101,7 +6088,7 @@ $i: 1;
     }
   }
 
-  // add product css
+  /* add product css */
   .add-product-form {
     .form-group {
       .form-control {
@@ -6140,7 +6127,7 @@ $i: 1;
     }
   }
 
-  // order
+  /* order */
   .dataTables_wrapper {
     .dataTables_paginate {
       margin-top: 15px !important;
@@ -6245,7 +6232,7 @@ $i: 1;
     }
   }
 
-  // product detail
+  /* product detail */
   .product-page-main {
     .btn {
       padding: 5px 12px;
@@ -6264,7 +6251,7 @@ $i: 1;
   }
 }
 
-// rtl css
+/* rtl css */
 body {
   &.rtl {
     .m-r-15 {
@@ -6499,7 +6486,7 @@ body {
       }
     }
 
-    // sidebar main page
+    /* sidebar main page */
     .page-wrapper {
       .page-body-wrapper {
         .page-sidebar {
@@ -6637,7 +6624,7 @@ body {
       }
     }
 
-    // page main header
+    /* page main header */
     .breadcrumb-item {
       +.breadcrumb-item {
         padding-left: unset;
@@ -6827,7 +6814,7 @@ body {
       direction: ltr;
     }
 
-    // default page
+    /* default page */
     .media {
       .media-body {
         text-align: right;
@@ -6849,7 +6836,7 @@ body {
       }
     }
 
-    // product
+    /* product */
     .product-physical {
       table {
         tr {
@@ -6874,21 +6861,6 @@ body {
     }
 
     .add-product-form {
-
-      // .qty-box {
-      //   .input-group {         
-      //     // .btn {
-      //     //   border-right: none !important;
-      //     //   border-left: 1px solid $light-gray !important;
-      //     // }         
-      //     .btn-primary {
-      //       &.bootstrap-touchspin-down {
-      //         // border-left: none !important;
-      //         // border-right: 1px solid $light-gray !important;
-      //       }
-      //     }
-      //   }
-      // }
       .offset-sm-4 {
         text-align: right;
       }
@@ -6957,7 +6929,7 @@ body {
       }
     }
 
-    // datatables
+    /* datatables */
     .dataTables_wrapper {
       .dataTables_filter {
         input[type="search"] {
@@ -7006,7 +6978,7 @@ body {
       }
     }
 
-    // profile page
+    /* profile page */
     .profile-details {
       h5 {
         text-align: center;

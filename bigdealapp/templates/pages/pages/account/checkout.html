@@ -11,157 +11,180 @@
     <div class="custom-container">
         <div class="checkout-page contact-page">
             <div class="checkout-form">
-                    <div class="row">
-                        <div class="col-lg-6 col-12">
-                            <div class="checkout-title" id="billingAddressDiv">
-                                <h3>Billing Details</h3></div>
-                                <div class="d-block my-3">
-                                    <div class="form-check custome-radio-box">
-                                      <input class="form-check-input" type="radio" name="flexRadioDefaultForAddress" value="newAddress"
-                                        id="newAddress">
-                                      <label class="form-check-label" for="newAddress">New Address</label>
-                                    </div>
-                                    {% for address in billingAddresses %}
-                                    <div class="form-check custome-radio-box">
-                                      <input class="form-check-input" type="radio" id="address-{{forloop.counter}}"
-                                        name="flexRadioDefaultForAddress" value={{address.id}}>
-                                      <label class="form-check-label" for="address-{{forloop.counter}}">{{address.customerAddress1}} -
-                                        {{address.customerZip}}</label>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                                <form class="needs-validation theme-form" id="new-address" style="display:none;">
-                                    <input type="hidden" name="cartid" value="{{Cart.id}}">
-                                    <div class="row check-out" >
-                                        <div class="form-group col-md-6 col-sm-6 col-12">
-                                           <label for="fname" class="form-label">First Name</label>
-                                           <input type="text" name="fname" class="form-control" id="fname" required placeholder="Enter Firstname">
-                                        </div>
-                                        <div class="form-group col-md-6 col-sm-6 col-12">
-                                            <label for="lname" class="form-label">Last Name</label>
-                                            <input type="text" name="lname" id="lname" class="form-control"  required placeholder="Enter Lastname">
-                                        </div>
-                                        <div class="form-group col-md-6 col-sm-6 col-12">
-                                            <label for="uname" class="form-lable">Username</label>
-                                            <input type="text" name="uname" id="uname" class="form-control"  placeholder="Enter Username" required>
-                                        </div>
-                                        <div class="form-group col-md-6 col-sm-6 col-12">
-                                            <label class="form-label" for="email">Email Address</label>
-                                            <input type="email" name="email" class="form-control" id="email"  placeholder="example@gmail.com" required>
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label class="form-label" for="address1">Address</label>
-                                            <input type="text" name="address1" class="form-control" id="address1"  placeholder="Street address">
-                                        </div>
-                                        <div class="form-group col-md-12 col-12">
-                                            <label class="form-label" for="validationCustom04">Country</label>
-                                            <select name="country" class="form-select custome-form-select" id="validationCustom04" required>
-                                                <option selected disabled value="">Choose...</option>
-                                                <option name="united-states" value="United States">United States</option>
-                                                <option name="india" value="India">India</option>
-                                                <option name="america" value="America">America</option>
-                                                <option name="south-america" value="">South America</option>
-                                                <option name="dubai" value="Dubai">Dubai</option>
-                                                <option name="hong-kong" value="Hong Kong">Hong Kong</option>
-                                                <option name="indonesia" value="Indonesia">Indonesia</option>
-                                                <option name="pakistan" value="Pakistan">Pakistan</option>
-                                                <option name="saudi-arabia" value="Saudi Arabia">Saudi Arabia</option>
-                                                <option name="china" value="China">China</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid country.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group col-md-12 col-12">
-                                            <label class="form-label" for="validationCustom04">Town/City</label>
-                                            <select name="city" class="form-select custome-form-select" id="validationCustom05" required>
-                                                <option selected disabled value="">Choose...</option>
-                                                <option name="Bhutan" value="Bhutan">Bhutan</option>
-                                                <option name="Burundi" value="Burundi">Burundi</option>
-                                                <option name="Comoros" value="Comoros">Comoros</option>
-                                                <option name="Delhi" value="Delhi">Delhi</option>
-                                                <option name="Mumbai" value="Mumbai">Mumbai</option>
-                                                <option name="Surat" value="Surat">Surat</option>
-                                                <option name="Abu & Ambaji" value="Abu & Ambaji">Abu & Ambaji</option>
-                                                <option name="Japan" value="Japan">Japan</option>
-                                                <option name="Cuba" value="Cuba">Cuba</option>
-                                                <option name="Zambia" value="Zambia">Zambia</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-12 col-sm-6 col-12">
-                                            <label class="form-label" for="state">State </label>
-                                            <input type="text" name="state" class="form-control" id="state"  placeholder="Enter State" required>
-                                        </div>
-                                        <div class="form-group col-md-12 col-sm-6 col-12">
-                                            <label class="form-label" for="zip">Postal Code</label>
-                                            <input type="text" name="zip" id="zip"  placeholder="Enter Zipcode" required>
-                                        </div>
-                                    </div>
-                                </form>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="checkout-title" id="billingAddressDiv">
+                            <h3>Billing Details</h3>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div id="couponCodeDiv">
-                                <div class="promo-section mb-sm-4 mb-2" >
-                                    <div class="row g-2">
-                                        <div class="col-7">
-                                            <input type="text" class="form-control" id="couponCode" placeholder="Coupon Code">
-                                        </div>
-                                        <div class="col-5">
-                                            <button class="btn btn-info" id="couponBtn"
+                        <div class="d-block my-3">
+                            <div class="form-check custome-radio-box">
+                                <input class="form-check-input" type="radio" name="flexRadioDefaultForAddress"
+                                    value="newAddress" id="newAddress">
+                                <label class="form-check-label" for="newAddress">New Address</label>
+                            </div>
+                            {% for address in billingAddresses %}
+                            <div class="form-check custome-radio-box">
+                                <input class="form-check-input" type="radio" id="address-{{forloop.counter}}"
+                                    name="flexRadioDefaultForAddress" value={{address.id}}>
+                                <label class="form-check-label"
+                                    for="address-{{forloop.counter}}">{{address.customerAddress1}} -
+                                    {{address.customerZip}}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <form class="needs-validation theme-form" id="new-address" style="display:none;">
+                            <input type="hidden" name="cartid" value="{{Cart.id}}">
+                            <div class="row check-out">
+                                <div class="form-group col-md-6 col-sm-6 col-12">
+                                    <label for="fname" class="form-label">First Name</label>
+                                    <input type="text" name="fname" class="form-control" id="fname" required
+                                        placeholder="Enter Firstname">
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-12">
+                                    <label for="lname" class="form-label">Last Name</label>
+                                    <input type="text" name="lname" id="lname" class="form-control" required
+                                        placeholder="Enter Lastname">
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-12">
+                                    <label for="uname" class="form-lable">Username</label>
+                                    <input type="text" name="uname" id="uname" class="form-control"
+                                        placeholder="Enter Username" required>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-12">
+                                    <label class="form-label" for="email">Email Address</label>
+                                    <input type="email" name="email" class="form-control" id="email"
+                                        placeholder="example@gmail.com" required>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label class="form-label" for="address1">Address</label>
+                                    <input type="text" name="address1" class="form-control" id="address1"
+                                        placeholder="Street address">
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label class="form-label" for="validationCustom04">Country</label>
+                                    <select name="country" class="form-select custome-form-select"
+                                        id="validationCustom04" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option name="united-states" value="United States">United States</option>
+                                        <option name="india" value="India">India</option>
+                                        <option name="america" value="America">America</option>
+                                        <option name="south-america" value="">South America</option>
+                                        <option name="dubai" value="Dubai">Dubai</option>
+                                        <option name="hong-kong" value="Hong Kong">Hong Kong</option>
+                                        <option name="indonesia" value="Indonesia">Indonesia</option>
+                                        <option name="pakistan" value="Pakistan">Pakistan</option>
+                                        <option name="saudi-arabia" value="Saudi Arabia">Saudi Arabia</option>
+                                        <option name="china" value="China">China</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid country.
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 col-12">
+                                    <label class="form-label" for="validationCustom04">Town/City</label>
+                                    <select name="city" class="form-select custome-form-select" id="validationCustom05"
+                                        required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option name="Bhutan" value="Bhutan">Bhutan</option>
+                                        <option name="Burundi" value="Burundi">Burundi</option>
+                                        <option name="Comoros" value="Comoros">Comoros</option>
+                                        <option name="Delhi" value="Delhi">Delhi</option>
+                                        <option name="Mumbai" value="Mumbai">Mumbai</option>
+                                        <option name="Surat" value="Surat">Surat</option>
+                                        <option name="Abu & Ambaji" value="Abu & Ambaji">Abu & Ambaji</option>
+                                        <option name="Japan" value="Japan">Japan</option>
+                                        <option name="Cuba" value="Cuba">Cuba</option>
+                                        <option name="Zambia" value="Zambia">Zambia</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-6 col-12">
+                                    <label class="form-label" for="state">State </label>
+                                    <input type="text" name="state" class="form-control" id="state"
+                                        placeholder="Enter State" required>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-6 col-12">
+                                    <label class="form-label" for="zip">Postal Code</label>
+                                    <input type="text" name="zip" id="zip" placeholder="Enter Zipcode" required>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div id="couponCodeDiv">
+                            <div class="promo-section mb-sm-4 mb-2">
+                                <div class="row g-2">
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" id="couponCode"
+                                            placeholder="Coupon Code">
+                                    </div>
+                                    <div class="col-5">
+                                        <button class="btn btn-info" id="couponBtn"
                                             onclick="couponvalidation({'price':'{{Cart.getTotalPrice}}','tax':{{Cart.getTotalTax}},'priceInUSD':{{getFinalPriceAfterTax}}})">Apply
                                             Coupon</button>
-                                        </div>  
                                     </div>
                                 </div>
                             </div>
-                            <div class="checkout-details theme-form  section-big-mt-space">
-                                <div class="order-box">
-                                    <div class="title-box">
-                                        <div>Product <span>Total</span></div>
+                        </div>
+                        <div class="checkout-details theme-form  section-big-mt-space">
+                            <div class="order-box">
+                                <div class="title-box">
+                                    <div>Product <span>Total</span></div>
+                                </div>
+                                <ul class="qty">
+                                    {% for product in cart_products %}
+                                    <li>{{product.cartProduct.variantProduct.productName}}<span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                            X {{product.cartProductQuantity}}</span></li>
+                                    {% endfor %}
+
+                                </ul>
+                                <ul class="sub-total">
+                                    <li>Subtotal <span
+                                            class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span>
+                                    </li>
+                                    <li>Coupon amount <span class="count"
+                                            id="couponAmount">{{""|return_currency_wise_symbol:request}}{{couponAmount|return_currency_wise_ammount:request}}</span>
+                                    </li>
+                                    <li>Tax <span
+                                            class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span>
+                                    </li>
+                                </ul>
+                                <ul class="total">
+                                    <li>Total <span class="count"
+                                            id="finalAmount">{{""|return_currency_wise_symbol:request}}{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}</span>
+                                    </li>
+                                </ul>
+                                <ul class="total">
+                                    <li>Total (In USD) <span class="count"
+                                            id="finalAmountInUSD">${{getFinalPriceAfterTax}}</span></li>
+                                </ul>
+                            </div>
+
+
+                            <div class="upper-box payment-box" id="payment-option" style="display:none;">
+                                <h3 class="mb-3">Payment</h3>
+                                <div class="d-flex gap-3 my-3">
+                                    <div class="form-check custome-radio-box">
+                                        <input class="form-check-input p-0 rounded-circle mb-0" type="radio"
+                                            name="flexRadioDefault" value="PayPal" id="paypal">
+                                        <label class="form-check-label" for="paypal">PayPal</label>
                                     </div>
-                                    <ul class="qty">
-                                        {% for product in cart_products %}
-                                        <li>{{product.cartProduct.variantProduct.productName}}<span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                             X {{product.cartProductQuantity}}</span></li>
-                                        {% endfor %}
-
-                                    </ul>
-                                    <ul class="sub-total">
-                                        <li>Subtotal <span class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalPrice|return_currency_wise_ammount:request}}</span></li>
-                                        <li>Coupon amount <span class="count" id="couponAmount">{{""|return_currency_wise_symbol:request}}{{couponAmount|return_currency_wise_ammount:request}}</span></li>
-                                        <li>Tax <span class="count">{{""|return_currency_wise_symbol:request}}{{Cart.getTotalTax|return_currency_wise_ammount:request}}</span></li>
-                                    </ul>
-                                    <ul class="total">
-                                        <li>Total <span class="count" id="finalAmount">{{""|return_currency_wise_symbol:request}}{{getFinalPriceAfterTax|return_currency_wise_ammount:request}}</span></li>
-                                    </ul>
-                                    <ul class="total">
-                                        <li>Total (In USD) <span class="count" id="finalAmountInUSD">${{getFinalPriceAfterTax}}</span></li>
-                                    </ul>
-                                </div>
-
-
-                                <div class="upper-box payment-box" id="payment-option" style="display:none;">
-                                    <h3 class="mb-3">Payment</h3>
-                                    <div class="d-flex gap-3 my-3">
-                                        <div class="form-check custome-radio-box">
-                                            <input class="form-check-input p-0 rounded-circle mb-0" type="radio" name="flexRadioDefault" value="PayPal" id="paypal">
-                                            <label class="form-check-label" for="paypal">PayPal</label>
-                                        </div>
-                                        <div class="form-check custome-radio-box">
-                                            <input class="form-check-input p-0 rounded-circle mb-0" type="radio" name="flexRadioDefault" value="RazorPay" id="razorpay">
-                                            <label class="form-check-label" for="razorpay">RazorPay</label>
-                                        </div>
+                                    <div class="form-check custome-radio-box">
+                                        <input class="form-check-input p-0 rounded-circle mb-0" type="radio"
+                                            name="flexRadioDefault" value="RazorPay" id="razorpay">
+                                        <label class="form-check-label" for="razorpay">RazorPay</label>
                                     </div>
                                 </div>
-                                <div id="paypal-button-container" class="selected-option"></div>
-                                <div id="smart-button-container" class="selected-option"></div>
-                                <button id="rzp-button1" class="btn-normal btn razorpay-btn" style="display:none;">Pay with Razorpay</button>
-                                <div style="text-align: center;">
-                                </div>
+                            </div>
+                            <div id="paypal-button-container" class="selected-option"></div>
+                            <div id="smart-button-container" class="selected-option"></div>
+                            <button id="rzp-button1" class="btn-normal btn razorpay-btn" style="display:none;">Pay with
+                                Razorpay</button>
+                            <div style="text-align: center;">
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
         <div id='checkoutMsgDiv'>
@@ -182,16 +205,15 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
-
-    function getCookie(name){
+    function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++){
+            for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
                 // Does this cookie string begin with the name we want?
-                if(cookie.substring(0,name.length + 1) === name + "="){
-                    cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                     break;
                 }
             }
@@ -204,95 +226,52 @@
     var totalTax = '{{Cart.getTotalTax|return_currency_wise_ammount:request}}';
 
 
-// PayPal Start ============================================
+    // PayPal Start ============================================
 
-function completeOrder(params){
-    var url = "{% url 'payment_complete' %}";
-    var cartid = "{{Cart.id}}";
+    function completeOrder(params) {
+        var url = "{% url 'payment_complete' %}";
+        var cartid = "{{Cart.id}}";
 
-    var newAddressRadioBtn = document.getElementById("newAddress");
-    if(newAddressRadioBtn.checked){
-        var fname = document.getElementById("fname").value;
-        var lname = document.getElementById("lname").value;
-        var uname = document.getElementById("uname").value;
-        var email = document.getElementById("email").value;
-        var address1 = document.getElementById("address1").value;
-        var country = document.getElementById("validationCustom04").value;
-        var city = document.getElementById("validationCustom05").value;
-        var zip = document.getElementById("zip").value;
+        var newAddressRadioBtn = document.getElementById("newAddress");
+        if (newAddressRadioBtn.checked) {
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var uname = document.getElementById("uname").value;
+            var email = document.getElementById("email").value;
+            var address1 = document.getElementById("address1").value;
+            var country = document.getElementById("validationCustom04").value;
+            var city = document.getElementById("validationCustom05").value;
+            var zip = document.getElementById("zip").value;
 
-        var couponCode = document.getElementById("couponCode").value;
+            var couponCode = document.getElementById("couponCode").value;
 
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-        var couponCode = document.getElementById("couponCode").value;
+            var couponCode = document.getElementById("couponCode").value;
 
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-        fetch(url,{
-            method: "POST",
-            headers:{
-                "Content-type":"application/json",
-                "X-CSRFToken":csrftoken,
-            },
-            body: JSON.stringify({
-                price:price,
-                totalTax:totalTax,
-
-                fname:fname,
-                lname:lname,
-                uname:uname,
-                email:email,
-                address1:address1,
-                country:country,
-                city:city,
-                zip:zip,
-                cartid:cartid,
-                orderpaymentmethodname:orderpaymentmethodname,
-                payPalTransactionID:params.payPalTransactionID,
-                couponCode:couponCode,
-                couponCode:couponCode,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error(error);
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    } else {
-        var radios = document.getElementsByName("flexRadioDefaultForAddress");
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-        var couponCode = document.getElementById("couponCode").value;
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-        var couponCode = document.getElementById("couponCode").value;
-
-        for(var i = 0; i < radios.length; i++){
-            if(radios[i].checked){
-                var selectedValue = radios[i].value;
-                fetch(url, {
-                    method:"POST",
+            fetch(url, {
+                    method: "POST",
                     headers: {
                         "Content-type": "application/json",
                         "X-CSRFToken": csrftoken,
                     },
                     body: JSON.stringify({
-                        price:price,
-                        totalTax:totalTax,
-                        addressId:selectedValue,
-                        cartid:cartid,
-                        orderpaymentmethodname:orderpaymentmethodname,
-                        payPalTransactionID:params.payPalTransactionID,
+                        price: price,
+                        totalTax: totalTax,
+
+                        fname: fname,
+                        lname: lname,
+                        uname: uname,
+                        email: email,
+                        address1: address1,
+                        country: country,
+                        city: city,
+                        zip: zip,
+                        cartid: cartid,
+                        orderpaymentmethodname: orderpaymentmethodname,
+                        payPalTransactionID: params.payPalTransactionID,
                         couponCode: couponCode,
                         couponCode: couponCode,
                     }),
@@ -311,117 +290,107 @@ function completeOrder(params){
                 .catch(error => {
                     console.error(error);
                 });
+        } else {
+            var radios = document.getElementsByName("flexRadioDefaultForAddress");
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+            var couponCode = document.getElementById("couponCode").value;
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+            var couponCode = document.getElementById("couponCode").value;
+
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    var selectedValue = radios[i].value;
+                    fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-type": "application/json",
+                                "X-CSRFToken": csrftoken,
+                            },
+                            body: JSON.stringify({
+                                price: price,
+                                totalTax: totalTax,
+                                addressId: selectedValue,
+                                cartid: cartid,
+                                orderpaymentmethodname: orderpaymentmethodname,
+                                payPalTransactionID: params.payPalTransactionID,
+                                couponCode: couponCode,
+                                couponCode: couponCode,
+                            }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
             }
         }
     }
-}
 
-// PayPal End ==============================================  
+    // PayPal End ==============================================  
 
 
-// RazorPay Payment Start ==========================================
+    // RazorPay Payment Start ==========================================
 
-function completeOrderForRazorPay(params){
-    var url = "{% url 'payment_complete' %}";
-    var cartid = "{{Cart.id}}";
+    function completeOrderForRazorPay(params) {
+        var url = "{% url 'payment_complete' %}";
+        var cartid = "{{Cart.id}}";
 
-    var newAddressRadioBtn = document.getElementById("newAddress");
-    if(newAddressRadioBtn.checked){
-        var fname = document.getElementById("fname").value;
-        var lname = document.getElementById("lname").value;
-        var uname = document.getElementById("uname").value;
-        var email = document.getElementById("email").value;
-        var address1 = document.getElementById("address1").value;
-        var country = document.getElementById("validationCustom04").value;
-        var city = document.getElementById("validationCustom05").value;
-        var zip = document.getElementById("zip").value;
+        var newAddressRadioBtn = document.getElementById("newAddress");
+        if (newAddressRadioBtn.checked) {
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var uname = document.getElementById("uname").value;
+            var email = document.getElementById("email").value;
+            var address1 = document.getElementById("address1").value;
+            var country = document.getElementById("validationCustom04").value;
+            var city = document.getElementById("validationCustom05").value;
+            var zip = document.getElementById("zip").value;
 
-        var couponCode = document.getElementById("couponCode").value;
+            var couponCode = document.getElementById("couponCode").value;
 
-        var couponCode = document.getElementById("couponCode").value;
+            var couponCode = document.getElementById("couponCode").value;
 
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
 
-        fetch(url,{
-            method:'POST',
-            headers:{
-                "Content-type":"application/json",
-                "X-CSRFToken":csrftoken,
-            },
-            body: JSON.stringify({
-                price:price,
-                totalTax:totalTax,
-                fname:fname,
-                lname:lname,
-                uname:uname,
-                email:email,
-                address1:address1,
-                country:country,
-                city:city,
-                zip:zip,
-                cartid:cartid,
-                orderpaymentmethodname: orderpaymentmethodname,
-                rpPaymentId: params.rpPaymentId,
-                rpOrderId: params.rpOrderId,
-                rpSignature: params.rpSignature,
-                couponCode: couponCode,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the JSON response
-            console.log(data);
-        })
-        .catch(error => {
-            console.error(error);
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the JSON response
-          console.log(data); // Access the data returned from the server
-          // Perform any additional operations with the response data
-        })
-        .catch(error => {
-          // Handle any errors that occur during the request
-          console.error(error);
-        });
-
-    } else{
-        var radios = document.getElementsByName("flexRadioDefaultForAddress");
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-        var couponCode = document.getElementById("couponCode").value;
-        var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
-
-        var couponCode = document.getElementById("couponCode").value;
-
-        console.log('======> CompleteOrderForRazorPay Function Calling-1 <=======')
-
-        for(var i = 0; i < radios.length; i++){
-            if (radios[i].checked) {
-                var selectedValue = radios[i].value;
-                console.log('======> CompleteOrderForRazorPay Function Calling-2 <======='),
-                fetch(url, {
-                    method:"POST",
-                    headers:{
-                        "Content-type":"application/json",
+            fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json",
                         "X-CSRFToken": csrftoken,
                     },
-                    body:JSON.stringify({
-                        price:price,
-                        totalTax:totalTax,
-                        addressId:selectedValue,
-                        cartid:cartid,
-                        orderpaymentmethodname:orderpaymentmethodname,
-                        rpPaymentId:params.rpPaymentId,
-                        rpOrderId:params.rpOrderId,
+                    body: JSON.stringify({
+                        price: price,
+                        totalTax: totalTax,
+                        fname: fname,
+                        lname: lname,
+                        uname: uname,
+                        email: email,
+                        address1: address1,
+                        country: country,
+                        city: city,
+                        zip: zip,
+                        cartid: cartid,
+                        orderpaymentmethodname: orderpaymentmethodname,
+                        rpPaymentId: params.rpPaymentId,
+                        rpOrderId: params.rpOrderId,
                         rpSignature: params.rpSignature,
-                        couponCode:couponCode,
-                        couponCode:couponCode,
+                        couponCode: couponCode,
                     }),
                 })
                 .then(response => response.json())
-                .then(data=>{
+                .then(data => {
                     // Handle the JSON response
                     console.log(data);
                 })
@@ -433,28 +402,81 @@ function completeOrderForRazorPay(params){
                     // Handle the JSON response
                     console.log(data); // Access the data returned from the server
                     // Perform any additional operations with the response data
-                  })
-                  .catch(error => {
+                })
+                .catch(error => {
                     // Handle any errors that occur during the request
                     console.error(error);
-                  });
+                });
+
+        } else {
+            var radios = document.getElementsByName("flexRadioDefaultForAddress");
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+            var couponCode = document.getElementById("couponCode").value;
+            var orderpaymentmethodname = document.querySelector('input[name="flexRadioDefault"]:checked').value;
+
+            var couponCode = document.getElementById("couponCode").value;
+
+            console.log('======> CompleteOrderForRazorPay Function Calling-1 <=======')
+
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    var selectedValue = radios[i].value;
+                    console.log('======> CompleteOrderForRazorPay Function Calling-2 <======='),
+                        fetch(url, {
+                            method: "POST",
+                            headers: {
+                                "Content-type": "application/json",
+                                "X-CSRFToken": csrftoken,
+                            },
+                            body: JSON.stringify({
+                                price: price,
+                                totalTax: totalTax,
+                                addressId: selectedValue,
+                                cartid: cartid,
+                                orderpaymentmethodname: orderpaymentmethodname,
+                                rpPaymentId: params.rpPaymentId,
+                                rpOrderId: params.rpOrderId,
+                                rpSignature: params.rpSignature,
+                                couponCode: couponCode,
+                                couponCode: couponCode,
+                            }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the JSON response
+                            console.log(data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Handle the JSON response
+                            console.log(data); // Access the data returned from the server
+                            // Perform any additional operations with the response data
+                        })
+                        .catch(error => {
+                            // Handle any errors that occur during the request
+                            console.error(error);
+                        });
+                }
             }
         }
     }
-}
 
-// RazorPay Payment End ============================================
-
+    // RazorPay Payment End ============================================
 
 
-  // =======================================================================
-  // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
-  // =======================================================================
+
+    // =======================================================================
+    // PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal PayPal 
+    // =======================================================================
 
 
     paypal_sdk.Buttons({
         onClick: async function (data, actions) {
-            
+
             var fname = document.getElementById("fname").value;
             var lname = document.getElementById("lname").value;
             var uname = document.getElementById("uname").value;
@@ -470,392 +492,395 @@ function completeOrderForRazorPay(params){
             const options = document.getElementsByName("flexRadioDefaultForAddress");
             for (let i = 0; i < options.length; i++) {
                 if (options[i].checked && options[i].value == "newAddress") {
-                if (!fname || !lname || !uname || !email || !address1  || !country || !city || !zip) {
-                    alert("Please fill the billing address form.");
-                    return actions.reject();
+                    if (!fname || !lname || !uname || !email || !address1 || !country || !city || !zip) {
+                        alert("Please fill the billing address form.");
+                        return actions.reject();
+                    } else {
+                        if (checkOutStatus) {
+                            return actions.resolve();
+                        } else {
+                            return actions.reject();
+                        }
+                    }
                 } else {
                     if (checkOutStatus) {
-                    return actions.resolve();
+                        return actions.resolve();
                     } else {
-                    return actions.reject();
+                        return actions.reject();
                     }
-                }
-                } else {
-                if (checkOutStatus) {
-                    return actions.resolve();
-                } else {
-                    return actions.reject();
-                }
                 }
             }
         },
 
         createOrder: function (data, actions) {
-        return actions.order.create({
-            purchase_units: [{
-            amount: {
-                value: price,
-            },
-            }, ],
-        });
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: price,
+                    },
+                }, ],
+            });
         },
 
         onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-            var transactionId = details.purchase_units[0].payments.captures[0].id;
-            console.log('============>transactionId', transactionId)
-            console.log('==================>details', details)
-            console.log('============>data', data)
-            console.log('============>data.paymentID', data.paymentID)
-            console.log('============>data.order', data.orderID)
+            return actions.order.capture().then(function (details) {
+                var transactionId = details.purchase_units[0].payments.captures[0].id;
+                console.log('============>transactionId', transactionId)
+                console.log('==================>details', details)
+                console.log('============>data', data)
+                console.log('============>data.paymentID', data.paymentID)
+                console.log('============>data.order', data.orderID)
 
 
-            completeOrder({
-            'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
+                completeOrder({
+                    'payPalTransactionID': details.purchase_units[0].payments.captures[0].id
+                });
+                setTimeout(function () {
+                    location.href = "{% url 'order_success' %}";
+                }, 400);
             });
-            setTimeout(function () {
-            location.href = "{% url 'order_success' %}";
-            }, 400);
-        });
         },
     }).render("#paypal-button-container");
 
 
 
-//  =======================================================================
-//  RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay
-// ========================================================================
+    //  =======================================================================
+    //  RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay RazorPay
+    // ========================================================================
 
 
-var options = {
-    key: "{{rsk}}",
-    amount: "{{payment.amount}}",
-    currency: "{{payment.currency}}",
-    name: "Bigdeal Ecommerce",
-    description: "Order Transaction",
-    order_id: "{{payment.id}}",
-
-    
-    handler: function (response){
-        if(response.error && response.error.code === 'payment_cancelled'){
-            // Handle payment cancellation error
-            alert("Payment has been cancelled. Please try again or complete the payment later.");
-        }
-
-        completeOrderForRazorPay({
-            'rpPaymentId': response.razorpay_payment_id,
-            'rpOrderId': response.razorpay_order_id,
-            'rpSignature': response.razorpay_signature
-        });
-        setTimeout(function(){
-            location.href = "{% url 'order_success' %}";
-        },400);
-    },
-};
+    var options = {
+        key: "{{rsk}}",
+        amount: "{{payment.amount}}",
+        currency: "{{payment.currency}}",
+        name: "Bigdeal Ecommerce",
+        description: "Order Transaction",
+        order_id: "{{payment.id}}",
 
 
-var rzpObject = new Razorpay(options);
+        handler: function (response) {
+            if (response.error && response.error.code === 'payment_cancelled') {
+                // Handle payment cancellation error
+                alert("Payment has been cancelled. Please try again or complete the payment later.");
+            }
 
-document.getElementById('rzp-button1').onclick = function(e){
-    var fname = document.getElementById("fname").value;
-    var lname = document.getElementById("lname").value;
-    var uname = document.getElementById("uname").value;
-    var email = document.getElementById("email").value;
-    var address1 = document.getElementById("address1").value;
-    var country = document.getElementById("validationCustom04").value;
-    var city = document.getElementById("validationCustom05").value;
-    var zip = document.getElementById("zip").value;
+            completeOrderForRazorPay({
+                'rpPaymentId': response.razorpay_payment_id,
+                'rpOrderId': response.razorpay_order_id,
+                'rpSignature': response.razorpay_signature
+            });
+            setTimeout(function () {
+                location.href = "{% url 'order_success' %}";
+            }, 400);
+        },
+    };
 
-    handleCheckout()
-    .then((checkOutStatus) => {
-        const options = document.getElementsByName("flexRadioDefaultForAddress");
 
-        for (let i = 0; i < options.length; i++){
-            if (options[i].checked && options[i].value == "newAddress"){
-                if(!fname || !lname || !uname || !email || !address1 || !country || !city || !zip){
-                    alert("Please fill the billing address form.");
-                } else{
+    var rzpObject = new Razorpay(options);
 
-                    if(checkOutStatus){
-                        rzpObject.open();
-                        e.preventDefault();
-                    } else{
-                        return;
+    document.getElementById('rzp-button1').onclick = function (e) {
+        var fname = document.getElementById("fname").value;
+        var lname = document.getElementById("lname").value;
+        var uname = document.getElementById("uname").value;
+        var email = document.getElementById("email").value;
+        var address1 = document.getElementById("address1").value;
+        var country = document.getElementById("validationCustom04").value;
+        var city = document.getElementById("validationCustom05").value;
+        var zip = document.getElementById("zip").value;
+
+        handleCheckout()
+            .then((checkOutStatus) => {
+                const options = document.getElementsByName("flexRadioDefaultForAddress");
+
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].checked && options[i].value == "newAddress") {
+                        if (!fname || !lname || !uname || !email || !address1 || !country || !city || !zip) {
+                            alert("Please fill the billing address form.");
+                        } else {
+
+                            if (checkOutStatus) {
+                                rzpObject.open();
+                                e.preventDefault();
+                            } else {
+                                return;
+                            }
+                        }
+                    }
+                    if (options[i].checked && options[i].value != "newAddress") {
+                        if (checkOutStatus) {
+                            rzpObject.open();
+                            e.preventDefault();
+                        } else {
+                            return;
+                        }
                     }
                 }
-            }
-            if(options[i].checked && options[i].value != "newAddress"){
-                if(checkOutStatus){
-                    rzpObject.open();
-                    e.preventDefault();
-                } else{
-                    return;
-                }
-            }
-        }
-    });
-};
+            });
+    };
 
 
 
     // ===============================================================
-  // It will display payment option based on payment method selection
+    // It will display payment option based on payment method selection
 
-  const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
-  const paypalProceedButton = document.querySelector("#paypal-button-container");
-  const razorPayProceedButton = document.querySelector("#rzp-button1");
+    const paymentMethodRadios = document.querySelectorAll('input[name="flexRadioDefault"]');
+    const paypalProceedButton = document.querySelector("#paypal-button-container");
+    const razorPayProceedButton = document.querySelector("#rzp-button1");
 
-  paypalProceedButton.style.display = "none";
-  razorPayProceedButton.style.display = "none";
+    paypalProceedButton.style.display = "none";
+    razorPayProceedButton.style.display = "none";
 
-  paymentMethodRadios.forEach((radio) => {
-    radio.addEventListener("click", (event) => {
-        const options = document.getElementsByName("flexRadioDefaultForAddress");
-        let isChecked = false;
-        for(let i = 0; i < options.length; i++){
-            
-            if(options[i].checked && (options[i].value == "newAddress" || options[i].value != "newAddress")){
-                isChecked = true;
-                break;
+    paymentMethodRadios.forEach((radio) => {
+        radio.addEventListener("click", (event) => {
+            const options = document.getElementsByName("flexRadioDefaultForAddress");
+            let isChecked = false;
+            for (let i = 0; i < options.length; i++) {
+
+                if (options[i].checked && (options[i].value == "newAddress" || options[i].value !=
+                        "newAddress")) {
+                    isChecked = true;
+                    break;
+                }
             }
-        }
-        if (!isChecked) {
-            event.preventDefault();
-            alert("Please select at least one option from the billing address.");
-        }else {
-            const paymentMethod = event.target.value;
-            if(paymentMethod === "PayPal"){
-                paypalProceedButton.style.display = "block";
-                razorPayProceedButton.style.display = "none";
-            } else if(paymentMethod === "RazorPay"){
-                paypalProceedButton.style.display = "none";
-                razorPayProceedButton.style.display = "block";
-            } else if(paymentMethod === "Stripe"){
-                paypalProceedButton.style.display = "none";
-                razorPayProceedButton.style.display = "none";
-            }
-        }
-    });
-  });
-
-
-
-  // ============================================================
-  // It will display address option based on previously saved address
-  // ============================================================
-
-  const addressMethodRadios = document.querySelectorAll('input[name="flexRadioDefaultForAddress"]');
-  const addAddressDiv = document.querySelector("#new-address");
-  const paymentOptions = document.querySelector("#payment-option");
-  const couponCodeEle = document.getElementById('couponCode');
-  const couponBtn = document.getElementById('couponBtn');
-
-
-  addressMethodRadios.forEach((radio) => {
-    radio.addEventListener("change", (event) => {
-
-        couponCodeEle.disabled = true;
-        couponBtn.disabled = true;
-
-        const addressMethod = event.target.value;
-        if (addressMethod === 'newAddress') {
-            addAddressDiv.style.display = "block";
-            paymentOptions.style.display = "block";
-        } else{
-            addAddressDiv.style.display = "none";
-            paymentOptions.style.display = "block";
-        }
-    });
-  });
-
-// Handle Checkout Function Start ============================================================
-
-var cartId = getCookie("cid");
-console.log('cartId =====>',cartId)
-
-
-async function handleCheckout(){
-    var checkOutStatus = true;
-    var url = "{% url 'cart_to_checkout_validation' %}";
-
-    await fetch(url,{
-        method: "POST",
-        headers:{
-            "Content-type": "application/json",
-            "X-CSRFToken": csrftoken,
-        },
-        body:JSON.stringify({
-            cartId:cartId,
-            
-        }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        if(data.flag === "True"){
-            // You can not Buy Product
-
-            var checkoutMsgDiv = document.getElementById("checkoutMsgDiv");
-            for(var i = 0; i < data.outOfStockProducts.length; i++){
-                var checkoutMsg = document.createElement("h5");
-                checkoutMsg.setAttribute("id","checkoutMsg" + i);
-                checkoutMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts + 
-              " stock of product " + data.outOfStockProducts[i].productName + ". Please update your cart.";
-                checkoutMsgDiv.append(checkoutMsg);
-
-                // Set a timeout to hide the checkoutMsg element after 3 seconds
-                setTimeout(function(index){
-                    var checkoutMsgElement = document.getElementById("checkoutMsg" + index);
-                    if(checkoutMsgElement){
-                        checkoutMsgElement.remove();
-                    }
-                },3000, i);
-            }
-            checkOutStatus = false;
-        }
-
-        if(data.flag === "False"){
-            // You can buy product
-        }
-    });
-
-    return checkOutStatus;
- }
-
- // Handle Checkout Function End ============================================================
-
-
-
-
-
-// Set value in cookie Function Start ============================================================
-
-function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds){
-    const existingCookie = getCookie(cookieName);
-
-    if (existingCookie !== null ) {
-        // Cookie exists, update its value and expiration
-        setCookie(cookieName,cookieValue,expirationSeconds);
-    } else {
-        // Cookie doesn't exist, set a new cookie
-        setCookie(cookieName, cookieValue, expirationSeconds);
-    }
-}
-
-function setCookie(cookieName,cookieValue,expirationSeconds){
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + expirationSeconds * 1000);
-    const cookieString = `${encodeURIComponent(cookieName)}=${encodeURIComponent(cookieValue)}; expires=${expirationDate.toUTCString()}; path=/`;
-    document.cookie = cookieString;
-    
-}
-
-function getCookie(cookieName) {
-    const cookieString = document.cookie;
-    const cookies = cookieString.split(';');
-
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.startsWith(`${cookieName}=`)) {
-        return cookie.substring(cookieName.length + 1);
-      }
-    }
-
-    return null;
-  }
-
-
-
-// Set value in cookie Function Start ============================================================
-
-
-// Handle coupon validation start ======================
-
-/*async function couponvalidation(params){
-    const couponCodeEle = document.getElementById('couponCode');
-    const couponCode = couponCodeEle.value;
-
-    if(couponCode == ''){
-        alert('Please enter coupon code')
-        return;
-    }else{
-        setOrUpdateCookie('couponCode',couponCode,3600);
-        }
-
-    window.location.reload();
-}*/
-
-// Handle coupon validation end ========================
-
-
-function couponvalidation(params) {
-    const { price, tax, priceInUSD } = params;
-    const couponCodeEle = document.getElementById('couponCode');
-    const couponCode = couponCodeEle.value;
-
-    if (couponCode === '') {
-        alert('Please enter a coupon code');
-        return;
-    } else {
-        setOrUpdateCookie('couponCode', couponCode, 3600);
-    }
-
-    // Perform coupon validation
-    validateCoupon(price, tax, priceInUSD, couponCode)
-        .then(isValidCoupon => {
-            const billingAddressDiv = document.querySelector("#billingAddressDiv");
-
-            if (isValidCoupon) {
-                billingAddressDiv.style.display = "block";
+            if (!isChecked) {
+                event.preventDefault();
+                alert("Please select at least one option from the billing address.");
             } else {
-                billingAddressDiv.style.display = "none";
+                const paymentMethod = event.target.value;
+                if (paymentMethod === "PayPal") {
+                    paypalProceedButton.style.display = "block";
+                    razorPayProceedButton.style.display = "none";
+                } else if (paymentMethod === "RazorPay") {
+                    paypalProceedButton.style.display = "none";
+                    razorPayProceedButton.style.display = "block";
+                } else if (paymentMethod === "Stripe") {
+                    paypalProceedButton.style.display = "none";
+                    razorPayProceedButton.style.display = "none";
+                }
+            }
+        });
+    });
+
+
+
+    // ============================================================
+    // It will display address option based on previously saved address
+    // ============================================================
+
+    const addressMethodRadios = document.querySelectorAll('input[name="flexRadioDefaultForAddress"]');
+    const addAddressDiv = document.querySelector("#new-address");
+    const paymentOptions = document.querySelector("#payment-option");
+    const couponCodeEle = document.getElementById('couponCode');
+    const couponBtn = document.getElementById('couponBtn');
+
+
+    addressMethodRadios.forEach((radio) => {
+        radio.addEventListener("change", (event) => {
+
+            couponCodeEle.disabled = true;
+            couponBtn.disabled = true;
+
+            const addressMethod = event.target.value;
+            if (addressMethod === 'newAddress') {
+                addAddressDiv.style.display = "block";
+                paymentOptions.style.display = "block";
+            } else {
+                addAddressDiv.style.display = "none";
+                paymentOptions.style.display = "block";
+            }
+        });
+    });
+
+    // Handle Checkout Function Start ============================================================
+
+    var cartId = getCookie("cid");
+    console.log('cartId =====>', cartId)
+
+
+    async function handleCheckout() {
+        var checkOutStatus = true;
+        var url = "{% url 'cart_to_checkout_validation' %}";
+
+        await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    cartId: cartId,
+
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.flag === "True") {
+                    // You can not Buy Product
+
+                    var checkoutMsgDiv = document.getElementById("checkoutMsgDiv");
+                    for (var i = 0; i < data.outOfStockProducts.length; i++) {
+                        var checkoutMsg = document.createElement("h5");
+                        checkoutMsg.setAttribute("id", "checkoutMsg" + i);
+                        checkoutMsg.innerHTML = "There is " + data.outOfStockProducts[i].outOfStockProducts +
+                            " stock of product " + data.outOfStockProducts[i].productName +
+                            ". Please update your cart.";
+                        checkoutMsgDiv.append(checkoutMsg);
+
+                        // Set a timeout to hide the checkoutMsg element after 3 seconds
+                        setTimeout(function (index) {
+                            var checkoutMsgElement = document.getElementById("checkoutMsg" + index);
+                            if (checkoutMsgElement) {
+                                checkoutMsgElement.remove();
+                            }
+                        }, 3000, i);
+                    }
+                    checkOutStatus = false;
+                }
+
+                if (data.flag === "False") {
+                    // You can buy product
+                }
+            });
+
+        return checkOutStatus;
+    }
+
+    // Handle Checkout Function End ============================================================
+
+
+
+
+
+    // Set value in cookie Function Start ============================================================
+
+    function setOrUpdateCookie(cookieName, cookieValue, expirationSeconds) {
+        const existingCookie = getCookie(cookieName);
+
+        if (existingCookie !== null) {
+            // Cookie exists, update its value and expiration
+            setCookie(cookieName, cookieValue, expirationSeconds);
+        } else {
+            // Cookie doesn't exist, set a new cookie
+            setCookie(cookieName, cookieValue, expirationSeconds);
+        }
+    }
+
+    function setCookie(cookieName, cookieValue, expirationSeconds) {
+        const expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + expirationSeconds * 1000);
+        const cookieString =
+            `${encodeURIComponent(cookieName)}=${encodeURIComponent(cookieValue)}; expires=${expirationDate.toUTCString()}; path=/`;
+        document.cookie = cookieString;
+
+    }
+
+    function getCookie(cookieName) {
+        const cookieString = document.cookie;
+        const cookies = cookieString.split(';');
+
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(`${cookieName}=`)) {
+                return cookie.substring(cookieName.length + 1);
+            }
+        }
+
+        return null;
+    }
+
+
+
+    // Set value in cookie Function Start ============================================================
+
+
+    // Handle coupon validation start ======================
+
+    /*async function couponvalidation(params){
+        const couponCodeEle = document.getElementById('couponCode');
+        const couponCode = couponCodeEle.value;
+
+        if(couponCode == ''){
+            alert('Please enter coupon code')
+            return;
+        }else{
+            setOrUpdateCookie('couponCode',couponCode,3600);
             }
 
-            // Reload the page after handling coupon validation
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
-        })
-        .catch(error => {
-            console.error("Error during coupon validation", error);
-        });
-}
+        window.location.reload();
+    }*/
 
-async function validateCoupon(price, tax, priceInUSD, couponCode) {
-    const url = "{% url 'validate_coupon' %}";
-    var csrftoken = getCookie('csrftoken');
+    // Handle coupon validation end ========================
 
 
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
-            },
-            body: JSON.stringify({
-                couponCode: couponCode,
-                price: price,
-                tax: tax,
-                priceInUSD: priceInUSD,
-            }),
-        });
+    function couponvalidation(params) {
+        const {
+            price,
+            tax,
+            priceInUSD
+        } = params;
+        const couponCodeEle = document.getElementById('couponCode');
+        const couponCode = couponCodeEle.value;
 
-        if (response.ok) {
-            const data = await response.json();
-            return data.valid === "True";
+        if (couponCode === '') {
+            alert('Please enter a coupon code');
+            return;
         } else {
-            console.error("Failed to validate coupon");
+            setOrUpdateCookie('couponCode', couponCode, 3600);
+        }
+
+        // Perform coupon validation
+        validateCoupon(price, tax, priceInUSD, couponCode)
+            .then(isValidCoupon => {
+                const billingAddressDiv = document.querySelector("#billingAddressDiv");
+
+                if (isValidCoupon) {
+                    billingAddressDiv.style.display = "block";
+                } else {
+                    billingAddressDiv.style.display = "none";
+                }
+
+                // Reload the page after handling coupon validation
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            })
+            .catch(error => {
+                console.error("Error during coupon validation", error);
+            });
+    }
+
+    async function validateCoupon(price, tax, priceInUSD, couponCode) {
+        const url = "{% url 'validate_coupon' %}";
+        var csrftoken = getCookie('csrftoken');
+
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                    couponCode: couponCode,
+                    price: price,
+                    tax: tax,
+                    priceInUSD: priceInUSD,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data.valid === "True";
+            } else {
+                console.error("Failed to validate coupon");
+                return false;
+            }
+        } catch (error) {
+            console.error("Error during coupon validation", error);
             return false;
         }
-    } catch (error) {
-        console.error("Error during coupon validation", error);
-        return false;
     }
-}
-
-
 </script>
-    
+
 {% endblock script %}
-    
-               

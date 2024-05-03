@@ -1,4 +1,4 @@
-//font
+/* font */
 $font_0: PT Sans;
 $font-1: 'PT Sans',
     sans-serif;
@@ -44,7 +44,7 @@ $font-work-sans: work-Sans;
 $font-nunito: Nunito;
 $font-serif: sans-serif;
 
-//color
+/* color */
 $theme-color1: #ff6000;
 $theme-color2: #ffa800;
 $theme-color3: #33b54c;
@@ -113,14 +113,14 @@ $indidcolor: #2164f3;
 $printcolor: #de0422;
 $instacolor: #c42253;
 
-// slider //
+/* slider */
 $rich-gold: #eddbd1;
 $solitud: #dfe9f3;
 $gaynsboro: #e7e7e7;
 $hawkesh-blue: #f0dec9;
 $gray93: #ededed;
 
-// dark layout //
+/* dark layout */
 $dark-layout: #1b1b1b;
 $light-layout: #262626;
 $light-layout1: #2d2d2d;
@@ -137,7 +137,7 @@ $white-3: #e7eaec;
 $white-4: #dee2e6;
 $white-5: #cfd4da;
 
-// Theme colors variables
+/* Theme colors variables */
 $primary-color: #00baf2;
 $secondary-color: #314da7;
 $success-color: #11d89c;
@@ -159,7 +159,7 @@ $light-box-bg: #ebebeb;
 $light-blue: #eff2f7;
 $shade-gray: #777777;
 
-// Tables settings
+/* Tables settings */
 $horizontal-border-color: #dee2e6;
 $table-b-margin: 0px;
 $table-footer-font-weight: bold;
@@ -180,12 +180,12 @@ $horizontal-border-color: #dee2e6;
 $horizontal-padding: .75rem 2rem;
 $table-inverse-bg-color: #292b2c;
 
-// General variables
+/* General variables */
 $theme-font-color: #1b252a;
 $theme-body-font-color: #313131;
 $theme-body-sub-title-color: #777777;
 
-//sidabr main settings
+/* sidabr main settings */
 $sidebar-width: 255px;
 $sidebar-position: fixed;
 $sidebar-background-color: #242934;
@@ -194,7 +194,7 @@ $sidebar-overflow: auto;
 $sidebar-z-index: 9;
 $sidebar-transition: 0.3s;
 
-//main header left settings
+/* main header left settings */
 $main-header-left-bg-color : $transparent-color;
 $main-header-padding : 12px;
 $main-header-z-index : 9;
@@ -205,7 +205,7 @@ $main-header-right-nav-icon-size : 18px;
 $main-header-right-nav-icon-color : $primary-color;
 $main-header-right-nav-icon-margin-top : 10px;
 
-//page settings
+/* page settings */
 $page-body-padding : 0 15px;
 $page-body-bg-color: $light-color;
 $page-body-margin-bottom: 0px;
@@ -218,14 +218,14 @@ $breadcrumb-size: 14px;
 $breadcrumb-content: "/";
 $breadcrumb-svg-icon-align: text-top;
 
-//Header settings
+/* Header settings */
 $main-header-bg-color: $white;
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-z-index: 10;
 $main-header-shadow: 0 0 10px 1px rgba(68, 102, 242, 0.05);
 
-//General tag settings
+/* General tag settings */
 $body-bg-color: rgba(246, 246, 246, 0.6);
 $body-font-size: 14px;
 $body-font-color: $theme-body-font-color;
@@ -253,14 +253,14 @@ $list-group-active-border-color: $primary-color;
 $list-group-img-size: 40px;
 $list-group-margin: 10px;
 
-//footer settings
+/* footer settings */
 $footer_bg_color : $white;
 $footer_top_bgr_color : $light-color;
 $footer_link_align : right;
 $footer_dark_color : $dark-color;
 $footer_dark__txt_color : $white;
 
-//Card settings
+/* Card settings */
 $card-padding :30px;
 $card-margin-bottom :30px;
 $card-border-width :0px;
@@ -277,11 +277,11 @@ $card-header-span-color : $theme-body-sub-title-color;
 $card-body-bg-color : $transparent-color;
 $card-footer-bg-color : $white;
 
-//breadcrumb setting
+/* breadcrumb setting */
 $breadcrumb-ancher-color : $white;
 $breadcrumb-ancher-dark-color : $black;
 
-//buttons setting
+/* buttons setting */
 $btn-font-size : 14px;
 $btn-padding : 0.6rem 1.75rem;
 $btn-lg-font-size: 18px;
@@ -289,10 +289,10 @@ $btn-sm-font-size: 12px;
 $btn-xs-font-size: 11px;
 $btn-xs-padding: 0.05rem 0.4rem;
 
-//error input color start
+/* error input color start */
 $light-body-bg-color: #f1f4fb;
 
-//sidebar profile settings
+/* sidebar profile settings */
 $sidebar-user-section-padding: 25px 10px;
 $sidebar-user-section-shadow: 3px 2px 7px -1px rgba(127, 151, 249, 0.13);
 $sidebar-profile-name-txt-color : $primary-color;
@@ -304,7 +304,7 @@ $sidebar-profile-sub-title-font-size: 10px;
 $sidebar-profile-sub-title-margin: 0px;
 $sidebar-profile-img-shadow: 0 0 15px rgba(68, 102, 242, 0.3);
 
-//Sidebar main menu setting
+/* Sidebar main menu setting */
 $sidebar-menu-padding: 20px;
 $sidebar-menu-list-style: none;
 $sidebar-menu-list-margin: 0;

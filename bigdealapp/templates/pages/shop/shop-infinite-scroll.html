@@ -4,7 +4,7 @@
 {% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
-{% block components %} 
+{% block components %}
 
 
 <!-- section start -->
@@ -19,77 +19,84 @@
             <div class="row">
               <div class="col-12">
                 <div class="top-banner-wrapper">
-                  <a href="{% url 'shop_left_sidebar' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid " alt="category"></a>
+                  <a href="{% url 'shop_left_sidebar' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid "
+                      alt="category"></a>
                   <div class="top-banner-content small-section">
                     <h4>fashion</h4>
                     <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                      also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+                      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                   </div>
                 </div>
-                <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter"></i> Filter</span></div>
+                <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter"></i>
+                    Filter</span></div>
                 <div class="col-12">
                   <ul class="short-name">
-                      {% for key, value in request.GET.items %}
-                      {% if key != 'selectedAttribute' and key != 'price' %}
-                      {% for attribute in value|return_selected_attribute_list:request %}
-                      <li>
-                          <div class="label-tag">
-                              <span>{{attribute}}-{{key}}</span>
-                              <button type="button" class="btn-close"
-                                  onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
-                          </div>
-                      </li>
-                      {% endfor %}
-                      {% endif %}
-
-                      {% if key == 'price' %}
-                      {% with price_values=value|return_selected_attribute_list:request %}
-                      {% if price_values %}
-                      <li>
-                          <div class="label-tag">
-                              <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
-                                  {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
-                          </div>
-                      </li>
-                      {% endif %}
-                      {% endwith %}
-                      {% endif %}
-
-                      {% endfor %}
-
-                      {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
-                      {% if request.GET.page %}
-
+                    {% for key, value in request.GET.items %}
+                    {% if key != 'selectedAttribute' and key != 'price' %}
+                    {% for attribute in value|return_selected_attribute_list:request %}
+                    <li>
                       <div class="label-tag">
-                          <a href="{% url 'shop_infinite_scroll' %}"><span>Clear All</span></a>
+                        <span>{{attribute}}-{{key}}</span>
+                        <button type="button" class="btn-close"
+                          onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
                       </div>
+                    </li>
+                    {% endfor %}
+                    {% endif %}
 
-                      {% endif %}
-                      {% endif %}
-
-
-                      {% if request.path == '/shop_infinite_scroll' or request.GET.page %}
-                      {% if 'price' not in request.GET %}
-
-                      <li>
-                          <div class="label-tag">
-                              <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
-                                  {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
-                          </div>
-                      </li>
-
-                      {% endif %}
-                      {% endif %}
-
-
-                      {% if request.path != '/shop_infinite_scroll' or request.GET %}
-                      {% if not request.GET.page %}
-
+                    {% if key == 'price' %}
+                    {% with price_values=value|return_selected_attribute_list:request %}
+                    {% if price_values %}
+                    <li>
                       <div class="label-tag">
-                          <a href="{% url 'shop_infinite_scroll' %}"><span>Clear All</span></a>
+                        <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                          {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
                       </div>
-                      {% endif %}
-                      {% endif %}
+                    </li>
+                    {% endif %}
+                    {% endwith %}
+                    {% endif %}
+
+                    {% endfor %}
+
+                    {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                    {% if request.GET.page %}
+
+                    <div class="label-tag">
+                      <a href="{% url 'shop_infinite_scroll' %}"><span>Clear All</span></a>
+                    </div>
+
+                    {% endif %}
+                    {% endif %}
+
+
+                    {% if request.path == '/shop_infinite_scroll' or request.GET.page %}
+                    {% if 'price' not in request.GET %}
+
+                    <li>
+                      <div class="label-tag">
+                        <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                          {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                      </div>
+                    </li>
+
+                    {% endif %}
+                    {% endif %}
+
+
+                    {% if request.path != '/shop_infinite_scroll' or request.GET %}
+                    {% if not request.GET.page %}
+
+                    <div class="label-tag">
+                      <a href="{% url 'shop_infinite_scroll' %}"><span>Clear All</span></a>
+                    </div>
+                    {% endif %}
+                    {% endif %}
 
                   </ul>
                 </div>
@@ -99,7 +106,8 @@
                       <div class="col-12">
                         <div class="product-filter-content">
                           <div class="search-count">
-                            <h5>Showing Products of {{totalCount}} Result</h5></div>
+                            <h5>Showing Products of {{totalCount}} Result</h5>
+                          </div>
                           <div class="collection-view">
                             <ul>
                               <li><i class="fa fa-th grid-layout-view"></i></li>
@@ -108,10 +116,14 @@
                           </div>
                           <div class="collection-grid-view">
                             <ul>
-                              <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt=""
+                                  class="product-2-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt=""
+                                  class="product-3-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt=""
+                                  class="product-4-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt=""
+                                  class="product-6-layout-view"></li>
                             </ul>
                           </div>
                           <div class="product-page-per-view">
@@ -140,10 +152,14 @@
                         <div class="product-box">
                           <div class="product-imgbox">
                             <div class="product-front">
-                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageFront}}" class="img-fluid" alt="product"> </a>
+                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img
+                                  src="{{product.variantProduct.productImageFront}}" class="img-fluid" alt="product">
+                              </a>
                             </div>
                             <div class="product-back">
-                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img src="{{product.variantProduct.productImageBack}}" class="img-fluid" alt="product"> </a>
+                              <a href="{% url 'left_slidebar' product.variantProduct.id %}"> <img
+                                  src="{{product.variantProduct.productImageBack}}" class="img-fluid" alt="product">
+                              </a>
                             </div>
 
                           </div>
@@ -154,23 +170,24 @@
                                   {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
                                   {% for x in product.variantProduct.productFinalRating|times %}
                                   <li>
-                                    <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                    <a class="fa fa-star theme-color" id="productOfStar"
+                                      href="{% url 'left_slidebar' product.id %}"></a>
                                   </li>
                                   {% endfor %}
-                
+
                                   {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
                                   {% with number3=number1|sub:number2 %}
-                
+
                                   {% for x in number3|times %}
                                   <li>
                                     <i class="fa fa-star"></i>
                                   </li>
                                   {% endfor %}
-                
+
                                   {% endwith %}
                                   {% endwith %}
-                
-                                  
+
+
                                   {% else %}
                                   <li>
                                     <i class="fa fa-star theme-color"></i>
@@ -188,42 +205,57 @@
                                     <i class="fa fa-star theme-color"></i>
                                   </li>
                                   {% endif %}
-                                </div> 
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+                                </div>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                  Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                  unknown printer took a galley of type and scrambled it to make a type specimen book
+                                </p>
                                 <a href="javascript:void(0)">
                                   <h6 class="price-title">
                                     {{product.variantProduct.productName}}
-                                  </h6> </a>
+                                  </h6>
+                                </a>
                               </div>
                               <div class="detail-right">
-                                <div class="price"> 
+                                <div class="price">
                                   {% if product.variantProduct.productType == "Simple" %}
-                                  <h3 class="theme-color">{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}</h3>
-                                  {% else %}  
-                                  <h3 class="theme-color">{{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}</h3>
+                                  <h3 class="theme-color">
+                                    {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
+                                  </h3>
+                                  {% else %}
+                                  <h3 class="theme-color">
+                                    {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
+                                  </h3>
                                   {% endif %}
-                                 </div>
+                                </div>
                                 <div class="check-price">
                                   {% if product.variantProduct.productType == "Simple" %}
-                                    <del>{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}</del=>
-                                  {% else %}
-                                    <del>{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}</=>
-                                  {% endif %}
-                                   </div>
+                                  <del>{{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}
+                                    </del=>
+                                    {% else %}
+                                    <del>{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                      </=>
+                                      {% endif %}
+                                </div>
                               </div>
                             </div>
-                            <div class="icon-detail">                             
-                              <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                                <i data-feather="shopping-cart"></i> 
+                            <div class="icon-detail">
+                              <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}"
+                                class="add-cartnoty tooltip-top" data-tippy-content="Add to cart">
+                                <i data-feather="shopping-cart"></i>
                               </a>
-                              <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" >
-                                <i data-feather="heart"></i> 
+                              <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"
+                                class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist">
+                                <i data-feather="heart"></i>
                               </a>
-                              <a href="javascript:void(0)" onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"> <i  data-feather="eye"></i> </a>
+                              <a href="javascript:void(0)"
+                                onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"
+                                data-tippy-content="Quick View"> <i data-feather="eye"></i> </a>
                               <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
                                 class="add-to-compare-list" data-tippy-content="Compare">
                                 <i data-feather="refresh-cw"></i>
-                              </a> 
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -252,7 +284,7 @@
 
 
 {% block script %}
-  
+
 <!-- range sldier -->
 <script src="{% static 'assets/js/ion.rangeSlider.js' %}"></script>
 <script src="{% static 'assets/js/rangeslidermain.js' %}"></script>

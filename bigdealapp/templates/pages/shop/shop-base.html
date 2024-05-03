@@ -1,134 +1,136 @@
-{% load static %} 
+{% load static %}
 {% load sass_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="big-deal" />
-    <meta name="keywords" content="big-deal" />
-    <meta name="author" content="big-deal" />
-    <link rel="icon"  href="{% static 'assets/images/favicon/favicon.png' %}"type="image/x-icon"/>
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon"/>
 
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"/>
+<head>
+  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="big-deal" />
+  <meta name="keywords" content="big-deal" />
+  <meta name="author" content="big-deal" />
+  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon" />
 
-    <!--icon css-->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}"/>
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
 
-    <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}"/>
+  <!--icon css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}" />
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}" />
 
-    <!--Animate css-->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}"/>
+  <!--Slick slider css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}" />
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}" />
 
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}"/>
+  <!--Animate css-->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}" />
 
-    {% block css %} {% endblock css %}
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}" />
 
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color"/>
-  </head>
-  <body class="b-g-light">
-    <!-- loader start -->
-    <div class="loader-wrapper">
-      <div>
-        <img src="{% static 'assets/images/loader.gif' %}" alt="loader" />
-      </div>
+  {% block css %} {% endblock css %}
+
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color" />
+</head>
+
+<body class="b-g-light">
+  <!-- loader start -->
+  <div class="loader-wrapper">
+    <div>
+      <img src="{% static 'assets/images/loader.gif' %}" alt="loader" />
     </div>
-    <!-- loader end -->
+  </div>
+  <!-- loader end -->
 
-<!-- Bg Overlay Start -->
-<div class="bg-overlay"></div>
-<!-- Bg Overlay End -->
+  <!-- Bg Overlay Start -->
+  <div class="bg-overlay"></div>
+  <!-- Bg Overlay End -->
 
-    {% include 'pages/shop/shop-header.html' %}
-    {% include 'pages/shop/breadcrumb-section.html' %}
-    {% block components %} {% endblock components %}
-    {% include 'pages/shop/shop-footer.html' %} 
-    {% block script %}
-    {% endblock script %}
+  {% include 'pages/shop/shop-header.html' %}
+  {% include 'pages/shop/breadcrumb-section.html' %}
+  {% block components %} {% endblock components %}
+  {% include 'pages/shop/shop-footer.html' %}
+  {% block script %}
+  {% endblock script %}
 
-    <script>
-      function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-          const cookies = document.cookie.split(";");
-          for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === name + "=") {
-              cookieValue = decodeURIComponent(
-                cookie.substring(name.length + 1)
-              );
-              break;
-            }
+  <script>
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === name + "=") {
+            cookieValue = decodeURIComponent(
+              cookie.substring(name.length + 1)
+            );
+            break;
           }
         }
-        return cookieValue;
       }
-      var csrftoken = getCookie("csrftoken");
+      return cookieValue;
+    }
+    var csrftoken = getCookie("csrftoken");
 
-      async function GetConvertedValues(value) {
-        var url = "{% url 'get_selected_currency' %}",
-          valuereturn = 0;
-        await fetch(url, {
+    async function GetConvertedValues(value) {
+      var url = "{% url 'get_selected_currency' %}",
+        valuereturn = 0;
+      await fetch(url, {
           method: "GET",
           headers: {
             "Content-type": "application/json",
             "X-CSRFToken": csrftoken,
           },
         })
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            (valuereturn = (data.factor * value).toFixed(2)),
-              (symbol = data.symbol);
-          });
-        return {
-          symbol: symbol,
-          value: valuereturn,
-        };
-      }
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          (valuereturn = (data.factor * value).toFixed(2)),
+          (symbol = data.symbol);
+        });
+      return {
+        symbol: symbol,
+        value: valuereturn,
+      };
+    }
 
-      async function GetConvertedRangeValues(value1, value2) {
-        var url = "{% url 'get_selected_currency' %}";
-        valuereturn1 = 0;
-        valuereturn2 = 0;
-        await fetch(url, {
+    async function GetConvertedRangeValues(value1, value2) {
+      var url = "{% url 'get_selected_currency' %}";
+      valuereturn1 = 0;
+      valuereturn2 = 0;
+      await fetch(url, {
           method: "GET",
           headers: {
             "Content-type": "application/json",
             "X-CSRFToken": csrftoken,
           },
         })
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            (valuereturn1 = (data.factor * value1).toFixed(2)),
-              (valuereturn2 = (data.factor * value2).toFixed(2)),
-              (symbol = data.symbol);
-          });
-        return {
-          symbol: symbol,
-          value1: valuereturn1,
-          value2: valuereturn2,
-        };
-      }
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          (valuereturn1 = (data.factor * value1).toFixed(2)),
+          (valuereturn2 = (data.factor * value2).toFixed(2)),
+          (symbol = data.symbol);
+        });
+      return {
+        symbol: symbol,
+        value1: valuereturn1,
+        value2: valuereturn2,
+      };
+    }
 
-      async function handleQuickView(params) {
-        var url = "{% url 'quick_view' %}";
-        await fetch(url, {
+    async function handleQuickView(params) {
+      var url = "{% url 'quick_view' %}";
+      await fetch(url, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
@@ -139,277 +141,277 @@
             productVariantId: params.productVariantId,
           }),
         })
-          .then((response) => {
-            return response.json();
-          })
-          .then((data) => {
-            let id = data.productId;
-            let firstProductVariant = data.firstProductVariant;
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          let id = data.productId;
+          let firstProductVariant = data.firstProductVariant;
 
-            var productDetailsAtQuickView =
-              document.getElementById("product-details");
-            if (productDetailsAtQuickView) {
-              productDetailsAtQuickView.remove();
+          var productDetailsAtQuickView =
+            document.getElementById("product-details");
+          if (productDetailsAtQuickView) {
+            productDetailsAtQuickView.remove();
+          }
+
+          // Code to render out multiple images in quick model view START -------------------------------------------------
+          var quickViewImg = document.getElementById("quickViewImage");
+          quickViewImg.setAttribute("src", data.singleImage);
+          var element = document.getElementById("quickViewImagesDiv");
+          element.style.backgroundImage = 'url("/' + data.singleImage + '")';
+
+          // Code to render out multiple images in quick model view END ---------------------------------------------------
+
+          // ================= for rating ==================
+          let productRatingDiv = document.getElementById("productRating");
+          productRatingDiv.innerHTML = "";
+
+          for (let j = 1; j <= 5; j++) {
+            let ratingLi = document.createElement("li"),
+              icon = document.createElement("i");
+            icon.setAttribute("class", "fa fa-star");
+            if (j <= data.productFinalRating) {
+              icon.classList.add("theme-color");
             }
+            ratingLi.appendChild(icon);
+            productRatingDiv.appendChild(ratingLi);
+          }
+          let stockStatusLi = document.createElement("li");
+          stockStatusLi.setAttribute("class", "font-light");
+          stockStatusLi.setAttribute("id", "stockStatus");
+          productRatingDiv.appendChild(stockStatusLi);
 
-            // Code to render out multiple images in quick model view START -------------------------------------------------
-            var quickViewImg = document.getElementById("quickViewImage");
-            quickViewImg.setAttribute("src", data.singleImage);
-            var element = document.getElementById("quickViewImagesDiv");
-            element.style.backgroundImage = 'url("/' + data.singleImage + '")';
+          // ================= for rating ends==================
 
-            // Code to render out multiple images in quick model view END ---------------------------------------------------
+          document.getElementById("productName").innerHTML = data.productName;
+          document.getElementById("stockStatus").innerHTML =
+            "( " + data.productStockStatus + " )";
+          document.getElementById("productPrice").innerHTML =
+            data.productVariantMinPrice + "-" + data.productVariantMaxPrice;
 
-            // ================= for rating ==================
-            let productRatingDiv = document.getElementById("productRating");
-            productRatingDiv.innerHTML = "";
-
-            for (let j = 1; j <= 5; j++) {
-              let ratingLi = document.createElement("li"),
-                icon = document.createElement("i");
-              icon.setAttribute("class", "fa fa-star");
-              if (j <= data.productFinalRating) {
-                icon.classList.add("theme-color");
-              }
-              ratingLi.appendChild(icon);
-              productRatingDiv.appendChild(ratingLi);
-            }
-            let stockStatusLi = document.createElement("li");
-            stockStatusLi.setAttribute("class", "font-light");
-            stockStatusLi.setAttribute("id", "stockStatus");
-            productRatingDiv.appendChild(stockStatusLi);
-
-            // ================= for rating ends==================
-
-            document.getElementById("productName").innerHTML = data.productName;
-            document.getElementById("stockStatus").innerHTML =
-              "( " + data.productStockStatus + " )";
-            document.getElementById("productPrice").innerHTML =
-              data.productVariantMinPrice + "-" + data.productVariantMaxPrice;
-
-            if (data.productType == "Simple") {
-              GetConvertedValues(data.productVariantPrice1).then((Data) => {
-                document.getElementById("productPrice").innerHTML =
-                  Data.symbol + " " + Data.value;
-              });
-              GetConvertedValues(data.productVariantActualPrice).then(
-                (Data) => {
-                  document.getElementById("actualPriceAtQuickView").innerHTML =
-                    Data.symbol + " " + Data.value;
-                }
-              );
-
-              document.getElementById(
-                "discountPercentageAtQuickView"
-              ).innerHTML = data.productVariantDiscount;
-            }
-            if (data.productType == "Classified") {
-              GetConvertedRangeValues(
-                data.productVariantMinPrice,
-                data.productVariantMaxPrice
-              ).then((Data) => {
-                document.getElementById("productPrice").innerHTML =
-                  Data.symbol + " " + Data.value1;
-              });
-
-              GetConvertedRangeValues(
-                data.productVariantMinActualPrice,
-                data.productVariantMaxActualPrice
-              ).then((Data) => {
+          if (data.productType == "Simple") {
+            GetConvertedValues(data.productVariantPrice1).then((Data) => {
+              document.getElementById("productPrice").innerHTML =
+                Data.symbol + " " + Data.value;
+            });
+            GetConvertedValues(data.productVariantActualPrice).then(
+              (Data) => {
                 document.getElementById("actualPriceAtQuickView").innerHTML =
-                  Data.symbol + " " + Data.value1;
-              });
-
-              document.getElementById(
-                "discountPercentageAtQuickView"
-              ).innerHTML = data.productVariantDiscountRange;
-            }
-
-            if (data.productType == "Simple") {
-              var flag = document.getElementById("attrSuperDiv");
-              if (flag) {
-                flag.remove();
+                  Data.symbol + " " + Data.value;
               }
+            );
+
+            document.getElementById(
+              "discountPercentageAtQuickView"
+            ).innerHTML = data.productVariantDiscount;
+          }
+          if (data.productType == "Classified") {
+            GetConvertedRangeValues(
+              data.productVariantMinPrice,
+              data.productVariantMaxPrice
+            ).then((Data) => {
+              document.getElementById("productPrice").innerHTML =
+                Data.symbol + " " + Data.value1;
+            });
+
+            GetConvertedRangeValues(
+              data.productVariantMinActualPrice,
+              data.productVariantMaxActualPrice
+            ).then((Data) => {
+              document.getElementById("actualPriceAtQuickView").innerHTML =
+                Data.symbol + " " + Data.value1;
+            });
+
+            document.getElementById(
+              "discountPercentageAtQuickView"
+            ).innerHTML = data.productVariantDiscountRange;
+          }
+
+          if (data.productType == "Simple") {
+            var flag = document.getElementById("attrSuperDiv");
+            if (flag) {
+              flag.remove();
             }
+          }
 
-            if (data.productType == "Classified") {
-              var attributeObjects = data.attributeObjects;
-              var attributeObjectsLength = data.attributeObjects.length;
-              var flag = document.getElementById("attrSuperDiv");
-              if (flag) {
-                flag.remove();
-              }
-              var priceLabel2 = document.getElementById("priceLabel2");
-              let attrSuperDiv = document.createElement("div");
-              attrSuperDiv.id = "attrSuperDiv";
-              for (let i = 0; i < attributeObjects.length; i++) {
-                for (let attrName in attributeObjects[i]) {
-                  var flag = document.getElementById(attrName + "DivId");
+          if (data.productType == "Classified") {
+            var attributeObjects = data.attributeObjects;
+            var attributeObjectsLength = data.attributeObjects.length;
+            var flag = document.getElementById("attrSuperDiv");
+            if (flag) {
+              flag.remove();
+            }
+            var priceLabel2 = document.getElementById("priceLabel2");
+            let attrSuperDiv = document.createElement("div");
+            attrSuperDiv.id = "attrSuperDiv";
+            for (let i = 0; i < attributeObjects.length; i++) {
+              for (let attrName in attributeObjects[i]) {
+                var flag = document.getElementById(attrName + "DivId");
 
-                  let attrValues = attributeObjects[i][attrName];
+                let attrValues = attributeObjects[i][attrName];
 
-                  let attrDiv = document.createElement("div");
-                  attrDiv.className =
-                    attrName.toLowerCase() + "-types size-detail";
-                  attrDiv.setAttribute("id", attrName.toLowerCase() + "-id");
+                let attrDiv = document.createElement("div");
+                attrDiv.className =
+                  attrName.toLowerCase() + "-types size-detail";
+                attrDiv.setAttribute("id", attrName.toLowerCase() + "-id");
 
-                  let heading = document.createElement("h4");
-                  heading.textContent = attrName;
-                  heading.id = attrName + "DivId";
+                let heading = document.createElement("h4");
+                heading.textContent = attrName;
+                heading.id = attrName + "DivId";
 
-                  let ul = document.createElement("ul");
+                let ul = document.createElement("ul");
 
-                  for (let j = 0; j < attrValues.length; j++) {
-                    let li = document.createElement("li");
+                for (let j = 0; j < attrValues.length; j++) {
+                  let li = document.createElement("li");
 
-                    let liId = attrName.toLowerCase() + "UlLi" + j;
-                    li.setAttribute("id", liId);
+                  let liId = attrName.toLowerCase() + "UlLi" + j;
+                  li.setAttribute("id", liId);
 
-                    let a = document.createElement("a");
-                    let aId = attrName.toLowerCase() + "A" + j;
-                    a.setAttribute("id", aId);
+                  let a = document.createElement("a");
+                  let aId = attrName.toLowerCase() + "A" + j;
+                  a.setAttribute("id", aId);
 
-                    let fun =
-                      "show_details_for_quick_view({attributeObjectsIds:'" +
-                      data.attributeObjectsIds +
-                      "',clickedEleId: '" +
-                      aId +
-                      "', eleLen: '" +
-                      attrValues.length +
-                      "', key: 'selected" +
-                      attrName +
-                      "AtQuickView', value: '" +
-                      attrValues[j] +
-                      "',ulDiv:'" +
-                      attrName.toLowerCase() +
-                      "', id: '" +
-                      data.productId +
-                      "'})";
-                    a.setAttribute("onClick", fun);
+                  let fun =
+                    "show_details_for_quick_view({attributeObjectsIds:'" +
+                    data.attributeObjectsIds +
+                    "',clickedEleId: '" +
+                    aId +
+                    "', eleLen: '" +
+                    attrValues.length +
+                    "', key: 'selected" +
+                    attrName +
+                    "AtQuickView', value: '" +
+                    attrValues[j] +
+                    "',ulDiv:'" +
+                    attrName.toLowerCase() +
+                    "', id: '" +
+                    data.productId +
+                    "'})";
+                  a.setAttribute("onClick", fun);
 
-                    let liContent = document.createElement("li");
-                    liContent.setAttribute(
-                      "class",
-                      attrName.toLowerCase() + "Li"
-                    );
-                    liContent.innerHTML = attrValues[j];
+                  let liContent = document.createElement("li");
+                  liContent.setAttribute(
+                    "class",
+                    attrName.toLowerCase() + "Li"
+                  );
+                  liContent.innerHTML = attrValues[j];
 
-                    li.appendChild(a);
-                    a.appendChild(liContent);
-                    ul.appendChild(li);
-                  }
-                  // Create hidden input field for attribute
-                  let input = document.createElement("input");
-                  input.type = "hidden";
-                  input.name = attrName.toLowerCase();
-                  input.id = "selected" + attrName + "AtQuickView";
-                  attrDiv.appendChild(input);
-
-                  attrDiv.appendChild(heading);
-                  attrDiv.appendChild(ul);
-
-                  priceLabel2.appendChild(attrSuperDiv);
-                  attrSuperDiv.appendChild(attrDiv);
+                  li.appendChild(a);
+                  a.appendChild(liContent);
+                  ul.appendChild(li);
                 }
+                // Create hidden input field for attribute
+                let input = document.createElement("input");
+                input.type = "hidden";
+                input.name = attrName.toLowerCase();
+                input.id = "selected" + attrName + "AtQuickView";
+                attrDiv.appendChild(input);
+
+                attrDiv.appendChild(heading);
+                attrDiv.appendChild(ul);
+
+                priceLabel2.appendChild(attrSuperDiv);
+                attrSuperDiv.appendChild(attrDiv);
               }
             }
+          }
 
-            let url1 = "add_to_cart_fun_at_quick_view({key:'test'})".replace(
-              "test",
-              firstProductVariant.toString()
-            );
-            document.getElementById("addToCart").setAttribute("onClick", url1);
+          let url1 = "add_to_cart_fun_at_quick_view({key:'test'})".replace(
+            "test",
+            firstProductVariant.toString()
+          );
+          document.getElementById("addToCart").setAttribute("onClick", url1);
 
-            let url2 = "{% url 'left_slidebar' 'test' %}".replace(
-              "test",
-              id.toString()
-            );
-            document
-              .getElementById("productLeftSlidebar")
-              .setAttribute("href", url2);
+          let url2 = "{% url 'left_slidebar' 'test' %}".replace(
+            "test",
+            id.toString()
+          );
+          document
+            .getElementById("productLeftSlidebar")
+            .setAttribute("href", url2);
 
-            var images = document.getElementsByClassName("product-quick-view");
+          var images = document.getElementsByClassName("product-quick-view");
 
-            // Code to render out product details like Category and Brand in quick model view START -------------------------
-            const div = document.createElement("div");
-            div.className = "product-details";
-            div.id = "product-details";
+          // Code to render out product details like Category and Brand in quick model view START -------------------------
+          const div = document.createElement("div");
+          div.className = "product-details";
+          div.id = "product-details";
 
-            const h4 = document.createElement("h4");
-            h4.textContent = "product details";
-            div.appendChild(h4);
+          const h4 = document.createElement("h4");
+          h4.textContent = "product details";
+          div.appendChild(h4);
 
-            const ul = document.createElement("ul");
+          const ul = document.createElement("ul");
 
-            const li1 = document.createElement("li");
-            const span1 = document.createElement("span");
-            span1.className = "font-light";
-            span1.textContent = "Brand :";
-            li1.appendChild(span1);
-            li1.appendChild(document.createTextNode(data.brand));
-            ul.appendChild(li1);
+          const li1 = document.createElement("li");
+          const span1 = document.createElement("span");
+          span1.className = "font-light";
+          span1.textContent = "Brand :";
+          li1.appendChild(span1);
+          li1.appendChild(document.createTextNode(data.brand));
+          ul.appendChild(li1);
 
-            const li2 = document.createElement("li");
-            const span2 = document.createElement("span");
-            span2.className = "font-light";
-            span2.textContent = "Category :";
-            li2.appendChild(span2);
-            li2.appendChild(document.createTextNode(data.category));
-            ul.appendChild(li2);
+          const li2 = document.createElement("li");
+          const span2 = document.createElement("span");
+          span2.className = "font-light";
+          span2.textContent = "Category :";
+          li2.appendChild(span2);
+          li2.appendChild(document.createTextNode(data.category));
+          ul.appendChild(li2);
 
-            div.appendChild(ul);
+          div.appendChild(ul);
 
-            var priceLabelAtQuickView = document.getElementById("priceLabel2");
-            priceLabelAtQuickView.after(div);
-          });
+          var priceLabelAtQuickView = document.getElementById("priceLabel2");
+          priceLabelAtQuickView.after(div);
+        });
+    }
+
+    function removeElementsByClass(className) {
+      const elements = document.getElementsByClassName(className);
+      while (elements.length > 0) {
+        elements[0].parentNode.removeChild(elements[0]);
       }
+    }
 
-      function removeElementsByClass(className) {
-        const elements = document.getElementsByClassName(className);
-        while (elements.length > 0) {
-          elements[0].parentNode.removeChild(elements[0]);
+    async function show_details_for_quick_view(params) {
+      var ulElement = document.getElementById(params.ulDiv + "-id");
+      var activeElements = ulElement.querySelectorAll(".active");
+      activeElements.forEach(function (element) {
+        element.classList.remove("active");
+        element.style.backgroundColor = "";
+      });
+      document
+        .getElementById(params.clickedEleId)
+        .setAttribute("class", "active");
+      document.getElementById(params.clickedEleId).style.backgroundColor =
+        "#bfbfbf";
+      document.getElementById(params.key).setAttribute("value", params.value);
+
+      const attributes = params.attributeObjectsIds.split(",");
+
+      var allAttributesFilled = true;
+
+      for (var i = 0; i < attributes.length; i++) {
+        var attributeValue = document
+          .getElementById(attributes[i])
+          .getAttribute("value");
+        if (!attributeValue || attributeValue.length === 0) {
+          allAttributesFilled = false;
+          break;
         }
       }
-
-      async function show_details_for_quick_view(params) {
-        var ulElement = document.getElementById(params.ulDiv + "-id");
-        var activeElements = ulElement.querySelectorAll(".active");
-        activeElements.forEach(function (element) {
-          element.classList.remove("active");
-          element.style.backgroundColor = "";
-        });
-        document
-          .getElementById(params.clickedEleId)
-          .setAttribute("class", "active");
-        document.getElementById(params.clickedEleId).style.backgroundColor =
-          "#bfbfbf";
-        document.getElementById(params.key).setAttribute("value", params.value);
-
-        const attributes = params.attributeObjectsIds.split(",");
-
-        var allAttributesFilled = true;
-
+      if (allAttributesFilled) {
+        var selectedAttributeValueDict = {};
         for (var i = 0; i < attributes.length; i++) {
-          var attributeValue = document
+          var attributeName = attributes[i];
+          var selectedAttributeValue = document
             .getElementById(attributes[i])
             .getAttribute("value");
-          if (!attributeValue || attributeValue.length === 0) {
-            allAttributesFilled = false;
-            break;
-          }
+          // Perform any desired operations with selectedAttributeValue
+          selectedAttributeValueDict[attributeName] = selectedAttributeValue;
         }
-        if (allAttributesFilled) {
-          var selectedAttributeValueDict = {};
-          for (var i = 0; i < attributes.length; i++) {
-            var attributeName = attributes[i];
-            var selectedAttributeValue = document
-              .getElementById(attributes[i])
-              .getAttribute("value");
-            // Perform any desired operations with selectedAttributeValue
-            selectedAttributeValueDict[attributeName] = selectedAttributeValue;
-          }
-          var url = "{% url 'get_product_variant' %}";
-          await fetch(url, {
+        var url = "{% url 'get_product_variant' %}";
+        await fetch(url, {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -420,67 +422,67 @@
               selectedAttributeValueDict: selectedAttributeValueDict,
             }),
           })
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              if (data.productVariantPrice == "Product Out Of Stock") {
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            if (data.productVariantPrice == "Product Out Of Stock") {
+              document.getElementById("productPrice").innerHTML =
+                data.productVariantPrice;
+              document.getElementById("actualPriceAtQuickView").innerHTML =
+                "";
+              document.getElementById(
+                "discountPercentageAtQuickView"
+              ).innerHTML = "";
+            } else {
+              GetConvertedValues(data.productVariantPrice).then((Data) => {
                 document.getElementById("productPrice").innerHTML =
-                  data.productVariantPrice;
-                document.getElementById("actualPriceAtQuickView").innerHTML =
-                  "";
-                document.getElementById(
-                  "discountPercentageAtQuickView"
-                ).innerHTML = "";
-              } else {
-                GetConvertedValues(data.productVariantPrice).then((Data) => {
-                  document.getElementById("productPrice").innerHTML =
-                    Data.symbol + " " + Data.value;
-                });
+                  Data.symbol + " " + Data.value;
+              });
 
-                GetConvertedValues(data.productVariantActualPrice).then(
-                  (Data) => {
-                    document.getElementById(
-                      "actualPriceAtQuickView"
-                    ).innerHTML = Data.symbol + " " + Data.value;
-                  }
-                );
-
-                document.getElementById(
-                  "discountPercentageAtQuickView"
-                ).innerHTML = data.productVariantDiscount + "%";
-              }
-
-              let urlForAddToCartAddToCart =
-                "add_to_cart_fun_at_quick_view({key:'firstProductVariant'})";
-              urlForAddToCartAddToCart = urlForAddToCartAddToCart.replace(
-                "firstProductVariant",
-                data.productVariantId.toString()
+              GetConvertedValues(data.productVariantActualPrice).then(
+                (Data) => {
+                  document.getElementById(
+                    "actualPriceAtQuickView"
+                  ).innerHTML = Data.symbol + " " + Data.value;
+                }
               );
-              document
-                .getElementById("addToCart")
-                .setAttribute("onClick", urlForAddToCartAddToCart);
-            });
-        }
-      }
 
-      function add_to_cart_fun_at_quick_view(params) {
-        let quantityValue = 1;
-        if (params.key == "No Product Yet") {
-        } else {
-          let url = "{% url 'add_to_cart' 'id' 'quantity' %}";
-          url = url.replace("id", params.key);
-          url = url.replace("quantity", quantityValue);
-          fetch(url, {
-            method: "GET",
-            headers: {
-              "Content-type": "application/json",
-              "X-CSRFToken": csrftoken,
-            },
+              document.getElementById(
+                "discountPercentageAtQuickView"
+              ).innerHTML = data.productVariantDiscount + "%";
+            }
+
+            let urlForAddToCartAddToCart =
+              "add_to_cart_fun_at_quick_view({key:'firstProductVariant'})";
+            urlForAddToCartAddToCart = urlForAddToCartAddToCart.replace(
+              "firstProductVariant",
+              data.productVariantId.toString()
+            );
+            document
+              .getElementById("addToCart")
+              .setAttribute("onClick", urlForAddToCartAddToCart);
           });
-          window.location.reload();
-        }
       }
-    </script>
-  </body>
+    }
+
+    function add_to_cart_fun_at_quick_view(params) {
+      let quantityValue = 1;
+      if (params.key == "No Product Yet") {} else {
+        let url = "{% url 'add_to_cart' 'id' 'quantity' %}";
+        url = url.replace("id", params.key);
+        url = url.replace("quantity", quantityValue);
+        fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+        });
+        window.location.reload();
+      }
+    }
+  </script>
+</body>
+
 </html>

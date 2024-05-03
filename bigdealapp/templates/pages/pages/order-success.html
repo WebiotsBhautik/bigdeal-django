@@ -31,8 +31,11 @@
                     {% for product in products %}
                     <div class="row product-order-detail">
                         <div class="col-3">
-                            <a class="product-img" href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
-                                <img loading="lazy" src="{{product.productOrderedProducts.variantProduct.productImageFront}}" alt="" class="img-fluid">
+                            <a class="product-img"
+                                href="{% url 'left_slidebar' product.productOrderedProducts.variantProduct.id %}">
+                                <img loading="lazy"
+                                    src="{{product.productOrderedProducts.variantProduct.productImageFront}}" alt=""
+                                    class="img-fluid">
                             </a>
                         </div>
                         <div class="col-3 order_detail">
@@ -51,7 +54,7 @@
                             <div>
                                 <h4>price</h4>
                                 <h5>${{product.productOrderFinalPrice}}.00</h5>
-                                
+
                             </div>
                         </div>
                     </div>

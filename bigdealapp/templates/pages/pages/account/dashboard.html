@@ -7,7 +7,7 @@
 
 
 {% block components %}
-  
+
 <!-- user dashboard section start -->
 <section class="section-b-space section-big-py-space dashboard-section">
     <div class="container">
@@ -60,36 +60,41 @@
                                 <div class="page-title">
                                     <h2>My Dashboard</h2>
                                 </div>
-                                <div class="welcome-msg"> 
+                                <div class="welcome-msg">
                                     {% with username=request.user.username|default:"MARK JECNO" %}
-                                        <p>Hello, <span>{{ username }} ! </span></p>
+                                    <p>Hello, <span>{{ username }} ! </span></p>
                                     {% endwith %}
-                                    <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                                    <p>From your My Account Dashboard you have the ability to view a snapshot of your
+                                        recent account activity and update your account information. Select a link below
+                                        to view or edit information.</p>
                                 </div>
 
                                 <div class="box-account box-info">
-                            
+
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="box">
                                                 <div class="box-title">
-                                                    <h3>Contact Information</h3><a href="javascript:void(0)">Edit</a></div>
+                                                    <h3>Contact Information</h3><a href="javascript:void(0)">Edit</a>
+                                                </div>
                                                 <div class="box-content">
-                                                  {% if request.user.is_authenticated %}
+                                                    {% if request.user.is_authenticated %}
                                                     <h6>{{request.user}}</h6>
                                                     <h6>{{request.user.username}}</h6>
-                                                  {% else %}
-                                                  <h6>MARK JECNO</h6>
-                                                  <h6>MARk-JECNO@gmail.com</h6>
-                                                  {% endif %} 
-        
-                                                  <h6><a href="{% url 'change_password' %}">Change Password</a></h6></div>
+                                                    {% else %}
+                                                    <h6>MARK JECNO</h6>
+                                                    <h6>MARk-JECNO@gmail.com</h6>
+                                                    {% endif %}
+
+                                                    <h6><a href="{% url 'change_password' %}">Change Password</a></h6>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="box">
                                                 <div class="box-title">
-                                                    <h3>Newsletters</h3><a href="javascript:void(0)">Edit</a></div>
+                                                    <h3>Newsletters</h3><a href="javascript:void(0)">Edit</a>
+                                                </div>
                                                 <div class="box-content">
                                                     <p>You are currently not subscribed to any newsletter.</p>
                                                 </div>
@@ -99,12 +104,19 @@
                                     <div>
                                         <div class="box">
                                             <div class="box-title">
-                                                <h3>Address Book</h3><a href="javascript:void(0)">Manage Addresses</a></div>
+                                                <h3>Address Book</h3><a href="javascript:void(0)">Manage Addresses</a>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <h6>Default Billing Address</h6><address>You have not set a default billing address.<br><a href="javascript:void(0)">Edit Address</a></address></div>
+                                                    <h6>Default Billing Address</h6>
+                                                    <address>You have not set a default billing address.<br><a
+                                                            href="javascript:void(0)">Edit Address</a></address>
+                                                </div>
                                                 <div class="col-sm-6">
-                                                    <h6>Default Shipping Address</h6><address>You have not set a default shipping address.<br><a href="javascript:void(0)">Edit Address</a></address></div>
+                                                    <h6>Default Shipping Address</h6>
+                                                    <address>You have not set a default shipping address.<br><a
+                                                            href="javascript:void(0)">Edit Address</a></address>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -118,204 +130,205 @@
                             <div class="page-title">
                                 <h2>My Order</h2>
                             </div>
-                        <div class="table-responsive">
-                            {% if orders %}
-                            <table class="table dashboard-table m-0">
-                                <thead>
-                                    <tr class="table-head">
-                                        <th scope="col">Order Id</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">View</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for order in orders %}
-                                    <tr>
-                                        <td>
-                                            <p class="mt-0">#{{order.id}}</p>
-                                        </td>
-                                        {% if order.orderedOrNot == True %}
-                                        <td>
-                                            <p class="btn-success btn btn-sm">Shipped</p>
-                                        </td>
-                                        {% else %}
-                                        <td>
-                                            <label class="danger-label">Pending</label>
-                                        </td>
-                                        {% endif %}
-                                        <td>
-                                            <p class="theme-color fs-6">
-                                                {{""|return_currency_wise_symbol:request}}{{order.orderTotalPrice|return_currency_wise_ammount:request}}
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <a href="{% url 'order_tracking' order.id %}">
-                                                <i class="fa fa-eye"></i>
+                            <div class="table-responsive">
+                                {% if orders %}
+                                <table class="table dashboard-table m-0">
+                                    <thead>
+                                        <tr class="table-head">
+                                            <th scope="col">Order Id</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                        <tr>
+                                            <td>
+                                                <p class="mt-0">#{{order.id}}</p>
+                                            </td>
+                                            {% if order.orderedOrNot == True %}
+                                            <td>
+                                                <p class="btn-success btn btn-sm">Shipped</p>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <label class="danger-label">Pending</label>
+                                            </td>
+                                            {% endif %}
+                                            <td>
+                                                <p class="theme-color fs-6">
+                                                    {{""|return_currency_wise_symbol:request}}{{order.orderTotalPrice|return_currency_wise_ammount:request}}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'order_tracking' order.id %}">
+                                                    <i class="fa fa-eye"></i>
 
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %} 
-                                    
-                                </tbody>
-                            </table>
-                            {% else %}
-                            <section class="pt-0">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-12 p-0">    
-                                            <div class="empty-product-box success-icon">
-                                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" class="img-fluid"  alt="">
-                                                <div class="success-contain">
-                                                    <h4>No order found!</h4>
-                                                </div>
-                                                <div class='text-center';>
-                                                    <a href="{% url 'index' %}" class="btn btn-normal">
-                                                        <i class="fa fa-arrow-left"></i> Add Products</a>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                <section class="pt-0">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-12 p-0">
+                                                <div class="empty-product-box success-icon">
+                                                    <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}"
+                                                        class="img-fluid" alt="">
+                                                    <div class="success-contain">
+                                                        <h4>No order found!</h4>
+                                                    </div>
+                                                    <div class='text-center' ;>
+                                                        <a href="{% url 'index' %}" class="btn btn-normal">
+                                                            <i class="fa fa-arrow-left"></i> Add Products</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </section>
-                            {% endif %}
+                                </section>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="tab-pane fade table-dashboard dashboard wish-list-section" id="wishlist">
                         <div class="dashboard-right dashboard-white">
                             <div class="page-title">
-                            <h2>My Wishlist</h2>
-                        </div>
-                        <div class="table-responsive">
-                            {% if totalWishlistProducts|to_int == 0|to_int %}
-
-                            <div class="empty-product-box success-icon">
-                                <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" alt="">
-                                <div class="success-contain">
-                                    <h4>Your shopping wishlist is empty. Let's add something to it</h4>
-                                </div>
-                                <div class='text-center';>
-                                    <a href="{% url 'index' %}"
-                                        class="btn btn-normal">
-                                        <i class="fa fa-arrow-left"></i> Add Products</a>
-                                </div>
+                                <h2>My Wishlist</h2>
                             </div>
+                            <div class="table-responsive">
+                                {% if totalWishlistProducts|to_int == 0|to_int %}
 
-                            {% else %}
-                            {% include 'includes/alerts.html' %}
+                                <div class="empty-product-box success-icon">
+                                    <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" alt="">
+                                    <div class="success-contain">
+                                        <h4>Your shopping wishlist is empty. Let's add something to it</h4>
+                                    </div>
+                                    <div class='text-center' ;>
+                                        <a href="{% url 'index' %}" class="btn btn-normal">
+                                            <i class="fa fa-arrow-left"></i> Add Products</a>
+                                    </div>
+                                </div>
 
-                            <table class="table dashboard-table m-0">
-                                <thead>
-                                    <tr class="table-head">
-                                        <th scope="col">image</th>
-                                        <th scope="col">Product Details</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for wishlist_product in wishlist_products %}
-                                    <tr>
-                                        <td>
-                                            <a href="{% url 'shop_left_sidebar' %}">
-                                                <img loading="lazy"
-                                                    src="{{wishlist_product.variantProduct.productImageFront}}"
-                                                    class="blur-up lazyload" height="70px" alt="">
-                                            </a>
-                                        </td>
+                                {% else %}
+                                {% include 'includes/alerts.html' %}
 
-                                        <td>
-                                            <p>{{wishlist_product.variantProduct.productName}}</p>
-                                        </td>
-                                        <td>
-                                            <p class="theme-color fs-6">
-                                                {{""|return_currency_wise_symbol:request}}{{wishlist_product.productVariantFinalPrice|return_currency_wise_ammount:request}}
-                                            </p>
-                                        </td>
+                                <table class="table dashboard-table m-0">
+                                    <thead>
+                                        <tr class="table-head">
+                                            <th scope="col">image</th>
+                                            <th scope="col">Product Details</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for wishlist_product in wishlist_products %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'shop_left_sidebar' %}">
+                                                    <img loading="lazy"
+                                                        src="{{wishlist_product.variantProduct.productImageFront}}"
+                                                        class="blur-up lazyload" height="70px" alt="">
+                                                </a>
+                                            </td>
 
-                                        <td>
-                                            <div class="icon-box">
-                                                <h2 class="td-color">
-                                                    <a href="{% url 'delete_wishlist_product' wishlist_product.id %}"
-                                                        class="icon">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </h2>
-                                                <h2 class="td-color">
-                                                    <a href="{% url 'add_to_cart_from_wishlist' wishlist_product.id 1 %}"
-                                                        class="icon">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                </h2>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            {% endif %}
+                                            <td>
+                                                <p>{{wishlist_product.variantProduct.productName}}</p>
+                                            </td>
+                                            <td>
+                                                <p class="theme-color fs-6">
+                                                    {{""|return_currency_wise_symbol:request}}{{wishlist_product.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                                </p>
+                                            </td>
+
+                                            <td>
+                                                <div class="icon-box">
+                                                    <h2 class="td-color">
+                                                        <a href="{% url 'delete_wishlist_product' wishlist_product.id %}"
+                                                            class="icon">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </h2>
+                                                    <h2 class="td-color">
+                                                        <a href="{% url 'add_to_cart_from_wishlist' wishlist_product.id 1 %}"
+                                                            class="icon">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </h2>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
                     </div>
 
                     <div class="tab-pane fade dashboard" id="save">
                         <div class="dashboard-right dashboard-white">
-                        <div class="box-head page-title">
-                            <h2>Save Address</h2>
-                            <button class="btn btn-normal" data-bs-toggle="modal"
-                                data-bs-target="#addAddress">
-                                Add New Address
-                            </button>
-                        </div>
+                            <div class="box-head page-title">
+                                <h2>Save Address</h2>
+                                <button class="btn btn-normal" data-bs-toggle="modal" data-bs-target="#addAddress">
+                                    Add New Address
+                                </button>
+                            </div>
 
-                        <div class="save-details-box">
-                            <div class="row g-3">
-                                {% include 'includes/alerts.html' %}
-                                {% if orderaillingaddress %}
-                                {% for address in orderaillingaddress %}
-                                <div class="col-md-6">
-                                    <div class="save-details">
-                                        <div class="save-name">
-                                            <h5>{{address.customerFirstName}} {{address.customerLastName}}</h5>
-                                            <div class="save-position">
-                                                <h6>{{address.customerAddress2}}</h6>
+                            <div class="save-details-box">
+                                <div class="row g-3">
+                                    {% include 'includes/alerts.html' %}
+                                    {% if orderaillingaddress %}
+                                    {% for address in orderaillingaddress %}
+                                    <div class="col-md-6">
+                                        <div class="save-details">
+                                            <div class="save-name">
+                                                <h5>{{address.customerFirstName}} {{address.customerLastName}}</h5>
+                                                <div class="save-position">
+                                                    <h6>{{address.customerAddress2}}</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="save-address">
+                                                <p class="font-light">{{address.customerAddress1}}</p>
+                                                <p class="font-light">{{address.customerCity}}, {{address.customerZip}}
+                                                </p>
+                                                <p class="font-light">{{address.customerCountry}}</p>
+                                            </div>
+
+                                            <div class="mobile">
+                                                <p class="font-light mobile">Mobile No. {{address.customerMobile}}</p>
+                                            </div>
+
+                                            <div class="button mt-3">
+                                                <a class="btn remove-edit"
+                                                    onclick="HandleEdit({'addressId':'{{address.id}}'})"
+                                                    data-bs-toggle="modal" data-bs-target="#editAddress">Edit</a>
+                                                <a href="{% url 'remove_address' address.id %}"
+                                                    class="btn remove-edit">Remove</a>
                                             </div>
                                         </div>
-
-                                        <div class="save-address">
-                                            <p class="font-light">{{address.customerAddress1}}</p>
-                                            <p class="font-light">{{address.customerCity}}, {{address.customerZip}}</p>
-                                            <p class="font-light">{{address.customerCountry}}</p>
-                                        </div>
-
-                                        <div class="mobile">
-                                            <p class="font-light mobile">Mobile No. {{address.customerMobile}}</p>
-                                        </div>
-
-                                        <div class="button mt-3">
-                                            <a class="btn remove-edit"
-                                                onclick="HandleEdit({'addressId':'{{address.id}}'})"
-                                                data-bs-toggle="modal" data-bs-target="#editAddress">Edit</a>
-                                            <a href="{% url 'remove_address' address.id %}"
-                                                class="btn remove-edit">Remove</a>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="empty-product-box success-icon">
+                                        <img loading="lazy" src="{% static 'assets/images/noaddressfound.jpg' %}"
+                                            alt="">
+                                        <div class="success-contain">
+                                            <h4>No Address Found!</h4>
                                         </div>
                                     </div>
+                                    {% endif %}
                                 </div>
-                                {% endfor %}
-                                {% else %}
-                                <div class="empty-product-box success-icon">
-                                    <img loading="lazy" src="{% static 'assets/images/noaddressfound.jpg' %}" alt="">
-                                    <div class="success-contain">
-                                        <h4>No Address Found!</h4>
-                                    </div>
-                                </div>
-                                {% endif %}
                             </div>
-                        </div>  
-                    </div>
+                        </div>
                     </div>
 
                     <script>
@@ -347,8 +360,7 @@
                                     },
                                 });
                                 window.location.href = '/login_page';
-                            } else {
-                            }
+                            } else {}
                         }
                     </script>
 
@@ -425,8 +437,8 @@
                                         </div>
 
                                         <div class="modal-footer pt-0 text-end d-block p-0 border-0">
-                                            <button type="button"
-                                                class="btn btn-normal m-0" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-normal m-0"
+                                                data-bs-dismiss="modal">Close</button>
                                             <button class="btn btn-normal m-0" id="saveNewAddress"
                                                 onclick="addNewAddress()" data-bs-dismiss="modal">Save Address</button>
                                         </div>
@@ -560,7 +572,7 @@
                             });
 
                         }
-                    </script> 
+                    </script>
 
                     <!-- Edit Address Modal Start-->
                     <div class="modal fade add-address-modal" id="editAddress">
@@ -636,8 +648,8 @@
                                         </div>
 
                                         <div class="modal-footer pt-0 text-end d-block p-0 border-0">
-                                            <button type="button"
-                                                class="btn btn-normal m-0" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-normal m-0"
+                                                data-bs-dismiss="modal">Close</button>
                                             <button class="btn btn-normal m-0" id="saveEditAddress"
                                                 onclick="handleSaveAddress()" data-bs-dismiss="modal">Save
                                                 Address</button>
@@ -656,7 +668,7 @@
                                 <h2>Card & Payment</h2>
                                 <button class="btn btn-normal"><i class="fa fa-plus"></i>
                                     Add New Card</button>
-                            </div>  
+                            </div>
 
                             <div class="card-details-section">
                                 <div class="row g-md-4 g-3">
@@ -812,7 +824,8 @@
                         <div class="dashboard-right dashboard-white">
                             <div class="box-head page-title mb-0">
                                 <h2>Profile</h2>
-                                <button class="btn btn-normal" onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})" data-bs-toggle="modal" data-bs-target="#editAddress">Edit</button>
+                                <button class="btn btn-normal" onclick="HandleEdit({'addressId':'{{lastAddress.id}}'})"
+                                    data-bs-toggle="modal" data-bs-target="#editAddress">Edit</button>
                             </div>
 
                             <ul class="dash-profile">
@@ -981,5 +994,3 @@
 
 
 {% endblock components %}
-
-
