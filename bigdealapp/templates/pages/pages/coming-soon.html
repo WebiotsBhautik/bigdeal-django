@@ -1,133 +1,137 @@
 {% load static %}
 {% load sass_tags %}
-{% load custom_templatetags %} 
+{% load custom_templatetags %}
 {% load mathfilters %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="big-deal">
-  <meta name="keywords" content="big-deal">
-  <meta name="author" content="big-deal">
-  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+    <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="big-deal">
+    <meta name="keywords" content="big-deal">
+    <meta name="author" content="big-deal">
+    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
 
-  <!--Google font-->
-  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 
-  <!--icon css-->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}">
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}">
+    <!--icon css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/font-awesome.scss' %}">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/themify.scss' %}">
 
-  <!--Slick slider css-->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick.scss' %}">
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/slick-theme.scss' %}">
 
-  {% block css %}
-    
-  {% endblock css %}
+    {% block css %}
 
-  <!--Animate css-->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
+    {% endblock css %}
 
-  <!-- Bootstrap css -->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
+    <!--Animate css-->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/owltheme/_animate.scss' %}">
 
-  <!-- Theme css -->
-  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
 </head>
+
 <body>
 
-<!-- loader start -->
-<div class="loader-wrapper">
-  <div>
-    <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
-  </div>
-</div>
-<!-- loader end -->
+    <!-- loader start -->
+    <div class="loader-wrapper">
+        <div>
+            <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
+        </div>
+    </div>
+    <!-- loader end -->
 
 
 
-<!--section start-->
-<div class="template-password">
-    <div class="container">
-        <div id="container" class="text-center">
-            <div>
-                <div id="login">
-                    <div>
-                        <div class="logo mb-4">
-                            <a href="{% url 'index' %}">
-                                <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" alt="logo" class="img-fluid" >
-                            </a>
+    <!--section start-->
+    <div class="template-password">
+        <div class="container">
+            <div id="container" class="text-center">
+                <div>
+                    <div id="login">
+                        <div>
+                            <div class="logo mb-4">
+                                <a href="{% url 'index' %}">
+                                    <img src="{% static 'assets/images/layout-2/logo/logo.png' %}" alt="logo"
+                                        class="img-fluid">
+                                </a>
+                            </div>
+                            <h2 class="mb-3">
+                                Will be Opening Soon!
+                            </h2>
                         </div>
-                        <h2 class="mb-3">
-                            Will be Opening Soon!
-                        </h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <form  action="#" class="theme-form">
-                                <div class="col-md-12 mt-2">
-                                    <h3>Enter Your Email: </h3>
-                                </div>
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="enter your email address" >
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#" class="theme-form">
+                                    <div class="col-md-12 mt-2">
+                                        <h3>Enter Your Email: </h3>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="actions">
-                                            <a href="{% url 'index' %}" class="btn btn-normal" >notify me</a>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                placeholder="enter your email address">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="actions">
+                                                <a href="{% url 'index' %}" class="btn btn-normal">notify me</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            </form>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="footer" class="mt-4">
+                            <div id="owner">
+                                Are you the store owner? <a href="javascript:void(0)">Log in here</a> or <a
+                                    href="javascript:void(0)">change your password settings</a>
+                            </div>
                         </div>
                     </div>
-                    <div id="footer" class="mt-4">
-                        <div id="owner">
-                            Are you the store owner? <a href="javascript:void(0)">Log in here</a> or <a href="javascript:void(0)">change your password settings</a>
-                        </div>
+                    <div id="powered">
+                        <p>© 2019, Powered by Bigdeal.</p>
                     </div>
-                </div>
-                <div id="powered">
-                    <p>© 2019, Powered by Bigdeal.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--section end-->
+    <!--section end-->
 
 
-<!-- latest jquery-->
-<script src="{% static 'assets/js/jquery-3.3.1.min.js' %}" ></script>
+    <!-- latest jquery-->
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
 
-<!-- menu js-->
-<script src="{% static 'assets/js/menu.js' %}"></script>
+    <!-- menu js-->
+    <script src="{% static 'assets/js/menu.js' %}"></script>
 
-<!-- tool tip js -->
-<script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
-<script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
+    <!-- tool tip js -->
+    <script src="{% static 'assets/js/tippy-popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
 
-<!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
+    <!-- popper js-->
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
 
-<!-- slick js-->
-<script  src="{% static 'assets/js/slick.js' %}"></script>
+    <!-- slick js-->
+    <script src="{% static 'assets/js/slick.js' %}"></script>
 
-<!-- Bootstrap js-->
-<script src="{% static 'assets/js/bootstrap.js' %}" ></script>
+    <!-- Bootstrap js-->
+    <script src="{% static 'assets/js/bootstrap.js' %}"></script>
 
-<!-- Theme js-->
-<script src="{% static 'assets/js/script.js' %}" ></script>
+    <!-- Theme js-->
+    <script src="{% static 'assets/js/script.js' %}"></script>
 
 </body>
+
 </html>
-
-

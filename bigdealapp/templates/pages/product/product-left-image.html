@@ -9,16 +9,36 @@
 
 
 <!-- section start -->
-<section class="section-big-pt-space b-g-light">
+<section class="section-big-pt-space b-g-light product-box-section">
     <div class="collection-wrapper">
         <div class="custom-container">
-            <div class="row">
-                <div class="col-lg-1 col-sm-2 col-12">
+            <div class="row g-sm-4 g-3">
+              <div class="col-lg-5">
+                <div class="row g-xxl-4 g-3">
+                  <div class="col-xl-3 col-lg-12 col-sm-2 order-xl-0 order-lg-1 order-sm-0 order-1">
+                    <div class="product-left-thumbnail no-arrow">
+                      {% for image in images %}
+                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-12 col-sm-10 order-xl-1 order-lg-0 order-sm-1 order-0">
+                    <div class="no-arrow product-left-mian-box">
+                      {% for image in images %}
+                      <div>
+                        <img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0">
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+                {% comment %} <div class="col-lg-1 col-sm-2 col-12">
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
                               {% for image in images %}
-                              <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                              <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                               {% endfor %}
                             </div>
                         </div>
@@ -27,10 +47,10 @@
                 <div class="col-lg-4 col-sm-10 col-12 order-up">
                     <div class="product-right-slick no-arrow">
                       {% for image in images %}
-                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                      <div><img src="/{{image.multipleImages}}" alt="" class="img-fluid image_zoom_cls-0"></div>
                       {% endfor %}
                     </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="col-lg-7 rtl-text">
                   <div class="product-right">                                 
                     <div class="pro-group">
@@ -142,11 +162,11 @@
                       <div class="qty-box">
                         <div class="input-group">
                           <button class="qty-minus btn" type="button" onclick="counterMinus({key:'counterAtLeftSlidebar'})">
-                            <i class="fa fa-minus"></i>
+                            <i class="ti-minus"></i>
                           </button>
                           <input class="qty-adj form-control" id="counterAtLeftSlidebar" type="text" readonly name="quantity" value="1"/>
                           <button class="qty-plus btn" type="button" onclick="counterPlus({key:'counterAtLeftSlidebar'})">
-                            <i class="fa fa-plus"></i>
+                            <i class="ti-plus"></i>
                           </button>
                         </div>
                       </div>
@@ -156,7 +176,7 @@
                           add to cart
                         </a>
                         <a id="wishlistEffect" href="{% url 'add_to_wishlist' firstProductVariant %}" class="btn btn-normal add-to-wish tooltip-top" data-tippy-content="Add to wishlist">
-                          <i class="fa fa-heart" aria-hidden="true"></i>
+                          <i class="fa fa-heart"></i>
                         </a>
                       </div>
                     </div>
@@ -170,7 +190,6 @@
                       <ul class="delivery-services">
                         {% for option in selected_delivery_options %}
                         <li>
-                          {% comment %} <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"  xml:space="preserve"><g><g><path d="M466.244,257.845l-58.193-86.841H300v-120H0v364.992h61.899c6.678,25.849,30.195,45,58.101,45s51.424-19.151,58.101-45h155.797c6.678,25.849,30.195,45,58.101,45s51.424-19.151,58.101-45H512V269.284L466.244,257.845z M135,81.003h30v60h-30V81.003z M120,430.995c-16.542,0-30-13.458-30-30s13.458-30,30-30s30,13.458,30,30S136.542,430.995,120,430.995z M270,385.995h-91.899c-6.677-25.849-30.195-45-58.101-45s-51.424,19.151-58.101,45H30v-75h240V385.995z M270,280.995H30V81.003h75v90h90v-90h75V280.995z M392,430.995c-16.542,0-30-13.458-30-30s13.458-30,30-30s30,13.458,30,30S408.542,430.995,392,430.995z M482,385.995h-31.899c-6.678-25.849-30.195-45-58.101-45s-51.424,19.151-58.101,45H300V201.003h92.041l55.715,83.143L482,292.707V385.995z"/></g></g></svg> {% endcomment %}
                           {{option.name}}
                         </li>
                         {% endfor %}

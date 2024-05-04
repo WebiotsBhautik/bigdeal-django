@@ -14,70 +14,75 @@
                 <div class="compare-page">
                     <div class="table-wrapper table-responsive">
                         <table class="table">
-                          {% if compare_products %}
+                            {% if compare_products %}
                             <thead>
-                            <tr class="th-compare">
-                                <td>Action</td>
-                                {% for product in compare_products %}
-                                <th class="item-row">
-                                    <a href="{% url 'delete_compare_product' product.id %}"><button type="button"  class="remove-compare">Remove</button></a>
-                                </th>
-                                {% endfor %}
-                            </tr>
-                            
+                                <tr class="th-compare">
+                                    <td>Action</td>
+                                    {% for product in compare_products %}
+                                    <th class="item-row">
+                                        <a href="{% url 'delete_compare_product' product.id %}"><button type="button"
+                                                class="remove-compare">Remove</button></a>
+                                    </th>
+                                    {% endfor %}
+                                </tr>
+
                             <tbody id="table-compare">
-                            <tr>
-                                <th class="product-name">Product Name</th>
-                                {% for product in compare_products %}
-                                <td class="grid-link__title">{{product.variantProduct.productName}}</td>
-                                {% endfor %}
-                            </tr>
-                            <tr>
-                                <th class="product-name">Product Image</th>
-                                {% for product in compare_products %}
+                                <tr>
+                                    <th class="product-name">Product Name</th>
+                                    {% for product in compare_products %}
+                                    <td class="grid-link__title">{{product.variantProduct.productName}}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <th class="product-name">Product Image</th>
+                                    {% for product in compare_products %}
 
-                                <td class="item-row"><img src="{{product.variantProduct.productImageFront}}" alt="product" class="   featured-image">
-                                    <div class="product-price product_price"><strong>On Sale: </strong><span>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</span></div>
-                                    <form class="variants clearfix">
-                                        <input type="hidden">
-                                        <button title="Add to Cart" class="add-to-cart btn btn-normal">Add to Cart</button>
-                                        {% comment %} <a href="{% url 'delete_compare_product' product.id %}" title="Remove from Compare" class="remove-compare btn btn-warning">Remove</a> {% endcomment %}
-                                    </form>
-                                    <p class="grid-link__title hidden">{{product.variantProduct.proCategory}}</p>
-                                </td>
-                                {% endfor %}
-                            </tr>
-                            <tr>
-                                <th class="product-name">Product Description</th>
-                                {% for product in compare_products %}
+                                    <td class="item-row"><img src="{{product.variantProduct.productImageFront}}"
+                                            alt="product" class="   featured-image">
+                                        <div class="product-price product_price"><strong>On Sale:
+                                            </strong><span>{{""|return_currency_wise_symbol:request}}{{product.productVariantFinalPrice|return_currency_wise_ammount:request}}</span>
+                                        </div>
+                                        <form class="variants clearfix">
+                                            <input type="hidden">
+                                            <button title="Add to Cart" class="add-to-cart btn btn-normal">Add to
+                                                Cart</button>
+                                        </form>
+                                        <p class="grid-link__title hidden">{{product.variantProduct.proCategory}}</p>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <th class="product-name">Product Description</th>
+                                    {% for product in compare_products %}
 
-                                <td class="item-row">
-                                    <p class="description-compare">{{product.variantProduct.productDescription|safe}}</p>
-                                </td>
-                                {% endfor %}
-                            </tr>
-                            <tr>
-                                <th class="product-name">Availability</th>
-                                {% for product in compare_products %}
+                                    <td class="item-row">
+                                        <p class="description-compare">
+                                            {{product.variantProduct.productDescription|safe}}</p>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    <th class="product-name">Availability</th>
+                                    {% for product in compare_products %}
 
-                                <td class="availabel-stock">
-                                    <p>{{product.productVariantStockStatus}}</p>
-                                </td>
-                                {% endfor %}
-                            </tr>
+                                    <td class="availabel-stock">
+                                        <p>{{product.productVariantStockStatus}}</p>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
                             </tbody>
-                          </thead>
+                            </thead>
                             {% else %}
-                            <div class="col-12 p-0">    
+                            <div class="col-12 p-0">
                                 <div class="empty-product-box success-icon text-center">
-                                    <img loading="lazy" src="{% static 'assets/images/empty-compare.png' %}" class="img-fluid"  alt="">
+                                    <img loading="lazy" src="{% static 'assets/images/empty-compare.png' %}"
+                                        class="img-fluid" alt="">
                                     <div class="success-contain">
                                         <h3><strong>Your compare list is Empty.</strong></h3>
-                                          <h4>Explore more shortlist some items.</h4> 
+                                        <h4>Explore more shortlist some items.</h4>
                                     </div>
                                 </div>
                             </div>
-                            {% comment %} <h2> No compare Products Found!</h2> {% endcomment %}
                             {% endif %}
                         </table>
                     </div>

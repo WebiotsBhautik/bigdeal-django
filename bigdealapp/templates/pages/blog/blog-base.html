@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,39 +35,39 @@
     <!-- Bootstrap css -->
     <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/bootstrap.scss' %}">
 
-    
+
     {% block css %}
-        
+
     {% endblock css %}
-        
+
 
     <!-- Theme css -->
     <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color2.scss' %}" media="screen" id="color">
 
 </head>
+
 <body class="b-g-light">
 
-<!-- loader start -->
-<div class="loader-wrapper">
-    <div>
-        <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
+    <!-- loader start -->
+    <div class="loader-wrapper">
+        <div>
+            <img src="{% static 'assets/images/loader.gif' %}" alt="loader">
+        </div>
     </div>
-</div>
-<!-- loader end -->
+    <!-- loader end -->
 
 
-{% include 'pages/shop/shop-header.html' %}
-{% include 'pages/shop/breadcrumb-section.html' %}
+    {% include 'pages/shop/shop-header.html' %}
+    {% include 'pages/shop/breadcrumb-section.html' %}
 
-{% block components %}
-    
-{% endblock components %}
+    {% block components %}
 
-
-{% include 'pages/blog/blog-footer.html' %}
+    {% endblock components %}
 
 
-{% block script %}
-    
-{% endblock script %}
-    
+    {% include 'pages/blog/blog-footer.html' %}
+
+
+    {% block script %}
+
+    {% endblock script %}

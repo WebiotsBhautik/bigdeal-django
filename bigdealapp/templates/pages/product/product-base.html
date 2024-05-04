@@ -60,9 +60,11 @@
 
 {% endblock components %}
 
+{% if request.path == "/element_productbox" or request.path == "/element_product_slider" or request.path == "/element_no_slider" %}
+{% else %}
 
 <!-- related products -->
-<section class="section-big-py-space  ratio_asos b-g-light">
+<section class="section-big-py-space ratio_asos b-g-light">
     <div class="custom-container">
       <div class="row">
         <div class="col-12 product-related">
@@ -104,7 +106,7 @@
                   </div>
                 </div>
                 <div class="product-detail detail-inline">
-                  <div class="detail-title">
+                  <div class="detail-title mt-0">
                     <div class="detail-left">
                       <div class="rating-star">
                         {% if product.productFinalRating|to_int < 5|to_int %}
@@ -152,21 +154,19 @@
                       </a>
                     </div>
                     <div class="detail-right">
+                      <div class="price">
+                        {% if product.productType == "Simple" %}
+                        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                        {% else %}
+                        {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                        {% endif %} 
+                      </div>
                       <div class="check-price">
                         {% if product.productType == "Simple" %} 
                         {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
                         {% else %} 
                         {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                         {% endif %}  
-                      </div>
-                      <div class="price">
-                        <div class="price">
-                          {% if product.productType == "Simple" %}
-                          {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
-                          {% else %}
-                          {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                          {% endif %} 
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -184,6 +184,8 @@
 </section>
 <!-- related products -->
 
+{% endif %}
+
 {% include 'components/footer/product-footer.html' %}
 
 
@@ -195,7 +197,7 @@
         <h3>my cart</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeCart()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -225,9 +227,7 @@
                 <div class="addit-box">
                   <div class="qty-box">
                     <div class="input-group">
-                      {% comment %} <button class="qty-minus"></button> {% endcomment %}
                       <input class="qty-adj form-control" type="number" readonly value="{{product.cartProductQuantity}}"/>
-                      {% comment %} <button class="qty-plus"></button> {% endcomment %}
                     </div>
                   </div>
                   <div class="pro-add">
@@ -274,7 +274,6 @@
             <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
           </li>
           {% else %}
-          {% comment %} {% for product in cart_products|return_cart_products:request %} {% endcomment %}
           {% for product in cart_products %}
   
           <li>
@@ -288,19 +287,14 @@
                   <h4>{{product.productName}}</h4>
                 </a>
                 <h6>
-                  {% comment %} $80.00 <span>$120.00</span> {% endcomment %}
                   {{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
-                  {% comment %} <span>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}</span> {% endcomment %}
                 </h6>
                 <div class="addit-box">
                   <div class="qty-box">
                     <div class="input-group">
-                      {% comment %} <button class="qty-minus" disabled></button> {% endcomment %}
-                      {% comment %} <input class="qty-adj form-control" type="number" value="{{product.quantity}}"/> {% endcomment %}
                       <input type="text" readonly id="quantityInput{{forloop.counter}}"
                                               name="quantity{{forloop.counter}}" class="form-control input-number"
                                               value="{{product.quantity}}">
-                      {% comment %} <button class="qty-plus" disabled></button> {% endcomment %}
                     </div>
                   </div>
                   <div class="pro-add">
@@ -354,7 +348,7 @@
         <h3>my account</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeAccount()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -398,7 +392,7 @@
         <h3>my setting</h3>
         <div class="close-cart">
           <a href="javascript:void(0)" onclick="closeSetting()">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i class="fa fa-times"></i>
           </a>
         </div>
       </div>
@@ -426,7 +420,7 @@
   <!-- add to  setting bar  end-->
   
   <!-- Add to cart modal popup start-->
-  <div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg theme-modal cart-modal " id="addtocart" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
           <div class="modal-content">
               <div class="modal-body modal1">
@@ -434,7 +428,7 @@
                       <div class="row">
                           <div class="col-12">
                               <div class="modal-bg addtocart">
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal">
                                       
                                   </button>
                                   <div class="media">
@@ -538,14 +532,14 @@
   <!-- Add to cart modal popup end-->
   
   <!-- Quick-view modal popup start-->
-  <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
       <div class="modal-content quick-view-modal">
         <div class="modal-body">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           <div class="row">
             <div class="col-lg-6 col-12">
-              <div class="quick-view-img" id="quickViewImagesDiv">
+              <div class="quick-view-img b_size_content" id="quickViewImagesDiv">
                 <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
             </div>
@@ -628,7 +622,7 @@
 <script src="{% static 'assets/js/tippy-bundle.iife.min.js' %}"></script>
 
 <!-- popper js-->
-<script src="{% static 'assets/js/popper.min.js' %}" ></script>
+<script src="{% static 'assets/js/popper.min.js' %}"></script>
 
 
 <!-- father icon -->

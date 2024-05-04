@@ -7,160 +7,167 @@
 
 <!--section start-->
 <section class="authentication-page section-big-pt-space b-g-light">
-    <div class="custom-containe">
-        <section class="search-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <form class="form-header" action="{% url 'search_bar_with_params' 'params' %}" method='GET'>
-                            <div class="input-group">
-                                <input type="search" name="search" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="Search Products......">                                
-                                <button class="btn btn-normal"><i class="fa fa-search"></i>Search</button>                               
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+  <div class="custom-containe">
+    <section class="search-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <form class="form-header" action="{% url 'search_bar_with_params' 'params' %}" method='GET'>
+              <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search Products......">
+                <button class="btn btn-normal"><i class="fa fa-search"></i>Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </section>
 <!-- section end -->
 
 <!-- product section start -->
 <section class="section-big-py-space ratio_asos b-g-light">
-    <div class="custom-container">
-        <div class="row search-product related-pro1">
-          {% if page_obj %}
-          {% for product in page_obj %}
-            <div class="col-xl-3 col-md-4 col-sm-6">
-                <div class="product">
-                    <div class="product-box">
-                        <div class="product-imgbox">
-                            <div class="product-front">
-                              <a href="{% url 'left_slidebar' product.variantProduct.id %}">
-                                <img src="{{product.variantProduct.productImageFront.url}}" class="img-fluid" alt="product">
-                              </a>
-                            </div>
-                            <div class="product-back">
-                              <a href="{% url 'left_slidebar' product.variantProduct.id %}">
-                                <img src="{{product.variantProduct.productImageBack.url}}" class="img-fluid" alt="product">
-                              </a>
-                            </div>
-                        </div>
-                        <div class="product-detail detail-center">
-                            <div class="detail-title m-0">
-                                <div class="detail-left">
-                                    <div class="rating-star">
-                                        {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
-                                        {% for x in product.variantProduct.productFinalRating|times %}
-                                        <li>
-                                          <a class="fa fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.variantProduct.id %}"></a>
-                                        </li>
-                                        {% endfor %}
-                  
-                                        {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
-                                        {% with number3=number1|sub:number2 %}
-                  
-                                        {% for x in number3|times %}
-                                        <li>
-                                          <i class="fa fa-star"></i>
-                                        </li>
-                                        {% endfor %}
-                  
-                                        {% endwith %}
-                                        {% endwith %}
-                  
-                                        
-                                        {% else %}
-                                        <li>
-                                          <i class="fa fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                          <i class="fa fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                          <i class="fa fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                          <i class="fa fa-star theme-color"></i>
-                                        </li>
-                                        <li>
-                                          <i class="fa fa-star theme-color"></i>
-                                        </li>
-                                        {% endif %}
-                                      </div>
-                                    <a href="">
-                                        <h6 class="price-title">
-                                            {{product.variantProduct.productName}}
-                                        </h6>
-                                    </a>
-                                </div>
-                                <div class="detail-right">
-                                    <div class="check-price">
-                                      {% if product.variantProduct.productType == "Simple" %} 
-                                      {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}} 
-                                      {% else %} 
-                                      {{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                                      {% endif %}
-                                    </div>
-                                    <div class="price">
-                                      {% if product.variantProduct.productType == "Simple" %}
-                                      {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
-                                      {% else %}
-                                      {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
-                                      {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="icon-detail">
-                                <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}" class="add-cartnoty tooltip-top" data-tippy-content="Add to cart" >
-                                  <i data-feather="shopping-cart"></i> 
-                                </a>
-                                <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"  class="add-to-wish tooltip-top wishlist"  data-tippy-content="Add to Wishlist" ><i  data-feather="heart"></i></a>
-                                <a onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View"><i  data-feather="eye"></i></a>
-                                <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i  data-feather="refresh-cw"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          {% endfor %}
-
-          {% if page_obj.has_other_pages %}
-          <div class="page-section">
-            <div class="pagination">
-                {% if page_obj.has_previous %}
-                    <a href="{{page_obj.previous_page_number|update_url_parameters:request}}" class="previous">
-                      <i class="fa fa-angle-double-left d-block"></i>
-                    </a>
-                {% endif %}
-                
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                    <a class="current-page">{{ num }}</a>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                        <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
-                    {% endif %}
-                {% endfor %}
-                
-                {% if page_obj.has_next %}
-                <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">
-                  <i class="fa fa-angle-double-right d-block"></i>
+  <div class="custom-container">
+    <div class="row search-product related-pro1">
+      {% if page_obj %}
+      {% for product in page_obj %}
+      <div class="col-xl-3 col-md-4 col-sm-6">
+        <div class="product">
+          <div class="product-box">
+            <div class="product-imgbox">
+              <div class="product-front">
+                <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                  <img src="{{product.variantProduct.productImageFront.url}}" class="img-fluid" alt="product">
                 </a>
-                {% endif %}
+              </div>
+              <div class="product-back">
+                <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                  <img src="{{product.variantProduct.productImageBack.url}}" class="img-fluid" alt="product">
+                </a>
+              </div>
+            </div>
+            <div class="product-detail detail-center">
+              <div class="detail-title m-0">
+                <div class="detail-left">
+                  <div class="rating-star">
+                    {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
+                    {% for x in product.variantProduct.productFinalRating|times %}
+                    <li>
+                      <a class="fa fa-star theme-color" id="productOfStar"
+                        href="{% url 'left_slidebar' product.variantProduct.id %}"></a>
+                    </li>
+                    {% endfor %}
+
+                    {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
+                    {% with number3=number1|sub:number2 %}
+
+                    {% for x in number3|times %}
+                    <li>
+                      <i class="fa fa-star"></i>
+                    </li>
+                    {% endfor %}
+
+                    {% endwith %}
+                    {% endwith %}
+
+
+                    {% else %}
+                    <li>
+                      <i class="fa fa-star theme-color"></i>
+                    </li>
+                    <li>
+                      <i class="fa fa-star theme-color"></i>
+                    </li>
+                    <li>
+                      <i class="fa fa-star theme-color"></i>
+                    </li>
+                    <li>
+                      <i class="fa fa-star theme-color"></i>
+                    </li>
+                    <li>
+                      <i class="fa fa-star theme-color"></i>
+                    </li>
+                    {% endif %}
+                  </div>
+                  <a href="">
+                    <h6 class="price-title">
+                      {{product.variantProduct.productName}}
+                    </h6>
+                  </a>
+                </div>
+                <div class="detail-right">
+                  <div class="check-price">
+                    {% if product.variantProduct.productType == "Simple" %}
+                    {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_actual_price_range|return_currency_wise_ammount:request}}
+                    {% else %}
+                    {{product.variantProduct.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                    {% endif %}
+                  </div>
+                  <div class="price">
+                    {% if product.variantProduct.productType == "Simple" %}
+                    {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
+                    {% else %}
+                    {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <div class="icon-detail">
+                <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}"
+                  class="add-cartnoty tooltip-top" data-tippy-content="Add to cart">
+                  <i data-feather="shopping-cart"></i>
+                </a>
+                <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"
+                  class="add-to-wish tooltip-top wishlist" data-tippy-content="Add to Wishlist"><i
+                    data-feather="heart"></i></a>
+                <a onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})"
+                  href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"
+                  data-tippy-content="Quick View"><i data-feather="eye"></i></a>
+                <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
+                  class="add-to-compare-list tooltip-top" data-tippy-content="Compare"><i
+                    data-feather="refresh-cw"></i></a>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% if page_obj.has_other_pages %}
+      <div class="page-section">
+        <div class="pagination">
+          {% if page_obj.has_previous %}
+          <a href="{{page_obj.previous_page_number|update_url_parameters:request}}" class="previous">
+            <i class="fa fa-angle-double-left d-block"></i>
+          </a>
           {% endif %}
 
-          {% else %}
-          <div class="success-icon">
-              <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
-          </div>
-          {% endif %} 
+          {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+          <a class="current-page">{{ num }}</a>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
+          {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+          <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">
+            <i class="fa fa-angle-double-right d-block"></i>
+          </a>
+          {% endif %}
         </div>
+      </div>
+      {% endif %}
+
+      {% else %}
+      <div class="success-icon">
+        <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
+      </div>
+      {% endif %}
     </div>
+  </div>
 </section>
 <!-- product section end -->
 
-{% endblock components %} 
-
+{% endblock components %}

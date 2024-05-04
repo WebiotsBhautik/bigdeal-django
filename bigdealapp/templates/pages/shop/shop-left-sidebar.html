@@ -7,7 +7,7 @@
 
 
 <!-- section start -->
-<section class="section-big-pt-space ratio_asos b-g-light">
+<section class="section-big-pt-space section-big-pb-space ratio_asos b-g-light overflow-hidden">
   <div class="collection-wrapper">
     <div class="custom-container">
       <div class="row">
@@ -17,18 +17,24 @@
             <div class="row">
               <div class="col-12">
                 <div class="top-banner-wrapper">
-                  <a href="{% url 'shop_left_sidebar' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid " alt=""></a>
+                  <a href="{% url 'shop_left_sidebar' %}"><img src="{{shop_banner.bannerImage}}" class="img-fluid "
+                      alt=""></a>
                   <div class="top-banner-content small-section">
                     <h4>fashion</h4>
                     <h5>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                      also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+                      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xl-12">
+                  <div class="col-12">
                     <div class="filter-main-btn">
                       <span class="filter-btn">
-                        <i class="fa fa-filter" aria-hidden="true"></i> Filter</span>
+                        <i class="fa fa-filter"></i> Filter</span>
                     </div>
                   </div>
                 </div>
@@ -38,8 +44,9 @@
                   {% for attribute in value|return_selected_attribute_list:request %}
                   <li class="label-tag">
                     <span>{{attribute}}-{{key}}</span>
-                    <button type="button" class="btn-close" onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})">
-                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <button type="button" class="btn-close"
+                      onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})">
+                      <i class="fa fa-times"></i>
                     </button>
                   </li>
                   {% endfor %}
@@ -49,10 +56,10 @@
                   {% with price_values=value|return_selected_attribute_list:request %}
                   {% if price_values %}
                   <li>
-                      <div class="label-tag">
-                          <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
-                              {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
-                      </div>
+                    <div class="label-tag">
+                      <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                        {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
+                    </div>
                   </li>
                   {% endif %}
                   {% endwith %}
@@ -64,7 +71,7 @@
                   {% if request.GET.page %}
 
                   <div class="label-tag">
-                      <a href="{% url 'shop_left_sidebar' %}"><span>Clear All</span></a>
+                    <a href="{% url 'shop_left_sidebar' %}"><span>Clear All</span></a>
                   </div>
 
                   {% endif %}
@@ -75,10 +82,10 @@
                   {% if 'price' not in request.GET %}
 
                   <li>
-                      <div class="label-tag">
-                          <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
-                              {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
-                      </div>
+                    <div class="label-tag">
+                      <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                        {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                    </div>
                   </li>
 
                   {% endif %}
@@ -89,7 +96,7 @@
                   {% if not request.GET.page %}
 
                   <div class="label-tag">
-                      <a href="{% url 'shop_left_sidebar' %}"><span>Clear All</span></a>
+                    <a href="{% url 'shop_left_sidebar' %}"><span>Clear All</span></a>
                   </div>
                   {% endif %}
                   {% endif %}
@@ -102,7 +109,8 @@
                       <div class="col-12">
                         <div class="product-filter-content">
                           <div class="search-count">
-                            <h5>Showing Products  of {{totalCount}} Result</h5></div>
+                            <h5>Showing Products of {{totalCount}} Result</h5>
+                          </div>
                           <div class="collection-view">
                             <ul>
                               <li><i class="fa fa-th grid-layout-view"></i></li>
@@ -111,10 +119,14 @@
                           </div>
                           <div class="collection-grid-view">
                             <ul>
-                              <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt="" class="product-2-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt="" class="product-3-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt="" class="product-4-layout-view"></li>
-                              <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt="" class="product-6-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/2.png' %}" alt=""
+                                  class="product-2-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/3.png' %}" alt=""
+                                  class="product-3-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/4.png' %}" alt=""
+                                  class="product-4-layout-view"></li>
+                              <li><img src="{% static 'assets/images/category/icon/6.png' %}" alt=""
+                                  class="product-6-layout-view"></li>
                             </ul>
                           </div>
                           <div class="product-page-per-view">
@@ -137,7 +149,7 @@
                   </div>
 
                   {% include 'pages/shop/shop-product.html' %}
-      
+
                 </div>
               </div>
             </div>
@@ -146,21 +158,17 @@
       </div>
     </div>
   </div>
-</section> 
-<!-- section End --> 
+</section>
+<!-- section End -->
 
 
 {% endblock components %}
 
 
 {% block script %}
-  
+
 <!-- range sldier -->
 <script src="{% static 'assets/js/ion.rangeSlider.js' %}"></script>
 <script src="{% static 'assets/js/rangeslidermain.js' %}"></script>
 
 {% endblock script %}
-
-
-
-                                

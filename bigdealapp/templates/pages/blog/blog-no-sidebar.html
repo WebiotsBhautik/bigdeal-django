@@ -13,12 +13,13 @@
     <div class="custom-container">
         <div class="row">
             <div class="col-12">
-              {% if page_obj %}
-              {% for obj in page_obj %}
+                {% if page_obj %}
+                {% for obj in page_obj %}
                 <div class="row blog-media">
                     <div class="col-xl-6">
                         <div class="blog-left">
-                            <a href="{% url 'blog_details' obj.id %}"><img src="{{obj.blogImage}}"  class="img-fluid" alt="blog"></a>
+                            <a href="{% url 'blog_details' obj.id %}"><img src="{{obj.blogImage}}" class="img-fluid"
+                                    alt="blog"></a>
                             <div class="date-label">
                                 {{obj.createdAt|date:"d M Y"}}
                             </div>
@@ -27,7 +28,9 @@
                     <div class="col-xl-6">
                         <div class="blog-right">
                             <div>
-                                <a href="{% url 'blog_details' obj.id %}"><h4>{{obj.blogTitle}}</h4> </a>
+                                <a href="{% url 'blog_details' obj.id %}">
+                                    <h4>{{obj.blogTitle}}</h4>
+                                </a>
                                 <ul class="post-social">
                                     <li>Posted By : Admin Admin</li>
                                     <li><i class="fa fa-heart"></i> 5 Hits</li>
@@ -63,7 +66,7 @@
                 </div>
                 {% else %}
                 <div>
-                  <h2 style="text-align:center"> No Blogs Yet </h2>
+                    <h2 style="text-align:center"> No Blogs Yet </h2>
                 </div>
                 {% endif %}
             </div>

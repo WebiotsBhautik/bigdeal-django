@@ -3,227 +3,260 @@
 {% if request.path == '/layout3' %}
 <ul id="main-menu" class="sm pixelstrap desc-horizontal sm-vertical sm-blue">
     <li>
-    <div class="desc-back text-right">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+        <div class="desc-back text-right">Back<i class="fa fa-angle-right ps-2"></i></div>
     </li>
-{% else %}
-<ul id="main-menu" class="sm pixelstrap sm-horizontal">
-    <li>
-    <div class="mobile-back text-right">Back<i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
-    </li>
-{% endif %}
-
-    <!--HOME-->
-    <li>
-    <a class="dark-menu-item" href="javascript:void(0)">Home</a>
-    <ul>
-        {% for theme in active_banner_themes %}
-        {% if theme.bannerThemeName == 'Megastore1 Demo' %}
-        <li><a  href="{% url 'index' %}">mega store 1</a></li>
-        {% elif theme.bannerThemeName == 'Megastore2 Demo' %}
-        <li><a  href="{% url 'layout2' %}">mega store 2</a></li>
-        {% elif theme.bannerThemeName == 'Megastore3 Demo' %}
-        <li><a  href="{% url 'layout3' %}">mega store 3</a></li>
-        {% elif theme.bannerThemeName == 'Megastore4 Demo' %}
-        <li><a  href="{% url 'layout4' %}">mega store 4</a></li>
-        {% elif theme.bannerThemeName == 'Megastore5 Demo' %}
-        <li><a  href="{% url 'layout5' %}">mega store 5</a></li>
-        {% elif theme.bannerThemeName == 'Electronics Demo' %}
-        <li><a  href="{% url 'electronics' %}">electronics</a></li>
-        {% elif theme.bannerThemeName == 'Vegetable Demo' %}
-        <li><a  href="{% url 'vegetable' %}">vegetable</a></li>
-        {% elif theme.bannerThemeName == 'Furniture Demo' %}
-        <li><a  href="{% url 'furniture' %}">furniture</a></li>
-        {% elif theme.bannerThemeName == 'Cosmetic Demo' %}
-        <li><a  href="{% url 'cosmetic' %}">cosmetic</a></li>
-        {% elif theme.bannerThemeName == 'Kids Demo' %}
-        <li><a  href="{% url 'kids' %}">kids</a></li>
-        {% elif theme.bannerThemeName == 'Tools Demo' %}
-        <li><a  href="{% url 'tools' %}">tools</a></li>
-        {% elif theme.bannerThemeName == 'Grocery Demo' %}
-        <li><a  href="{% url 'grocery' %}">grocery</a></li>
-        {% elif theme.bannerThemeName == 'Pets Demo' %}
-        <li><a  href="{% url 'pets' %}">pets</a></li>
-        {% elif theme.bannerThemeName == 'Farming Demo' %}
-        <li><a  href="{% url 'farming' %}">farming</a></li>
-        {% elif theme.bannerThemeName == 'Digital Marketplace demo' %}
-        <li><a  href="{% url 'digital_marketplace' %}">digital marketplace</a></li>
+    {% else %}
+    <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+        <li>
+            <div class="mobile-back text-right">Back<i class="fa fa-angle-right ps-2"></i></div>
+        </li>
         {% endif %}
-        {% endfor %}
 
-    </ul>
-    </li>
-    <!--HOME-END-->
-    <!--SHOP-->
-    <li>
-    <a class="dark-menu-item" href="javascript:void(0)">shop</a>
-    <ul>
-        <li><a href="{% url 'shop_left_sidebar' %}">left sidebar</a></li>
-        <li><a href="{% url 'shop_right_sidebar' %}">right sidebar</a></li>
-        <li><a href="{% url 'shop_no_sidebar' %}">no sidebar</a></li>
-        <li><a href="{% url 'shop_sidebar_popup' %}">sidebar popup</a></li>
-        <li><a href="{% url 'shop_metro' %}">metro </a></li>
-        <li><a href="{% url 'shop_full_width' %}">full width </a></li>
-        <li><a href="{% url 'shop_infinite_scroll' %}">infinite scroll</a></li>
-        <li><a href="{% url 'shop_3grid' %}">3 grid</a></li>
-        <li><a href="{% url 'shop_6grid' %}">6 grid</a></li>
-        <li><a href="{% url 'shop_list_view' %}">list view</a></li>
-    </ul>
-    </li>
-    <!--SHOP-END-->
-    <!--product-meu start-->
-    <li class="mega"><a  class="dark-menu-item" href="javascript:void(0)">product
-    </a>
-    <ul class="mega-menu full-mega-menu">
+        <!--HOME-->
         <li>
-        <div class="container">
-            <div class="row">
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>sidebar</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'left_slidebar' 'a2610f7b-1fb0-4bcf-9a5d-26dbad66decf' %}">left sidebar</a></li>
-                    <li><a href="{% url 'right_sidebar' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">right sidebar</a></li>
-                    <li><a href="{% url 'no_sidebar' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">non sidebar</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>bonus layout</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'bundle' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">bundle</a></li>
-                    <li><a href="{% url 'image_swatch' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">image swatch</a></li>
-                    <li><a href="{% url 'vertical_tab' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">vertical tab</a></li>
-                    <li><a href="{% url 'video_thumbnail' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">video thumbnail</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>product layout </h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'image_4' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">4 image </a></li>
-                    <li><a href="{% url 'sticky' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">sticky</a></li>
-                    <li><a href="{% url 'accordian' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">accordian</a></li>
-                    <li><a href="{% url 'product_360_view' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">360 view</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>thumbnail image</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'left_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">left image</a></li>
-                    <li><a href="{% url 'right_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">right image</a></li>
-                    <li><a href="{% url 'image_outside' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">image outside</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>3 column</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'thumbnail_left' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thumbnail left</a></li>
-                    <li><a href="{% url 'thumbnail_right' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thumbnail right</a></li>
-                    <li><a href="{% url 'thumbnail_bottom' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thubnail bottom</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            <div class="col mega-box">
-                <div class="link-section">
-                <div class="menu-title">
-                    <h5>product element</h5>
-                </div>
-                <div class="menu-content">
-                    <ul>
-                    <li><a href="{% url 'element_productbox' %}">product box</a></li>
-                    <li><a href="{% url 'element_product_slider' %}">product slider</a></li>
-                    <li><a href="{% url 'element_no_slider' %}">no slider</a></li>
-                    </ul>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="row menu-banner">
-            <div class="col-lg-6">
-                <div>
-                <img src="{% static 'assets/images/menu-banner1.jpg' %}" alt="menu-banner" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div>
-                <img src="{% static 'assets/images/menu-banner2.jpg' %}" alt="menu-banner" class="img-fluid">
-                </div>
-            </div>
-            </div>
-        </div>
+            <a class="dark-menu-item" href="javascript:void(0)">Home</a>
+            <ul>
+                {% for theme in active_banner_themes %}
+                {% if theme.bannerThemeName == 'Megastore1 Demo' %}
+                <li><a href="{% url 'index' %}">mega store 1</a></li>
+                {% elif theme.bannerThemeName == 'Megastore2 Demo' %}
+                <li><a href="{% url 'layout2' %}">mega store 2</a></li>
+                {% elif theme.bannerThemeName == 'Megastore3 Demo' %}
+                <li><a href="{% url 'layout3' %}">mega store 3</a></li>
+                {% elif theme.bannerThemeName == 'Megastore4 Demo' %}
+                <li><a href="{% url 'layout4' %}">mega store 4</a></li>
+                {% elif theme.bannerThemeName == 'Megastore5 Demo' %}
+                <li><a href="{% url 'layout5' %}">mega store 5</a></li>
+                {% elif theme.bannerThemeName == 'Electronics Demo' %}
+                <li><a href="{% url 'electronics' %}">electronics</a></li>
+                {% elif theme.bannerThemeName == 'Vegetable Demo' %}
+                <li><a href="{% url 'vegetable' %}">vegetable</a></li>
+                {% elif theme.bannerThemeName == 'Furniture Demo' %}
+                <li><a href="{% url 'furniture' %}">furniture</a></li>
+                {% elif theme.bannerThemeName == 'Cosmetic Demo' %}
+                <li><a href="{% url 'cosmetic' %}">cosmetic</a></li>
+                {% elif theme.bannerThemeName == 'Kids Demo' %}
+                <li><a href="{% url 'kids' %}">kids</a></li>
+                {% elif theme.bannerThemeName == 'Tools Demo' %}
+                <li><a href="{% url 'tools' %}">tools</a></li>
+                {% elif theme.bannerThemeName == 'Grocery Demo' %}
+                <li><a href="{% url 'grocery' %}">grocery</a></li>
+                {% elif theme.bannerThemeName == 'Pets Demo' %}
+                <li><a href="{% url 'pets' %}">pets</a></li>
+                {% elif theme.bannerThemeName == 'Farming Demo' %}
+                <li><a href="{% url 'farming' %}">farming</a></li>
+                {% elif theme.bannerThemeName == 'Digital Marketplace demo' %}
+                <li><a href="{% url 'digital_marketplace' %}">digital marketplace</a></li>
+                {% endif %}
+                {% endfor %}
+
+            </ul>
         </li>
-    </ul>
-    </li>
-    <!--product-meu end-->
-
-
-    <!--pages meu start-->
-    <li>
-    <a  class="dark-menu-item" href="javascript:void(0)">pages</a>
-    <ul>
+        <!--HOME-END-->
+        <!--SHOP-->
         <li>
-        <a href="javascript:void(0)">account</a>
-        <ul>
-            <li><a href="{% url 'wishlist_page' %}">wishlist</a></li>
-            <li><a href="{% url 'cart_page' %}">cart</a></li>
-            <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'contact_us' %}">contact</a></li>
-        </ul>
+            <a class="dark-menu-item" href="javascript:void(0)">shop</a>
+            <ul>
+                <li><a href="{% url 'shop_left_sidebar' %}">left sidebar</a></li>
+                <li><a href="{% url 'shop_right_sidebar' %}">right sidebar</a></li>
+                <li><a href="{% url 'shop_no_sidebar' %}">no sidebar</a></li>
+                <li><a href="{% url 'shop_sidebar_popup' %}">sidebar popup</a></li>
+                <li><a href="{% url 'shop_metro' %}">metro </a></li>
+                <li><a href="{% url 'shop_full_width' %}">full width </a></li>
+                <li><a href="{% url 'shop_infinite_scroll' %}">infinite scroll</a></li>
+                <li><a href="{% url 'shop_3grid' %}">3 grid</a></li>
+                <li><a href="{% url 'shop_6grid' %}">6 grid</a></li>
+                <li><a href="{% url 'shop_list_view' %}">list view</a></li>
+            </ul>
         </li>
-        <li><a href="{% url 'about_page' %}">about us</a></li>
-        <li><a href="{% url 'search_bar' %}">search</a></li>
-        <li>
-        <a href="javascript:void(0)">compare</a>
-        <ul>
-            <li><a href="{% url 'compare_page' %}">compare</a></li>
-            <li><a href="{% url 'compare_page2' %}">compare-2</a></li>
-        </ul>
+        <!--SHOP-END-->
+        <!--product-meu start-->
+        <li class="mega"><a class="dark-menu-item" href="javascript:void(0)">product
+            </a>
+            <ul class="mega-menu full-mega-menu">
+                <li>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>sidebar</h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a
+                                                    href="{% url 'left_slidebar' 'a2610f7b-1fb0-4bcf-9a5d-26dbad66decf' %}">left
+                                                    sidebar</a></li>
+                                            <li><a
+                                                    href="{% url 'right_sidebar' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">right
+                                                    sidebar</a></li>
+                                            <li><a href="{% url 'no_sidebar' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">non
+                                                    sidebar</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>bonus layout</h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a
+                                                    href="{% url 'bundle' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">bundle</a>
+                                            </li>
+                                            <li><a
+                                                    href="{% url 'image_swatch' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">image
+                                                    swatch</a></li>
+                                            <li><a
+                                                    href="{% url 'vertical_tab' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">vertical
+                                                    tab</a></li>
+                                            <li><a
+                                                    href="{% url 'video_thumbnail' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">video
+                                                    thumbnail</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>product layout </h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a href="{% url 'image_4' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">4
+                                                    image </a></li>
+                                            <li><a
+                                                    href="{% url 'sticky' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">sticky</a>
+                                            </li>
+                                            <li><a
+                                                    href="{% url 'accordian' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">accordian</a>
+                                            </li>
+                                            <li><a
+                                                    href="{% url 'product_360_view' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">360
+                                                    view</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>thumbnail image</h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a href="{% url 'left_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">left
+                                                    image</a></li>
+                                            <li><a
+                                                    href="{% url 'right_image' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">right
+                                                    image</a></li>
+                                            <li><a
+                                                    href="{% url 'image_outside' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">image
+                                                    outside</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>3 column</h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a
+                                                    href="{% url 'thumbnail_left' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thumbnail
+                                                    left</a></li>
+                                            <li><a
+                                                    href="{% url 'thumbnail_right' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thumbnail
+                                                    right</a></li>
+                                            <li><a
+                                                    href="{% url 'thumbnail_bottom' '0ef0f240-7671-4a7b-ae5b-375fe15329ed' %}">thubnail
+                                                    bottom</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col mega-box">
+                                <div class="link-section">
+                                    <div class="menu-title">
+                                        <h5>product element</h5>
+                                    </div>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a href="{% url 'element_productbox' %}">product box</a></li>
+                                            <li><a href="{% url 'element_product_slider' %}">product slider</a></li>
+                                            <li><a href="{% url 'element_no_slider' %}">no slider</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row menu-banner">
+                            <div class="col-lg-6">
+                                <div>
+                                    <img src="{% static 'assets/images/menu-banner1.jpg' %}" alt="menu-banner"
+                                        class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div>
+                                    <img src="{% static 'assets/images/menu-banner2.jpg' %}" alt="menu-banner"
+                                        class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </li>
-        <li><a href="{% url 'collection' %}">collection</a></li>
-        <li><a href="{% url 'look_book' %}">lookbook</a></li>
-        <li><a href="{% url 'page_not_found' %}">404</a></li>
-        <li><a href="{% url 'coming_soon' %}">coming soon </a></li>
-        <li><a href="{% url 'faq_page' %}">FAQ</a></li>
-    </ul>
-    </li>
-    <!--product-end end-->
+        <!--product-meu end-->
 
-    <!--blog-meu start-->
-    <li>
-    <a  class="dark-menu-item" href="javascript:void(0)">blog</a>
-    <ul>
-        <li><a href="{% url 'blog_left_sidebar' %}">left sidebar</a></li>
-        <li><a href="{% url 'blog_right_sidebar' %}">right sidebar</a></li>
-        <li><a href="{% url 'blog_no_sidebar' %}">no sidebar</a></li>
-        <li><a href="{% url 'blog_details' 'c5cd908a-c3a0-4288-8059-da50446c9fb5' %}">blog details</a></li>
-        <li><a href="{% url 'blog_creative_left_sidebar' %}">creative left sidebar</a></li>
+
+        <!--pages meu start-->
+        <li>
+            <a class="dark-menu-item" href="javascript:void(0)">pages</a>
+            <ul>
+                <li>
+                    <a href="javascript:void(0)">account</a>
+                    <ul>
+                        <li><a href="{% url 'wishlist_page' %}">wishlist</a></li>
+                        <li><a href="{% url 'cart_page' %}">cart</a></li>
+                        <li><a href="{% url 'user_dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'contact_us' %}">contact</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'about_page' %}">about us</a></li>
+                <li><a href="{% url 'search_bar' %}">search</a></li>
+                <li>
+                    <a href="javascript:void(0)">compare</a>
+                    <ul>
+                        <li><a href="{% url 'compare_page' %}">compare</a></li>
+                        <li><a href="{% url 'compare_page2' %}">compare-2</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'collection' %}">collection</a></li>
+                <li><a href="{% url 'look_book' %}">lookbook</a></li>
+                <li><a href="{% url 'page_not_found' %}">404</a></li>
+                <li><a href="{% url 'coming_soon' %}">coming soon </a></li>
+                <li><a href="{% url 'faq_page' %}">FAQ</a></li>
+            </ul>
+        </li>
+        <!--product-end end-->
+
+        <!--blog-meu start-->
+        <li>
+            <a class="dark-menu-item" href="javascript:void(0)">blog</a>
+            <ul>
+                <li><a href="{% url 'blog_left_sidebar' %}">left sidebar</a></li>
+                <li><a href="{% url 'blog_right_sidebar' %}">right sidebar</a></li>
+                <li><a href="{% url 'blog_no_sidebar' %}">no sidebar</a></li>
+                <li><a href="{% url 'blog_details' 'c5cd908a-c3a0-4288-8059-da50446c9fb5' %}">blog details</a></li>
+                <li><a href="{% url 'blog_creative_left_sidebar' %}">creative left sidebar</a></li>
+            </ul>
+        </li>
+        <!--blog-meu end-->
     </ul>
-    </li>
-    <!--blog-meu end-->
-</ul>

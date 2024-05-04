@@ -3,121 +3,151 @@
 {% load sass_tags %}
 {% load custom_templatetags %}
 {% load mathfilters %}
-{% block components %} 
+{% block components %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="big-deal">
-    <meta name="keywords" content="big-deal">
-    <meta name="author" content="big-deal">
-    <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+  <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="big-deal">
+  <meta name="keywords" content="big-deal">
+  <meta name="author" content="big-deal">
+  <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
 
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <!--Google font-->
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color12.scss' %}" media="screen" id="color">
+  <!-- Theme css -->
+  <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color12.scss' %}" media="screen" id="color">
 </head>
+
 <body class="bg-light">
 
-<!-- loader start -->
-<div class="loader-wrapper">
-  <div>
-    <img src="{% static 'assets/images/grocery/loader.gif' %}" alt="loader">
+  <!-- loader start -->
+  <div class="loader-wrapper">
+    <div>
+      <img src="{% static 'assets/images/grocery/loader.gif' %}" alt="loader">
+    </div>
   </div>
-</div>
-<!-- loader end -->
+  <!-- loader end -->
 
-<!--header start-->
-<header id="stickyheader" class="header-style2">
-  <div class="mobile-fix-option"></div>
-  <div class="top-header2">
-    <div class="custom-container">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="top-header-left">
-            <ul>
-              <li>
-                <a href="{% url 'index' %}">bigdeal ecommerce always free delevery</a>
-              </li>
-              <li>
-                <a href="{% url 'index' %}"><i class="fa fa-phone"></i>Call Us: 123 - 456 - 7890</a>
-              </li>
-            </ul>
+  <!--header start-->
+  <header id="stickyheader" class="header-style2">
+    <div class="mobile-fix-option"></div>
+    <div class="top-header2">
+      <div class="custom-container">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="top-header-left">
+              <ul>
+                <li>
+                  <a href="{% url 'index' %}">bigdeal ecommerce always free delevery</a>
+                </li>
+                <li>
+                  <a href="{% url 'index' %}"><i class="fa fa-phone"></i>Call Us: 123 - 456 - 7890</a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="top-header-right">
-            <ul>
-              <li>
-                <a href="{% url 'wishlist_page' %}"><i class="fa fa-heart"></i> wishlist</a>
-              </li>
-              <li onclick="openAccount()">
-                <a href="javascript:void(0)"><i class="fa fa-user"></i> my profile</a>
-              </li>
-            </ul>
+          <div class="col-md-4">
+            <div class="top-header-right">
+              <ul>
+                <li>
+                  <a href="{% url 'wishlist_page' %}"><i class="fa fa-heart"></i> wishlist</a>
+                </li>
+                <li onclick="openAccount()">
+                  <a href="javascript:void(0)"><i class="fa fa-user"></i> my profile</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="header7">
-    <div class="custom-container">
-      <div class="row">
-        <div class="col-12">
-          <div class="header-contain">
-            <div class="logo-block">
-              <div class="mobilecat-toggle">
-                <i class="fa fa-bars sidebar-bar"></i>
+    <div class="header7">
+      <div class="custom-container">
+        <div class="row">
+          <div class="col-12">
+            <div class="header-contain">
+              <div class="logo-block">
+                <div class="mobilecat-toggle">
+                  <i class="fa fa-bars sidebar-bar"></i>
+                </div>
+                <div class="brand-logo logo-sm-center">
+                  <a href="{% url 'index' %}">
+                    <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
+                  </a>
+                </div>
               </div>
-              <div class="brand-logo logo-sm-center">
-                <a href="{% url 'index' %}">
-                  <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
-                </a>
-              </div>
-              </div>   
               <div class="header-search search-style2 ajax-search the-basics">
-                     <div class="input-group">                       
-                        <div class="input-group-text">
-                           <select>
-                              <option>all category</option>
-                              <option>hand tools</option>
-                              <option>kitchen</option>
-                              <option>baby products</option>
-                              <option>Gardening Tools</option>
-                              <option>Fireplace tools</option>
-                              <option>Gutter cleaning</option>
-                           </select>
-                        </div>                       
-                        <input type="search" class="form-control typeahead" id="search-input" placeholder="Search a Product" >
-                        <div class="input-group-text">
-                           <i class="fa fa-search"></i>
-                        </div>
-                     </div>
-                  </div>           
-            <div class="icon-block">
+                <div class="input-group">
+                  <div class="input-group-text">
+                    <select>
+                      <option>all category</option>
+                      <option>hand tools</option>
+                      <option>kitchen</option>
+                      <option>baby products</option>
+                      <option>Gardening Tools</option>
+                      <option>Fireplace tools</option>
+                      <option>Gutter cleaning</option>
+                    </select>
+                  </div>
+                  <input type="search" class="form-control typeahead" id="search-input" placeholder="Search a Product">
+                  <div class="input-group-text">
+                    <i class="fa fa-search"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="icon-block">
                 <ul class="">
                   <li class="mobile-search icon-desk-none">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612.01 612.01" style="enable-background:new 0 0 612.01 612.01;" xml:space="preserve"><g><g><g><path d="M606.209,578.714L448.198,423.228C489.576,378.272,515,318.817,515,253.393C514.98,113.439,399.704,0,257.493,0C115.282,0,0.006,113.439,0.006,253.393s115.276,253.393,257.487,253.393c61.445,0,117.801-21.253,162.068-56.586l158.624,156.099c7.729,7.614,20.277,7.614,28.006,0C613.938,598.686,613.938,586.328,606.209,578.714z M257.493,467.8c-120.326,0-217.869-95.993-217.869-214.407S137.167,38.986,257.493,38.986c120.327,0,217.869,95.993,217.869,214.407S377.82,467.8,257.493,467.8z"/></g></g></g></svg>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 612.01 612.01" style="enable-background:new 0 0 612.01 612.01;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <g>
+                            <path
+                              d="M606.209,578.714L448.198,423.228C489.576,378.272,515,318.817,515,253.393C514.98,113.439,399.704,0,257.493,0C115.282,0,0.006,113.439,0.006,253.393s115.276,253.393,257.487,253.393c61.445,0,117.801-21.253,162.068-56.586l158.624,156.099c7.729,7.614,20.277,7.614,28.006,0C613.938,598.686,613.938,586.328,606.209,578.714z M257.493,467.8c-120.326,0-217.869-95.993-217.869-214.407S137.167,38.986,257.493,38.986c120.327,0,217.869,95.993,217.869,214.407S377.82,467.8,257.493,467.8z" />
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
                   </li>
                   <li class="mobile-setting " onclick="openSetting()">
-                    <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z"/><path d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z"/></svg>
+                    <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z" />
+                      <path
+                        d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z" />
+                      </svg>
                   </li>
                   <li class="mobile-user icon-desk-none" onclick="openAccount()">
-                      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve"><g><g><path d="M386.816,323.456l-69.984-14.016c-7.424-1.472-12.832-8.064-12.832-15.68v-16.064c4.608-6.4,8.928-14.944,13.408-23.872c3.424-6.752,8.576-16.928,10.88-19.328c13.568-13.28,28.032-29.76,32.448-51.232c4-19.456,0-29.568-4.64-37.568c0-15.648,0-44.288-5.44-64.928c-0.544-24.928-5.12-39.008-16.608-51.552c-8.128-8.768-20.096-10.816-29.696-12.448c-3.808-0.64-9.024-1.536-10.848-2.528C276.896,5.056,260.032,0.512,239.392,0c-42.24,1.6-94.08,28.384-111.424,76.544c-5.28,14.624-4.768,38.624-4.384,57.92l-0.448,11.232c-4.064,8-8.064,18.112-4.032,37.536c4.416,21.568,18.88,38.016,32.384,51.232c2.336,2.432,7.552,12.672,11.008,19.424c4.544,8.896,8.896,17.44,13.504,23.84v16.032c0,7.616-5.408,14.208-12.864,15.68l-69.984,14.016C48.448,332.384,16,371.968,16,417.568V448c0,17.632,14.368,32,32,32h384c17.632,0,32-14.368,32-32v-30.432C464,371.968,431.552,332.384,386.816,323.456z M432,448H48v-30.432c0-30.4,21.632-56.8,51.456-62.752l69.952-14.016C191.776,336.384,208,316.576,208,293.76V272c0-4.288-1.728-8.416-4.768-11.392c-2.752-2.688-8.672-14.336-12.224-21.28c-6.016-11.776-11.2-21.952-17.12-27.712c-10.624-10.368-20.768-21.76-23.456-34.816c-2.08-10.112-0.64-12.96,1.216-16.576c1.632-3.2,4.064-8,4.064-14.528l-0.16-11.872c-0.288-13.984-0.768-37.408,2.496-46.432C170.464,52.96,209.856,33.152,239.584,32c14.656,0.384,26.176,3.424,38.4,10.24c6.592,3.648,14.272,4.928,21.024,6.08c3.808,0.64,10.176,1.728,11.488,2.56c4.32,4.704,7.904,10.368,8.16,32.384c0,1.44,0.224,2.88,0.64,4.288c4.768,16.352,4.768,44.576,4.768,58.144c0,6.528,2.464,11.328,4.064,14.528c1.856,3.616,3.296,6.464,1.216,16.608c-2.656,12.992-12.864,24.416-23.456,34.784c-5.952,5.824-11.104,16-17.056,27.808c-3.456,6.912-9.312,18.496-12.032,21.152c-3.072,3.008-4.8,7.136-4.8,11.424v21.76c0,22.816,16.224,42.624,38.592,47.072l69.984,14.016c29.792,5.92,51.424,32.32,51.424,62.72V448z"/></g></g></svg>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <path
+                            d="M386.816,323.456l-69.984-14.016c-7.424-1.472-12.832-8.064-12.832-15.68v-16.064c4.608-6.4,8.928-14.944,13.408-23.872c3.424-6.752,8.576-16.928,10.88-19.328c13.568-13.28,28.032-29.76,32.448-51.232c4-19.456,0-29.568-4.64-37.568c0-15.648,0-44.288-5.44-64.928c-0.544-24.928-5.12-39.008-16.608-51.552c-8.128-8.768-20.096-10.816-29.696-12.448c-3.808-0.64-9.024-1.536-10.848-2.528C276.896,5.056,260.032,0.512,239.392,0c-42.24,1.6-94.08,28.384-111.424,76.544c-5.28,14.624-4.768,38.624-4.384,57.92l-0.448,11.232c-4.064,8-8.064,18.112-4.032,37.536c4.416,21.568,18.88,38.016,32.384,51.232c2.336,2.432,7.552,12.672,11.008,19.424c4.544,8.896,8.896,17.44,13.504,23.84v16.032c0,7.616-5.408,14.208-12.864,15.68l-69.984,14.016C48.448,332.384,16,371.968,16,417.568V448c0,17.632,14.368,32,32,32h384c17.632,0,32-14.368,32-32v-30.432C464,371.968,431.552,332.384,386.816,323.456z M432,448H48v-30.432c0-30.4,21.632-56.8,51.456-62.752l69.952-14.016C191.776,336.384,208,316.576,208,293.76V272c0-4.288-1.728-8.416-4.768-11.392c-2.752-2.688-8.672-14.336-12.224-21.28c-6.016-11.776-11.2-21.952-17.12-27.712c-10.624-10.368-20.768-21.76-23.456-34.816c-2.08-10.112-0.64-12.96,1.216-16.576c1.632-3.2,4.064-8,4.064-14.528l-0.16-11.872c-0.288-13.984-0.768-37.408,2.496-46.432C170.464,52.96,209.856,33.152,239.584,32c14.656,0.384,26.176,3.424,38.4,10.24c6.592,3.648,14.272,4.928,21.024,6.08c3.808,0.64,10.176,1.728,11.488,2.56c4.32,4.704,7.904,10.368,8.16,32.384c0,1.44,0.224,2.88,0.64,4.288c4.768,16.352,4.768,44.576,4.768,58.144c0,6.528,2.464,11.328,4.064,14.528c1.856,3.616,3.296,6.464,1.216,16.608c-2.656,12.992-12.864,24.416-23.456,34.784c-5.952,5.824-11.104,16-17.056,27.808c-3.456,6.912-9.312,18.496-12.032,21.152c-3.072,3.008-4.8,7.136-4.8,11.424v21.76c0,22.816,16.224,42.624,38.592,47.072l69.984,14.016c29.792,5.92,51.424,32.32,51.424,62.72V448z" />
+                        </g>
+                      </g>
+                    </svg>
                   </li>
-                  <li  class="mobile-wishlist icon-desk-none item-count" >
-                    <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                         viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                  <li class="mobile-wishlist icon-desk-none item-count">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                      xml:space="preserve">
                       <g>
                         <g>
                           <path d="M474.644,74.27C449.391,45.616,414.358,29.836,376,29.836c-53.948,0-88.103,32.22-107.255,59.25
@@ -131,98 +161,141 @@
                             C79.34,72.007,106.379,59.836,136,59.836c41.129,0,67.716,25.338,82.776,46.594c13.509,19.064,20.558,38.282,22.962,45.659
                             c2.011,6.175,7.768,10.354,14.262,10.354c6.494,0,12.251-4.179,14.262-10.354c2.404-7.377,9.453-26.595,22.962-45.66
                             c15.06-21.255,41.647-46.593,82.776-46.593c29.621,0,56.66,12.171,76.137,34.27C471.395,115.957,482,145.521,482,177.351
-                            C482,254.358,413.255,312.939,309.193,401.614z"/>
+                            C482,254.358,413.255,312.939,309.193,401.614z" />
                         </g>
                       </g>
                     </svg>
-                    <div class="item-count-contain inverce"> 
-                        1
+                    <div class="item-count-contain inverce">
+                      1
                     </div>
                   </li>
                   <li class="mobile-cart item-count" onclick="openCart()">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve"><g><g><path d="M435.099,29.815h-71.361V0H148.262v29.814H76.901L40.464,181.549H0.008v103.359h30.969l34.508,227.091h381.029l34.509-227.091h30.968V181.55h-40.456L435.099,29.815z M178.261,29.999h155.477v29.629H178.261V29.999z M100.549,59.813h47.714v29.814h215.475V59.813h47.714l29.233,121.736H71.316L100.549,59.813z M420.73,482.001H91.27L61.32,284.909h389.36L420.73,482.001z M481.993,254.91H30.007v-43.361h451.986V254.91z"/></g></g><g><g><rect x="241.002" y="326.38" width="29.999" height="114.156"/></g></g><g><g><rect x="143.436" y="326.38" width="29.999" height="114.156"/></g></g><g></g></svg>
-                    <div class="item-count-contain inverce"> 
-                        {{totalCartProducts}}
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <path
+                            d="M435.099,29.815h-71.361V0H148.262v29.814H76.901L40.464,181.549H0.008v103.359h30.969l34.508,227.091h381.029l34.509-227.091h30.968V181.55h-40.456L435.099,29.815z M178.261,29.999h155.477v29.629H178.261V29.999z M100.549,59.813h47.714v29.814h215.475V59.813h47.714l29.233,121.736H71.316L100.549,59.813z M420.73,482.001H91.27L61.32,284.909h389.36L420.73,482.001z M481.993,254.91H30.007v-43.361h451.986V254.91z" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <rect x="241.002" y="326.38" width="29.999" height="114.156" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <rect x="143.436" y="326.38" width="29.999" height="114.156" />
+                        </g>
+                      </g>
+                      <g></g>
+                    </svg>
+                    <div class="item-count-contain inverce">
+                      {{totalCartProducts}}
                     </div>
                   </li>
                 </ul>
                 <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="searchbar-input">
-      <div class="input-group">         
-        <span class="input-group-text"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28.931px" height="28.932px" viewBox="0 0 28.931 28.932" style="enable-background:new 0 0 28.931 28.932;" xml:space="preserve"><g><path d="M28.344,25.518l-6.114-6.115c1.486-2.067,2.303-4.537,2.303-7.137c0-3.275-1.275-6.355-3.594-8.672C18.625,1.278,15.543,0,12.266,0C8.99,0,5.909,1.275,3.593,3.594C1.277,5.909,0.001,8.99,0.001,12.266c0,3.276,1.275,6.356,3.592,8.674c2.316,2.316,5.396,3.594,8.673,3.594c2.599,0,5.067-0.813,7.136-2.303l6.114,6.115c0.392,0.391,0.902,0.586,1.414,0.586c0.513,0,1.024-0.195,1.414-0.586C29.125,27.564,29.125,26.299,28.344,25.518z M6.422,18.111c-1.562-1.562-2.421-3.639-2.421-5.846S4.86,7.983,6.422,6.421c1.561-1.562,3.636-2.422,5.844-2.422s4.284,0.86,5.845,2.422c1.562,1.562,2.422,3.638,2.422,5.845s-0.859,4.283-2.422,5.846c-1.562,1.562-3.636,2.42-5.845,2.42S7.981,19.672,6.422,18.111z"/></g></svg></span>         
-        <input type="text" class="form-control" placeholder="search your product">         
-        <span class="input-group-text close-searchbar"><svg viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg"><path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/></svg></span>         
+      <div class="searchbar-input">
+        <div class="input-group">
+          <span class="input-group-text"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28.931px" height="28.932px"
+              viewBox="0 0 28.931 28.932" style="enable-background:new 0 0 28.931 28.932;" xml:space="preserve">
+              <g>
+                <path
+                  d="M28.344,25.518l-6.114-6.115c1.486-2.067,2.303-4.537,2.303-7.137c0-3.275-1.275-6.355-3.594-8.672C18.625,1.278,15.543,0,12.266,0C8.99,0,5.909,1.275,3.593,3.594C1.277,5.909,0.001,8.99,0.001,12.266c0,3.276,1.275,6.356,3.592,8.674c2.316,2.316,5.396,3.594,8.673,3.594c2.599,0,5.067-0.813,7.136-2.303l6.114,6.115c0.392,0.391,0.902,0.586,1.414,0.586c0.513,0,1.024-0.195,1.414-0.586C29.125,27.564,29.125,26.299,28.344,25.518z M6.422,18.111c-1.562-1.562-2.421-3.639-2.421-5.846S4.86,7.983,6.422,6.421c1.561-1.562,3.636-2.422,5.844-2.422s4.284,0.86,5.845,2.422c1.562,1.562,2.422,3.638,2.422,5.845s-0.859,4.283-2.422,5.846c-1.562,1.562-3.636,2.42-5.845,2.42S7.981,19.672,6.422,18.111z" />
+              </g>
+            </svg></span>
+          <input type="text" class="form-control" placeholder="search your product">
+          <span class="input-group-text close-searchbar"><svg viewBox="0 0 329.26933 329"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0" />
+              </svg></span>
+        </div>
       </div>
     </div>
-  </div> 
-  <div class="category-header7">
-    <div class="custom-container">
-      <div class="row">
-        <div class="col-12">
-          <div class="category-contain">
-            <div class="category-left">
-              <div class="header-category">
-                  <a class="category-toggle"><i class="ti-layout-grid2-alt"></i>Shop by category</a>              
+    <div class="category-header7">
+      <div class="custom-container">
+        <div class="row">
+          <div class="col-12">
+            <div class="category-contain">
+              <div class="category-left">
+                <div class="header-category">
+                  <a class="category-toggle"><i class="ti-layout-grid2-alt"></i>Shop by category</a>
                   <ul class="collapse-category show">
                     <li class="back-btn"><i class="fa fa-angle-left"></i> back</li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/1.jpg' %}" alt="">furniture</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/2.jpg' %}" alt="">electronics</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/3.jpg' %}" alt="">fashion</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/4.jpg' %}" alt="">medicine</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/6.jpg' %}" alt="">cosmetic</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/7.jpg' %}" alt="">bycycle</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/8.jpg' %}" alt="">shoes</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/9.jpg' %}" alt="">sport</a></li>
-                    <li><a href="{% url 'shop_left_sidebar' %}"><img src="{% static 'assets/images/grocery/header-category/10.jpg' %}" alt="">gym</a></li>                       
-                </ul>
-                  </div>
-                  <div class="logo-block">
-                    <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
-                    <div class="brand-logo logo-sm-center"> 
-                    <a href="{% url 'index' %}"> 
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/1.jpg' %}" alt="">furniture</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/2.jpg' %}" alt="">electronics</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/3.jpg' %}" alt="">fashion</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/4.jpg' %}" alt="">medicine</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/6.jpg' %}" alt="">cosmetic</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/7.jpg' %}" alt="">bycycle</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/8.jpg' %}" alt="">shoes</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/9.jpg' %}" alt="">sport</a></li>
+                    <li><a href="{% url 'shop_left_sidebar' %}"><img
+                          src="{% static 'assets/images/grocery/header-category/10.jpg' %}" alt="">gym</a></li>
+                  </ul>
+                </div>
+                <div class="logo-block">
+                  <div class="mobilecat-toggle"> <i class="fa fa-bars sidebar-bar"></i> </div>
+                  <div class="brand-logo logo-sm-center">
+                    <a href="{% url 'index' %}">
                       <img src="{% static 'assets/images/tools/logo.png' %}" class="img-fluid" alt="logo">
-                    </a> 
+                    </a>
                   </div>
-                  </div>
+                </div>
               </div>
               <div class="category-right">
-                  <div class="menu-block">
-                    <nav id="main-nav">
-                      <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
-                      <!-- ===================================================================================== -->
-                      {% include 'layout/nav-link.html' %}
-                      <!-- ===================================================================================== -->
-                    </nav>
-                  </div>
+                <div class="menu-block">
+                  <nav id="main-nav">
+                    <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                    <!-- ===================================================================================== -->
+                    {% include 'layout/nav-link.html' %}
+                    <!-- ===================================================================================== -->
+                  </nav>
+                </div>
               </div>
               <div class="icon-block">
-                  <ul class="theme-color">
-                    <li class="mobile-search icon-md-block">
-                      <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 612.01 612.01" style="enable-background:new 0 0 612.01 612.01;" xml:space="preserve">
+                <ul class="theme-color">
+                  <li class="mobile-search icon-md-block">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 612.01 612.01" style="enable-background:new 0 0 612.01 612.01;"
+                      xml:space="preserve">
+                      <g>
                         <g>
                           <g>
-                            <g>
-                              <path d="M606.209,578.714L448.198,423.228C489.576,378.272,515,318.817,515,253.393C514.98,113.439,399.704,0,257.493,0
+                            <path d="M606.209,578.714L448.198,423.228C489.576,378.272,515,318.817,515,253.393C514.98,113.439,399.704,0,257.493,0
                                 C115.282,0,0.006,113.439,0.006,253.393s115.276,253.393,257.487,253.393c61.445,0,117.801-21.253,162.068-56.586
                                 l158.624,156.099c7.729,7.614,20.277,7.614,28.006,0C613.938,598.686,613.938,586.328,606.209,578.714z M257.493,467.8
                                 c-120.326,0-217.869-95.993-217.869-214.407S137.167,38.986,257.493,38.986c120.327,0,217.869,95.993,217.869,214.407
-                                S377.82,467.8,257.493,467.8z"/>
-                            </g>
+                                S377.82,467.8,257.493,467.8z" />
                           </g>
                         </g>
-                      </svg>
-                    </li>
-                    <li class="mobile-user icon-desk-none" onclick="openAccount()">
-                      <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+                      </g>
+                    </svg>
+                  </li>
+                  <li class="mobile-user icon-desk-none" onclick="openAccount()">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;"
+                      xml:space="preserve">
+                      <g>
                         <g>
-                          <g>
-                            <path d="M386.816,323.456l-69.984-14.016c-7.424-1.472-12.832-8.064-12.832-15.68v-16.064c4.608-6.4,8.928-14.944,13.408-23.872
+                          <path d="M386.816,323.456l-69.984-14.016c-7.424-1.472-12.832-8.064-12.832-15.68v-16.064c4.608-6.4,8.928-14.944,13.408-23.872
                               c3.424-6.752,8.576-16.928,10.88-19.328c13.568-13.28,28.032-29.76,32.448-51.232c4-19.456,0-29.568-4.64-37.568
                               c0-15.648,0-44.288-5.44-64.928c-0.544-24.928-5.12-39.008-16.608-51.552c-8.128-8.768-20.096-10.816-29.696-12.448
                               c-3.808-0.64-9.024-1.536-10.848-2.528C276.896,5.056,260.032,0.512,239.392,0c-42.24,1.6-94.08,28.384-111.424,76.544
@@ -238,20 +311,26 @@
                               c4.768,16.352,4.768,44.576,4.768,58.144c0,6.528,2.464,11.328,4.064,14.528c1.856,3.616,3.296,6.464,1.216,16.608
                               c-2.656,12.992-12.864,24.416-23.456,34.784c-5.952,5.824-11.104,16-17.056,27.808c-3.456,6.912-9.312,18.496-12.032,21.152
                               c-3.072,3.008-4.8,7.136-4.8,11.424v21.76c0,22.816,16.224,42.624,38.592,47.072l69.984,14.016
-                              c29.792,5.92,51.424,32.32,51.424,62.72V448z"/>
-                          </g>
+                              c29.792,5.92,51.424,32.32,51.424,62.72V448z" />
                         </g>
+                      </g>
+                    </svg>
+                  </li>
+                  <li class="mobile-setting " onclick="openSetting()">
+                    <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z" />
+                      <path
+                        d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z" />
                       </svg>
-                    </li>
-                    <li class="mobile-setting " onclick="openSetting()">
-                        <svg enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><path d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z"/><path d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z"/></svg>
-                    </li>
-                    <li class="mobile-wishlist item-count icon-desk-none">
-                        <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                  </li>
+                  <li class="mobile-wishlist item-count icon-desk-none">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                      xml:space="preserve">
+                      <g>
                         <g>
-                          <g>
-                            <path d="M474.644,74.27C449.391,45.616,414.358,29.836,376,29.836c-53.948,0-88.103,32.22-107.255,59.25
+                          <path d="M474.644,74.27C449.391,45.616,414.358,29.836,376,29.836c-53.948,0-88.103,32.22-107.255,59.25
                               c-4.969,7.014-9.196,14.047-12.745,20.665c-3.549-6.618-7.775-13.651-12.745-20.665c-19.152-27.03-53.307-59.25-107.255-59.25
                               c-38.358,0-73.391,15.781-98.645,44.435C13.267,101.605,0,138.213,0,177.351c0,42.603,16.633,82.228,52.345,124.7
                               c31.917,37.96,77.834,77.088,131.005,122.397c19.813,16.884,40.302,34.344,62.115,53.429l0.655,0.574
@@ -262,163 +341,168 @@
                               C79.34,72.007,106.379,59.836,136,59.836c41.129,0,67.716,25.338,82.776,46.594c13.509,19.064,20.558,38.282,22.962,45.659
                               c2.011,6.175,7.768,10.354,14.262,10.354c6.494,0,12.251-4.179,14.262-10.354c2.404-7.377,9.453-26.595,22.962-45.66
                               c15.06-21.255,41.647-46.593,82.776-46.593c29.621,0,56.66,12.171,76.137,34.27C471.395,115.957,482,145.521,482,177.351
-                              C482,254.358,413.255,312.939,309.193,401.614z"/>
-                          </g>
+                              C482,254.358,413.255,312.939,309.193,401.614z" />
                         </g>
-                        </svg>
-                        <div class="item-count-contain inverce"> 1 </div>
-                    </li>
-                    <li class="mobile-cart item-count" onclick="openCart()">
-                      <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                          viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
-                            <g>
-                              <g>
-                                <path d="M435.099,29.815h-71.361V0H148.262v29.814H76.901L40.464,181.549H0.008v103.359h30.969l34.508,227.091h381.029
+                      </g>
+                    </svg>
+                    <div class="item-count-contain inverce"> 1 </div>
+                  </li>
+                  <li class="mobile-cart item-count" onclick="openCart()">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <path d="M435.099,29.815h-71.361V0H148.262v29.814H76.901L40.464,181.549H0.008v103.359h30.969l34.508,227.091h381.029
                                   l34.509-227.091h30.968V181.55h-40.456L435.099,29.815z M178.261,29.999h155.477v29.629H178.261V29.999z M100.549,59.813h47.714
                                   v29.814h215.475V59.813h47.714l29.233,121.736H71.316L100.549,59.813z M420.73,482.001H91.27L61.32,284.909h389.36L420.73,482.001
-                                  z M481.993,254.91H30.007v-43.361h451.986V254.91z"/>
-                              </g>
-                            </g>
-                            <g>
-                              <g>
-                                <rect x="241.002" y="326.38" width="29.999" height="114.156"/>
-                              </g>
-                            </g>
-                            <g>
-                              <g>
-                                <rect x="143.436" y="326.38" width="29.999" height="114.156"/>
-                              </g>
-                            </g>
-                            <g>
-                              <g>
-                                <rect x="338.559" y="326.38" width="29.999" height="114.156"/>
-                              </g>
-                            </g>
-                      </svg>
-                        <div class="item-count-contain inverce"> 3 </div>
-                    </li>
-                  </ul>
-                  <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
+                                  z M481.993,254.91H30.007v-43.361h451.986V254.91z" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <rect x="241.002" y="326.38" width="29.999" height="114.156" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <rect x="143.436" y="326.38" width="29.999" height="114.156" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <rect x="338.559" y="326.38" width="29.999" height="114.156" />
+                        </g>
+                      </g>
+                    </svg>
+                    <div class="item-count-contain inverce"> 3 </div>
+                  </li>
+                </ul>
+                <div class="toggle-nav"><i class="fa fa-bars sidebar-bar"></i></div>
               </div>
               <div class="store-locator">
-                  <select>
-                    <option value="">store locations</option>
-                    <option value="store1">new delhi</option>
-                    <option value="store2">mumbai</option>
-                    <option value="store3">ludhiyana</option>
-                    <option value="store4">kolkata</option>
-                    <option value="store5">pune</option>
-                    <option value="store6">hariyana</option>
-                    <option value="store7">pondicheri</option>
-                  </select>
+                <select>
+                  <option value="">store locations</option>
+                  <option value="store1">new delhi</option>
+                  <option value="store2">mumbai</option>
+                  <option value="store3">ludhiyana</option>
+                  <option value="store4">kolkata</option>
+                  <option value="store5">pune</option>
+                  <option value="store6">hariyana</option>
+                  <option value="store7">pondicheri</option>
+                </select>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <div class="searchbar-input ajax-search the-basics">
-         <div class="input-group">           
-           <span class="input-group-text">
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28.931px" height="28.932px" viewBox="0 0 28.931 28.932" style="enable-background:new 0 0 28.931 28.932;" xml:space="preserve">
-                 <g>
-                    <path d="M28.344,25.518l-6.114-6.115c1.486-2.067,2.303-4.537,2.303-7.137c0-3.275-1.275-6.355-3.594-8.672C18.625,1.278,15.543,0,12.266,0C8.99,0,5.909,1.275,3.593,3.594C1.277,5.909,0.001,8.99,0.001,12.266c0,3.276,1.275,6.356,3.592,8.674c2.316,2.316,5.396,3.594,8.673,3.594c2.599,0,5.067-0.813,7.136-2.303l6.114,6.115c0.392,0.391,0.902,0.586,1.414,0.586c0.513,0,1.024-0.195,1.414-0.586C29.125,27.564,29.125,26.299,28.344,25.518z M6.422,18.111c-1.562-1.562-2.421-3.639-2.421-5.846S4.86,7.983,6.422,6.421c1.561-1.562,3.636-2.422,5.844-2.422s4.284,0.86,5.845,2.422c1.562,1.562,2.422,3.638,2.422,5.845s-0.859,4.283-2.422,5.846c-1.562,1.562-3.636,2.42-5.845,2.42S7.981,19.672,6.422,18.111z"/>
-                 </g>
-              </svg>
-           </span>           
-            <input type="search" class="form-control typeahead" placeholder="Search a Product" >
-             <span class="input-group-text close-searchbar">
-                <svg viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg">
-                   <path d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"/>
-                </svg>
-             </span>           
-         </div>
+      <div class="searchbar-input ajax-search the-basics">
+        <div class="input-group">
+          <span class="input-group-text">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+              y="0px" width="28.931px" height="28.932px" viewBox="0 0 28.931 28.932"
+              style="enable-background:new 0 0 28.931 28.932;" xml:space="preserve">
+              <g>
+                <path
+                  d="M28.344,25.518l-6.114-6.115c1.486-2.067,2.303-4.537,2.303-7.137c0-3.275-1.275-6.355-3.594-8.672C18.625,1.278,15.543,0,12.266,0C8.99,0,5.909,1.275,3.593,3.594C1.277,5.909,0.001,8.99,0.001,12.266c0,3.276,1.275,6.356,3.592,8.674c2.316,2.316,5.396,3.594,8.673,3.594c2.599,0,5.067-0.813,7.136-2.303l6.114,6.115c0.392,0.391,0.902,0.586,1.414,0.586c0.513,0,1.024-0.195,1.414-0.586C29.125,27.564,29.125,26.299,28.344,25.518z M6.422,18.111c-1.562-1.562-2.421-3.639-2.421-5.846S4.86,7.983,6.422,6.421c1.561-1.562,3.636-2.422,5.844-2.422s4.284,0.86,5.845,2.422c1.562,1.562,2.422,3.638,2.422,5.845s-0.859,4.283-2.422,5.846c-1.562,1.562-3.636,2.42-5.845,2.42S7.981,19.672,6.422,18.111z" />
+              </g>
+            </svg>
+          </span>
+          <input type="search" class="form-control typeahead" placeholder="Search a Product">
+          <span class="input-group-text close-searchbar">
+            <svg viewBox="0 0 329.26933 329" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0" />
+            </svg>
+          </span>
+        </div>
       </div>
-   </div>
-</header>
-<!--header end-->
+    </div>
+  </header>
+  <!--header end-->
 
-<!-- home slider start -->
-<section class=" section-pb-space  grocery-slide bg-white home-slide">
-  <div class="custom-container">
-    <div class="row grocery-slide-block">     
-      <div class="col-12">
-        <div class="slide-1 no-arrow">
-          {% for banner in allbanners  %}
-          {% if banner.bannerType|to_str == 'Slider' %}
-          <div>
-            <div class="slide-main">
-              <img  src="{{banner.bannerImageTwo}}" class="img-fluid bg-img " alt="grocery-slider">
-              <div class="animat-block">
-                <img id="img-1" src="{{banner.bannerImage}}" class="img-fluid animat1" alt="grocery-slider">
-              </div>
-              <div class="slide-contain">
-                <div>
-                  <h3>{{banner.titleOne}}</h3>
-                  <h2>{{banner.titleTwo}}</h2>
-                  <h4>get  {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
-                    {% else %}
+  <!-- home slider start -->
+  <section class=" section-pb-space  grocery-slide bg-white home-slide">
+    <div class="custom-container">
+      <div class="row grocery-slide-block">
+        <div class="col-12">
+          <div class="slide-1 no-arrow">
+            {% for banner in allbanners  %}
+            {% if banner.bannerType|to_str == 'Slider' %}
+            <div>
+              <div class="slide-main">
+                <img src="{{banner.bannerImageTwo}}" class="img-fluid bg-img " alt="grocery-slider">
+                <div class="animat-block">
+                  <img id="img-1" src="{{banner.bannerImage}}" class="img-fluid animat1" alt="grocery-slider">
+                </div>
+                <div class="slide-contain">
+                  <div>
+                    <h3>{{banner.titleOne}}</h3>
+                    <h2>{{banner.titleTwo}}</h2>
+                    <h4>get {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                      {% else %}
                       <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% extra save</span>
-                    {% endif %} </h4>
-                  <a href="{% url 'shop_left_sidebar' %}" class="btn btn-md btn-rounded">
-                    Shop Now
-                  </a>
+                      {% endif %} </h4>
+                    <a href="{% url 'shop_left_sidebar' %}" class="btn btn-md btn-rounded">
+                      Shop Now
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+            {% endif %}
+            {% endfor %}
           </div>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>            
-    </div>
-  </div>
-</section>
-<!-- home slider end -->
-
-<!--category start-->
-<section class="category2 section-mt-space">
-  <div class="custom-container">
-    <div class="row">
-      <div class="col-12 pr-0">
-        <div class="category-slide6 no-arrow">
-          {% for category in subcategories %}
-          <div>
-            <a href="{% url 'shop_left_sidebar' %}">
-              <div class="category-box">
-                <div>
-                  <div class="img-wrapper">
-                    <img src="{{category.categoryImage}}" alt="cosmetic " class="img-fluid">
-                  </div>
-                  <div class="category-details">
-                    <h6>{{category.categoryName}}</h6>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          {% endfor %}
         </div>
       </div>
     </div>
+  </section>
+  <!-- home slider end -->
+
+  <!--category start-->
+  <section class="category2 section-mt-space">
+    <div class="custom-container">
+      <div class="row">
+        <div class="col-12 pr-0">
+          <div class="category-slide6 no-arrow">
+            {% for category in subcategories %}
+            <div>
+              <a href="{% url 'shop_left_sidebar' %}">
+                <div class="category-box">
+                  <div>
+                    <div class="img-wrapper">
+                      <img src="{{category.categoryImage}}" alt="cosmetic " class="img-fluid">
+                    </div>
+                    <div class="category-details">
+                      <h6>{{category.categoryName}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--category end-->
+
+  <!--title start-->
+  <div class="title8  section-big-pt-space">
+    <h4>trending Products</h4>
   </div>
-</section>
-<!--category end-->
+  <!--title end-->
 
-<!--title start-->
-<div class="title8  section-big-pt-space">
-  <h4>trending Products</h4>
-</div>
-<!--title end-->
-
-<!-- product start -->
-<section class="product section-big-mb-space">
-  <div class="custom-container addtocart_count">
-    <div class="row">
-      <div class="col-12 pr-0">
-        <div class="product-slide-5 product-m no-arrow">
-          {% for product in grocery_products %}
-          <div>
-            <div class="product-box">
+  <!-- product start -->
+  <section class="product section-big-mb-space">
+    <div class="custom-container addtocart_count">
+      <div class="row">
+        <div class="col-12 pr-0">
+          <div class="product-slide-5 product-m no-arrow">
+            {% for product in grocery_products %}
+            <div>
+              <div class="product-box">
                 <div class="product-imgbox">
                   <div class="product-front">
                     <a href="{% url 'left_slidebar' product.id %}">
@@ -427,29 +511,33 @@
                   </div>
                   <div class="counter-cart">
                     <div class="addtocart_btn">
-                    <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" >
-                      <button  type="button" class="btn btn-outline btn-cart tooltip-top add-cartnoty"  data-tippy-content="Add to cart"> add to cart </button>
-                    </a>
-                    <div class="qty-box cart_qty">
+                      <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}">
+                        <button type="button" class="btn btn-outline btn-cart tooltip-top add-cartnoty"
+                          data-tippy-content="Add to cart"> add to cart </button>
+                      </a>
+                      <div class="qty-box cart_qty">
                         <div class="input-group">
-                            <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                            <input type="text" name="quantity" class="form-control input-number qty-input" value="1">
-                            <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
+                          <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
+                            <i class="fa fa-minus"></i>
+                          </button>
+                          <input type="text" name="quantity" class="form-control input-number qty-input" value="1">
+                          <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
+                            <i class="fa fa-plus"></i>
+                          </button>
                         </div>
+                      </div>
                     </div>
                   </div>
-                  </div>
                   <div class="product-icon icon-top">
-                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-left wishlist"  data-tippy-content="Add to Wishlist" > <i
-                      data-feather="heart"></i></a>
-                  <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal"
-                     data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View"> <i  data-feather="eye"></i>
-                  </a> 
-                  <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="tooltip-left" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i></a>
+                    <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                      class="add-to-wish tooltip-left wishlist" data-tippy-content="Add to Wishlist"> <i
+                        data-feather="heart"></i></a>
+                    <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                      href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-left"
+                      data-tippy-content="Quick View"> <i data-feather="eye"></i>
+                    </a>
+                    <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="tooltip-left"
+                      data-tippy-content="Compare"> <i data-feather="refresh-cw"></i></a>
                   </div>
                   <div class="new-label2">
                     <div>
@@ -470,32 +558,32 @@
                     {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
                     {% else %}
                     {{product.product_price_range|return_currency_wise_ammount_range:request}}
-                    {% endif %} 
+                    {% endif %}
                     <span>
-                      {% if product.productType == "Simple" %} 
-                      {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                      {% else %} 
+                      {% if product.productType == "Simple" %}
+                      {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                      {% else %}
                       {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
-                      {% endif %}  
+                      {% endif %}
                     </span>
                   </h5>
                 </div>
+              </div>
             </div>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!-- product end -->
+  </section>
+  <!-- product end -->
 
-<!--collection big banner start-->
-{% if col_first_banner and col_second_banner and col_third_banner and col_fourth_banner and col_five_banner %}
-<section class="collection-banner b-g-white section-py-space">
-  <div class="custom-container">
-    <div class="row collection-p5">
-      <div class="col-12">
+  <!--collection big banner start-->
+  {% if col_first_banner and col_second_banner and col_third_banner and col_fourth_banner and col_five_banner %}
+  <section class="collection-banner b-g-white section-py-space">
+    <div class="custom-container">
+      <div class="row collection-p5">
+        <div class="col-12">
           <div class="row">
             <div class="col-md-6">
               <div class="collection-banner-main p-left   banner-13 banner-style8 text-center">
@@ -506,7 +594,7 @@
                   <div>
                     <h3>up to {% if col_first_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                       {% else %}
-                        <span class="theme-color">{{col_first_banner.bannerProduct.productVariantDiscount}}% </span>
+                      <span class="theme-color">{{col_first_banner.bannerProduct.productVariantDiscount}}% </span>
                       {% endif %} </h3>
                     <h4>{{col_first_banner.titleOne}}</h4>
                     <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
@@ -523,7 +611,7 @@
                   <div>
                     <h3>up to {% if col_second_banner.bannerProduct.productVariantDiscount|to_int == 0 %}
                       {% else %}
-                        <span class="theme-color">{{col_second_banner.bannerProduct.productVariantDiscount}}% off </span>
+                      <span class="theme-color">{{col_second_banner.bannerProduct.productVariantDiscount}}% off </span>
                       {% endif %} </h3>
                     <h4>{{col_second_banner.titleOne}}</h4>
                     <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
@@ -535,7 +623,7 @@
         </div>
         <div class="col-12">
           <div class="row">
-             <div class="col-md-4">
+            <div class="col-md-4">
               <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
                 <div class="collection-img">
                   <img src="{{col_third_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
@@ -549,71 +637,73 @@
                 </div>
               </div>
             </div>
-        <div class="col-md-4">
-          <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
-            <div class="collection-img">
-              <img src="{{col_fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
+            <div class="col-md-4">
+              <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
+                <div class="collection-img">
+                  <img src="{{col_fourth_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
+                </div>
+                <div class="collection-banner-contain">
+                  <div>
+                    <h3>{{col_fourth_banner.titleOne}}</h3>
+                    <h4>{{col_fourth_banner.titleTwo}}</h4>
+                    <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="collection-banner-contain">
-              <div>
-                <h3>{{col_fourth_banner.titleOne}}</h3>
-                <h4>{{col_fourth_banner.titleTwo}}</h4>
-                <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
+            <div class="col-md-4">
+              <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
+                <div class="collection-img">
+                  <img src="{{col_five_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
+                </div>
+                <div class="collection-banner-contain">
+                  <div>
+                    <h3>{{col_five_banner.titleOne}}</h3>
+                    <h4>{{col_five_banner.titleTwo}}</h4>
+                    <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="collection-banner-main p-left  banner-13 banner-style8 text-center">
-            <div class="collection-img">
-              <img src="{{col_five_banner.bannerImage}}" class="img-fluid bg-img" alt="banner">
-            </div>
-            <div class="collection-banner-contain">
-              <div>
-                <h3>{{col_five_banner.titleOne}}</h3>
-                <h4>{{col_five_banner.titleTwo}}</h4>
-                <a href="{% url 'shop_left_sidebar' %}" class="btn btn-rounded btn-xs">shop now</a>
-              </div>
-            </div>
-          </div>
-        </div>   
         </div>
       </div>
     </div>
-  </div>
-</section>
-{% endif %}
-<!--collection big banner end-->
+  </section>
+  {% endif %}
+  <!--collection big banner end-->
 
 
-<!--tab product-->
-<section class="section-pt-space" >
-  <div class="tab-product-main tab-third">
-    <div class="tab-prodcut-contain">
-      <ul class="tabs tab-title">
-        {% for category in subcategories %}
-        <li class="{% if forloop.first %} current {% endif %}"><a href="tab-{{category.id}}">{{category.categoryName}}</a></li>
-        {% endfor %}
-      </ul>
+  <!--tab product-->
+  <section class="section-pt-space">
+    <div class="tab-product-main tab-third">
+      <div class="tab-prodcut-contain">
+        <ul class="tabs tab-title">
+          {% for category in subcategories %}
+          <li class="{% if forloop.first %} current {% endif %}"><a
+              href="tab-{{category.id}}">{{category.categoryName}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-  </div>
-</section>
-<!--tab product-->
+  </section>
+  <!--tab product-->
 
-<!-- product tab  -->
-<section class="section-py-space ratio_square product">
-  <div class="custom-container addtocart_count">
-    <div class="row">
-      <div class="col pr-0">
-        <div class="theme-tab product no-arrow">
-          <div class="tab-content-cls">
-            {% for subcategory,products in products_by_subcategory.items  %}
-            <div id="tab-{{subcategory.id}}" class="tab-content {% if forloop.first %} active default product {% endif %}">
-              <div class="product-slide-5 product-m no-arrow">
-                {% if products %}
-                {% for product in products %}
-                <div>
-                  <div class="product-box">
+  <!-- product tab  -->
+  <section class="section-py-space ratio_square product">
+    <div class="custom-container addtocart_count">
+      <div class="row">
+        <div class="col pr-0">
+          <div class="theme-tab product no-arrow">
+            <div class="tab-content-cls">
+              {% for subcategory,products in products_by_subcategory.items  %}
+              <div id="tab-{{subcategory.id}}"
+                class="tab-content {% if forloop.first %} active default product {% endif %}">
+                <div class="product-slide-5 product-m no-arrow">
+                  {% if products %}
+                  {% for product in products %}
+                  <div>
+                    <div class="product-box">
                       <div class="product-imgbox">
                         <div class="product-front">
                           <a href="{% url 'left_slidebar' product.id %}">
@@ -622,29 +712,34 @@
                         </div>
                         <div class="counter-cart">
                           <div class="addtocart_btn">
-                          <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" >
-                            <button  type="button" class="btn btn-outline btn-cart tooltip-top add-cartnoty"  data-tippy-content="Add to cart"> add to cart </button>
-                          </a>
-                          <div class="qty-box cart_qty">
+                            <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}">
+                              <button type="button" class="btn btn-outline btn-cart tooltip-top add-cartnoty"
+                                data-tippy-content="Add to cart"> add to cart </button>
+                            </a>
+                            <div class="qty-box cart_qty">
                               <div class="input-group">
-                                  <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
-                                      <i class="fa fa-minus" aria-hidden="true"></i>
-                                  </button>
-                                  <input type="text" name="quantity" class="form-control input-number qty-input" value="1">
-                                  <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
-                                      <i class="fa fa-plus" aria-hidden="true"></i>
-                                  </button>
+                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field="">
+                                  <i class="fa fa-minus"></i>
+                                </button>
+                                <input type="text" name="quantity" class="form-control input-number qty-input"
+                                  value="1">
+                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field="">
+                                  <i class="fa fa-plus"></i>
+                                </button>
                               </div>
+                            </div>
                           </div>
                         </div>
-                        </div>
                         <div class="product-icon icon-top">
-                          <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"  class="add-to-wish tooltip-left wishlist"  data-tippy-content="Add to Wishlist" > <i
-                            data-feather="heart"></i></a>
-                          <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})" href="javascript:void(0)" data-bs-toggle="modal"
-                            data-bs-target="#quick-view" class="tooltip-left"  data-tippy-content="Quick View"> <i  data-feather="eye"></i>
-                          </a> 
-                          <a href="{% url 'compare_products' product.id|return_first_product_variant %}" class="tooltip-left" data-tippy-content="Compare"> <i  data-feather="refresh-cw"></i></a>
+                          <a href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                            class="add-to-wish tooltip-left wishlist" data-tippy-content="Add to Wishlist"> <i
+                              data-feather="heart"></i></a>
+                          <a onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                            href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
+                            class="tooltip-left" data-tippy-content="Quick View"> <i data-feather="eye"></i>
+                          </a>
+                          <a href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                            class="tooltip-left" data-tippy-content="Compare"> <i data-feather="refresh-cw"></i></a>
                         </div>
                         <div class="new-label2">
                           <div>
@@ -667,642 +762,757 @@
                           {{product.product_price_range|return_currency_wise_ammount_range:request}}
                           {% endif %}
                           <span>
-                            {% if product.productType == "Simple" %} 
-                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
-                            {% else %} 
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
                             {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
                             {% endif %}
                           </span>
                         </h5>
                       </div>
+                    </div>
                   </div>
+                  {% endfor %}
+                  {% else %}
+                  <h2 style="text-align:center;"> No products Yet! </h2>
+                  {% endif %}
                 </div>
-                {% endfor %}
-                {% else %}
-                <h2 style="text-align:center;"> No products Yet! </h2>
-                {% endif %}
               </div>
-            </div>
-            {% endfor %}  
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
     </div>
-</section>
-<!-- product tab end -->
+  </section>
+  <!-- product tab end -->
 
-<!--testimonial start-->
-<section class="testimonial block">
-  {% for banner in last_testimonial   %}
-  <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
-  {% endfor %}
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="slide-1 no-arrow">
-          {% for banner in allbanners %}
-          {% if banner.bannerType|to_str == 'Farmer Banner'  %}
-          <div>
-            <div class="testimonial-contain">
-              <div class="media">
-                <div class="testimonial-img">
-                  <img src="{{banner.bannerImage}}" class="img-fluid rounded-circle" alt="testimonial">
+  <!--testimonial start-->
+  <section class="testimonial block">
+    {% for banner in last_testimonial   %}
+    <img src="{{banner.bannerImage}}" alt="testimonial" class="img-fluid bg-img">
+    {% endfor %}
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="slide-1 no-arrow">
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Farmer Banner'  %}
+            <div>
+              <div class="testimonial-contain">
+                <div class="media">
+                  <div class="testimonial-img">
+                    <img src="{{banner.bannerImage}}" class="img-fluid rounded-circle" alt="testimonial">
+                  </div>
+                  <div class="media-body">
+                    <h5>{{banner.titleOne}}</h5>
+                    <p>{{banner.bannerDescription|safe}}</p>
+                  </div>
                 </div>
-                <div class="media-body">
-                  <h5>{{banner.titleOne}}</h5>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--testimonial end-->
+
+
+  <!--title start-->
+  <div class="title8  section-big-pt-space">
+    <h4>our team</h4>
+  </div>
+  <!--title end-->
+
+  <!-- team start -->
+  <section class="team1 section-big-mb-space">
+    <div class="custom-container">
+      <div class="row">
+        <div class="col-12 pr-0">
+          <div class="team-slide4 no-arrow">
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Review Banner'  %}
+            <div>
+              <div class="team-box">
+                <div class="img-wrraper">
+                  <img src="{{banner.bannerImage}}" alt="team" class="img-fluid">
+                </div>
+                <div class="team-detail">
+                  <h3>{{banner.titleOne}}</h3>
+                  <h5>{{banner.titleTwo}}</h5>
                   <p>{{banner.bannerDescription|safe}}</p>
+                  <ul>
+                    <li class="fb-color"><a href="https://www.facebook.com/" target="_blank"> <i
+                          class="ti-facebook"></i></a></li>
+                    <li class="twt-color"> <a href="https://twitter.com/" target="_blank"><i
+                          class="ti-twitter-alt"></i></a></li>
+                    <li class="print-color"> <a href="https://in.pinterest.com/" target="_blank"><i
+                          class="ti-pinterest"></i></a></li>
+                  </ul>
                 </div>
               </div>
             </div>
+            {% endif %}
+            {% endfor %}
           </div>
-          {% endif %}
-          {% endfor %}
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!--testimonial end-->
+  </section>
+  <!-- team end -->
 
-
-<!--title start-->
-<div class="title8  section-big-pt-space">
-  <h4>our team</h4>
-</div>
-<!--title end-->
-
-<!-- team start -->
-<section class="team1 section-big-mb-space">
-  <div class="custom-container">
-    <div class="row">
-      <div class="col-12 pr-0">
-        <div class="team-slide4 no-arrow">
-          {% for banner in allbanners %}
-          {% if banner.bannerType|to_str == 'Review Banner'  %}
-          <div>
-            <div class="team-box">
-              <div class="img-wrraper">
-                <img src="{{banner.bannerImage}}" alt="team" class="img-fluid">
-              </div>
-              <div class="team-detail">
-                <h3>{{banner.titleOne}}</h3>
-                <h5>{{banner.titleTwo}}</h5>
-                <p>{{banner.bannerDescription|safe}}</p>
-                <ul>
-                  <li class="fb-color"><a href="https://www.facebook.com/" target ="_blank"> <i class="ti-facebook"></i></a></li>
-                  <li class="twt-color"> <a href="https://twitter.com/" target ="_blank"><i class="ti-twitter-alt"></i></a></li>
-                  <li class="print-color"> <a href="https://in.pinterest.com/" target ="_blank"><i class="ti-pinterest"></i></a></li>
-                </ul>
+  <!-- masonory-banner start -->
+  {% if first_banner and second_banner and third_banner and fourth_banner and five_banner and six_banner %}
+  <section class="masonory-banner  section-py-space b-g-white">
+    <div class="container-fluid">
+      <div class="row masonory-p1">
+        <div class="col-xl-3 col-sm-6">
+          <div class="masonary-banner-main">
+            <div class="masonory-banner-img masonory-img1">
+              <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+            </div>
+            <div class="masonary-banner-contant p-center p-top">
+              <div class="masonary-banner-subcontant">
+                <div>
+                  <h5> {{first_banner.titleOne}}</h5>
+                  <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
+                </div>
               </div>
             </div>
           </div>
-          {% endif %}
-          {% endfor %}
         </div>
-      </div>
-    </div>  
-  </div>
-</section>
-<!-- team end -->
-
-<!-- masonory-banner start -->
-{% if first_banner and second_banner and third_banner and fourth_banner and five_banner and six_banner %}
-<section class="masonory-banner  section-py-space b-g-white">
-  <div class="container-fluid">
-    <div class="row masonory-p1">
-      <div class="col-xl-3 col-sm-6">
-        <div class="masonary-banner-main">
-              <div class="masonory-banner-img masonory-img1">
-               <img src="{{first_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
-              </div>
-              <div class="masonary-banner-contant p-center p-top">
-                <div class="masonary-banner-subcontant">
+        <div class="col-xl-3  col-sm-6">
+          <div class="row">
+            <div class="col-12">
+              <div class="masonary-banner-main">
+                <div class="masonory-banner-img">
+                  <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+                </div>
+                <div class="masonary-banner-contant p-center">
                   <div>
-                      <h5> {{first_banner.titleOne}}</h5>
-                      <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
+                    <h5>{{second_banner.titleOne}}</h5>
+                    <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
                   </div>
                 </div>
               </div>
-        </div>
-      </div>
-      <div class="col-xl-3  col-sm-6">
-        <div class="row">
-          <div class="col-12">
-            <div class="masonary-banner-main">
-                  <div class="masonory-banner-img">
-                      <img src="{{second_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
-                  </div>
-                  <div class="masonary-banner-contant p-center">
-                      <div>
-                        <h5>{{second_banner.titleOne}}</h5>
-                        <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
-                      </div>
-                  </div>
-                </div>
             </div>
             <div class="col-12">
-                <div class="masonary-banner-main">
+              <div class="masonary-banner-main">
+                <div class="masonory-banner-img">
+                  <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+                </div>
+                <div class="masonary-banner-contant p-center">
+                  <div>
+                    <h5>{{third_banner.titleOne}}</h5>
+                    <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="row">
+            <div class="col-12">
+              <div class="masonary-banner-main banner-style1">
+                <div class="masonory-banner-img">
+                  <img src="{{fourth_banner.bannerImage}}" alt="masonary-banner" class="img-fluid bg-img">
+                </div>
+                <div class="masonary-banner-contant p-right py-center">
+                  <div class="masonary-banner-subcontant">
+                    <div>
+                      <h2>{{fourth_banner.bannerProduct.variantProduct.productName}}</h2>
+                      <h5>{{fourth_banner.titleOne}}</h5>
+                      <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="masonary-banner-main">
                     <div class="masonory-banner-img">
-                        <img src="{{third_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+                      <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
                     </div>
                     <div class="masonary-banner-contant p-center">
-                        <div>
-                          <h5>{{third_banner.titleOne}}</h5>
+                      <div>
+                        <h5>{{five_banner.titleOne}}</h5>
                         <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
-                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-      </div>
-      <div class="col-xl-6">
-        <div class="row">
-          <div class="col-12">
-            <div class="masonary-banner-main banner-style1">
-                  <div class="masonory-banner-img">
-                      <img src="{{fourth_banner.bannerImage}}" alt="masonary-banner" class="img-fluid bg-img">
-                  </div>
-                  <div class="masonary-banner-contant p-right py-center">
-                      <div class="masonary-banner-subcontant">
-                          <div>
-                              <h2>{{fourth_banner.bannerProduct.variantProduct.productName}}</h2>
-                              <h5>{{fourth_banner.titleOne}}</h5>
-                              <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-12">
-            <div class="row">
-              <div class="col-sm-6">
+                <div class="col-sm-6">
                   <div class="masonary-banner-main">
-                      <div class="masonory-banner-img">
-                          <img src="{{five_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+                    <div class="masonory-banner-img">
+                      <img src="{{six_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
+                    </div>
+                    <div class="masonary-banner-contant p-center">
+                      <div>
+                        <h5>{{six_banner.titleOne}}</h5>
+                        <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
                       </div>
-                      <div class="masonary-banner-contant p-center">
-                          <div>
-                            <h5>{{five_banner.titleOne}}</h5>
-                          <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
-                          </div>
-                      </div>
+                    </div>
                   </div>
-              </div>
-              <div class="col-sm-6">
-                  <div class="masonary-banner-main">
-                      <div class="masonory-banner-img">
-                          <img src="{{six_banner.bannerImage}}" class="img-fluid bg-img" alt="masonory-banner">
-                      </div>
-                      <div class="masonary-banner-contant p-center">
-                          <div>
-                            <h5>{{six_banner.titleOne}}</h5>
-                          <a href="{% url 'shop_left_sidebar' %}" class="btn-rounded btn-md">shop now</a>
-                          </div>
-                      </div>
-                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
+  {% endif %}
+  <!-- masonory-banner end -->
+
+
+
+
+
+  <!--title-start-->
+  <div class="title8  section-big-pt-space">
+    <h4>latest blog</h4>
   </div>
-</section>
-{% endif %}
-<!-- masonory-banner end -->
+  <!--title-end-->
 
 
 
 
-
-<!--title-start-->
-<div class="title8  section-big-pt-space">
-  <h4>latest blog</h4>
-</div>
-<!--title-end-->
-
-
-
-
-<!--blog start-->
-<section class="blog  section-big-pb-space">
-  <div class="custom-container">
-    <div class="row">
-      <div class="col pr-0">
-        <div class="blog-slide-4 no-arrow">
-          {% if blogs %}
-          {% for blog in blogs %}
-          <div>
-            <div class="blog-contain">
-              <div class="blog-img">
-                <a href="{% url 'blog_details' blog.id %}">
-                  <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
-                </a>
+  <!--blog start-->
+  <section class="blog  section-big-pb-space">
+    <div class="custom-container">
+      <div class="row">
+        <div class="col pr-0">
+          <div class="blog-slide-4 no-arrow">
+            {% if blogs %}
+            {% for blog in blogs %}
+            <div>
+              <div class="blog-contain">
+                <div class="blog-img">
+                  <a href="{% url 'blog_details' blog.id %}">
+                    <img src="{{blog.blogImage}}" alt="blog" class="img-fluid w-100">
+                  </a>
+                </div>
+                <div class="blog-details-2 text-center">
+                  <a href="{% url 'blog_details' blog.id %}">
+                    <h4>{{blog.blogTitle}} </h4>
+                  </a>
+                  <p>{{blog.blogDescription|safe}}</p>
+                  <a href="{% url 'blog_details' blog.id %}" class="btn btn-rounded  btn-xs">
+                    read more
+                  </a>
+                </div>
+                <div class="blog-label1">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"M"}}</div>
               </div>
-              <div class="blog-details-2 text-center">
-                <a href="{% url 'blog_details' blog.id %}">
-                  <h4>{{blog.blogTitle}} </h4>
-                </a>
-                <p>{{blog.blogDescription|safe}}</p>
-                <a href="{% url 'blog_details' blog.id %}" class="btn btn-rounded  btn-xs">
-                  read more
-                </a>
-              </div>
-              <div class="blog-label1">{{blog.createdAt|date:"j"}} <br>{{blog.createdAt|date:"M"}}</div>
             </div>
-          </div>      
-          {% endfor %}
-          {% else %}
-          <h2 style="text-align:center;"> No Blogs Yet! </h2>
-          {% endif %}
+            {% endfor %}
+            {% else %}
+            <h2 style="text-align:center;"> No Blogs Yet! </h2>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<!--blog end-->
+  </section>
+  <!--blog end-->
 
 
 
 
-<!-- subscribe start -->
-<section class="subscribe1">
-      <img src="{% static 'assets/images/marketplace/subscribe2.png' %}"  alt="subscribe" class="bg-img img-fluid">
-         <div class="container">
-            <div class="row">
-               <div class="col-12">
-                  <div class="subscribe-contain">
-                     <div class="subscribe-left">
-                        <div class="media">
-                           <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                              <g>
-                                 <path d="m0
+  <!-- subscribe start -->
+  <section class="subscribe1">
+    <img src="{% static 'assets/images/marketplace/subscribe2.png' %}" alt="subscribe" class="bg-img img-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="subscribe-contain">
+            <div class="subscribe-left">
+              <div class="media">
+                <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                    <path d="m0
                                     197.61v297.8l173.2-154.29z"></path>
-                                 <path d="m26.47 512h466.2l-236.65-203.21c-61.813
+                    <path d="m26.47 512h466.2l-236.65-203.21c-61.813
                                     53.36-16.636 13.542-229.55 203.21z"></path>
-                                 <path d="m66.4 144.81-48.28 28.85 48.28
+                    <path d="m66.4 144.81-48.28 28.85 48.28
                                     40.01z"></path>
-                                 <path d="m195.95 321.02c28.701-24.77 26.492-22.863
+                    <path d="m195.95 321.02c28.701-24.77 26.492-22.863
                                     57.32-49.47h5.43c41.981 36.045 29.32 25.174 57.52 49.39 71.602-58.557
                                     14.234-11.633 99.38-81.27 0-9.221 0-228.158 0-239.67h-319.2v238.53c60.491
                                     50.123 60.988 50.541 99.55
                                     82.49zm-36.35-115.02v-30h192.8v30zm0-158h192.8v30h-192.8zm0
                                     64h192.8v30h-192.8c0-7.219 0-23.148 0-30z"></path>
-                                 <path d="m445.6
+                    <path d="m445.6
                                     144.82v70.32l49.69-40.63z"></path>
-                                 <path d="m339.33 340.78 172.67
+                    <path d="m339.33 340.78 172.67
                                     148.28v-289.46z"></path>
-                              </g>
-                           </svg>
-                           <div class="media-body">
-                              <h6>Sale Up To 20% Off
-                                 For
-                              </h6>
-                              <h3>join our newsletter</h3>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="subscribe-right">
-                        <div class="input-group">
-                           <input class="form-control" type="text" placeholder="Enter Your Email">                          
-                          <div class="input-group-text">subscribe</div>                          
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                  </g>
+                </svg>
+                <div class="media-body">
+                  <h6>Sale Up To 20% Off
+                    For
+                  </h6>
+                  <h3>join our newsletter</h3>
+                </div>
+              </div>
             </div>
-         </div>
-</section>
-<!-- subscribe end -->
-
-
-<!-- footer start -->
-<footer>
-    <div class="footer1">
-      <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="footer-main">                 
-                <div class="footer-box">
-                  <div class="footer-title mobile-title">
-                      <h5>about</h5>
-                  </div>
-                  <div class="footer-contant">
-                    <div class="footer-logo">
-                      <a href="{% url 'index' %}">
-                        <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
-                      </a>    
-                    </div>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece.</p>
-                    <ul class="sosiyal">
-                      <li><a href="https://www.facebook.com/" target ="_blank"><i class="fa fa-facebook"></i></a></li>
-                      <li><a href="https://www.google.com/" target ="_blank"><i class="fa fa-google-plus"></i></a></li>
-                      <li><a href="https://twitter.com/" target ="_blank"><i class="fa fa-twitter"></i></a></li>
-                      <li><a href="https://www.instagram.com/" target ="_blank"><i class="fa fa-instagram"></i></a></li>
-                      <li><a href="javascript:void(0)" ><i class="fa fa-rss"></i></a></li>
-                    </ul>
-                  </div>
-                </div>                                  
-                <div class="footer-box">                 
-                    <div class="footer-title">
-                        <h5>my account</h5>
-                    </div>
-                    <div class="footer-contant">
-                        <ul>
-                          <li><a href="{% url 'about_page' %}">about us</a></li>
-                          <li><a href="{% url 'contact_us' %}">contact us</a></li>
-                            <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
-                            <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
-                            <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
-                        </ul>
-                    </div>                   
-                </div>                                  
-                <div class="footer-box">
-                    <div class="footer-title">
-                        <h5>quick link</h5>
-                    </div>
-                    <div class="footer-contant">
-                        <ul>
-                            <li><a href="javascript:void(0)">store location</a></li>
-                            <li><a href="javascript:void(0)"> my account</a></li>
-                            <li><a href="javascript:void(0)"> orders tracking</a></li>
-                            <li><a href="javascript:void(0)"> size guide</a></li>
-                            <li><a href="javascript:void(0)">FAQ </a></li>                         
-                        </ul>
-                    </div>
-                </div>                                  
-                <div class="footer-box">                 
-                    <div class="footer-title">
-                        <h5>contact us</h5>
-                    </div>
-                    <div class="footer-contant">
-                        <ul class="contact-list">
-                            <li><i class="fa fa-map-marker"></i>big deal store demo store <br> india-<span>3654123</span></li>
-                            <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
-                            <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
-                            <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
-                        </ul>
-                    </div>                   
-                </div>                 
+            <div class="subscribe-right">
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="Enter Your Email">
+                <div class="input-group-text">subscribe</div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- subscribe end -->
+
+
+  <!-- footer start -->
+  <footer>
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="footer-main">
+              <div class="footer-box">
+                <div class="footer-title mobile-title">
+                  <h5>about</h5>
+                </div>
+                <div class="footer-contant">
+                  <div class="footer-logo">
+                    <a href="{% url 'index' %}">
+                      <img src="{% static 'assets/images/grocery/logo.png' %}" class="img-fluid" alt="logo">
+                    </a>
+                  </div>
+                  <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece.</p>
+                  <ul class="sosiyal">
+                    <li><a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="javascript:void(0)"><i class="fa fa-rss"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>my account</h5>
+                </div>
+                <div class="footer-contant">
+                  <ul>
+                    <li><a href="{% url 'about_page' %}">about us</a></li>
+                    <li><a href="{% url 'contact_us' %}">contact us</a></li>
+                    <li><a href="javascript:void(0)">terms &amp; conditions</a></li>
+                    <li><a href="javascript:void(0)">returns &amp; exchanges</a></li>
+                    <li><a href="javascript:void(0)">shipping &amp; delivery</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>quick link</h5>
+                </div>
+                <div class="footer-contant">
+                  <ul>
+                    <li><a href="javascript:void(0)">store location</a></li>
+                    <li><a href="javascript:void(0)"> my account</a></li>
+                    <li><a href="javascript:void(0)"> orders tracking</a></li>
+                    <li><a href="javascript:void(0)"> size guide</a></li>
+                    <li><a href="javascript:void(0)">FAQ </a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="footer-box">
+                <div class="footer-title">
+                  <h5>contact us</h5>
+                </div>
+                <div class="footer-contant">
+                  <ul class="contact-list">
+                    <li><i class="fa fa-map-marker"></i>big deal store demo store <br> india-<span>3654123</span></li>
+                    <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
+                    <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
+                    <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="subfooter footer-border">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-md-8">
-                    <div class="footer-left">
-                        <p>2019-20 Copy Right by Themeforest Powered by pixel strap</p>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-md-4">
-                    <div class="footer-right">
-                        <ul class="payment">
-                            <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/1.png' %}" class="img-fluid" alt="pay"></a></li>
-                            <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/2.png' %}" class="img-fluid" alt="pay"></a></li>
-                            <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/3.png' %}" class="img-fluid" alt="pay"></a></li>
-                            <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/4.png' %}" class="img-fluid" alt="pay"></a></li>
-                            <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/5.png' %}" class="img-fluid" alt="pay"></a></li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-6 col-md-8">
+            <div class="footer-left">
+              <p>2019-20 Copy Right by Themeforest Powered by pixel strap</p>
             </div>
+          </div>
+          <div class="col-xl-6 col-md-4">
+            <div class="footer-right">
+              <ul class="payment">
+                <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/1.png' %}"
+                      class="img-fluid" alt="pay"></a></li>
+                <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/2.png' %}"
+                      class="img-fluid" alt="pay"></a></li>
+                <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/3.png' %}"
+                      class="img-fluid" alt="pay"></a></li>
+                <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/4.png' %}"
+                      class="img-fluid" alt="pay"></a></li>
+                <li><a href="javascript:void(0)"><img src="{% static 'assets/images/layout-1/pay/5.png' %}"
+                      class="img-fluid" alt="pay"></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div> 
-</footer>
-<!-- footer end -->
+      </div>
+    </div>
+  </footer>
+  <!-- footer end -->
 
 
-<!--Newsletter modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="news-latter">
-          <div class="modal-bg">
-            <div class="newslatter-main">
-              <div class="offer-content">
-              <div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h2>newsletter</h2>
-                <p>Subscribe to our website mailling list <br> and get a Offer, Just for you!</p>
-                <form action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda" class="auth-form needs-validation" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
-                  <div class="form-group mx-sm-3">
-                    <input type="email" class="form-control" name="EMAIL" id="mce-EMAIL" placeholder="Enter your email" required="required">
-                    <button type="submit" class="btn btn-theme btn-normal btn-sm " id="mc-submit">subscribe</button>
+  <!--Newsletter modal popup start-->
+  <div class="modal fade bd-example-modal-lg theme-modal" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="news-latter">
+            <div class="modal-bg">
+              <div class="newslatter-main">
+                <div class="offer-content">
+                  <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h2>newsletter</h2>
+                    <p>Subscribe to our website mailling list <br> and get a Offer, Just for you!</p>
+                    <form
+                      action="https://pixelstrap.us19.list-manage.com/subscribe/post?u=5a128856334b598b395f1fc9b&amp;id=082f74cbda"
+                      class="auth-form needs-validation" method="post" id="mc-embedded-subscribe-form"
+                      name="mc-embedded-subscribe-form" target="_blank">
+                      <div class="form-group mx-sm-3">
+                        <input type="email" class="form-control" name="EMAIL" id="mce-EMAIL"
+                          placeholder="Enter your email" required="required">
+                        <button type="submit" class="btn btn-theme btn-normal btn-sm " id="mc-submit">subscribe</button>
+                      </div>
+                    </form>
                   </div>
-                </form>
+                </div>
+                <div class="imd-wrraper">
+                  <img src="{% static 'assets/images/grocery/product/10.jpg' %}" alt="newsletterimg"
+                    class="img-fluid bg-img">
+                </div>
               </div>
-            </div>
-            <div class="imd-wrraper">
-                <img src="{% static 'assets/images/grocery/product/10.jpg' %}" alt="newsletterimg" class="img-fluid bg-img">
-            </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!--Newsletter Modal popup end-->
+  <!--Newsletter Modal popup end-->
 
-<!-- Quick-view modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-     <div class="modal-content quick-view-modal">
+  <!-- Quick-view modal popup start-->
+  <div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content quick-view-modal">
         <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div class="row">
-           <div class="col-lg-6 col-12">
-              <div class="quick-view-img" id="quickViewImagesDiv">
-              <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <div class="row">
+            <div class="col-lg-6 col-12">
+              <div class="quick-view-img b_size_content" id="quickViewImagesDiv">
+                <img id="quickViewImage" alt="product" loading="lazy" class="img-fluid bg-img">
               </div>
-           </div>
-           <div class="col-lg-6 rtl-text">
+            </div>
+            <div class="col-lg-6 rtl-text">
               <div class="product-right" id="productRight">
-              <div class="pro-group">
-                 <h2 id="productName">
+                <div class="pro-group">
+                  <h2 id="productName">
                     reader will be distracted
-                 </h2>
-                 <div class="pro-price" id="priceLabel">
+                  </h2>
+                  <div class="pro-price" id="priceLabel">
                     <h3 id="productPrice">$20.00</h3>
                     <del class="font-light mx-2" id="actualPriceAtQuickView"></del>
                     <span class="theme-color" id="discountPercentageAtQuickView"></span>
-                 </div>
-                 <div class="price mt-3" id="priceLabel2"></div>
-  
-                 <div class="revieu-box">
+                  </div>
+                  <div class="price mt-3" id="priceLabel2"></div>
+
+                  <div class="revieu-box">
                     <ul id="productRating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star-o"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                 </div>
-                 <ul class="best-seller">
+                  </div>
+                  <ul class="best-seller">
                     <li>
-                    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><g><path d="m102.427 43.155-2.337-2.336a3.808 3.808 0 0 1 -.826-4.149l1.263-3.053a3.808 3.808 0 0 0 -2.063-4.975l-3.036-1.256a3.807 3.807 0 0 1 -2.352-3.519v-3.286a3.808 3.808 0 0 0 -3.809-3.808h-3.3a3.81 3.81 0 0 1 -3.518-2.35l-1.269-3.052a3.808 3.808 0 0 0 -4.98-2.059l-3.032 1.258a3.807 3.807 0 0 1 -4.152-.825l-2.323-2.323a3.809 3.809 0 0 0 -5.386 0l-2.336 2.336a3.808 3.808 0 0 1 -4.149.826l-3.053-1.263a3.809 3.809 0 0 0 -4.975 2.063l-1.257 3.036a3.808 3.808 0 0 1 -3.519 2.353h-3.285a3.808 3.808 0 0 0 -3.809 3.808v3.3a3.808 3.808 0 0 1 -2.349 3.519l-3.053 1.266a3.809 3.809 0 0 0 -2.059 4.976l1.259 3.035a3.81 3.81 0 0 1 -.825 4.152l-2.324 2.323a3.809 3.809 0 0 0 0 5.386l2.337 2.337a3.807 3.807 0 0 1 .826 4.149l-1.263 3.056a3.808 3.808 0 0 0 2.063 4.975l3.036 1.256a3.807 3.807 0 0 1 2.352 3.519v3.286a3.808 3.808 0 0 0 3.809 3.808h3.3a3.809 3.809 0 0 1 3.518 2.35l1.265 3.052a3.808 3.808 0 0 0 4.984 2.059l3.035-1.259a3.811 3.811 0 0 1 4.152.825l2.323 2.324a3.809 3.809 0 0 0 5.386 0l2.336-2.336a3.81 3.81 0 0 1 4.149-.827l3.053 1.264a3.809 3.809 0 0 0 4.975-2.063l1.257-3.037a3.809 3.809 0 0 1 3.519-2.352h3.285a3.808 3.808 0 0 0 3.809-3.808v-3.3a3.808 3.808 0 0 1 2.349-3.518l3.053-1.266a3.809 3.809 0 0 0 2.059-4.976l-1.259-3.036a3.809 3.809 0 0 1 .825-4.151l2.324-2.324a3.809 3.809 0 0 0 -.003-5.39z" fill="#f9cc4e"/><circle cx="64" cy="45.848" fill="#4ec4b5" r="29.146"/><path d="m59.795 41.643 4.205-12.614 4.205 12.614h12.615l-8.41 8.41 4.205 12.615-12.615-8.41-12.615 8.41 4.205-12.615-8.41-8.41z" fill="#f9cc4e"/><path d="m87.579 74.924h-1.6a3.809 3.809 0 0 0 -3.519 2.352l-1.257 3.037a3.809 3.809 0 0 1 -4.975 2.063l-3.053-1.264a3.81 3.81 0 0 0 -4.149.827l-2.336 2.336a3.809 3.809 0 0 1 -5.386 0l-2.323-2.324a3.811 3.811 0 0 0 -4.152-.825l-3.029 1.259a3.808 3.808 0 0 1 -4.977-2.059l-1.265-3.052a3.809 3.809 0 0 0 -3.518-2.35h-1.618l-17.417 35.386 17.255-5.872 5.872 17.256 17.868-36.304 17.868 36.3 5.872-17.256 17.26 5.876z" fill="#f95050"/></g></svg>
-                    3 best seller
+                      <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                          <path
+                            d="m102.427 43.155-2.337-2.336a3.808 3.808 0 0 1 -.826-4.149l1.263-3.053a3.808 3.808 0 0 0 -2.063-4.975l-3.036-1.256a3.807 3.807 0 0 1 -2.352-3.519v-3.286a3.808 3.808 0 0 0 -3.809-3.808h-3.3a3.81 3.81 0 0 1 -3.518-2.35l-1.269-3.052a3.808 3.808 0 0 0 -4.98-2.059l-3.032 1.258a3.807 3.807 0 0 1 -4.152-.825l-2.323-2.323a3.809 3.809 0 0 0 -5.386 0l-2.336 2.336a3.808 3.808 0 0 1 -4.149.826l-3.053-1.263a3.809 3.809 0 0 0 -4.975 2.063l-1.257 3.036a3.808 3.808 0 0 1 -3.519 2.353h-3.285a3.808 3.808 0 0 0 -3.809 3.808v3.3a3.808 3.808 0 0 1 -2.349 3.519l-3.053 1.266a3.809 3.809 0 0 0 -2.059 4.976l1.259 3.035a3.81 3.81 0 0 1 -.825 4.152l-2.324 2.323a3.809 3.809 0 0 0 0 5.386l2.337 2.337a3.807 3.807 0 0 1 .826 4.149l-1.263 3.056a3.808 3.808 0 0 0 2.063 4.975l3.036 1.256a3.807 3.807 0 0 1 2.352 3.519v3.286a3.808 3.808 0 0 0 3.809 3.808h3.3a3.809 3.809 0 0 1 3.518 2.35l1.265 3.052a3.808 3.808 0 0 0 4.984 2.059l3.035-1.259a3.811 3.811 0 0 1 4.152.825l2.323 2.324a3.809 3.809 0 0 0 5.386 0l2.336-2.336a3.81 3.81 0 0 1 4.149-.827l3.053 1.264a3.809 3.809 0 0 0 4.975-2.063l1.257-3.037a3.809 3.809 0 0 1 3.519-2.352h3.285a3.808 3.808 0 0 0 3.809-3.808v-3.3a3.808 3.808 0 0 1 2.349-3.518l3.053-1.266a3.809 3.809 0 0 0 2.059-4.976l-1.259-3.036a3.809 3.809 0 0 1 .825-4.151l2.324-2.324a3.809 3.809 0 0 0 -.003-5.39z"
+                            fill="#f9cc4e" />
+                          <circle cx="64" cy="45.848" fill="#4ec4b5" r="29.146" />
+                          <path
+                            d="m59.795 41.643 4.205-12.614 4.205 12.614h12.615l-8.41 8.41 4.205 12.615-12.615-8.41-12.615 8.41 4.205-12.615-8.41-8.41z"
+                            fill="#f9cc4e" />
+                          <path
+                            d="m87.579 74.924h-1.6a3.809 3.809 0 0 0 -3.519 2.352l-1.257 3.037a3.809 3.809 0 0 1 -4.975 2.063l-3.053-1.264a3.81 3.81 0 0 0 -4.149.827l-2.336 2.336a3.809 3.809 0 0 1 -5.386 0l-2.323-2.324a3.811 3.811 0 0 0 -4.152-.825l-3.029 1.259a3.808 3.808 0 0 1 -4.977-2.059l-1.265-3.052a3.809 3.809 0 0 0 -3.518-2.35h-1.618l-17.417 35.386 17.255-5.872 5.872 17.256 17.868-36.304 17.868 36.3 5.872-17.256 17.26 5.876z"
+                            fill="#f95050" />
+                        </g>
+                      </svg>
+                      3 best seller
                     </li>
                     <li>
-                    <svg enable-background="new 0 0 497 497" viewBox="0 0 497 497" xmlns="http://www.w3.org/2000/svg"><g><path d="m329.63 405.42-.38.43c-10.048 19.522-48.375 35.567-80.775 35.607-24.881 0-53.654-9.372-71.486-20.681-5.583-3.54-2.393-10.869-6.766-15.297l19.149-5.13c3.76-1.22 6.46-4.54 6.87-8.47l8.574-59.02 82.641-2.72 12.241 28.06.837 8.668-1.844 9.951 3.456 6.744.673 6.967c.41 3.93 3.11 7.25 6.87 8.47z" fill="#f2d1a5"/><path d="m420.39 497h-343.78c-6.21 0-7.159-6.156-6.089-12.266l2.53-14.57c3.82-21.96 16.463-37.323 37.683-44.153l27.702-8.561 28.754-8.035c18.34 18.57 48.615 27.957 81.285 27.957 32.4-.04 61.709-8.478 80.259-26.809l.38-.43 31.486 5.256 26.39 8.5c21.22 6.83 36.9 24.87 40.72 46.83l2.53 14.57c1.07 6.111-3.64 11.711-9.85 11.711z" fill="#7e8b96"/><g><path d="m384.055 215c-2.94 43.71-18.85 104.74-24.92 130.96-.68 2.94-2.33 5.45-4.56 7.22-2.23 1.78-5.05 2.82-8.06 2.82-6.88 0-12.55-5.37-12.94-12.23 0 0-5.58-84.28-7.63-128.77z" fill="#dc4955"/></g><path d="m141 271c-27.062 0-49-21.938-49-49 0-11.046 8.954-20 20-20h8.989l240.468-6.287 8.293 6.287h15.25c11.046 0 20 8.954 20 20 0 27.062-21.938 49-49 49z" fill="#f2bb88"/><path d="m360.6 415.39-.06.09c-49.3 66.23-174.56 66.38-223.76.56l-.43-.63 18.171-1.91 12.669-8.02c18.34 18.57 48.41 29.8 81.08 29.8h.15c32.4-.04 62.28-11.1 80.83-29.43l.38-.43z" fill="#a9a4d3"/><path d="m147.8 418.394v10.136l-32.89 10.59c-15.6 5.02-27.05 18.18-29.86 34.34l-3.59 23.54h-4.85c-6.21 0-10.92-5.6-9.85-11.71l2.53-14.57c3.82-21.96 19.5-40 40.72-46.83l26.34-8.48z" fill="#64727a"/><path d="m182.19 417.45-34.39 11.08c-3.99-3.86-7.68-8.02-11.02-12.49l-.43-.63 30.84-9.93c1.828 1.848 10.344.351 12.353 2.02 2.928 2.433-.561 7.928 2.647 9.95z" fill="#938dc8"/><path d="m299.7 358.2-2.71-28.06-79.861 2.255.001-.005-16.48.47-2.98 26.56-.763 6.8 2.039 12.83-3.989 4.55-.778 6.93c-.41 3.93-3.11 7.25-6.87 8.47l-20.12 6.48c4.37 4.43 9.41 8.44 15 11.97l10.02-3.22c9.79-3.17 16.79-11.79 17.88-21.97l2.058-17.506c.392-3.33 3.888-5.367 6.958-4.02 11.414 5.008 21.565 7.765 28.393 7.765 11.322.001 31.852-7.509 52.202-20.299z" fill="#f2bb88"/><path d="m134.539 164.427s-.849 18.411-.849 33.002c0 38.745 9.42 76.067 25.701 105.572 20.332 36.847 72.609 61.499 88.109 61.499s68.394-24.653 89.275-61.499c14.137-24.946 23.338-55.482 25.843-87.741.458-5.894-9.799-20.073-9.799-26.058l10.491-24.775c0-38.422-36.205-111.427-114.81-111.427s-113.961 73.005-113.961 111.427z" fill="#f2d1a5"/><g><path d="m294 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m203 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z" fill="#64727a"/></g><g><path d="m249 260.847c-5.976 0-11.951-1.388-17.398-4.163-3.691-1.88-5.158-6.397-3.278-10.087 1.88-3.691 6.398-5.158 10.087-3.278 6.631 3.379 14.547 3.379 21.178 0 3.689-1.881 8.207-.413 10.087 3.278 1.88 3.69.413 8.207-3.278 10.087-5.447 2.775-11.422 4.163-17.398 4.163z" fill="#f2bb88"/></g><path d="m288.989 40.759c0 22.511-9.303 40.759-40.489 40.759s-48.702-42.103-48.702-42.103 17.516-39.415 48.702-39.415c25.911 0 47.746 12.597 54.392 29.769 1.353 3.497-13.903 7.182-13.903 10.99z" fill="#df646e"/><path d="m254.305 81.307c1.031-.099 2.069-.167 3.093-.295 26.96-3.081 47.572-19.928 47.572-40.252 0-3.81-.72-7.49-2.08-10.99-15.42-6.31-33.46-10.34-54.39-10.34-4.139 0-8.163.159-12.073.462-5.127.397-7.393-6.322-3.107-9.163 7.36-4.878 16.519-8.364 26.68-9.879-3.71-.56-7.56-.85-11.5-.85-25.933 0-47.766 12.621-54.393 29.813-.006.002-.011.004-.017.007-1.337 3.487-2.055 7.201-2.06 10.94 0 22.51 25.28 40.76 56.47 40.76 1.946.008 3.872-.09 5.805-.213z" fill="#dc4955"/><path d="m363.31 164.43v33c0 5.99-.23 11.94-.7 17.83-4.32-.91-8.4-2.66-12.05-5.19-22.785-15.834-31.375-40.163-37.64-60.936-.382-1.268-1.547-2.134-2.871-2.134h-30.949c-4.96 0-9.65-2.15-12.89-5.91l-10.947-12.711c-1.197-1.39-3.349-1.39-4.546 0l-10.947 12.711c-3.24 3.76-7.93 5.91-12.89 5.91h-90.33c8.47-39.6 44.09-94 111.95-94 78.61 0 114.81 73 114.81 111.43z" fill="#f2bb88"/><path d="m381 164.19v37.81h-11.25c-4 0-7.93-1.16-11.22-3.44-19.74-13.72-26.93-35.65-33.69-58.43-1.26-4.24-5.16-7.13-9.58-7.13h-36.165c-.873 0-1.703-.38-2.273-1.042l-21.559-25.029c-1.197-1.389-3.349-1.389-4.546 0l-21.559 25.029c-.57.662-1.4 1.042-2.273 1.042h-38.015c-5.3 0-9.68 4.14-9.98 9.44 0 0-2.331 25.591-4.032 66.31-1.765 42.256-7.908 135.02-7.908 135.02-.16 2.822-1.215 5.393-2.879 7.441-2.381 2.929-5.67.375-9.72.375-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-.792-5.474-1.472-8.414-6.7-28.94-23.83-94.686-23.83-138.351 0-13.73-.14-34.689 0-37.649.14-26.43 12.74-54.048 32-78.128 12.937-16.178 28.667-38.955 58.628-47.692 10.986-3.204 23.248-5.101 36.883-5.101 50.8 0 82.75 26.31 100.6 48.39 19.68 24.319 31.9 55.879 31.9 82.369z" fill="#df646e"/><path d="m211.62 38.54c-19.38 9.9-33.55 23.84-43.37 36.44-19.26 24.69-31.27 56.78-31.41 83.88-.14 3.03-.84 25.18-.84 39.25 0 44.77 18.69 117.93 25.39 147.6.47 2.08 1.4 3.94 2.68 5.5-2.38 2.93-6.01 4.79-10.06 4.79-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-3.88-4.28-4.56-7.22-6.7-28.94-25.39-100.29-25.39-143.96 0-13.73.7-35.33.84-38.29.14-26.43 12.15-57.73 31.41-81.81 12.94-16.18 33.4-34.63 63.37-43.36z" fill="#dc4955"/><g><path d="m316.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.172.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m225.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.171.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z" fill="#df646e"/></g><g><path d="m302.143 383.517c-16.23 10.87-34.973 16.353-53.643 16.353s-37.3-5.41-53.54-16.27l3.476-6.313-1.526-11.067 4.15 3.37c28.46 20.41 66.63 20.37 95.05-.12.2-.14.39-.27.6-.39l3.826-2.211z" fill="#a9a4d3"/></g><g><path d="m211.98 376.2-1.85 15.68c-5.23-2.27-10.31-5.03-15.17-8.28l1.95-17.38 4.15 3.37c3.5 2.51 7.15 4.72 10.92 6.61z" fill="#938dc8"/></g><g><path d="m269.5 306.5h-42c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h42c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z" fill="#df646e"/></g></g></svg>
-                    44 active view this
+                      <svg enable-background="new 0 0 497 497" viewBox="0 0 497 497" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                          <path
+                            d="m329.63 405.42-.38.43c-10.048 19.522-48.375 35.567-80.775 35.607-24.881 0-53.654-9.372-71.486-20.681-5.583-3.54-2.393-10.869-6.766-15.297l19.149-5.13c3.76-1.22 6.46-4.54 6.87-8.47l8.574-59.02 82.641-2.72 12.241 28.06.837 8.668-1.844 9.951 3.456 6.744.673 6.967c.41 3.93 3.11 7.25 6.87 8.47z"
+                            fill="#f2d1a5" />
+                          <path
+                            d="m420.39 497h-343.78c-6.21 0-7.159-6.156-6.089-12.266l2.53-14.57c3.82-21.96 16.463-37.323 37.683-44.153l27.702-8.561 28.754-8.035c18.34 18.57 48.615 27.957 81.285 27.957 32.4-.04 61.709-8.478 80.259-26.809l.38-.43 31.486 5.256 26.39 8.5c21.22 6.83 36.9 24.87 40.72 46.83l2.53 14.57c1.07 6.111-3.64 11.711-9.85 11.711z"
+                            fill="#7e8b96" />
+                          <g>
+                            <path
+                              d="m384.055 215c-2.94 43.71-18.85 104.74-24.92 130.96-.68 2.94-2.33 5.45-4.56 7.22-2.23 1.78-5.05 2.82-8.06 2.82-6.88 0-12.55-5.37-12.94-12.23 0 0-5.58-84.28-7.63-128.77z"
+                              fill="#dc4955" />
+                          </g>
+                          <path
+                            d="m141 271c-27.062 0-49-21.938-49-49 0-11.046 8.954-20 20-20h8.989l240.468-6.287 8.293 6.287h15.25c11.046 0 20 8.954 20 20 0 27.062-21.938 49-49 49z"
+                            fill="#f2bb88" />
+                          <path
+                            d="m360.6 415.39-.06.09c-49.3 66.23-174.56 66.38-223.76.56l-.43-.63 18.171-1.91 12.669-8.02c18.34 18.57 48.41 29.8 81.08 29.8h.15c32.4-.04 62.28-11.1 80.83-29.43l.38-.43z"
+                            fill="#a9a4d3" />
+                          <path
+                            d="m147.8 418.394v10.136l-32.89 10.59c-15.6 5.02-27.05 18.18-29.86 34.34l-3.59 23.54h-4.85c-6.21 0-10.92-5.6-9.85-11.71l2.53-14.57c3.82-21.96 19.5-40 40.72-46.83l26.34-8.48z"
+                            fill="#64727a" />
+                          <path
+                            d="m182.19 417.45-34.39 11.08c-3.99-3.86-7.68-8.02-11.02-12.49l-.43-.63 30.84-9.93c1.828 1.848 10.344.351 12.353 2.02 2.928 2.433-.561 7.928 2.647 9.95z"
+                            fill="#938dc8" />
+                          <path
+                            d="m299.7 358.2-2.71-28.06-79.861 2.255.001-.005-16.48.47-2.98 26.56-.763 6.8 2.039 12.83-3.989 4.55-.778 6.93c-.41 3.93-3.11 7.25-6.87 8.47l-20.12 6.48c4.37 4.43 9.41 8.44 15 11.97l10.02-3.22c9.79-3.17 16.79-11.79 17.88-21.97l2.058-17.506c.392-3.33 3.888-5.367 6.958-4.02 11.414 5.008 21.565 7.765 28.393 7.765 11.322.001 31.852-7.509 52.202-20.299z"
+                            fill="#f2bb88" />
+                          <path
+                            d="m134.539 164.427s-.849 18.411-.849 33.002c0 38.745 9.42 76.067 25.701 105.572 20.332 36.847 72.609 61.499 88.109 61.499s68.394-24.653 89.275-61.499c14.137-24.946 23.338-55.482 25.843-87.741.458-5.894-9.799-20.073-9.799-26.058l10.491-24.775c0-38.422-36.205-111.427-114.81-111.427s-113.961 73.005-113.961 111.427z"
+                            fill="#f2d1a5" />
+                          <g>
+                            <path
+                              d="m294 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z"
+                              fill="#64727a" />
+                          </g>
+                          <g>
+                            <path
+                              d="m203 227.5c-4.142 0-7.5-3.358-7.5-7.5v-15c0-4.142 3.358-7.5 7.5-7.5s7.5 3.358 7.5 7.5v15c0 4.142-3.358 7.5-7.5 7.5z"
+                              fill="#64727a" />
+                          </g>
+                          <g>
+                            <path
+                              d="m249 260.847c-5.976 0-11.951-1.388-17.398-4.163-3.691-1.88-5.158-6.397-3.278-10.087 1.88-3.691 6.398-5.158 10.087-3.278 6.631 3.379 14.547 3.379 21.178 0 3.689-1.881 8.207-.413 10.087 3.278 1.88 3.69.413 8.207-3.278 10.087-5.447 2.775-11.422 4.163-17.398 4.163z"
+                              fill="#f2bb88" />
+                          </g>
+                          <path
+                            d="m288.989 40.759c0 22.511-9.303 40.759-40.489 40.759s-48.702-42.103-48.702-42.103 17.516-39.415 48.702-39.415c25.911 0 47.746 12.597 54.392 29.769 1.353 3.497-13.903 7.182-13.903 10.99z"
+                            fill="#df646e" />
+                          <path
+                            d="m254.305 81.307c1.031-.099 2.069-.167 3.093-.295 26.96-3.081 47.572-19.928 47.572-40.252 0-3.81-.72-7.49-2.08-10.99-15.42-6.31-33.46-10.34-54.39-10.34-4.139 0-8.163.159-12.073.462-5.127.397-7.393-6.322-3.107-9.163 7.36-4.878 16.519-8.364 26.68-9.879-3.71-.56-7.56-.85-11.5-.85-25.933 0-47.766 12.621-54.393 29.813-.006.002-.011.004-.017.007-1.337 3.487-2.055 7.201-2.06 10.94 0 22.51 25.28 40.76 56.47 40.76 1.946.008 3.872-.09 5.805-.213z"
+                            fill="#dc4955" />
+                          <path
+                            d="m363.31 164.43v33c0 5.99-.23 11.94-.7 17.83-4.32-.91-8.4-2.66-12.05-5.19-22.785-15.834-31.375-40.163-37.64-60.936-.382-1.268-1.547-2.134-2.871-2.134h-30.949c-4.96 0-9.65-2.15-12.89-5.91l-10.947-12.711c-1.197-1.39-3.349-1.39-4.546 0l-10.947 12.711c-3.24 3.76-7.93 5.91-12.89 5.91h-90.33c8.47-39.6 44.09-94 111.95-94 78.61 0 114.81 73 114.81 111.43z"
+                            fill="#f2bb88" />
+                          <path
+                            d="m381 164.19v37.81h-11.25c-4 0-7.93-1.16-11.22-3.44-19.74-13.72-26.93-35.65-33.69-58.43-1.26-4.24-5.16-7.13-9.58-7.13h-36.165c-.873 0-1.703-.38-2.273-1.042l-21.559-25.029c-1.197-1.389-3.349-1.389-4.546 0l-21.559 25.029c-.57.662-1.4 1.042-2.273 1.042h-38.015c-5.3 0-9.68 4.14-9.98 9.44 0 0-2.331 25.591-4.032 66.31-1.765 42.256-7.908 135.02-7.908 135.02-.16 2.822-1.215 5.393-2.879 7.441-2.381 2.929-5.67.375-9.72.375-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-.792-5.474-1.472-8.414-6.7-28.94-23.83-94.686-23.83-138.351 0-13.73-.14-34.689 0-37.649.14-26.43 12.74-54.048 32-78.128 12.937-16.178 28.667-38.955 58.628-47.692 10.986-3.204 23.248-5.101 36.883-5.101 50.8 0 82.75 26.31 100.6 48.39 19.68 24.319 31.9 55.879 31.9 82.369z"
+                            fill="#df646e" />
+                          <path
+                            d="m211.62 38.54c-19.38 9.9-33.55 23.84-43.37 36.44-19.26 24.69-31.27 56.78-31.41 83.88-.14 3.03-.84 25.18-.84 39.25 0 44.77 18.69 117.93 25.39 147.6.47 2.08 1.4 3.94 2.68 5.5-2.38 2.93-6.01 4.79-10.06 4.79-3.01 0-5.83-1.04-8.06-2.82-2.23-1.77-3.88-4.28-4.56-7.22-6.7-28.94-25.39-100.29-25.39-143.96 0-13.73.7-35.33.84-38.29.14-26.43 12.15-57.73 31.41-81.81 12.94-16.18 33.4-34.63 63.37-43.36z"
+                            fill="#dc4955" />
+                          <g>
+                            <path
+                              d="m316.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.172.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z"
+                              fill="#df646e" />
+                          </g>
+                          <g>
+                            <path
+                              d="m225.539 193.816c-1.277 0-2.571-.327-3.755-1.013-11.762-6.82-25.806-6.82-37.567 0-3.583 2.078-8.171.858-10.25-2.726-2.078-3.583-.857-8.172 2.726-10.25 16.474-9.552 36.143-9.552 52.616 0 3.583 2.078 4.804 6.667 2.726 10.25-1.392 2.399-3.909 3.739-6.496 3.739z"
+                              fill="#df646e" />
+                          </g>
+                          <g>
+                            <path
+                              d="m302.143 383.517c-16.23 10.87-34.973 16.353-53.643 16.353s-37.3-5.41-53.54-16.27l3.476-6.313-1.526-11.067 4.15 3.37c28.46 20.41 66.63 20.37 95.05-.12.2-.14.39-.27.6-.39l3.826-2.211z"
+                              fill="#a9a4d3" />
+                          </g>
+                          <g>
+                            <path
+                              d="m211.98 376.2-1.85 15.68c-5.23-2.27-10.31-5.03-15.17-8.28l1.95-17.38 4.15 3.37c3.5 2.51 7.15 4.72 10.92 6.61z"
+                              fill="#938dc8" />
+                          </g>
+                          <g>
+                            <path
+                              d="m269.5 306.5h-42c-4.142 0-7.5-3.358-7.5-7.5s3.358-7.5 7.5-7.5h42c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5z"
+                              fill="#df646e" />
+                          </g>
+                        </g>
+                      </svg>
+                      44 active view this
                     </li>
-                 </ul>
-              </div>
+                  </ul>
+                </div>
                 <div class="product-buttons">
-                <a href="javascript:void(0)" id="addToCart" onclick="openCart()" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
-                  <i class="fa fa-shopping-cart"></i> 
-                  add to cart
-                </a>
-                <a href="javascript.void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"  data-tippy-content="view detail">
-                  view detail
-                </a>
+                  <a href="javascript:void(0)" id="addToCart" onclick="openCart()"
+                    class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    add to cart
+                  </a>
+                  <a href="javascript.void(0)" id="productLeftSlidebar" class="btn btn-normal tooltip-top"
+                    data-tippy-content="view detail">
+                    view detail
+                  </a>
                 </div>
               </div>
-              </div>
-           </div>
+            </div>
+          </div>
         </div>
-        </div>
-     </div>
-  </div>
-</div>
-<!-- Quick-view modal popup end-->
-
-
-{% include 'base/cart-popup.html' %}
-
-
-<!-- My account bar start-->
-<div id="myAccount" class="add_to_cart right account-bar">
-  <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my account</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeAccount()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
       </div>
     </div>
-    {% if request.user.is_authenticated %}
+  </div>
+  </div>
+  <!-- Quick-view modal popup end-->
+
+
+  {% include 'base/cart-popup.html' %}
+
+
+  <!-- My account bar start-->
+  <div id="myAccount" class="add_to_cart right account-bar">
+    <a href="javascript:void(0)" class="overlay" onclick="closeAccount()"></a>
+    <div class="cart-inner">
+      <div class="cart_top">
+        <h3>my account</h3>
+        <div class="close-cart">
+          <a href="javascript:void(0)" onclick="closeAccount()">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      {% if request.user.is_authenticated %}
       <li>
-          <h6 class="d-block">
-              Welcome, {{request.user.username}}
-          </h6>
-         </li>
-         <li>
-            <a href="{% url 'logout_page' %}" class="d-block">Logout</a>
-         </li>
-   
-         {% else %}
+        <h6 class="d-block">
+          Welcome, {{request.user.username}}
+        </h6>
+      </li>
+      <li>
+        <a href="{% url 'logout_page' %}" class="d-block">Logout</a>
+      </li>
 
-         <form class="theme-form" method="post" action="{% url 'login_page' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label >Email Address</label>
-                <input type="text" class="form-control"  name="name" placeholder="Email" required="">
-            </div>
-            <div class="form-group">
-                <label >Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
-            </div>
-            <button class="btn btn-normal">Login</button>
-            <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
-         </form>
-          <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
-          <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
-   
-         {% endif %}
-  </div>
-</div>
-<!-- Add to account bar end-->
+      {% else %}
 
-<!-- add to  setting bar  start-->
-<div id="mySetting" class="add_to_cart right">
-  <a href="javascript:void(0)" class="overlay" onclick="closeSetting()"></a>
-  <div class="cart-inner">
-    <div class="cart_top">
-      <h3>my setting</h3>
-      <div class="close-cart">
-        <a href="javascript:void(0)" onclick="closeSetting()">
-          <i class="fa fa-times" aria-hidden="true"></i>
-        </a>
-      </div>
+      <form class="theme-form" method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="text" class="form-control" name="name" placeholder="Email" required="">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Enter your password" required="">
+        </div>
+        <button class="btn btn-normal">Login</button>
+        <a class="float-end txt-default mt-2" href="{% url 'forgot_password' %}">Forgot your password?</a>
+      </form>
+      <p class="mt-3">Sign up for a free account at our store. Registration is quick and easy. It allows you to be able
+        to order from our shop. To start shopping click register.</p>
+      <a href="{% url 'signup_page' %}" class="txt-default pt-3 d-block">Create an Account</a>
+
+      {% endif %}
     </div>
-    <div class="setting-block">
-      <div class="form-group" id="currency-selection">
-        <select id="currency-selection-dropdown">
-           <option id="currency-value" value="%">Currency</option>
-           {% for cur in ""|return_currency %}
-           <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
-           {% endfor %}
-        </select>
-        <script>
+  </div>
+  <!-- Add to account bar end-->
 
-           function getCookie(name) {
+  <!-- add to  setting bar  start-->
+  <div id="mySetting" class="add_to_cart right">
+    <a href="javascript:void(0)" class="overlay" onclick="closeSetting()"></a>
+    <div class="cart-inner">
+      <div class="cart_top">
+        <h3>my setting</h3>
+        <div class="close-cart">
+          <a href="javascript:void(0)" onclick="closeSetting()">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="setting-block">
+        <div class="form-group" id="currency-selection">
+          <select id="currency-selection-dropdown">
+            <option id="currency-value" value="%">Currency</option>
+            {% for cur in ""|return_currency %}
+            <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+            {% endfor %}
+          </select>
+          <script>
+            function getCookie(name) {
               let cookieValue = null;
               if (document.cookie && document.cookie !== "") {
-                 const cookies = document.cookie.split(";");
-                 for (let i = 0; i < cookies.length; i++) {
-                 const cookie = cookies[i].trim();
-                 // Does this cookie string begin with the name we want?
-                 if (cookie.substring(0, name.length + 1) === name + "=") {
-                       cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                       break;
-                 }
-                 }
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                  }
+                }
               }
               return cookieValue;
-              } 
+            }
 
-           document.getElementById("currency-selection").addEventListener("change", async function () {
-                 var dropdown = document.getElementById("currency-selection-dropdown");
-                 var currencyId = dropdown.options[dropdown.selectedIndex].value;
-                 var csrftoken = getCookie("csrftoken");
-                 var url = "{% url 'set_currency_to_session' %}";
-              
-                 await fetch(url, {
-                 method: "POST",
-                 headers: {
-                    "Content-type": "application/json",
-                    "X-CSRFToken": csrftoken,
-                 },
-                 body: JSON.stringify({
-                    currencyId: currencyId,
-                 }),
-                 })
-                 location.reload();
-              });
-        </script>
-     </div>
+            document.getElementById("currency-selection").addEventListener("change", async function () {
+              var dropdown = document.getElementById("currency-selection-dropdown");
+              var currencyId = dropdown.options[dropdown.selectedIndex].value;
+              var csrftoken = getCookie("csrftoken");
+              var url = "{% url 'set_currency_to_session' %}";
+
+              await fetch(url, {
+                method: "POST",
+                headers: {
+                  "Content-type": "application/json",
+                  "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                  currencyId: currencyId,
+                }),
+              })
+              location.reload();
+            });
+          </script>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<!-- add to  setting bar  end-->
+  <!-- add to  setting bar  end-->
 
-{% endblock components %}
-
-
-
-{% block script %}
-
-<!-- ajax search js -->
-<script src="{% static 'assets/js/typeahead.bundle.min.js' %}"></script>
-<script src="{% static 'assets/js/typeahead.jquery.min.js' %}"></script>
-<script src="{% static 'assets/js/ajax-custom.js' %}"></script>
+  {% endblock components %}
 
 
 
-<!-- Theme js-->
-<script src="{% static 'assets/js/slider-animat-three.js' %}"></script>
+  {% block script %}
+
+  <!-- ajax search js -->
+  <script src="{% static 'assets/js/typeahead.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/typeahead.jquery.min.js' %}"></script>
+  <script src="{% static 'assets/js/ajax-custom.js' %}"></script>
+
+
+
+  <!-- Theme js-->
+  <script src="{% static 'assets/js/slider-animat-three.js' %}"></script>
 
 </body>
+
 </html>
 
 {% endblock script %}
-
