@@ -193,6 +193,66 @@ JAZZMIN_SETTINGS = {
     "custom_css": "assets/css/backend-1.css",
     "custom_js": "assets/js/custom.js",
     
+    "use_google_fonts_cdn": False,
+    "site_logo": "assets/images/logos/logo.png",
+    "favicon_icon": "assets/images/favicon/favicon.png",
+    "welcome_sign": "Welcome to voxo Ecommerce",
+    "copyright": "Voxo theme by pixelstrap",
+    # "language_chooser": True,
+    "icons": {
+        # Icon's for Account
+        "accounts.CustomUser": "fas fa-user",
+        "accounts.Admin": "fas fa-user",
+        "accounts.Vendor": "fas fa-user",
+        
+        "product.Product": "fas fa-box",
+        "product.ProductVariant": "fas fa-cube",
+        "product.AttributeName": "fas fa-tasks",
+        "product.ProCategory": "fas fa-stream",
+        "product.ProBrand": "fas fa-gem",
+        "product.ProUnit": "fas fa-archive",
+        "product.ProVideoProvider": "fas fa-video",
+        "product.ProductReview": "fas fa-star",
+        "product.MultipleImages": "fas fa-image",
+
+        "order.Order": "fas fa-boxes",
+        "order.ProductOrder": "fas fa-box",
+        "order.OrderPayment": "fas fa-money-bill-wave-alt",
+        "order.OrderTracking": "fas fa-truck",
+        "order.Cart": "fas fa-shopping-cart",
+        "order.Wishlist": "fas fa-heart",
+        "order.Compare": "fas fa-sync-alt",
+        "order.CartProducts": "fas fa-cart-plus",
+        "order.OrderBillingAddress": "fas fa-address-card",
+        "order.PaymentMethod": "fas fa-credit-card",
+
+        "payment.Card": "fab fa-cc-visa",
+        "payment.Wallet":"fas fa-wallet",
+        "payment.WalletHistory":"fas fa-history",
+        "payment.Withdrawal":"fas fa-money-check-alt",
+
+        "currency.Currency": "fas fa-dollar-sign",
+
+        "voxoapp.BannerTheme": "fas fa-palette",
+        "voxoapp.BannerType": "fas fa-image",
+        "voxoapp.Banner": "fas fa-image",
+        "voxoapp.BlogCategory": "fas fa-clipboard-list",
+        "voxoapp.Blog": "fas fa-blog",
+        "voxoapp.BlogComment": "fas fa-comment-dots",
+        "voxoapp.Coupon": "fas fa-ticket-alt",
+        "voxoapp.CouponHistory": "fas fa-history",
+        "voxoapp.ContactUs": "fas fa-phone-square",
+        # "voxoapp.TodoTask":"fas fa-list-ul",
+
+        "logout": "fas fa-sign-out-alt",
+        "auth.Group": "fas fa-users",
+    },
+
+    "changeform_format": "vertical_tabs",
+    "related_modal_active": True,
+    "topmenu_links": [],
+    "usermenu_links": [],
+    
     # Keep the same app ordering as above, but also order choice and book model links within the books app
     "order_with_respect_to": [
         # APPLICATIONS Orderings

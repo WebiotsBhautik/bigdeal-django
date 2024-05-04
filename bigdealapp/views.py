@@ -53,6 +53,11 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 # Create your views here.
 
+def home(request):
+    product = ProductOrder.objects.all()
+    context = {'product': product}
+    return render(request, 'admin/home.html', context)
+
 
 def setCookie(request):
     response = HttpResponse('Cookie Set')

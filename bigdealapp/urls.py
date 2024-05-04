@@ -4,6 +4,8 @@ from .import views
 urlpatterns = [
     
 # AUTHNTICATION ROUTES
+
+    path('admin/', views.home),
     
     path('setCookie',views.setCookie, name='setCookie'),
     path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),
