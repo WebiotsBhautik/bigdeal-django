@@ -190,7 +190,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 JAZZMIN_SETTINGS = {
-    "custom_css": "assets/css/backend-1.css",
+    "custom_css": "assets/css/backend.css",
     "custom_js": "assets/js/custom.js",
     
     "use_google_fonts_cdn": False,
@@ -282,9 +282,9 @@ JAZZMIN_SETTINGS = {
     ],
 }
 
-JAZZMIN_UI_TWEAKS = {
-    "theme": "darkly",
-}
+# JAZZMIN_UI_TWEAKS = {
+#     "theme": "darkly",
+# }
  
  
 MESSAGE_TAGS = {
