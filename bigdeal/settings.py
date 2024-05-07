@@ -196,8 +196,8 @@ JAZZMIN_SETTINGS = {
     "use_google_fonts_cdn": False,
     "site_logo": "assets/images/logos/logo.png",
     "favicon_icon": "assets/images/favicon/favicon.png",
-    "welcome_sign": "Welcome to voxo Ecommerce",
-    "copyright": "Voxo theme by pixelstrap",
+    "welcome_sign": "Welcome to Bigdeal Ecommerce",
+    "copyright": "Bigdeal theme by pixelstrap",
     # "language_chooser": True,
     "icons": {
         # Icon's for Account
@@ -233,16 +233,16 @@ JAZZMIN_SETTINGS = {
 
         "currency.Currency": "fas fa-dollar-sign",
 
-        "voxoapp.BannerTheme": "fas fa-palette",
-        "voxoapp.BannerType": "fas fa-image",
-        "voxoapp.Banner": "fas fa-image",
-        "voxoapp.BlogCategory": "fas fa-clipboard-list",
-        "voxoapp.Blog": "fas fa-blog",
-        "voxoapp.BlogComment": "fas fa-comment-dots",
-        "voxoapp.Coupon": "fas fa-ticket-alt",
-        "voxoapp.CouponHistory": "fas fa-history",
-        "voxoapp.ContactUs": "fas fa-phone-square",
-        # "voxoapp.TodoTask":"fas fa-list-ul",
+        "bigdealapp.BannerTheme": "fas fa-palette",
+        "bigdealapp.BannerType": "fas fa-image",
+        "bigdealapp.Banner": "fas fa-image",
+        "bigdealapp.BlogCategory": "fas fa-clipboard-list",
+        "bigdealapp.Blog": "fas fa-blog",
+        "bigdealapp.BlogComment": "fas fa-comment-dots",
+        "bigdealapp.Coupon": "fas fa-ticket-alt",
+        "bigdealapp.CouponHistory": "fas fa-history",
+        "bigdealapp.ContactUs": "fas fa-phone-square",
+        # "bigdealapp.TodoTask":"fas fa-list-ul",
 
         "logout": "fas fa-sign-out-alt",
         "auth.Group": "fas fa-users",
@@ -256,7 +256,7 @@ JAZZMIN_SETTINGS = {
     # Keep the same app ordering as above, but also order choice and book model links within the books app
     "order_with_respect_to": [
         # APPLICATIONS Orderings
-        "accounts", "auth", "product", "order", "payment", "currency", "voxoapp",
+        "accounts", "auth", "product", "order", "payment", "currency", "bigdealapp",
     
     # Models Ordering for ACCOUNT Application
     "accounts.CustomUser", "accounts.Admin", "accounts.Vendor", "accounts.Customer",

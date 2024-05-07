@@ -339,6 +339,11 @@ button:focus {
       right: unset !important;
       left: 50%;
       transform: translateX(-50%); } }
+.sticky-box {
+  position: sticky;
+  top: 0;
+  left: 0; }
+
 .media {
   display: flex; }
   .media .media-body {
@@ -2807,8 +2812,12 @@ button {
   .product .product-box .product-detail .detail-title .detail-left .rating-star i {
     color: #e8ebf2;
     font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320))); }
+    body.dark .product .product-box .product-detail .detail-title .detail-left .rating-star i {
+      color: #777; }
     .product .product-box .product-detail .detail-title .detail-left .rating-star i.theme-color {
       color: #ffa800; }
+      body.dark .product .product-box .product-detail .detail-title .detail-left .rating-star i.theme-color {
+        color: #ffa800; }
   .product .product-box .product-detail .detail-title .detail-left .price-title {
     text-transform: capitalize;
     color: #444444;
@@ -7698,11 +7707,6 @@ ul.sosiyal {
     margin-bottom: 0;
     color: #444444; }
 
-.sticky-box {
-  position: sticky;
-  top: 20px;
-  left: 0; }
-
 /* product-sidebar */
 .collection-filter {
   position: sticky;
@@ -11661,6 +11665,75 @@ ul.sosiyal {
         color: #ddd;
         background-color: #1b1b1b; }
 
+.vertical-tab {
+  padding: calc(13px + (30 - 13) * ((100vw - 320px) / (1920 - 320)));
+  margin-top: calc(28px + (50 - 28) * ((100vw - 320px) / (1920 - 320)));
+  background-color: #ffffff;
+  border-bottom: 0; }
+  body.dark .vertical-tab {
+    background-color: #262626; }
+  .vertical-tab .nav-tabs {
+    display: flex;
+    align-items: center;
+    overflow: auto hidden;
+    justify-content: unset;
+    border-color: #eee;
+    flex-wrap: nowrap;
+    white-space: nowrap; }
+    body.dark .vertical-tab .nav-tabs {
+      border-color: #3c3c3c; }
+    @media (max-width: 991px) {
+      .vertical-tab .nav-tabs {
+        justify-content: unset !important; } }
+    .vertical-tab .nav-tabs .nav-item {
+      width: 100%; }
+      .vertical-tab .nav-tabs .nav-item + .nav-item {
+        border-top: 1px solid #eee; }
+        body.dark .vertical-tab .nav-tabs .nav-item + .nav-item {
+          border-color: #3c3c3c; }
+      .vertical-tab .nav-tabs .nav-item .nav-link {
+        color: #333333;
+        text-align: center;
+        padding: 15px 20px;
+        text-transform: capitalize;
+        border: 0;
+        background-color: transparent;
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        border-bottom: 2px solid transparent; }
+        body.dark .vertical-tab .nav-tabs .nav-item .nav-link {
+          color: #ddd; }
+        .vertical-tab .nav-tabs .nav-item .nav-link.active {
+          border-color: #00baf2;
+          color: #00baf2;
+          font-weight: 600; }
+          body.dark .vertical-tab .nav-tabs .nav-item .nav-link.active {
+            color: #00baf2; }
+  .vertical-tab .tab-content {
+    padding: calc(12px + (20 - 12)*((100vw - 320px) /(1920 - 320)));
+    height: 100%;
+    display: flex;
+    align-items: center; }
+    .vertical-tab .tab-content .tab-pane p {
+      margin-bottom: 0;
+      line-height: 1.6;
+      letter-spacing: 0.05em;
+      -webkit-line-clamp: unset;
+      padding: 0;
+      font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320))); }
+      @media (max-width: 991px) {
+        .vertical-tab .tab-content .tab-pane p {
+          padding: 0 !important; } }
+    .vertical-tab .tab-content .tab-pane .video-box iframe {
+      width: 100%;
+      height: calc(190px + (400 - 190) * ((100vw - 320px) / (1920 - 320))); }
+    .vertical-tab .tab-content .tab-pane .theme-form .form-control {
+      box-shadow: unset; }
+      body.dark .vertical-tab .tab-content .tab-pane .theme-form .form-control:focus {
+        color: #ddd;
+        background-color: #1b1b1b; }
+
 .product-full-tab {
   padding-top: 70px; }
 
@@ -11679,9 +11752,6 @@ ul.sosiyal {
     border-bottom: 1px solid #eee;
     width: 100%;
     color: #fa741b; }
-
-.product_image_4 > div:nth-last-child(-n + 2) {
-  margin-top: 25px; }
 
 .image-360 {
   cursor: pointer;
@@ -13916,6 +13986,17 @@ body.dark .compare-page {
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase; }
+  .theme-modal .modal-dialog .product-right {
+    padding: 0; }
+    .theme-modal .modal-dialog .product-right .product-btns {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 17px; }
+      .theme-modal .modal-dialog .product-right .product-btns a {
+        padding: 14px;
+        width: 100%;
+        font-size: 17px; }
   .theme-modal.demo-modal .modal-dialog .modal-content .modal-body {
     height: 75vh;
     overflow-y: scroll;
@@ -15764,6 +15845,8 @@ table.invoice-table {
     color: #777; }
   .fa-star.theme-color {
     color: #ffa800; }
+    body.dark .fa-star.theme-color {
+      color: #ffa800; }
 
 .tab-pane .save-details-box .save-details {
   background-color: #f9f9f9;
@@ -16144,28 +16227,31 @@ table.invoice-table {
         text-transform: capitalize;
         display: inline-block; }
 
-.product-left-thumbnail .slick-list {
-  margin: 0; }
-  @media (max-width: 1199px) {
-    .product-left-thumbnail .slick-list {
-      margin: 0 -8px; } }
-  .product-left-thumbnail .slick-list .slick-slide > div {
+.product-left-thumbnail {
+  position: sticky;
+  top: 20px;
+  left: 0; }
+  .product-left-thumbnail .slick-list {
     margin: 0; }
     @media (max-width: 1199px) {
-      .product-left-thumbnail .slick-list .slick-slide > div {
-        margin: 0 8px; } }
-.product-left-thumbnail .slick-slide > div {
-  display: flex;
-  margin: 15px 15px 0 15px;
-  border: 1px solid #f1f5f8;
-  transition: all 0.5s ease;
-  opacity: 0.5;
-  overflow: hidden; }
-
-.product-left-thumbnail .slick-slide.slick-current > div {
-  border-color: #00baf2;
-  transition: all 0.5s ease;
-  opacity: 1; }
+      .product-left-thumbnail .slick-list {
+        margin: 0 -8px; } }
+    .product-left-thumbnail .slick-list .slick-slide > div {
+      margin: 0; }
+      @media (max-width: 1199px) {
+        .product-left-thumbnail .slick-list .slick-slide > div {
+          margin: 0 8px; } }
+  .product-left-thumbnail .slick-slide > div {
+    display: flex;
+    margin: 15px 15px 0 15px;
+    border: 1px solid #f1f5f8;
+    transition: all 0.5s ease;
+    opacity: 0.5;
+    overflow: hidden; }
+  .product-left-thumbnail .slick-slide.slick-current > div {
+    border-color: #00baf2;
+    transition: all 0.5s ease;
+    opacity: 1; }
 
 /*=====================
     27.Menu css start
@@ -16337,18 +16423,10 @@ desktop mode
     text-shadow: none;
     border-radius: 4px; }
 
-.pixelstrap > li:last-child > a, .pixelstrap > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul,
-.pixelstrap > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul {
+.pixelstrap > li:last-child > a, .pixelstrap > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul, .pixelstrap > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul {
   border-radius: 0 0 0 0; }
 
-.pixelstrap > li:last-child > a.highlighted, .pixelstrap > li:last-child > *:not(ul) a.highlighted,
-.pixelstrap > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > *:not(ul) a.highlighted,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted,
-.pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted {
+.pixelstrap > li:last-child > a.highlighted, .pixelstrap > li:last-child > *:not(ul) a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > a.highlighted, .pixelstrap > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > ul > li:last-child > *:not(ul) a.highlighted {
   border-radius: 0; }
 
 .pixelstrap ul {
