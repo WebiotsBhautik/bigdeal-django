@@ -205,7 +205,10 @@ class ProductAdmin(admin.ModelAdmin):
         
         if obj.productType == "Simple":
             productVariant = ProductVariant.objects.filter(variantProduct=obj).first()
-            return str(productVariant.productVariantFinalPrice)
+            if productVariant is not None:
+                return str(productVariant.productVariantFinalPrice)
+            else:
+                return "No product variant found"
     
     @admin.display(description='Original Price')
     def original_price(self, obj):
@@ -218,7 +221,11 @@ class ProductAdmin(admin.ModelAdmin):
         
         if obj.productType == "Simple":
             productVariant = ProductVariant.objects.filter(variantProduct=obj).first()
-            return str(productVariant.productVariantPrice)
+            if productVariant is not None:
+                return str(productVariant.productVariantPrice)
+            else:
+                return "No product variant found"
+
         
     @admin.display(description='Discount %')
     def discount_percentage(self, obj):
@@ -235,7 +242,11 @@ class ProductAdmin(admin.ModelAdmin):
         
         if obj.productType == "Simple":
             productVariant = ProductVariant.objects.filter(variantProduct=obj).first()
-            return str(productVariant.productVariantDiscount) + "%" 
+            if productVariant is not None:
+                return str(productVariant.productVariantDiscount) + "%" 
+            else:
+                return "No product discount found"
+                
         
     @admin.display(description='Total Sold')
     def sold_quantity(self, obj):

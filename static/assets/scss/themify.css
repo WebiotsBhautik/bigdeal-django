@@ -233,7 +233,11 @@ a .icon-spin {
   transform: scale(1, -1); }
 
 /* ensure rotation occurs inside anchor tags */
-a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, a .icon-flip-horizontal:before, a .icon-flip-vertical:before {
+a .icon-rotate-90:before,
+a .icon-rotate-180:before,
+a .icon-rotate-270:before,
+a .icon-flip-horizontal:before,
+a .icon-flip-vertical:before {
   display: inline-block; }
 
 .icon-wand:before {
@@ -1299,7 +1303,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   font-weight: normal;
   font-style: normal; }
 
-[class^="ti-"], [class*=" ti-"] {
+[class^="ti-"],
+[class*=" ti-"] {
   font-family: 'themify';
   speak: none;
   font-style: normal;

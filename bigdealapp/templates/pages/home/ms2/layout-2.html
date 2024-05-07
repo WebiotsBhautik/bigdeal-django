@@ -5,30 +5,15 @@
 {% load mathfilters %}
 {% block components %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block style %} 
 
-<head>
-   <title>Bigdeal - Multi-purpopse E-commerce Html Template</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width,initial-scale=1">
-   <meta name="description" content="big-deal">
-   <meta name="keywords" content="big-deal">
-   <meta name="author" content="big-deal">
-   <link rel="icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-   <link rel="shortcut icon" href="{% static 'assets/images/favicon/favicon.png' %}" type="image/x-icon">
-   <!--Google font-->
-   <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet">
-   <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+<!-- Theme css -->
+<link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color1.scss' %}" media="screen" id="color">
 
-   <!-- Theme css -->
-   <link rel="stylesheet" type="text/css" href="{% sass_src 'assets/scss/color1.scss' %}" media="screen" id="color">
-</head>
+{% endblock style %}
+{% comment %} </head> {% endcomment %}
 
 <body class="bg-light">
-
-
 
    <!-- loader start -->
    <div class="loader-wrapper">
