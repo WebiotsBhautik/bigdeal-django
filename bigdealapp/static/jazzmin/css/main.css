@@ -821,7 +821,7 @@ body.layout-navbar-fixed #jazzy-actions.sticky-top {
     top: 67px;
 }
 
-/* stacked inlines */
+/* stacked inline */
 a.inline-deletelink:hover {
     background-color: #c82333;
     border-color: #bd2130;
@@ -838,7 +838,7 @@ a.inline-deletelink {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-/* end stacked inlines */
+/* end stacked inline */
 
 /* Support for django-mptt */
 #result_list .field-tree_actions {
