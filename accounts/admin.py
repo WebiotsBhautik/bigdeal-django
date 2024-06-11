@@ -142,16 +142,15 @@ class CustomUserAdmin(BaseUserAdmin):
     
     def delete_queryset(self, request, queryset):
         if queryset.filter(is_admin=True).exists():
-            print('=================================================>NOT DELETED ')
+            print('========================> Superuser cannot be deleted  <=========================> ')
             messages.error(request, "Superuser cannot be deleted.")
             self.message_user(request, "You cannot delete a Super Admin", level=messages.ERROR)
-        
-
         else:
             super().delete_queryset(request, queryset)
     
     def delete_model(self, request, obj):
         if obj.is_admin:
+            print('========================> You cannot delete Superuser  <=========================> ')
             # messages.error(request, "Superuser cannot be deleted.")
             self.message_user(request, "You cannot delete a Super Admin", level=messages.ERROR)
         else:

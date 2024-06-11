@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
-
+    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'bigdeal.urls'

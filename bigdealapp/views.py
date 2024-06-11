@@ -1191,7 +1191,7 @@ def shop_left_sidebar(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1282,7 +1282,7 @@ def shop_right_sidebar(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1369,7 +1369,7 @@ def shop_no_sidebar(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1457,7 +1457,7 @@ def shop_sidebar_popup(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1544,7 +1544,7 @@ def shop_metro(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1736,7 +1736,7 @@ def shop_3grid(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1821,7 +1821,7 @@ def shop_6grid(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -1907,7 +1907,7 @@ def shop_list_view(request):
             
     product = GetUniqueProducts(product)
     totalProduct = len(product)
-    paginator = Paginator(product,5)
+    paginator = Paginator(product,8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -4473,6 +4473,7 @@ def forgot_password(request):
             messages.error(request,'Account Does Not Exist!')
             return redirect('forgot_password')
         
+    response = manage_currency(request,response1)
     context = {
         "breadcrumb":{"parent":"Forget Password", "child":"Forget Password"},
         'active_banner_themes':active_banner_themes,
@@ -5845,28 +5846,6 @@ def typography(request):
                 'totalCartProducts':totalCartProducts,}
     return render(request, 'pages/pages/typography.html',context)
 
-def look_book(request):
-    active_banner_themes = BannerTheme.objects.filter(is_active=True)
-    cart_context = handle_cart_logic(request)
-    cart_products,totalCartProducts = show_cart_popup(request)
-    context = {"breadcrumb":{"parent":"Look book","child":"Look book"},
-                'active_banner_themes':active_banner_themes,
-                **cart_context,
-                'cart_products':cart_products,
-                'totalCartProducts':totalCartProducts,
-                }
-    return render(request, 'pages/pages/look-book.html',context)
-
-def collection(request):
-    active_banner_themes = BannerTheme.objects.filter(is_active=True)
-    cart_context = handle_cart_logic(request)
-    cart_products,totalCartProducts = show_cart_popup(request)
-    context = {"breadcrumb":{"parent":"collection","child":"collection"},
-                'active_banner_themes':active_banner_themes,
-                **cart_context,
-                'cart_products':cart_products,
-                'totalCartProducts':totalCartProducts,}
-    return render(request, 'pages/pages/collection.html',context)
 
 @login_required(login_url='login_page')
 def cart_to_checkout_validation(request):

@@ -137,8 +137,6 @@ urlpatterns = [
     path('about_page',views.about_page, name='about_page'),
     path('review',views.review, name='review'),
     path('typography',views.typography, name='typography'),
-    path('look_book',views.look_book, name='look_book'),
-    path('collection',views.collection, name='collection'),
     
     # User dashboard routes
     path('user_dashboard',views.user_dashboard,name='user_dashboard'),

@@ -142,12 +142,12 @@
             </div>
             <div class="input-block">
               <div class="input-box">
-                <form class="big-deal-form">
+                <form class="big-deal-form" action="{% url 'search_bar_with_params' 'params' %}" method='GET'>
                   <div class="input-group">
                     <div class="input-group-text">
                       <span class="search"><i class="fa fa-search"></i></span>
                     </div>
-                    <input text="text" class="form-control" id="search-input" placeholder="Search here.." autofocus>
+                    <input text="text" class="form-control" name="search" id="search-input" placeholder="Search here..">
                     <div class="input-group-text">
                       <select>
                         <option>All Category</option>
