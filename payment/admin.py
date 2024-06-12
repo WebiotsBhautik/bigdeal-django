@@ -3,11 +3,24 @@ from django import forms
 from accounts.get_username import get_request
 from accounts.models import Admin, Vendor
 from .models import Card,Wallet,WalletHistory,Withdrawal
-from django.contrib import messages
 # Register your models here.
 
 
-class WalletAdmin(admin.ModelAdmin):
+class BaseModelAdmin(admin.ModelAdmin):
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class WalletAdmin(BaseModelAdmin):
     list_display = ['walletByUser','walletBalance','walletModifiedAt']
     ordering = ['-walletCreatedAt']
     
@@ -21,7 +34,7 @@ class WalletAdmin(admin.ModelAdmin):
         
 admin.site.register(Wallet,WalletAdmin)
 
-class WalletHistoryAdmin(admin.ModelAdmin):
+class WalletHistoryAdmin(BaseModelAdmin):
     list_display=['walletHistoryByUser','walletHistoryCredit','walletHistoryDebit','walletHistoryBalance','walletHistoryOfOrderId','walletHistoryOfOrderTransactionId','walletHistoryOfTrackingId','walletHistoryModifiedAt']
     ordering=['-walletHistoryCreatedAt']
     
@@ -71,7 +84,7 @@ class WithdrawalAdminForm(forms.ModelForm):
                 raise forms.ValidationError('Please fill PayPal details in your profile.')
         return withdrawalPaymentOption
 
-class WithdrawalAdmin(admin.ModelAdmin):
+class WithdrawalAdmin(BaseModelAdmin):
     form = WithdrawalAdminForm
     exclude = ['withdrawalByUser']
     list_display=['withdrawalByUser','withdrawalPaymentOption','withdrawalAmount','withdrawalStatus','withdrawalMessage',]

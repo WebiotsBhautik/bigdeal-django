@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django import forms
-from django.contrib.auth.models import Permission, Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -17,8 +16,34 @@ from django.utils.html import format_html
 from django.contrib import admin, messages
 
 
-# admin.site.register(Permission)
-# admin.site.register(Group)
+
+class ReadOnlyAdminMixin:
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_view_permission(self, request, obj=None):
+        return True
+    
+
+class BaseModelAdmin(admin.ModelAdmin):
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -73,7 +98,7 @@ class UserChangeForm(forms.ModelForm):
         cleaned_data = super().clean()     
         return cleaned_data
 
-class CustomUserAdmin(BaseUserAdmin):
+class CustomUserAdmin(BaseModelAdmin,ReadOnlyAdminMixin):
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('username', 'email','is_vendor', 'is_customer','is_admin','is_superuser','is_staff',
@@ -157,17 +182,16 @@ class CustomUserAdmin(BaseUserAdmin):
             super().delete_model(request, obj)
     
     # New Code Added End =================================================================
-
-
+    
     
 admin.site.register(CustomUser, CustomUserAdmin)
 
 @admin.register(Admin)
-class AdminAdmin(admin.ModelAdmin):
+class AdminAdmin(BaseModelAdmin):
     list_display = ('adminName','admin','adminContact','adminWalletBalance','created_at')
     
 @admin.register(Vendor)
-class VendorAdmin(admin.ModelAdmin):
+class VendorAdmin(BaseModelAdmin):
     list_display = ('vendorName','vendor','vendorContact','vendorGst','vendorWalletBalance','created_at')
 
 # @admin.register(TemporaryData)
@@ -175,5 +199,5 @@ class VendorAdmin(admin.ModelAdmin):
 #     list_display = ('TemporaryDataByUser','otpNumber','otpExpiryTime')
     
 @admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(BaseModelAdmin):
     list_display = ('customerName','customer','customerContact','customerWalletBalance','created_at')

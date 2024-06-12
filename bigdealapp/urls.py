@@ -6,6 +6,9 @@ urlpatterns = [
 # AUTHNTICATION ROUTES
 
     path('admin/', views.home),
+    # path('admin/accounts/customuser/add/', views.restricted_custom_user_add_view, name='restricted_custom_user_add_view'),
+
+    
     
     path('setCookie',views.setCookie, name='setCookie'),
     path('set_currency_to_session',views.set_currency_to_session,name='set_currency_to_session'),

@@ -40,7 +40,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
         
 
-
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'

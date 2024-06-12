@@ -6,11 +6,11 @@ from django.core import serializers
 from django.conf import settings
 from collections import Counter
 from django.urls import reverse
-from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from accounts.models import CustomUser,TemporaryData, Customer
 from django.contrib import messages
 from django.contrib.auth.models import Group
-from django.http import HttpResponse, HttpRequest, HttpResponseBadRequest, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.models import auth
 from .models import Banner,BannerTheme, BannerType, BlogCategory, Blog, BlogComment,ContactUs,Coupon,CouponHistory
@@ -20,7 +20,6 @@ from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory
 from order.models import (Cart,CartProducts,OrderBillingAddress,OrderPayment,Order,OrderTracking,ProductOrder,Wishlist,Compare,PaymentMethod)
 
 from bigdealapp.helpers import get_color_and_size_list, get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
-
 
 from currency.models import Currency
 from decimal import Decimal, ROUND_HALF_UP
@@ -5897,8 +5896,13 @@ def manage_currency(request,response):
     return response
 
          
-        
-    
-    
-    
 
+
+        
+        
+        
+        
+        
+        
+        
+         

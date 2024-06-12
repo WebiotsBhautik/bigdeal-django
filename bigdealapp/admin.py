@@ -5,7 +5,20 @@ from django.utils.safestring import mark_safe
 
 # Register your models here.
 
-class BannerAdmin(admin.ModelAdmin):
+class BaseModelAdmin(admin.ModelAdmin):
+    def has_view_permission(self, request, obj=None):
+        return True
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+class BannerAdmin(BaseModelAdmin):
     exclude = ['slug']
     list_display = ['bannerTheme', 'bannerType', 'bannerProduct']
     ordering = ('bannerTheme','bannerType',)
@@ -16,7 +29,7 @@ class BannerAdmin(admin.ModelAdmin):
 admin.site.register(Banner, BannerAdmin)
 
 
-class BannerTypeAdmin(admin.ModelAdmin):
+class BannerTypeAdmin(BaseModelAdmin):
     exclude = ['slug']
     search_fields = ['bannerTypeName',]
 
@@ -24,14 +37,14 @@ class BannerTypeAdmin(admin.ModelAdmin):
 admin.site.register(BannerType, BannerTypeAdmin)
 
 
-class BannerThemeAdmin(admin.ModelAdmin):
+class BannerThemeAdmin(BaseModelAdmin):
     exclude = ['slug']
     search_fields = ['bannerThemeName',]
 
 
 admin.site.register(BannerTheme, BannerThemeAdmin)
 
-class BlogCategoryAdmin(admin.ModelAdmin):
+class BlogCategoryAdmin(BaseModelAdmin):
     exclude = ['slug']
     list_display=['blog_category_image','categoryName','createdAt']
     ordering=['-createdAt']
@@ -45,7 +58,7 @@ class BlogCategoryAdmin(admin.ModelAdmin):
 admin.site.register(BlogCategory, BlogCategoryAdmin)
 
 
-class BlogAdmin(admin.ModelAdmin):
+class BlogAdmin(BaseModelAdmin):
     exclude = ['slug','blogAuthor']
     list_display=['blog_image','blogTitle','blogAuthor','blogCategory','blogStatus','status','createdAt']
     ordering=['-createdAt']
@@ -68,7 +81,7 @@ class BlogAdmin(admin.ModelAdmin):
 admin.site.register(Blog, BlogAdmin)
 
 
-class BlogCommentAdmin(admin.ModelAdmin):
+class BlogCommentAdmin(BaseModelAdmin):
     exclude = ['slug']
     list_display=['comment','commentOfBlog','commentByUser','status','createdAt']
     ordering=['-createdAt']
@@ -86,20 +99,20 @@ class BlogCommentAdmin(admin.ModelAdmin):
 admin.site.register(BlogComment, BlogCommentAdmin)
 
 
-class ContactUsAdmin(admin.ModelAdmin):
+class ContactUsAdmin(BaseModelAdmin):
     list_display=['contactUsName','contactUsEmail','contactUsNumber','createdAt']
     ordering=['-createdAt']
         
 admin.site.register(ContactUs, ContactUsAdmin)
 
 
-class CouponAdmin(admin.ModelAdmin):
+class CouponAdmin(BaseModelAdmin):
     list_display = ['couponCode','couponType','couponDiscountOrFixed','numOfCoupon','minAmount','expirationDateTime','usageLimit','couponDescription','createdAt']
     ordering = ['-createdAt']
 
 admin.site.register(Coupon, CouponAdmin)
 
-class CouponHistoryAdmin(admin.ModelAdmin):
+class CouponHistoryAdmin(BaseModelAdmin):
     list_display = ['coupon','couponHistoryByUser','order_id','couponHistoryByOrder']
     ordering = ['-createdAt']
     

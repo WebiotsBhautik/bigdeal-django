@@ -101,6 +101,11 @@ DATABASES = {
     }
 }
 
+# AUTHENTICATION_BACKENDS = [
+#     'bigdealapp.backends.NoPasswordBackend',  # Path to your custom authentication backend
+#     'django.contrib.auth.backends.ModelBackend',
+# ]
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
