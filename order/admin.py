@@ -29,6 +29,7 @@ class OrderAdmin(BaseModelAdmin,admin.ModelAdmin):
     list_display=['orderedByCustomer','id','orderTransactionId','orderPrice','orderTotalTax','orderTotalPrice','orderSavings','benefit_amount','final_amount','orderedOrNot','orderCreatedAt']
     ordering=['-orderCreatedAt']
     list_per_page=10
+    search_fields = ['id']
     
     def get_queryset(self, request):
         if request.user.is_superuser:
@@ -66,6 +67,7 @@ class ProductOrderAdmin(BaseModelAdmin,admin.ModelAdmin):
     list_display=['productOrderedProducts','productOrderOrderId','productOrderPaymentTransactionId','productOrderedByCustomer','productOrderedProductsvendor','productOrderedProductQuantity','productOrderTotalPrice','productOrderSavings','productOrderFinalPrice','productVariantOrderTax','productVariantOrderTaxPrice','productVariantOrderFinalPriceAfterTax','productOrderCreatedAt']
     ordering=['-productOrderCreatedAt']
     list_per_page=10
+    search_fields = ['productOrderOrderId']
 
 admin.site.register(ProductOrder,ProductOrderAdmin)
 
@@ -73,6 +75,7 @@ class OrderBillingAddressAdmin(BaseModelAdmin,admin.ModelAdmin):
     list_display=['get_full_name','customerMobile','customerEmail','orderId','orderTransactionId']
     ordering=['-orderBillingAddressCreatedAt']
     list_per_page=10
+    search_fields=['customerFirstName','customerLastName','customerMobile']
 
 
 admin.site.register(OrderBillingAddress,OrderBillingAddressAdmin)
@@ -80,6 +83,7 @@ admin.site.register(OrderBillingAddress,OrderBillingAddressAdmin)
 class CartProductAdmin(BaseModelAdmin,admin.ModelAdmin):
     exclude = ['slug']
     list_display=['cart_id','cartByCustomer','cartProduct','cartProductQuantity']
+    search_fields=['cart_id']
 
 
 admin.site.register(CartProducts,CartProductAdmin)
@@ -110,6 +114,7 @@ class PaymentMethodAdmin(BaseModelAdmin,admin.ModelAdmin):
     exclude=['slug']
     list_display=['paymentMethodName']
     ordering=['-paymentMethodCreatedAt']
+    search_fields = ['paymentMethodName']
 
 admin.site.register(PaymentMethod,PaymentMethodAdmin)
 
@@ -118,6 +123,7 @@ class OrderPaymentAdmin(BaseModelAdmin,admin.ModelAdmin):
     list_display=['orderPaymentOrderId','orderPaymentTransactionId','orderPaymentFromCustomer','orderAmount','orderPaymentMethodName','orderPaymentCreatedAt']
     ordering=['-orderPaymentCreatedAt']
     list_per_page=10
+    search_fields = ['orderPaymentOrderId']
 
     # ,'orderNameOnCard','orderCardNumber','orderExpireationDate','orderCVV'
     

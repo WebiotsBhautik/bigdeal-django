@@ -19,5 +19,6 @@ class BaseModelAdmin(admin.ModelAdmin):
 class CurrencyAdmin(BaseModelAdmin):
     exclude=['slug']
     list_display=['name','code','symbol','factor','is_active']
+    search_fields=['name']
 
 admin.site.register(Currency,CurrencyAdmin)

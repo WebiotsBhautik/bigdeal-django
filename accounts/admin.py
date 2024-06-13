@@ -14,10 +14,12 @@ from django.utils.safestring import mark_safe
 from django.contrib import admin
 from django.utils.html import format_html
 from django.contrib import admin, messages
+from django.contrib.auth.models import Group
 
 
 
-class ReadOnlyAdminMixin:
+class ReadOnlyGroupAdmin(admin.ModelAdmin):
+    search_fields = ['name']    
     def has_add_permission(self, request):
         return False
 
@@ -29,6 +31,9 @@ class ReadOnlyAdminMixin:
 
     def has_view_permission(self, request, obj=None):
         return True
+    
+admin.site.unregister(Group)
+admin.site.register(Group, ReadOnlyGroupAdmin)
     
 
 class BaseModelAdmin(admin.ModelAdmin):
@@ -98,17 +103,19 @@ class UserChangeForm(forms.ModelForm):
         cleaned_data = super().clean()     
         return cleaned_data
 
-class CustomUserAdmin(BaseModelAdmin,ReadOnlyAdminMixin):
+class CustomUserAdmin(BaseUserAdmin,BaseModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('username', 'email','is_vendor', 'is_customer','is_admin','is_superuser','is_staff',
                     'get_role', 'is_active', 'created_at')
     ordering=['-created_at']
+
     # show_full_result_count=True
     
     # Display on Creating New Object   
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'profilePicture', 'is_active', 'groups',)}),)
+        (None, {'fields': ('username', 'email', 'profilePicture', 'is_active', 'groups',)}),
+)
         # (None, {'fields': ('username', 'email', 'profilePicture', 'is_active', 'is_vendor', 'is_customer', 'groups',)}),)
     
     # Display on Edting Existing Object
@@ -180,7 +187,7 @@ class CustomUserAdmin(BaseModelAdmin,ReadOnlyAdminMixin):
             self.message_user(request, "You cannot delete a Super Admin", level=messages.ERROR)
         else:
             super().delete_model(request, obj)
-    
+            
     # New Code Added End =================================================================
     
     
@@ -188,10 +195,12 @@ admin.site.register(CustomUser, CustomUserAdmin)
 
 @admin.register(Admin)
 class AdminAdmin(BaseModelAdmin):
+    search_fields = ['adminName', 'admin']
     list_display = ('adminName','admin','adminContact','adminWalletBalance','created_at')
     
 @admin.register(Vendor)
 class VendorAdmin(BaseModelAdmin):
+    search_fields = ['vendorName','vendor']
     list_display = ('vendorName','vendor','vendorContact','vendorGst','vendorWalletBalance','created_at')
 
 # @admin.register(TemporaryData)
@@ -200,4 +209,5 @@ class VendorAdmin(BaseModelAdmin):
     
 @admin.register(Customer)
 class CustomerAdmin(BaseModelAdmin):
+    search_fields = ['customerName','customer']
     list_display = ('customerName','customer','customerContact','customerWalletBalance','created_at')

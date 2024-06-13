@@ -1,4 +1,4 @@
-from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import BaseUserManager,Group
 
 
 class CustomUserManager(BaseUserManager):
@@ -23,4 +23,13 @@ class CustomUserManager(BaseUserManager):
         user.role = None
 
         user.save(using=self._db)
+        
+        
+        try:
+            vendor_group = Group.objects.get(name='Vendor')
+            customer_group = Group.objects.get(name='Customer')
+            user.groups.add(vendor_group, customer_group)
+        except Group.DoesNotExist:
+            pass
+        
         return user

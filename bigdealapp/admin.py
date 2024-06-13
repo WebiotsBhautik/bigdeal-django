@@ -48,6 +48,7 @@ class BlogCategoryAdmin(BaseModelAdmin):
     exclude = ['slug']
     list_display=['blog_category_image','categoryName','createdAt']
     ordering=['-createdAt']
+    search_fields = ['categoryName',]
 
     @mark_safe
     def blog_category_image(self, obj):
@@ -62,6 +63,7 @@ class BlogAdmin(BaseModelAdmin):
     exclude = ['slug','blogAuthor']
     list_display=['blog_image','blogTitle','blogAuthor','blogCategory','blogStatus','status','createdAt']
     ordering=['-createdAt']
+    search_fields = ['blogCategory__categoryName','blogTitle']
 
     def get_queryset(self, request):
        
@@ -85,6 +87,7 @@ class BlogCommentAdmin(BaseModelAdmin):
     exclude = ['slug']
     list_display=['comment','commentOfBlog','commentByUser','status','createdAt']
     ordering=['-createdAt']
+    search_fields = ['commentOfBlog__blogTitle','comment']
 
     def get_queryset(self, request):
 
@@ -102,6 +105,7 @@ admin.site.register(BlogComment, BlogCommentAdmin)
 class ContactUsAdmin(BaseModelAdmin):
     list_display=['contactUsName','contactUsEmail','contactUsNumber','createdAt']
     ordering=['-createdAt']
+    search_fields = ['contactUsName','contactUsNumber']
         
 admin.site.register(ContactUs, ContactUsAdmin)
 
@@ -109,12 +113,14 @@ admin.site.register(ContactUs, ContactUsAdmin)
 class CouponAdmin(BaseModelAdmin):
     list_display = ['couponCode','couponType','couponDiscountOrFixed','numOfCoupon','minAmount','expirationDateTime','usageLimit','couponDescription','createdAt']
     ordering = ['-createdAt']
+    search_fields = ['couponCode','couponType']
 
 admin.site.register(Coupon, CouponAdmin)
 
 class CouponHistoryAdmin(BaseModelAdmin):
     list_display = ['coupon','couponHistoryByUser','order_id','couponHistoryByOrder']
     ordering = ['-createdAt']
+    search_fields = ['coupon__couponCode']
     
     @admin.display(description='Order ID')
     def order_id(self,obj):

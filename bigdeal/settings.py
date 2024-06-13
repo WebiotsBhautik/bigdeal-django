@@ -262,6 +262,7 @@ JAZZMIN_SETTINGS = {
         # APPLICATIONS Orderings
         "accounts", "auth", "product", "order", "payment", "currency", "bigdealapp",
     
+    
     # Models Ordering for ACCOUNT Application
     "accounts.CustomUser", "accounts.Admin", "accounts.Vendor", "accounts.Customer",
 
