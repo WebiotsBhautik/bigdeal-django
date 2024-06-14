@@ -177,13 +177,13 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-12 p-0">
-                                                <div class="empty-product-box success-icon">
+                                                <div class="empty-product-box">
                                                     <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}"
                                                         class="img-fluid" alt="">
                                                     <div class="success-contain">
                                                         <h4>No order found!</h4>
                                                     </div>
-                                                    <div class='text-center' ;>
+                                                    <div class='text-center'>
                                                         <a href="{% url 'index' %}" class="btn btn-normal">
                                                             <i class="fa fa-arrow-left"></i> Add Products</a>
                                                     </div>
@@ -205,12 +205,12 @@
                             <div class="table-responsive">
                                 {% if totalWishlistProducts|to_int == 0|to_int %}
 
-                                <div class="empty-product-box success-icon">
+                                <div class="empty-product-box">
                                     <img loading="lazy" src="{% static 'assets/images/cartEmpty.png' %}" alt="">
                                     <div class="success-contain">
                                         <h4>Your shopping wishlist is empty. Let's add something to it</h4>
                                     </div>
-                                    <div class='text-center' ;>
+                                    <div class='text-center'>
                                         <a href="{% url 'index' %}" class="btn btn-normal">
                                             <i class="fa fa-arrow-left"></i> Add Products</a>
                                     </div>

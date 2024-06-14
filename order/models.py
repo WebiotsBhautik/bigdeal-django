@@ -7,6 +7,8 @@ from accounts.get_username import get_request
 import random
 from string import digits, ascii_uppercase
 from django.core.validators import RegexValidator
+from datetime import timedelta
+
 
 
 # Create your models here.
@@ -130,7 +132,6 @@ class CartProducts(models.Model):
 
 
 class OrderBillingAddress(models.Model):
-    
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False)
@@ -236,6 +237,9 @@ class Order(models.Model):
         for i in range(len(ancestors)):
             slugs.append('/'.join(ancestors[:i+1]))
         return slugs
+    
+    def get_three_days_after_order(self):
+        return self.orderCreatedAt + timedelta(days=3,hours=2,minutes=7)
 
     def save(self, *args, **kwargs):
         # if self.orderedOrNot == False:

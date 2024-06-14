@@ -29,37 +29,3 @@ class RestrictUrlsMiddleware:
             return render(request, 'pages/pages/404.html',context)
         
         return response
-    
-    
-# class RestrictDatabaseAccessMiddleware:
-#     def __init__(self, get_response):
-#         self.get_response = get_response
-        
-#     def __call__(self, request):
-#         if self.is_restricted(request):
-#             messages.error(request, 'This Section Does Not Allowed In demo Mode')
-#             return HttpResponseRedirect('/admin/')
-
-#         return self.get_response(request)
-    
-#     def is_restricted(self, request):
-#         if request.method == 'POST':
-#             if request.path.startswith('/signup_page'):
-#                 return True
-#             if request.path.startswith('/login_page'):
-#                 return True
-#             # if request.path.startswith('/add_to_cart_product_quantity_management'):
-#                 # return True
-#             if request.path.startswith('/cart_page'):
-#                 return True
-#             # if request.path.startswith('/quick_view'):
-#                 # return True
-#         elif request.method in ['PUT', 'PATCH', 'DELETE']:
-#             return True
-#         return False
-            
-        
-        # return request.path.startswith('/login_page') or request.path == '/admin/login/' 
-
-    
-    

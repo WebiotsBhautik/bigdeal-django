@@ -20,5 +20,8 @@ class Currency(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.id)
         super(Currency, self).save(*args, **kwargs)
+        
+    class Meta:
+        verbose_name_plural = 'Currency'
 
    

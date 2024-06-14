@@ -37,17 +37,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode
-# from django.contrib.auth.tokens import default_token_generator,PasswordResetTokenGenerator
 from django.core.mail import EmailMultiAlternatives
 from datetime import datetime, timedelta
 from django.utils import timezone
 import re
 from django.db.models import Q,Sum
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-
-
-
-
 
 
 # Create your views here.
@@ -192,7 +187,7 @@ def login_page(request):
 
 def logout_page(request):
     auth.logout(request)
-    return redirect('/login_page')
+    return redirect('/index')
 
 
 # HOME PAGES SECTION 
@@ -766,7 +761,6 @@ def kids(request):
 
     context = {"breadcrumb": {"parent": "Dashboard", "child": "Default"},
             'allbanners':banners,
-        #     'last_two_banners':last_two_banners,
             'kids_category':kids_category,
             'kids_products':kids_products,
             'subcategories':subcategories,
@@ -5597,6 +5591,8 @@ def order_success(request):
         customer = Customer.objects.get(customer=request.user)
         
         order = Order.objects.filter(orderedByCustomer=request.user.id).order_by('-orderCreatedAt').first()
+        order_delivery = order.get_three_days_after_order()
+
         print('Order Successfully =========>',order)
         if order is not None:
             paymentmethod = order.orderPayment.orderPaymentMethodName
@@ -5621,6 +5617,7 @@ def order_success(request):
         "ordersubtotal":order.orderPrice if order else None,
         "products":products if order else None,
         "orderaddress":order.orderBillingAddress if order else None,
+        "order_delivery":order_delivery,
         "contactno":customer.customerContact,
         "paymentmethod":paymentmethod if order else None,
         'active_banner_themes':active_banner_themes,
@@ -5813,7 +5810,7 @@ def about_page(request):
     cart_context = handle_cart_logic(request)
     cart_products,totalCartProducts = show_cart_popup(request)
 
-    context = {"breadcrumb":{"parent":"About","child":"About"},
+    context = {"breadcrumb":{"parent":"About-us","child":"About-us"},
                 'active_banner_themes':active_banner_themes,
                 **cart_context,
                 'cart_products':cart_products,

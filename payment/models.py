@@ -43,8 +43,10 @@ class WalletHistory(models.Model):
     
     def __str__(self):
         return str(self.walletHistoryByUser)
+    
     class Meta:
         verbose_name ='Wallet History'
+        verbose_name_plural = 'Wallet History'
         
         
 class Withdrawal(models.Model):

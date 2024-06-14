@@ -67,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
-    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'bigdeal.urls'
@@ -100,23 +99,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'mydatabase',
     }
 }
-
-# AUTHENTICATION_BACKENDS = [
-#     'bigdealapp.backends.NoPasswordBackend',  # Path to your custom authentication backend
-#     'django.contrib.auth.backends.ModelBackend',
-# ]
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bigdeal',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
-
 
 
 # Password validation

@@ -3,6 +3,8 @@ from django import forms
 from .models import AttributeName, AttributeValue, ProductMeta, ProductVariant, ProductAttributes, MultipleImages, Product, ProCategory, ProBrand, ProUnit, ProVideoProvider, ProductReview,DeliveryOption
 from mptt.admin import MPTTModelAdmin
 from django.db.models import Sum
+from django.utils.html import format_html
+
 
 
 
@@ -10,7 +12,7 @@ from django.db.models import Sum
 # Register your models here.
 
 class ReadOnlyAdminMixin:
-    def has_add_permission(self, request):
+    def has_add_permission(self, request, obj=None):
         return False
 
     def has_change_permission(self, request, obj=None):
@@ -187,7 +189,7 @@ class ProductVariantAdmin(ReadOnlyAdminMixin, admin.ModelAdmin):
 
 admin.site.register(ProductVariant, ProductVariantAdmin)
 
-class ProductAdmin(BaseModelAdmin):
+class ProductAdmin(BaseModelAdmin, ReadOnlyAdminMixin):
     exclude = ['slug','productVendor', 'productNoOfReview', 'productStatus',
                'productRatingCount', 'productFinalRating', 'productEndDate', 'productSoldQuantity']
     # 'product_image',
@@ -284,6 +286,10 @@ class ProductAdmin(BaseModelAdmin):
         productVariants=ProductVariant.objects.filter(variantProduct=obj)
         total_quantity=productVariants.aggregate(Sum('productVariantQuantity'))['productVariantQuantity__sum']
         return str(total_quantity)
+    
+    @admin.display(description='Description')
+    def rendered_description(self, obj):
+        return format_html(obj.productDescription)
 
 
 class DeliveryOptionAdmin(BaseModelAdmin):

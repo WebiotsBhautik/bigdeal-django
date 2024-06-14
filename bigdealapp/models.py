@@ -266,17 +266,3 @@ class CouponHistory(models.Model):
     class Meta:
         verbose_name = 'Coupon History'
         verbose_name_plural = 'Coupon History'
-        
-
-        
-        
-        
-    
-    
-    
-    
-    
-        
-        
-        
-    

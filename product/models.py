@@ -269,7 +269,7 @@ class Product(models.Model):
 
     @property
     def is_past_due(self):
-        if self.productEndDate and date.today() > self.productEndDate.date():
+        if self.productEndDate and date.today() < self.productEndDate.date():
             return True
         return False
     
