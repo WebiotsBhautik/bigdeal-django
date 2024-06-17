@@ -47,10 +47,10 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 # Create your views here.
 
-def home(request):
+def index(request):
     product = ProductOrder.objects.all()
     context = {'product': product}
-    return render(request, 'admin/home.html', context)
+    return render(request, 'admin/index.html', context)
 
 
 def setCookie(request):
@@ -4668,6 +4668,11 @@ def get_address(request):
         address = OrderBillingAddress.objects.get(id=addressId)
         data = {'fname':address.customerFirstName, 'lname':address.customerLastName, 'username':address.customerUsername, 'email':address.customerEmail, 'mobno':address.customerMobile, 'address1':address.customerAddress1, 'address2':address.customerAddress2, 'country':address.customerCountry,'city':address.customerCity,'zipcode':address.customerZip}
         return JsonResponse(data,safe=False)
+    
+def delete_user(request):
+    user = request.user
+    user.delete()
+    return HttpResponse({'success': True})
 
 
 def change_password(request):

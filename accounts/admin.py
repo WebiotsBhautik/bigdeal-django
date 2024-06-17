@@ -18,38 +18,6 @@ from django.contrib.auth.models import Group
 
 
 
-class ReadOnlyGroupAdmin(admin.ModelAdmin):
-    search_fields = ['name']    
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-    def has_view_permission(self, request, obj=None):
-        return True
-    
-admin.site.unregister(Group)
-admin.site.register(Group, ReadOnlyGroupAdmin)
-    
-
-class BaseModelAdmin(admin.ModelAdmin):
-    def has_view_permission(self, request, obj=None):
-        return True
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
@@ -103,7 +71,7 @@ class UserChangeForm(forms.ModelForm):
         cleaned_data = super().clean()     
         return cleaned_data
 
-class CustomUserAdmin(BaseUserAdmin,BaseModelAdmin):
+class CustomUserAdmin(BaseUserAdmin,admin.ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     list_display = ('username', 'email','is_vendor', 'is_customer','is_admin','is_superuser','is_staff',
@@ -194,12 +162,12 @@ class CustomUserAdmin(BaseUserAdmin,BaseModelAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 
 @admin.register(Admin)
-class AdminAdmin(BaseModelAdmin):
+class AdminAdmin(admin.ModelAdmin):
     search_fields = ['adminName', 'admin']
     list_display = ('adminName','admin','adminContact','adminWalletBalance','created_at')
     
 @admin.register(Vendor)
-class VendorAdmin(BaseModelAdmin):
+class VendorAdmin(admin.ModelAdmin):
     search_fields = ['vendorName','vendor']
     list_display = ('vendorName','vendor','vendorContact','vendorGst','vendorWalletBalance','created_at')
 
@@ -208,6 +176,6 @@ class VendorAdmin(BaseModelAdmin):
 #     list_display = ('TemporaryDataByUser','otpNumber','otpExpiryTime')
     
 @admin.register(Customer)
-class CustomerAdmin(BaseModelAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     search_fields = ['customerName','customer']
     list_display = ('customerName','customer','customerContact','customerWalletBalance','created_at')

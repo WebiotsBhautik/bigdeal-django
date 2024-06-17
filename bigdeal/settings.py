@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
+    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',  
 ]
 
 ROOT_URLCONF = 'bigdeal.urls'
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bigdeal.context_processors.dashboardData',
             ],
         },
     },
@@ -174,6 +176,10 @@ PAYPAL_SECRET = 'EPtAGaQiNig5iYMuxtoFs_kVimBODw7axl7hSjn21YLPi6aCRJymPoU2n9GtLWN
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+MPTT_ADMIN_LEVEL_INDENT = 20
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 JAZZMIN_SETTINGS = {
     "custom_css": "assets/css/backend.css",

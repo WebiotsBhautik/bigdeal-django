@@ -320,5 +320,12 @@
         updateInlines();
       });
     });
-  
+
+
+  setTimeout(function () {
+    $('#error-message').fadeOut('slow')
+  }, 6000)    
+
     
+
+

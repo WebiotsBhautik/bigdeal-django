@@ -11,20 +11,7 @@ import json
 
 # Register your models here.
 
-class BaseModelAdmin(admin.ModelAdmin):
-    def has_view_permission(self, request, obj=None):
-        return True
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-class OrderAdmin(BaseModelAdmin,admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     exclude = ['slug','orderedByCustomer','orderPrice','orderSavings','orderTotalPrice']
     list_display=['orderedByCustomer','id','orderTransactionId','orderPrice','orderTotalTax','orderTotalPrice','orderSavings','benefit_amount','final_amount','orderedOrNot','orderCreatedAt']
     ordering=['-orderCreatedAt']
@@ -52,7 +39,7 @@ admin.site.register(Order,OrderAdmin)
 
 
 
-class ProductOrderAdmin(BaseModelAdmin,admin.ModelAdmin):
+class ProductOrderAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
        
@@ -71,7 +58,7 @@ class ProductOrderAdmin(BaseModelAdmin,admin.ModelAdmin):
 
 admin.site.register(ProductOrder,ProductOrderAdmin)
 
-class OrderBillingAddressAdmin(BaseModelAdmin,admin.ModelAdmin):
+class OrderBillingAddressAdmin(admin.ModelAdmin):
     list_display=['get_full_name','customerMobile','customerEmail','orderId','orderTransactionId']
     ordering=['-orderBillingAddressCreatedAt']
     list_per_page=10
@@ -80,7 +67,7 @@ class OrderBillingAddressAdmin(BaseModelAdmin,admin.ModelAdmin):
 
 admin.site.register(OrderBillingAddress,OrderBillingAddressAdmin)
 
-class CartProductAdmin(BaseModelAdmin,admin.ModelAdmin):
+class CartProductAdmin(admin.ModelAdmin):
     exclude = ['slug']
     list_display=['cart_id','cartByCustomer','cartProduct','cartProductQuantity']
     search_fields=['cart_id']
@@ -89,7 +76,7 @@ class CartProductAdmin(BaseModelAdmin,admin.ModelAdmin):
 admin.site.register(CartProducts,CartProductAdmin)
 
 
-class OrderTrackingAdmin(BaseModelAdmin,admin.ModelAdmin):
+class OrderTrackingAdmin(admin.ModelAdmin):
     exclude=['trackingOrderVendor','trackingOrderCustomer','trackingOrder']
     list_display=['trackingOrderCustomer','trackingOrderVendor','trackingOrderOrderId','trackingOrderOrderTransactionId','getProducts','trackingOrderStatus','trackingModifiedAt']
     search_fields=['trackingOrderCustomer__email','trackingOrderStatus','trackingOrderOrderId']
@@ -110,7 +97,7 @@ class OrderTrackingAdmin(BaseModelAdmin,admin.ModelAdmin):
 admin.site.register(OrderTracking,OrderTrackingAdmin)
 
 
-class PaymentMethodAdmin(BaseModelAdmin,admin.ModelAdmin):
+class PaymentMethodAdmin(admin.ModelAdmin):
     exclude=['slug']
     list_display=['paymentMethodName']
     ordering=['-paymentMethodCreatedAt']
@@ -118,7 +105,7 @@ class PaymentMethodAdmin(BaseModelAdmin,admin.ModelAdmin):
 
 admin.site.register(PaymentMethod,PaymentMethodAdmin)
 
-class OrderPaymentAdmin(BaseModelAdmin,admin.ModelAdmin):
+class OrderPaymentAdmin(admin.ModelAdmin):
     exclude=['slug']
     list_display=['orderPaymentOrderId','orderPaymentTransactionId','orderPaymentFromCustomer','orderAmount','orderPaymentMethodName','orderPaymentCreatedAt']
     ordering=['-orderPaymentCreatedAt']

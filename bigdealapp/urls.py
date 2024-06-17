@@ -5,9 +5,7 @@ urlpatterns = [
     
 # AUTHNTICATION ROUTES
 
-    path('admin/', views.home),
-    # path('admin/accounts/customuser/add/', views.restricted_custom_user_add_view, name='restricted_custom_user_add_view'),
-
+    path('admin/', views.index),
     
     
     path('setCookie',views.setCookie, name='setCookie'),
@@ -28,6 +26,7 @@ urlpatterns = [
     path('verify_token',views.verify_token, name='verify_token'),
     path('update_password',views.update_password, name='update_password'),
     path('change_password',views.change_password,name='change_password'),
+    path('delete_user',views.delete_user, name='delete_user'),
     
     path('contact_us',views.contact_us,name='contact_us'),
     

@@ -2227,4 +2227,25 @@ body.dark-mode .modal .modal-content .modal-header {
   border-radius: 0;
   border: 1px solid #eee;
 }
+
+
+.messages{
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #e22454;
+  padding: 18px 26px;
+  box-shadow: 0 3px 3px rgba(81, 88, 94, 0.1);
+}
+
+.messages li{
+  background-color: transparent !important;
+  border: unset !important;
+  display: block;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.7px;
+}
+
+
 /*# sourceMappingURL=backend.css.map */

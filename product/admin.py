@@ -3,39 +3,10 @@ from django import forms
 from .models import AttributeName, AttributeValue, ProductMeta, ProductVariant, ProductAttributes, MultipleImages, Product, ProCategory, ProBrand, ProUnit, ProVideoProvider, ProductReview,DeliveryOption
 from mptt.admin import MPTTModelAdmin
 from django.db.models import Sum
-from django.utils.html import format_html
-
-
 
 
 
 # Register your models here.
-
-class ReadOnlyAdminMixin:
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
-    def has_view_permission(self, request, obj=None):
-        return True
-
-class BaseModelAdmin(admin.ModelAdmin):
-    def has_view_permission(self, request, obj=None):
-        return True
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
 
 class MultipleImageInlineFormSet(forms.BaseInlineFormSet):
     def clean(self):
@@ -151,7 +122,7 @@ class ProductVariantAdminInlineFormSet(forms.BaseInlineFormSet):
         
         
         
-class ProductVariantAdminInline(ReadOnlyAdminMixin,admin.StackedInline):
+class ProductVariantAdminInline(admin.StackedInline):
     model = ProductVariant
     formset = ProductVariantAdminInlineFormSet
     # form = ProductVariantForm
@@ -179,17 +150,18 @@ class ProductVariantAdminInline(ReadOnlyAdminMixin,admin.StackedInline):
     # max_num = 1
     validate_min = True
 
-class ProductVariantAdmin(ReadOnlyAdminMixin, admin.ModelAdmin):
-    list_display = ['variantProduct', 'productVariantQuantity', 'productVariantStockStatus', 'productVariantPrice', 'productVariantDiscount',
-                    'productVariantDiscountPrice', 'productVariantFinalPrice', 'productVariantTax', 'productVariantTaxPrice', 'productVariantFinalPriceAfterTax', 'productVariantCreatedAt']
-    list_filter = ['variantProduct']
-    search_fields = ["variantProduct__productName"]
-    ordering = ['-productVariantCreatedAt']
-    list_per_page = 10
+admin.site.register(ProductVariant,
+                    # 'variantProduct__productType' ,
+                    list_display=['variantProduct', 'productVariantQuantity', 'productVariantStockStatus', 'productVariantPrice', 'productVariantDiscount',
+                                  'productVariantDiscountPrice', 'productVariantFinalPrice', 'productVariantTax', 'productVariantTaxPrice', 'productVariantFinalPriceAfterTax', 'productVariantCreatedAt'],
+                    list_filter=['variantProduct'],
+                    search_fields=["variantProduct__productName"],
+                    ordering=['-productVariantCreatedAt'],
+                    list_per_page=10,
+                    )
 
-admin.site.register(ProductVariant, ProductVariantAdmin)
-
-class ProductAdmin(BaseModelAdmin, ReadOnlyAdminMixin):
+class ProductAdmin(admin.ModelAdmin):
+   
     exclude = ['slug','productVendor', 'productNoOfReview', 'productStatus',
                'productRatingCount', 'productFinalRating', 'productEndDate', 'productSoldQuantity']
     # 'product_image',
@@ -286,24 +258,17 @@ class ProductAdmin(BaseModelAdmin, ReadOnlyAdminMixin):
         productVariants=ProductVariant.objects.filter(variantProduct=obj)
         total_quantity=productVariants.aggregate(Sum('productVariantQuantity'))['productVariantQuantity__sum']
         return str(total_quantity)
+        
     
-    @admin.display(description='Description')
-    def rendered_description(self, obj):
-        return format_html(obj.productDescription)
-
-
-class DeliveryOptionAdmin(BaseModelAdmin):
-    list_display = ['name', 'description']
-    search_fields = ['name',]
 
 admin.site.register(Product, ProductAdmin,
                     list_per_page=10,
                     )
 
-admin.site.register(DeliveryOption,DeliveryOptionAdmin)
+admin.site.register(DeliveryOption)
 
 
-class ProductReviewAdmin(BaseModelAdmin):
+class ProductReviewAdmin(admin.ModelAdmin):
     exclude = ['productReviewByCustomer']
     search_fields = ['productName__productName', 'productReview', 'productRatings']
     list_display = ['productName', 'productReview', 'productRatings','productReviewByCustomer']
@@ -319,14 +284,18 @@ class ProductReviewAdmin(BaseModelAdmin):
 
 admin.site.register(ProductReview, ProductReviewAdmin)
 
-class ProCategoryAdmin(BaseModelAdmin):
-    list_display=['categoryName','categoryProductCommission', 'categoryTotalProduct']
+admin.site.register(
+    ProCategory,
+    MPTTModelAdmin,
+    exclude=['slug', 'categoryTotalProduct'],
+    list_display=['categoryName',
+                  'categoryProductCommission', 'categoryTotalProduct'],
+    # list_filter = ['categoryName',],
     search_fields=['categoryName',],
     list_per_page=10
+)
 
-admin.site.register(ProCategory,ProCategoryAdmin)
-
-class ProductBrandAdmin(BaseModelAdmin):
+class ProductBrandAdmin(admin.ModelAdmin):
     exclude = ['slug', 'brandTotalProduct']
     list_display = ['brandName', 'brandTotalProduct']
     search_fields = ['brandName', 'brandTotalProduct']
@@ -334,20 +303,16 @@ class ProductBrandAdmin(BaseModelAdmin):
 admin.site.register(ProBrand, ProductBrandAdmin,
                         list_per_page=10
 )
-
-    
-class ProUnitAdmin(BaseModelAdmin):
-    list_display = ['unitName']
-    search_fields = ['unitName',]
-    
-    
-admin.site.register(ProUnit,ProUnitAdmin)
-
-class ProVideoProviderAdmin(BaseModelAdmin):
-    list_display = ['videoProviderName']
-    search_fields = ['videoProviderName',]
-    
-admin.site.register(ProVideoProvider,ProVideoProviderAdmin)
+admin.site.register(
+    ProUnit,
+    exclude=['slug'],
+    # list_filter = ['unitName'],
+    search_fields=['unitName',]
+)
+admin.site.register(
+    ProVideoProvider,
+    exclude=['slug'],
+)
 
 
 
@@ -406,11 +371,10 @@ class AttributeValueAdminInline(admin.StackedInline):
     min_num = 1
     validate_min = True
 
-class AttributeNameAdmin(BaseModelAdmin):
+class AttributeNameAdmin(admin.ModelAdmin):
     form = AttributeNameAdminForm
     exclude = ['slug', 'id', 'createdAt']
     list_display = ['attributeName', 'atribute_value','createdAt']
-    search_fields = ['attributeName',]
     ordering = ['-createdAt']
     verbose_name_plural = 'Attributes'
     inlines = [AttributeValueAdminInline]

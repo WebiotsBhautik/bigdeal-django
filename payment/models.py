@@ -72,8 +72,3 @@ class Withdrawal(models.Model):
     
     class Meta:
         verbose_name = 'Withdrawal'
-        
-        
-    
-
-    
