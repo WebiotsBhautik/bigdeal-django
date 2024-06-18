@@ -4,7 +4,7 @@
 :focus-visible {
   outline: 0 !important;
 }
-.row {
+/* .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   display: -webkit-box;
@@ -24,7 +24,7 @@
   padding-right: calc(var(--bs-gutter-x) / 2);
   padding-left: calc(var(--bs-gutter-x) / 2);
   margin-top: var(--bs-gutter-y);
-}
+} */
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button,
 .form-control::-webkit-inner-spin-button,

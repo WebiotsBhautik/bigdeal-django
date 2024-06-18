@@ -78,18 +78,8 @@ urlpatterns = [
 
 
     path('get_product_variant',views.get_product_variant,name='get_product_variant'),
-    
     path('product-detail/<str:id>', views.left_slidebar, name='left_slidebar'),
-    
     path('quick_view',views.quick_view,name='quick_view'),
-
-    # path('product-detail/<slug:brand_slug>', views.left_slidebar, name='left_slidebar_with_brands'),
-
-    # path('shop-left-sidebar/<slug:brand_slug>', views.products_by_brand, name='products_by_brand'),
-    
-    # path('shop-left-sidebar/<str:brand_id>', views.left_slidebar_with_brands, name='left_slidebar_with_brands'),
-    
-
     path('right_sidebar/<str:id>', views.right_sidebar, name='right_sidebar'),
     path('no_sidebar/<str:id>', views.no_sidebar, name='no_sidebar'),
     path('bundle/<str:id>', views.bundle, name='bundle'),
@@ -130,7 +120,6 @@ urlpatterns = [
     
     
     path('user_authenticate',views.user_authenticate, name='user_authenticate'),
-    # path('check_quantity/<str:id>', views.check_quantity, name='check_quantity'),
 
     
     path('page_not_found',views.page_not_found, name='page_not_found'),
@@ -160,7 +149,6 @@ urlpatterns = [
     path('add_to_cart/<str:id>/<str:quantity>', views.add_to_cart, name='add_to_cart'),
     path('cart_page', views.cart_page, name='cart_page'),
     path('delete_cart_product/<str:id>',views.delete_cart_product, name='delete_cart_product'),
-    # path('delete_cart_product_form_header_button/<str:id>',views.delete_cart_product_form_header_button,name='delete_cart_product_form_header_button'),
     path('delete_cart_all_product', views.delete_cart_all_product,name='delete_cart_all_product'),
     
     
@@ -183,7 +171,6 @@ urlpatterns = [
     
     
     path('blog_left_sidebar',views.blog_left_sidebar, name='blog_left_sidebar'),
-    # path('left_sidebar_for_selected_category/<str:id>',views.left_sidebar_for_selected_category, name='left_sidebar_for_selected_category'),
     path('blog_right_sidebar',views.blog_right_sidebar, name='blog_right_sidebar'),
     path('blog_no_sidebar',views.blog_no_sidebar,name='blog_no_sidebar'),
     path('blog_creative_left_sidebar',views.blog_creative_left_sidebar,name='blog_creative_left_sidebar'),

@@ -29,10 +29,6 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.cartByCustomer)
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.id)
-    #     super(Cart, self).save(*args, **kwargs)
-
     def getCartProducts(self):
         return " | ".join([str(cp) for cp in self.cartProducts.all()])
 
@@ -242,16 +238,11 @@ class Order(models.Model):
         return self.orderCreatedAt + timedelta(days=3,hours=2,minutes=7)
 
     def save(self, *args, **kwargs):
-        # if self.orderedOrNot == False:
-        #     raise Exception("Something went wrong")
-
         self.orderPrice=self.orderTotalPrice-self.orderTotalTax
 
         self.slug = slugify(self.id)
         req = get_request().user
         self.orderedByCustomer = req
-        # vendorofproduct = Product.objects.get(id=self.orderedProducts.id)
-        # self.orderedProductsvendor = vendorofproduct.productVendor
         super(Order, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -321,8 +312,6 @@ class ProductOrder(models.Model):
         return slugs
 
     def save(self, *args, **kwargs):
-        # if self.orderedOrNot == False:
-        #     raise Exception("Something went wrong")
         self.slug = slugify(self.id)
         req = get_request().user
         self.productOrderedByCustomer = req

@@ -196,7 +196,7 @@ class Product(models.Model):
     productStatus = models.BooleanField(default=True, verbose_name='Status')
     proCategory = TreeForeignKey(ProCategory, on_delete=models.CASCADE, verbose_name='Category')
     productBrand = models.ForeignKey(
-        ProBrand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Brand')
+        ProBrand, on_delete=models.CASCADE, blank=False, null=False, verbose_name='Brand')
     productUnit = models.ForeignKey(
         ProUnit, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Unit')
     productDescription = RichTextField(

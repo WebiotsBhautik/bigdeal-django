@@ -19,7 +19,7 @@ from product.models import (AttributeName, MultipleImages, ProBrand, ProCategory
 
 from order.models import (Cart,CartProducts,OrderBillingAddress,OrderPayment,Order,OrderTracking,ProductOrder,Wishlist,Compare,PaymentMethod)
 
-from bigdealapp.helpers import get_color_and_size_list, get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
+from bigdealapp.helpers import  get_currency_instance, GetUniqueProducts, IsVariantPresent, GetRoute, create_query_params_url, generateOTP, get_product_attribute_list, get_product_attribute_list_for_quick_view, search_query_params_url, convert_amount_based_on_currency
 
 from currency.models import Currency
 from decimal import Decimal, ROUND_HALF_UP
@@ -158,7 +158,7 @@ def login_page(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None and user.is_customer:
             auth.login(request,user)
-            response = HttpResponseRedirect('checkout_page')
+            response = HttpResponseRedirect('index')
             cid=Cart.objects.get(cartByCustomer=user)
             response.set_cookie('cid',cid.id)
             
@@ -168,7 +168,6 @@ def login_page(request):
                     response.delete_cookie('cart')
             currency = Currency.objects.get(code='USD')
             response.set_cookie('currency', currency.id)
-
             return response
         else:
             messages.error(request, 'Invalid Credentials')
@@ -252,6 +251,8 @@ def index(request):
     layout1_category = ProCategory.objects.get(categoryName='ms1')
     subcategories = layout1_category.get_descendants(include_self=True)
     layout1_products = Product.objects.filter(proCategory__in=subcategories)
+    layout1_new_products = Product.objects.all().order_by('-productCreatedAt')  # Order by date added
+
     
     products_by_subcategory = {}
     
@@ -271,6 +272,7 @@ def index(request):
                'allbrands':brands,
                'allbanners':banners,
                'layout1_products':layout1_products,
+               'layout1_new_products':layout1_new_products,
                'subcategories':subcategories,
                'products_by_subcategory':products_by_subcategory,
                'col_banner':col_banner,

@@ -12,10 +12,8 @@
 {% endif %}
 
 {% if request.user.is_superuser %}
-{% comment %} {% if request.user %} {% endcomment %}
 
 <div class="container-fluid">
-  {% comment %} {% endcomment %}
     <div class="row">
       <!-- Wallet and Commision section start -->
       <div class="col-sm-3 col-xxl-3 col-lg-6">
@@ -28,8 +26,6 @@
                   {{adminWalletBalance}}
                   <span class="badge badge-light-primary grow">
                     <i data-feather="trending-up"></i>
-                      {% comment %} 8.5% {% endcomment %}
-                    
                     </span>
                 </h4>
               </div>
@@ -51,7 +47,6 @@
                   {{adminTotalCommissionProfit}}
                   <span class="badge badge-light-danger grow">
                     <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
                     </span
                   >
                 </h4>
@@ -67,10 +62,6 @@
     </div>
 
     <div class="row">
-      <!-- chart caard section start -->
-      {% comment %}
-      <div class="col-sm-6 col-xxl-3 col-lg-6">
-        {% endcomment %}
         <div class="col-sm-3 col-xxl-3 col-lg-3">
           <div class="b-b-primary border-5 border-0 card o-hidden">
             <div class="custome-1-bg b-r-4 card-body">
@@ -79,11 +70,6 @@
                   <span class="m-0">Total Revenue</span>
                   <h4 class="mb-0 counter mt-2 mt-3">
                     {{totalRevenue}}
-                    {% comment %} <span class="badge badge-light-primary grow">
-                      <i data-feather="trending-up"></i>
-                      8.5%
-                      
-                      </span> {% endcomment %}
                   </h4>
                 </div>
                 <div class="align-self-center text-center">
@@ -104,8 +90,6 @@
                     {{totalProductOrders}}
                     <span class="badge badge-light-danger grow">
                       <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
-                      
                       </span
                     >
                   </h4>
@@ -128,7 +112,6 @@
                     {{totalVendors}}
                     <span class="badge badge-light-secondary grow">
                       <i data-feather="trending-up"></i>
-                      {% comment %} 8.5% {% endcomment %}
                       </span
                     >
                   </h4>
@@ -152,7 +135,6 @@
                     {{totalUser}}
                     <span class="badge badge-light-success grow">
                       <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
                       </span
                     >
                   </h4>
@@ -200,7 +182,7 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
       <script>
 
-        var barColors = ["#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40"];
+        var barColors = ["#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444"];
 
         
         new Chart("top-sold", {
@@ -340,10 +322,8 @@
   </div>
     <!-- Container-fluid Ends-->
     {% elif request.user.is_vendor %}
-    {% comment %} <h1>Vendor</h1> {% endcomment %}
     
 <div class="container-fluid">
-  {% comment %} {% endcomment %}
     <div class="row">
       <!-- Wallet and Commision section start -->
       <div class="col-sm-3 col-xxl-3 col-lg-6">
@@ -356,8 +336,6 @@
                   {{vendorWaletBalance}}
                   <span class="badge badge-light-primary grow">
                     <i data-feather="trending-up"></i>
-                      {% comment %} 8.5% {% endcomment %}
-                    
                     </span>
                 </h4>
               </div>
@@ -379,7 +357,6 @@
                   {{adminTotalCommissionProfit}}
                   <span class="badge badge-light-danger grow">
                     <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
                     </span
                   >
                 </h4>
@@ -423,8 +400,6 @@
                     {{totalVendorProductOrders}}
                     <span class="badge badge-light-danger grow">
                       <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
-                      
                       </span
                     >
                   </h4>
@@ -447,7 +422,6 @@
                     {{totalVendors}}
                     <span class="badge badge-light-secondary grow">
                       <i data-feather="trending-up"></i>
-                      {% comment %} 8.5% {% endcomment %}
                       </span
                     >
                   </h4>
@@ -470,7 +444,6 @@
                     {{totalUser}}
                     <span class="badge badge-light-success grow">
                       <i data-feather="trending-down"></i>
-                      {% comment %} 8.5% {% endcomment %}
                       </span
                     >
                   </h4>
@@ -517,7 +490,7 @@
   
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
       <script>
-        var barColors = ["#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40", "#00baf2", "#343a40"];
+        var barColors = ["#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444", "#00baf2", "#444444"];
         new Chart("top-sold", {
 
         type: "bar",
@@ -650,9 +623,6 @@
     </div>
   </div>
     {% else %}
-    {% comment %} <h1>Staff User</h1> {% endcomment %}
-    
     {% endif %}
     {% endblock %}
 
-{% comment %} </div> {% endcomment %}

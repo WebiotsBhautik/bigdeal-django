@@ -39,10 +39,10 @@ class RestrictDatabaseAccessMiddleware:
         if request.path.startswith('/admin/'):
             if request.method == 'POST':
                 if not self.is_login_request(request):
-                    messages.error(request, 'This Section Does Not Allowed In demo Mode')
+                    messages.error(request, 'This Section Does Not Allowed In Demo Mode')
                     return HttpResponseRedirect('/admin/')
             elif request.method in ['PUT', 'PATCH', 'DELETE']:
-                messages.error(request, 'This Section Does Not Allowed In demo Mode')
+                messages.error(request, 'This Section Does Not Allowed In Demo Mode')
                 return HttpResponseRedirect('/admin/')
         return self.get_response(request)
     

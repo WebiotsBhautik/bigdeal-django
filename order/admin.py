@@ -112,6 +112,5 @@ class OrderPaymentAdmin(admin.ModelAdmin):
     list_per_page=10
     search_fields = ['orderPaymentOrderId']
 
-    # ,'orderNameOnCard','orderCardNumber','orderExpireationDate','orderCVV'
     
 admin.site.register(OrderPayment,OrderPaymentAdmin)

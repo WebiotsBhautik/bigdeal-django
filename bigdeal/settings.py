@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'accounts.get_username.RequestMiddleware',
     'bigdealapp.middleware.RestrictUrlsMiddleware',
-    # 'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',  
+    'bigdealapp.middleware.RestrictDatabaseAccessMiddleware',  
 ]
 
 ROOT_URLCONF = 'bigdeal.urls'
@@ -234,7 +234,6 @@ JAZZMIN_SETTINGS = {
         "bigdealapp.Coupon": "fas fa-ticket-alt",
         "bigdealapp.CouponHistory": "fas fa-history",
         "bigdealapp.ContactUs": "fas fa-phone-square",
-        # "bigdealapp.TodoTask":"fas fa-list-ul",
 
         "logout": "fas fa-sign-out-alt",
         "auth.Group": "fas fa-users",
@@ -275,11 +274,6 @@ JAZZMIN_SETTINGS = {
     ],
 }
 
-# JAZZMIN_UI_TWEAKS = {
-#     "theme": "darkly",
-# }
- 
- 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
     messages.INFO: 'alert-info',
