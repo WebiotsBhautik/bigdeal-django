@@ -4468,7 +4468,6 @@ def forgot_password(request):
             messages.error(request,'Account Does Not Exist!')
             return redirect('forgot_password')
         
-    response = manage_currency(request,response1)
     context = {
         "breadcrumb":{"parent":"Forget Password", "child":"Forget Password"},
         'active_banner_themes':active_banner_themes,
